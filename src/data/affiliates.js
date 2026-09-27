@@ -6,7 +6,7 @@
 // Keyed by app slug (the same slug on every platform). An entry with an empty
 // `url` renders nothing, so a program can sit here until it approves you.
 // Paste the tracking link the program gives you (must start with https://).
-// Programs and commissions: README.md → "Monetization".
+// Programs: CLAUDE.md → "Monetization".
 
 export const AFFILIATES = {
   photoshop: { program: 'Adobe (Partnerize)', label: 'Get Photoshop', url: '' },

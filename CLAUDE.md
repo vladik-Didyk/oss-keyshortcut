@@ -22,7 +22,9 @@ pnpm test         # Vitest test suite (single run)
 pnpm test:watch   # Vitest in watch mode
 pnpm test:perf    # Run performance benchmarks
 pnpm test:perf:browser  # Run Playwright E2E performance tests
-pnpm run deploy   # Build + deploy to Cloudflare Pages (production)
+pnpm run deploy   # Build + deploy the WORKING TREE (uncommitted changes included)
+scripts/deploy-clean.sh [--dry-run]  # Build committed HEAD in a clean folder, verify, deploy (preferred manual deploy)
+node scripts/verify-build.mjs [dir] [--strict]  # Check a build has the AdSense tag (+ analytics IDs with --strict)
 pnpm export       # Export Supabase data to public/data/ JSON (maintainer only, needs .env)
 pnpm sync         # Run shortcut sync pipeline (scrape → diff → write to Supabase)
 pnpm sync:dry     # Dry run (no writes to Supabase)
@@ -43,9 +45,14 @@ See `.env.example`. **Build works without any env vars** — it reads from commi
 - `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` — only for `pnpm export`, `pnpm sync`, `pnpm add-app`
 - `SUPABASE_SERVICE_ROLE_KEY` — shortcut-sync write operations
 - `GEMINI_API_KEY` — AI-powered scraping in shortcut-sync
-- `VITE_APP_STORE_ID` — Mac App Store link; when unset, `APP_STORE_URL` is `null` and all download buttons are hidden
 - `VITE_CF_ANALYTICS_TOKEN` — Cloudflare Web Analytics (optional)
-- `VITE_ADSENSE_ID` — Google AdSense (optional)
+- `VITE_GA4_ID`, `VITE_CLARITY_ID`, `VITE_POSTHOG_KEY`, `VITE_POSTHOG_HOST` — consent-gated analytics (see Analytics stack)
+
+**Public build config lives in the committed `.env.production`** (Vite loads it for production builds; a shell env var of the same name overrides it, which is why CI no longer passes these two):
+- `VITE_ADSENSE_ID` — AdSense publisher ID (already public in `ads.txt`). Empty = no ad script, no ad slots.
+- `VITE_APP_STORE_ID` — Mac App Store link; empty = `APP_STORE_URL` is `null` and all download buttons are hidden. Stays empty until Apple approves the app (ID `6760172007`; the switch is prepared on branch `feat/app-store-live`).
+
+A clean-folder build without `.env` still gets the AdSense ID but not the analytics IDs; `scripts/deploy-clean.sh` copies `.env` in for that reason. The 2026-09-24 deploy shipped without any of them.
 
 ## Architecture
 
@@ -125,7 +132,8 @@ Supabase DB  →  pnpm export  →  public/data/*.json  →  build reads local J
 **Centralized copy**: `content.js` — single source of truth for all UI/marketing text. Imports computed values from `siteConfig.js`. Use `content.js` for all new copy; `copy.js` is legacy.
 
 **Other data files** in `src/data/`:
-- `siteConfig.js` — computed constants from `platformIndex.generated.js`: `APP_COUNT`, `SHORTCUT_COUNT`, `PRICE`, etc.
+- `siteConfig.js` — `APP_COUNT` / `SHORTCUT_COUNT` (whole directory, unique apps) and `MAC_APP_COUNT` / `MAC_SHORTCUT_COUNT` (macOS, used in Mac app copy: the app syncs the macOS data). Computed at build time from `public/data/` by `scripts/site-stats.mjs`, injected as `__SITE_STATS__` via `define` in both `vite.config.js` and `vitest.config.js`. Never hardcode counts in copy. Also `PRICE`, `APP_STORE_URL`, etc.
+- `ads.js`, `affiliates.js`, `sponsors.js` — monetization config (see Monetization).
 - `categoryConfig.js` — unified category metadata (icon + color per category) for all platforms.
 - `keyboardLayout.js` — keyboard row definitions and shortcut databases for Hero and InteractiveKeyboard.
 - `details.js` — detail card items for the Details section.
@@ -208,19 +216,36 @@ Three consent-gated tools live behind a single wrapper at `src/lib/analytics.js`
 
 **Consent banner** lives at `src/components/CookieConsent.jsx`. The `cookie-consent` localStorage key holds `accepted` | `declined` (absent = banner shown). GDPR region detection runs through the Cloudflare Function at `functions/api/geo.js` to decide whether the Decline button is rendered.
 
+**Ads consent is separate** (`src/lib/consent.js`):
+- The AdSense script is the one script that loads for every visitor, before our banner. That is required: in the EEA/UK/CH it serves **Google's certified consent message** (AdSense → Privacy & messaging), and AdSense waits for that TCF choice before requesting ads. It is injected by an inline loader in `root.jsx` after `load` + idle (a plain async tag cost ~240 ms LCP on a throttled mobile app page).
+- In GDPR regions our banner asks about analytics only, and appears after Google's message settles (`whenGoogleConsentSettled`), so the two don't stack.
+- `declined` → `requestNonPersonalizedAds = 1` (set by the loader on page load and by `decline()`), plus analytics opt-out.
+- Footer "Cookie settings" → `openCookieSettings()` reopens our banner and Google's message (`googlefc.showRevocationMessage`).
+- Ad hosts in the CSP: `GOOGLE_ADS_HOSTS` in `root.jsx` (googlesyndication, doubleclick, google.com, gstatic, adtrafficquality.google) for script, img, connect and frame.
+
 **Route-change page views** are fired by the `AnalyticsTracker` component in `src/root.jsx`, which watches `useLocation().pathname` and calls `trackPageView()` after re-confirming consent.
 
 Reference implementation (non-SSR variant) at `Personal-Portfolio/src/lib/analytics.js`.
+
+### Monetization
+
+- **AdSense units:** `src/data/ads.js`. One In-article unit serves all placements (`IN_ARTICLE_UNIT`); a placement with an empty ID renders nothing. `AdSlot` never hides the slot with `display:none` before fill (AdSense then measures width 0 and never fills); card styling and the "Advertisements" label appear on fill, and `index.css` collapses `data-ad-status="unfilled"`. Ads render only in production builds.
+- **Affiliate links:** `src/data/affiliates.js`, keyed by app slug, plus `PLATFORM_FALLBACK` (Setapp on macOS pages). Kept out of Supabase because CI's `pnpm export` rewrites `public/data/`. Empty `url` = nothing renders. `AffiliateLink` uses `rel="sponsored nofollow noopener"`, puts the disclosure beside the button, fires `affiliate_clicked`. Programs: Adobe (Partnerize), Figma (PartnerStack), Raycast (Rewardful), 1Password (CJ), Canva (Impact), Setapp (Impact).
+- **Sponsors:** `src/data/sponsors.js` (`sitewide` or `byPath`). A sponsor replaces the mid-page AdSense unit on app pages; without one, a "sponsor this page" mailto link shows there. Sponsor images must be in `public/images/sponsors/` (CSP).
+- **Disclosures** live in three places: `content.js` (privacy + About "How the Site Is Funded"), `public/privacy.html` (served at `/privacy`, see Deployment), and next to each link.
 
 ### Deployment
 
 Hosted on **Cloudflare Pages** (project: `keyshortcut`). Domain: `keyshortcut.com` via Namecheap (nameservers pointed to Cloudflare).
 
 ```bash
-pnpm run deploy   # Build + deploy to Cloudflare Pages (production)
+scripts/deploy-clean.sh   # Preferred manual deploy: committed HEAD only, .env copied in, verify-build --strict, arm64 wrangler, --branch=main
+pnpm run deploy           # Build + deploy the working tree as-is (uncommitted changes ship too)
 ```
 
-This runs `pnpm build` then `wrangler pages deploy build/client`. All ~175 routes are pre-rendered as static HTML. No Node.js server needed.
+A push to `main` also deploys, through CI. All ~175 routes are pre-rendered as static HTML. No Node.js server needed. Traps (arm64 workerd, stale OAuth token, `--branch=main`): `~/Desktop/Developing/toolbox/playbooks/2026-09-24-wrangler-pages-deploy-traps.md`.
+
+**`/privacy` is served from `public/privacy.html`**, not from the pre-rendered React page (Cloudflare prefers `privacy.html`). It is also the Mac App Store privacy URL. Edit both it and `content.js` together.
 
 Cloudflare Pages config files in `public/`:
 - `_headers` — security headers (X-Frame-Options, HSTS, etc.)
