@@ -60,16 +60,22 @@ jobs:
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: pnpm export
 
+      # VITE_ADSENSE_ID and VITE_APP_STORE_ID come from the committed
+      # .env.production. Don't pass them here: a shell env var (even an empty
+      # secret) overrides that file.
       - name: Build
         env:
           VITE_CF_ANALYTICS_TOKEN: ${{ secrets.VITE_CF_ANALYTICS_TOKEN }}
-          VITE_ADSENSE_ID: ${{ secrets.VITE_ADSENSE_ID }}
-          VITE_APP_STORE_ID: ${{ secrets.VITE_APP_STORE_ID }}
           VITE_GA4_ID: ${{ secrets.VITE_GA4_ID }}
           VITE_CLARITY_ID: ${{ secrets.VITE_CLARITY_ID }}
           VITE_POSTHOG_KEY: ${{ secrets.VITE_POSTHOG_KEY }}
           VITE_POSTHOG_HOST: ${{ secrets.VITE_POSTHOG_HOST }}
         run: pnpm build
+
+      # Main only: fork PRs don't get secrets, so analytics IDs would be missing.
+      - name: Verify build (ad script, analytics IDs)
+        if: github.ref == 'refs/heads/main'
+        run: node scripts/verify-build.mjs --strict
 
       - name: Upload build artifact
         if: github.ref == 'refs/heads/main'

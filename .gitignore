@@ -19,6 +19,7 @@ dist-ssr
 .env
 .env.*
 !.env.example
+!.env.production
 
 # Icons downloaded at build time from Supabase Storage
 public/images/app-icons/
