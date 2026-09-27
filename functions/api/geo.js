@@ -1,5 +1,6 @@
 // Cloudflare Pages Function — returns the user's country code from CF headers.
-// Used by CookieConsent to show reject option for GDPR regions.
+// Used by CookieConsent to show the reject option, and to wait for Google's
+// consent message, in the regions that message covers (EEA, UK, Switzerland).
 
 const GDPR_COUNTRIES = new Set([
   // EU member states
@@ -10,6 +11,9 @@ const GDPR_COUNTRIES = new Set([
   'IS', 'LI', 'NO',
   // UK (UK GDPR)
   'GB',
+  // Switzerland (FADP). Google's certified consent message covers EEA + UK + CH,
+  // so the cookie banner must treat CH the same way.
+  'CH',
 ])
 
 export function onRequestGet({ request }) {
