@@ -19,10 +19,20 @@ const GOOGLE_ADS_HOSTS = [
   "https://*.adtrafficquality.google",
 ].join(" ");
 
-// Runs before the AdSense script: a visitor who declined the cookie banner gets
-// non-personalised ads. In the EEA/UK/CH, Google's consent message (TCF) also applies.
-const ADS_NPA_SCRIPT =
-  "try{if(localStorage.getItem('cookie-consent')==='declined'){(window.adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds=1}}catch(e){}";
+// Loads the AdSense script once the page has finished loading and the browser
+// is idle, so it doesn't compete with the first render (measured: +240 ms LCP on
+// a throttled mobile app page when loaded as a plain async tag). Ad units pushed
+// before then wait in the window.adsbygoogle queue.
+// It first sets the non-personalised-ads flag for visitors who declined our
+// cookie banner. In the EEA/UK/CH, Google's consent message (TCF) also applies.
+const ADS_LOADER_SCRIPT = ADSENSE_CLIENT
+  ? `(function(){var q=window.adsbygoogle=window.adsbygoogle||[];` +
+    `try{if(localStorage.getItem('cookie-consent')==='declined')q.requestNonPersonalizedAds=1}catch(e){}` +
+    `function load(){var s=document.createElement('script');s.async=true;s.crossOrigin='anonymous';` +
+    `s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}';document.head.appendChild(s)}` +
+    `function idle(){'requestIdleCallback' in window?requestIdleCallback(load,{timeout:2000}):setTimeout(load,200)}` +
+    `document.readyState==='complete'?idle():window.addEventListener('load',idle,{once:true})})()`
+  : "";
 
 export function Layout({ children }) {
   return (
@@ -86,10 +96,6 @@ export function Layout({ children }) {
         {/* JSON-LD WebSite — static content, safe to inline */}
         <script type="application/ld+json">{JSON_LD}</script>
 
-        {import.meta.env.PROD && ADSENSE_CLIENT && (
-          <script dangerouslySetInnerHTML={{ __html: ADS_NPA_SCRIPT }} />
-        )}
-
         <Meta />
         <Links />
       </head>
@@ -101,15 +107,11 @@ export function Layout({ children }) {
         <ScrollRestoration />
         <Scripts />
 
-        {/* Google AdSense (production only). Loads for every visitor: in the
-            EEA/UK/CH it shows Google's certified consent message, and ad
-            requests wait for that choice. */}
-        {import.meta.env.PROD && ADSENSE_CLIENT && (
-          <script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-            crossOrigin="anonymous"
-          />
+        {/* Google AdSense (production only). Loads for every visitor, deferred
+            (see ADS_LOADER_SCRIPT): in the EEA/UK/CH it shows Google's certified
+            consent message, and ad requests wait for that choice. */}
+        {import.meta.env.PROD && ADS_LOADER_SCRIPT && (
+          <script dangerouslySetInnerHTML={{ __html: ADS_LOADER_SCRIPT }} />
         )}
 
         {/* Analytics: Cloudflare Web Analytics (production only) */}
