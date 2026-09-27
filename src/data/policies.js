@@ -6,7 +6,7 @@ export const policies = [
       'The KeyShortcut app does not collect, store, or transmit any personal data. No analytics or tracking frameworks are included in the app.',
       'The app connects to Supabase to sync shortcut data (read-only). No personal data or device identifiers are sent. Apple MetricKit is used for anonymized crash reports.',
       'All user preferences (favorites, custom shortcuts, window position) are stored locally on your device using macOS UserDefaults.',
-      'KeyShortcut requests Accessibility permissions solely to detect which app is in the foreground and to monitor key presses for the "Follow Key Presses" feature. This data is never recorded or transmitted.',
+      'KeyShortcut does not request Accessibility permission and does not monitor your keystrokes. Active app detection reads only the identifier of the frontmost app.',
       'The keyshortcut.com website uses Cloudflare Web Analytics (cookie-free, no personal data) and Google AdSense. These services apply only to the website, not the app.',
     ],
   },

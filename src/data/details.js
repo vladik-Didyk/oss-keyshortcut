@@ -15,9 +15,9 @@ export const detailItems = [
   },
   {
     icon: Keyboard,
-    title: 'Key press highlighting',
+    title: 'Lives in your menu bar',
     description:
-      'Press a modifier key and see it light up in the panel. A subtle visual confirmation that keeps you oriented.',
+      'No Dock icon. Click the ⌘ icon in the menu bar or press ⌃⌘K to show or hide the panel.',
   },
   {
     icon: Clipboard,
@@ -35,6 +35,6 @@ export const detailItems = [
     icon: ShieldCheck,
     title: 'Completely private',
     description:
-      'No analytics. No tracking. No data collection. No internet connection required. KeyShortcut runs entirely on your Mac, and your data stays there.',
+      'No analytics. No tracking. No data collection. Works offline, and your settings never leave your Mac.',
   },
 ]

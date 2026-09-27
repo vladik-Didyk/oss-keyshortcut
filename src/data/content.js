@@ -165,8 +165,8 @@ export const CONTENT = {
         },
         {
           icon: 'Keyboard',
-          title: 'Key press highlighting',
-          description: 'Press a modifier key and see it light up in the panel. A subtle visual confirmation that keeps you oriented.',
+          title: 'Lives in your menu bar',
+          description: 'No Dock icon. Click the ⌘ icon in the menu bar or press ⌃⌘K to show or hide the panel.',
         },
         {
           icon: 'Clipboard',
@@ -181,7 +181,7 @@ export const CONTENT = {
         {
           icon: 'ShieldCheck',
           title: 'Completely private',
-          description: 'No analytics. No tracking. No data collection. No internet connection required. KeyShortcut runs entirely on your Mac, and your data stays there.',
+          description: 'No analytics. No tracking. No data collection. Works offline, and your settings never leave your Mac.',
         },
       ],
     },
@@ -329,9 +329,9 @@ export const CONTENT = {
           id: 'privacy',
           content: [
             'The KeyShortcut app does not collect, store, or transmit any personal data. No analytics or tracking frameworks are included in the app.',
-            'No network requests are made by the app \u2014 it works entirely offline.',
+            'The app downloads shortcut data from Supabase (read-only). No personal data or device identifiers are sent. Apple MetricKit is used for anonymized crash reports.',
             'All user preferences (favorites, custom shortcuts, window position) are stored locally on your device using macOS UserDefaults.',
-            'KeyShortcut requests Accessibility permissions solely to detect which app is in the foreground and to monitor key presses for the "Follow Key Presses" feature. This data is never recorded or transmitted.',
+            'KeyShortcut does not request Accessibility permission and does not monitor your keystrokes. Active app detection reads only the identifier of the frontmost app.',
             'The keyshortcut.com website uses Cloudflare Web Analytics (cookie-free, no personal data) and Google AdSense. These services apply only to the website, not the app.',
           ],
         },
@@ -578,7 +578,7 @@ export const CONTENT = {
   privacy: {
     policy: {
       title: 'Privacy Policy',
-      effectiveDate: 'Effective date: March 14, 2026',
+      effectiveDate: 'Effective date: September 23, 2026',
       intro: 'KeyShortcut is built with privacy as a core principle. This policy covers both the KeyShortcut macOS app and the keyshortcut.com website. The app does not collect personal data. This site displays advertisements served by Google AdSense.',
       sections: [
         {
@@ -626,17 +626,10 @@ export const CONTENT = {
           ],
         },
         {
-          heading: 'Accessibility Permissions',
+          heading: 'Accessibility Permission',
           content: [
-            { type: 'paragraph', text: 'KeyShortcut may request macOS Accessibility permission for two optional features:' },
-            {
-              type: 'list',
-              items: [
-                { bold: 'Follow Key Presses', text: ' \u2014 monitors which keys you press to highlight matching shortcuts in real time. This data is processed in memory and never stored or transmitted.' },
-                { bold: 'Active App Detection', text: ' \u2014 identifies the frontmost application to show relevant shortcuts. Only the app\'s bundle identifier is read; no window content is accessed.' },
-              ],
-            },
-            { type: 'paragraph', text: 'Both features are disabled by default and require explicit opt-in.' },
+            { type: 'paragraph', text: 'KeyShortcut does not request macOS Accessibility permission and does not monitor your keystrokes.' },
+            { type: 'paragraph', text: 'Active App Detection (optional, off by default) reads only the bundle identifier of the frontmost app, using standard macOS APIs, to show relevant shortcuts. No window content is accessed.' },
           ],
         },
         {
