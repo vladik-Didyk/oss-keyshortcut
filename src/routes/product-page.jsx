@@ -2,11 +2,10 @@ import { useLoaderData } from "react-router";
 import { CONTENT, buildMeta } from "../data/content";
 import { getPlatformApps, getCategories } from "../utils/supabase.server";
 import { groupByCategories } from "../utils/platformHelpers";
-import { APP_COUNT, PRICE, APP_STORE_URL, formatShortcutCount } from "../data/siteConfig";
+import { APP_COUNT, PRICE, APP_STORE_URL, SHORTCUT_COUNT, formatShortcutCount } from "../data/siteConfig";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Problem from "../components/Problem";
-import SocialProof from "../components/SocialProof";
 import Features from "../components/Features";
 import Details from "../components/Details";
 import MacAppStoreButton from "../components/MacAppStoreButton";
@@ -17,10 +16,56 @@ import FAQ from "../components/FAQ";
 import Policies from "../components/Policies";
 import CTABanner from "../components/CTABanner";
 import Footer from "../components/Footer";
-import HotkeyShowcase from "../components/HotkeyShowcase";
 
 export function meta() {
   return buildMeta(CONTENT.meta.productPage);
+}
+
+/**
+ * Compact, scannable value/pricing strip built from REAL siteConfig constants.
+ * Inline copy (candidate for content.js later): the dot-separated value line.
+ */
+function ValueStrip() {
+  const items = [
+    `${PRICE} once`,
+    `${APP_COUNT} apps`,
+    `${SHORTCUT_COUNT.toLocaleString()}+ shortcuts`,
+    "no subscription",
+    "no tracking",
+  ];
+  return (
+    <div className="px-5 md:px-6 -mt-2 mb-2">
+      <ul className="mx-auto flex max-w-[980px] flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[13px] text-theme-muted">
+        {items.map((item, i) => (
+          <li key={item} className="flex items-center gap-3">
+            {i > 0 && <span aria-hidden="true" className="text-theme-border">·</span>}
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/**
+ * Mid-page inline CTA — App Store badge + one-line price/value microcopy.
+ * Inserted after long sections so the buy action is never far away.
+ * Inline copy (candidate for content.js later): the microcopy below the badge.
+ */
+function InlineCTA({ location }) {
+  // Honor the project invariant: no store URL → render no CTA (avoids an
+  // orphaned headline/microcopy with nothing to click).
+  if (!APP_STORE_URL) return null;
+  return (
+    <section className="py-14 px-5 md:px-6">
+      <div className="mx-auto max-w-md text-center">
+        <MacAppStoreButton eventProps={{ location }} />
+        <p className="mt-4 text-[15px] text-theme-muted">
+          {PRICE} once · {APP_COUNT} apps · {formatShortcutCount()} shortcuts · no subscription
+        </p>
+      </div>
+    </section>
+  );
 }
 
 export async function loader() {
@@ -65,23 +110,23 @@ export default function ProductPageRoute() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
+        <ValueStrip />
         <Problem />
-        <SocialProof />
+        {/* CTA after the problem narrative — long page, keep buy action nearby */}
+        <InlineCTA location="after_problem" />
+        {/* SocialProof hidden until there are real Mac App Store reviews — the quotes in CONTENT.productPage.socialProof are placeholders */}
         <Features />
+        {/* CTA after the feature walkthrough */}
+        <InlineCTA location="after_features" />
         {/* <section className="py-20 md:py-28 px-5 md:px-6">
           <div className="mx-auto max-w-md">
             <HotkeyShowcase />
           </div>
         </section> */}
         <Details />
-        <section className="py-14 px-5 md:px-6">
-          <div className="mx-auto max-w-md text-center">
-            <p className="text-theme-muted text-[15px] mb-5">Ready to try it?</p>
-            <MacAppStoreButton />
-          </div>
-        </section>
+        <InlineCTA location="after_details" />
         <ShortcutPreview />
         <AppCoverage />
         <AppGrid appCategories={appCategories} />

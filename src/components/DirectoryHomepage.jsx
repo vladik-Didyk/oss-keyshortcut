@@ -4,14 +4,23 @@ import { Search, X, ArrowRight } from '../utils/icons'
 import { usePlatformData, prefetchPlatform } from '../hooks/usePlatformData'
 import { groupByCategories, getPopularApps, parseKeyParts } from '../utils/platformHelpers'
 import { detectPlatform } from '../utils/detectPlatform'
-import { buildSearchIndex, searchIndex, parseAppQuery } from '../utils/searchHelpers'
+import { buildSearchIndex, searchIndex, parseAppQuery, flattenSearchResults } from '../utils/searchHelpers'
 import AppCard from './directory/AppCard'
+import SearchDropdown from './SearchDropdown'
 import { categoryConfig } from '../data/categoryConfig'
 import { useInView } from '../hooks/useInView'
 import { CONTENT } from '../data/content'
 import AdSlot from './AdSlot'
-import { APP_STORE_URL } from '../data/siteConfig'
+import { APP_STORE_URL, APP_COUNT, SHORTCUT_COUNT } from '../data/siteConfig'
 import { trackEvent } from '../lib/analytics'
+
+// Popular apps suggested in the empty-search state (mirrors SearchDropdown).
+const POPULAR_SUGGESTIONS = [
+  { slug: 'figma', name: 'Figma' },
+  { slug: 'chrome', name: 'Chrome' },
+  { slug: 'vs-code', name: 'VS Code' },
+  { slug: 'slack', name: 'Slack' },
+]
 
 export default function DirectoryHomepage() {
   const loaderData = useLoaderData()
@@ -24,6 +33,9 @@ export default function DirectoryHomepage() {
   const searchContainerRef = useRef(null)
   const chipsRef = useRef(null)
   const [searchFocused, setSearchFocused] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(-1)
+  const listId = 'directory-search-listbox'
 
   const platforms = loaderData?.manifest?.platforms ?? null
   const isInitialPlatform = selectedPlatform === (loaderData?.defaultPlatformId || 'macos')
@@ -102,6 +114,23 @@ export default function DirectoryHomepage() {
   const navigate = useNavigate()
   const hasSmartResults = smartResults.appMatches.length > 0 || smartResults.shortcutMatches.length > 0
 
+  // Flat, ordered list of selectable result rows for keyboard navigation —
+  // ordering matches SearchDropdown's render order.
+  const flatResults = useMemo(
+    () => flattenSearchResults(smartResults, selectedPlatform),
+    [smartResults, selectedPlatform]
+  )
+  const totalResultCount = flatResults.length
+  const showDropdown = dropdownOpen && search.trim().length > 0
+
+  // Typing resets the highlighted option, opens the dropdown, and clears category.
+  const onSearchChange = useCallback((value) => {
+    setSearch(value)
+    setActiveIndex(-1)
+    setDropdownOpen(value.trim().length > 0)
+    setActiveCategory(null)
+  }, [])
+
   useEffect(() => {
     const onKey = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -110,12 +139,25 @@ export default function DirectoryHomepage() {
       }
       if (e.key === 'Escape') {
         setSearch('')
+        setDropdownOpen(false)
         searchRef.current?.blur()
       }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [])
+
+  // Click / focus outside the search container dismisses the dropdown.
+  useEffect(() => {
+    if (!showDropdown) return
+    const onPointerDown = (e) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target)) {
+        setDropdownOpen(false)
+      }
+    }
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => document.removeEventListener('pointerdown', onPointerDown)
+  }, [showDropdown])
 
 
   const setCategory = useCallback((cat) => {
@@ -127,8 +169,49 @@ export default function DirectoryHomepage() {
     setSelectedPlatform(id)
     setActiveCategory(null)
     setSearch('')
+    setDropdownOpen(false)
     trackEvent('platform_switched', { platform: id })
   }, [])
+
+  // Combobox keyboard navigation: Up/Down move the highlighted option,
+  // Enter selects it (or the top match), Escape closes the dropdown.
+  const onSearchKeyDown = useCallback((e) => {
+    if (!search.trim()) return
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      if (flatResults.length === 0) return
+      setDropdownOpen(true)
+      setActiveIndex(prev => (prev + 1) % flatResults.length)
+      return
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      if (flatResults.length === 0) return
+      setDropdownOpen(true)
+      setActiveIndex(prev => (prev <= 0 ? flatResults.length - 1 : prev - 1))
+      return
+    }
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      trackEvent('directory_search_performed', { query: search, platform: selectedPlatform, has_results: hasSmartResults })
+      // Highlighted option wins; otherwise fall back to the top match.
+      const chosen =
+        activeIndex >= 0 && flatResults[activeIndex]
+          ? flatResults[activeIndex].href
+          : smartResults.appMatches[0]
+            ? `/${selectedPlatform}/${smartResults.appMatches[0].slug}`
+            : smartResults.shortcutMatches[0]
+              ? `/${selectedPlatform}/${smartResults.shortcutMatches[0].appSlug}`
+              : null
+      if (chosen) {
+        navigate(chosen)
+        setSearch('')
+        setDropdownOpen(false)
+        searchRef.current?.blur()
+      }
+    }
+  }, [search, flatResults, activeIndex, smartResults, selectedPlatform, hasSmartResults, navigate])
 
   // Platform is detected at initialization via useState initializer above
 
@@ -156,15 +239,12 @@ export default function DirectoryHomepage() {
 
   const popularApps = useMemo(() => getPopularApps(apps, 8), [apps])
 
-  const matchCount = search
-    ? grouped.reduce((sum, g) => sum + g.apps.length, 0)
-    : null
-
   return (
     <div className="min-h-screen bg-theme-base">
 
       {/* ─── Hero ─── */}
-      <section className="pt-24 md:pt-32 pb-8 px-5 md:px-6">
+      {/* Reduced top padding (was pt-24 md:pt-32) so the app grid sits higher / above the fold. */}
+      <section className="pt-20 md:pt-24 pb-8 px-5 md:px-6">
         <div className="mx-auto max-w-[780px] text-center">
           <h1 className="text-[2.5rem] sm:text-[3.25rem] md:text-[4rem] font-bold tracking-tight leading-[1.08] mb-5">
             <span className="text-theme-text">{CONTENT.home.title}</span>
@@ -172,22 +252,37 @@ export default function DirectoryHomepage() {
             <span className="text-accent">{CONTENT.home.titleAccent}</span>
           </h1>
 
-          <p className="text-theme-muted text-[1.125rem] md:text-[1.25rem] mb-8 max-w-lg mx-auto leading-relaxed">
-            {CONTENT.home.subtitle}
+          {/* Quantified value prop from siteConfig constants. */}
+          <p className="text-theme-muted text-[1.125rem] md:text-[1.25rem] mb-8 max-w-xl mx-auto leading-relaxed">
+            Search {SHORTCUT_COUNT.toLocaleString()}+ shortcuts across {APP_COUNT}+ apps on macOS, Windows &amp; Linux.
           </p>
 
           {/* Platform Toggle */}
+          {/* NOTE: This intentionally duplicates directory/PlatformToggle.jsx — the
+              homepage variant uses a transparent inactive background to blend into the
+              hero, while the shared component uses bg-theme-base-alt. Kept inline to
+              avoid visual drift; consolidate only if the two styles are unified. */}
           {!search && platforms && (
             <div className="flex justify-center mb-10">
-              <div className="inline-flex items-center rounded-xl overflow-hidden border border-theme-border">
-                {platforms.map(p => {
+              <div
+                role="radiogroup"
+                aria-label="Choose platform"
+                className="inline-flex items-center rounded-xl border border-theme-border"
+              >
+                {platforms.map((p, i) => {
                   const isActive = p.id === selectedPlatform
+                  const isFirst = i === 0
+                  const isLast = i === platforms.length - 1
                   return (
                     <button
                       key={p.id}
+                      role="radio"
+                      aria-checked={isActive}
                       onClick={() => setPlatform(p.id)}
                       onMouseEnter={() => prefetchPlatform(p.id)}
-                      className={`group flex items-center gap-2 px-5 py-2.5 text-[15px] font-medium transition-all cursor-pointer border-none ${
+                      className={`group flex items-center gap-2 px-5 py-3 min-h-[44px] text-[15px] font-medium transition-all cursor-pointer border-none outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-theme-accent ${
+                        isFirst ? 'rounded-l-xl' : ''
+                      } ${isLast ? 'rounded-r-xl' : ''} ${
                         isActive
                           ? 'bg-theme-accent text-theme-base'
                           : 'bg-transparent text-theme-muted hover:text-theme-text'
@@ -214,10 +309,8 @@ export default function DirectoryHomepage() {
           {/* Search */}
           <div ref={searchContainerRef} className="relative max-w-[600px] mx-auto">
             <div
-              className={`relative rounded-xl border-[1.5px] transition-all duration-300 ${
-                searchFocused
-                  ? 'border-theme-accent'
-                  : 'border-theme-border hover:border-theme-border-hover'
+              className={`relative rounded-xl border-[1.5px] border-theme-border hover:border-theme-border-hover transition-all duration-300 ${
+                searchFocused ? 'directory-search-focused' : ''
               }`}
             >
               <Search
@@ -228,30 +321,32 @@ export default function DirectoryHomepage() {
               <input
                 ref={searchRef}
                 type="text"
-                placeholder="Search apps and shortcuts — try &quot;Figma copy&quot;"
+                placeholder={CONTENT.home.searchPlaceholder}
                 value={search}
-                onChange={e => { setSearch(e.target.value); setCategory(null) }}
-                onKeyDown={e => {
-                  if (e.key === 'Enter' && search) {
-                    e.preventDefault()
-                    trackEvent('directory_search_performed', { query: search, platform: selectedPlatform, has_results: hasSmartResults })
-                    const topApp = smartResults.appMatches[0]
-                    if (topApp) {
-                      navigate(`/${selectedPlatform}/${topApp.slug}`)
-                      setSearch('')
-                      searchRef.current?.blur()
-                    } else if (smartResults.shortcutMatches[0]) {
-                      navigate(`/${selectedPlatform}/${smartResults.shortcutMatches[0].appSlug}`)
-                      setSearch('')
-                      searchRef.current?.blur()
-                    }
-                  }
-                }}
-                onFocus={() => setSearchFocused(true)}
+                role="combobox"
+                aria-expanded={showDropdown}
+                aria-controls={listId}
+                aria-autocomplete="list"
+                aria-activedescendant={
+                  showDropdown && activeIndex >= 0 ? `${listId}-opt-${activeIndex}` : undefined
+                }
+                onChange={e => onSearchChange(e.target.value)}
+                onKeyDown={onSearchKeyDown}
+                onFocus={() => { setSearchFocused(true); if (search.trim()) setDropdownOpen(true) }}
                 onBlur={() => setSearchFocused(false)}
                 aria-label={CONTENT.home.searchAriaLabel}
-                className="directory-search w-full pl-12 pr-24 py-4.5 bg-transparent outline-none text-[17px] text-theme-text caret-theme-accent"
+                className="directory-search w-full pl-12 pr-28 py-4.5 bg-transparent outline-none text-[17px] text-theme-text caret-theme-accent"
               />
+              {/* Live result count next to the input */}
+              {search && (
+                <span
+                  className="absolute right-14 top-1/2 -translate-y-1/2 text-[13px] font-medium text-theme-muted pointer-events-none select-none tabular-nums"
+                  role="status"
+                  aria-live="polite"
+                >
+                  {totalResultCount === 1 ? '1 result' : `${totalResultCount} results`}
+                </span>
+              )}
               {!search && (
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 pointer-events-none select-none">
                   <kbd className="px-1.5 py-0.5 rounded text-[11px] font-medium text-theme-muted border border-theme-border">⌘</kbd>
@@ -260,7 +355,7 @@ export default function DirectoryHomepage() {
               )}
               {search && (
                 <button
-                  onClick={() => setSearch('')}
+                  onClick={() => { setSearch(''); setDropdownOpen(false); searchRef.current?.focus() }}
                   className="absolute right-4 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer p-1.5 rounded-full transition-colors hover:bg-theme-base-alt text-theme-muted"
                   aria-label="Clear search"
                 >
@@ -269,21 +364,27 @@ export default function DirectoryHomepage() {
               )}
             </div>
 
+            {/* Anchored results dropdown — appears directly under the input */}
+            {showDropdown && (
+              <SearchDropdown
+                results={smartResults}
+                platform={selectedPlatform}
+                query={search}
+                listId={listId}
+                activeIndex={activeIndex}
+                onClose={() => { setSearch(''); setDropdownOpen(false); searchRef.current?.blur() }}
+              />
+            )}
           </div>
-
-          {search && !hasSmartResults && matchCount === 0 && (
-            <p className="mt-3 text-sm text-theme-muted" role="status" aria-live="polite">
-              No results for &ldquo;{search}&rdquo;
-            </p>
-          )}
         </div>
       </section>
 
       {/* ─── Category Chips ─── */}
       {!search && (
         <div className="px-5 md:px-6 mb-10">
-          <div className="mx-auto max-w-[1080px] overflow-hidden">
-            <nav ref={chipsRef} className="chips-scroll flex flex-nowrap gap-2 py-2 overflow-x-auto select-none" aria-label="Filter by category">
+          {/* relative wrapper hosts the right-edge fade affordance (mobile scroll hint) */}
+          <div className="mx-auto max-w-[1080px] relative">
+            <nav ref={chipsRef} className="chips-scroll flex flex-nowrap gap-2 py-2 pr-8 overflow-x-auto select-none" aria-label="Filter by category">
               <ChipButton active={!activeCategory} onClick={() => setCategory(null)}>
                 {CONTENT.home.allCategory}
               </ChipButton>
@@ -303,11 +404,19 @@ export default function DirectoryHomepage() {
                 )
               })}
             </nav>
+            {/* Right-edge fade so the horizontal scroll is discoverable on touch */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:hidden"
+              style={{ background: 'linear-gradient(to right, transparent, var(--color-theme-base))' }}
+            />
           </div>
         </div>
       )}
 
-      <div className="mx-auto max-w-[1080px] px-5 md:px-6 pb-16">
+      {/* min-height reserves space so the platform-switch loading skeleton swap
+          doesn't reflow / cause CLS at the point of focus (the app grid). */}
+      <div className="mx-auto max-w-[1080px] px-5 md:px-6 pb-16 min-h-[420px]">
 
         {/* ─── Error state ─── */}
         {error && (
@@ -338,6 +447,37 @@ export default function DirectoryHomepage() {
         {/* ─── Search Results (inline, same as dropdown) ─── */}
         {!error && !loading && search && hasSmartResults && (
           <SearchResultsInline results={smartResults} platform={selectedPlatform} />
+        )}
+
+        {/* ─── No-results empty state — suggest popular apps as chips ─── */}
+        {!error && !loading && search && !hasSmartResults && (
+          <div className="py-16 text-center" role="status" aria-live="polite">
+            <p className="text-theme-text text-[17px] font-medium mb-1">
+              No results for &ldquo;{search}&rdquo;
+            </p>
+            <p className="text-theme-muted text-sm mb-6">
+              Try one of these popular apps instead.
+            </p>
+            <div className="flex flex-wrap justify-center gap-2.5">
+              {POPULAR_SUGGESTIONS.map(app => (
+                <button
+                  key={app.slug}
+                  onClick={() => { setSearch(''); setDropdownOpen(false); navigate(`/${selectedPlatform}/${app.slug}`) }}
+                  className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-full border border-theme-border bg-theme-base-alt hover:border-theme-border-hover transition-colors cursor-pointer text-[14px] text-theme-text outline-none focus-visible:ring-2 focus-visible:ring-theme-accent"
+                >
+                  <img
+                    src={`/images/app-icons/${app.slug}.webp`}
+                    alt=""
+                    width={18}
+                    height={18}
+                    className="rounded shrink-0"
+                    onError={e => { e.target.style.display = 'none' }}
+                  />
+                  {app.name}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
 
         {/* ─── Category Sections (when not searching) ─── */}
@@ -468,7 +608,8 @@ function ChipButton({ active, onClick, children, icon: Icon, color }) {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-[15px] font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 border-none ${
+      aria-pressed={active}
+      className={`flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] rounded-full text-[15px] font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 border-none outline-none focus-visible:ring-2 focus-visible:ring-theme-accent ${
         active
           ? 'bg-theme-accent text-theme-base'
           : 'bg-transparent text-theme-muted hover:text-theme-text hover:bg-theme-base-alt'
@@ -545,7 +686,7 @@ function SearchResultsInline({ results, platform }) {
                     <Link
                       key={`${sc.action}-${i}`}
                       to={`/${platform}/${group.appSlug}`}
-                      className="flex items-center justify-between px-3 py-2 rounded-lg no-underline hover:bg-theme-base-alt transition-colors"
+                      className="flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-lg no-underline hover:bg-theme-base-alt transition-colors"
                     >
                       <span className="text-[15px] text-theme-text truncate">{sc.action}</span>
                       <span className="flex items-center gap-0.5 shrink-0 ml-4">

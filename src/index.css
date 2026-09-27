@@ -30,7 +30,11 @@
 
   --pattern-color: rgba(0, 0, 0, 0.03);
   --theme-line-color: #DDD7CC;
-  --theme-placeholder: #A09A90;
+  /* Placeholder text: 4.74:1 on #F5F0E8 base — passes WCAG 1.4.3 (was #A09A90 ≈ 2.46:1, failing) */
+  --theme-placeholder: #6F6A60;
+  /* Border used for interactive control boundaries: 3.27:1 on base — passes WCAG 1.4.11 (the
+     decorative --color-theme-border #C8C0B4 is only ~1.59:1, kept for soft card outlines) */
+  --theme-control-border: #8B8478;
 }
 
 /* =========================================
@@ -75,6 +79,10 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--color-theme-base);
+  /* Defensive: a single overflowing child shouldn't scroll the whole page sideways on
+     mobile. `clip` (not `hidden`) avoids creating a scroll container, so it does not
+     break `position: sticky`/fixed descendants the way overflow-x: hidden would. */
+  overflow-x: clip;
 }
 
 body {
@@ -413,6 +421,10 @@ body {
   color: var(--theme-placeholder);
 }
 
+.directory-search-focused {
+  box-shadow: inset 0 0 0 1.5px var(--theme-accent);
+}
+
 .chips-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -548,10 +560,34 @@ body {
 :focus-visible {
   outline: 2px solid var(--theme-accent);
   outline-offset: 2px;
+  border-radius: 4px;
 }
 
 :focus:not(:focus-visible) {
   outline: none;
+}
+
+/* For controls inside overflow-hidden / segmented containers where an outlined ring
+   would be clipped, opt into an inset ring via .focus-ring-inset. The outline still
+   provides the contrasting boundary, but offset is negative so it stays inside bounds. */
+.focus-ring-inset:focus-visible {
+  outline-offset: -2px;
+}
+
+/* =========================================
+   ACCESSIBILITY: Interactive control borders (WCAG 1.4.11, ≥3:1)
+   The default --color-theme-border (#C8C0B4 ≈ 1.59:1) is too faint to mark the
+   boundary of form controls. Ensure native inputs use the darker control border at
+   rest. Decorative card/section borders keep the soft token. */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select,
+textarea {
+  border-color: var(--theme-control-border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--theme-placeholder);
 }
 
 /* =========================================
@@ -603,5 +639,16 @@ body {
   .animate-marquee-left,
   .animate-marquee-right {
     animation: none;
+  }
+
+  /* Cards animate in from opacity:0 via a forwards animation; if the UA drops the
+     animation entirely, guarantee they remain visible. */
+  .fade-in-stagger {
+    opacity: 1;
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }

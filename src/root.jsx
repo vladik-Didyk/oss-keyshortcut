@@ -35,7 +35,7 @@ export function Layout({ children }) {
         <link rel="apple-touch-icon" href="/images/app-icon-512.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#F5F0E8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="google-adsense-account" content="ca-pub-7739329133284929" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

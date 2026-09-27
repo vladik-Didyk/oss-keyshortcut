@@ -206,6 +206,33 @@ export function searchIndex(index, query, maxResults = 50) {
 }
 
 /**
+ * Flatten grouped search results into an ordered list of selectable items,
+ * matching the visual order rendered by SearchDropdown / SearchResultsInline.
+ * Each item is { href, type } and is keyboard-navigable.
+ *
+ * @param {{ appMatches: [], shortcutMatches: [] }} results
+ * @param {string} platform
+ * @returns {Array<{ href: string, type: 'app'|'app-header'|'shortcut' }>}
+ */
+export function flattenSearchResults(results, platform) {
+  if (!results) return []
+  const { appMatches = [], shortcutMatches = [] } = results
+  const items = []
+
+  for (const app of appMatches) {
+    items.push({ href: `/${platform}/${app.slug}`, type: 'app' })
+  }
+  for (const group of shortcutMatches) {
+    items.push({ href: `/${platform}/${group.appSlug}`, type: 'app-header' })
+    for (let i = 0; i < group.shortcuts.length; i += 1) {
+      items.push({ href: `/${platform}/${group.appSlug}`, type: 'shortcut' })
+    }
+  }
+
+  return items
+}
+
+/**
  * Group flat shortcut results by app.
  */
 function groupShortcutResults(results) {

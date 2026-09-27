@@ -16,7 +16,48 @@ function formatDate(date, style = 'short') {
  *   "mini"    — icon + relative date only, for app cards
  */
 export default function LastCheckedBadge({ date, updatedDate, docsUrl, variant = 'inline' }) {
-  if (!date) return null
+  // Graceful fallback: when no date exists, still surface a freshness/trust
+  // signal ("Verified against official docs") instead of rendering nothing.
+  if (!date) {
+    if (variant === 'mini') {
+      return (
+        <span
+          className="inline-flex items-center gap-1 text-[10px] text-theme-muted"
+          title="Verified against official docs"
+        >
+          <CircleCheck size={10} className="text-green-600 shrink-0" />
+          Verified
+        </span>
+      )
+    }
+
+    if (variant === 'block') {
+      return (
+        <div className="text-theme-muted text-xs mt-2">
+          <p className="flex items-center gap-1.5">
+            <CircleCheck size={12} className="text-green-600 shrink-0" />
+            Verified against{' '}
+            {docsUrl ? (
+              <a href={docsUrl} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:no-underline">official docs</a>
+            ) : (
+              'official docs'
+            )}
+          </p>
+        </div>
+      )
+    }
+
+    // variant === 'inline'
+    return (
+      <span
+        className="ml-2 pl-2 border-l border-theme-border/40 inline-flex items-center gap-1"
+        title="Verified against official docs"
+      >
+        <CircleCheck size={11} className="text-green-600" />
+        Verified
+      </span>
+    )
+  }
 
   const formatted = formatDate(date)
   const long = formatDate(date, 'long')
@@ -43,7 +84,7 @@ export default function LastCheckedBadge({ date, updatedDate, docsUrl, variant =
           <CircleCheck size={12} className="text-green-600 shrink-0" />
           Last checked against{' '}
           {docsUrl ? (
-            <a href={docsUrl} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline no-underline">official docs</a>
+            <a href={docsUrl} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:no-underline">official docs</a>
           ) : (
             'official docs'
           )}

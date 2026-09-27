@@ -14,7 +14,11 @@ export default function SocialProof() {
       >
         {/* Rating badge */}
         <div className="flex flex-col items-center mb-12">
-          <div className="flex items-center gap-1 mb-2">
+          <div
+            className="flex items-center gap-1 mb-2"
+            role="img"
+            aria-label="Five out of five stars"
+          >
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}
@@ -22,6 +26,7 @@ export default function SocialProof() {
                 className="text-theme-accent"
                 fill="currentColor"
                 strokeWidth={0}
+                aria-hidden="true"
               />
             ))}
           </div>
@@ -36,7 +41,11 @@ export default function SocialProof() {
               key={i}
               className="rounded-2xl border border-theme-border bg-theme-base-alt p-6"
             >
-              <div className="flex items-center gap-1 mb-3">
+              <div
+                className="flex items-center gap-1 mb-3"
+                role="img"
+                aria-label="Five out of five stars"
+              >
                 {Array.from({ length: 5 }).map((_, j) => (
                   <Star
                     key={j}
@@ -44,6 +53,7 @@ export default function SocialProof() {
                     className="text-theme-accent"
                     fill="currentColor"
                     strokeWidth={0}
+                    aria-hidden="true"
                   />
                 ))}
               </div>

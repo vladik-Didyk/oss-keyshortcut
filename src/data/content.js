@@ -11,11 +11,27 @@ export const CONTENT = {
     tagline: 'Keyboard shortcuts for every app.',
 
     navbar: {
+      // Primary platform links — shown on desktop and mobile.
       platformLinks: [
         { label: 'macOS', to: '/macos' },
         { label: 'Windows', to: '/windows' },
         { label: 'Linux', to: '/linux' },
       ],
+      // Resource links — shown on desktop and mobile (same set on both).
+      resourceLinks: [
+        { label: 'Guides', to: '/guides' },
+        { label: 'Compare', to: '/compare' },
+        { label: 'Cheat Sheets', to: '/cheat-sheets' },
+      ],
+      // Secondary links — shown on desktop and mobile (same set on both).
+      secondaryLinks: [
+        { label: 'Mac App', to: '/mac-hud' },
+        { label: 'About', to: '/about' },
+      ],
+      // Convenience link surfaced first in the mobile menu so deep-page
+      // visitors can always reach the searchable homepage.
+      homeLink: { label: 'Home · All shortcuts', to: '/' },
+      resourcesLabel: 'Resources',
       appDropdownLinks: [
         { label: 'Features', href: '#features' },
         { label: 'FAQ', href: '#faq' },
@@ -30,10 +46,12 @@ export const CONTENT = {
 
     footer: {
       tagline: 'Keyboard shortcuts for every app.',
+      // Static, hand-curated columns (kept for direct crawl/discovery value).
       columns: [
         {
           heading: 'Directory',
           links: [
+            { label: 'All Apps', to: '/' },
             { label: 'macOS Shortcuts', to: '/macos' },
             { label: 'Windows Shortcuts', to: '/windows' },
             { label: 'Linux Shortcuts', to: '/linux' },
@@ -51,14 +69,39 @@ export const CONTENT = {
         {
           heading: 'Company',
           links: [
-            { label: 'Guides', to: '/guides' },
-            { label: 'Cheat Sheets', to: '/cheat-sheets' },
-            { label: 'Compare Apps', to: '/compare' },
             { label: 'About', to: '/about' },
             { label: 'Privacy Policy', to: '/privacy' },
             { label: 'Terms of Use', to: '/privacy#terms' },
           ],
         },
+      ],
+      // Curated set of high-traffic app pages across all platforms — a
+      // static internal-linking asset that helps crawlers and deep-page
+      // visitors reach popular references. Slugs verified against
+      // public/data/platforms/*.json.
+      popularAppsHeading: 'Popular Apps',
+      popularApps: [
+        { label: 'VS Code (macOS)', to: '/macos/vscode' },
+        { label: 'Figma (macOS)', to: '/macos/figma' },
+        { label: 'Chrome (macOS)', to: '/macos/chrome' },
+        { label: 'Safari (macOS)', to: '/macos/safari' },
+        { label: 'Photoshop (macOS)', to: '/macos/photoshop' },
+        { label: 'Excel (macOS)', to: '/macos/excel' },
+        { label: 'Slack (macOS)', to: '/macos/slack' },
+        { label: 'Notion (macOS)', to: '/macos/notion' },
+        { label: 'Chrome (Windows)', to: '/windows/chrome' },
+        { label: 'Excel (Windows)', to: '/windows/excel' },
+        { label: 'VS Code (Linux)', to: '/linux/vscode' },
+        { label: 'Vim (Linux)', to: '/linux/vim' },
+      ],
+      // Resources column heading + the cheat-sheet entry point. Top guides
+      // and top comparisons are appended from GUIDES / COMPARISONS in the
+      // Footer component so this stays in sync with the data automatically.
+      resourcesHeading: 'Resources',
+      resourcesStaticLinks: [
+        { label: 'Cheat Sheets', to: '/cheat-sheets' },
+        { label: 'All Guides', to: '/guides' },
+        { label: 'Compare Apps', to: '/compare' },
       ],
       copyright: 'KeyShortcut. All rights reserved.',
       bottomTagline: 'Made for people who love shortcuts.',

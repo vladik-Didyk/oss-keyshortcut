@@ -30,8 +30,8 @@ export default function PlatformIcons({ currentPlatform, otherPlatforms }) {
         if (!meta) return null
         const Icon = meta.icon
         return (
-          <span key={id} title={meta.label} className="text-theme-muted/50">
-            <Icon size={12} />
+          <span key={id} title={meta.label} className="text-theme-muted/70">
+            <Icon size={13} />
           </span>
         )
       })}

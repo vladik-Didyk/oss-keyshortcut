@@ -1,24 +1,98 @@
 import { Link, useLoaderData } from 'react-router'
-import React, { useState, useDeferredValue, useEffect, useMemo, useRef } from 'react'
-import { Search, X, Download, ExternalLink, Lightbulb, ChevronDown } from '../utils/icons'
+import React, { useState, useCallback, useDeferredValue, useEffect, useMemo, useRef } from 'react'
+import { Search, X, Download, ExternalLink, Lightbulb, ChevronDown, ChevronRight, Clipboard, CircleCheck } from '../utils/icons'
 import LastCheckedBadge from './LastCheckedBadge'
 import MacAppStoreButton from './MacAppStoreButton'
 import AppIcon from './directory/AppIcon'
+import AppCard from './directory/AppCard'
 import { useScrollspy } from '../hooks/useScrollspy'
 import { CONTENT } from '../data/content'
 import { APP_STORE_URL } from '../data/siteConfig'
 import AdSlot from './AdSlot'
 import { tokenize } from '../utils/searchHelpers'
 import { parseKeyParts } from '../utils/platformHelpers'
+import { COMPARISONS } from '../data/comparisons'
 import { trackEvent } from '../lib/analytics'
 
 function Keycap({ children }) {
   return <kbd className="keycap">{children}</kbd>
 }
 
+/**
+ * A shortcut's keycaps, clickable to copy the human-readable combo to the
+ * clipboard. Shows a transient "Copied" state for ~1.2s.
+ */
+function CopyableShortcut({ parts, action, appSlug, platform }) {
+  const [copied, setCopied] = useState(false)
+  const timerRef = useRef(null)
+
+  useEffect(() => () => clearTimeout(timerRef.current), [])
+
+  const combo = parts.join(' + ')
+
+  const onCopy = useCallback(() => {
+    if (!navigator.clipboard?.writeText) return
+    navigator.clipboard
+      .writeText(combo)
+      .then(() => {
+        setCopied(true)
+        clearTimeout(timerRef.current)
+        timerRef.current = setTimeout(() => setCopied(false), 1200)
+        trackEvent('shortcut_copied', { app: appSlug, platform, action, combo })
+      })
+      .catch(() => {})
+  }, [combo, action, appSlug, platform])
+
+  return (
+    <button
+      type="button"
+      onClick={onCopy}
+      title={copied ? 'Copied' : `Copy shortcut: ${combo}`}
+      aria-label={copied ? `Copied ${combo}` : `Copy shortcut ${combo} for ${action}`}
+      className="group/copy inline-flex items-center gap-1.5 flex-wrap justify-end bg-transparent border-none p-0 m-0 cursor-pointer align-middle"
+    >
+      {parts.map((part, k) => (
+        <Keycap key={k}>{part}</Keycap>
+      ))}
+      <span
+        className={`inline-flex items-center transition-opacity ${
+          copied ? 'opacity-100 text-green-600' : 'opacity-0 group-hover/copy:opacity-70 text-theme-muted'
+        }`}
+        aria-hidden="true"
+      >
+        {copied ? <CircleCheck size={13} /> : <Clipboard size={13} />}
+      </span>
+    </button>
+  )
+}
+
 export default function ShortcutPage() {
-  const { platformId: platform, platformName, app, otherPlatforms } = useLoaderData()
+  const {
+    platformId: platform,
+    platformName,
+    app,
+    otherPlatforms,
+    relatedApps = [],
+    popularApps = [],
+    otherPlatformsMap = {},
+  } = useLoaderData()
   const slug = app.slug
+
+  // Cross-content link targets that actually exist for this app.
+  const comparisonLinks = useMemo(
+    () =>
+      COMPARISONS.filter(
+        (c) => c.platform === platform && (c.slugA === slug || c.slugB === slug)
+      ).map((c) => {
+        const otherSlug = c.slugA === slug ? c.slugB : c.slugA
+        const otherName = otherSlug
+          .split('-')
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(' ')
+        return { pairSlug: `${c.slugA}-vs-${c.slugB}`, otherName }
+      }),
+    [platform, slug]
+  )
   const [search, setSearch] = useState('')
   const searchInputRef = useRef(null)
   const headerRef = useRef(null)
@@ -106,12 +180,42 @@ export default function ShortcutPage() {
       {/* Navbar clearance */}
       <div className="h-12" />
 
+      {/* ─── Breadcrumbs ─── */}
+      <nav
+        aria-label="Breadcrumb"
+        className="mx-auto max-w-[980px] px-5 md:px-6 pt-4 text-theme-muted text-xs sm:text-sm"
+      >
+        <ol className="flex items-center gap-1.5 flex-wrap">
+          <li>
+            <Link to="/" className="text-accent hover:underline no-underline">
+              {sp.breadcrumbHome}
+            </Link>
+          </li>
+          <li aria-hidden="true">
+            <ChevronRight size={13} className="text-theme-muted" />
+          </li>
+          <li>
+            <Link to={`/${platform}`} className="text-accent hover:underline no-underline">
+              {platformName} Shortcuts
+            </Link>
+          </li>
+          <li aria-hidden="true">
+            <ChevronRight size={13} className="text-theme-muted" />
+          </li>
+          <li aria-current="page" className="text-theme-text font-medium truncate max-w-[55vw] sm:max-w-none">
+            {app.displayName}
+          </li>
+        </ol>
+      </nav>
+
       {/* ─── Header ─── */}
-      <header ref={headerRef} className="py-4 px-5 md:px-6 border-b border-theme-border sticky top-12 z-20 bg-theme-base">
-        <div className="mx-auto max-w-[980px] flex items-center gap-4 flex-wrap">
-          <AppIcon slug={slug} displayName={app.displayName} size={40} />
+      <header ref={headerRef} className="py-3 lg:py-4 px-5 md:px-6 border-b border-theme-border static lg:sticky lg:top-12 z-20 bg-theme-base">
+        <div className="mx-auto max-w-[980px] flex items-center gap-3 lg:gap-4 flex-wrap">
+          <div className="shrink-0">
+            <AppIcon slug={slug} displayName={app.displayName} size={40} />
+          </div>
           <div className="flex items-center gap-3 flex-1 min-w-0">
-            <h1 className="text-xl font-bold tracking-tight truncate">
+            <h1 className="text-lg lg:text-xl font-bold tracking-tight truncate">
               {app.displayName} Shortcuts
             </h1>
             {app.category && (
@@ -132,7 +236,7 @@ export default function ShortcutPage() {
                 {otherPlatforms.map((p, i) => (
                   <span key={p.id}>
                     {i > 0 && ', '}
-                    <Link to={`/${p.id}/${slug}`} className="text-accent hover:underline no-underline">
+                    <Link to={`/${p.id}/${slug}`} className="text-accent underline underline-offset-2 hover:no-underline">
                       {p.name}
                     </Link>
                   </span>
@@ -155,7 +259,7 @@ export default function ShortcutPage() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 aria-label={sp.filterAriaLabel}
-                className="w-full pl-8 pr-12 py-1.5 rounded-lg bg-theme-base-alt border border-theme-border text-theme-text placeholder:text-theme-muted outline-none focus:border-theme-border-hover focus:ring-1 focus:ring-theme-border-hover transition-all text-sm"
+                className="w-full pl-8 pr-12 py-1.5 rounded-lg bg-theme-base-alt border border-theme-border text-theme-text placeholder:text-theme-muted outline-none focus:border-theme-border-hover focus:ring-1 focus:ring-theme-border-hover transition-all text-base sm:text-sm"
               />
               {!search && (
                 <span className="absolute right-2.5 top-1/2 -translate-y-1/2 hidden sm:flex items-center text-theme-muted pointer-events-none select-none">
@@ -165,7 +269,7 @@ export default function ShortcutPage() {
               {search && (
                 <button
                   onClick={() => setSearch('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-theme-muted hover:text-theme-text bg-transparent border-none cursor-pointer p-0.5 rounded-full transition-colors"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center justify-center min-w-[28px] min-h-[28px] text-theme-muted hover:text-theme-text bg-transparent border-none cursor-pointer rounded-full transition-colors"
                   aria-label={sp.clearAriaLabel}
                 >
                   <X size={14} />
@@ -178,23 +282,23 @@ export default function ShortcutPage() {
                 generateShortcutPDF(app)
                 trackEvent('shortcut_pdf_downloaded', { app: slug, platform, app_name: app.displayName })
               }}
-              className="p-1.5 rounded-lg border border-theme-border hover:bg-theme-base-alt text-theme-muted hover:text-theme-text transition-colors shrink-0 cursor-pointer"
+              className="flex items-center justify-center min-w-[40px] min-h-[40px] rounded-lg border border-theme-border hover:bg-theme-base-alt text-theme-muted hover:text-theme-text transition-colors shrink-0 cursor-pointer"
               title={sp.downloadTitle}
               aria-label={sp.downloadTitle}
             >
-              <Download size={14} />
+              <Download size={16} />
             </button>
             {app.docsUrl && (
               <a
                 href={app.docsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1.5 rounded-lg border border-theme-border hover:bg-theme-base-alt text-theme-muted hover:text-theme-text transition-colors shrink-0 no-underline"
+                className="flex items-center justify-center min-w-[40px] min-h-[40px] rounded-lg border border-theme-border hover:bg-theme-base-alt text-theme-muted hover:text-theme-text transition-colors shrink-0 no-underline"
                 title="View official documentation"
                 aria-label="View official documentation"
                 onClick={() => trackEvent('docs_link_clicked', { app: slug, platform, app_name: app.displayName, docs_url: app.docsUrl })}
               >
-                <ExternalLink size={14} />
+                <ExternalLink size={16} />
               </a>
             )}
           </div>
@@ -235,21 +339,61 @@ export default function ShortcutPage() {
           </ul>
         </div>
 
-        {/* ─── Inline CTA ─── */}
-        {APP_STORE_URL && (
-          <div className="mt-8 max-w-[720px] flex items-center gap-4 rounded-2xl border border-theme-border bg-theme-base-alt p-5">
-            <div className="flex-1 min-w-0">
-              <p className="text-[15px] font-medium">{sp.ctaTitle(app.displayName)}</p>
-              <p className="text-[13px] text-theme-muted mt-0.5">{sp.ctaSubtitle}</p>
-            </div>
-            <Link
-              to="/mac-hud"
-              className="shrink-0 px-4 py-2 rounded-full bg-theme-accent text-theme-accent-text text-[13px] font-medium no-underline hover:opacity-90 transition-opacity"
-            >
-              Learn more
-            </Link>
+        {/* ─── Inline CTA (Mac HUD nudge — always renders; /mac-hud is a valid route) ─── */}
+        <div className="mt-8 max-w-[720px] flex flex-col sm:flex-row sm:items-center gap-4 rounded-2xl border border-theme-border bg-theme-base-alt p-5">
+          <div className="flex-1 min-w-0">
+            <p className="text-[15px] font-medium">{sp.ctaTitle(app.displayName)}</p>
+            <p className="text-[13px] text-theme-muted mt-0.5">{sp.ctaSubtitle}</p>
           </div>
-        )}
+          <Link
+            to="/mac-hud"
+            onClick={() => trackEvent('mac_hud_promo_clicked', { location: 'shortcut_page', app: slug })}
+            className="shrink-0 self-start sm:self-auto px-4 py-2 rounded-full bg-theme-accent text-theme-accent-text text-[13px] font-medium no-underline hover:opacity-90 transition-opacity"
+          >
+            Learn more
+          </Link>
+        </div>
+
+        {/* ─── Related resources (cross-content links) ─── */}
+        <div className="mt-8 max-w-[720px] rounded-2xl border border-theme-border bg-theme-base p-5">
+          <p className="text-xs font-semibold uppercase tracking-wider text-theme-muted mb-3">
+            Related resources
+          </p>
+          <ul className="flex flex-col gap-2 text-[14px]">
+            {comparisonLinks.map((c) => (
+              <li key={c.pairSlug} className="flex items-center gap-1.5">
+                <ChevronRight size={14} className="text-theme-muted shrink-0" />
+                <Link
+                  to={`/compare/${c.pairSlug}`}
+                  onClick={() => trackEvent('related_resource_clicked', { type: 'compare', app: slug, target: c.pairSlug })}
+                  className="text-accent underline underline-offset-2 hover:no-underline"
+                >
+                  Compare {app.displayName} vs {c.otherName}
+                </Link>
+              </li>
+            ))}
+            <li className="flex items-center gap-1.5">
+              <ChevronRight size={14} className="text-theme-muted shrink-0" />
+              <Link
+                to="/cheat-sheets"
+                onClick={() => trackEvent('related_resource_clicked', { type: 'cheat_sheet', app: slug })}
+                className="text-accent underline underline-offset-2 hover:no-underline"
+              >
+                Download printable cheat sheet
+              </Link>
+            </li>
+            <li className="flex items-center gap-1.5">
+              <ChevronRight size={14} className="text-theme-muted shrink-0" />
+              <Link
+                to="/guides"
+                onClick={() => trackEvent('related_resource_clicked', { type: 'guides', app: slug })}
+                className="text-accent underline underline-offset-2 hover:no-underline"
+              >
+                Browse guides
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* ─── Sidebar + Main ─── */}
@@ -282,7 +426,7 @@ export default function ShortcutPage() {
                           isActive
                             ? 'toc-link-active'
                             : isDimmed
-                              ? 'text-theme-muted/30 border-transparent'
+                              ? 'text-theme-muted line-through border-transparent'
                               : 'text-theme-muted hover:text-theme-text border-transparent hover:border-theme-border-hover'
                         }`}
                       >
@@ -300,6 +444,29 @@ export default function ShortcutPage() {
 
           {/* Main content */}
           <div className="flex-1 min-w-0">
+
+            {/* Mobile jump-to-section — desktop uses the sidebar TOC */}
+            {app.sections.length > 1 && (
+              <details className="lg:hidden mb-8 rounded-xl border border-theme-border bg-theme-base-alt">
+                <summary className="flex items-center justify-between gap-2 px-4 py-3 cursor-pointer select-none text-sm font-medium text-theme-text [&::-webkit-details-marker]:hidden">
+                  Jump to section
+                  <ChevronDown size={16} className="text-theme-muted shrink-0" />
+                </summary>
+                <ul className="px-2 pb-2 flex flex-wrap gap-1.5">
+                  {app.sections.map((section, i) => (
+                    <li key={i}>
+                      <a
+                        href={`#${sectionIds[i]}`}
+                        className="inline-block px-3 py-1.5 rounded-full bg-theme-base border border-theme-border text-theme-text text-[13px] no-underline hover:border-theme-border-hover transition-colors"
+                      >
+                        {section.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
+
             {filteredSections.map((section, idx) => (
               <React.Fragment key={section.id}>
                 <div id={section.id} className="mb-14">
@@ -310,21 +477,26 @@ export default function ShortcutPage() {
                     </span>
                   </h2>
                   <table className="shortcut-table">
+                    <colgroup>
+                      <col className="w-[55%]" />
+                      <col className="w-[45%]" />
+                    </colgroup>
                     <thead className="sr-only">
                       <tr><th>Action</th><th>Shortcut</th></tr>
                     </thead>
                     <tbody>
                       {section.shortcuts.map((s, j) => (
                         <tr key={j} className={j % 2 === 1 ? 'shortcut-row-alt' : ''}>
-                          <td className="py-3 pr-4 text-theme-text text-[15px]">
+                          <td className="py-3 pr-3 text-theme-text text-[15px] break-words">
                             {s.action}
                           </td>
-                          <td className="py-3 pl-4 text-right whitespace-nowrap">
-                            <span className="inline-flex items-center gap-1.5">
-                              {parseKeyParts(s.modifiers, s.key).map((part, k) => (
-                                <Keycap key={k}>{part}</Keycap>
-                              ))}
-                            </span>
+                          <td className="py-3 pl-3 text-right align-middle">
+                            <CopyableShortcut
+                              parts={parseKeyParts(s.modifiers, s.key)}
+                              action={s.action}
+                              appSlug={slug}
+                              platform={platform}
+                            />
                           </td>
                         </tr>
                       ))}
@@ -345,6 +517,49 @@ export default function ShortcutPage() {
           </div>
         </div>
       </div>
+
+      {/* ─── Onward journeys: related + popular apps ─── */}
+      {(relatedApps.length > 0 || popularApps.length > 0) && (
+        <div className="border-t border-theme-border">
+          <div className="mx-auto max-w-[980px] px-5 md:px-6 py-14 space-y-12">
+            {relatedApps.length > 0 && app.category && (
+              <section>
+                <h2 className="text-xl font-semibold tracking-tight mb-6">
+                  More {app.category} shortcuts
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {relatedApps.map((a) => (
+                    <div
+                      key={a.slug}
+                      onClick={() => trackEvent('related_app_clicked', { from: slug, to: a.slug, platform, group: 'related' })}
+                    >
+                      <AppCard app={a} platform={platform} otherPlatforms={otherPlatformsMap[a.slug]} />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {popularApps.length > 0 && (
+              <section>
+                <h2 className="text-xl font-semibold tracking-tight mb-6">
+                  Popular {platformName} apps
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {popularApps.map((a) => (
+                    <div
+                      key={a.slug}
+                      onClick={() => trackEvent('related_app_clicked', { from: slug, to: a.slug, platform, group: 'popular' })}
+                    >
+                      <AppCard app={a} platform={platform} otherPlatforms={otherPlatformsMap[a.slug]} />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ─── FAQ Section ─── */}
       <div className="border-t border-theme-border">
@@ -368,7 +583,17 @@ export default function ShortcutPage() {
             <p className="text-theme-accent-text/80 text-[15px] leading-relaxed mb-6 max-w-md mx-auto">
               {sp.ctaSubtitle}
             </p>
-            <MacAppStoreButton />
+            <div className="flex flex-col items-center gap-3">
+              <MacAppStoreButton />
+              {/* Always-present nudge — survives even when the App Store badge is gated off */}
+              <Link
+                to="/mac-hud"
+                onClick={() => trackEvent('mac_hud_promo_clicked', { location: 'shortcut_page', app: slug })}
+                className={`text-[14px] font-medium no-underline hover:underline ${APP_STORE_URL ? 'text-theme-accent-text/80' : 'inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-theme-base text-theme-text'}`}
+              >
+                {APP_STORE_URL ? `Learn how KeyShortcut works with ${app.displayName} →` : `Learn how KeyShortcut works with ${app.displayName}`}
+              </Link>
+            </div>
           </div>
         </div>
       </div>

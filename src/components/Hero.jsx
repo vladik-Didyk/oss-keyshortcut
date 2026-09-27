@@ -5,9 +5,73 @@ import { useInView } from '../hooks/useInView'
 import { DEMO_APPS, buildDemoTimeline } from '../data/heroDemoData'
 import { MAC_ROWS } from '../data/keyboardLayout'
 import { CONTENT } from '../data/content'
+import { APP_STORE_URL } from '../data/siteConfig'
 
 // ─── Build timeline from demo data ───
 const { frames: FRAMES, duration: LOOP_MS } = buildDemoTimeline(DEMO_APPS)
+
+// ─── Sticky CTA ───
+// Appears once the hero scrolls out of view: a bottom bar on mobile and a
+// bottom-right card on desktop, holding the App Store badge + price microcopy.
+// SSR-safe: all observer/scroll work lives inside an effect with a window guard.
+function StickyCTA({ heroRef }) {
+  const [visible, setVisible] = useState(false)
+  const { hero } = CONTENT.productPage
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const heroEl = heroRef.current
+    if (!heroEl) return
+
+    // Preferred path: IntersectionObserver on the hero element.
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        ([entry]) => setVisible(!entry.isIntersecting),
+        { threshold: 0, rootMargin: '0px 0px -100% 0px' }
+      )
+      observer.observe(heroEl)
+      return () => observer.disconnect()
+    }
+
+    // Fallback for environments without IntersectionObserver.
+    const onScroll = () => {
+      const rect = heroEl.getBoundingClientRect()
+      setVisible(rect.bottom <= 0)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [heroRef])
+
+  return (
+    <div
+      aria-hidden={!visible}
+      className={`fixed inset-x-0 bottom-0 z-40 px-4 pb-4 sm:left-auto sm:right-4 sm:inset-x-auto sm:max-w-sm transition-all duration-300 ${
+        visible
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 translate-y-4 pointer-events-none'
+      }`}
+    >
+      <div className="flex items-center justify-between gap-4 rounded-2xl border border-theme-border bg-theme-base-alt/95 backdrop-blur px-4 py-3 shadow-lg">
+        <div className="min-w-0">
+          <p className="text-sm font-semibold leading-tight truncate">
+            {hero.headline} {hero.headlineAccent}
+          </p>
+          <p className="text-xs text-theme-muted leading-tight whitespace-pre-line">
+            {hero.platformInfoMobile}
+          </p>
+        </div>
+        <div className="shrink-0">
+          <MacAppStoreButton
+            eventName="sticky_cta_clicked"
+            eventProps={{ location: 'sticky' }}
+            className="[&_img]:h-[36px] sm:[&_img]:h-[40px]"
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
 
 // ─── Component ───
 export default function Hero() {
@@ -23,6 +87,15 @@ export default function Hero() {
 
   useEffect(() => {
     if (!isVisible) return
+    // Respect reduced-motion: skip the decorative auto-playing keyboard animation.
+    // Guarded for SSR — matchMedia only exists in the browser.
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return
+    }
     const startTime = performance.now() + 1400
     let rafId
     let lastIdx = -1
@@ -96,8 +169,15 @@ export default function Hero() {
               {hero.subheadline}
             </p>
 
-            <div className="flex items-center gap-4 mb-5">
-              <MacAppStoreButton />
+            <div className="flex flex-col items-start gap-2 mb-5">
+              <MacAppStoreButton eventProps={{ location: 'hero_desktop' }} />
+              {/* Price / platform microcopy — surfaces existing content.js field.
+                  Guarded so it isn't orphaned when no store URL (button is null). */}
+              {APP_STORE_URL && (
+                <p className="text-[13px] text-theme-muted whitespace-pre-line leading-snug">
+                  {hero.platformInfo}
+                </p>
+              )}
             </div>
 
             {/* Stat badges — horizontal, compact */}
@@ -187,7 +267,14 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col items-center gap-3 mb-10 md:mb-12">
-          <MacAppStoreButton />
+          <MacAppStoreButton eventProps={{ location: 'hero_mobile' }} />
+          {/* Price / platform microcopy — surfaces existing content.js field.
+              Guarded so it isn't orphaned when no store URL (button is null). */}
+          {APP_STORE_URL && (
+            <p className="text-sm text-theme-muted">
+              {hero.platformInfoMobile}
+            </p>
+          )}
         </div>
 
         <div className="flex justify-center gap-4 md:gap-6 flex-wrap">
@@ -230,6 +317,9 @@ export default function Hero() {
         </p>
       </div>
 
+      {/* Persistent CTA — appears after the hero scrolls out of view.
+          Only when there's a store URL (otherwise there's nothing to click). */}
+      {APP_STORE_URL && <StickyCTA heroRef={ref} />}
     </section>
   )
 }
