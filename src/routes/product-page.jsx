@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router";
 import { CONTENT, buildMeta } from "../data/content";
 import { getPlatformApps, getCategories } from "../utils/supabase.server";
 import { groupByCategories } from "../utils/platformHelpers";
-import { APP_COUNT, PRICE, APP_STORE_URL, SHORTCUT_COUNT, formatShortcutCount } from "../data/siteConfig";
+import { MAC_APP_COUNT, PRICE, APP_STORE_URL, MAC_SHORTCUT_COUNT, formatShortcutCount } from "../data/siteConfig";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Problem from "../components/Problem";
@@ -28,8 +28,8 @@ export function meta() {
 function ValueStrip() {
   const items = [
     `${PRICE} once`,
-    `${APP_COUNT} apps`,
-    `${SHORTCUT_COUNT.toLocaleString()}+ shortcuts`,
+    `${MAC_APP_COUNT} apps`,
+    `${MAC_SHORTCUT_COUNT.toLocaleString("en-US")}+ shortcuts`,
     "no subscription",
     "no tracking",
   ];
@@ -61,7 +61,7 @@ function InlineCTA({ location }) {
       <div className="mx-auto max-w-md text-center">
         <MacAppStoreButton eventProps={{ location }} />
         <p className="mt-4 text-[15px] text-theme-muted">
-          {PRICE} once · {APP_COUNT} apps · {formatShortcutCount()} shortcuts · no subscription
+          {PRICE} once · {MAC_APP_COUNT} apps · {formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts · no subscription
         </p>
       </div>
     </section>
@@ -93,7 +93,7 @@ const SOFTWARE_APP_JSONLD = JSON.stringify({
   name: 'KeyShortcut',
   operatingSystem: 'macOS',
   applicationCategory: 'UtilitiesApplication',
-  description: `Floating keyboard shortcut panel for macOS. ${formatShortcutCount()} shortcuts across ${APP_COUNT} apps with active app detection, search, and custom shortcuts.`,
+  description: `Floating keyboard shortcut panel for macOS. ${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts across ${MAC_APP_COUNT} apps with active app detection, search, and custom shortcuts.`,
   url: 'https://keyshortcut.com/mac-hud',
   ...(APP_STORE_URL ? { downloadUrl: APP_STORE_URL } : {}),
   offers: {

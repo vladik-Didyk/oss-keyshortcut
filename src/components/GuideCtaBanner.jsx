@@ -1,5 +1,5 @@
 import MacAppStoreButton from './MacAppStoreButton'
-import { formatShortcutCount, APP_COUNT } from '../data/siteConfig'
+import { formatShortcutCount, MAC_APP_COUNT, MAC_SHORTCUT_COUNT } from '../data/siteConfig'
 
 export default function GuideCtaBanner() {
   return (
@@ -8,7 +8,7 @@ export default function GuideCtaBanner() {
         Stop looking up shortcuts
       </h3>
       <p className="text-theme-accent-text/80 mb-6 max-w-md mx-auto">
-        KeyShortcut shows {formatShortcutCount()} shortcuts for {APP_COUNT} apps
+        KeyShortcut shows {formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts for {MAC_APP_COUNT} apps
         in a floating panel that detects your active app automatically.
       </p>
       <MacAppStoreButton />

@@ -4,6 +4,8 @@ import { CONTENT } from '../data/content'
 import { GUIDES } from '../data/guides/index.js'
 import { COMPARISONS } from '../data/comparisons.js'
 import { trackEvent } from '../lib/analytics'
+import { openCookieSettings } from '../lib/consent'
+import { HAS_AFFILIATE_LINKS } from '../data/affiliates'
 
 // Turn a comparison slug pair into a readable label, e.g.
 // { slugA: 'vscode', slugB: 'cursor' } → "VS Code vs Cursor".
@@ -78,9 +80,22 @@ export default function Footer() {
 
         {/* ─── Bottom bar ─── */}
         <div className="border-t border-theme-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="text-[13px] text-theme-muted">
-            &copy; {year} {footer.copyright}
-          </span>
+          <div className="flex flex-col items-center sm:items-start gap-1">
+            <span className="text-[13px] text-theme-muted">
+              &copy; {year} {footer.copyright}
+              {' · '}
+              <button
+                type="button"
+                onClick={openCookieSettings}
+                className="bg-transparent border-none p-0 cursor-pointer text-[13px] text-theme-muted underline underline-offset-2 hover:text-theme-text"
+              >
+                {footer.cookieSettings}
+              </button>
+            </span>
+            {HAS_AFFILIATE_LINKS && (
+              <span className="text-[12px] text-theme-muted">{footer.affiliateNote}</span>
+            )}
+          </div>
 
           {/* Created by badge */}
           <a href={creator.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 no-underline group">

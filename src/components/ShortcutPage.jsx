@@ -9,6 +9,9 @@ import { useScrollspy } from '../hooks/useScrollspy'
 import { CONTENT } from '../data/content'
 import { APP_STORE_URL } from '../data/siteConfig'
 import AdSlot from './AdSlot'
+import AffiliateLink from './AffiliateLink'
+import { getAffiliate } from '../data/affiliates'
+import { getSponsor, sponsorMailto } from '../data/sponsors'
 import { tokenize } from '../utils/searchHelpers'
 import { parseKeyParts } from '../utils/platformHelpers'
 import { COMPARISONS } from '../data/comparisons'
@@ -98,6 +101,9 @@ export default function ShortcutPage() {
   const headerRef = useRef(null)
   const [stickyTop, setStickyTop] = useState(48)
   const sp = CONTENT.shortcutPage
+  const pagePath = `/${platform}/${slug}`
+  const affiliate = getAffiliate(slug, platform)
+  const sponsor = getSponsor(pagePath)
 
   const sectionIds = useMemo(() => {
     const counts = {}
@@ -317,6 +323,7 @@ export default function ShortcutPage() {
           {sp.intro(app.displayName, platformName, app.shortcutCount, app.sections.length)}
         </p>
         <LastCheckedBadge date={app.lastVerified} updatedDate={app.lastUpdated} docsUrl={app.docsUrl} variant="block" />
+        <AffiliateLink affiliate={affiliate} appSlug={slug} platform={platform} className="mt-4 max-w-[720px]" />
         <p className="text-theme-muted text-[15px] leading-relaxed max-w-[720px] mt-3">
           {sp.learnMore(app.displayName)}
         </p>
@@ -503,8 +510,21 @@ export default function ShortcutPage() {
                     </tbody>
                   </table>
                 </div>
-                {idx === 1 && filteredSections.length >= 4 && !search && (
-                  <AdSlot adSlot="shortcut_mid" variant="in-article" />
+                {idx === 1 && filteredSections.length >= 3 && !search && (
+                  <>
+                    <AdSlot adSlot="shortcut_mid" variant="in-article" sponsor={sponsor} />
+                    {!sponsor && (
+                      <p className="text-center text-[12px] text-theme-muted -mt-2 mb-6">
+                        <a
+                          href={sponsorMailto(pagePath, app.displayName)}
+                          onClick={() => trackEvent('sponsor_cta_clicked', { app: slug, platform })}
+                          className="underline underline-offset-2 hover:text-theme-text"
+                        >
+                          {sp.sponsorCta(app.displayName)}
+                        </a>
+                      </p>
+                    )}
+                  </>
                 )}
               </React.Fragment>
             ))}

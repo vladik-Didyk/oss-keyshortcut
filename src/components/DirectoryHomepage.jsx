@@ -254,7 +254,7 @@ export default function DirectoryHomepage() {
 
           {/* Quantified value prop from siteConfig constants. */}
           <p className="text-theme-muted text-[1.125rem] md:text-[1.25rem] mb-8 max-w-xl mx-auto leading-relaxed">
-            Search {SHORTCUT_COUNT.toLocaleString()}+ shortcuts across {APP_COUNT}+ apps on macOS, Windows &amp; Linux.
+            Search {SHORTCUT_COUNT.toLocaleString('en-US')}+ shortcuts across {APP_COUNT}+ apps on macOS, Windows &amp; Linux.
           </p>
 
           {/* Platform Toggle */}

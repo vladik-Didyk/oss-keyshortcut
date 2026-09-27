@@ -1,75 +1,104 @@
 import { useEffect, useRef, useSyncExternalStore } from 'react'
 import { CONTENT } from '../data/content'
+import { ADSENSE_CLIENT, resolveAdUnit } from '../data/ads'
+import { trackEvent } from '../lib/analytics'
 
-const ADSENSE_ID = import.meta.env.VITE_ADSENSE_ID || ''
 const IS_PROD = import.meta.env.PROD
 
+/**
+ * One ad placement: a direct sponsor when `sponsor` is given, otherwise a
+ * Google AdSense unit. `adSlot` is a placement name from src/data/ads.js (or a
+ * raw numeric unit ID). Renders nothing when there is no sponsor and no unit ID.
+ *
+ * Ad consent is not decided here. In the EEA/UK/Switzerland, Google's certified
+ * consent message (AdSense → Privacy & messaging) gates ad requests. A visitor
+ * who declined our cookie banner gets non-personalised ads (flag set in root.jsx).
+ */
 export default function AdSlot({ adSlot, variant = 'banner', format = 'auto', sponsor, className = '' }) {
-  if (!sponsor && !ADSENSE_ID) return null
+  if (sponsor) return <SponsorBanner sponsor={sponsor} className={className} />
 
-  // Direct sponsor mode — always visible
-  if (sponsor) {
-    return (
-      <div className={`py-8 px-5 md:px-6 ${className}`}>
-        <div className="mx-auto max-w-[980px] text-center">
-          <p className="text-[11px] uppercase tracking-widest text-theme-muted mb-3">{CONTENT.shared.adSlot.sponsoredLabel}</p>
-          <a
-            href={sponsor.url}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="inline-block rounded-2xl border border-theme-border hover:border-theme-border-hover transition-colors overflow-hidden"
-          >
-            <img
-              src={sponsor.image}
-              alt={sponsor.alt || 'Sponsor'}
-              className="max-w-full h-auto max-h-24"
-            />
-          </a>
-        </div>
-      </div>
-    )
-  }
-
-  // Google AdSense — only render in production and when consent not declined
-  if (!IS_PROD) return null
-  if (typeof window !== 'undefined' && localStorage.getItem('cookie-consent') === 'declined') return null
+  const unitId = resolveAdUnit(adSlot)
+  if (!IS_PROD || !ADSENSE_CLIENT || !unitId) return null
 
   if (variant === 'in-article') {
     return (
-      <AdWrapper className={`py-8 px-5 md:px-6 ${className}`}>
-        <div className="mx-auto max-w-[980px]">
-          <div className="rounded-2xl bg-theme-base-alt border border-theme-border p-5 text-center">
-            <AdSenseUnit adSlot={adSlot} format="fluid" layout="in-article" />
+      <AdWrapper className={className} filledClassName="py-8" baseClassName="px-5 md:px-6">
+        {(filled) => (
+          <div className="mx-auto max-w-[980px]">
+            {/* Border is always 1px (transparent until filled) so the width AdSense measured never changes. */}
+            <div className={`rounded-2xl border px-5 text-center ${filled ? 'bg-theme-base-alt border-theme-border py-5' : 'border-transparent'}`}>
+              <AdSenseUnit unitId={unitId} format="fluid" layout="in-article" />
+            </div>
           </div>
-        </div>
+        )}
       </AdWrapper>
     )
   }
 
   if (variant === 'in-feed') {
     return (
-      <AdWrapper className={`flex flex-col items-center py-6 px-4 rounded-2xl border border-theme-border bg-theme-base-alt ${className}`}>
-        <AdSenseUnit adSlot={adSlot} format="fluid" layoutKey="-fb+5w+4e-db+86" />
+      <AdWrapper
+        className={`flex flex-col items-center rounded-2xl border ${className}`}
+        filledClassName="py-6 bg-theme-base-alt border-theme-border"
+        baseClassName="px-4 border-transparent"
+      >
+        {() => <AdSenseUnit unitId={unitId} format="fluid" layoutKey="-fb+5w+4e-db+86" />}
       </AdWrapper>
     )
   }
 
   // Default: banner
   return (
-    <AdWrapper className={`py-8 px-5 md:px-6 ${className}`}>
-      <div className="mx-auto max-w-[980px] text-center">
-        <AdSenseUnit adSlot={adSlot} format={format} />
-      </div>
+    <AdWrapper className={className} filledClassName="py-8" baseClassName="px-5 md:px-6">
+      {() => (
+        <div className="mx-auto max-w-[980px] text-center">
+          <AdSenseUnit unitId={unitId} format={format} />
+        </div>
+      )}
     </AdWrapper>
   )
 }
 
+function SponsorBanner({ sponsor, className }) {
+  const onClick = () => trackEvent('sponsor_clicked', { sponsor: sponsor.name || sponsor.url, url: sponsor.url })
+  return (
+    <div className={`py-8 px-5 md:px-6 ${className}`}>
+      <div className="mx-auto max-w-[980px] text-center">
+        <p className="text-[11px] uppercase tracking-widest text-theme-muted mb-3">{CONTENT.shared.adSlot.sponsoredLabel}</p>
+        <a
+          href={sponsor.url}
+          target="_blank"
+          rel="sponsored nofollow noopener noreferrer"
+          onClick={onClick}
+          className="inline-block rounded-2xl border border-theme-border hover:border-theme-border-hover transition-colors overflow-hidden no-underline"
+        >
+          {sponsor.image ? (
+            <img src={sponsor.image} alt={sponsor.alt || sponsor.name || 'Sponsor'} className="max-w-full h-auto max-h-24" />
+          ) : (
+            <span className="block px-6 py-4 text-left">
+              <span className="block text-[15px] font-semibold text-theme-text">{sponsor.name}</span>
+              {sponsor.tagline && <span className="block text-[13px] text-theme-muted mt-0.5">{sponsor.tagline}</span>}
+            </span>
+          )}
+        </a>
+      </div>
+    </div>
+  )
+}
+
 /**
- * Wrapper that stays hidden until the AdSense <ins> inside it gets filled.
- * Uses useSyncExternalStore to subscribe to the ad fill status without
- * calling setState inside an effect.
+ * Keeps an ad placement visually empty until AdSense fills it, then adds the
+ * spacing, card styling and the "Advertisements" label.
+ *
+ * The wrapper is never display:none. AdSense sizes a responsive unit from its
+ * container's width, and a hidden container reports 0 ("No slot size for
+ * availableWidth=0"), so the unit never fills. An unfilled <ins> is 0px tall,
+ * and index.css hides one AdSense marks data-ad-status="unfilled".
+ *
+ * Uses useSyncExternalStore to subscribe to the fill status without calling
+ * setState inside an effect.
  */
-function AdWrapper({ children, className }) {
+function AdWrapper({ children, className = '', baseClassName = '', filledClassName = '' }) {
   const ref = useRef(null)
   const filledRef = useRef(false)
   const listenersRef = useRef(new Set())
@@ -106,16 +135,18 @@ function AdWrapper({ children, className }) {
   }, [])
 
   return (
-    <div ref={ref} className={className} style={filled ? undefined : { display: 'none' }}>
+    <div ref={ref} className={`${baseClassName} ${filled ? filledClassName : ''} ${className}`}>
       {filled && (
-        <p className="text-[10px] uppercase tracking-widest text-theme-muted mb-3 text-center">Sponsored</p>
+        <p className="text-[10px] uppercase tracking-widest text-theme-muted mb-3 text-center">
+          {CONTENT.shared.adSlot.adLabel}
+        </p>
       )}
-      {children}
+      {children(filled)}
     </div>
   )
 }
 
-function AdSenseUnit({ adSlot, format, layout, layoutKey }) {
+function AdSenseUnit({ unitId, format, layout, layoutKey }) {
   const pushed = useRef(false)
 
   useEffect(() => {
@@ -130,8 +161,8 @@ function AdSenseUnit({ adSlot, format, layout, layoutKey }) {
 
   const attrs = {
     className: 'adsbygoogle block',
-    'data-ad-client': ADSENSE_ID,
-    'data-ad-slot': adSlot,
+    'data-ad-client': ADSENSE_CLIENT,
+    'data-ad-slot': unitId,
     'data-ad-format': format,
   }
 

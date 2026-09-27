@@ -24,7 +24,7 @@ function PolicySection({ data, id }) {
 
       {data.sections.map((section) => (
         <div key={section.heading}>
-          <h2 className="text-xl font-semibold mt-10 mb-3">{section.heading}</h2>
+          <h2 className="text-xl font-semibold mt-10 mb-3 scroll-mt-20" id={section.id}>{section.heading}</h2>
           {section.content.map((block, i) => (
             <ContentBlock key={i} block={block} />
           ))}

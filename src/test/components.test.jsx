@@ -79,6 +79,11 @@ describe('AdSlot', () => {
     expect(container.innerHTML).toBe('')
   })
 
+  it('renders nothing for a placement with no ad unit ID', () => {
+    const { container } = render(<AdSlot adSlot="shortcut_mid" />)
+    expect(container.innerHTML).toBe('')
+  })
+
   it('renders sponsor content when sponsor prop is provided', () => {
     const sponsor = { url: 'https://example.com', image: '/sponsor.png', alt: 'Test Sponsor' }
     const { container } = render(<AdSlot adSlot="1234567890" sponsor={sponsor} />)

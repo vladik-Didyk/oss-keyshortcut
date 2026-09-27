@@ -5,9 +5,24 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import CookieConsent from "./components/CookieConsent";
 import { hasConsented, initAnalytics, trackPageView } from "./lib/analytics";
 import { CONTENT } from "./data/content";
+import { ADSENSE_CLIENT } from "./data/ads";
 import "./index.css";
 
 const JSON_LD = JSON.stringify(CONTENT.structured.website);
+
+// Hosts Google AdSense needs for scripts, pixels, beacons and ad iframes.
+const GOOGLE_ADS_HOSTS = [
+  "https://*.googlesyndication.com",
+  "https://*.doubleclick.net",
+  "https://*.google.com",
+  "https://*.gstatic.com",
+  "https://*.adtrafficquality.google",
+].join(" ");
+
+// Runs before the AdSense script: a visitor who declined the cookie banner gets
+// non-personalised ads. In the EEA/UK/CH, Google's consent message (TCF) also applies.
+const ADS_NPA_SCRIPT =
+  "try{if(localStorage.getItem('cookie-consent')==='declined'){(window.adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds=1}}catch(e){}";
 
 export function Layout({ children }) {
   return (
@@ -17,14 +32,17 @@ export function Layout({ children }) {
           httpEquiv="Content-Security-Policy"
           content={[
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://partner.googleadservices.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms https://*.posthog.com https://us-assets.i.posthog.com https://eu-assets.i.posthog.com",
+            // Ads: Google AdSense, its consent message (fundingchoicesmessages.google.com)
+            // and ad-quality checks (*.adtrafficquality.google) load from these Google
+            // hosts. Analytics: Cloudflare, GA4, Clarity, PostHog.
+            `script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com ${GOOGLE_ADS_HOSTS} https://partner.googleadservices.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms https://*.posthog.com https://us-assets.i.posthog.com https://eu-assets.i.posthog.com`,
             // 'unsafe-inline' required: dynamic style attributes for runtime colors, flex widths, and sizing
             // cannot use nonces/hashes (CSP only supports those for <style> blocks, not style attributes)
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "font-src 'self' data: https://fonts.gstatic.com",
-            "img-src 'self' data: https://hgxtwlynuixwwyjykiqd.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com",
-            "connect-src 'self' https://*.cloudflareinsights.com https://cloudflareinsights.com https://pagead2.googlesyndication.com https://hgxtwlynuixwwyjykiqd.supabase.co https://www.google-analytics.com https://*.analytics.google.com https://*.google-analytics.com https://*.clarity.ms https://*.posthog.com https://us.i.posthog.com https://eu.i.posthog.com",
-            "frame-src https://googleads.g.doubleclick.net",
+            `img-src 'self' data: https://hgxtwlynuixwwyjykiqd.supabase.co ${GOOGLE_ADS_HOSTS} https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com`,
+            `connect-src 'self' https://*.cloudflareinsights.com https://cloudflareinsights.com ${GOOGLE_ADS_HOSTS} https://hgxtwlynuixwwyjykiqd.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://*.analytics.google.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com https://*.posthog.com https://us.i.posthog.com https://eu.i.posthog.com`,
+            `frame-src ${GOOGLE_ADS_HOSTS}`,
             "object-src 'none'",
             "base-uri 'self'",
           ].join("; ")}
@@ -68,6 +86,10 @@ export function Layout({ children }) {
         {/* JSON-LD WebSite — static content, safe to inline */}
         <script type="application/ld+json">{JSON_LD}</script>
 
+        {import.meta.env.PROD && ADSENSE_CLIENT && (
+          <script dangerouslySetInnerHTML={{ __html: ADS_NPA_SCRIPT }} />
+        )}
+
         <Meta />
         <Links />
       </head>
@@ -79,11 +101,13 @@ export function Layout({ children }) {
         <ScrollRestoration />
         <Scripts />
 
-        {/* Google AdSense (production only) */}
-        {import.meta.env.PROD && import.meta.env.VITE_ADSENSE_ID && (
+        {/* Google AdSense (production only). Loads for every visitor: in the
+            EEA/UK/CH it shows Google's certified consent message, and ad
+            requests wait for that choice. */}
+        {import.meta.env.PROD && ADSENSE_CLIENT && (
           <script
             async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.VITE_ADSENSE_ID}`}
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
             crossOrigin="anonymous"
           />
         )}

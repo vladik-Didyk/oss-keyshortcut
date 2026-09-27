@@ -1,4 +1,4 @@
-import { APP_COUNT, PRICE, MIN_MACOS, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL } from './siteConfig'
+import { APP_COUNT, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL } from './siteConfig'
 
 /**
  * Single source of truth for all website content.
@@ -104,6 +104,8 @@ export const CONTENT = {
         { label: 'Compare Apps', to: '/compare' },
       ],
       copyright: 'KeyShortcut. All rights reserved.',
+      cookieSettings: 'Cookie settings',
+      affiliateNote: 'Some links on this site are affiliate links. If you buy through one, we may earn a commission at no extra cost to you.',
       bottomTagline: 'Made for people who love shortcuts.',
     },
 
@@ -125,7 +127,22 @@ export const CONTENT = {
     },
 
     adSlot: {
+      // Direct sponsors (sold by us).
       sponsoredLabel: 'Sponsored',
+      // Google AdSense units. AdSense allows only "Advertisements" or "Sponsored Links".
+      adLabel: 'Advertisements',
+    },
+
+    cookieConsent: {
+      ariaLabel: 'Cookie consent',
+      // Outside the EEA/UK/CH: one banner covers ads and analytics.
+      text: 'This website uses cookies for advertising (Google AdSense) and analytics (Google Analytics, Microsoft Clarity, PostHog). By accepting, you consent to our use of cookies. If you decline, you get non-personalised ads and no analytics.',
+      // EEA/UK/CH: Google's consent message covers ads; this banner covers analytics only.
+      textGdpr: 'We would like to use analytics cookies (Google Analytics, Microsoft Clarity, PostHog) to see which pages people use. Your ad choices are set in Google\u2019s consent message.',
+      learnMore: 'Learn more',
+      accept: 'Accept',
+      decline: 'Decline',
+      dismissAria: 'Dismiss cookie banner',
     },
   },
 
@@ -139,12 +156,12 @@ export const CONTENT = {
       platformInfo: `${MIN_MACOS}\nOne-time ${PRICE}`,
       platformInfoMobile: `${MIN_MACOS} \u00B7 One-time ${PRICE}`,
       stats: [
-        { value: String(APP_COUNT), label: 'Apps' },
-        { value: formatShortcutCount(), label: 'Shortcuts' },
+        { value: String(MAC_APP_COUNT), label: 'Apps' },
+        { value: formatShortcutCount(MAC_SHORTCUT_COUNT), label: 'Shortcuts' },
       ],
       statsMobile: [
-        { value: String(APP_COUNT), label: 'Apps supported' },
-        { value: formatShortcutCount(), label: 'Shortcuts built-in' },
+        { value: String(MAC_APP_COUNT), label: 'Apps supported' },
+        { value: formatShortcutCount(MAC_SHORTCUT_COUNT), label: 'Shortcuts' },
       ],
       keyboardHint: 'Modifier keys filter the panel — press a shortcut to highlight it',
       mobileCta: 'One-time purchase \u00B7 No subscription \u00B7 No tracking',
@@ -166,7 +183,7 @@ export const CONTENT = {
       subtitle: 'One interface, everything you need to know.',
       items: [
         {
-          title: `${formatShortcutCount()} shortcuts across ${APP_COUNT} apps`,
+          title: `${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts across ${MAC_APP_COUNT} apps`,
           description: 'From Finder basics to Figma layers to Excel formulas — the shortcuts you actually use, organized by app, ready at a glance. No memorization required.',
           screenshot: 'keyflow-activeapp',
           alt: 'KeyShortcut showing organized keyboard shortcuts across multiple Mac applications',
@@ -282,7 +299,7 @@ export const CONTENT = {
     appCoverage: {
       title: 'Shortcuts for the apps',
       titleAccent: 'you use every day',
-      subtitle: `${APP_COUNT} apps. ${formatShortcutCount()} shortcuts. From system essentials to pro tools.`,
+      subtitle: `${MAC_APP_COUNT} apps. ${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts. From system essentials to pro tools.`,
       footnote: 'Don\'t see your app? Import your own shortcut packs or create custom shortcuts for any app.',
       rows: [
         [
@@ -308,7 +325,7 @@ export const CONTENT = {
     appGrid: {
       title: 'Browse by category',
       subtitle: 'Find shortcuts for your favorite apps, organized by workflow.',
-      viewAll: `View all ${APP_COUNT} apps`,
+      viewAll: `View all ${MAC_APP_COUNT} apps`,
     },
 
     interactiveKeyboard: {
@@ -338,7 +355,7 @@ export const CONTENT = {
         },
         {
           question: 'Does it work with my favorite app?',
-          answer: `KeyShortcut ships with shortcuts for ${APP_COUNT} apps \u2014 from system essentials like Finder and Safari to professional tools like Figma, Xcode, Final Cut Pro, and Excel. Plus JetBrains IDEs, Google Workspace, project management tools, and more. You can also import custom shortcut packs or create your own.`,
+          answer: `KeyShortcut covers shortcuts for ${MAC_APP_COUNT} apps \u2014 from system essentials like Finder and Safari to professional tools like Figma, Xcode, Final Cut Pro, and Excel. Plus JetBrains IDEs, Google Workspace, project management tools, and more. You can also import custom shortcut packs or create your own.`,
         },
         {
           question: 'Is it private?',
@@ -406,7 +423,7 @@ export const CONTENT = {
     ctaBanner: {
       title: 'Take the short way.',
       titleAccent: `One-time ${PRICE}.`,
-      subtitle: `${formatShortcutCount()} shortcuts across ${APP_COUNT} apps.\nNo subscription. No tracking. Just shortcuts, always within reach.`,
+      subtitle: `${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts across ${MAC_APP_COUNT} apps.\nNo subscription. No tracking. Just shortcuts, always within reach.`,
       footnote: `${MIN_MACOS} \u00B7 No account required`,
     },
 
@@ -608,6 +625,11 @@ export const CONTENT = {
 
       return items
     },
+    affiliate: {
+      disclosure: 'Affiliate link: we may earn a commission if you buy, at no extra cost to you.',
+      learnMore: 'How we make money',
+    },
+    sponsorCta: (appName) => `Reach people who use ${appName}: sponsor this page`,
     faqTitle: 'Frequently Asked Questions',
     ctaTitle: (appName) => `Access ${appName} shortcuts from your menu bar`,
     ctaSubtitle: 'KeyShortcut detects the active app and shows its shortcuts instantly. No memorization needed.',
@@ -621,8 +643,8 @@ export const CONTENT = {
   privacy: {
     policy: {
       title: 'Privacy Policy',
-      effectiveDate: 'Effective date: September 23, 2026',
-      intro: 'KeyShortcut is built with privacy as a core principle. This policy covers both the KeyShortcut macOS app and the keyshortcut.com website. The app does not collect personal data. This site displays advertisements served by Google AdSense.',
+      effectiveDate: 'Effective date: September 27, 2026',
+      intro: 'KeyShortcut is built with privacy as a core principle. This policy covers both the KeyShortcut macOS app and the keyshortcut.com website. The app does not collect personal data. This site displays advertisements served by Google AdSense, uses analytics with your consent, and contains affiliate links.',
       sections: [
         {
           heading: 'App Data Collection',
@@ -645,10 +667,22 @@ export const CONTENT = {
               type: 'list',
               items: [
                 { bold: 'Cloudflare Web Analytics', text: ' \u2014 a privacy-first analytics service that measures page views and performance. It does not use cookies, does not track individual users, and does not collect personal data. Data is aggregated and anonymous.' },
-                { bold: 'Google AdSense', text: ' \u2014 may display ads on certain pages of the website. Google may use cookies to serve ads based on your prior visits. You can opt out of personalized advertising at ', link: { text: 'Google Ads Settings', href: 'https://www.google.com/settings/ads' }, textAfter: '.' },
+                { bold: 'Google Analytics, Microsoft Clarity and PostHog', text: ' \u2014 measure which pages are used and how (Clarity also records anonymised page interactions). They load only after you accept the cookie banner.' },
+                { bold: 'Google AdSense', text: ' \u2014 displays ads on the website. Google and its partners may use cookies to serve ads based on your visits to this and other websites. You can opt out of personalized advertising at ', link: { text: 'Google Ads Settings', href: 'https://www.google.com/settings/ads' }, textAfter: '.' },
+                { bold: 'How Google uses data', text: ' \u2014 from sites that use its services: ', link: { text: 'policies.google.com/technologies/partner-sites', href: 'https://policies.google.com/technologies/partner-sites' }, textAfter: '.' },
               ],
             },
+            { type: 'paragraph', text: 'Visitors in the EEA, the UK and Switzerland see Google\u2019s consent message, a certified consent tool, before ads use cookies. If you decline our cookie banner, you get non-personalised ads and no analytics. You can change your choice at any time with the "Cookie settings" link in the footer.' },
             { type: 'paragraph', text: 'These services apply only to the website. The KeyShortcut macOS app contains no analytics, advertising, or tracking of any kind.' },
+          ],
+        },
+        {
+          heading: 'Affiliate Links and Sponsors',
+          id: 'affiliate-links',
+          content: [
+            { type: 'paragraph', text: 'The website is free. It is paid for by ads, sponsors, affiliate links and the KeyShortcut Mac app.' },
+            { type: 'paragraph', text: 'Some "Get" buttons on app pages are affiliate links, and each one is labeled. If you buy through one, we may earn a commission at no extra cost to you. The seller may set a cookie to credit the sale to us; that cookie is governed by the seller\u2019s privacy policy.' },
+            { type: 'paragraph', text: 'Sponsored placements are labeled "Sponsored". Sponsors and affiliate programs do not change which shortcuts we list or how we describe them.' },
           ],
         },
         {
@@ -689,16 +723,19 @@ export const CONTENT = {
         },
         {
           heading: 'Cookies',
+          id: 'cookies',
           content: [
             { type: 'paragraph', text: 'The KeyShortcut macOS app does not use cookies. The keyshortcut.com website uses cookies only through third-party services:' },
             {
               type: 'list',
               items: [
                 { bold: 'Google AdSense', text: ' — may set cookies to serve and measure ads. These are governed by ', link: { text: 'Google\u2019s privacy policy', href: 'https://policies.google.com/privacy' }, textAfter: '.' },
+                { bold: 'Google Analytics, Microsoft Clarity, PostHog', text: ' — set analytics cookies only after you accept the cookie banner.' },
+                { bold: 'Affiliate partners', text: ' — may set a cookie after you click an affiliate link, to credit a purchase.' },
                 { bold: 'Cloudflare', text: ' — may set a technical cookie (__cf_bm) for bot protection. This is not used for tracking.' },
               ],
             },
-            { type: 'paragraph', text: 'You can control cookies through your browser settings. Disabling cookies may affect ad display but will not affect site functionality.' },
+            { type: 'paragraph', text: 'Your choices are stored in your browser. Use "Cookie settings" in the footer to change them, or control cookies through your browser settings. Disabling cookies may affect ad display but will not affect site functionality.' },
           ],
         },
         {
@@ -716,7 +753,7 @@ export const CONTENT = {
                 { bold: 'Right to object', text: ' — object to processing of your data, including for advertising purposes.' },
               ],
             },
-            { type: 'paragraph', text: 'Since KeyShortcut does not collect personal data through its app, these rights primarily apply to any data collected by third-party services on the website (Google AdSense). You can opt out of personalized ads via Google Ads Settings or by using the Google consent banner.' },
+            { type: 'paragraph', text: 'Since KeyShortcut does not collect personal data through its app, these rights primarily apply to any data collected by third-party services on the website (Google AdSense). You can opt out of personalized ads via Google Ads Settings, Google\u2019s consent message, or "Cookie settings" in the footer.' },
             { type: 'contact', text: 'To exercise any of these rights, contact us at' },
           ],
         },
@@ -733,7 +770,7 @@ export const CONTENT = {
                 { bold: 'Right to non-discrimination', text: ' — you will not be penalized for exercising your rights.' },
               ],
             },
-            { type: 'paragraph', text: 'KeyShortcut does not sell personal information. Google AdSense on the website may use data for ad targeting, which may qualify as "sharing" under CCPA. You can opt out via Google Ads Settings or by enabling "Do Not Track" in your browser.' },
+            { type: 'paragraph', text: 'KeyShortcut does not sell personal information. Google AdSense on the website may use data for ad targeting, which may qualify as "sharing" under CCPA. You can opt out via Google Ads Settings, the privacy choices link Google shows to visitors in US states that require one, or "Cookie settings" in the footer (declining gives non-personalised ads).' },
             { type: 'contact', text: 'For CCPA requests, contact us at' },
           ],
         },
@@ -800,7 +837,7 @@ export const CONTENT = {
   about: {
     title: 'About KeyShortcut',
     published: '2025-06-01',
-    lastUpdated: '2026-03-30',
+    lastUpdated: '2026-09-27',
     sections: [
       {
         title: 'The Story',
@@ -825,6 +862,14 @@ export const CONTENT = {
           'The directory is structured around three levels: platforms, categories, and apps. At the top level, you choose your operating system — macOS, Windows, or Linux. Each platform has its own set of apps and platform-specific key combinations.',
           'Within each platform, apps are grouped into categories like Browsers, Code Editors, Design, Productivity, and Communication. Categories make it easy to discover apps similar to the ones you already use.',
           'Each app page lists all available shortcuts organized into logical sections (e.g., "File Management," "Navigation," "Editing"). You can search within a page, browse the sidebar table of contents, or download the full list as a printable PDF.',
+        ],
+      },
+      {
+        title: 'How the Site Is Funded',
+        paragraphs: [
+          'The directory is free. Ads (Google AdSense), page sponsors, affiliate links and the KeyShortcut Mac app pay for it.',
+          'Affiliate links and sponsored placements are labeled. If you buy through an affiliate link, we may earn a commission at no extra cost to you. Sponsors and affiliate programs do not change which shortcuts we list or how we describe them.',
+          `To sponsor a page, email ${SUPPORT_EMAIL}.`,
         ],
       },
     ],
@@ -869,7 +914,7 @@ export const CONTENT = {
     },
     productPage: {
       title: 'KeyShortcut for Mac \u2014 Floating Shortcut Panel',
-      description: `A floating keyboard shortcut panel for macOS that detects your active app and shows every shortcut at a glance. ${formatShortcutCount()} shortcuts across ${APP_COUNT} apps. One-time purchase.`,
+      description: `A floating keyboard shortcut panel for macOS that detects your active app and shows every shortcut at a glance. ${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts across ${MAC_APP_COUNT} apps. One-time purchase.`,
       url: 'https://keyshortcut.com/mac-hud',
     },
     privacy: {
