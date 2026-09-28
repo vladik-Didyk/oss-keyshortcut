@@ -707,31 +707,28 @@ function BreadcrumbSchema({ appName, platformName, platformId, slug }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
 }
 
-/* ─── FAQ Accordion ─── */
+/* ─── FAQ Accordion ───
+   Native <details>: the answer is in the pre-rendered HTML (the FAQPage JSON-LD
+   must describe text that is on the page) and it opens without JavaScript. */
 function FaqAccordion({ question, answer }) {
-  const [open, setOpen] = useState(false)
-
   return (
-    <div className="rounded-xl border border-theme-border overflow-hidden">
-      <button
-        onClick={() => {
-          const next = !open
-          setOpen(next)
-          if (next) trackEvent('faq_item_expanded', { question })
-        }}
-        className="w-full flex items-center justify-between px-5 py-4 text-left bg-transparent border-none cursor-pointer text-theme-text hover:bg-theme-base-alt transition-colors"
-      >
+    <details
+      className="group rounded-xl border border-theme-border overflow-hidden"
+      onToggle={(e) => {
+        if (e.currentTarget.open) trackEvent('faq_item_expanded', { question })
+      }}
+    >
+      <summary className="focus-ring-inset flex items-center justify-between px-5 py-4 cursor-pointer text-theme-text hover:bg-theme-base-alt transition-colors list-none [&::-webkit-details-marker]:hidden">
         <span className="text-[15px] font-medium pr-4">{question}</span>
         <ChevronDown
           size={16}
-          className={`shrink-0 text-theme-muted transition-transform ${open ? 'rotate-180' : ''}`}
+          aria-hidden="true"
+          className="shrink-0 text-theme-muted transition-transform group-open:rotate-180"
         />
-      </button>
-      {open && (
-        <div className="px-5 pb-4">
-          <p className="text-theme-muted text-[14px] leading-relaxed">{answer}</p>
-        </div>
-      )}
-    </div>
+      </summary>
+      <div className="px-5 pb-4">
+        <p className="text-theme-muted text-[14px] leading-relaxed">{answer}</p>
+      </div>
+    </details>
   )
 }
