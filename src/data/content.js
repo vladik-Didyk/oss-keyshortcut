@@ -1,5 +1,5 @@
 import { APP_COUNT, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL } from './siteConfig'
-import { APP_NOTES } from './appNotes'
+import { getAppNote } from './appNotes'
 import { SPONSOR_OFFER, SPONSOR_AUDIENCE } from './sponsors'
 import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys } from '../utils/appCopy'
 import { pageUrl } from '../utils/siteUrl'
@@ -575,7 +575,7 @@ export const CONTENT = {
       //    this page, otherwise the everyday actions it has (utils/appCopy).
       if (typeof app !== 'string') {
         const platformId = platformName === 'macOS' ? 'macos' : platformName.toLowerCase()
-        const note = APP_NOTES[app.slug]
+        const note = getAppNote(app.slug, platformId)
         const fromNote = noteFitsApp(note, app)
         const picks = fromNote ? resolveEssentials(note.essentials, app) : everydayShortcuts(app)
         if (picks.length >= 3) {

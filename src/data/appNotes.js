@@ -6,7 +6,15 @@
 // platform doesn't have renders as plain text. src/test/app-notes.test.js checks
 // that every placeholder resolves on the app's main platform.
 //
+// `sections` (optional) lists the section names the text mentions. A note is
+// used only on a page that has those sections, and the test checks each name
+// against the data, so a renamed section cannot leave a wrong sentence behind.
+//
+// A platform whose data names its actions differently gets its own note in
+// APP_NOTES_BY_PLATFORM (end of this file). Pages read notes through getAppNote().
+//
 // Rules: facts about how the app's shortcuts work, no invented numbers or claims.
+// Never type a key by hand: name the action and let the page show its keys.
 
 export const APP_NOTES = {
   vscode: {
@@ -217,4 +225,908 @@ export const APP_NOTES = {
     ],
     essentials: ['Command Palette', 'Quick Open', 'New Note', 'Toggle Edit/Preview', 'Search in All Files', 'Go Back'],
   },
+
+  // ─── Apple apps ───────────────────────────────────────────────────
+
+  'apple-tv': {
+    overview:
+      'The Apple TV shortcuts are grouped by task. Playback has {{Play or pause video}} and the volume shortcuts. Playlists creates, refreshes and deletes playlists. View opens the Info window and the filter field, and General holds the window commands.',
+    tips: [
+      '{{Open the Info window for the selected item}} shows the details of one item. {{See info for the next item in the list}} and {{See info for the previous item in the list}} then step through the list.',
+      '{{Show filter field}} opens a field for filtering the list on screen.',
+    ],
+    essentials: ['Play or pause video', 'Increase the volume', 'Decrease the volume', 'Enter or exit full screen', 'Create a new playlist', 'Show filter field'],
+    sections: ['Playback', 'Playlists', 'View', 'General'],
+  },
+
+  news: {
+    overview:
+      'News shortcuts are grouped by what they act on. Windows and Tabs opens and closes windows and tabs, and moves between stories with {{Move to the next story}} and {{Move to the previous story}}. Stories acts on the story you are reading. View changes the zoom and the text size.',
+    tips: [
+      '{{Suggest more stories like this one}} and {{Suggest fewer stories like this one}} tell News which stories you want more or less of.',
+      '{{Save or unsave a story}} saves the story you are reading, or removes it from your saved stories.',
+      '{{Make the text bigger}} and {{Make the text smaller}} change the text size. {{Zoom in}} and {{Zoom out}} scale the content, and {{Return content to actual size}} resets it.',
+    ],
+    essentials: ['Move to the next story', 'Move to the previous story', 'Save or unsave a story', 'Refresh a feed', 'Close story and return to the feed', 'Make the text bigger'],
+    sections: ['Windows and Tabs', 'Stories', 'View'],
+  },
+
+  'voice-memos': {
+    overview:
+      'The Voice Memos shortcuts that belong to the app itself work on a recording: {{Create a recording}}, {{Play or pause a recording}}, {{Trim a recording}}, {{Enhance a recording}} and {{Skip silence in a recording}}. The rest are the standard window commands.',
+    tips: [
+      '{{Jump backward 15 seconds}} and {{Jump forward 15 seconds}} move through a recording in fixed steps.',
+      '{{Duplicate a recording}} makes a copy, so you can trim the copy and keep the original.',
+      '{{Undo}} reverses the last change and {{Redo}} applies it again.',
+    ],
+    essentials: ['Create a recording', 'Play or pause a recording', 'Trim a recording', 'Enhance a recording', 'Skip silence in a recording', 'Delete a recording'],
+  },
+
+  'find-my': {
+    overview:
+      'Find My’s sections are short. Sidebar switches between the lists: {{Switch to the People list}}, {{Switch to the Devices list}} and {{Switch to the Items list}}. Map has {{Zoom in}} and {{Zoom out}}. General holds the window commands and {{Share My Location}}.',
+    tips: [
+      'The list shortcuts use consecutive number keys: People, then Devices, then Items.',
+      '{{Enter or exit full-screen view}} gives the map the whole screen. The same shortcut leaves full screen.',
+    ],
+    essentials: ['Switch to the People list', 'Switch to the Devices list', 'Switch to the Items list', 'Zoom in', 'Zoom out', 'Share My Location'],
+    sections: ['Sidebar', 'Map', 'General'],
+  },
+
+  'disk-utility': {
+    overview:
+      'Disk Utility shortcuts cover three jobs. Disk images: {{New blank image}}, {{New image from folder}}, {{New image from volume}} and {{Open disk image}}. Work on a disk or volume: {{Erase}}, {{Partition}}, {{Restore}} and {{Eject}}. The sidebar: {{Switch to Show Only Volumes view}} and {{Switch to Show All Devices view}}.',
+    tips: [
+      '{{Switch to Show All Devices view}} lists the devices as well as their volumes. {{Switch to Show Only Volumes view}} goes back to volumes only.',
+      '{{Erase}} removes what is on the selected volume. Check the selection in the sidebar before you use it.',
+      '{{Get info}} opens the information for the selected item.',
+    ],
+    essentials: ['Erase', 'Partition', 'Eject', 'Get info', 'New blank image', 'Open disk image'],
+  },
+
+  'app-store': {
+    overview:
+      'Most App Store shortcuts switch between the pages of the store. The Navigation section has one for each page, from {{Display Discover apps}} to {{Display Updates}}. The General section has the rest: {{Search for an app}}, {{Refresh the current page}} and {{Go to the previous page}}.',
+    tips: [
+      'The page shortcuts use the number keys in order. {{Display Discover apps}} is the first and {{Display Updates}} is the last.',
+      'Use {{Search for an app}} when you know the name of the app. The page shortcuts are for browsing.',
+    ],
+    essentials: ['Search for an app', 'Display Discover apps', 'Display Updates', 'Display Categories', 'Go to the previous page', 'Refresh the current page'],
+    sections: ['Navigation', 'General'],
+  },
+
+  contacts: {
+    overview:
+      'Contacts shortcuts work on cards and lists. {{Create a card for a new contact}} adds a card, {{Edit the current contact}} opens it for editing and {{Save changes}} saves it. {{Go to the next card}} and {{Go to the previous card}} move through the cards.',
+    tips: [
+      '{{Merge or link selected cards}} combines the cards you have selected. Use it when one person has two cards.',
+      '{{Open a card in a separate window}} keeps one card on screen while you look at another.',
+      '{{Go to your My Card}} jumps to your own card.',
+    ],
+    essentials: ['Create a card for a new contact', 'Edit the current contact', 'Save changes', 'Go to the next card', 'Go to the previous card', 'Merge or link selected cards'],
+  },
+
+  maps: {
+    overview:
+      'Maps shortcuts change what the map shows and how you look at it. One group switches the view: {{Switch to explore view}}, {{Switch to driving view}}, {{Switch to transit view}} and {{Switch to satellite view}}. The others zoom, rotate, and show or hide panels such as directions and the sidebar.',
+    tips: [
+      'After {{Rotate map clockwise}} or {{Rotate map counterclockwise}}, {{Return to north-facing orientation}} puts north at the top again.',
+      '{{Show your current location}} shows where you are on the map.',
+      '{{Drop a pin in the middle of the map}} marks the centre of the map as it is on screen.',
+    ],
+    essentials: ['Show your current location', 'Zoom in', 'Zoom out', 'Show or hide directions', 'Show or hide the 3D map', 'Drop a pin in the middle of the map'],
+  },
+
+  podcasts: {
+    overview:
+      'Podcasts shortcuts are grouped into Playback and General. Playback controls the episode: {{Start playing or pause}}, {{Skip forward}}, {{Skip backward}}, the volume and the playback speed. General holds the window commands, plus {{Search your library or all podcasts}} and {{Refresh feed updates}}.',
+    tips: [
+      'The volume shortcuts and the speed shortcuts use the same arrow keys. {{Increase the playback speed}} and {{Decrease the playback speed}} add one more modifier.',
+      '{{Skip forward}} and {{Skip backward}} move inside an episode.',
+    ],
+    essentials: ['Start playing or pause', 'Skip forward', 'Skip backward', 'Increase the playback speed', 'Decrease the playback speed', 'Search your library or all podcasts'],
+    sections: ['Playback', 'General'],
+  },
+
+  spotlight: {
+    overview:
+      'Spotlight shortcuts cover three steps: open the search window, move through the results, and narrow the search. {{Open or close the Spotlight window}} starts a search. The Filters section limits the results to one kind: {{Search Applications}}, {{Search Files}}, {{Search Actions}} or {{Search Clipboard}}.',
+    tips: [
+      '{{Open a search result in Quick Look}} previews a result without opening it.',
+      '{{See a file in an app or the Finder}} shows where a result is, instead of opening it.',
+      '{{Open Finder with search field selected}} starts the search in a Finder window.',
+    ],
+    essentials: ['Open or close the Spotlight window', 'Open a result', 'Open a search result in Quick Look', 'Move to the next result', 'Search Applications', 'Search Files'],
+    sections: ['Filters'],
+  },
+
+  calendar: {
+    overview:
+      'Calendar shortcuts do two things: move around the calendar and edit events. {{Switch to Day view}}, {{Switch to Week view}}, {{Switch to Month view}} and {{Switch to Year view}} change the view, and {{Go to today}} returns to the current date. The Events section edits and moves the selected event.',
+    tips: [
+      '{{Move event 15 minutes later}} and {{Move event 15 minutes earlier}} shift the selected event in small steps. {{Move event one day later}} and {{Move event one day earlier}} move it by a day.',
+      '{{Go to the next day, week, month, or year}} moves by what the view shows: a day in Day view, a month in Month view.',
+      '{{Go to a specific date}} jumps to any date.',
+    ],
+    essentials: ['New Event', 'Go to today', 'Switch to Week view', 'Switch to Month view', 'Edit the selected event', 'Go to a specific date'],
+    sections: ['Events'],
+  },
+
+  mail: {
+    overview:
+      'Mail shortcuts are grouped into General, Compose and Reading. General has the ones used most: {{New Message}}, {{Reply}}, {{Reply All}}, {{Forward}} and {{Send Message}}. Compose adds address fields and attachments to the message you are writing. Reading files the selected emails.',
+    tips: [
+      '{{Show the Bcc address field}} and {{Show the Reply-To address field}} add those fields to the message you are writing.',
+      '{{Archive emails}} and {{Move selected emails to Junk}} file the selected emails from the keyboard.',
+      '{{Enable or disable the message filter}} turns the filter on the message list on and off.',
+    ],
+    essentials: ['New Message', 'Reply', 'Reply All', 'Forward', 'Send Message', 'Archive emails'],
+    sections: ['General', 'Compose', 'Reading'],
+  },
+
+  messages: {
+    overview:
+      'Messages shortcuts are grouped into General and Conversations. General covers the app: {{Start a new message}}, {{Search all conversations}} and the filters for the conversation list, such as {{Show conversations with unread messages}}. Conversations works inside a chat: {{Reply to the last incoming message}}, {{Edit a sent message}} and {{Add a Tapback to the last message}}.',
+    tips: [
+      '{{Select the next conversation}} and {{Select the previous conversation}} move through the conversation list.',
+      '{{Hide or unhide alerts for a conversation}} silences one conversation and leaves the others as they are.',
+      '{{Mark a conversation as unread or read}} switches a conversation between the two states.',
+    ],
+    essentials: ['Start a new message', 'Search all conversations', 'Reply to the last incoming message', 'Edit a sent message', 'Add a Tapback to the last message', 'Select the next conversation'],
+    sections: ['General', 'Conversations'],
+  },
+
+  music: {
+    overview:
+      'Music shortcuts are grouped by task. Playback plays, stops and moves within a song, and moves between songs and albums. Playlists creates and deletes playlists. Library works on song files and their information. View opens the players and windows, such as {{Open or close MiniPlayer}} and {{Open or close Full Screen Player}}.',
+    tips: [
+      '{{Move forward within a song}} and {{Move backward within a song}} move inside the song. {{Play the next song in a list}} and {{Play the previous song in a list}} change the song.',
+      '{{Show the currently playing song}} finds the playing song in the list.',
+      '{{Create a playlist from a selection}} turns the selected songs into a new playlist.',
+    ],
+    essentials: ['Start playing or pause the selected song', 'Play the next song in a list', 'Play the previous song in a list', 'Increase the volume', 'Decrease the volume', 'Show the queue'],
+    sections: ['Playback', 'Playlists', 'Library', 'View'],
+  },
+
+  notes: {
+    overview:
+      'A large part of the Notes shortcuts is formatting. The Editing section applies paragraph styles, such as {{Apply Title format}}, {{Apply Heading format}} and {{Apply Body format}}, and list styles, such as {{Apply Checklist format}} and {{Apply Bulleted List format}}. Tables has its own section for moving between cells and adding rows and columns.',
+    tips: [
+      '{{Increase list level}} and {{Decrease list level}} indent a list item and bring it back. {{Move list item up}} and {{Move list item down}} change its position.',
+      '{{Mark or unmark a checklist item}} ticks a checklist item, or clears the tick.',
+      'In a table, {{Add a new row below}} and {{Add a column to the right}} extend the table from the keyboard.',
+    ],
+    essentials: ['Create a new note', 'Search all notes', 'Apply Heading format', 'Apply Checklist format', 'Mark or unmark a checklist item', 'Insert a table'],
+    sections: ['Editing', 'Tables'],
+  },
+
+  photos: {
+    overview:
+      'Photos shortcuts follow the way the app is used. Viewing switches between {{Years view}}, {{Months view}} and {{All Photos view}}. Editing opens the editing view, where single keys choose a tool: {{Crop a photo}}, {{Adjust a photo}} and {{Apply a filter}}. Organization creates albums and folders and marks favorites.',
+    tips: [
+      '{{Open or close editing view}} switches between viewing a photo and editing it.',
+      '{{Show unadjusted photo without edits}} shows the original, so you can compare it with your edit.',
+      '{{Toggle between current zoom and 100 percent}} switches between the current zoom and full size.',
+    ],
+    essentials: ['Open or close editing view', 'Crop a photo', 'Automatically enhance a photo', 'Show unadjusted photo without edits', 'Make a photo a favorite', 'Create a new album'],
+    sections: ['Viewing', 'Editing', 'Organization'],
+  },
+
+  reminders: {
+    overview:
+      'Many Reminders shortcuts create something or set a due date. {{New Reminder}} and {{New Section}} create. {{Set reminder as due today}}, {{Set reminder as due tomorrow}}, {{Set reminder as due this weekend}} and {{Set reminder as due next week}} set the date in one step.',
+    tips: [
+      '{{Set all overdue reminders as due today}} moves every overdue reminder to today at once.',
+      '{{Indent reminder}} and {{Outdent reminder}} move a reminder in and out. {{Show all subtasks}} and {{Hide all subtasks}} expand and collapse the subtasks.',
+      '{{Mark reminder completed or incomplete}} and {{Flag or unflag reminder}} each switch a reminder between two states.',
+    ],
+    essentials: ['New Reminder', 'Set reminder as due today', 'Set reminder as due tomorrow', 'Mark reminder completed or incomplete', 'Flag or unflag reminder', 'Show or hide completed reminders'],
+  },
+
+  imovie: {
+    overview:
+      'iMovie shortcuts are grouped into Playback, Editing, Audio and Window, plus a short General section. In Editing, single keys put the selection into the movie: {{Add the selection to the movie}}, {{Insert the selection at the playhead}} and {{Connect the selection at the playhead}}. Many of its shortcuts paste one kind of adjustment from a copied clip.',
+    tips: [
+      '{{Paste all adjustments}} applies every adjustment of the copied clip. The other paste shortcuts apply one kind only, such as {{Paste color correction adjustments}} or {{Paste volume adjustments}}.',
+      '{{Move playhead one frame forward}} and {{Move playhead one frame backward}} place the playhead exactly. {{Divide a clip at the playhead}} then splits the clip there.',
+    ],
+    essentials: ['Play or pause video', 'Add the selection to the movie', 'Divide a clip at the playhead', 'Select an entire clip', 'Detach audio from a clip', 'Open or close the clip trimmer'],
+    sections: ['Playback', 'Editing', 'Audio', 'Window', 'General'],
+  },
+
+  // ─── Productivity, communication and media ────────────────────────
+
+  '1password': {
+    overview:
+      '1Password shortcuts are grouped by where they work. Global has {{Show Quick Access}} and {{Lock 1Password}}. The App sections work inside the 1Password window, where the item actions copy parts of a login: {{Copy Username}}, {{Copy Password}} and {{Copy One-Time Password}}. Browser extension has the shortcuts for the browser.',
+    tips: [
+      '{{Open Website & Autofill}} opens the website of the selected item and fills in the login.',
+      '{{Reveal/Conceal Fields}} shows the hidden fields of an item and hides them again.',
+      'There are two searches: {{Search}}, and {{Find in Current List}} for the list on screen.',
+    ],
+    essentials: ['Show Quick Access', 'Lock 1Password', 'Copy Username', 'Copy Password', 'Copy One-Time Password', 'Open Website & Autofill'],
+    sections: ['Global', 'Browser extension'],
+  },
+
+  asana: {
+    overview:
+      'Many Asana shortcuts start with the same key, followed by a letter. Navigation uses them to open {{My Tasks}}, {{Inbox}} and {{Home}}. Task Actions uses them on the selected task: {{Assign Task}}, {{Set Due Date}}, {{Mark Complete}}. Editing has the text formatting: bold, italic, links and lists.',
+    tips: [
+      '{{Create Task Below}} adds a task under the selected one, and {{Create Subtask}} adds a subtask to it.',
+      '{{Navigate Up}} and {{Navigate Down}} move through the task list. {{Open Task Detail}} opens the selected task and {{Close Detail}} closes it.',
+    ],
+    essentials: ['My Tasks', 'Inbox', 'Create Task Below', 'Assign Task', 'Set Due Date', 'Mark Complete'],
+    sections: ['Navigation', 'Task Actions', 'Editing'],
+  },
+
+  bear: {
+    overview:
+      'Bear’s list is short and almost all of it is formatting. {{Heading 1}}, {{Heading 2}} and {{Heading 3}} set the heading level, {{Todo}} starts a to-do item, {{Unordered List}} starts a list, and {{Code Block}} marks code. {{New Note}} and {{Search}} are the only ones that are not about formatting.',
+    tips: [
+      'The heading shortcuts use the number of the heading level.',
+      '{{Insert Link}} and {{Code Block}} use the same letter. {{Insert Link}} adds one more modifier.',
+    ],
+    essentials: ['New Note', 'Search', 'Heading 1', 'Todo', 'Unordered List', 'Code Block'],
+  },
+
+  clickup: {
+    overview:
+      'Many ClickUp shortcuts are single letters. Global has {{Create Task}}, {{Open Search}} and {{Open Notepad}}. Navigation jumps between places and views: {{Go to Home}}, {{Go to Inbox}}, {{Jump to list view}}, {{Jump to board view}}. Text Editor holds the formatting shortcuts.',
+    tips: [
+      '{{Create task from selected text}} and {{Create comment from selected text}} turn the selected text into a task or a comment.',
+      '{{Tag a user}}, {{Mention a task}} and {{Mention a doc}} are typed characters, not key combinations.',
+      '{{Move to previous task}} and {{Move to next task}} go from one task to the next.',
+    ],
+    essentials: ['Open Command Center', 'Create Task', 'Open Search', 'Go to Home', 'Go to Inbox', 'Assign current task to yourself'],
+    sections: ['Global', 'Navigation', 'Text Editor'],
+  },
+
+  discord: {
+    overview:
+      'The Discord shortcuts cover moving around ({{Quick Switcher}}, {{Previous Channel}}, {{Next Channel}}, {{Search}}), voice ({{Toggle Mute}}, {{Toggle Deafen}}) and messages ({{Emoji Picker}}, {{Upload File}}, {{Toggle Pins}}).',
+    tips: [
+      '{{Keyboard Shortcuts}} opens Discord’s own shortcut list inside the app.',
+      '{{Toggle Mute}} and {{Toggle Deafen}} share their modifiers and differ in one letter. Each one switches its state on and off.',
+      '{{Previous Channel}} and {{Next Channel}} use the up and down arrow keys with one modifier.',
+    ],
+    essentials: ['Quick Switcher', 'Search', 'Toggle Mute', 'Toggle Deafen', 'Previous Channel', 'Next Channel'],
+  },
+
+  gmail: {
+    overview:
+      'A large part of Gmail works with single keys, without a modifier. Actions on Messages works on the open or selected conversation: {{Archive}}, {{Reply}}, {{Reply All}}, {{Forward}}. Navigation moves through the inbox with {{Older Conversation}} and {{Newer Conversation}}. Formatting text is the exception: its shortcuts use modifier keys, as in a text editor.',
+    tips: [
+      '{{Reply in a new window}}, {{Reply all in a new window}} and {{Forward in a new window}} use the same letters as {{Reply}}, {{Reply All}} and {{Forward}}, with one modifier added.',
+      '{{Open Conversation}} opens the conversation and {{Return To List}} goes back to the list.',
+      '{{Show Shortcuts}} opens Gmail’s own shortcut list.',
+    ],
+    essentials: ['Compose', 'Send', 'Archive', 'Reply', 'Search', 'Older Conversation'],
+    sections: ['Actions on Messages', 'Navigation', 'Formatting text'],
+  },
+
+  'google-drive': {
+    overview:
+      'Google Drive shortcuts are grouped into Navigation, Selection and Create. Selection moves through the files with {{Move Down}} and {{Move Up}} and selects with {{Select Item}}. Navigation acts on the selection: {{Open Selected}}, {{Rename Selected}}, {{Share Selected}}, {{Move Selected}}. Create starts a new file or folder.',
+    tips: [
+      'The Create shortcuts share one modifier and use the first letter of what they create, as in {{New Spreadsheet}}, {{New Presentation}} and {{New Folder}}. {{New Document}} is the exception.',
+      '{{Extend Selection Down}} and {{Extend Selection Up}} add the next file to the selection.',
+    ],
+    essentials: ['Search', 'Open Selected', 'Rename Selected', 'Share Selected', 'New Folder', 'Select Item'],
+    sections: ['Navigation', 'Selection', 'Create'],
+  },
+
+  jira: {
+    overview:
+      'Jira shortcuts are single keys. Global shortcuts has {{Create Issue}}, {{Quick Search}} and {{Open Shortcut Help}}. Navigation moves between issues with {{Next Issue}} and {{Previous Issue}}. Issue actions works on the selected issue, and Board shortcuts changes the view of a board.',
+    tips: [
+      '{{Assign To Me}} assigns the issue to you. {{Assign Issue}} is for assigning it to someone else.',
+      '{{Go To Parent}} opens the parent of the issue.',
+      '{{Detail View}} and {{List View}} use the first two number keys.',
+    ],
+    essentials: ['Create Issue', 'Quick Search', 'Next Issue', 'Previous Issue', 'Assign To Me', 'Edit Issue'],
+    sections: ['Global shortcuts', 'Navigation', 'Issue actions', 'Board shortcuts'],
+  },
+
+  raycast: {
+    overview:
+      'Everything in Raycast starts with {{Open Raycast}}, the shortcut in the Launch section. Navigation moves through the list and opens preferences. Built-in Commands opens Raycast’s own tools: {{Clipboard History}}, {{Snippets}}, {{Quick Links}}, {{File Search}} and {{Window Management}}.',
+    tips: [
+      '{{Move Down in List}} and {{Move Up in List}} move through the list without the arrow keys.',
+      '{{Add/Remove Favorite}} makes the selected item a favorite, or removes it. {{Move Favorite Up}} and {{Move Favorite Down}} change the order of the favorites.',
+    ],
+    essentials: ['Open Raycast', 'Clipboard History', 'File Search', 'Snippets', 'Quick Links', 'Run Command'],
+    sections: ['Launch', 'Navigation', 'Built-in Commands'],
+  },
+
+  spotify: {
+    overview:
+      'Spotify shortcuts are grouped into Basic, Playback, Navigation and Layout. Playback controls the music: {{Play/Pause}}, {{Next Track}}, {{Previous Track}}, {{Shuffle}} and {{Repeat}}. Navigation opens a page of the app, such as {{Go to Home}}, {{Go to Liked Songs}} and {{Go to Queue}}. Layout shows, hides and resizes the sidebars.',
+    tips: [
+      '{{Seek Forward}} and {{Seek Backward}} move within the track. They are the track shortcuts with one modifier added.',
+      'Most Navigation shortcuts share the same two modifiers and differ in the last key.',
+      '{{Open Search}} opens search. {{Search in Your Library}} looks only in your library.',
+    ],
+    essentials: ['Play/Pause', 'Next Track', 'Previous Track', 'Open Search', 'Go to Liked Songs', 'Go to Queue'],
+    sections: ['Basic', 'Playback', 'Navigation', 'Layout'],
+  },
+
+  teams: {
+    overview:
+      'Teams shortcuts are grouped into General, Navigation, Messaging, and Meeting and Calls. General opens the main views with the number keys: {{Activity}}, {{Chat}}, {{Teams}} and {{Calendar}}. It also has the meeting controls {{Toggle Mute}}, {{Toggle Video}} and {{Share Screen}}. Meeting and Calls adds the shortcuts for accepting, declining and starting calls.',
+    tips: [
+      '{{Show keyboard shortcuts}} opens the shortcut list inside Teams.',
+      '{{Start new line}} starts a new line in the message without sending it.',
+      '{{Search}} goes to the search box. {{Search current Chat/Channel messages}} looks only in the open chat or channel.',
+    ],
+    essentials: ['Search', 'New Chat', 'Toggle Mute', 'Toggle Video', 'Share Screen', 'Raise Hand'],
+    sections: ['General', 'Navigation', 'Messaging', 'Meeting and Calls'],
+  },
+
+  telegram: {
+    overview:
+      'Telegram’s shortcuts are about chats. {{Next Chat}} and {{Previous Chat}} move through the chat list, {{Search}} and {{Quick search}} are the search shortcuts, and {{Edit Last Message}} opens your last message for editing. The rest create a message or a channel, format text and send.',
+    tips: [
+      'A new channel is the new-message shortcut plus one modifier: {{New message}}, {{New channel}}.',
+      '{{Bold}}, {{Italic}} and {{Add link}} format the text of the message you are writing.',
+    ],
+    essentials: ['Quick search', 'Next Chat', 'Previous Chat', 'New message', 'Edit Last Message', 'Send Message'],
+  },
+
+  things: {
+    overview:
+      'Things has a section for each kind of work, among them Create new items, Edit items, Select items, Move items, Edit dates and Navigate. The General section has the ones to learn first: {{New To-Do}}, {{Complete To-Do}}, {{Move to Today}} and {{Show Today}}. Edit dates is for planning: it sets start dates and deadlines.',
+    tips: [
+      '{{Start date +1 day}} and {{Start date -1 day}} move the start date by a day. {{Start date +1 week}} and {{Start date -1 week}} move it by a week. The deadline shortcuts work the same way.',
+      '{{Move to Today}}, {{Move to Evening}} and {{Move to Someday}} use the same letter with different modifiers.',
+    ],
+    essentials: ['New To-Do', 'Complete To-Do', 'Move to Today', 'Show Today', 'Open Quick Entry', 'Set Deadline'],
+    sections: ['General', 'Create new items', 'Edit items', 'Select items', 'Move items', 'Edit dates', 'Navigate'],
+  },
+
+  todoist: {
+    overview:
+      'Todoist mixes two kinds of shortcuts. Some use modifier keys, such as {{Add Task}}, {{Complete Task}} and {{Set Due Date}}. Others are single letters, such as {{Add a task (with Quick Add)}}, {{Go to Home view}} and the shortcuts in Sorting tasks inside a project. The Global section is {{Show/hide Todoist}} and {{Open task Quick Add}}.',
+    tips: [
+      'The sorting shortcuts are {{Sort by date}}, {{Sort by priority}}, {{Sort by name}} and {{Sort by assignee}}.',
+      'The section Creating and completing sub-tasks has {{Increase task indent (only works inside projects)}} and {{Decrease task indent (only works inside projects)}}. As their names say, they work only inside a project.',
+    ],
+    essentials: ['Add Task', 'Complete Task', 'Set Due Date', 'Set Priority', 'Go to Today', 'Add a task (with Quick Add)'],
+    sections: ['Global', 'Sorting tasks inside a project', 'Creating and completing sub-tasks'],
+  },
+
+  trello: {
+    overview:
+      'Every Trello shortcut in this list is a single key. Card shortcuts works on a card: {{Insert Card}}, {{Quick Edit Card}}, {{Archive Card}}, {{Set Due Date}}. Navigation & board shortcuts filters the board and opens its menu. Label color shortcuts has one number key for each label color.',
+    tips: [
+      'The label shortcuts run from {{Toggle Green Label}} to {{Toggle Blue Label}}, on the number keys in order.',
+      '{{Filter Cards}} filters the cards on the board and {{Clear Filters}} removes the filters.',
+      '{{Assign Self To Card}} adds you to the card. {{Add Remove Members}} changes the other members.',
+    ],
+    essentials: ['Insert Card', 'Quick Edit Card', 'Open Card', 'Archive Card', 'Filter Cards', 'Focus Search'],
+    sections: ['Card shortcuts', 'Navigation & board shortcuts', 'Label color shortcuts'],
+  },
+
+  vlc: {
+    overview:
+      'VLC shortcuts are grouped into Playback, Volume & Audio, Navigation, and File & Settings. Navigation jumps through the video in steps of different sizes, from {{Jump Forward 3 Seconds}} to {{Jump Forward 1 Minute}}. Volume & Audio also holds the subtitle shortcuts: {{Cycle Subtitles}}, {{Increase Subtitle Delay}} and {{Decrease Subtitle Delay}}.',
+    tips: [
+      'The jump shortcuts use the same arrow keys. The modifiers set the size of the jump.',
+      '{{Increase Audio Delay}} and {{Decrease Audio Delay}} shift the sound when it does not match the picture.',
+      '{{Faster Playback}} and {{Slower Playback}} change the playback speed.',
+    ],
+    essentials: ['Full Screen', 'Volume Up', 'Volume Down', 'Jump Forward 10 Seconds', 'Jump Back 10 Seconds', 'Cycle Subtitles'],
+    sections: ['Playback', 'Volume & Audio', 'Navigation', 'File & Settings'],
+  },
+
+  zoom: {
+    overview:
+      'Most Zoom shortcuts are for meetings. The Meeting section covers audio, video, screen sharing, recording and reactions: {{Mute/Unmute Audio}}, {{Start/Stop Video}}, {{Share Screen}}, {{Start/Stop Local Recording}}. Chat, General and Phone are shorter sections for messages, the app window and phone calls.',
+    tips: [
+      '{{Mute All (Host)}} and {{Unmute All (Host)}} are for the host of the meeting.',
+      '{{Show/Hide Participants}} and {{Show/Hide Chat}} open and close those panels.',
+      'Each reaction has its own shortcut, from {{Reaction: Clap}} to {{Reaction: Celebrate}}.',
+    ],
+    essentials: ['Mute/Unmute Audio', 'Start/Stop Video', 'Share Screen', 'Show/Hide Participants', 'Show/Hide Chat', 'Raise/Lower Hand'],
+    sections: ['Meeting', 'Chat', 'General', 'Phone'],
+  },
+
+  // ─── JetBrains IDEs ───────────────────────────────────────────────
+
+  'android-studio': {
+    overview:
+      'Android Studio shortcuts follow the work in the IDE: Navigation, Editing and Find & Replace, then Build, Run & Debug, then Refactoring and Tool Windows. Navigation finds code by name: {{Navigate To Class}}, {{Navigate To File}} and {{Navigate To Symbol}}. {{Search Everywhere}} looks in all of them at once, and {{Find Action}} finds a command of the IDE by name.',
+    tips: [
+      'Tool Windows opens the panels around the editor, such as {{Project Window}}, {{Logcat}} and {{Terminal}}.',
+      '{{Build Project}} builds the project. {{Run}} and {{Debug}} start the app.',
+      '{{Quick Fix}} shows the fixes the IDE suggests at the cursor.',
+    ],
+    essentials: ['Search Everywhere', 'Find Action', 'Navigate To File', 'Go To Declaration', 'Quick Fix', 'Run'],
+    sections: ['Navigation', 'Editing', 'Find & Replace', 'Build, Run & Debug', 'Refactoring', 'Tool Windows'],
+  },
+
+  clion: {
+    overview:
+      'CLion shortcuts are grouped like the work itself: Search & Navigation, Editing, Find & Replace, Run & Debug, Refactoring & VCS and Tool Windows. One section belongs to the language: C/C++ Specific has {{Switch Header Source}}, which moves between a header and its source file.',
+    tips: [
+      '{{Build Project}} builds without running. {{Run}} and {{Debug}} start the program.',
+      'In Tool Windows, the number keys open panels: {{Project Window}}, {{Run Window}}, {{Debug Window}} and {{Structure Window}}.',
+      '{{Toggle Breakpoint}} sets a breakpoint on the current line, or removes it.',
+    ],
+    essentials: ['Search Everywhere', 'Switch Header Source', 'Go To Declaration', 'Build Project', 'Debug', 'Rename'],
+    sections: ['Search & Navigation', 'Editing', 'Find & Replace', 'Run & Debug', 'Refactoring & VCS', 'Tool Windows', 'C/C++ Specific'],
+  },
+
+  intellij: {
+    overview:
+      'In IntelliJ IDEA, two shortcuts reach almost everything: {{Search Everywhere}} finds classes, files and symbols by name, and {{Find Action}} finds a command of the IDE. Search & Navigation also moves through the places you have visited, with {{Navigate Back}} and {{Navigate Forward}}, and through problems in the file, with {{Next Error}} and {{Previous Error}}.',
+    tips: [
+      '{{Move Statement Up}} and {{Move Statement Down}} move a whole statement, not only a line.',
+      '{{Refactor This}} lists the refactorings available at the cursor.',
+      '{{Join Lines}} joins the next line to the current one.',
+    ],
+    essentials: ['Search Everywhere', 'Find Action', 'Go to Declaration', 'Context Actions / Quick Fix', 'Reformat Code', 'Refactor This'],
+    sections: ['Search & Navigation'],
+  },
+
+  pycharm: {
+    overview:
+      'PyCharm shortcuts are grouped into Search & Navigation, Editing, Find & Replace, Run & Debug, Refactoring, and Tool Windows & VCS. Run & Debug goes beyond the basics: {{Run}} and {{Debug}} start the current configuration, and {{Choose Run Config}} and {{Choose Debug Config}} let you pick another one first.',
+    tips: [
+      '{{Run To Cursor}} runs the program up to the line the cursor is on.',
+      '{{Extract Method}}, {{Extract Variable}} and {{Extract Constant}} turn the selected code into a method, a variable or a constant.',
+      '{{Structure Window}} shows the structure of the open file.',
+    ],
+    essentials: ['Search Everywhere', 'Run', 'Debug', 'Toggle Breakpoint', 'Context Actions', 'Rename'],
+    sections: ['Search & Navigation', 'Editing', 'Find & Replace', 'Run & Debug', 'Refactoring', 'Tool Windows & VCS'],
+  },
+
+  phpstorm: {
+    overview:
+      'The Editing section is where the IDE helps you write. {{Code Completion}} suggests code, {{Context Actions}} offers fixes and changes at the cursor, {{Parameter Info}} shows the parameters of the call you are typing, and {{Generate}} creates code for you. The other sections cover navigation, search, debugging, refactoring and tool windows.',
+    tips: [
+      '{{Extend Selection}} grows the selection to the next larger piece of code. {{Shrink Selection}} goes back one step.',
+      '{{Reformat Code}} applies the code style to the file or the selection.',
+      '{{Line Comment}} and {{Block Comment}} comment code out, and back in.',
+    ],
+    essentials: ['Code Completion', 'Context Actions', 'Parameter Info', 'Reformat Code', 'Search Everywhere', 'Go To Declaration'],
+    sections: ['Editing'],
+  },
+
+  rubymine: {
+    overview:
+      'RubyMine shortcuts are grouped into Search & Navigation, Editing, Find & Replace, Run & Debug, Refactoring & VCS and Tool Windows. Find & Replace works at two levels: {{Find}} and {{Replace}} in the open file, {{Find In Path}} and {{Replace In Path}} across the project. {{Find Usages}} lists the places where a symbol is used.',
+    tips: [
+      '{{Recent Files}} lists the files you opened last.',
+      'Refactoring & VCS puts code changes and version control together: {{Rename}}, {{Extract Method}} and {{Extract Variable}} next to {{Commit}} and {{Vcs Operations}}.',
+    ],
+    essentials: ['Search Everywhere', 'Find In Path', 'Find Usages', 'Recent Files', 'Rename', 'Commit'],
+    sections: ['Search & Navigation', 'Editing', 'Find & Replace', 'Run & Debug', 'Refactoring & VCS', 'Tool Windows'],
+  },
+
+  goland: {
+    overview:
+      'GoLand’s list is long. Besides navigation, editing, debugging and refactoring, it has short sections for one feature each. Code Folding collapses and expands blocks of code. Bookmarks marks places in the code. Search (Find & Replace) includes the usage searches, such as {{Find Usages}} and {{Show Usages}}.',
+    tips: [
+      '{{Navigate To Test}} goes from the code to its test.',
+      '{{Smart Step Into}} lets you choose which call to step into when a line has several.',
+      '{{Toggle Bookmark}} marks the current line and {{Show Bookmarks}} lists the marks.',
+    ],
+    essentials: ['Search Everywhere', 'Navigate To Declaration', 'Find Usages', 'Context Actions', 'Run', 'Rename'],
+    sections: ['Code Folding', 'Bookmarks', 'Search (Find & Replace)'],
+  },
+
+  webstorm: {
+    overview:
+      'In WebStorm’s list, Multiple Carets is a short section for editing in several places at once: {{Select Next Occurrence}} adds the next match to the selection, {{Select All Occurrences}} takes every match, and {{Unselect Occurrence}} drops the last one. Usage Search finds where a symbol is used.',
+    tips: [
+      '{{Run Gulp / Grunt / npm Tasks}} runs a Gulp, Grunt or npm task of the project.',
+      '{{Move Line Up}} and {{Move Line Down}} move the current line. {{Duplicate Line / Block}} copies it.',
+      '{{Go to Declaration}} goes to where a symbol is defined, and {{Navigate Back}} returns to where you were.',
+    ],
+    essentials: ['Search Everywhere', 'Go to Declaration', 'Show Intention Actions / Quick Fixes', 'Select Next Occurrence', 'Reformat Code', 'Rename'],
+    sections: ['Multiple Carets', 'Usage Search'],
+  },
+
+  rider: {
+    overview:
+      'Rider’s list is a short selection, grouped into Navigation, Editing, Refactoring, Running and Debugging, and VCS / Git. Navigation jumps by name or by meaning: {{Go to file}} opens a file, {{Go to declaration}} goes to where a symbol is defined, and {{Go to implementation}} goes to the code behind it.',
+    tips: [
+      '{{Basic code completion}} suggests names. {{Smart code completion}} limits the suggestions to what fits the expected type.',
+      'In VCS / Git, {{Commit}} comes first. {{Push}} is the same shortcut with one more modifier.',
+    ],
+    essentials: ['Go to file', 'Go to declaration', 'Find action', 'Show quick fixes', 'Rename', 'Run'],
+    sections: ['Navigation', 'Editing', 'Refactoring', 'Running and Debugging', 'VCS / Git'],
+  },
+
+  datagrip: {
+    overview:
+      'DataGrip adds two sections for database work to the usual IDE shortcuts. Console runs SQL: {{Execute Statement}} runs one statement and {{Execute All}} runs all of them. Data Editor works on table data: {{Duplicate Row}}, {{Delete Row}} and {{Open Value Editor}}. Search and Editing cover finding and writing code.',
+    tips: [
+      '{{Revert Changes}} takes back changes made in the data editor.',
+      '{{Navigate to File}} and {{Navigate to Class}} open a file or a class by name.',
+      '{{Find}} searches the open file and {{Find in Files}} searches all files.',
+    ],
+    essentials: ['Execute Statement', 'Execute All', 'Open New Console', 'Code Completion', 'Find Action', 'Duplicate Row'],
+    sections: ['Search', 'Console', 'Data Editor', 'Editing'],
+  },
+
+  dataspell: {
+    overview:
+      'DataSpell has a Notebook section next to Navigation and Editing. A notebook has two modes. {{Edit Mode}} types into the cell. {{Command Mode}} turns the keys into commands for the cell, which is why {{Insert Cell Above}}, {{Insert Cell Below}}, {{Change to Markdown}} and {{Change to Code}} are single letters.',
+    tips: [
+      'A cell can be run in more than one way. {{Run Cell}} stays on the cell, {{Run Cell and Select Below}} moves to the next one, and {{Run Cell and Insert Below}} adds a new cell under it.',
+      '{{Show Intention Actions}} lists what the IDE can do at the cursor.',
+    ],
+    essentials: ['Run Cell', 'Run Cell and Select Below', 'Insert Cell Below', 'Command Mode', 'Edit Mode', 'Code Completion'],
+    sections: ['Navigation', 'Notebook', 'Editing'],
+  },
+
+  // ─── Developer, design and web tools ──────────────────────────────
+
+  blender: {
+    overview:
+      'Blender puts many of its commands on single keys. Transform has the ones used most: {{Grab / Move}}, {{Rotate}} and {{Scale}}. View Navigation uses the number pad to look at the scene from fixed sides: {{Front View}}, {{Side View}}, {{Top View}} and {{Camera View}}. Mesh Editing holds the modelling tools, such as {{Extrude}}, {{Bevel}} and {{Loop Cut}}.',
+    tips: [
+      'Each transform has a clearing shortcut on the same letter: {{Clear Location}} for {{Grab / Move}}, {{Clear Rotation}} for {{Rotate}}, {{Clear Scale}} for {{Scale}}.',
+      '{{Hide Selection}} hides the selected objects and {{Unhide All}} brings everything back.',
+      '{{Vertex Select}}, {{Edge Select}} and {{Face Select}} choose what a click selects in a mesh.',
+    ],
+    essentials: ['Grab / Move', 'Rotate', 'Scale', 'Toggle Edit Mode', 'Extrude', 'Focus Selected'],
+    sections: ['Transform', 'View Navigation', 'Mesh Editing'],
+  },
+
+  'chrome-devtools': {
+    overview:
+      'Chrome DevTools shortcuts start with opening the tools: {{Open Dev Tools}}, {{Open Console}} and {{Inspect Element}}. Panel Navigation moves between panels and changes the layout. Elements Panel walks through the page structure with the arrow keys, and Debugger (Sources Panel) pauses and steps through code.',
+    tips: [
+      '{{Open Command Menu}} opens the Command Menu, where a command is found by name.',
+      '{{Find In Panel}} searches the open panel. {{Search All Sources}} searches across the sources.',
+      '{{Hide Element}} hides the selected element on the page.',
+    ],
+    essentials: ['Open Dev Tools', 'Open Console', 'Inspect Element', 'Open Command Menu', 'Toggle Device Mode', 'Search All Sources'],
+    sections: ['Panel Navigation', 'Elements Panel', 'Debugger (Sources Panel)'],
+  },
+
+  cursor: {
+    overview:
+      'Cursor’s list covers the AI features of the editor. General opens and arranges the panels with {{Toggle Sidepanel}} and {{Toggle Agent Layout}}. Chat manages the conversation: {{Add Selected Code as Context}}, {{Cancel Generation}}, {{Reject All Changes}}. Code & Context accepts suggestions, and Terminal has the prompt bar.',
+    tips: [
+      '{{Accept Suggestion}} takes the whole suggestion. {{Accept Next Word}} takes one word of it.',
+      '{{Previous Chat}} and {{Next Chat}} move between chats, and {{New Chat Tab}} opens a chat in a new tab.',
+      '{{Open Terminal Prompt Bar}} opens the prompt bar in the terminal. {{Run Generated Command}} runs the command it produced.',
+    ],
+    essentials: ['Toggle Sidepanel', 'Command Palette', 'Add Selected Code as Context', 'Accept Suggestion', 'Open Terminal Prompt Bar', 'Cancel Generation'],
+    sections: ['General', 'Chat', 'Code & Context', 'Terminal'],
+  },
+
+  github: {
+    overview:
+      'GitHub shortcuts depend on the page you are on, so the list has a section for each kind of page: Source code browsing, Issue and pull request lists, Changes in pull requests, Project boards, Notifications and more. Site wide shortcuts is the section that applies on every page. Many of the shortcuts are single keys, such as {{File finder}} and {{Create issue}}.',
+    tips: [
+      'The same letter does different things in different sections. {{Apply label}} and {{Filter by labels}} share a key, and so do {{Set assignee}} and {{Filter by assignee}}.',
+      'In a pull request, {{Open commits list}} and {{Open changed files}} switch between the commits and the files.',
+    ],
+    essentials: ['Command Palette', 'File finder', 'Switch branch or tag', 'Create issue', 'Open web editor', 'Show keyboard shortcuts'],
+    sections: ['Site wide shortcuts', 'Source code browsing', 'Issue and pull request lists', 'Changes in pull requests', 'Project boards', 'Notifications'],
+  },
+
+  'sublime-text': {
+    overview:
+      'Editing is the long section in Sublime Text’s list: lines, selections and several cursors at once. {{Select Word}} selects the word at the cursor and {{Select All Occurrences}} selects every occurrence of it. {{Extra cursor on the line above}} and {{Extra cursor on the line below}} add cursors. Navigation / Goto Anywhere opens files, symbols and lines by typing.',
+    tips: [
+      'Split Window arranges the editor in columns: {{Single Column}}, {{Two Columns}}, {{Three Columns}} and {{Four Columns}}.',
+      '{{Toggle Bookmark}} marks a line. {{Next Bookmark}} and {{Previous Bookmark}} jump between the marks, and {{Clear Bookmarks}} removes them.',
+      '{{Command Palette}} finds a command by name.',
+    ],
+    essentials: ['Go to File', 'Command Palette', 'Select Word', 'Select All Occurrences', 'Toggle Comment', 'Find in Files'],
+    sections: ['Navigation / Goto Anywhere', 'Split Window'],
+  },
+
+  emacs: {
+    overview:
+      'Many Emacs shortcuts take two steps: a prefix first, then a second key. The File and Buffer & Window sections work this way, as in {{Find open file}}, {{Save file}} and {{Switch buffer}}. Navigation moves the cursor without the arrow keys: {{Forward one character}}, {{Next line}}, {{Beginning of line}}, {{End of line}}.',
+    tips: [
+      'Emacs calls cutting “killing” and pasting “yanking”. {{Cut kill region}}, {{Copy kill ring save}} and {{Paste yank}} are its cut, copy and paste.',
+      '{{Cancel current command}} stops a command you started by mistake.',
+      '{{Incremental search forward}} searches while you type. {{Incremental search backward}} does the same toward the start of the buffer.',
+    ],
+    essentials: ['Find open file', 'Save file', 'Cancel current command', 'Undo', 'Incremental search forward', 'Switch buffer'],
+    sections: ['File', 'Buffer & Window', 'Navigation'],
+  },
+
+  tower: {
+    overview:
+      'Tower’s sections follow Git itself: Repository, Branch, Commit and Stash, plus Navigation for moving around the app. Navigation switches between the main views with the number keys: {{Working copy}}, {{History}} and {{Stashes}}. Repository talks to the remote: {{Fetch}}, {{Pull}} and {{Push}}.',
+    tips: [
+      '{{Stageunstage}} stages the selected file, or unstages it. {{Stage all}} stages everything.',
+      '{{Commit dialog}} opens the commit dialog and {{Confirm commit}} makes the commit.',
+      '{{Save stash}} puts the changes into a stash, and {{Apply stash}} brings a stash back.',
+    ],
+    essentials: ['Working copy', 'Fetch', 'Pull', 'Push', 'Commit dialog', 'Create branch'],
+    sections: ['Repository', 'Branch', 'Commit', 'Stash', 'Navigation'],
+  },
+
+  confluence: {
+    overview:
+      'Confluence has two kinds of shortcuts. Navigation uses single keys: {{Create Page}}, {{Edit Page}}, {{Share Page}}, {{Watch Page}}. Formatting, Actions and Tables work in the editor, where {{Publish Page}} publishes the page and {{Find and Replace}} searches it.',
+    tips: [
+      '{{Go to Dashboard}} is two keys pressed one after the other.',
+      'In a table, {{Next Cell}} and {{Previous Cell}} move between cells. {{Insert Row Below}} and {{Insert Column After}} extend the table.',
+    ],
+    essentials: ['Quick Search', 'Create Page', 'Edit Page', 'Publish Page', 'Insert Link', 'Find and Replace'],
+    sections: ['Navigation', 'Formatting', 'Actions', 'Tables'],
+  },
+
+  dbeaver: {
+    overview:
+      'DBeaver shortcuts are grouped by the part of the app they work in. SQL Editor runs and formats queries: {{Execute SQL Statement}} runs one statement, {{Execute SQL Script}} runs the script, and {{Format SQL}} tidies the text. Data Editor edits the rows of a result. Navigation and Views open the panels and editors around them.',
+    tips: [
+      'In the Data Editor, {{Edit Cell Value}} opens the cell, {{Save Changes}} saves the edits and {{Refresh Data}} reloads the rows.',
+      '{{SQL Content Assist}} suggests what can come next in the statement.',
+      '{{Refresh Database Tree}} reloads the tree in the navigator.',
+    ],
+    essentials: ['Execute SQL Statement', 'Execute SQL Script', 'Format SQL', 'SQL Content Assist', 'New SQL Editor', 'Database Navigator'],
+    sections: ['SQL Editor', 'Data Editor', 'Navigation', 'Views'],
+  },
+
+  gitlab: {
+    overview:
+      'Almost all GitLab shortcuts are built from letter keys. Global Navigation goes to the top-level pages: {{Go to Projects}}, {{Go to Groups}}, {{Go to Activity}}. Project shortcuts are two keys pressed one after the other, and they go to a part of the current project: {{Go to Issues}}, {{Go to Merge Requests}}, {{Go to Files}}, {{Go to Commits}}.',
+    tips: [
+      'All Project shortcuts start with the same key.',
+      'Issues & Merge Requests has {{Edit description}}, {{Reply in comment}} and the shortcuts that change the assignee, the milestone and the labels.',
+    ],
+    essentials: ['Focus search bar', 'Open command palette', 'Go to Projects', 'Go to Issues', 'Go to Merge Requests', 'Go to Files'],
+    sections: ['Global Navigation', 'Project', 'Issues & Merge Requests'],
+  },
+
+  insomnia: {
+    overview:
+      'Insomnia shortcuts follow the life of a request. General creates and organises: {{Create new request}}, {{Create new folder}}, {{Duplicate request}}. Request edits and sends: {{Focus URL bar}}, {{Send request}}. Response works on what came back: {{Search in response}} and {{Response history}}. Navigation moves between requests.',
+    tips: [
+      '{{Next request}} and {{Previous request}} go through the requests in order. {{Filter requests}} narrows the list.',
+      '{{Copy as cURL}} copies the request as a cURL command.',
+      '{{Beautify body}} formats the request body.',
+    ],
+    essentials: ['Send request', 'Create new request', 'Focus URL bar', 'Quick switcher', 'Manage Environments', 'Copy as cURL'],
+    sections: ['General', 'Request', 'Response', 'Navigation'],
+  },
+
+  'jira-align': {
+    overview:
+      'Jira Align shortcuts are keys without modifiers. Global goes to the main pages: {{Go to Dashboard}}, {{Go to Backlog}} and {{Go to Roadmap}} are two keys pressed one after the other. Board moves the focus through the items, and Actions works on the item in focus: {{Edit item}}, {{Assign item}}, {{Comment on item}}.',
+    tips: [
+      '{{Move focus down}} and {{Move focus up}} move through the board. {{Open selected item}} opens the item in focus.',
+      '{{Next item}} and {{Previous item}} go through the items in order.',
+    ],
+    essentials: ['Quick search', 'Create work item', 'Go to Dashboard', 'Go to Backlog', 'Open selected item', 'Edit item'],
+    sections: ['Global', 'Board', 'Actions'],
+  },
+
+  maya: {
+    overview:
+      'Maya uses single keys for many commands. Tools has the main tools: {{Select Tool}}, {{Move Tool}}, {{Rotate Tool}} and {{Scale Tool}}. Display switches how the scene is drawn: {{Wireframe Display}}, {{Shaded Display}}, {{Shaded and Textured Display}}. Selection chooses the component type, and Animation sets keys and steps through them.',
+    tips: [
+      '{{Frame Selected}} fits the selected objects in the view, and {{Frame All}} fits the whole scene.',
+      '{{Set Keyframe}} sets a key. {{Set Key on Translate}}, {{Set Key on Rotate}} and {{Set Key on Scale}} key one kind of transform only.',
+      '{{Go to Next Key}} and {{Go to Previous Key}} jump between keys. {{Move Forward One Frame}} and {{Move Backward One Frame}} move by a frame.',
+    ],
+    essentials: ['Select Tool', 'Move Tool', 'Rotate Tool', 'Scale Tool', 'Frame Selected', 'Set Keyframe'],
+    sections: ['Tools', 'Display', 'Selection', 'Animation'],
+  },
+
+  rstudio: {
+    overview:
+      'RStudio shortcuts are grouped by pane and task: Console, Editor, Navigation, Debug and Build. {{Run Line/Selection}} runs the current line or the selection, and {{Run Entire Document}} runs the whole script. {{Move to Console}} and {{Move to Source}} move the cursor between the console and the editor.',
+    tips: [
+      '{{Interrupt Command}} stops the command that is running.',
+      '{{Help for Function}} opens the help for the function at the cursor.',
+      '{{Command History}} brings back earlier commands in the console.',
+    ],
+    essentials: ['Run Line/Selection', 'Run Entire Document', 'Comment/Uncomment', 'Move to Console', 'Go to File/Function', 'Knit Document'],
+    sections: ['Console', 'Editor', 'Navigation', 'Debug', 'Build'],
+  },
+
+  'sql-developer': {
+    overview:
+      'In Oracle SQL Developer, the Worksheet section runs SQL in more than one way: {{Execute Statement}} runs one statement, {{Run Script}} runs the worksheet as a script, and {{Explain Plan}} shows the plan of a query. Editor has the text commands, such as {{Format SQL}} and {{Toggle Comment}}. Debug has {{Step Into}} and {{Step Over}}.',
+    tips: [
+      '{{Code Completion}} offers completions while you type.',
+      '{{Toggle Comment}} comments the line out, or back in. {{Duplicate Line}} copies it.',
+    ],
+    essentials: ['Execute Statement', 'Run Script', 'Explain Plan', 'Format SQL', 'Code Completion', 'Find and Replace'],
+    sections: ['Worksheet', 'Editor', 'Debug'],
+  },
+
+  'visual-studio': {
+    overview:
+      'Visual Studio shortcuts are grouped into Build, Debug, Edit, Navigate and Window. Debug is the section to learn first: {{Start Debugging}} runs the program under the debugger, {{Start Without Debugging}} runs it without, and {{Stop Debugging}} ends the session. When the program is paused, {{Step Over}}, {{Step Into}} and {{Step Out}} move through the code.',
+    tips: [
+      '{{Toggle Breakpoint}} marks the line where the debugger should pause.',
+      '{{Find}} and {{Replace}} work in the open file. {{Find in Files}} searches across files.',
+      '{{Rename}} renames a symbol in every place it is used.',
+    ],
+    essentials: ['Start Debugging', 'Stop Debugging', 'Toggle Breakpoint', 'Step Over', 'Find in Files', 'Go to Declaration'],
+    sections: ['Build', 'Debug', 'Edit', 'Navigate', 'Window'],
+  },
+
+  wordpress: {
+    overview:
+      'These are the shortcuts of the WordPress block editor. Block works on whole blocks: {{Insert New Block Before}}, {{Insert New Block After}}, {{Duplicate Selected Block(s)}}, {{Move Selected Block(s) Up}} and {{Move Selected Block(s) Down}}. Global changes the editor itself, such as {{Switch Visual/Code Editor}} and {{Open Block List View}}. Text Formatting works on the text inside a block.',
+    tips: [
+      '{{Select All Text (press again for all blocks)}} selects the text of the block. Pressed again, it selects all blocks.',
+      '{{Display Keyboard Shortcuts}} shows the shortcut list inside the editor.',
+    ],
+    essentials: ['Save Changes', 'Insert New Block After', 'Duplicate Selected Block(s)', 'Move Selected Block(s) Up', 'Open Block List View', 'Convert Text to Link'],
+    sections: ['Global', 'Block', 'Text Formatting'],
+  },
+}
+
+// Discord on Windows and on Linux has the same sections and action names.
+const DISCORD_DESKTOP = {
+  overview:
+    'Discord shortcuts are grouped into Navigation, Chat and Voice. Navigation has {{Quick Switcher}}, {{Previous Channel}} and {{Next Channel}}. Chat works in the message box: {{Edit Last Message}}, {{New Line}}, {{Bold}} and {{Italic}}. Voice has {{Toggle Mute}}, {{Toggle Deafen}} and {{Toggle Screen Share}}.',
+  tips: [
+    '{{New Line}} starts a new line in the message box without sending the message.',
+    'The Voice shortcuts differ only in their last key.',
+  ],
+  essentials: ['Quick Switcher', 'Previous Channel', 'Next Channel', 'Edit Last Message', 'Toggle Mute', 'Toggle Deafen'],
+  sections: ['Navigation', 'Chat', 'Voice'],
+}
+
+// Figma on Windows and on Linux: same sections; the note uses actions both have.
+const FIGMA_DESKTOP = {
+  overview:
+    'Figma shortcuts are grouped into Tools, View and Editing. Tools are single letters: {{Move Tool}}, {{Frame Tool}}, {{Rectangle}}, {{Pen Tool}} and {{Text Tool}}. View zooms: {{Zoom to Fit}} fits the design in the window and {{Zoom to 100%}} shows it at its real size. Editing works on the selected layers.',
+  tips: [
+    '{{Send Backward}} and {{Bring Forward}} move a layer one step in the stack.',
+    '{{Group Selection}} groups the selected layers and {{Ungroup}} splits the group again.',
+    '{{Copy as CSS}} copies the selected layer as CSS.',
+  ],
+  essentials: ['Move Tool', 'Frame Tool', 'Text Tool', 'Duplicate', 'Group Selection', 'Zoom to Fit'],
+  sections: ['Tools', 'View', 'Editing'],
+}
+
+// Notion on Windows and on Linux: same sections; the note uses actions both have.
+const NOTION_DESKTOP = {
+  overview:
+    'Notion shortcuts are grouped into Content and Blocks. Content formats the text inside a block: bold, italic, {{Inline Code}}, {{Add Link}}. Blocks sets the type of a block: {{Heading 1}}, {{To-do List}}, {{Bulleted List}}, {{Toggle List}}, {{Code Block}}.',
+  tips: [
+    'The Blocks shortcuts share their modifiers and use the number keys in order, starting with {{Text Block}}.',
+    '{{Strikethrough (when text selected)}} works only when text is selected, as its name says.',
+  ],
+  essentials: ['Command Menu', 'Add Link', 'Heading 1', 'To-do List', 'Bulleted List', 'Code Block'],
+  sections: ['Content', 'Blocks'],
+}
+
+// Slack on Windows and on Linux: same sections; the note uses actions both have.
+const SLACK_DESKTOP = {
+  overview:
+    'Slack shortcuts are grouped into Navigation, Messaging and Actions. Navigation has {{Quick Switcher}} for jumping to a conversation, {{Previous Channel}} and {{Next Channel}} for moving through the list, and {{Go Back}} and {{Go Forward}} for the history. Messaging works in the message box, and Actions opens {{All Unreads}}, {{All Threads}} and {{Preferences}}.',
+  tips: [
+    'In the message box, {{Upload File}} attaches a file and {{New Line in Message}} adds a line break.',
+    '{{Go Back}} and {{Go Forward}} use the left and right arrow keys with one modifier.',
+  ],
+  essentials: ['Quick Switcher', 'Previous Channel', 'Next Channel', 'New Message', 'All Unreads', 'All Threads'],
+  sections: ['Navigation', 'Messaging', 'Actions'],
+}
+
+// Notes for one platform only: APP_NOTES_BY_PLATFORM[platformId][slug].
+// For pages whose data names actions differently from the shared note, and for
+// apps that are not on macOS. Same shape and rules as APP_NOTES.
+export const APP_NOTES_BY_PLATFORM = {
+  windows: {
+    discord: DISCORD_DESKTOP,
+
+    teams: {
+      overview:
+        'Teams shortcuts are grouped into Navigation, Messaging and Meetings. Navigation opens the main views with the number keys: {{Activity}}, {{Chat}}, {{Teams}} and {{Calendar}}. Messaging has {{New Chat}} and the text formatting. Meetings has the controls for a call, such as {{Toggle Mute}}, {{Toggle Video}} and {{Share Screen}}.',
+      tips: [
+        '{{New Line}} starts a new line in the message without sending it.',
+        'The Meetings shortcuts use the same modifiers, so only the letter changes.',
+      ],
+      essentials: ['Search', 'New Chat', 'Chat', 'Toggle Mute', 'Toggle Video', 'Share Screen'],
+      sections: ['Navigation', 'Messaging', 'Meetings'],
+    },
+
+    figma: FIGMA_DESKTOP,
+    notion: NOTION_DESKTOP,
+    slack: SLACK_DESKTOP,
+
+    excel: {
+      overview:
+        'Excel shortcuts on Windows are grouped into Navigation, Editing, Formatting and Formulas. Navigation jumps to the ends of the sheet with {{Go to Cell A1}} and {{Go to Last Cell}}, and between sheets with {{Previous Sheet}} and {{Next Sheet}}. Formulas has {{AutoSum}}, {{Show Formulas}} and {{Toggle Absolute Reference}}.',
+      tips: [
+        '{{Fill Down}} copies the top cell of the selection into the cells below it. {{Fill Right}} does the same to the right.',
+        '{{Insert Current Date}} and {{Insert Current Time}} put the date or the time into the cell.',
+        '{{Toggle Absolute Reference}} switches a cell reference in a formula between relative and absolute.',
+      ],
+      essentials: ['Edit Cell', 'Fill Down', 'AutoSum', 'Format Cells', 'Go To Dialog', 'Insert Current Date'],
+      sections: ['Navigation', 'Editing', 'Formatting', 'Formulas'],
+    },
+
+    photoshop: {
+      overview:
+        'Photoshop shortcuts on Windows are grouped into Tools, Layers and Image. Tools are single letters, such as {{Move tool}}, {{Brush Tool}} and {{Eyedropper}}. Layers creates and arranges layers: {{New layer}}, {{Duplicate layer}}, {{Group layers}}, {{Merge layers}}. Image has {{Free Transform}}, {{Image Size}} and {{Canvas Size}}.',
+      tips: [
+        '{{Send Layer Back}} and {{Bring Layer Forward}} move the selected layer down or up in the stack.',
+        '{{Image Size}} changes the size of the image. {{Canvas Size}} changes the area around it.',
+      ],
+      essentials: ['Move tool', 'Brush Tool', 'New layer', 'Duplicate layer', 'Free Transform', 'Merge layers'],
+      sections: ['Tools', 'Layers', 'Image'],
+    },
+
+    powerpoint: {
+      overview:
+        'PowerPoint shortcuts on Windows are grouped into Presentation, Editing and Navigation. Presentation runs the show: {{Start Slideshow}} starts it, {{Start from Current Slide}} starts at the slide you are on, and {{End Slideshow}} stops it. Editing builds slides, and Navigation moves between them.',
+      tips: [
+        'During a show, {{Black Screen (during show)}} and {{White Screen (during show)}} replace the slide with a black or a white screen.',
+        '{{Copy Formatting}} and {{Paste Formatting}} copy the look of one object to another.',
+        '{{First Slide}} and {{Last Slide}} jump to the ends of the presentation.',
+      ],
+      essentials: ['New Slide', 'Duplicate Slide', 'Start Slideshow', 'Start from Current Slide', 'End Slideshow', 'Group Objects'],
+      sections: ['Presentation', 'Editing', 'Navigation'],
+    },
+
+    tortoisegit: {
+      overview:
+        'TortoiseGit shortcuts belong to its dialogs, and the list has a section for each: Commit Dialog, Log Dialog, Diff and Merge, and Explorer. The same key refreshes in each place: {{Rescan Working Tree}} in the commit dialog, {{Refresh Log}} in the log and {{Refresh Overlays}} in Explorer.',
+      tips: [
+        'In a diff, {{Next Difference}} and {{Previous Difference}} jump from change to change.',
+        '{{Search in Log}} searches the log and {{Find Next}} goes to the next match.',
+        '{{Confirm Commit}} makes the commit from the keyboard.',
+      ],
+      essentials: ['Confirm Commit', 'Show Diff', 'Next Difference', 'Previous Difference', 'Search in Log', 'Save Merged File'],
+      sections: ['Commit Dialog', 'Log Dialog', 'Diff and Merge', 'Explorer'],
+    },
+  },
+
+  linux: {
+    discord: DISCORD_DESKTOP,
+
+    figma: FIGMA_DESKTOP,
+    notion: NOTION_DESKTOP,
+    slack: SLACK_DESKTOP,
+
+    vscode: {
+      overview:
+        'VS Code shortcuts on Linux are grouped into General, Editing, Navigation, Search, View and Debug. General has the ones to learn first: {{Command Palette}} runs any command by name and {{Quick Open File}} opens a file by name. View opens the panels of the side bar: {{Explorer}}, {{Source Control}} and {{Extensions}}.',
+      tips: [
+        '{{Select Word / Next Occurrence}} selects the word at the cursor. Pressed again, it adds the next occurrence. {{Select All Occurrences}} takes them all.',
+        'Search has both scopes: {{Find}} and {{Find and Replace}} for the open file, {{Find in Files}} and {{Replace in Files}} for all files.',
+        '{{Toggle Problems}} opens the list of problems.',
+      ],
+      essentials: ['Command Palette', 'Quick Open File', 'Toggle Terminal', 'Select Word / Next Occurrence', 'Toggle Comment', 'Find in Files'],
+      sections: ['General', 'Editing', 'Navigation', 'Search', 'View', 'Debug'],
+    },
+
+    vim: {
+      overview:
+        'Vim works in modes. The Modes section lists them: in {{Normal Mode}} the keys are commands, {{Insert Mode}} types text, and {{Visual Mode}}, {{Visual Line Mode}} and {{Visual Block Mode}} select it. Navigation moves the cursor with letter keys: {{Move Left}}, {{Move Down}}, {{Move Up}} and {{Move Right}}.',
+      tips: [
+        '{{Delete Line}} and {{Yank (Copy) Line}} are one key pressed twice.',
+        '{{Repeat Last Command}} repeats the last change, so one edit can be applied again in another place.',
+        'After {{Search Forward}} or {{Search Backward}}, {{Next Match}} and {{Previous Match}} move between the matches.',
+      ],
+      essentials: ['Normal Mode', 'Insert Mode', 'Delete Line', 'Undo', 'Search Forward', 'Repeat Last Command'],
+      sections: ['Modes', 'Navigation'],
+    },
+
+    linux: {
+      overview:
+        'These shortcuts belong to the desktop, not to one app. Window Management tiles and resizes windows: {{Tile Window Left}}, {{Tile Window Right}}, {{Maximize Window}}. Workspaces moves between workspaces, and moves a window to another one. System opens the terminal, locks the screen and takes screenshots. Files works in the file manager.',
+      tips: [
+        '{{Move Window to Previous Workspace}} and {{Move Window to Next Workspace}} are the workspace shortcuts with one modifier added.',
+        'The screenshot shortcuts use the same key. {{Screenshot Region}} captures an area and {{Screenshot Window}} captures one window.',
+        '{{Toggle Hidden Files}} shows or hides hidden files in the file manager.',
+      ],
+      essentials: ['Switch Windows', 'Show Desktop', 'Tile Window Left', 'Tile Window Right', 'Open Terminal', 'Lock Screen'],
+      sections: ['Window Management', 'Workspaces', 'System', 'Files'],
+    },
+  },
+}
+
+/** The note for one app page: the platform's own note if it has one, else the shared note. */
+export function getAppNote(slug, platform) {
+  return APP_NOTES_BY_PLATFORM[platform]?.[slug] ?? APP_NOTES[slug]
 }

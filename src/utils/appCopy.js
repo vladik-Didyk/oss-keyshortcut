@@ -7,7 +7,8 @@
  * macOS, Ctrl on Windows). An action the page doesn't have renders as plain text.
  */
 
-import { parseKeyParts } from './platformHelpers'
+// Explicit ".js" so plain Node can import this file too (scripts/lib/page-prose.mjs).
+import { parseKeyParts } from './platformHelpers.js'
 
 const norm = (s) => s.toLowerCase().replace(/[’']/g, "'").trim()
 
@@ -57,11 +58,13 @@ export function noteToPlainText(text, app, platform) {
  * A note is used on a page only if every {{Action}} in its overview exists on
  * that page and at least 4 of its essentials do. Windows and Linux data often
  * name actions differently from macOS, and a half-matching note reads wrong.
+ * A note that names sections (note.sections) also needs those sections on the page.
  */
 export function noteFitsApp(note, app) {
   if (!note) return false
   const overviewOk = resolveNoteText(note.overview, app).every((s) => s.text !== undefined || s.shortcut)
-  return overviewOk && resolveEssentials(note.essentials, app).length >= 4
+  const sectionsOk = (note.sections || []).every((name) => (app.sections || []).some((s) => norm(s.name) === norm(name)))
+  return overviewOk && sectionsOk && resolveEssentials(note.essentials, app).length >= 4
 }
 
 /** Tips whose {{Action}} placeholders all exist on this page. */

@@ -14,7 +14,7 @@ import AdSlot from './AdSlot'
 import AffiliateLink from './AffiliateLink'
 import { getAffiliate } from '../data/affiliates'
 import { getSponsor, sponsorPageLink, MIN_SECTIONS_FOR_SLOT } from '../data/sponsors'
-import { APP_NOTES } from '../data/appNotes'
+import { getAppNote } from '../data/appNotes'
 import { noteFitsApp, fittingTips, resolveNoteText, resolveEssentials, everydayShortcuts, largestSections } from '../utils/appCopy'
 import { tokenize } from '../utils/searchHelpers'
 import { parseKeyParts, keysToWords } from '../utils/platformHelpers'
@@ -147,7 +147,7 @@ export default function ShortcutPage() {
   const pagePath = `/${platform}/${slug}`
   const affiliate = getAffiliate(slug, platform)
   const sponsor = getSponsor(pagePath)
-  const note = APP_NOTES[slug]
+  const note = getAppNote(slug, platform)
   const noteFits = useMemo(() => noteFitsApp(note, app), [note, app])
   const noteTips = useMemo(() => (noteFits ? fittingTips(note, app) : []), [noteFits, note, app])
   const everyday = useMemo(() => (noteFits ? [] : everydayShortcuts(app)), [noteFits, app])
