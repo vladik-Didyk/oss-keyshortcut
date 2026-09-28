@@ -1,6 +1,6 @@
 import { isRouteErrorResponse, useRouteError } from "react-router";
 import { getPlatformApps, getPlatforms, getOtherPlatforms, getOtherPlatformsMap } from "../utils/supabase.server";
-import { getPopularApps } from "../utils/platformHelpers";
+import { pickMoreApps } from "../utils/platformHelpers";
 import { CONTENT, buildMeta } from "../data/content";
 import NotFound from "../components/NotFound";
 import ShortcutPage from "../components/ShortcutPage";
@@ -27,19 +27,20 @@ export async function loader({ params }) {
 
   const otherPlatforms = await getOtherPlatforms(slug, platformId);
 
-  // Onward journeys: same-category siblings + platform's most-loaded apps.
+  // Onward journeys, different on every page (see pickMoreApps): same-category
+  // siblings, then other apps on the platform.
   const otherPlatformsMap = await getOtherPlatformsMap(platformId);
-  const relatedApps = apps
-    .filter((a) => a.slug !== slug && app.category && a.category === app.category)
-    .slice(0, 8)
-    .map(toCardApp);
-  const popularApps = getPopularApps(
-    apps.filter((a) => a.slug !== slug),
-    8
+  const sameCategory = app.category ? apps.filter((a) => a.category === app.category) : [];
+  const relatedApps = pickMoreApps(sameCategory, slug, 8).map(toCardApp);
+  const moreApps = pickMoreApps(
+    apps,
+    slug,
+    8,
+    relatedApps.map((a) => a.slug)
   ).map(toCardApp);
 
   // Only ship otherPlatforms entries the cards actually reference.
-  const cardSlugs = new Set([...relatedApps, ...popularApps].map((a) => a.slug));
+  const cardSlugs = new Set([...relatedApps, ...moreApps].map((a) => a.slug));
   const cardOtherPlatformsMap = {};
   for (const s of cardSlugs) {
     if (otherPlatformsMap[s]) cardOtherPlatformsMap[s] = otherPlatformsMap[s];
@@ -51,7 +52,7 @@ export async function loader({ params }) {
     app,
     otherPlatforms,
     relatedApps,
-    popularApps,
+    moreApps,
     otherPlatformsMap: cardOtherPlatformsMap,
   };
 }

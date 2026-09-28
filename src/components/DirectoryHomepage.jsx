@@ -481,10 +481,10 @@ export default function DirectoryHomepage() {
         )}
 
         {/* ─── Category Sections (when not searching) ─── */}
-        {/* ─── Popular Apps ─── */}
+        {/* ─── Apps with the most shortcuts ─── */}
         {!error && !loading && !search && !activeCategory && popularApps.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-theme-muted mb-4">Popular</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-theme-muted mb-4">{CONTENT.home.aboutSection.mostShortcutsTitle}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {popularApps.map(app => (
                 <AppCard key={app.slug} app={app} platform={selectedPlatform} />

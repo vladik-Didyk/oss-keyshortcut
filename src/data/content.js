@@ -464,6 +464,8 @@ export const CONTENT = {
         'Research consistently shows that keyboard shortcuts save significant time over mouse-driven workflows. A study by Brainscape found that the average user can save up to 8 working days per year by using shortcuts instead of navigating menus. Every second you spend reaching for the mouse, finding the right menu, and clicking adds up.',
         'Beyond speed, shortcuts reduce cognitive load. When a key combination becomes muscle memory, it no longer requires conscious thought — your hands execute the action while your mind stays focused on the task. This is why professional designers, developers, and writers all rely heavily on shortcut-driven workflows.',
       ],
+      // Homepage app row: the apps with the most shortcuts. No traffic data yet, so not "Popular".
+      mostShortcutsTitle: 'Most shortcuts',
       popularTitle: 'Universal Shortcuts',
       popularSubtitle: 'These shortcuts work in almost every application, across all platforms.',
       popularShortcuts: [
@@ -630,6 +632,7 @@ export const CONTENT = {
       learnMore: 'How we make money',
     },
     sponsorCta: (appName) => `Reach people who use ${appName}: sponsor this page`,
+    moreAppsTitle: (platformName) => `Explore more ${platformName} apps`,
     faqTitle: 'Frequently Asked Questions',
     ctaTitle: (appName) => `Access ${appName} shortcuts from your menu bar`,
     ctaSubtitle: 'KeyShortcut detects the active app and shows its shortcuts instantly. No memorization needed.',

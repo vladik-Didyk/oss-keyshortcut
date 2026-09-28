@@ -2,10 +2,13 @@ import { describe, it, expect } from 'vitest'
 import {
   getIconData,
 } from '../utils/directoryHelpers'
+import { readFileSync } from 'fs'
+import { join } from 'path'
 import {
   buildPlatformLookups,
   getPopularApps,
   groupByCategories,
+  pickMoreApps,
 } from '../utils/platformHelpers'
 
 // Minimal mock apps for testing helper functions (no file dependency)
@@ -60,3 +63,41 @@ describe('directoryHelpers', () => {
     expect(unknownIcon.label).toBe('S')
   })
 })
+
+describe('pickMoreApps', () => {
+  const macApps = JSON.parse(readFileSync(join(process.cwd(), 'public/data/platforms/macos.json'), 'utf-8')).apps
+
+  it('is deterministic and skips the current app and excluded apps', () => {
+    const exclude = ['figma', 'sketch']
+    const a = pickMoreApps(macApps, 'photoshop', 8, exclude).map((x) => x.slug)
+    const b = pickMoreApps(macApps, 'photoshop', 8, exclude).map((x) => x.slug)
+    expect(a).toEqual(b)
+    expect(a).toHaveLength(8)
+    expect(a).not.toContain('photoshop')
+    for (const slug of exclude) expect(a).not.toContain(slug)
+    expect(new Set(a).size).toBe(8)
+  })
+
+  it('shows a different set on different pages', () => {
+    const sets = new Set(macApps.map((app) => pickMoreApps(macApps, app.slug, 8).map((x) => x.slug).join(',')))
+    expect(sets.size).toBe(macApps.length)
+  })
+
+  it('links every app from other pages, evenly', () => {
+    const inbound = Object.fromEntries(macApps.map((a) => [a.slug, 0]))
+    for (const app of macApps) {
+      for (const picked of pickMoreApps(macApps, app.slug, 8)) inbound[picked.slug]++
+    }
+    const counts = Object.values(inbound)
+    expect(Math.min(...counts)).toBe(8)
+    expect(Math.max(...counts)).toBe(8)
+  })
+
+  it('handles small lists and unknown slugs', () => {
+    const small = macApps.slice(0, 3)
+    expect(pickMoreApps(small, small[0].slug, 8)).toHaveLength(2)
+    expect(pickMoreApps(small, 'not-an-app', 2)).toHaveLength(2)
+    expect(pickMoreApps([], 'x', 8)).toEqual([])
+  })
+})
+

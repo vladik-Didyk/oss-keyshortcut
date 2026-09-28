@@ -76,7 +76,7 @@ export default function ShortcutPage() {
     app,
     otherPlatforms,
     relatedApps = [],
-    popularApps = [],
+    moreApps = [],
     otherPlatformsMap = {},
   } = useLoaderData()
   const slug = app.slug
@@ -538,8 +538,8 @@ export default function ShortcutPage() {
         </div>
       </div>
 
-      {/* ─── Onward journeys: related + popular apps ─── */}
-      {(relatedApps.length > 0 || popularApps.length > 0) && (
+      {/* ─── Onward journeys: related + more apps (a different set on every page) ─── */}
+      {(relatedApps.length > 0 || moreApps.length > 0) && (
         <div className="border-t border-theme-border">
           <div className="mx-auto max-w-[980px] px-5 md:px-6 py-14 space-y-12">
             {relatedApps.length > 0 && app.category && (
@@ -560,16 +560,16 @@ export default function ShortcutPage() {
               </section>
             )}
 
-            {popularApps.length > 0 && (
+            {moreApps.length > 0 && (
               <section>
                 <h2 className="text-xl font-semibold tracking-tight mb-6">
-                  Popular {platformName} apps
+                  {sp.moreAppsTitle(platformName)}
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {popularApps.map((a) => (
+                  {moreApps.map((a) => (
                     <div
                       key={a.slug}
-                      onClick={() => trackEvent('related_app_clicked', { from: slug, to: a.slug, platform, group: 'popular' })}
+                      onClick={() => trackEvent('related_app_clicked', { from: slug, to: a.slug, platform, group: 'more' })}
                     >
                       <AppCard app={a} platform={platform} otherPlatforms={otherPlatformsMap[a.slug]} />
                     </div>
