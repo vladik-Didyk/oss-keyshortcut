@@ -1,8 +1,10 @@
-import { isRouteErrorResponse, useRouteError } from "react-router";
+import { isRouteErrorResponse, useLoaderData, useRouteError } from "react-router";
 import { getPlatformApps, getPlatforms, getOtherPlatformsMap } from "../utils/supabase.server";
+import { buildPlatformItemList } from "../utils/structuredData";
 import { CONTENT, buildMeta } from "../data/content";
 import NotFound from "../components/NotFound";
 import ShortcutsIndex from "../components/ShortcutsIndex";
+import JsonLd from "../components/JsonLd";
 
 export async function loader({ params }) {
   const { platformId } = params;
@@ -33,7 +35,14 @@ export function meta({ data }) {
 }
 
 export default function PlatformIndexRoute() {
-  return <ShortcutsIndex />;
+  const data = useLoaderData();
+  return (
+    <>
+      <ShortcutsIndex />
+      {/* ItemList of the apps on this page, in the order shown */}
+      <JsonLd data={buildPlatformItemList(data)} />
+    </>
+  );
 }
 
 export function ErrorBoundary() {

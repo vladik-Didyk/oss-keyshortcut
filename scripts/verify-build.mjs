@@ -9,10 +9,12 @@
  *   buildDir  defaults to build/client
  *   --strict  missing analytics IDs fail the check (default: warn only)
  *
- * Always fails when the AdSense script tag, the ads.txt line or 404.html is missing.
+ * Always fails when the AdSense script tag, the ads.txt line or 404.html is missing,
+ * or when the JSON-LD of a checked page does not parse or lacks a type.
  */
 import { existsSync, readFileSync, readdirSync } from "fs";
 import { join } from "path";
+import { readJsonLd, jsonLdTypes } from "./lib/json-ld.mjs";
 
 const args = process.argv.slice(2);
 const strict = args.includes("--strict");
@@ -75,9 +77,35 @@ if (notFoundPage === null) {
 // 6. llms.txt (scripts/generate-llms-txt.mjs)
 if (read("llms.txt") === null) warnings.push("llms.txt missing");
 
+// 7. JSON-LD (src/utils/structuredData.js), one page of each type that has
+// its own: every block must parse, and the types of that page must be there.
+const structuredData = [
+  ["macos/index.html", ["WebSite", "BreadcrumbList", "ItemList"]],
+  ["macos/figma/index.html", ["WebSite", "FAQPage", "BreadcrumbList", "WebPage"]],
+  ["about/index.html", ["WebSite", "Person"]],
+];
+const jsonLdFound = [];
+for (const [page, expected] of structuredData) {
+  const html = read(page);
+  if (html === null) {
+    errors.push(`${page} not found in ${buildDir}`);
+    continue;
+  }
+  try {
+    const types = jsonLdTypes(readJsonLd(html));
+    jsonLdFound.push(`${page}: ${types.join(", ")}`);
+    for (const type of expected) {
+      if (!types.includes(type)) errors.push(`${page}: JSON-LD has no ${type}`);
+    }
+  } catch (error) {
+    errors.push(`${page}: ${error.message}`);
+  }
+}
+
 for (const w of warnings) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`FAIL  ${e}`);
 console.log(`INFO  App Store download buttons: ${appStoreLive ? "SHOWN" : "hidden"}`);
+for (const line of jsonLdFound) console.log(`INFO  JSON-LD ${line}`);
 
 if (errors.length) {
   console.error(`\nverify-build: ${errors.length} problem(s). Do not deploy this build.`);

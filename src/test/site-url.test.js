@@ -143,7 +143,8 @@ describe('pre-rendered pages (if built)', () => {
       const blocks = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)]
       for (const url of blocks.flatMap((m) => siteUrlsIn(JSON.parse(m[1])))) {
         if (url.startsWith(`${SITE_ORIGIN}/images/`)) continue
-        const page = url.split('?')[0]
+        // Without the query and without the fragment (an @id such as /about/#creator).
+        const page = url.split(/[?#]/)[0]
         if (!served.has(page)) problems.push(`${route}: JSON-LD names ${url}`)
       }
     }

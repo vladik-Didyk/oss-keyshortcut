@@ -1,9 +1,11 @@
-import { isRouteErrorResponse, useRouteError } from "react-router";
+import { isRouteErrorResponse, useLoaderData, useRouteError } from "react-router";
 import { getPlatformApps, getPlatforms, getOtherPlatforms, getOtherPlatformsMap } from "../utils/supabase.server";
 import { pickMoreApps } from "../utils/platformHelpers";
+import { buildAppPageJsonLd } from "../utils/structuredData";
 import { CONTENT, buildMeta } from "../data/content";
 import NotFound from "../components/NotFound";
 import ShortcutPage from "../components/ShortcutPage";
+import JsonLd from "../components/JsonLd";
 
 /** Strip heavy section/shortcut payloads so the related-app cards stay lightweight. */
 function toCardApp(a) {
@@ -66,7 +68,14 @@ export function meta({ data }) {
 }
 
 export default function ShortcutPageRoute() {
-  return <ShortcutPage />;
+  const data = useLoaderData();
+  return (
+    <>
+      <ShortcutPage />
+      {/* The app this page is about (FAQ and breadcrumb JSON-LD are in ShortcutPage) */}
+      <JsonLd data={buildAppPageJsonLd(data)} />
+    </>
+  );
 }
 
 export function ErrorBoundary() {

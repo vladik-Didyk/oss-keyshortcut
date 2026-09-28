@@ -9,9 +9,10 @@ import Footer from "./components/Footer";
 import { hasConsented, initAnalytics, trackPageView } from "./lib/analytics";
 import { CONTENT, buildMeta } from "./data/content";
 import { ADSENSE_CLIENT } from "./data/ads";
+import { buildWebSiteJsonLd } from "./utils/structuredData";
 import "./index.css";
 
-const JSON_LD = JSON.stringify(CONTENT.structured.website);
+const JSON_LD = JSON.stringify(buildWebSiteJsonLd());
 
 // Hosts Google AdSense needs for scripts, pixels, beacons and ad iframes.
 const GOOGLE_ADS_HOSTS = [
