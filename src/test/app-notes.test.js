@@ -117,6 +117,71 @@ describe('app notes', () => {
   })
 })
 
+// A shared note is written on macOS and shown on every platform the app is on.
+// So the checks below run on every page, not on the note's main platform only.
+const PAGES = ['macos', 'windows', 'linux'].flatMap((platform) =>
+  load(platform)
+    .map((app) => ({ platform, app, path: `${platform}/${app.slug}`, note: getAppNote(app.slug, platform) }))
+    .filter((page) => page.note)
+)
+
+/** Every action a note names on a page: in its overview, its tips and its essentials. */
+const namedActions = (note, app) => [
+  ...new Set([note.overview, ...note.tips].flatMap((t) => resolveNoteText(t, app).filter((s) => s.action).map((s) => s.action)).concat(note.essentials)),
+]
+
+// The same key under two spellings is one key: "Esc" and "Escape", "↑" and "Up".
+const KEY_SPELLINGS = { '↑': 'Up', '↓': 'Down', '←': 'Left', '→': 'Right', '↩': 'Enter', '⏎': 'Enter', Return: 'Enter', Escape: 'Esc', '⎋': 'Esc', '⌫': 'Delete' }
+const keysOf = (sc) => `${[...sc.modifiers].sort().join('+')}|${(KEY_SPELLINGS[sc.key] ?? sc.key).toUpperCase()}`
+const sameAction = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim()
+
+/** Why a row should not be named in a note. Empty when the row is fine. */
+function rowFaults(app, platform, action) {
+  const rows = app.sections.flatMap((s) => s.shortcuts)
+  const mine = rows.filter((sc) => sameAction(sc.action, action))
+  if (mine.length === 0) return []
+  const faults = []
+  if (mine.length > 1) faults.push('listed more than once')
+  if (rows.some((sc) => !sameAction(sc.action, action) && keysOf(sc) === keysOf(mine[0]))) faults.push('another action has the same keys')
+  const printed = [...mine[0].modifiers, mine[0].key].join(' ')
+  if (platform !== 'macos' && /[⌘⌥⌃⇧↩⌫⎋]/.test(printed)) faults.push('Mac key symbol on a page for another platform')
+  if (mine[0].key.includes('\\\\')) faults.push('key prints a doubled backslash')
+  return faults
+}
+
+// Notes written before the rule below name rows of this kind. The pages are
+// listed so that the rule holds for every other note and for every new one.
+const PAGES_WITH_KNOWN_ROW_FAULTS = [
+  'macos/calendar', 'macos/clickup', 'macos/figma', 'macos/github', 'macos/google-docs', 'macos/mail', 'macos/music',
+  'macos/notes', 'macos/photos', 'macos/photoshop', 'macos/safari', 'macos/slack', 'macos/sublime-text', 'windows/tortoisegit',
+]
+
+describe('app notes on every page they show on', () => {
+  it('a page whose app has a note shows it, with every tip and every essential', () => {
+    const partly = PAGES.filter(({ app, note }) =>
+      !noteFitsApp(note, app) || fittingTips(note, app).length !== note.tips.length || resolveEssentials(note.essentials, app).length !== note.essentials.length
+    ).map((page) => page.path)
+    expect(partly, 'the note names an action or a section this page does not have: give the platform its own note in APP_NOTES_BY_PLATFORM').toEqual([])
+  })
+
+  // A row that is listed twice, or whose keys also belong to another action on
+  // the page, may be a fault in the data. A note would put it at the top of the page.
+  it('names no action whose row looks wrong on the page', () => {
+    const found = PAGES.filter(({ path }) => !PAGES_WITH_KNOWN_ROW_FAULTS.includes(path)).flatMap(({ platform, app, note, path }) =>
+      namedActions(note, app).flatMap((action) => rowFaults(app, platform, action).map((fault) => `${path}: ${action}: ${fault}`))
+    )
+    expect(found).toEqual([])
+  })
+
+  it('lists as known only pages that still have such a row', () => {
+    const clean = PAGES_WITH_KNOWN_ROW_FAULTS.filter((path) => {
+      const page = PAGES.find((p) => p.path === path)
+      return !page || namedActions(page.note, page.app).every((action) => rowFaults(page.app, page.platform, action).length === 0)
+    })
+    expect(clean, 'remove these pages from PAGES_WITH_KNOWN_ROW_FAULTS').toEqual([])
+  })
+})
+
 describe('app page copy from data', () => {
   const figma = mac.find((a) => a.slug === 'figma')
 
