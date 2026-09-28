@@ -640,22 +640,9 @@ export const CONTENT = {
   privacy: {
     policy: {
       title: 'Privacy Policy',
-      effectiveDate: 'Effective date: September 27, 2026',
-      intro: 'KeyShortcut is built with privacy as a core principle. This policy covers both the KeyShortcut macOS app and the keyshortcut.com website. The app does not collect personal data. This site displays advertisements served by Google AdSense, uses analytics with your consent, and contains affiliate links.',
+      effectiveDate: 'Effective date: September 28, 2026',
+      intro: 'This policy covers the keyshortcut.com website and the KeyShortcut macOS app. The website displays advertisements served by Google AdSense, uses analytics with your consent, and contains affiliate links. The app does not collect personal data. Website sections come first, app sections after.',
       sections: [
-        {
-          heading: 'App Data Collection',
-          content: [
-            { type: 'paragraph', text: 'The KeyShortcut macOS app does not collect, store, or transmit any personal data. There are no analytics frameworks, no tracking pixels, and no advertising SDKs in the app.' },
-          ],
-        },
-        {
-          heading: 'Network Access',
-          content: [
-            { type: 'paragraph', text: 'The KeyShortcut macOS app connects to Supabase (our database provider) to sync shortcut data. These requests are read-only and used solely to keep your shortcut library up to date. No personal data, device identifiers, or usage information is sent in these requests.' },
-            { type: 'paragraph', text: 'The app also uses Apple\u2019s MetricKit framework for anonymized crash reporting (see Apple Diagnostics below). Apart from these two services, the app makes no other network requests.' },
-          ],
-        },
         {
           heading: 'Website Analytics & Advertising',
           content: [
@@ -680,42 +667,6 @@ export const CONTENT = {
             { type: 'paragraph', text: 'The website is free. It is paid for by ads, sponsors, affiliate links and the KeyShortcut Mac app.' },
             { type: 'paragraph', text: 'Some "Get" buttons on app pages are affiliate links, and each one is labeled. If you buy through one, we may earn a commission at no extra cost to you. The seller may set a cookie to credit the sale to us; that cookie is governed by the seller\u2019s privacy policy.' },
             { type: 'paragraph', text: 'Sponsored placements are labeled "Sponsored". Sponsors and affiliate programs do not change which shortcuts we list or how we describe them.' },
-          ],
-        },
-        {
-          heading: 'Local Storage',
-          content: [
-            { type: 'paragraph', text: 'KeyShortcut stores your preferences locally on your device using macOS UserDefaults within the app sandbox. This includes:' },
-            {
-              type: 'list',
-              items: [
-                'Favorited shortcuts',
-                'Custom shortcuts you create',
-                'Window position and appearance settings',
-                'Language preference',
-                'Imported shortcut pack file references',
-              ],
-            },
-            { type: 'paragraph', text: 'This data never leaves your Mac. Uninstalling KeyShortcut removes all associated data.' },
-          ],
-        },
-        {
-          heading: 'Accessibility Permission',
-          content: [
-            { type: 'paragraph', text: 'KeyShortcut does not request macOS Accessibility permission and does not monitor your keystrokes.' },
-            { type: 'paragraph', text: 'Active App Detection (optional, off by default) reads only the bundle identifier of the frontmost app, using standard macOS APIs, to show relevant shortcuts. No window content is accessed.' },
-          ],
-        },
-        {
-          heading: 'Apple Diagnostics',
-          content: [
-            { type: 'paragraph', text: 'KeyShortcut uses Apple\'s MetricKit framework, which allows Apple to collect anonymized crash reports and performance metrics through the standard macOS diagnostics pipeline. This data is processed by Apple, not by us. You can control this in System Settings > Privacy & Security > Analytics & Improvements.' },
-          ],
-        },
-        {
-          heading: 'Children\'s Privacy',
-          content: [
-            { type: 'paragraph', text: 'KeyShortcut does not collect any data from any user, including children.' },
           ],
         },
         {
@@ -769,6 +720,55 @@ export const CONTENT = {
             },
             { type: 'paragraph', text: 'KeyShortcut does not sell personal information. Google AdSense on the website may use data for ad targeting, which may qualify as "sharing" under CCPA. You can opt out via Google Ads Settings, the privacy choices link Google shows to visitors in US states that require one, or "Cookie settings" in the footer (declining gives non-personalised ads).' },
             { type: 'contact', text: 'For CCPA requests, contact us at' },
+          ],
+        },
+        {
+          heading: 'App Data Collection',
+          content: [
+            { type: 'paragraph', text: 'The KeyShortcut macOS app does not collect, store, or transmit any personal data. There are no analytics frameworks, no tracking pixels, and no advertising SDKs in the app.' },
+          ],
+        },
+        {
+          heading: 'Network Access',
+          content: [
+            { type: 'paragraph', text: 'The KeyShortcut macOS app connects to Supabase (our database provider) to sync shortcut data. These requests are read-only and used solely to keep your shortcut library up to date. No personal data, device identifiers, or usage information is sent in these requests.' },
+            { type: 'paragraph', text: 'The app also uses Apple\u2019s MetricKit framework for anonymized crash reporting (see Apple Diagnostics below). Apart from these two services, the app makes no other network requests.' },
+          ],
+        },
+        {
+          heading: 'Local Storage',
+          content: [
+            { type: 'paragraph', text: 'KeyShortcut stores your preferences locally on your device using macOS UserDefaults within the app sandbox. This includes:' },
+            {
+              type: 'list',
+              items: [
+                'Favorited shortcuts',
+                'Custom shortcuts you create',
+                'Window position and appearance settings',
+                'Language preference',
+                'Imported shortcut pack file references',
+              ],
+            },
+            { type: 'paragraph', text: 'This data never leaves your Mac. Uninstalling KeyShortcut removes all associated data.' },
+          ],
+        },
+        {
+          heading: 'Accessibility Permission',
+          content: [
+            { type: 'paragraph', text: 'KeyShortcut does not request macOS Accessibility permission and does not monitor your keystrokes.' },
+            { type: 'paragraph', text: 'Active App Detection (optional, off by default) reads only the bundle identifier of the frontmost app, using standard macOS APIs, to show relevant shortcuts. No window content is accessed.' },
+          ],
+        },
+        {
+          heading: 'Apple Diagnostics',
+          content: [
+            { type: 'paragraph', text: 'KeyShortcut uses Apple\'s MetricKit framework, which allows Apple to collect anonymized crash reports and performance metrics through the standard macOS diagnostics pipeline. This data is processed by Apple, not by us. You can control this in System Settings > Privacy & Security > Analytics & Improvements.' },
+          ],
+        },
+        {
+          heading: 'Children\'s Privacy',
+          content: [
+            { type: 'paragraph', text: 'KeyShortcut does not collect any data from any user, including children.' },
           ],
         },
         {
