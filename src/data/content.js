@@ -358,7 +358,7 @@ export const CONTENT = {
         },
         {
           question: 'Is this a subscription?',
-          answer: `No. KeyShortcut is a one-time purchase of ${PRICE}. No subscriptions, no in-app purchases, no upsells. Pay once, use it forever.`,
+          answer: `No. KeyShortcut is a one-time purchase of ${PRICE}. No subscriptions, no in-app purchases, no upsells. Pay once.`,
         },
         {
           question: 'Does it work with my favorite app?',
