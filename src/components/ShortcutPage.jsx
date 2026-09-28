@@ -1,6 +1,6 @@
 import { Link, useLoaderData } from 'react-router'
 import React, { useState, useCallback, useDeferredValue, useEffect, useMemo, useRef } from 'react'
-import { Search, X, Download, ExternalLink, Lightbulb, ChevronDown, ChevronRight, Clipboard, CircleCheck } from '../utils/icons'
+import { Search, X, Download, ExternalLink, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, Clipboard, CircleCheck } from '../utils/icons'
 import LastCheckedBadge from './LastCheckedBadge'
 import MacAppStoreButton from './MacAppStoreButton'
 import AppIcon from './directory/AppIcon'
@@ -227,131 +227,120 @@ export default function ShortcutPage() {
       {/* Navbar clearance */}
       <div className="h-12" />
 
-      {/* ─── Breadcrumbs ─── */}
-      <nav
-        aria-label="Breadcrumb"
-        className="mx-auto max-w-[980px] px-5 md:px-6 pt-4 text-theme-muted text-xs sm:text-sm"
-      >
-        <ol className="flex items-center gap-1.5 flex-wrap">
-          <li>
-            <Link to="/" className="text-accent hover:underline no-underline">
-              {sp.breadcrumbHome}
-            </Link>
-          </li>
-          <li aria-hidden="true">
-            <ChevronRight size={13} className="text-theme-muted" />
-          </li>
-          <li>
-            <Link to={`/${platform}`} className="text-accent hover:underline no-underline">
-              {platformName} Shortcuts
-            </Link>
-          </li>
-          <li aria-hidden="true">
-            <ChevronRight size={13} className="text-theme-muted" />
-          </li>
-          <li aria-current="page" className="text-theme-text font-medium truncate max-w-[55vw] sm:max-w-none">
-            {app.displayName}
-          </li>
-        </ol>
+      {/* ─── Back link (breadcrumb JSON-LD stays in <BreadcrumbSchema>) ─── */}
+      <nav aria-label="Breadcrumb" className="mx-auto max-w-[980px] px-5 md:px-6 pt-4">
+        <Link
+          to={`/${platform}`}
+          className="inline-flex items-center gap-1 min-h-[32px] text-[13px] text-theme-muted hover:text-theme-text no-underline transition-colors"
+        >
+          <ChevronLeft size={15} aria-hidden="true" />
+          {sp.backLabel(platformName)}
+        </Link>
       </nav>
 
-      {/* ─── Header ─── */}
-      <header ref={headerRef} className="py-3 lg:py-4 px-5 md:px-6 border-b border-theme-border static lg:sticky lg:top-12 z-20 bg-theme-base">
-        <div className="mx-auto max-w-[980px] flex items-center gap-3 lg:gap-4 flex-wrap">
-          <div className="shrink-0">
-            <AppIcon slug={slug} displayName={app.displayName} size={40} />
-          </div>
-          <div className="flex items-center gap-3 flex-1 min-w-0">
-            <h1 className="text-lg lg:text-xl font-bold tracking-tight truncate">
-              {app.displayName} Shortcuts
-            </h1>
-            {app.category && (
-              <Link
-                to={`/?category=${app.category}${platform !== 'macos' ? `&platform=${platform}` : ''}`}
-                className="hidden sm:inline-block text-xs font-medium px-2 py-0.5 rounded-full no-underline transition-colors border-[1.5px] border-theme-accent bg-theme-keycap text-theme-keycap-legend shrink-0"
-              >
-                {app.category}
-              </Link>
-            )}
-            <span className="hidden md:inline text-theme-muted text-xs shrink-0">
-              {app.shortcutCount} shortcuts · {app.sections.length} sections
-              <LastCheckedBadge date={app.lastVerified} variant="inline" />
-            </span>
-            {otherPlatforms.length > 0 && (
-              <span className="hidden lg:inline text-theme-muted text-xs shrink-0">
-                · {sp.alsoOnLabel}{' '}
-                {otherPlatforms.map((p, i) => (
-                  <span key={p.id}>
-                    {i > 0 && ', '}
-                    <Link to={`/${p.id}/${slug}`} className="text-accent underline underline-offset-2 hover:no-underline">
-                      {p.name}
+      {/* ─── Header: title + facts on the left, search + actions on the right (stacked on mobile) ─── */}
+      <header ref={headerRef} className="pt-1 pb-4 lg:py-4 px-5 md:px-6 border-b border-theme-border static lg:sticky lg:top-12 z-20 bg-theme-base">
+        <div className="mx-auto max-w-[980px] flex flex-col lg:flex-row lg:flex-wrap lg:items-center gap-4 lg:gap-x-6 lg:gap-y-2">
+          <div className="flex items-center gap-3 min-w-0 lg:flex-1">
+            <div className="shrink-0">
+              <AppIcon slug={slug} displayName={app.displayName} size={36} />
+            </div>
+            <div className="min-w-0">
+              <h1 className="text-2xl font-bold tracking-tight leading-tight">
+                {app.displayName} <span className="font-normal text-theme-muted">{sp.titleSuffix}</span>
+              </h1>
+              <p className="text-[13px] text-theme-muted mt-0.5">
+                {app.shortcutCount} shortcuts · {app.sections.length} {app.sections.length === 1 ? 'section' : 'sections'}
+                {app.category && (
+                  <>
+                    {' · '}
+                    <Link
+                      to={`/?category=${app.category}${platform !== 'macos' ? `&platform=${platform}` : ''}`}
+                      className="text-theme-muted hover:text-theme-text no-underline hover:underline underline-offset-2"
+                    >
+                      {app.category}
                     </Link>
+                  </>
+                )}
+                {otherPlatforms.length > 0 && (
+                  <span className="hidden sm:inline">
+                    {' · '}{sp.alsoOnLabel}{' '}
+                    {otherPlatforms.map((p, i) => (
+                      <span key={p.id}>
+                        {i > 0 && ', '}
+                        <Link to={`/${p.id}/${slug}`} className="text-theme-muted hover:text-theme-text underline underline-offset-2">
+                          {p.name}
+                        </Link>
+                      </span>
+                    ))}
                   </span>
-                ))}
-              </span>
-            )}
+                )}
+              </p>
+            </div>
           </div>
-          {/* Search + Download */}
-          <div className="flex items-center gap-2 shrink-0">
-            <div className="relative w-48 md:w-56">
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 lg:shrink-0">
+            <div className="relative w-full sm:flex-1 lg:w-64 lg:flex-none">
               <Search
-                size={14}
+                size={15}
                 className="absolute left-3 top-1/2 -translate-y-1/2 text-theme-muted pointer-events-none"
                 aria-hidden="true"
               />
               <input
                 ref={searchInputRef}
-                type="text"
-                placeholder={sp.filterPlaceholder}
+                type="search"
+                placeholder={sp.searchPlaceholder(app.shortcutCount)}
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 aria-label={sp.filterAriaLabel}
-                className="w-full pl-8 pr-12 py-1.5 rounded-lg bg-theme-base-alt border border-theme-border text-theme-text placeholder:text-theme-muted outline-none focus:border-theme-border-hover focus:ring-1 focus:ring-theme-border-hover transition-all text-base sm:text-sm"
+                className="appearance-none w-full h-10 pl-9 pr-10 rounded-xl bg-theme-surface border border-transparent text-theme-text placeholder:text-theme-muted outline-none focus:border-theme-border-hover transition-colors text-base sm:text-sm [&::-webkit-search-cancel-button]:hidden"
               />
               {!search && (
-                <span className="absolute right-2.5 top-1/2 -translate-y-1/2 hidden sm:flex items-center text-theme-muted pointer-events-none select-none">
-                  <kbd className="px-1 py-0.5 rounded bg-theme-base border border-theme-border text-[10px] font-medium">/</kbd>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:flex items-center text-theme-muted pointer-events-none select-none">
+                  <kbd className="px-1.5 py-0.5 rounded bg-theme-base text-[10px] font-medium">/</kbd>
                 </span>
               )}
               {search && (
                 <button
                   onClick={() => setSearch('')}
-                  className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center justify-center min-w-[28px] min-h-[28px] text-theme-muted hover:text-theme-text bg-transparent border-none cursor-pointer rounded-full transition-colors"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center justify-center min-w-[32px] min-h-[32px] text-theme-muted hover:text-theme-text bg-transparent border-none cursor-pointer rounded-full transition-colors"
                   aria-label={sp.clearAriaLabel}
                 >
-                  <X size={14} />
+                  <X size={15} />
                 </button>
               )}
             </div>
-            <button
-              onClick={async () => {
-                const { generateShortcutPDF } = await import('../utils/generateShortcutPDF')
-                generateShortcutPDF(app)
-                trackEvent('shortcut_pdf_downloaded', { app: slug, platform, app_name: app.displayName })
-              }}
-              className="flex items-center justify-center min-w-[40px] min-h-[40px] rounded-lg border border-theme-border hover:bg-theme-base-alt text-theme-muted hover:text-theme-text transition-colors shrink-0 cursor-pointer"
-              title={sp.downloadTitle}
-              aria-label={sp.downloadTitle}
-            >
-              <Download size={16} />
-            </button>
-            {app.docsUrl && (
-              <a
-                href={app.docsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center min-w-[40px] min-h-[40px] rounded-lg border border-theme-border hover:bg-theme-base-alt text-theme-muted hover:text-theme-text transition-colors shrink-0 no-underline"
-                title="View official documentation"
-                aria-label="View official documentation"
-                onClick={() => trackEvent('docs_link_clicked', { app: slug, platform, app_name: app.displayName, docs_url: app.docsUrl })}
+            <div className="flex items-center gap-5 -ml-1 sm:ml-0">
+              <button
+                onClick={async () => {
+                  const { generateShortcutPDF } = await import('../utils/generateShortcutPDF')
+                  generateShortcutPDF(app)
+                  trackEvent('shortcut_pdf_downloaded', { app: slug, platform, app_name: app.displayName })
+                }}
+                className="inline-flex items-center gap-1.5 min-h-[40px] px-1 bg-transparent border-none text-[13px] text-theme-text hover:opacity-70 transition-opacity cursor-pointer shrink-0"
+                title={sp.downloadTitle}
               >
-                <ExternalLink size={16} />
-              </a>
-            )}
+                <Download size={15} aria-hidden="true" />
+                {sp.pdfLabel}
+              </button>
+              {app.docsUrl && (
+                <a
+                  href={app.docsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 min-h-[40px] px-1 text-[13px] text-theme-text hover:opacity-70 transition-opacity no-underline shrink-0"
+                  onClick={() => trackEvent('docs_link_clicked', { app: slug, platform, app_name: app.displayName, docs_url: app.docsUrl })}
+                >
+                  <ExternalLink size={15} aria-hidden="true" />
+                  {sp.docsLabel}
+                </a>
+              )}
+            </div>
           </div>
+
           {/* Search feedback */}
           {search && (
-            <p className="w-full text-xs text-theme-muted" role="status" aria-live="polite">
+            <p className="w-full text-xs text-theme-muted -mt-2 lg:mt-0 lg:basis-full" role="status" aria-live="polite">
               {totalVisible} of {app.shortcutCount} shortcuts
             </p>
           )}

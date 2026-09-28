@@ -3,6 +3,7 @@
 export {
   ArrowRight,
   ChevronDown,
+  ChevronLeft,
   ChevronRight,
   Clipboard,
   Code2,
