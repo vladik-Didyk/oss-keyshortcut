@@ -187,6 +187,38 @@ export default function DirectoryHomepage() {
     if (cat) trackEvent('category_filtered', { category: cat, platform: selectedPlatform })
   }, [selectedPlatform])
 
+  // Sticky category bar: `chipsStuck` adds its bottom hairline once it pins under the navbar.
+  const chipsSentinelRef = useRef(null)
+  const [chipsStuck, setChipsStuck] = useState(false)
+  useEffect(() => {
+    const el = chipsSentinelRef.current
+    if (!el || typeof IntersectionObserver !== 'function') return
+    const io = new IntersectionObserver(
+      ([entry]) => setChipsStuck(!entry.isIntersecting && entry.boundingClientRect.top < 60),
+      { rootMargin: '-49px 0px 0px 0px' }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [chipsVisible])
+
+  // Picking a category: centre the chip in the row and, if the list was scrolled
+  // past, jump back to its top so the filtered apps are in view.
+  const pickCategory = useCallback((cat, chip) => {
+    const behavior = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+    const nav = chipsRef.current
+    if (nav && chip && nav.scrollWidth > nav.clientWidth) {
+      const n = nav.getBoundingClientRect()
+      const c = chip.getBoundingClientRect()
+      nav.scrollTo({ left: nav.scrollLeft + c.left - n.left - (n.width - c.width) / 2, behavior })
+    }
+    const sentinel = chipsSentinelRef.current
+    if (chipsStuck && sentinel) {
+      const navbarBottom = document.querySelector('nav.fixed')?.getBoundingClientRect().bottom ?? 48
+      window.scrollTo({ top: sentinel.getBoundingClientRect().top + window.scrollY - navbarBottom, behavior })
+    }
+    setCategory(cat)
+  }, [chipsStuck, setCategory])
+
   const setPlatform = useCallback((id) => {
     setSelectedPlatform(id)
     setActiveCategory(null)
@@ -259,7 +291,7 @@ export default function DirectoryHomepage() {
     return groups
   }, [apps, search, activeCategory, categoryOrder])
 
-  const popularApps = useMemo(() => getPopularApps(apps, 8), [apps])
+  const popularApps = useMemo(() => getPopularApps(apps, 9), [apps])
 
   return (
     <div className="min-h-screen bg-theme-base">
@@ -397,15 +429,23 @@ export default function DirectoryHomepage() {
         </div>
       </section>
 
+      {/* Directory: category bar + app list. The bar sticks under the navbar only
+          while the list is on screen (the wrapper bounds the sticky element). */}
+      <div>
       {/* ─── Category Chips ─── */}
       {!search && (
-        <div className="px-5 md:px-6 mb-8">
+        <>
+        <div ref={chipsSentinelRef} aria-hidden="true" />
+        <div
+          className={`sticky z-30 bg-theme-base px-5 md:px-6 mb-6 border-b transition-colors ${chipsStuck ? 'border-theme-border' : 'border-transparent'}`}
+          style={{ top: 'calc(3rem + env(safe-area-inset-top))' }}
+        >
           {/* Wider than the 1080px grid so all chips fit on one centred line on a 1280px screen */}
           <div className="mx-auto max-w-[1240px] relative">
             {/* w-max + mx-auto: centred when the chips fit, scrollable from the first chip when they don't */}
             <nav ref={chipsRef} className="chips-scroll overflow-x-auto select-none py-1" aria-label="Filter by category">
               <div className="flex flex-nowrap gap-1 w-max mx-auto">
-                <ChipButton active={!activeCategory} onClick={() => setCategory(null)}>
+                <ChipButton active={!activeCategory} onClick={(e) => pickCategory(null, e.currentTarget)}>
                   {CONTENT.home.allCategory}
                 </ChipButton>
                 {categoryOrder.map(cat => {
@@ -414,7 +454,7 @@ export default function DirectoryHomepage() {
                     <ChipButton
                       key={cat}
                       active={activeCategory === cat}
-                      onClick={() => setCategory(activeCategory === cat ? null : cat)}
+                      onClick={(e) => pickCategory(activeCategory === cat ? null : cat, e.currentTarget)}
                       icon={config?.icon}
                       color={config?.color}
                     >
@@ -437,6 +477,7 @@ export default function DirectoryHomepage() {
             />
           </div>
         </div>
+        </>
       )}
 
       {/* min-height reserves space so the platform-switch loading skeleton swap
@@ -458,9 +499,9 @@ export default function DirectoryHomepage() {
 
         {/* ─── Loading skeleton ─── */}
         {!error && loading && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
             {Array.from({ length: 10 }).map((_, i) => (
-              <div key={i} className="flex flex-col items-center py-10 px-4 rounded-2xl animate-pulse border border-theme-border">
+              <div key={i} className="flex flex-col items-center py-6 sm:py-10 px-2 sm:px-4 rounded-2xl animate-pulse border border-theme-border">
                 <div className="w-16 h-16 rounded-2xl mb-4 bg-black/6" />
                 <div className="w-20 h-3 rounded bg-black/6" />
                 <div className="w-12 h-2.5 rounded mt-2 bg-black/4" />
@@ -510,7 +551,7 @@ export default function DirectoryHomepage() {
         {!error && !loading && !search && !activeCategory && popularApps.length > 0 && (
           <section className="mb-8">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-theme-muted mb-4">{CONTENT.home.aboutSection.mostShortcutsTitle}</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:[&>*:nth-child(9)]:hidden">
               {popularApps.map(app => (
                 <AppCard key={app.slug} app={app} platform={selectedPlatform} />
               ))}
@@ -530,6 +571,7 @@ export default function DirectoryHomepage() {
         {!error && !loading && grouped.length === 0 && !search && (
           <p className="text-center py-20 text-theme-muted">{CONTENT.home.emptyCategory}</p>
         )}
+      </div>
       </div>
 
       {/* ─── About Section ─── */}
@@ -748,8 +790,8 @@ function CategorySection({ group, platform, otherPlatformsMap = {} }) {
   const CatIcon = config?.icon
 
   return (
-    <section ref={ref} className={`mb-20 fade-in-up ${visible ? 'visible' : ''}`}>
-      <div className="flex flex-col md:flex-row gap-8 md:gap-10">
+    <section ref={ref} className={`mb-12 md:mb-20 fade-in-up ${visible ? 'visible' : ''}`}>
+      <div className="flex flex-col md:flex-row gap-4 md:gap-10">
         {/* Left: Category label */}
         <div className="md:w-44 shrink-0 flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 md:pt-4">
           <div
@@ -762,12 +804,12 @@ function CategorySection({ group, platform, otherPlatformsMap = {} }) {
             <h2 className="text-xl md:text-2xl font-semibold text-theme-text leading-tight">
               {group.name}
             </h2>
-            <p className="text-theme-muted text-sm mt-0.5">{CONTENT.home.categorySubLabel}</p>
+            <p className="text-theme-muted text-sm mt-0.5">{CONTENT.home.categoryCount(group.apps.length)}</p>
           </div>
         </div>
 
         {/* Right: App grid */}
-        <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="flex-1 grid grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
           {group.apps.map(app => (
             <AppCard key={app.slug} app={app} platform={platform} otherPlatforms={otherPlatformsMap[app.slug]} />
           ))}

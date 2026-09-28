@@ -72,7 +72,7 @@ export default function ShortcutsIndex() {
 
   return (
     <div className="min-h-screen bg-theme-base">
-      <header className="pt-12 pb-10 px-5 md:px-6">
+      <header className="pt-12 pb-8 px-5 md:px-6">
         <div className="mx-auto max-w-[1080px]">
           <Link
             to="/"
@@ -90,29 +90,6 @@ export default function ShortcutsIndex() {
           <p className="text-theme-muted text-sm mb-4">
             {`${apps.length} apps · ${totalShortcuts.toLocaleString()} keyboard shortcuts`}
           </p>
-          <p className="text-theme-muted text-[15px] leading-relaxed max-w-[720px] mb-3">
-            {CONTENT.directory.intro(platformName, apps.length, totalShortcuts)}
-          </p>
-          <p className="text-theme-muted text-[15px] leading-relaxed max-w-[720px] mb-6">
-            {CONTENT.directory.learnMore(platformName)}
-          </p>
-
-          {/* ─── Modifier Keys Reference ─── */}
-          <div className="max-w-[720px] mb-8 rounded-2xl bg-theme-base-alt border border-theme-border p-5">
-            <h2 className="text-sm font-semibold tracking-tight mb-3">{CONTENT.directory.modifierTitle}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {CONTENT.directory.modifierExplainer(platformName).map(mod => (
-                <div key={mod.name} className="flex gap-3 items-start">
-                  <kbd className="keycap-mini shrink-0 mt-0.5">{mod.symbol}</kbd>
-                  <div>
-                    <span className="text-sm font-medium text-theme-text">{mod.name}</span>
-                    <p className="text-xs text-theme-muted leading-relaxed mt-0.5">{mod.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
           <div ref={searchContainerRef} className="relative">
             <Search
               size={18}
@@ -142,7 +119,7 @@ export default function ShortcutsIndex() {
                 }
               }}
               aria-label={CONTENT.directory.searchAriaLabel}
-              className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-theme-base-alt border border-theme-border text-theme-text placeholder:text-theme-muted outline-none focus:border-theme-border-hover focus:ring-1 focus:ring-theme-border-hover transition-all text-[15px]"
+              className="w-full h-12 pl-11 pr-10 rounded-xl bg-theme-surface border border-transparent hover:border-theme-border text-theme-text placeholder:text-theme-muted outline-none focus:border-theme-border-hover focus:ring-1 focus:ring-theme-border-hover transition-all text-[17px]"
             />
             {search && (
               <button
@@ -174,8 +151,8 @@ export default function ShortcutsIndex() {
 
           return (
             <React.Fragment key={group.name}>
-              <section className="mb-20">
-                <div className="flex flex-col md:flex-row gap-8 md:gap-10">
+              <section className="mb-12 md:mb-20">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-10">
                   {/* Left: Category label */}
                   <div className="md:w-44 shrink-0 flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 md:pt-4">
                     <div
@@ -188,12 +165,12 @@ export default function ShortcutsIndex() {
                       <h2 className="text-xl md:text-2xl font-semibold text-theme-text leading-tight">
                         {group.name}
                       </h2>
-                      <p className="text-theme-muted text-sm mt-0.5">{CONTENT.directory.categorySubLabel}</p>
+                      <p className="text-theme-muted text-sm mt-0.5">{CONTENT.directory.categoryCount(group.apps.length)}</p>
                     </div>
                   </div>
 
                   {/* Right: App grid */}
-                  <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  <div className="flex-1 grid grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
                     {group.apps.map(app => (
                       <AppCard key={app.slug} app={app} platform={platform} otherPlatforms={otherPlatformsMap[app.slug]} />
                     ))}
@@ -209,6 +186,34 @@ export default function ShortcutsIndex() {
 
         {grouped.length === 0 && search && !hasSmartResults && (
           <p className="text-center text-theme-muted py-20">No apps found for &ldquo;{search}&rdquo;</p>
+        )}
+
+        {/* ─── About this platform: intro + modifier keys (below the grid, so apps come first) ─── */}
+        {!search && (
+          <section className="border-t border-theme-border pt-12">
+            <p className="text-theme-muted text-[15px] leading-relaxed max-w-[720px] mb-3">
+              {CONTENT.directory.intro(platformName, apps.length, totalShortcuts)}
+            </p>
+            <p className="text-theme-muted text-[15px] leading-relaxed max-w-[720px] mb-6">
+              {CONTENT.directory.learnMore(platformName)}
+            </p>
+
+            {/* ─── Modifier Keys Reference ─── */}
+            <div className="max-w-[720px] mb-8 rounded-2xl bg-theme-base-alt border border-theme-border p-5">
+              <h2 className="text-sm font-semibold tracking-tight mb-3">{CONTENT.directory.modifierTitle}</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {CONTENT.directory.modifierExplainer(platformName).map(mod => (
+                  <div key={mod.name} className="flex gap-3 items-start">
+                    <kbd className="keycap-mini shrink-0 mt-0.5">{mod.symbol}</kbd>
+                    <div>
+                      <span className="text-sm font-medium text-theme-text">{mod.name}</span>
+                      <p className="text-xs text-theme-muted leading-relaxed mt-0.5">{mod.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
         )}
       </div>
 

@@ -446,7 +446,7 @@ export const CONTENT = {
     searchPlaceholder: 'Search apps or shortcuts',
     searchAriaLabel: 'Search for an app',
     allCategory: 'All',
-    categorySubLabel: 'shortcuts',
+    categoryCount: (n) => `${n} ${n === 1 ? 'app' : 'apps'}`,
     error: 'Something went wrong. Please try refreshing.',
     refreshButton: 'Refresh',
     emptyCategory: 'No apps in this category yet.',
@@ -489,10 +489,10 @@ export const CONTENT = {
   // ─── Platform index (/:platformId) ────────────────────────────────
   directory: {
     backLabel: 'Home',
-    searchPlaceholder: 'Search for an app...',
+    searchPlaceholder: 'Search apps or shortcuts',
     searchAriaLabel: 'Search apps',
     clearAriaLabel: 'Clear search',
-    categorySubLabel: 'shortcuts',
+    categoryCount: (n) => `${n} ${n === 1 ? 'app' : 'apps'}`,
     shortcutsLabel: 'shortcuts',
     intro: (platformName, appCount, shortcutCount) =>
       `Browse keyboard shortcuts for ${appCount} ${platformName} applications, totaling ${shortcutCount.toLocaleString()}+ shortcuts. Every shortcut is sourced from official documentation and organized by category. Click on any app to see its full shortcut reference, filter by action, or download a PDF cheat sheet.`,

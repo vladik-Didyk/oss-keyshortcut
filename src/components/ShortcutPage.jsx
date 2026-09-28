@@ -390,61 +390,6 @@ export default function ShortcutPage() {
           </div>
         ) : null}
 
-        {/* ─── Inline CTA (Mac HUD nudge — always renders; /mac-hud is a valid route) ─── */}
-        <div className="mt-8 max-w-[720px] flex flex-col sm:flex-row sm:items-center gap-4 rounded-2xl border border-theme-border bg-theme-base-alt p-5">
-          <div className="flex-1 min-w-0">
-            <p className="text-[15px] font-medium">{sp.ctaTitle(app.displayName)}</p>
-            <p className="text-[13px] text-theme-muted mt-0.5">{sp.ctaSubtitle}</p>
-          </div>
-          <Link
-            to="/mac-hud"
-            onClick={() => trackEvent('mac_hud_promo_clicked', { location: 'shortcut_page', app: slug })}
-            className="shrink-0 self-start sm:self-auto px-4 py-2 rounded-full bg-theme-accent text-theme-accent-text text-[13px] font-medium no-underline hover:opacity-90 transition-opacity"
-          >
-            Learn more
-          </Link>
-        </div>
-
-        {/* ─── Related resources (cross-content links) ─── */}
-        <div className="mt-8 max-w-[720px] rounded-2xl border border-theme-border bg-theme-base p-5">
-          <p className="text-xs font-semibold uppercase tracking-wider text-theme-muted mb-3">
-            Related resources
-          </p>
-          <ul className="flex flex-col gap-2 text-[14px]">
-            {comparisonLinks.map((c) => (
-              <li key={c.pairSlug} className="flex items-center gap-1.5">
-                <ChevronRight size={14} className="text-theme-muted shrink-0" />
-                <Link
-                  to={`/compare/${c.pairSlug}`}
-                  onClick={() => trackEvent('related_resource_clicked', { type: 'compare', app: slug, target: c.pairSlug })}
-                  className="text-accent underline underline-offset-2 hover:no-underline"
-                >
-                  Compare {app.displayName} vs {c.otherName}
-                </Link>
-              </li>
-            ))}
-            <li className="flex items-center gap-1.5">
-              <ChevronRight size={14} className="text-theme-muted shrink-0" />
-              <Link
-                to="/cheat-sheets"
-                onClick={() => trackEvent('related_resource_clicked', { type: 'cheat_sheet', app: slug })}
-                className="text-accent underline underline-offset-2 hover:no-underline"
-              >
-                Download printable cheat sheet
-              </Link>
-            </li>
-            <li className="flex items-center gap-1.5">
-              <ChevronRight size={14} className="text-theme-muted shrink-0" />
-              <Link
-                to="/guides"
-                onClick={() => trackEvent('related_resource_clicked', { type: 'guides', app: slug })}
-                className="text-accent underline underline-offset-2 hover:no-underline"
-              >
-                Browse guides
-              </Link>
-            </li>
-          </ul>
-        </div>
       </div>
 
       {/* ─── Sidebar + Main ─── */}
@@ -582,6 +527,49 @@ export default function ShortcutPage() {
         </div>
       </div>
 
+      <div className="mx-auto max-w-[980px] px-5 md:px-6 pb-14">
+        {/* ─── Related resources (cross-content links), after the list ─── */}
+        <div className="max-w-[720px] rounded-2xl border border-theme-border bg-theme-base p-5">
+          <p className="text-xs font-semibold uppercase tracking-wider text-theme-muted mb-3">
+            Related resources
+          </p>
+          <ul className="flex flex-col gap-2 text-[14px]">
+            {comparisonLinks.map((c) => (
+              <li key={c.pairSlug} className="flex items-center gap-1.5">
+                <ChevronRight size={14} className="text-theme-muted shrink-0" />
+                <Link
+                  to={`/compare/${c.pairSlug}`}
+                  onClick={() => trackEvent('related_resource_clicked', { type: 'compare', app: slug, target: c.pairSlug })}
+                  className="text-accent underline underline-offset-2 hover:no-underline"
+                >
+                  Compare {app.displayName} vs {c.otherName}
+                </Link>
+              </li>
+            ))}
+            <li className="flex items-center gap-1.5">
+              <ChevronRight size={14} className="text-theme-muted shrink-0" />
+              <Link
+                to="/cheat-sheets"
+                onClick={() => trackEvent('related_resource_clicked', { type: 'cheat_sheet', app: slug })}
+                className="text-accent underline underline-offset-2 hover:no-underline"
+              >
+                Download printable cheat sheet
+              </Link>
+            </li>
+            <li className="flex items-center gap-1.5">
+              <ChevronRight size={14} className="text-theme-muted shrink-0" />
+              <Link
+                to="/guides"
+                onClick={() => trackEvent('related_resource_clicked', { type: 'guides', app: slug })}
+                className="text-accent underline underline-offset-2 hover:no-underline"
+              >
+                Browse guides
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+
       {/* ─── Onward journeys: related + more apps (a different set on every page) ─── */}
       {(relatedApps.length > 0 || moreApps.length > 0) && (
         <div className="border-t border-theme-border">
@@ -591,7 +579,7 @@ export default function ShortcutPage() {
                 <h2 className="text-xl font-semibold tracking-tight mb-6">
                   More {app.category} shortcuts
                 </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
                   {relatedApps.map((a) => (
                     <div
                       key={a.slug}
@@ -609,7 +597,7 @@ export default function ShortcutPage() {
                 <h2 className="text-xl font-semibold tracking-tight mb-6">
                   {sp.moreAppsTitle(platformName)}
                 </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
                   {moreApps.map((a) => (
                     <div
                       key={a.slug}
@@ -637,30 +625,32 @@ export default function ShortcutPage() {
         </div>
       </div>
 
-      {/* ─── CTA Card ─── */}
-      <div className="border-t border-theme-border">
-        <div className="mx-auto max-w-[980px] px-5 md:px-6 py-14">
-          <div className="rounded-2xl bg-theme-accent text-theme-accent-text p-8 md:p-10 text-center">
-            <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-3">
-              {sp.ctaTitle(app.displayName)}
-            </h2>
-            <p className="text-theme-accent-text/80 text-[15px] leading-relaxed mb-6 max-w-md mx-auto">
-              {sp.ctaSubtitle}
-            </p>
-            <div className="flex flex-col items-center gap-3">
-              <MacAppStoreButton />
-              {/* Always-present nudge — survives even when the App Store badge is gated off */}
-              <Link
-                to="/mac-hud"
-                onClick={() => trackEvent('mac_hud_promo_clicked', { location: 'shortcut_page', app: slug })}
-                className={`text-[14px] font-medium no-underline hover:underline ${APP_STORE_URL ? 'text-theme-accent-text/80' : 'inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-theme-base text-theme-text'}`}
-              >
-                {APP_STORE_URL ? `Learn how KeyShortcut works with ${app.displayName} →` : `Learn how KeyShortcut works with ${app.displayName}`}
-              </Link>
+      {/* ─── CTA Card: the Mac app, so macOS pages only ─── */}
+      {platform === 'macos' && (
+        <div className="border-t border-theme-border">
+          <div className="mx-auto max-w-[980px] px-5 md:px-6 py-14">
+            <div className="rounded-2xl bg-theme-accent text-theme-accent-text p-8 md:p-10 text-center">
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-3">
+                {sp.ctaTitle(app.displayName)}
+              </h2>
+              <p className="text-theme-accent-text/80 text-[15px] leading-relaxed mb-6 max-w-md mx-auto">
+                {sp.ctaSubtitle}
+              </p>
+              <div className="flex flex-col items-center gap-3">
+                <MacAppStoreButton />
+                {/* Always-present nudge — survives even when the App Store badge is gated off */}
+                <Link
+                  to="/mac-hud"
+                  onClick={() => trackEvent('mac_hud_promo_clicked', { location: 'shortcut_page', app: slug })}
+                  className={`text-[14px] font-medium no-underline hover:underline ${APP_STORE_URL ? 'text-theme-accent-text/80' : 'inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-theme-base text-theme-text'}`}
+                >
+                  {APP_STORE_URL ? `Learn how KeyShortcut works with ${app.displayName} →` : `Learn how KeyShortcut works with ${app.displayName}`}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       <FaqSchema app={app} platformName={platformName} />
       <BreadcrumbSchema appName={app.displayName} platformName={platformName} platformId={platform} slug={slug} />
