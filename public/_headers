@@ -4,3 +4,10 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+# Files under /assets/ carry a hash of their content in the name (root-Ogupc5Q_.js):
+# a changed file gets a new name, so a browser may keep each one for a year.
+# Only /assets/. HTML, /data/*.json, icons, OG images, sitemaps and llms.txt keep
+# their name when they change and must not get this rule.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
