@@ -70,7 +70,7 @@
 
 <h2>Network Access</h2>
 <p>KeyShortcut connects to Supabase (our database provider) to download shortcut data. These requests are read-only and keep your shortcut library up to date. No personal data, device identifiers, or usage information is sent. Without a connection, the app uses its built-in and cached shortcuts.</p>
-<p>The app also uses Apple's MetricKit framework for anonymized crash reporting (see Apple Diagnostics below). It makes no other network requests.</p>
+<p>The app also registers with Apple's MetricKit framework (see Apple Diagnostics below). It makes no other network requests.</p>
 
 <h2>Local Storage</h2>
 <p>KeyShortcut stores your preferences locally on your device using macOS UserDefaults within the app sandbox. This includes:</p>
@@ -88,7 +88,7 @@
 <p><strong>Active App Detection</strong> (optional, off by default) reads only the bundle identifier of the frontmost app, using standard macOS APIs, to show relevant shortcuts. No window content is accessed.</p>
 
 <h2>Apple Diagnostics</h2>
-<p>KeyShortcut uses Apple's MetricKit framework, which allows Apple to collect anonymized crash reports and performance metrics through the standard macOS diagnostics pipeline. This data is processed by Apple, not by us. You can control this in System Settings > Privacy & Security > Analytics & Improvements.</p>
+<p>The app registers with Apple's MetricKit framework. The released app does not read, store or send what it receives. This data is processed by Apple, not by us. You can control this in System Settings > Privacy & Security > Analytics & Improvements.</p>
 
 <h2>Children's Privacy</h2>
 <p>KeyShortcut does not collect any data from any user, including children.</p>

@@ -396,7 +396,7 @@ export const CONTENT = {
           id: 'privacy',
           content: [
             'The KeyShortcut app does not collect, store, or transmit any personal data. No analytics or tracking frameworks are included in the app.',
-            'The app downloads shortcut data from Supabase (read-only). No personal data or device identifiers are sent. Apple MetricKit is used for anonymized crash reports.',
+            'The app downloads shortcut data from Supabase (read-only). No personal data or device identifiers are sent. The app registers with Apple\'s MetricKit framework. The released app does not read, store or send what it receives.',
             'All user preferences (favorites, custom shortcuts, window position) are stored locally on your device using macOS UserDefaults.',
             'KeyShortcut does not request Accessibility permission and does not monitor your keystrokes. Active app detection reads only the identifier of the frontmost app.',
             'The keyshortcut.com website uses Cloudflare Web Analytics (cookie-free, no personal data) and Google AdSense. These services apply only to the website, not the app.',
@@ -739,7 +739,7 @@ export const CONTENT = {
           heading: 'Network Access',
           content: [
             { type: 'paragraph', text: 'The KeyShortcut macOS app connects to Supabase (our database provider) to sync shortcut data. These requests are read-only and used solely to keep your shortcut library up to date. No personal data, device identifiers, or usage information is sent in these requests.' },
-            { type: 'paragraph', text: 'The app also uses Apple\u2019s MetricKit framework for anonymized crash reporting (see Apple Diagnostics below). Apart from these two services, the app makes no other network requests.' },
+            { type: 'paragraph', text: 'The app also registers with Apple\u2019s MetricKit framework (see Apple Diagnostics below). Apart from these two services, the app makes no other network requests.' },
           ],
         },
         {
@@ -769,7 +769,7 @@ export const CONTENT = {
         {
           heading: 'Apple Diagnostics',
           content: [
-            { type: 'paragraph', text: 'KeyShortcut uses Apple\'s MetricKit framework, which allows Apple to collect anonymized crash reports and performance metrics through the standard macOS diagnostics pipeline. This data is processed by Apple, not by us. You can control this in System Settings > Privacy & Security > Analytics & Improvements.' },
+            { type: 'paragraph', text: 'The app registers with Apple\'s MetricKit framework. The released app does not read, store or send what it receives. This data is processed by Apple, not by us. You can control this in System Settings > Privacy & Security > Analytics & Improvements.' },
           ],
         },
         {
