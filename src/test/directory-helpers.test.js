@@ -10,6 +10,7 @@ import {
   groupByCategories,
   pickMoreApps,
 } from '../utils/platformHelpers'
+import { CONTENT } from '../data/content'
 
 // Minimal mock apps for testing helper functions (no file dependency)
 const mockApps = [
@@ -53,14 +54,36 @@ describe('platformHelpers', () => {
 
 describe('directoryHelpers', () => {
   it('getIconData returns valid icon data for known apps', () => {
-    const finderIcon = getIconData('Finder')
-    expect(finderIcon.type).toBe('image')
-    expect(finderIcon.src).toContain('finder.webp')
+    const safariIcon = getIconData('Safari')
+    expect(safariIcon.type).toBe('image')
+    expect(safariIcon.src).toContain('safari.webp')
 
     // Fallback for unknown app
     const unknownIcon = getIconData('SomeUnknownApp')
     expect(unknownIcon.type).toBe('fallback')
     expect(unknownIcon.label).toBe('S')
+  })
+
+  // The build downloads an icon only for an app in public/data that has an
+  // iconUrl (scripts/download-icons.mjs). Any other image path is a 404.
+  it('the /mac-hud app marquee asks only for icons the build downloads', () => {
+    const dataDir = join(process.cwd(), 'public/data')
+    const readJSON = (file) => JSON.parse(readFileSync(join(dataDir, file), 'utf-8'))
+    const downloaded = new Set()
+    for (const platform of readJSON('platforms.json')) {
+      for (const app of readJSON(`platforms/${platform.id}.json`).apps) {
+        if (app.iconUrl) downloaded.add(`/images/app-icons/${app.slug}.webp`)
+      }
+    }
+
+    const names = CONTENT.productPage.appCoverage.rows.flat()
+    expect(names.length).toBeGreaterThan(0)
+
+    const missing = names.filter((name) => {
+      const icon = getIconData(name)
+      return icon.type === 'image' && !downloaded.has(icon.src)
+    })
+    expect(missing).toEqual([])
   })
 })
 

@@ -1,9 +1,11 @@
 import { fallbackIcons } from '../data/fallbackIcons'
 
-/* ─── Image icons for apps with real macOS icons ─── */
+/* ─── Image icons for apps with real macOS icons ───
+   Only apps in public/data get an icon file at build time. A name listed here
+   without one (Finder and Linear were) makes the page request a missing file. */
 const imageIcons = {
   // Apple apps
-  'Finder': 'finder', 'Mail': 'mail', 'Notes': 'notes', 'Calendar': 'calendar',
+  'Mail': 'mail', 'Notes': 'notes', 'Calendar': 'calendar',
   'Reminders': 'reminders', 'Photos': 'photos', 'Preview': 'preview',
   'Pages': 'pages', 'Numbers': 'numbers', 'Keynote': 'keynote',
   'Messages': 'messages', 'Music': 'music', 'Safari': 'safari',
@@ -32,7 +34,7 @@ const imageIcons = {
   'Zoom': 'zoom', 'Teams': 'teams', 'Gmail': 'gmail',
   // Productivity
   '1Password': '1password', 'Notion': 'notion', 'Obsidian': 'obsidian',
-  'Things': 'things', 'Todoist': 'todoist', 'Linear': 'linear',
+  'Things': 'things', 'Todoist': 'todoist',
   'Raycast': 'raycast', 'Jira': 'jira', 'Trello': 'trello',
   'Asana': 'asana', 'Click Up': 'clickup', 'ClickUp': 'clickup', 'Bear': 'bear',
   'WordPress': 'wordpress', 'Confluence': 'confluence', 'GitLab': 'gitlab',
