@@ -9,8 +9,8 @@ export default {
   relatedSlugs: ['keyboard-shortcuts-efficiency', 'keyboard-shortcuts-productivity-guide'],
   relatedApps: [
     { label: 'Chrome Shortcuts', to: '/macos/chrome' },
-    { label: 'VS Code Shortcuts', to: '/macos/vs-code' },
-    { label: 'Finder Shortcuts', to: '/macos/finder' },
+    { label: 'VS Code Shortcuts', to: '/macos/vscode' },
+    { label: 'macOS and Finder Shortcuts', to: '/macos/macos' },
   ],
   sections: [
     {

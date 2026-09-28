@@ -8,8 +8,8 @@ export default {
   category: 'Productivity',
   relatedSlugs: ['keyboard-shortcuts-efficiency', 'keyboard-shortcut-tools'],
   relatedApps: [
-    { label: 'Finder Shortcuts', to: '/macos/finder' },
-    { label: 'VS Code Shortcuts', to: '/macos/vs-code' },
+    { label: 'macOS and Finder Shortcuts', to: '/macos/macos' },
+    { label: 'VS Code Shortcuts', to: '/macos/vscode' },
     { label: 'Slack Shortcuts', to: '/macos/slack' },
   ],
   sections: [

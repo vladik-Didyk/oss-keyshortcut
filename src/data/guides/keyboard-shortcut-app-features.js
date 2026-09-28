@@ -9,7 +9,7 @@ export default {
   relatedSlugs: ['keyboard-shortcut-tools', 'shortcut-collections'],
   relatedApps: [
     { label: 'Figma Shortcuts', to: '/macos/figma' },
-    { label: 'VS Code Shortcuts', to: '/macos/vs-code' },
+    { label: 'VS Code Shortcuts', to: '/macos/vscode' },
   ],
   sections: [
     {

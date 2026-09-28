@@ -9,7 +9,7 @@ export default {
   relatedSlugs: ['universal-shortcuts-all-platforms', 'keyboard-shortcuts-productivity-guide'],
   relatedApps: [
     { label: 'Linux Shortcuts', to: '/linux' },
-    { label: 'VS Code Linux Shortcuts', to: '/linux/vs-code' },
+    { label: 'VS Code Linux Shortcuts', to: '/linux/vscode' },
     { label: 'Chrome Linux Shortcuts', to: '/linux/chrome' },
   ],
   sections: [

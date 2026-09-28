@@ -8,7 +8,7 @@ export default {
   category: 'Tools',
   relatedSlugs: ['keyboard-shortcut-app-features', 'personalized-shortcut-workflow'],
   relatedApps: [
-    { label: 'VS Code Shortcuts', to: '/macos/vs-code' },
+    { label: 'VS Code Shortcuts', to: '/macos/vscode' },
     { label: 'Figma Shortcuts', to: '/macos/figma' },
     { label: 'Chrome Shortcuts', to: '/macos/chrome' },
   ],

@@ -8,7 +8,7 @@ export default {
   category: 'Productivity',
   relatedSlugs: ['universal-shortcuts-all-platforms', 'keyboard-shortcuts-efficiency'],
   relatedApps: [
-    { label: 'VS Code Shortcuts', to: '/macos/vs-code' },
+    { label: 'VS Code Shortcuts', to: '/macos/vscode' },
     { label: 'Figma Shortcuts', to: '/macos/figma' },
     { label: 'Notion Shortcuts', to: '/macos/notion' },
     { label: 'Chrome Shortcuts', to: '/macos/chrome' },

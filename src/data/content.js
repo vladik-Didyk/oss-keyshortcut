@@ -567,7 +567,7 @@ export const CONTENT = {
       if (count) {
         items.push({
           question: `How many keyboard shortcuts does ${name} have on ${platformName}?`,
-          answer: `${name} has ${count} keyboard shortcuts on ${platformName}, organized into ${sections.length} sections${sectionNames.length ? ': ' + sectionNames.join(', ') + ', and more' : ''}. This page lists all of them with searchable, organized shortcut tables.`,
+          answer: `${name} has ${count} keyboard shortcuts on ${platformName}, organized into ${sections.length} ${sections.length === 1 ? 'section' : 'sections'}${sectionNames.length ? ': ' + sectionNames.join(', ') + (sections.length > sectionNames.length ? ', and more' : '') : ''}. This page lists all of them with searchable, organized shortcut tables.`,
         })
       }
 
