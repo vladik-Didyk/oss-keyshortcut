@@ -977,6 +977,42 @@ export const CONTENT = {
       byEmailNote: 'Card payment for this option is being set up. The button opens an email to me.',
     },
 
+    // Questions a sponsor asks before paying. Answer each one in plain words,
+    // and say so when something is not known.
+    faq: {
+      title: 'Questions',
+      items: ({ slotPages, appPages, email, days }) => [
+        {
+          q: 'Where exactly does my card appear?',
+          a: `In the middle of the shortcut list on an app page, after the second group of shortcuts, on phones and on desktop. It carries the label "Sponsored". ${slotPages} of the ${appPages} app pages are long enough to hold it.`,
+        },
+        {
+          q: 'How many people will click it?',
+          a: `I don’t know yet. The site gets ${SPONSOR_AUDIENCE.monthlyVisitors} unique visitors a month (${SPONSOR_AUDIENCE.source}, ${SPONSOR_AUDIENCE.period}), but the slot is new and has no click history. Your link carries ?ref=keyshortcut, so you can count the clicks yourself from the first day.`,
+        },
+        {
+          q: 'Which page should I pick?',
+          a: 'The page of the app your customers already use, or one close to it. If your product works with many apps, the whole site costs less than four single pages.',
+        },
+        {
+          q: 'Can I change my text or link later?',
+          a: `Yes. Email the new text or link to ${email}. It is live within ${days} business days.`,
+        },
+        {
+          q: 'How do I cancel?',
+          a: `Email ${email}. I stop the payments within ${days} business days, and your card stays up until the end of the month you paid for.`,
+        },
+        {
+          q: 'Will you review my product or change the shortcuts for me?',
+          a: 'No. The card is the only thing for sale. Which shortcuts are listed, and how they are described, does not depend on who sponsors the site.',
+        },
+        {
+          q: 'Do I get a receipt?',
+          a: `Stripe emails a receipt for every payment. If you need an invoice with your company details on it, email ${email}.`,
+        },
+      ],
+    },
+
     contact: (email) => `Questions first? Write to ${email}.`,
   },
 

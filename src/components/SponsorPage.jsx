@@ -102,6 +102,17 @@ export default function SponsorPage({ stats, offer = SPONSOR_OFFER, sitewideOpen
           <BulletList items={c.rules.items} />
         </Section>
 
+        <Section title={c.faq.title}>
+          <dl>
+            {c.faq.items({ ...stats, email: SPONSOR_EMAIL, days: offer.goLiveBusinessDays }).map(({ q, a }) => (
+              <div key={q} className="mb-5">
+                <dt className="text-[16px] font-semibold text-theme-text mb-1">{q}</dt>
+                <dd className="text-theme-muted leading-relaxed m-0">{a}</dd>
+              </div>
+            ))}
+          </dl>
+        </Section>
+
         <p className="text-theme-muted leading-relaxed">
           <a
             href={`mailto:${SPONSOR_EMAIL}`}

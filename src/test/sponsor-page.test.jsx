@@ -191,9 +191,13 @@ describe('SponsorPage', () => {
 
   it('prints the visitor figure together with its source and period', () => {
     renderPage({ offer: NO_LINKS, sitewideOpen: true })
-    const line = screen.getByText(new RegExp(SPONSOR_AUDIENCE.monthlyVisitors.replace('+', '\\+')))
-    expect(line).toHaveTextContent(SPONSOR_AUDIENCE.source)
-    expect(line).toHaveTextContent(SPONSOR_AUDIENCE.period)
+    // Wherever the figure appears, its source and period appear with it.
+    const lines = screen.getAllByText(new RegExp(SPONSOR_AUDIENCE.monthlyVisitors.replace('+', '\\+')))
+    expect(lines.length).toBeGreaterThanOrEqual(1)
+    for (const line of lines) {
+      expect(line).toHaveTextContent(SPONSOR_AUDIENCE.source)
+      expect(line).toHaveTextContent(SPONSOR_AUDIENCE.period)
+    }
   })
 
   it('says that click numbers are not known yet', () => {
@@ -224,7 +228,7 @@ describe('SponsorPage', () => {
     expect(sitewide).toHaveAttribute('target', '_blank')
     expect(sitewide.getAttribute('rel')).toContain('noopener')
     expect(screen.queryByText(CONTENT.sponsorPage.cta.byEmailNote)).not.toBeInTheDocument()
-    expect(screen.getByText(/live within 2 business days/)).toBeInTheDocument()
+    expect(screen.getByText(CONTENT.sponsorPage.steps.items({ email: SPONSOR_EMAIL, days: 2 })[2])).toBeInTheDocument()
   })
 
   it('shows the half-price line only when a promotion code is set', () => {
@@ -241,6 +245,27 @@ describe('SponsorPage', () => {
     expect(screen.queryByRole('link', { name: CONTENT.sponsorPage.cta.sitewide(99) })).not.toBeInTheDocument()
     expect(screen.getByText(CONTENT.sponsorPage.price.taken)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: CONTENT.sponsorPage.cta.page(29) })).toBeInTheDocument()
+  })
+
+  it('answers the questions a sponsor asks, in plain words', () => {
+    renderPage({ offer: NO_LINKS, sitewideOpen: true })
+    const items = CONTENT.sponsorPage.faq.items({ ...STATS, email: SPONSOR_EMAIL, days: 2 })
+    expect(items.length).toBeGreaterThanOrEqual(6)
+    for (const { q, a } of items) {
+      expect(q.endsWith('?')).toBe(true)
+      expect(screen.getByText(q)).toBeInTheDocument()
+      expect(screen.getByText(a)).toBeInTheDocument()
+      expect(a.length).toBeLessThan(420)
+    }
+  })
+
+  it('admits that the click rate is not known', () => {
+    const clicks = CONTENT.sponsorPage.faq
+      .items({ ...STATS, email: SPONSOR_EMAIL, days: 2 })
+      .find((item) => item.q.includes('click'))
+    expect(clicks.a.startsWith('I don\u2019t know yet.')).toBe(true)
+    expect(clicks.a).toContain(SPONSOR_AUDIENCE.source)
+    expect(clicks.a).toContain(SPONSOR_AUDIENCE.period)
   })
 
   it('lists what is refused', () => {
