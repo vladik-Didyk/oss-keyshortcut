@@ -1,0 +1,6 @@
+# keysticker.app (the Mac app's old name) now redirects to keyshortcut.com.
+# Deployed to the Cloudflare Pages project "keysticker" (production branch main).
+# First match wins: the homepage goes to the Mac app page, every other path to
+# the same path on keyshortcut.com. 301 = permanent.
+/   https://keyshortcut.com/mac-hud  301
+/*  https://keyshortcut.com/:splat   301

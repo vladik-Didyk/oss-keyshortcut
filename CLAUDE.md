@@ -245,6 +245,8 @@ pnpm run deploy           # Build + deploy the working tree as-is (uncommitted c
 
 A push to `main` also deploys, through CI. All ~175 routes are pre-rendered as static HTML. No Node.js server needed. Traps (arm64 workerd, stale OAuth token, `--branch=main`): `~/Desktop/Developing/toolbox/playbooks/2026-09-24-wrangler-pages-deploy-traps.md`.
 
+**keysticker.app** (the Mac app's old name, Pages project `keysticker`) only redirects to keyshortcut.com since 2026-09-27: `/` → `/mac-hud`, other paths → same path. Source and deploy command: `deploy/keysticker-app/`.
+
 **`/privacy` is served from `public/privacy.html`**, not from the pre-rendered React page (Cloudflare prefers `privacy.html`). It is also the Mac App Store privacy URL. Edit both it and `content.js` together.
 
 Cloudflare Pages config files in `public/`:
