@@ -4,7 +4,8 @@
 // {{Action name}} is replaced with that page's own keys (see src/utils/appCopy.js),
 // so write action names exactly as they appear in public/data. An action a
 // platform doesn't have renders as plain text. src/test/app-notes.test.js checks
-// that every placeholder resolves on the app's main platform.
+// that every placeholder resolves on every page the note shows on, and that a
+// note names no row that is listed twice or shares its keys with another action.
 //
 // `sections` (optional) lists the section names the text mentions. A note is
 // used only on a page that has those sections, and the test checks each name
@@ -15,6 +16,17 @@
 //
 // Rules: facts about how the app's shortcuts work, no invented numbers or claims.
 // Never type a key by hand: name the action and let the page show its keys.
+// Say what a shortcut does only as far as its name says it. A statement about
+// keys ("the same letter", "adds Shift") must hold on every page the note shows on.
+
+// Postman on macOS and on Windows shares its tips. The overview and the
+// essentials differ: the Windows row for "Send request" shows a Mac key symbol,
+// so the Windows note (in APP_NOTES_BY_PLATFORM) does not name it.
+const POSTMAN_TIPS = [
+  'In Tabs, the two bracket keys switch tabs: {{Switch to previous tab}} and {{Switch to next tab}} differ only in the bracket.',
+  'Shift added to {{New tab}} gives {{Reopen closed tab}}, and added to {{Save request}} it gives {{Save as}}.',
+  '{{Send and download response}} and {{Save request}} share a letter. The first has one modifier more.',
+]
 
 export const APP_NOTES = {
   vscode: {
@@ -958,6 +970,363 @@ export const APP_NOTES = {
     essentials: ['Save Changes', 'Insert New Block After', 'Duplicate Selected Block(s)', 'Move Selected Block(s) Up', 'Open Block List View', 'Convert Text to Link'],
     sections: ['Global', 'Block', 'Text Formatting'],
   },
+
+  // ─── Notes for the pages that showed only the everyday block (2026-09-28) ───
+  // Each statement about keys, sections and "every / most / only" was checked
+  // by script against the data of every page the note shows on.
+
+  acrobat: {
+    overview:
+      'Several Acrobat shortcuts that cycle through tools use the letter of one tool with Shift added: {{Cycle through zoom tools}} and {{Marquee Zoom tool}}, {{Cycle form tools}} and {{Text Field tool}}, {{Cycle drawing markup tools}} and {{Current drawing markup tool}}. Other tools are single letters as well, such as {{Pan (Hand) tool}}, {{Select tool}}, {{Crop tool}} and {{Link tool}} in Tools and Selection.',
+    tips: [
+      'In Navigation and Pages, {{Go to first page}} and {{Go to last page}} use the keys of {{Go to previous page}} and {{Go to next page}} with one modifier added.',
+      'The five Accessibility shortcuts for reading out loud share their modifiers and differ in the letter, from {{Activate Read out loud}} to {{Stop reading out loud}}.',
+    ],
+    essentials: ['Select tool', 'Pan (Hand) tool', 'Find in document', 'Go To Page', 'Add a comment tool', 'Go to next page'],
+    sections: ['Tools and Selection', 'Navigation and Pages', 'Accessibility'],
+  },
+
+  'adobe-xd': {
+    overview:
+      'In Layers, the two bracket keys are used four times: {{Bring Forward}} and {{Send Backward}} with one modifier, {{Bring to Front}} and {{Send to Back}} with Shift added. The section also has {{Group}}, {{Ungroup}}, {{Lock/Unlock}}, {{Make Component}} and {{Make Repeat Grid}}. In Tools, every Adobe XD shortcut is a single letter, such as {{Select}}, {{Rectangle}}, {{Pen Tool}}, {{Text}} and {{Artboard}}.',
+    tips: [
+      'Every Canvas shortcut uses the same single modifier. {{Zoom to Fit All}}, {{Zoom to 100%}} and {{Zoom to Selection}} add a number key, and {{Zoom In}} and {{Zoom Out}} add the plus and minus keys.',
+      'Shift turns {{Group}} into {{Ungroup}} and {{Undo}} into {{Redo}}.',
+    ],
+    essentials: ['Select', 'Rectangle', 'Text', 'Artboard', 'Group', 'Make Component'],
+    sections: ['Layers', 'Tools', 'Canvas'],
+  },
+
+  canva: {
+    overview:
+      'Four Canva shortcuts add an element with a single letter: {{Add Text Box}}, {{Add Rectangle}}, {{Add Circle}} and {{Add Line}}. The first is in Text, with {{Bold}}, {{Italic}} and {{Underline}}. The other three are in Arrangement, with {{Group}}, {{Ungroup}} and the four shortcuts from {{Bring Forward}} to {{Send to Back}}.',
+    tips: [
+      'In Arrangement, {{Bring to Front}} and {{Send to Back}} are {{Bring Forward}} and {{Send Backward}} with one more modifier.',
+      '{{Increase Font Size}} and {{Decrease Font Size}} use the period and comma keys with the same two modifiers.',
+      'In View, {{Zoom to Fit}} uses the keys of {{Actual Size}} with Shift added.',
+    ],
+    essentials: ['Add Text Box', 'Add Rectangle', 'Duplicate', 'Group', 'Add New Page', 'Zoom to Fit'],
+    sections: ['Text', 'Arrangement', 'View'],
+  },
+
+  gimp: {
+    overview:
+      'No GIMP shortcut in Tools needs more than a letter and Shift: {{Rectangle select}}, {{Paintbrush}}, {{Pencil}}, {{Gradient}} and {{Text}} are single letters, and {{Eraser}}, {{Bucket fill}}, {{Rotate}}, {{Scale}} and {{Perspective}} are a letter with Shift. In Image & Layers, {{New layer}} and {{Duplicate layer}} share their two modifiers, and {{Flatten image}} adds Shift to the keys of {{Merge down}}.',
+    tips: [
+      '{{Zoom in}} and {{Zoom out}} are the plus and minus keys with no modifier.',
+      'In Select, Shift and the keys of {{Select all}} give {{Select none}}.',
+      'In File, {{Open image}} and {{Open as layers}} share a letter, and the second has one modifier more.',
+    ],
+    essentials: ['Rectangle select', 'Paintbrush', 'Eraser', 'New layer', 'Export as', 'Fit image in window'],
+    sections: ['Tools', 'Image & Layers', 'Select', 'File'],
+  },
+
+  godot: {
+    overview:
+      'Three save shortcuts in the Godot Engine list use one letter and differ only in their modifiers: {{Save scene}}, {{Save scene as}} and {{Save all scenes}}. In 2D/3D Viewport, {{Select mode}}, {{Move mode}}, {{Rotate mode}} and {{Scale mode}} are single letters. Scene & Nodes has {{Rename node}} on a function key and {{Delete selected node}} on a single key. Debug & Run has {{Run project}}, {{Run current scene}}, {{Stop running}} and {{Toggle breakpoint}}.',
+    tips: [
+      'In Script Editor, the up and down arrow keys with one modifier move a line: {{Move line up}} and {{Move line down}}.',
+      '{{Toggle comment}} and {{Go to line}}, also in Script Editor, use one modifier and a letter.',
+    ],
+    essentials: ['Run project', 'Run current scene', 'Add node', 'Save scene', 'Move mode', 'Toggle comment'],
+    sections: ['2D/3D Viewport', 'Scene & Nodes', 'Debug & Run', 'Script Editor'],
+  },
+
+  inkscape: {
+    overview:
+      'Four Object shortcuts raise or lower without a modifier: {{Raise to top}} and {{Lower to bottom}} use the Home and End keys, {{Raise one step}} and {{Lower one step}} the Page Up and Page Down keys. Every Inkscape shortcut in Tools is a single key, such as {{Selector tool}}, {{Node editor}}, {{Rectangle tool}}, {{Text tool}} and {{Pen (freehand) tool}}.',
+    tips: [
+      'In Path, {{Union}}, {{Difference}} and {{Intersection}} use the plus, minus and asterisk keys with the same modifier.',
+      '{{Duplicate}} and {{Clone}} use one letter, each with a different single modifier.',
+      '{{Paste in place}} adds one modifier to the keys of {{Paste}}.',
+    ],
+    essentials: ['Selector tool', 'Node editor', 'Rectangle tool', 'Text tool', 'Group selection', 'Export PNG image'],
+    sections: ['Object', 'Tools', 'Path'],
+  },
+
+  jupyter: {
+    overview:
+      'Most Command Mode shortcuts in the Jupyter Notebook list are a single key, and none needs more than Shift. Among the single letters are {{Insert cell above}}, {{Insert cell below}}, {{Change cell to Code}}, {{Change cell to Markdown}} and {{Copy selected cells}}. {{Enter edit mode}} is listed in Command Mode and {{Enter command mode}} in Edit Mode. Edit Mode also has three shortcuts that run a cell.',
+    tips: [
+      '{{Run cell}}, {{Run cell and select below}} and {{Run cell and insert below}} use the same key, each with a different modifier.',
+      '{{Paste cells above}} is {{Paste cells below}} with Shift added.',
+      '{{Delete selected cell}}, {{Interrupt kernel}} and {{Restart kernel}} show one key twice.',
+    ],
+    essentials: ['Enter edit mode', 'Enter command mode', 'Run cell', 'Run cell and select below', 'Insert cell below', 'Save notebook'],
+    sections: ['Command Mode', 'Edit Mode'],
+  },
+
+  matlab: {
+    overview:
+      'Every MATLAB shortcut in Running and Debugging is a function key, alone or with Shift. {{Run current script}}, {{Run selected section}}, {{Step over}}, {{Step into}} and {{Set/clear breakpoint}} need no modifier. Command Window has two shortcuts, {{Recall previous command}} and {{Recall next command}}, on the up and down arrow keys. Every Navigation shortcut is one modifier and a letter, such as {{Go to line}}, {{Open function definition}} and {{Evaluate selection in Command Window}}.',
+    tips: [
+      'With Shift, the key of {{Step into}} becomes {{Step out}} and the key of {{Run current script}} becomes {{Stop debugging}}.',
+      'In Editing, the two bracket keys change the indent: {{Increase indent}} and {{Decrease indent}} share one modifier.',
+    ],
+    essentials: ['Run current script', 'Run selected section', 'Set/clear breakpoint', 'Step over', 'Go to line', 'Evaluate selection in Command Window'],
+    sections: ['Running and Debugging', 'Command Window', 'Navigation', 'Editing'],
+  },
+
+  opera: {
+    overview:
+      'Opera puts {{Go to tab 1}}, {{Go to tab 2}} and {{Go to tab 3}} on the first three number keys and {{Go to last tab}} on the nine key, all with one modifier. Window has {{New window}} and {{New private window}}, and also {{Toggle bookmarks bar}}, {{Open history}} and {{Open downloads}}.',
+    tips: [
+      'Several shortcuts are another shortcut with Shift added: {{Reopen last closed tab}} and {{New tab}}, {{Hard reload (ignore cache)}} and {{Reload page}}, {{Find previous}} and {{Find next}}.',
+      '{{Close window}} uses the letter of {{Close current tab}} with Shift added.',
+      'In Developer Tools, {{Open Developer Tools}} and {{Open JavaScript console}} share their modifiers and differ in the letter.',
+    ],
+    essentials: ['Focus address bar', 'New tab', 'Close current tab', 'Reopen last closed tab', 'New private window', 'Find on page'],
+    sections: ['Window', 'Developer Tools'],
+  },
+
+  postman: {
+    overview:
+      'Request has two shortcuts in the Postman list, {{Send request}} and {{Send and download response}}. General includes {{New request}}, {{Open / Import}}, {{Save request}} and {{Save as}}. Sidebar and Navigation has {{Toggle sidebar}}, {{Open command palette}}, {{Search}} and {{View keyboard shortcuts}}, all with the same single modifier.',
+    tips: POSTMAN_TIPS,
+    essentials: ['Send request', 'New request', 'Save request', 'New tab', 'Open command palette', 'Search'],
+    sections: ['Request', 'General', 'Sidebar and Navigation', 'Tabs'],
+  },
+
+  stata: {
+    overview:
+      'The Command Window section of the Stata list includes {{Previous Command}}, {{Next Command}}, {{Clear Command}} and {{Autocomplete}}. Do-file Editor has {{Execute Selection/File}} and text commands such as {{Toggle Comment}}, {{Go to Line}}, {{Increase Indent}} and {{Decrease Indent}}. General has {{Focus Results}}, {{Print}} and {{Close Window}}.',
+    tips: [
+      '{{Focus Command Window}} and {{Focus Results}} use the first two number keys with the same modifier.',
+      '{{Decrease Indent}} uses the keys of {{Increase Indent}} plus Shift.',
+      '{{Clear Command}} and {{Autocomplete}} need no modifier.',
+    ],
+    essentials: ['Execute Selection/File', 'Previous Command', 'Next Command', 'Focus Command Window', 'Toggle Comment', 'New Variable'],
+    sections: ['Command Window', 'Do-file Editor', 'General'],
+  },
+
+  'tor-browser': {
+    overview:
+      '{{New Identity (New Tor Circuit)}} and {{Clear Recent History}} make up the Privacy and Security section, and both use the same two modifiers. In Navigation, {{Force Reload}} is {{Reload}} with Shift, and {{Stop Loading}} is a single key. Tabs and Windows includes {{New Private Window}}, {{Reopen Closed Tab}} and {{Go to Last Tab}}.',
+    tips: [
+      '{{Print}} and {{New Private Window}} share a letter, and the second adds Shift.',
+      'In Developer Tools, {{Web Console}}, {{Network Monitor}} and {{Responsive Design Mode}} use the same modifiers with different letters.',
+      'In Tabs and Windows, {{Previous Tab}} is {{Next Tab}} with Shift added.',
+    ],
+    essentials: ['Focus Address Bar', 'New Tab', 'Reopen Closed Tab', 'New Private Window', 'Find on Page', 'New Identity (New Tor Circuit)'],
+    sections: ['Privacy and Security', 'Navigation', 'Tabs and Windows', 'Developer Tools'],
+  },
+
+  unity: {
+    overview:
+      'The Windows section of the Unity list has a shortcut for each of {{Scene View}}, {{Game View}}, {{Inspector}}, {{Hierarchy}}, {{Project}} and {{Console}}. The first five use the number keys in order and {{Console}} uses a letter, all with the same two modifiers. Every shortcut in Tools is a single letter: {{Pan/View}}, {{Move}}, {{Rotate}}, {{Scale}}, {{Rect}} and {{Transform}}. Play has {{Play/Pause}}, {{Pause}} and {{Step Frame}} on one letter with different modifiers.',
+    tips: [
+      '{{Lock View}} is the letter of {{Frame Selected}} with Shift.',
+      'In Edit, {{Rename}} is a function key without a modifier.',
+    ],
+    essentials: ['Move', 'Rotate', 'Scale', 'Frame Selected', 'Play/Pause', 'Save Scene'],
+    sections: ['Windows', 'Tools', 'Play', 'Edit'],
+  },
+
+  'unreal-engine': {
+    overview:
+      'No Unreal Engine shortcut in Viewport or in Snapping uses a modifier. Viewport has {{Move Mode}}, {{Rotate Mode}}, {{Scale Mode}}, {{Cycle Modes}} and {{Focus Selected}}. Snapping has {{Decrease Grid}} and {{Increase Grid}} on the two bracket keys, and {{Toggle Perspective}} and {{Toggle Lighting}} on letters. Blueprint includes {{Compile}} and {{Create Comment}}, and Content Browser has {{New Asset}} and {{Edit Asset}}.',
+    tips: [
+      'In Level Editor, {{Snap to Floor}} is the End key and {{Delete}} is the Delete key, both without a modifier.',
+      '{{Ungroup}} has the keys of {{Group}} and Shift.',
+      'In Blueprint, {{Compile}} is a function key.',
+    ],
+    essentials: ['Move Mode', 'Rotate Mode', 'Scale Mode', 'Focus Selected', 'Compile', 'Snap to Floor'],
+    sections: ['Viewport', 'Snapping', 'Blueprint', 'Content Browser', 'Level Editor'],
+  },
+
+  webflow: {
+    overview:
+      'The four Breakpoints shortcuts are the number keys from one to four, without a modifier: {{Desktop}}, {{Tablet}}, {{Mobile Landscape}} and {{Mobile Portrait}}. In Elements, the Webflow shortcuts {{Select Parent}} and {{Select Child}} use the up and down arrow keys with one modifier, and {{Previous Sibling}} and {{Next Sibling}} use the left and right arrow keys alone. Preview has {{Preview Mode}}, {{Show Shortcuts}} and {{Publish Site}}.',
+    tips: [
+      '{{Publish Site}} and {{Add/Edit Class}} use the same key. {{Publish Site}} has Shift as well.',
+      'In Canvas, {{Hide/Show Element}} is a single letter and {{Delete Element}} is the Delete key.',
+    ],
+    essentials: ['Quick Find', 'Select Parent', 'Select Child', 'Add/Edit Class', 'Preview Mode', 'Save'],
+    sections: ['Breakpoints', 'Elements', 'Preview', 'Canvas'],
+  },
+
+  arc: {
+    overview:
+      'In Quick Navigation, four Arc shortcuts use the arrow keys with the same two modifiers: {{Switch Tab Up}} and {{Switch Tab Down}} on the up and down keys, {{Previous Space}} and {{Next Space}} on the left and right keys. Everyday Use has shortcuts for tabs, such as {{Pin/Unpin Tab}}, {{Clear Unpinned Tabs}} and {{Reopen Closed Tab}}, and for the URL: {{Focus URL Bar}}, {{Copy URL}} and {{Copy URL as Markdown}}.',
+    tips: [
+      '{{New Window}}, {{New Incognito Window}} and {{Open Little Arc}} use one letter with different modifiers.',
+      '{{Copy URL as Markdown}} is {{Copy URL}} with one more modifier.',
+      '{{Add Split View}} and {{Close Split View}} use the plus and minus keys with the same two modifiers.',
+    ],
+    essentials: ['New Tab', 'Focus URL Bar', 'Pin/Unpin Tab', 'Open Little Arc', 'Add Split View', 'Next Space'],
+    sections: ['Quick Navigation', 'Everyday Use'],
+  },
+
+  brave: {
+    overview:
+      '{{Scroll Down a Screen}} and {{Browse Clickable Items Forward}} are single keys in the Navigation section of the Brave list, and Shift with the same keys gives {{Scroll Up a Screen}} and {{Browse Clickable Items Backward}}. In Text Editing, {{Previous Word}}, {{Next Word}} and {{Delete Previous Word}} share one modifier. The three Developer shortcuts, {{Developer Tools}}, {{View Page Source}} and {{JavaScript Console}}, share their modifiers.',
+    tips: [
+      'In Bookmarks, {{Bookmark All Tabs}} adds Shift to {{Add Bookmark}}.',
+      '{{Search the Web}} uses the letter of {{Find}} with one more modifier, and {{Page Setup}} does the same with the letter of {{Print}}.',
+      '{{Next Tab}} and {{Previous Tab}} use the right and left arrow keys with the same two modifiers.',
+    ],
+    essentials: ['New Tab', 'Reopen Closed Tab', 'Focus Address Bar', 'Private Window', 'Hard Reload (Ignore Cache)', 'Find'],
+    sections: ['Navigation', 'Text Editing', 'Developer', 'Bookmarks'],
+  },
+
+  edge: {
+    overview:
+      '{{Switch to Tab 1}} to {{Switch to Tab 8}} use the number keys in order with one modifier, and {{Switch to Last Tab}} uses the nine key. Favorites & History has {{Add Favorite}}, {{Save All Tabs as Favorites}}, {{Toggle Favorites Bar}} and {{Open History}}. Page Actions includes {{Read Aloud}} and {{Paste Without Formatting}}, and Downloads has one shortcut, {{Open Downloads}}.',
+    tips: [
+      'Two Edge shortcuts are a function key alone: {{Immersive Reader}} and {{Toggle Developer Tools}}.',
+      'In PDF, {{Rotate PDF Left}} and {{Rotate PDF Right}} use the two bracket keys with one modifier.',
+      '{{Save All Tabs as Favorites}} differs from {{Add Favorite}} only by Shift.',
+    ],
+    essentials: ['New Tab', 'Reopen Closed Tab', 'Focus Address Bar', 'InPrivate Window', 'Add Favorite', 'Find'],
+    sections: ['Favorites & History', 'Page Actions', 'Downloads', 'PDF'],
+  },
+
+  firefox: {
+    overview:
+      'Five Tools shortcuts share their modifiers and differ in the letter: {{Developer Tools}}, {{Web Console}}, {{Inspector}}, {{Network Monitor}} and {{Responsive Design Mode}}. Tools also has {{Take Screenshot}}, {{Task Manager}}, {{Page Info}} and {{Add-ons Manager}}. In Tabs & Windows, the Firefox shortcuts {{Reopen Closed Tab}} and {{Reopen Closed Window}} are {{New Tab}} and {{New Window}} with Shift added.',
+    tips: [
+      '{{Focus Address Bar}} and {{Focus Search Bar}} use one modifier and two different letters.',
+      'In Bookmarks & History, {{Toggle Bookmarks Toolbar}} and {{Bookmark All Tabs}} are {{Bookmarks Sidebar}} and {{Bookmark This Page}} with Shift.',
+      '{{Mute/Unmute Tab}} and {{Expand/Collapse Vertical Tabs}} are the only two shortcuts in the list that use their modifier.',
+    ],
+    essentials: ['New Tab', 'Reopen Closed Tab', 'Focus Address Bar', 'New Private Window', 'Find in Page', 'Take Screenshot'],
+    sections: ['Tools', 'Tabs & Windows', 'Bookmarks & History'],
+  },
+
+  vivaldi: {
+    overview:
+      'Quick Commands & Panels is a section of the Vivaldi list with two shortcuts: {{Quick Commands}}, and {{Toggle Panel}} on a function key. Tab Management includes {{New Tab}}, {{Close Tab}}, {{Reopen Closed Tab}}, {{Next Tab}}, {{Previous Tab}} and {{Last Tab}}. Zoom & View has the three zoom shortcuts and also {{Find In Page}} and {{Print}}.',
+    tips: [
+      'The three Developer shortcuts share their modifiers and differ in the letter.',
+      '{{Hard Reload}} is the Shift form of {{Reload}}, and {{Previous Tab}} is the Shift form of {{Next Tab}}.',
+    ],
+    essentials: ['Quick Commands', 'New Tab', 'Reopen Closed Tab', 'Focus Address Bar', 'New Private Window', 'Toggle Panel'],
+    sections: ['Quick Commands & Panels', 'Tab Management', 'Zoom & View', 'Developer'],
+  },
+
+  'davinci-resolve': {
+    overview:
+      'Every DaVinci Resolve shortcut in Playback is a single key. {{Play Forward}}, {{Play Reverse}} and {{Stop}} are letters, {{Previous Frame}} and {{Next Frame}} are the left and right arrow keys, and {{Previous Edit}} and {{Next Edit}} are the up and down arrow keys. Tools & Modes is single letters as well: {{Selection Mode}}, {{Trim Mode}}, {{Blade Mode}} and {{Dynamic Trim Mode}}.',
+    tips: [
+      'In Marking, {{Clear In}} and {{Clear Out}} use the letters of {{Mark In}} and {{Mark Out}} with one modifier added.',
+      '{{Ripple Delete}} is {{Delete Selection}} with Shift.',
+      'In Color Page, {{Add Serial Node}}, {{Add Parallel Node}} and {{Add Layer Node}} share one modifier and use the first letter of Serial, Parallel and Layer.',
+    ],
+    essentials: ['Play Forward', 'Stop', 'Split Clip', 'Mark In', 'Mark Out', 'Blade Mode'],
+    sections: ['Playback', 'Tools & Modes', 'Color Page', 'Marking'],
+  },
+
+  eclipse: {
+    overview:
+      'In the Java section of the Eclipse list, {{Rename (Refactor)}}, {{Extract Method}}, {{Extract Local Variable}}, {{Inline}} and {{Move (Refactor)}} share their modifiers and differ in the letter, and {{Refactor Menu}} uses the same modifiers. In Search, one letter with three sets of modifiers gives {{Search Declaration}}, {{Search References}} and {{Find in Workspace}}, and the section also has {{Open Search Dialog}}.',
+    tips: [
+      'In Window, {{Next Editor}}, {{Next View}} and {{Next Perspective}} use three function keys in a row with one modifier. Shift added gives {{Previous Editor}}, {{Previous View}} and {{Previous Perspective}}.',
+      'In Text Editing, {{Copy Lines Down}} and {{Copy Lines Up}} use the keys of {{Move Lines Down}} and {{Move Lines Up}} with one more modifier.',
+    ],
+    essentials: ['Content Assist', 'Quick Fix', 'Open Declaration', 'Organize Imports', 'Format', 'Quick Access'],
+    sections: ['Java', 'Search', 'Window', 'Text Editing'],
+  },
+
+  keynote: {
+    overview:
+      'Many Keynote shortcuts in Presenting are single letters, among them {{Show a black screen}}, {{Show a white screen}}, {{Show or hide the pointer}}, {{Display the slide number}} and {{Reset timer}}. Three others in that section use an arrow key with Shift: {{Go back to previous build}}, {{Advance to next slide without builds}} and {{Advance without animation}}. Slide Navigator includes {{Create a new slide}}, {{Move to the next slide}} and {{Move to the previous slide}}, which need no modifier.',
+    tips: [
+      '{{Show a black screen}} and {{Show a white screen}} use the first letter of the color.',
+      'In Objects, {{Ungroup selected objects}} and {{Unlock selected objects}} each add one modifier to {{Group selected objects}} and {{Lock selected objects}}.',
+    ],
+    essentials: ['Show or hide presenter notes', 'Show a black screen', 'Create a new slide', 'Group selected objects', 'Open a new comment', 'Add a row below'],
+    sections: ['Presenting', 'Slide Navigator', 'Objects'],
+  },
+
+  numbers: {
+    overview:
+      'Three Tables shortcuts in the Numbers list use the backslash key, each with different modifiers: {{Turn on autofill mode}}, {{Autofill from the row above}} and {{Autofill from the column before}}. The same section includes {{Turn Filters on or off}}, {{Apply sorting rules}}, {{Merge selected cells}} and {{Unmerge selected cells}}. General has the sheet shortcuts: {{Add a new sheet}}, and {{Switch to the previous sheet}} and {{Switch to the next sheet}} on the two brace keys.',
+    tips: [
+      '{{Insert the current date}} and {{Insert the current time}} share their modifiers and use the first letter of date and time.',
+      '{{Collapse selected category groups}} and {{Expand selected category groups}} use the eight and nine keys with one modifier.',
+    ],
+    essentials: ['Add a new sheet', 'Insert Table', 'Edit Cell', 'Turn on autofill mode', 'Turn Filters on or off', 'Apply sorting rules'],
+    sections: ['Tables', 'General'],
+  },
+
+  pages: {
+    overview:
+      '{{Align the text flush left}}, {{Center the text}} and {{Align the text flush right}} share one modifier in the Text Formatting section of the Pages list. The keys of {{Copy the selection}} and {{Paste the selection}}, with one modifier more, are {{Copy the paragraph style}} and {{Paste the paragraph style}}. General & View includes {{Insert Page Break}} and {{Show Formatting Characters}}. In Find & Edit, {{Find previous}} adds Shift to {{Find next}}, and {{Highlight Text}} uses two modifiers and a letter.',
+    tips: [
+      '{{Justify Text}} and {{Center the text}} share a key, and {{Justify Text}} has one modifier more.',
+      'In Tables, {{Delete selected rows}} and {{Delete selected columns}} use the Delete key with two modifiers, and differ in one of them.',
+    ],
+    essentials: ['Insert Page Break', 'Find', 'Highlight Text', 'Show Formatting Characters', 'Copy the paragraph style', 'Paste the paragraph style'],
+    sections: ['Text Formatting', 'General & View', 'Find & Edit', 'Tables'],
+  },
+
+  preview: {
+    overview:
+      'Scrolling in Preview needs no modifier: {{Scroll down a line}} and {{Scroll up a line}} are the down and up arrow keys, and {{Scroll down one screen}} and {{Scroll up one screen}} are the Page Down and Page Up keys. The same four keys with one modifier move by page or by document: {{Move to next page}}, {{Move to previous page}}, {{Move to next document in window}} and {{Move to previous document in window}}.',
+    tips: [
+      '{{Zoom all images in}}, {{Zoom all images out}} and {{Zoom all images to actual size}} add one modifier to {{Zoom In}}, {{Zoom Out}} and {{Actual Size}}.',
+      '{{Rotate Right}} and {{Rotate Left}} share one modifier and use the first letter of the direction.',
+    ],
+    essentials: ['Zoom to Fit', 'Rotate Right', 'Annotation Toolbar', 'Show Thumbnails', 'Move to next page', 'Remove the background'],
+  },
+
+  sketch: {
+    overview:
+      'Six Canvas shortcuts show or hide something with one modifier and a letter, such as {{Show/Hide Rulers}}, {{Show/Hide Grid}} and {{Show/Hide Layout Grid}}. Most Sketch shortcuts in Insert are single letters, such as {{Frame}}, {{Rectangle}}, {{Oval}}, {{Line}}, {{Vector}} and {{Text}}. In Shapes / Boolean, {{Union Shapes}}, {{Subtract Shapes}}, {{Intersect Shapes}} and {{Difference Shapes}} share their modifiers and differ in the letter.',
+    tips: [
+      '{{Zoom to 100%}}, {{Zoom to Fit}}, {{Zoom to Selection}} and {{Center Selection}} use the number keys from zero to three with one modifier.',
+      'In Style, {{Copy Style}} and {{Paste Style}} add one modifier to the keys of {{Copy}} and {{Paste}}.',
+      '{{Export All}} adds Shift to {{Export}}, and {{Duplicate Behind}} adds Shift to {{Duplicate}}.',
+    ],
+    essentials: ['Command Bar', 'Frame', 'Rectangle', 'Text', 'Group', 'Export'],
+    sections: ['Canvas', 'Insert', 'Shapes / Boolean', 'Style'],
+  },
+
+  'after-effects': {
+    overview:
+      'Every shortcut in Layer Properties (single-key reveals) is a single letter, such as {{Position}}, {{Scale}}, {{Rotation}}, {{Opacity}} and {{Anchor Point}}. The After Effects Tools section is single letters too, such as {{Selection Tool}}, {{Pen Tool}}, {{Hand Tool}} and {{Zoom Tool}}. In Panels, viewers, workspaces, the ten number keys with one modifier open or close a panel, from {{Open or close project panel}} to {{Open or close brushes panel}}.',
+    tips: [
+      '{{Easy ease selected keyframes}} is a function key alone. {{Easy ease selected keyframes in}} adds Shift, and {{Easy ease selected keyframes out}} adds one more modifier.',
+      'The five Fast previews shortcuts use the number keys from one to five with the same two modifiers, starting with {{Fast previews off}}.',
+    ],
+    essentials: ['Selection Tool', 'Position', 'Scale', 'Rotation', 'Opacity', 'New Composition'],
+    sections: ['Layer Properties (single-key reveals)', 'Tools', 'Panels, viewers, workspaces'],
+  },
+
+  // macOS. Vim on Linux names its actions differently and has its own note below.
+  vim: {
+    overview:
+      'Entering Insert Mode has three pairs, and in each pair the second shortcut adds Shift to the letter of the first: {{Insert Before Cursor}} and {{Insert At Line Start}}, {{Append After Cursor}} and {{Append At Line End}}, {{Open Line Below}} and {{Open Line Above}}. Movement starts with {{Move Left}}, {{Move Down}}, {{Move Up}} and {{Move Right}} on four letters. Visual Mode uses one letter for {{Visual Character}}, {{Visual Line}} and {{Visual Block}}.',
+    tips: [
+      '{{Delete Line}} and {{Yank Line}} show one letter twice.',
+      'In Save & Quit, {{Save}}, {{Quit}}, {{Save And Quit}} and {{Force Quit}} begin with a colon.',
+      'In Search, {{Next Match}} and {{Previous Match}} use one letter, the second with Shift.',
+    ],
+    essentials: ['Insert Before Cursor', 'Delete Line', 'Undo', 'Redo', 'Search Forward', 'Save And Quit'],
+    sections: ['Entering Insert Mode', 'Movement', 'Visual Mode', 'Save & Quit', 'Search'],
+  },
+
+  warp: {
+    overview:
+      'Most Warp shortcuts on this page are one modifier and one key, such as {{Command Palette}}, {{Split Pane}}, {{Clear Terminal}} and {{Search}}. {{Copy Output}} is the only one with two modifiers. {{Workflow Search}} is the only one without the modifier that the others share.',
+    tips: [
+      '{{Previous Block}} and {{Next Block}} use the up and down arrow keys with one modifier, the same one as {{New Tab}}.',
+      '{{Settings}} is the comma key with one modifier.',
+    ],
+    essentials: ['Command Palette', 'New Tab', 'Split Pane', 'Clear Terminal', 'Workflow Search', 'Copy Output'],
+  },
+
+  iterm: {
+    overview:
+      'The Tabs and Windows section of the iTerm2 list has a group of shortcuts for panes. {{Select Pane Above}}, {{Select Pane Below}}, {{Select Pane Left}} and {{Select Pane Right}} use the four arrow keys with the same two modifiers, and {{Next Pane}} and {{Previous Pane}} use the two bracket keys. In Cursor and editing, {{Set Mark}} and {{Jump to Mark}} use one modifier and the first letter of Mark and Jump.',
+    tips: [
+      'Shift changes {{Split Vertically}} into {{Split Horizontally}} and {{Fullscreen}} into {{Maximize Pane}}.',
+      '{{Move Tab Left}} and {{Move Tab Right}} add Shift to {{Previous Tab}} and {{Next Tab}}.',
+      '{{Split Horizontally (New Profile)}} and {{Split Vertically (New Profile)}} share their modifiers and use the first letter of the direction.',
+    ],
+    essentials: ['New Tab', 'Split Vertically', 'Split Horizontally', 'Next Pane', 'Clear Buffer', 'Paste History'],
+    sections: ['Tabs and Windows', 'Cursor and editing'],
+  },
 }
 
 // Discord on Windows and on Linux has the same sections and action names.
@@ -1009,12 +1378,126 @@ const SLACK_DESKTOP = {
   sections: ['Navigation', 'Messaging', 'Actions'],
 }
 
+// Firefox on Windows and on Linux has the same sections, actions and keys.
+const FIREFOX_DESKTOP = {
+  overview:
+    '{{Back}} and {{Forward}} use the left and right arrow keys with one modifier, and {{Reload (Override Cache)}} is {{Reload}} with Shift added. Both pairs are in Navigation, with {{Focus Address Bar}}. In Bookmarks & History, {{Bookmark Page}}, {{Open History}} and {{Open Downloads}} use one modifier and a letter, and {{Toggle Bookmarks}} and {{Clear Recent History}} use two modifiers.',
+  tips: [
+    'In Tabs, adding Shift changes {{New Tab}} into {{Reopen Closed Tab}} and {{Next Tab}} into {{Previous Tab}}.',
+    'In Page, {{Zoom In}}, {{Zoom Out}} and {{Reset Zoom}} use the plus, minus and zero keys with the same modifier.',
+  ],
+  essentials: ['New Tab', 'Close Tab', 'Reopen Closed Tab', 'Focus Address Bar', 'Find on Page', 'Bookmark Page'],
+  sections: ['Navigation', 'Tabs', 'Bookmarks & History', 'Page'],
+}
+
+// Chrome on Windows and on Linux: the note uses sections and actions both have.
+const CHROME_DESKTOP = {
+  overview:
+    'The Developer section has {{Developer Tools}} and {{Console}}, which share their modifiers, and {{Toggle DevTools}}, which is a function key alone. In Navigation, {{Go Back}} and {{Go Forward}} use the left and right arrow keys with one modifier, and {{Focus Address Bar}} and {{Hard Reload (Ignore Cache)}} are in the same section. In Tabs, {{Reopen Closed Tab}} differs from {{New Tab}} only by Shift, and {{Previous Tab}} differs from {{Next Tab}} in the same way.',
+  tips: [
+    'In Page, {{Zoom In}} and {{Zoom Out}} use the plus and minus keys, and {{Reset Zoom}} the zero key, all with one modifier.',
+    '{{Find on Page}}, {{Print}} and {{Bookmark This Page}} are one modifier and a letter.',
+  ],
+  essentials: ['New Tab', 'Close Tab', 'Reopen Closed Tab', 'Focus Address Bar', 'Find on Page', 'Bookmark This Page'],
+  sections: ['Developer', 'Tabs', 'Navigation', 'Page'],
+}
+
 // Notes for one platform only: APP_NOTES_BY_PLATFORM[platformId][slug].
 // For pages whose data names actions differently from the shared note, and for
 // apps that are not on macOS. Same shape and rules as APP_NOTES.
 export const APP_NOTES_BY_PLATFORM = {
   windows: {
     discord: DISCORD_DESKTOP,
+    firefox: FIREFOX_DESKTOP,
+    chrome: CHROME_DESKTOP,
+
+    // The macOS note without "Send request": that Windows row shows a Mac key symbol.
+    postman: {
+      overview:
+        'General includes {{New request}}, {{Open / Import}}, {{Save request}} and {{Save as}} in the Postman list, and Request includes {{Send and download response}}. Sidebar and Navigation has {{Toggle sidebar}}, {{Open command palette}}, {{Search}} and {{View keyboard shortcuts}}, all with the same single modifier.',
+      tips: POSTMAN_TIPS,
+      essentials: ['New request', 'Save request', 'Send and download response', 'New tab', 'Open command palette', 'Search'],
+      sections: ['General', 'Request', 'Sidebar and Navigation', 'Tabs'],
+    },
+
+    vscode: {
+      overview:
+        'In Search & Replace, Shift turns {{Find}} into {{Find in Files}} and {{Find and Replace}} into {{Replace in Files}}. In General, {{Command Palette}} adds Shift to the keys of {{Quick Open File}}. View has {{Explorer}}, {{Source Control}} and {{Extensions}}, which share their modifiers, and also {{Toggle Sidebar}} and {{Split Editor}}. Debug has {{Start Debugging}}, {{Stop Debugging}} and {{Toggle Breakpoint}}, all on function keys.',
+      tips: [
+        'In Editing, {{Move Line Up}} and {{Move Line Down}} use the up and down arrow keys, and {{Outdent Line}} and {{Indent Line}} the two bracket keys. Each pair has one modifier.',
+        'In Navigation, {{Previous Error}} adds Shift to the function key of {{Next Error/Warning}}.',
+      ],
+      essentials: ['Command Palette', 'Quick Open File', 'Toggle Terminal', 'Toggle Comment', 'Find in Files', 'Go to Symbol'],
+      sections: ['Search & Replace', 'General', 'View', 'Debug', 'Editing', 'Navigation'],
+    },
+
+    word: {
+      overview:
+        'Every Word shortcut on this page uses the same modifier, alone or with Shift. In Formatting, {{Left Align}}, {{Right Align}} and {{Justify}} add the first letter of their name, and {{Center Align}} adds another letter. Navigation has {{Go to Beginning}} and {{Go to End}} on the Home and End keys, and {{Go To Page}}. Editing includes {{Insert Hyperlink}} and {{Page Break}}.',
+      tips: [
+        '{{Increase Font Size}} and {{Decrease Font Size}} use the greater-than and less-than keys with two modifiers.',
+        'In View, {{Show/Hide Paragraph Marks}} has two modifiers, and {{Zoom In}} and {{Zoom Out}} have one.',
+      ],
+      essentials: ['Find', 'Replace', 'Insert Hyperlink', 'Page Break', 'Center Align', 'Go To Page'],
+      sections: ['Formatting', 'Navigation', 'Editing', 'View'],
+    },
+
+    clickup: {
+      overview:
+        'In Tasks, most ClickUp shortcuts are Shift and one key, such as {{Set Status}}, {{Comment}}, {{Tag}} and {{Create Subtask}}, and {{Assign to Self}} is a single letter. Text Editor has three mentions, {{Mention User}}, {{Mention Task}} and {{Mention Doc}}, which are one, two and three at signs. In SyncUps, {{Toggle Microphone}}, {{Toggle Camera}} and {{Toggle Screen Sharing}} use the same two modifiers, some with Shift added.',
+      tips: [
+        'The number keys seven, eight and nine, with the same two modifiers, are {{Numbered List}}, {{Checklist}} and {{Bulleted List}}.',
+        'In Inbox, {{Go to Snoozed Tab}} is the letter of {{Snooze}} with Shift.',
+        'In Views, {{List View}} and {{Board View}} are the first letter of their name.',
+      ],
+      essentials: ['Open Search', 'Go to Inbox', 'Assign to Self', 'Set Status', 'Create Subtask', 'Quick Create Task'],
+      sections: ['Tasks', 'Text Editor', 'SyncUps', 'Inbox', 'Views'],
+    },
+
+    labview: {
+      overview:
+        'Block Diagram is the section of the LabVIEW list with {{Toggle front panel / block diagram}}, {{Remove broken wires}}, {{Clean up diagram}} and {{New structure (SubVI)}}. In Debugging, {{Run continuously}} is {{Run VI}} with Shift added, and {{Pause/continue execution}} is the only function key in the list. View and Tools has two single keys, {{Toggle wiring/positioning tool}} and {{Toggle between tools on palette}}, and also {{Toggle context help}}.',
+      tips: [
+        '{{New VI}} and {{New structure (SubVI)}} use one letter. The second has Shift as a second modifier.',
+        '{{Abort execution}} is the period key with one modifier.',
+      ],
+      essentials: ['Run VI', 'Abort execution', 'Toggle front panel / block diagram', 'Clean up diagram', 'Remove broken wires', 'Toggle context help'],
+      sections: ['Block Diagram', 'Debugging', 'View and Tools'],
+    },
+
+    minitab: {
+      overview:
+        'Data and Worksheet is the section of the Minitab list for cells: {{Go to cell}}, {{Go to first cell}}, {{Go to last cell with data}}, {{Edit cell}} and {{Delete cell contents}}. View and Navigation has two shortcuts, {{Go to graph}} and {{Show Session window}}. File has the project commands, such as {{New project}}, {{Open project}} and {{Save project}}, and Edit includes {{Find}} and {{Replace}}.',
+      tips: [
+        '{{Go to first cell}} and {{Go to last cell with data}} use the Home and End keys with one modifier.',
+        '{{Edit cell}} is a function key and {{Delete cell contents}} is the Delete key. Neither needs a modifier.',
+      ],
+      essentials: ['Go to cell', 'Edit cell', 'Go to first cell', 'Go to last cell with data', 'Go to graph', 'Show Session window'],
+      sections: ['Data and Worksheet', 'View and Navigation', 'File', 'Edit'],
+    },
+
+    spss: {
+      overview:
+        'Syntax Editor has four bookmark shortcuts in the IBM SPSS Statistics list: {{Toggle bookmark}}, {{Clear all bookmarks}}, {{Next bookmark}} and {{Previous bookmark}}. The same section has {{Run selection}} and {{Paste syntax from dialog}}. Data Editor includes {{New dataset}}, {{Go to case}}, {{Find}} and {{Replace}}. Output Viewer has {{Print}}, {{Delete output item}} and {{Exit}}, the only shortcut in the list without the modifier that all the others use.',
+      tips: [
+        'Among the bookmark shortcuts, {{Clear all bookmarks}} is {{Toggle bookmark}} with Shift, and {{Previous bookmark}} is {{Next bookmark}} with Shift.',
+        '{{Next bookmark}} and {{Previous bookmark}} use a function key.',
+      ],
+      essentials: ['Run selection', 'Paste syntax from dialog', 'Go to case', 'Toggle bookmark', 'Next bookmark', 'Find'],
+      sections: ['Syntax Editor', 'Data Editor', 'Output Viewer'],
+    },
+
+    windows: {
+      overview:
+        'Window Management uses the four arrow keys with one modifier for {{Snap Window Left}}, {{Snap Window Right}}, {{Maximize Window}} and {{Minimize Window}}. The same modifier with a letter gives {{Show Desktop}}, {{Open File Explorer}}, {{Open Settings}} and {{Lock Screen}}. Virtual Desktops adds a second modifier for {{New Virtual Desktop}}, {{Previous Desktop}}, {{Next Desktop}} and {{Close Desktop}}. System has {{Task Manager}} and {{Run Dialog}}.',
+      tips: [
+        'In Screenshots, {{Screenshot to Clipboard}} is a single key. {{Screenshot to File}} and {{Screenshot Active Window}} add one modifier each to that key.',
+        '{{Switch Windows}} and {{Task View}} both use the Tab key, each with a different modifier.',
+        '{{New Virtual Desktop}} uses the letter of {{Show Desktop}}.',
+      ],
+      essentials: ['Switch Windows', 'Show Desktop', 'Snap Window Left', 'Snap Window Right', 'Screen Snip', 'Lock Screen'],
+      sections: ['Window Management', 'Virtual Desktops', 'System', 'Screenshots'],
+    },
 
     teams: {
       overview:
@@ -1081,6 +1564,20 @@ export const APP_NOTES_BY_PLATFORM = {
 
   linux: {
     discord: DISCORD_DESKTOP,
+    firefox: FIREFOX_DESKTOP,
+    chrome: CHROME_DESKTOP,
+
+    blender: {
+      overview:
+        'In General, {{Grab (Move)}}, {{Rotate}}, {{Scale}} and {{Delete}} are single letters, and {{Toggle Edit Mode}} is a single key. View uses the number pad without a modifier for {{Front View}}, {{Right View}}, {{Top View}}, {{Camera View}} and {{Toggle Perspective/Ortho}}.',
+      tips: [
+        'In Selection, {{Box Select}} and {{Circle Select}} are single letters, the first letter of their name.',
+        '{{Deselect All}} adds one modifier to the letter of {{Select All}}, and {{Add Object}} uses the same letter with Shift.',
+        '{{View All}} is the Home key.',
+      ],
+      essentials: ['Grab (Move)', 'Rotate', 'Scale', 'Toggle Edit Mode', 'Add Object', 'Front View'],
+      sections: ['General', 'View', 'Selection'],
+    },
 
     figma: FIGMA_DESKTOP,
     notion: NOTION_DESKTOP,
