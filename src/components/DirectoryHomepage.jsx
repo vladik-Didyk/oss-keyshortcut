@@ -13,14 +13,7 @@ import { CONTENT } from '../data/content'
 import AdSlot from './AdSlot'
 import { APP_STORE_URL, APP_COUNT, SHORTCUT_COUNT } from '../data/siteConfig'
 import { trackEvent } from '../lib/analytics'
-
-// Popular apps suggested in the empty-search state (mirrors SearchDropdown).
-const POPULAR_SUGGESTIONS = [
-  { slug: 'figma', name: 'Figma' },
-  { slug: 'chrome', name: 'Chrome' },
-  { slug: 'vs-code', name: 'VS Code' },
-  { slug: 'slack', name: 'Slack' },
-]
+import { POPULAR_APPS } from '../data/popularApps'
 
 export default function DirectoryHomepage() {
   const loaderData = useLoaderData()
@@ -525,7 +518,7 @@ export default function DirectoryHomepage() {
               Try one of these popular apps instead.
             </p>
             <div className="flex flex-wrap justify-center gap-2.5">
-              {POPULAR_SUGGESTIONS.map(app => (
+              {POPULAR_APPS.map(app => (
                 <button
                   key={app.slug}
                   onClick={() => { setSearch(''); setDropdownOpen(false); navigate(`/${selectedPlatform}/${app.slug}`) }}

@@ -1,13 +1,7 @@
 import { useNavigate } from 'react-router'
 import { ArrowRight } from '../utils/icons'
 import { parseKeyParts } from '../utils/platformHelpers'
-
-const POPULAR_APPS = [
-  { slug: 'figma', name: 'Figma' },
-  { slug: 'chrome', name: 'Chrome' },
-  { slug: 'vs-code', name: 'VS Code' },
-  { slug: 'slack', name: 'Slack' },
-]
+import { POPULAR_APPS } from '../data/popularApps'
 
 /**
  * Anchored search dropdown rendered under the homepage search input.

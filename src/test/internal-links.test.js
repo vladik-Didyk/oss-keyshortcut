@@ -2,6 +2,7 @@ import { describe, it, expect, beforeAll } from 'vitest'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { GUIDES } from '../data/guides/index.js'
+import { POPULAR_APPS } from '../data/popularApps.js'
 import { CONTENT } from '../data/content'
 import routerConfig from '../../react-router.config.ts'
 
@@ -49,6 +50,17 @@ describe('guide related links', () => {
       expect(sections).toContain(hash)
     }
   )
+})
+
+describe('popular app suggestions (empty search)', () => {
+  const platforms = readJSON('platforms.json')
+  const links = platforms.flatMap(platform =>
+    POPULAR_APPS.map(app => ({ name: app.name, to: `/${platform.id}/${app.slug}` }))
+  )
+
+  it.each(links)('$name → $to is a pre-rendered page', ({ to }) => {
+    expect(routes.has(to), `${to} is not in the pre-render route list`).toBe(true)
+  })
 })
 
 describe('guide related guides', () => {
