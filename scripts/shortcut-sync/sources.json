@@ -50,7 +50,7 @@
       "displayName": "Apple TV",
       "tier": 3,
       "sources": {
-        "macos": { "url": "https://support.apple.com/guide/tvapp/keyboard-shortcuts-atvb5f0d71f/mac", "parser": "ai-extract" }
+        "macos": { "url": "https://support.apple.com/guide/tvapp-mac/keyboard-shortcuts-atvc572afcf3/mac", "parser": "ai-extract" }
       }
     },
     "arc": {
@@ -253,7 +253,7 @@
       "displayName": "Find My",
       "tier": 3,
       "sources": {
-        "macos": { "url": "https://support.apple.com/guide/findmy/keyboard-shortcuts-and-gestures-fmycd53f07/mac", "parser": "ai-extract" }
+        "macos": { "url": "https://support.apple.com/guide/findmy-mac/fmmc26394c9b/mac", "parser": "ai-extract" }
       }
     },
     "firefox": {
@@ -297,8 +297,8 @@
       "displayName": "Godot Engine",
       "tier": 3,
       "sources": {
-        "macos": { "url": "https://docs.godotengine.org/en/stable/tutorials/editor/default_key_mapping.html", "parser": "ai-extract" },
-        "windows": { "url": "https://docs.godotengine.org/en/stable/tutorials/editor/default_key_mapping.html", "parser": "ai-extract" }
+        "macos": { "url": "https://docs.godotengine.org/en/4.6/tutorials/editor/default_key_mapping.html", "parser": "ai-extract" },
+        "windows": { "url": "https://docs.godotengine.org/en/4.6/tutorials/editor/default_key_mapping.html", "parser": "ai-extract" }
       }
     },
     "goland": {
@@ -599,7 +599,7 @@
       "displayName": "Raycast",
       "tier": 2,
       "sources": {
-        "macos": { "url": "https://manual.raycast.com/hotkey", "parser": "ai-extract" }
+        "macos": { "url": "https://manual.raycast.com/keyboard-shortcuts", "parser": "ai-extract" }
       }
     },
     "reminders": {

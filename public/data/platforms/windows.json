@@ -5062,7 +5062,7 @@
       "category": "Development",
       "shortcutCount": 30,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/godot.webp",
-      "docsUrl": "https://docs.godotengine.org/en/stable/tutorials/editor/default_key_mapping.html",
+      "docsUrl": "https://docs.godotengine.org/en/4.6/tutorials/editor/default_key_mapping.html",
       "sections": [
         {
           "name": "General",

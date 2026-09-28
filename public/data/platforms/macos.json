@@ -24314,7 +24314,7 @@
       "category": "Productivity",
       "shortcutCount": 18,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/raycast.webp",
-      "docsUrl": "https://manual.raycast.com/hotkey",
+      "docsUrl": "https://manual.raycast.com/keyboard-shortcuts",
       "sections": [
         {
           "name": "Launch",
@@ -36835,7 +36835,7 @@
       "category": "Development",
       "shortcutCount": 30,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/godot.webp",
-      "docsUrl": "https://docs.godotengine.org/en/stable/tutorials/editor/default_key_mapping.html",
+      "docsUrl": "https://docs.godotengine.org/en/4.6/tutorials/editor/default_key_mapping.html",
       "sections": [
         {
           "name": "General",
@@ -42528,7 +42528,7 @@
       "category": "Apple Apps",
       "shortcutCount": 21,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/apple-tv.webp",
-      "docsUrl": "https://support.apple.com/guide/tvapp/keyboard-shortcuts-atvb5f0d71f/mac",
+      "docsUrl": "https://support.apple.com/guide/tvapp-mac/keyboard-shortcuts-atvc572afcf3/mac",
       "sections": [
         {
           "name": "Playback",
@@ -43051,7 +43051,7 @@
       "category": "Apple Apps",
       "shortcutCount": 12,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/find-my.webp",
-      "docsUrl": "https://support.apple.com/guide/findmy/keyboard-shortcuts-and-gestures-fmycd53f07/mac",
+      "docsUrl": "https://support.apple.com/guide/findmy-mac/fmmc26394c9b/mac",
       "sections": [
         {
           "name": "Sidebar",
