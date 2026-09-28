@@ -5,7 +5,7 @@
     <link>https://keyshortcut.com/guides/</link>
     <description>Practical guides on keyboard shortcuts, productivity workflows, and shortcut management for macOS, Windows, and Linux.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 28 Sep 2026 16:51:35 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2026 18:59:03 GMT</lastBuildDate>
     <atom:link href="https://keyshortcut.com/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Top 10 Tools to Manage and Customize Your Keyboard Shortcuts</title>
@@ -72,12 +72,12 @@
       <category>Product</category>
     </item>
     <item>
-      <title>Enhance Your Digital Workflow with KeyShortcut's Custom Guides</title>
+      <title>How to Add Your Own Keyboard Shortcuts on a Mac</title>
       <link>https://keyshortcut.com/guides/custom-shortcut-guides/</link>
       <guid isPermaLink="true">https://keyshortcut.com/guides/custom-shortcut-guides/</guid>
-      <description>Create custom keyboard shortcuts, build personal reference cards, and automate actions with KeyShortcut's custom shortcut system on macOS.</description>
+      <description>Two ways to add your own keyboard shortcuts on macOS: App Shortcuts in System Settings for menu commands, and the Shortcuts app for actions.</description>
       <pubDate>Tue, 31 Mar 2026 00:00:00 GMT</pubDate>
-      <category>Product</category>
+      <category>Reference</category>
     </item>
     <item>
       <title>Mastering Linux Keyboard Shortcuts: Tips and Tricks</title>
