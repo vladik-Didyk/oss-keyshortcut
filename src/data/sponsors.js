@@ -29,8 +29,9 @@ export const SPONSORS = {
 //   half-price line is not shown.
 // goLiveBusinessDays: the promise on the page. Keep it one you can meet.
 export const SPONSOR_OFFER = {
-  sitewide: { price: 99, paymentLink: '' },
-  page: { price: 29, paymentLink: '' },
+  sitewide: { price: 99, paymentLink: 'https://buy.stripe.com/5kQ8wQ3IfaQA01EbX4abK02' },
+  // This link asks the buyer which app page, in a field of its own.
+  page: { price: 29, paymentLink: 'https://buy.stripe.com/cNiaEY0w32k4bKm6CKabK03' },
   firstMonthCode: '',
   goLiveBusinessDays: 2,
 }
