@@ -1,4 +1,4 @@
-import { APP_COUNT, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL } from './siteConfig'
+import { APP_COUNT, SHORTCUT_COUNT, APP_PAGE_COUNT, PAGES_WITH_DOCS, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, APP_STORE_URL, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL } from './siteConfig'
 import { getAppNote } from './appNotes'
 import { SPONSOR_OFFER, SPONSOR_AUDIENCE } from './sponsors'
 import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys } from '../utils/appCopy'
@@ -532,11 +532,10 @@ export const CONTENT = {
     breadcrumbHome: 'Home',
     sidebarTitle: 'Sections',
     filterPlaceholder: 'Filter shortcuts...',
-    searchPlaceholder: (count) => `Search ${count} shortcuts`,
+    searchPlaceholder: 'Search',
     backLabel: (platformName) => `${platformName} shortcuts`,
     titleSuffix: 'shortcuts',
     pdfLabel: 'PDF',
-    docsLabel: 'Official docs',
     filterAriaLabel: 'Filter shortcuts',
     clearAriaLabel: 'Clear filter',
     downloadTitle: 'Download shortcuts as PDF',
@@ -552,7 +551,7 @@ export const CONTENT = {
     appTipsTitle: (appName) => `Tips for ${appName}`,
     everydayTitle: (appName) => `Everyday ${appName} shortcuts`,
     everydayIntro: 'Everyday actions this app has shortcuts for:',
-    // Line under the verification badge. The name itself is about.cards.creator.name.
+    // Line at the end of the FAQ. The name itself is about.cards.creator.name.
     author: { label: 'Maintained by', to: '/about' },
     faqItems: (app, platformName) => {
       const name = typeof app === 'string' ? app : app.displayName
@@ -842,39 +841,34 @@ export const CONTENT = {
   about: {
     title: 'About KeyShortcut',
     published: '2025-06-01',
-    lastUpdated: '2026-09-27',
+    lastUpdated: '2026-09-28',
+    // Written in the first person: one person makes the site. Every number
+    // comes from siteConfig, so it changes with the data.
     sections: [
       {
-        title: 'The Story',
+        title: 'Why I made it',
         paragraphs: [
-          'I spend 12+ hours a day at a computer. Keyboard shortcuts are how I get things done: copying, pasting, switching apps, navigating code. I use them constantly, across dozens of different programs.',
-          'The problem? Every time I needed a shortcut I didn\u2019t know, I\u2019d open a browser, go to that app\u2019s website, dig through their docs, find the key combination, switch back, and sometimes forget it before I could even use it. Over and over, for every app.',
-          'So I started building my own shortcuts database. One place to look up any shortcut, for any app, organized the way my brain actually works. That became KeyShortcut.',
-          `Today it covers ${APP_COUNT} apps across macOS, Windows, and Linux, with ${formatShortcutCount()} shortcuts, all sourced from official documentation. The companion Mac app goes further: it detects your active app and shows its shortcuts in a floating panel, instantly.`,
+          'I work at a computer all day, and I use keyboard shortcuts for almost everything.',
+          'Every time I needed a shortcut I didn\u2019t know, I opened a browser, found the app\u2019s documentation, looked up the keys and switched back. Sometimes I forgot them on the way.',
+          `So I put the shortcuts in one place. Today that is ${APP_COUNT} apps and ${SHORTCUT_COUNT.toLocaleString('en-US')} shortcuts, for macOS, Windows and Linux. Every app page has a search box and a PDF you can print.`,
+          APP_STORE_URL
+            ? 'There is also a KeyShortcut app for Mac. It shows the shortcuts of the app you are working in, in a floating panel.'
+            : 'A KeyShortcut app for Mac is in the works. It shows the shortcuts of the app you are working in, in a floating panel.',
         ],
       },
       {
-        title: 'How We Verify Shortcuts',
+        title: 'Where the shortcuts come from',
         paragraphs: [
-          'Every shortcut in this directory is sourced from official application documentation — not user-submitted tips or third-party blogs. When an app publishes a keyboard shortcuts reference page, that\u2019s our primary source.',
-          'Our sync pipeline regularly checks official docs pages for changes. When an app updates its shortcuts (adding new ones, deprecating old ones, or changing key combinations), we detect the diff and update the directory accordingly. Each change is reviewed before it goes live.',
-          'If you spot an incorrect shortcut or a missing app, you can report it directly by emailing us. Community feedback helps us maintain accuracy across hundreds of apps and thousands of shortcuts.',
+          `The shortcuts come from each app\u2019s own documentation. ${PAGES_WITH_DOCS} of the ${APP_PAGE_COUNT} app pages link to the page they were taken from.`,
+          `Apps change. If you find a wrong shortcut or a missing app, email ${SUPPORT_EMAIL} and I will fix it.`,
         ],
       },
       {
-        title: 'How the Directory Is Organized',
+        title: 'How the site is paid for',
         paragraphs: [
-          'The directory is structured around three levels: platforms, categories, and apps. At the top level, you choose your operating system — macOS, Windows, or Linux. Each platform has its own set of apps and platform-specific key combinations.',
-          'Within each platform, apps are grouped into categories like Browsers, Code Editors, Design, Productivity, and Communication. Categories make it easy to discover apps similar to the ones you already use.',
-          'Each app page lists all available shortcuts organized into logical sections (e.g., "File Management," "Navigation," "Editing"). You can search within a page, browse the sidebar table of contents, or download the full list as a printable PDF.',
-        ],
-      },
-      {
-        title: 'How the Site Is Funded',
-        paragraphs: [
-          'The directory is free. Ads (Google AdSense), page sponsors, affiliate links and the KeyShortcut Mac app pay for it.',
-          'Affiliate links and sponsored placements are labeled. If you buy through an affiliate link, we may earn a commission at no extra cost to you. Sponsors and affiliate programs do not change which shortcuts we list or how we describe them.',
-          `To sponsor the site or one page, see keyshortcut.com/sponsor, or email ${SUPPORT_EMAIL}.`,
+          'The directory is free. Ads (Google AdSense), sponsor cards, affiliate links and the Mac app are meant to pay for it.',
+          'Affiliate links and sponsor cards are labeled. If you buy through an affiliate link, I may earn a commission at no extra cost to you. None of this changes which shortcuts are listed or how they are described.',
+          `To sponsor the site or one page, see keyshortcut.com/sponsor or email ${SUPPORT_EMAIL}.`,
         ],
       },
     ],
@@ -1047,7 +1041,7 @@ export const CONTENT = {
     },
     about: {
       title: 'About KeyShortcut \u2014 Keyboard Shortcuts Directory',
-      description: 'Learn about KeyShortcut, the free keyboard shortcuts directory for macOS, Windows, and Linux. Our mission, approach, and how to get in touch.',
+      description: 'KeyShortcut is a free keyboard shortcuts directory for macOS, Windows and Linux. Who makes it, where the shortcuts come from, and how the site is paid for.',
       url: pageUrl('/about'),
     },
     sponsor: {

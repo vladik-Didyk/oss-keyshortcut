@@ -1,6 +1,6 @@
 import { Link, useLoaderData } from 'react-router'
 import React, { useState, useCallback, useDeferredValue, useEffect, useMemo, useRef } from 'react'
-import { Search, X, Download, ExternalLink, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, Clipboard, CircleCheck } from '../utils/icons'
+import { Search, X, Download, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, Clipboard, CircleCheck } from '../utils/icons'
 import LastCheckedBadge from './LastCheckedBadge'
 import AuthorLine from './AuthorLine'
 import MacAppStoreButton from './MacAppStoreButton'
@@ -20,6 +20,9 @@ import { tokenize } from '../utils/searchHelpers'
 import { parseKeyParts, keysToWords } from '../utils/platformHelpers'
 import { COMPARISONS } from '../data/comparisons'
 import { trackEvent } from '../lib/analytics'
+
+// One fact of the line under the page title, with the dot that separates it from the one before.
+const FACT = "relative pl-4 before:content-['·'] before:absolute before:left-[5px]"
 
 function Keycap({ children }) {
   return <kbd className="keycap" aria-hidden="true">{children}</kbd>
@@ -77,15 +80,19 @@ function CopyableShortcut({ parts, action, appSlug, platform }) {
   )
 }
 
-/** Note text with {{Action}} placeholders rendered as the page's own keys. */
-function NoteText({ segments }) {
+/**
+ * Note text with {{Action}} placeholders rendered as the page's own keys.
+ * `keys={false}` names the action only: the overview reads as a sentence, and
+ * the keys are in the list under it and in the tables.
+ */
+function NoteText({ segments, keys = true }) {
   return segments.map((seg, i) =>
     seg.text !== undefined ? (
       <React.Fragment key={i}>{seg.text}</React.Fragment>
     ) : (
-      <span key={i} className="whitespace-nowrap">
+      <span key={i} className={keys ? 'whitespace-nowrap' : undefined}>
         {seg.action}
-        {seg.shortcut && (
+        {keys && seg.shortcut && (
           <>
             {' '}
             {parseKeyParts(seg.shortcut.modifiers, seg.shortcut.key).map((k, j) => (
@@ -253,9 +260,9 @@ export default function ShortcutPage() {
         </Link>
       </nav>
 
-      {/* ─── Header: title + facts on the left, search + actions on the right (stacked on mobile) ─── */}
-      <header ref={headerRef} className="pt-1 pb-4 lg:py-4 px-5 md:px-6 border-b border-theme-border static lg:sticky lg:top-12 z-20 bg-theme-base">
-        <div className="mx-auto max-w-[980px] flex flex-col lg:flex-row lg:flex-wrap lg:items-center gap-4 lg:gap-x-6 lg:gap-y-2">
+      {/* ─── Header: title + facts on the left, search + PDF on the right (stacked on mobile) ─── */}
+      <header ref={headerRef} className="pt-1 pb-4 lg:py-4 border-b border-theme-border static lg:sticky lg:top-12 z-20 bg-theme-base">
+        <div className="mx-auto max-w-[980px] px-5 md:px-6 flex flex-col lg:flex-row lg:flex-wrap lg:items-center gap-4 lg:gap-x-6 lg:gap-y-2">
           <div className="flex items-center gap-3 min-w-0 lg:flex-1">
             <div className="shrink-0">
               <AppIcon slug={slug} displayName={app.displayName} size={36} />
@@ -264,33 +271,47 @@ export default function ShortcutPage() {
               <h1 className="text-2xl font-bold tracking-tight leading-tight">
                 {app.displayName} <span className="font-normal text-theme-muted">{sp.titleSuffix}</span>
               </h1>
-              <p className="text-[13px] text-theme-muted mt-0.5">
-                {app.shortcutCount} shortcuts · {app.sections.length} {app.sections.length === 1 ? 'section' : 'sections'}
-                {app.category && (
-                  <>
-                    {' · '}
-                    <Link
-                      to={`/?category=${app.category}${platform !== 'macos' ? `&platform=${platform}` : ''}`}
-                      className="text-theme-muted hover:text-theme-text no-underline hover:underline underline-offset-2"
-                    >
-                      {app.category}
-                    </Link>
-                  </>
-                )}
-                {otherPlatforms.length > 0 && (
-                  <span className="hidden sm:inline">
-                    {' · '}{sp.alsoOnLabel}{' '}
-                    {otherPlatforms.map((p, i) => (
-                      <span key={p.id}>
-                        {i > 0 && ', '}
-                        <Link to={`/${p.id}/${slug}`} className="text-theme-muted hover:text-theme-text underline underline-offset-2">
-                          {p.name}
-                        </Link>
-                      </span>
-                    ))}
-                  </span>
-                )}
-              </p>
+              {/* Facts, each one once. The dot belongs to the fact after it and sits in the
+                  list's negative margin, so a fact that wraps starts its line without one. */}
+              <div className="overflow-hidden mt-0.5">
+                <ul className="flex flex-wrap -ml-4 text-[13px] text-theme-muted">
+                  <li className={FACT}>{app.shortcutCount} shortcuts</li>
+                  {app.sections.length > 1 && <li className={FACT}>{app.sections.length} sections</li>}
+                  {app.category && (
+                    <li className={FACT}>
+                      <Link
+                        to={`/?category=${app.category}${platform !== 'macos' ? `&platform=${platform}` : ''}`}
+                        className="text-theme-muted hover:text-theme-text no-underline hover:underline underline-offset-2"
+                      >
+                        {app.category}
+                      </Link>
+                    </li>
+                  )}
+                  {otherPlatforms.length > 0 && (
+                    <li className={`${FACT} hidden sm:block`}>
+                      {sp.alsoOnLabel}{' '}
+                      {otherPlatforms.map((p, i) => (
+                        <span key={p.id}>
+                          {i > 0 && ', '}
+                          <Link to={`/${p.id}/${slug}`} className="text-theme-muted hover:text-theme-text underline underline-offset-2">
+                            {p.name}
+                          </Link>
+                        </span>
+                      ))}
+                    </li>
+                  )}
+                  {(app.lastVerified || app.docsUrl) && (
+                    <li className={FACT}>
+                      <LastCheckedBadge
+                        date={app.lastVerified}
+                        docsUrl={app.docsUrl}
+                        variant="meta"
+                        onDocsClick={() => trackEvent('docs_link_clicked', { app: slug, platform, app_name: app.displayName, docs_url: app.docsUrl })}
+                      />
+                    </li>
+                  )}
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -304,7 +325,7 @@ export default function ShortcutPage() {
               <input
                 ref={searchInputRef}
                 type="search"
-                placeholder={sp.searchPlaceholder(app.shortcutCount)}
+                placeholder={sp.searchPlaceholder}
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 aria-label={sp.filterAriaLabel}
@@ -325,32 +346,18 @@ export default function ShortcutPage() {
                 </button>
               )}
             </div>
-            <div className="flex items-center gap-5 -ml-1 sm:ml-0">
-              <button
-                onClick={async () => {
-                  const { generateShortcutPDF } = await import('../utils/generateShortcutPDF')
-                  generateShortcutPDF(app)
-                  trackEvent('shortcut_pdf_downloaded', { app: slug, platform, app_name: app.displayName })
-                }}
-                className="inline-flex items-center gap-1.5 min-h-[40px] px-1 bg-transparent border-none text-[13px] text-theme-text hover:opacity-70 transition-opacity cursor-pointer shrink-0"
-                title={sp.downloadTitle}
-              >
-                <Download size={15} aria-hidden="true" />
-                {sp.pdfLabel}
-              </button>
-              {app.docsUrl && (
-                <a
-                  href={app.docsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 min-h-[40px] px-1 text-[13px] text-theme-text hover:opacity-70 transition-opacity no-underline shrink-0"
-                  onClick={() => trackEvent('docs_link_clicked', { app: slug, platform, app_name: app.displayName, docs_url: app.docsUrl })}
-                >
-                  <ExternalLink size={15} aria-hidden="true" />
-                  {sp.docsLabel}
-                </a>
-              )}
-            </div>
+            <button
+              onClick={async () => {
+                const { generateShortcutPDF } = await import('../utils/generateShortcutPDF')
+                generateShortcutPDF(app)
+                trackEvent('shortcut_pdf_downloaded', { app: slug, platform, app_name: app.displayName })
+              }}
+              className="inline-flex items-center gap-1.5 min-h-[40px] px-1 -ml-1 sm:ml-0 bg-transparent border-none text-[13px] text-theme-text hover:opacity-70 transition-opacity cursor-pointer shrink-0"
+              title={sp.downloadTitle}
+            >
+              <Download size={15} aria-hidden="true" />
+              {sp.pdfLabel}
+            </button>
           </div>
 
           {/* Search feedback */}
@@ -362,22 +369,23 @@ export default function ShortcutPage() {
         </div>
       </header>
 
-      {/* ─── Intro text ─── */}
+      {/* ─── Intro text: the hand-written note, or one sentence from the data when the page has none ─── */}
       <div className="mx-auto max-w-[980px] px-5 md:px-6 pt-8 pb-2">
-        <p className="text-theme-muted text-[15px] leading-relaxed max-w-[720px]">
-          {sp.intro(app.displayName, platformName, app.shortcutCount, app.sections.length)}{' '}
-          {sp.sectionsSummary(largestSections(app))}
-        </p>
-        <LastCheckedBadge date={app.lastVerified} updatedDate={app.lastUpdated} docsUrl={app.docsUrl} variant="block" />
-        <AuthorLine />
+        {noteFits ? (
+          <p className="text-theme-text text-[15px] leading-relaxed max-w-[720px]">
+            <NoteText segments={resolveNoteText(note.overview, app)} keys={false} />
+          </p>
+        ) : (
+          <p className="text-theme-muted text-[15px] leading-relaxed max-w-[720px]">
+            {sp.intro(app.displayName, platformName, app.shortcutCount, app.sections.length)}{' '}
+            {sp.sectionsSummary(largestSections(app))}
+          </p>
+        )}
         <AffiliateLink affiliate={affiliate} appSlug={slug} platform={platform} className="mt-4 max-w-[720px]" />
 
-        {/* ─── App note (hand-written, src/data/appNotes.js) or everyday shortcuts from the data ─── */}
+        {/* ─── Shortcuts to start with: from the note (src/data/appNotes.js), or everyday ones from the data ─── */}
         {noteFits ? (
           <>
-            <p className="text-theme-text text-[15px] leading-relaxed max-w-[720px] mt-4">
-              <NoteText segments={resolveNoteText(note.overview, app)} />
-            </p>
             <div className="mt-8 max-w-[720px] rounded-2xl bg-theme-base-alt border border-theme-border p-6">
               <h2 className="text-base font-semibold tracking-tight mb-4">{sp.startWithTitle}</h2>
               <ShortcutList shortcuts={resolveEssentials(note.essentials, app)} appSlug={slug} platform={platform} />
@@ -638,6 +646,7 @@ export default function ShortcutPage() {
               <FaqAccordion key={i} question={item.question} answer={item.answer} />
             ))}
           </div>
+          <AuthorLine />
         </div>
       </div>
 

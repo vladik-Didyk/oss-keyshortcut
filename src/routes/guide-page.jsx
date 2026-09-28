@@ -1,12 +1,13 @@
 import { useLoaderData } from "react-router";
 import { CONTENT, buildMeta } from "../data/content";
 import { getGuideBySlug } from "../data/guides";
+import { withCounts } from "../data/siteConfig";
 import GuidePage from "../components/GuidePage";
 
 export function loader({ params }) {
   const guide = getGuideBySlug(params.slug);
   if (!guide) throw new Response("Not Found", { status: 404 });
-  return { guide };
+  return { guide: withCounts(guide) };
 }
 
 export function meta({ data }) {

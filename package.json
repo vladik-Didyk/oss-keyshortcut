@@ -26,7 +26,8 @@
     "add-app": "node scripts/add-app.mjs",
     "add-app:dry": "node scripts/add-app.mjs --dry-run",
     "export": "node scripts/export-data.mjs",
-    "clean-data": "node scripts/clean-data.mjs"
+    "clean-data": "node scripts/clean-data.mjs",
+    "stats": "node scripts/site-stats.mjs"
   },
   "dependencies": {
     "@react-router/node": "^7.13.1",

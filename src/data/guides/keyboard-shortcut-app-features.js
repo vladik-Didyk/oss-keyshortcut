@@ -156,7 +156,7 @@ export default {
       id: 'recommendation',
       heading: 'Our Recommendation',
       content: [
-        { type: 'paragraph', text: 'KeyShortcut checks all of these boxes: automatic active app detection, cross-app search, custom shortcut creation with global hotkeys, visual keycap display, 60+ supported apps, floating non-intrusive panel, complete privacy (no data collection, no account, fully offline), 11-language localization, and a one-time purchase price.' },
+        { type: 'paragraph', text: 'KeyShortcut checks all of these boxes: automatic active app detection, cross-app search, custom shortcut creation with global hotkeys, visual keycap display, {macAppCount} supported apps, floating non-intrusive panel, complete privacy (no data collection, no account, fully offline), 11-language localization, and a one-time purchase price.' },
         { type: 'paragraph', text: 'It was built specifically to solve the shortcut reference problem without compromises — a tool that stays visible when you need it and invisible when you don\'t, with the coverage and customization to fit any workflow.' },
         { type: 'cta', variant: 'mac-app' },
       ],

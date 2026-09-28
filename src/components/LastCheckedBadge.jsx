@@ -14,8 +14,28 @@ function formatDate(date, style = 'short') {
  *   "inline"  — compact, for headers/metadata lines (default)
  *   "block"   — full line with docs link + updated date, for intro areas
  *   "mini"    — icon + relative date only, for app cards
+ *   "meta"    — one item of the facts line under a page title, with the docs link
  */
-export default function LastCheckedBadge({ date, updatedDate, docsUrl, variant = 'inline' }) {
+export default function LastCheckedBadge({ date, updatedDate, docsUrl, variant = 'inline', onDocsClick }) {
+  if (variant === 'meta') {
+    // Without a date or a link there is no source to point at, so nothing is claimed.
+    if (!date && !docsUrl) return null
+    return (
+      <span className="inline-flex items-center gap-1 whitespace-nowrap">
+        <CircleCheck size={12} className="text-green-600 shrink-0" aria-hidden="true" />
+        <span>
+          {date ? 'Checked against' : 'Verified against'}{' '}
+          {docsUrl ? (
+            <a href={docsUrl} target="_blank" rel="noopener noreferrer" onClick={onDocsClick} className="text-theme-muted hover:text-theme-text underline underline-offset-2">official docs</a>
+          ) : (
+            'official docs'
+          )}
+          {date && ` on ${formatDate(date)}`}
+        </span>
+      </span>
+    )
+  }
+
   // Graceful fallback: when no date exists, still surface a freshness/trust
   // signal ("Verified against official docs") instead of rendering nothing.
   if (!date) {

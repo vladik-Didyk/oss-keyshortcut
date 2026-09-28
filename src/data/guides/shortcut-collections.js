@@ -17,7 +17,7 @@ export default {
       id: 'introduction',
       heading: 'What Are Shortcut Collections?',
       content: [
-        { type: 'paragraph', text: 'KeyShortcut ships with a built-in library of keyboard shortcuts for over 60 macOS applications. Each app\'s shortcuts are organized into a collection — a structured set of key combinations grouped by function (file management, navigation, editing, formatting, and more).' },
+        { type: 'paragraph', text: 'KeyShortcut ships with a built-in library of keyboard shortcuts for {macAppCount} macOS applications. Each app\'s shortcuts are organized into a collection — a structured set of key combinations grouped by function (file management, navigation, editing, formatting, and more).' },
         { type: 'paragraph', text: 'These collections are designed to be browsable and searchable. Instead of reading through a wall of text in an app\'s documentation, you get a clean, categorized view of every shortcut — displayed with real keycap badges so you can read them at a glance.' },
       ],
     },
@@ -107,7 +107,7 @@ export default {
       id: 'online-directory',
       heading: 'Browse Collections Online',
       content: [
-        { type: 'paragraph', text: 'Don\'t have a Mac? You can browse the full shortcut directory on this website — all 60+ apps across macOS, Windows, and Linux, organized by category, searchable by name or action. Each app page includes every shortcut with keycap badges, section navigation, and a downloadable PDF cheat sheet.' },
+        { type: 'paragraph', text: 'Don\'t have a Mac? You can browse the full shortcut directory on this website — all {appCount} apps across macOS, Windows, and Linux, organized by category, searchable by name or action. Each app page includes every shortcut with keycap badges, section navigation, and a downloadable PDF cheat sheet.' },
         { type: 'paragraph', text: 'Whether you use the Mac app or the web directory, the goal is the same: get the right shortcut in front of you at the right moment, so you can work faster without breaking your flow.' },
       ],
     },

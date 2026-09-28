@@ -44,7 +44,7 @@ export default {
       heading: '1. KeyShortcut (macOS)',
       content: [
         { type: 'paragraph', text: 'KeyShortcut is a floating shortcut panel for macOS that automatically detects your active application and displays its keyboard shortcuts in a clean, organized overlay. Unlike tools that require you to hold a key to see a temporary tooltip, KeyShortcut stays visible as long as you need it — pinned to any corner of your screen.' },
-        { type: 'paragraph', text: 'It ships with shortcuts for over 60 apps, from Finder and Safari to Figma, VS Code, and the full JetBrains suite. You can also create custom shortcuts with global hotkeys, search across all apps instantly, and even see your clipboard contents in a live preview toast.' },
+        { type: 'paragraph', text: 'It ships with shortcuts for {macAppCount} apps, from Finder and Safari to Figma, VS Code, and the full JetBrains suite. You can also create custom shortcuts with global hotkeys, search across all apps instantly, and even see your clipboard contents in a live preview toast.' },
         {
           type: 'list',
           items: [

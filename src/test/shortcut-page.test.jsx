@@ -240,10 +240,11 @@ describe('app page author line', () => {
     expect(link.closest('p')).toHaveTextContent(`${CONTENT.shortcutPage.author.label} ${name}`)
   })
 
-  it('sits under the verification badge', () => {
+  it('sits at the end of the FAQ, not at the top of the page', () => {
     render(page())
     const line = screen.getByRole('link', { name }).closest('p')
-    expect(line.previousElementSibling).toHaveTextContent('Verified against official docs')
+    expect(line.previousElementSibling.querySelectorAll('details')).toHaveLength(faqItems().length)
+    expect(document.querySelector('header')).not.toContainElement(line)
   })
 
   it('takes the name from the About page copy, not from a second copy', () => {
@@ -251,5 +252,58 @@ describe('app page author line', () => {
     expect(read('src/components/AuthorLine.jsx')).not.toContain(name)
     expect(read('src/components/ShortcutPage.jsx')).not.toContain(name)
     expect(read('src/data/content.js').split(name)).toHaveLength(2)
+  })
+})
+
+describe('app page top', () => {
+  const macApps = JSON.parse(read('public/data/platforms/macos.json')).apps
+  const voiceMemos = macApps.find((a) => a.slug === 'voice-memos')
+  const header = () => document.querySelector('header')
+  const textOf = (node) => node.textContent.replace(/\s+/g, ' ')
+
+  it('says each fact once: the count, the sections, the source', () => {
+    render(page())
+    expect(textOf(document.body).match(/5 shortcuts/g)).toHaveLength(1)
+    const facts = [...header().querySelectorAll('li')].map((li) => textOf(li).trim())
+    expect(facts).toEqual(['5 shortcuts', '2 sections', 'Design', 'Verified against official docs'])
+    expect(screen.getByRole('searchbox')).toHaveAttribute('placeholder', CONTENT.shortcutPage.searchPlaceholder)
+    expect(CONTENT.shortcutPage.searchPlaceholder).not.toMatch(/\d/)
+  })
+
+  it('does not count the sections of a page that has one', () => {
+    expect(voiceMemos.sections).toHaveLength(1)
+    render(page(pageData(voiceMemos)))
+    expect(textOf(header())).not.toMatch(/\d+ sections?/)
+  })
+
+  it('links to the official docs once, and counts the click', () => {
+    render(page())
+    const links = [...document.querySelectorAll(`a[href="${APP.docsUrl}"]`)]
+    expect(links).toHaveLength(1)
+    expect(header()).toContainElement(links[0])
+    fireEvent.click(links[0])
+    expect(trackEvent).toHaveBeenCalledWith('docs_link_clicked', expect.objectContaining({ app: APP.slug, docs_url: APP.docsUrl }))
+  })
+
+  it('claims no source on a page that has no link to one', () => {
+    render(page(pageData({ ...APP, docsUrl: null })))
+    expect(textOf(header())).not.toMatch(/Verified|Checked/)
+  })
+
+  it('a page with a note opens with the note, as a sentence without keys', () => {
+    render(page(pageData(voiceMemos)))
+    const note = screen.getByText(/./, { selector: 'header ~ div > p' })
+    expect(note.querySelector('kbd')).toBeNull()
+    expect(textOf(note).length).toBeGreaterThan(100)
+    expect(textOf(document.body)).not.toContain(CONTENT.shortcutPage.intro(voiceMemos.displayName, 'macOS', voiceMemos.shortcutCount, 1))
+    // The keys of the shortcuts to start with are in the list under it.
+    const list = screen.getByRole('heading', { name: CONTENT.shortcutPage.startWithTitle }).parentElement
+    expect(list.querySelectorAll('kbd').length).toBeGreaterThan(3)
+  })
+
+  it('a page without a note opens with the sentence built from its data', () => {
+    render(page())
+    const sp = CONTENT.shortcutPage
+    expect(textOf(document.body)).toContain(sp.intro(APP.displayName, 'macOS', APP.shortcutCount, APP.sections.length))
   })
 })

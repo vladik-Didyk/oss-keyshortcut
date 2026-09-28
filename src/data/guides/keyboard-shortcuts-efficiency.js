@@ -99,7 +99,7 @@ export default {
             { keys: '⌘ F / Ctrl+F', action: 'Find text', platform: 'all' },
           ],
         },
-        { type: 'paragraph', text: 'Once these are automatic, expand to app-specific shortcuts for your most-used applications. Our keyboard shortcuts directory has organized, searchable shortcuts for 60+ apps — a much faster way to find what you need than digging through documentation.' },
+        { type: 'paragraph', text: 'Once these are automatic, expand to app-specific shortcuts for your most-used applications. Our keyboard shortcuts directory has organized, searchable shortcuts for {appCount} apps — a much faster way to find what you need than digging through documentation.' },
         { type: 'cta', variant: 'mac-app' },
       ],
     },

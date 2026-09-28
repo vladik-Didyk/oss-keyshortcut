@@ -7,9 +7,10 @@
  *   everyday  no fitting note, but the app has 3 or more everyday shortcuts
  *   none      neither: the one-sentence intro is the only prose on the page
  *
- * Prose words = the intro sentence, plus the note's overview and fitting tips
- * (an {{Action}} counts as the words of its name), or the one-line intro of
- * the everyday block. Shortcut tables, titles and the FAQ are not counted.
+ * Prose words = the note's overview and fitting tips (an {{Action}} counts as
+ * the words of its name). A page without a note shows the intro sentence
+ * instead, plus the one-line intro of the everyday block when it has one.
+ * Shortcut tables, titles and the FAQ are not counted.
  *
  * Used by scripts/measure-page-prose.mjs and src/test/page-prose.test.js.
  */
@@ -49,12 +50,14 @@ const noteWords = (text, app) =>
 /** { block: 'note' | 'everyday' | 'none', introWords, blockWords, words } for one page. */
 export function pageProse(app, platformId, platformName, noteFor = getAppNote) {
   const note = noteFor(app.slug, platformId);
-  const introWords = countWords(introText(app, platformName));
+  let introWords = countWords(introText(app, platformName));
   let block = "none";
   let blockWords = 0;
 
   if (noteFitsApp(note, app)) {
     block = "note";
+    // The note takes the place of the intro sentence.
+    introWords = 0;
     blockWords = [note.overview, ...fittingTips(note, app)].reduce((n, t) => n + noteWords(t, app), 0);
   } else if (everydayShortcuts(app).length >= EVERYDAY_MIN) {
     block = "everyday";

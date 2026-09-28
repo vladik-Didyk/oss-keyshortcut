@@ -146,7 +146,7 @@ export default {
           type: 'list',
           items: [
             'Use KeyShortcut\'s floating panel — it detects your active app and shows relevant shortcuts instantly, no searching required.',
-            'Bookmark this directory — the KeyShortcut website has searchable, organized shortcuts for 60+ apps across macOS, Windows, and Linux.',
+            'Bookmark this directory — the KeyShortcut website has searchable, organized shortcuts for {appCount} apps across macOS, Windows, and Linux.',
             'Print PDF cheat sheets — each app page in the directory has a downloadable PDF. Pin it near your monitor.',
             'Create a personal shortcut document — a simple list of your most-used shortcuts across all apps, tailored to your workflow.',
           ],

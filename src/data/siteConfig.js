@@ -5,6 +5,10 @@ const STATS = __SITE_STATS__
 // Whole directory: unique apps across macOS, Windows and Linux, and all their shortcuts.
 export const APP_COUNT = STATS.appCount
 export const SHORTCUT_COUNT = STATS.shortcutCount
+// Every app page (an app on three platforms has three), and how many of them
+// link to the official documentation the shortcuts were taken from.
+export const APP_PAGE_COUNT = STATS.appPageCount
+export const PAGES_WITH_DOCS = STATS.pagesWithDocs
 
 // macOS only. The Mac app downloads the macOS data from the same database, so
 // product copy about the app uses these.
@@ -21,4 +25,17 @@ export const SITE_NAME = 'KeyShortcut'
 
 export function formatShortcutCount(count = SHORTCUT_COUNT) {
   return count.toLocaleString('en-US') + '+'
+}
+
+// Guides are plain data that Node scripts load without Vite, so they cannot
+// import this file. They name a count as {appCount} or {macAppCount} instead.
+const GUIDE_COUNTS = { appCount: APP_COUNT, macAppCount: MAC_APP_COUNT }
+
+export function fillCounts(text) {
+  return text.replace(/\{(appCount|macAppCount)\}/g, (_, name) => GUIDE_COUNTS[name])
+}
+
+/** A guide with the counts written into all of its text. Used by the guide route. */
+export function withCounts(guide) {
+  return JSON.parse(fillCounts(JSON.stringify(guide)))
 }
