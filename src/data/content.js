@@ -366,7 +366,7 @@ export const CONTENT = {
         },
         {
           question: 'Is it private?',
-          answer: 'Completely. KeyShortcut is sandboxed, collects no data, sends nothing over the internet, and requires no account. What happens on your Mac stays on your Mac.',
+          answer: 'KeyShortcut is sandboxed, collects no data and needs no account. It downloads shortcut data when it starts, and sends no personal data with that request. Your settings stay on your Mac.',
         },
         {
           question: 'Can I add my own shortcuts?',
