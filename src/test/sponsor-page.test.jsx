@@ -183,6 +183,12 @@ describe('SponsorPage', () => {
     expect(screen.getByText(/on 152 of the 171 app pages/)).toBeInTheDocument()
   })
 
+  it('says that a one-page booking is for a page that holds the slot', () => {
+    renderPage({ offer: NO_LINKS, sitewideOpen: true })
+    expect(screen.getByText(CONTENT.sponsorPage.price.page.detail(STATS))).toHaveTextContent('from the 152 that hold the slot')
+    expect(screen.getByText(CONTENT.sponsorPage.price.sitewide.detail(STATS))).toHaveTextContent('all 152 app pages')
+  })
+
   it('prints the visitor figure together with its source and period', () => {
     renderPage({ offer: NO_LINKS, sitewideOpen: true })
     const line = screen.getByText(new RegExp(SPONSOR_AUDIENCE.monthlyVisitors.replace('+', '\\+')))

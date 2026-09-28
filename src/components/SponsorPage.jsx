@@ -71,7 +71,7 @@ export default function SponsorPage({ stats, offer = SPONSOR_OFFER, sitewideOpen
             <PriceCard
               kind="sitewide"
               name={c.price.sitewide.name}
-              detail={c.price.sitewide.detail}
+              detail={c.price.sitewide.detail(stats)}
               label={c.cta.sitewide(offer.sitewide.price)}
               offer={offer}
               open={sitewideOpen}
@@ -79,7 +79,7 @@ export default function SponsorPage({ stats, offer = SPONSOR_OFFER, sitewideOpen
             <PriceCard
               kind="page"
               name={c.price.page.name}
-              detail={c.price.page.detail}
+              detail={c.price.page.detail(stats)}
               label={fromPage ? c.cta.pageNamed(fromPage, offer.page.price) : c.cta.page(offer.page.price)}
               offer={offer}
               pagePath={fromPage}

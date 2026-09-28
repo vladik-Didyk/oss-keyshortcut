@@ -938,8 +938,8 @@ export const CONTENT = {
 
     price: {
       title: 'Price',
-      sitewide: { name: 'The whole site', detail: 'Your card on every app page that has the slot.' },
-      page: { name: 'One page', detail: 'Your card on one app page of your choice.' },
+      sitewide: { name: 'The whole site', detail: ({ slotPages }) => `Your card on all ${slotPages} app pages that hold the slot.` },
+      page: { name: 'One page', detail: ({ slotPages }) => `Your card on one app page of your choice, from the ${slotPages} that hold the slot.` },
       perMonth: 'a month',
       terms: 'Month to month. Cancel any time, and the card comes off at the end of the paid month.',
       firstMonth: (code) => `The first month is half price with the code ${code} at checkout.`,
