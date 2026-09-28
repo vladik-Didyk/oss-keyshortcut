@@ -1,3 +1,34 @@
-# Legacy redirects
-/shortcuts/*  /:splat  301
-/directory    /        301
+# Legacy redirects: /shortcuts/... and /directory, the addresses of the old site.
+# Every rule answers in one redirect and names the address that returns 200,
+# which ends with a slash (see src/utils/siteUrl.js).
+#
+# No platform in the path means macOS, as in src/routes/redirect-legacy.jsx.
+# That route never runs in production: Cloudflare Pages applies this file first.
+#
+# Each address is listed with and without the closing slash, because a rule
+# matches the path exactly. ":app" matches one path segment. A splat is not used:
+# "/macos/:splat" leaves the slash out (a second redirect, 308), and
+# "/macos/:splat/" doubles it when the request already ends with one.
+# Checked with `wrangler pages dev` on 2026-09-28.
+
+# Exact paths. Cloudflare Pages tries these before the rules with placeholders.
+/shortcuts           /macos/    301
+/shortcuts/          /macos/    301
+/shortcuts/macos     /macos/    301
+/shortcuts/macos/    /macos/    301
+/shortcuts/windows   /windows/  301
+/shortcuts/windows/  /windows/  301
+/shortcuts/linux     /linux/    301
+/shortcuts/linux/    /linux/    301
+/directory           /          301
+/directory/          /          301
+
+# App pages
+/shortcuts/macos/:app     /macos/:app/    301
+/shortcuts/macos/:app/    /macos/:app/    301
+/shortcuts/windows/:app   /windows/:app/  301
+/shortcuts/windows/:app/  /windows/:app/  301
+/shortcuts/linux/:app     /linux/:app/    301
+/shortcuts/linux/:app/    /linux/:app/    301
+/shortcuts/:app           /macos/:app/    301
+/shortcuts/:app/          /macos/:app/    301

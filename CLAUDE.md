@@ -263,7 +263,7 @@ A push to `main` also deploys, through CI. All ~175 routes are pre-rendered as s
 
 Cloudflare Pages config files in `public/`:
 - `_headers` — security headers (X-Frame-Options, HSTS, etc.)
-- `_redirects` — legacy redirect rules (`/shortcuts/*`, `/directory`)
+- `_redirects` — legacy redirects (`/shortcuts/...`, `/directory`), each one 301 straight to the address with the closing slash. Cloudflare applies this file before anything else, so `redirect-legacy.jsx` and `redirect-directory.jsx` answer only in `pnpm dev` / `pnpm preview`; change both together. No splats: `/:splat` costs a second redirect, `/:splat/` doubles the slash. Test a change with `wrangler pages dev build/client`.
 
 ### CI/CD Workflows (`.github/workflows/`)
 
