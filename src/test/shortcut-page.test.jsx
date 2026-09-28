@@ -229,3 +229,27 @@ describe('app page shortcut rows', () => {
     delete navigator.clipboard
   })
 })
+
+describe('app page author line', () => {
+  const { name } = CONTENT.about.cards.creator
+
+  it('names the author of the About page and links there', () => {
+    render(page())
+    const link = screen.getByRole('link', { name })
+    expect(link).toHaveAttribute('href', '/about')
+    expect(link.closest('p')).toHaveTextContent(`${CONTENT.shortcutPage.author.label} ${name}`)
+  })
+
+  it('sits under the verification badge', () => {
+    render(page())
+    const line = screen.getByRole('link', { name }).closest('p')
+    expect(line.previousElementSibling).toHaveTextContent('Verified against official docs')
+  })
+
+  it('takes the name from the About page copy, not from a second copy', () => {
+    expect(name).toBeTruthy()
+    expect(read('src/components/AuthorLine.jsx')).not.toContain(name)
+    expect(read('src/components/ShortcutPage.jsx')).not.toContain(name)
+    expect(read('src/data/content.js').split(name)).toHaveLength(2)
+  })
+})

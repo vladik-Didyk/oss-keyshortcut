@@ -2,6 +2,7 @@ import { Link, useLoaderData } from 'react-router'
 import React, { useState, useCallback, useDeferredValue, useEffect, useMemo, useRef } from 'react'
 import { Search, X, Download, ExternalLink, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, Clipboard, CircleCheck } from '../utils/icons'
 import LastCheckedBadge from './LastCheckedBadge'
+import AuthorLine from './AuthorLine'
 import MacAppStoreButton from './MacAppStoreButton'
 import AppIcon from './directory/AppIcon'
 import AppCard from './directory/AppCard'
@@ -368,6 +369,7 @@ export default function ShortcutPage() {
           {sp.sectionsSummary(largestSections(app))}
         </p>
         <LastCheckedBadge date={app.lastVerified} updatedDate={app.lastUpdated} docsUrl={app.docsUrl} variant="block" />
+        <AuthorLine />
         <AffiliateLink affiliate={affiliate} appSlug={slug} platform={platform} className="mt-4 max-w-[720px]" />
 
         {/* ─── App note (hand-written, src/data/appNotes.js) or everyday shortcuts from the data ─── */}

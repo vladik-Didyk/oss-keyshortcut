@@ -552,6 +552,8 @@ export const CONTENT = {
     appTipsTitle: (appName) => `Tips for ${appName}`,
     everydayTitle: (appName) => `Everyday ${appName} shortcuts`,
     everydayIntro: 'Everyday actions this app has shortcuts for:',
+    // Line under the verification badge. The name itself is about.cards.creator.name.
+    author: { label: 'Maintained by', to: '/about' },
     faqItems: (app, platformName) => {
       const name = typeof app === 'string' ? app : app.displayName
       const count = typeof app === 'string' ? null : app.shortcutCount
