@@ -96,13 +96,19 @@ const SOFTWARE_APP_JSONLD = JSON.stringify({
   applicationCategory: 'UtilitiesApplication',
   description: `Floating keyboard shortcut panel for macOS. ${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts across ${MAC_APP_COUNT} apps with active app detection and search.`,
   url: pageUrl('/mac-hud'),
-  ...(APP_STORE_URL ? { downloadUrl: APP_STORE_URL } : {}),
-  offers: {
-    '@type': 'Offer',
-    price: PRICE.replace('$', ''),
-    priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
-  },
+  // An offer only while the app can be bought: without a store URL nothing is for sale.
+  ...(APP_STORE_URL
+    ? {
+        downloadUrl: APP_STORE_URL,
+        offers: {
+          '@type': 'Offer',
+          price: PRICE.replace('$', ''),
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
+          url: APP_STORE_URL,
+        },
+      }
+    : {}),
   screenshot: 'https://keyshortcut.com/images/og-image.png',
 });
 
