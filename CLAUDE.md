@@ -286,6 +286,7 @@ During `pnpm build`, scripts run in order:
 Standalone scripts:
 - `scripts/update-readme-apps.mjs` — Queries Supabase, regenerates the Supported Apps section in README.md between `APP-DIRECTORY:START/END` markers
 - `scripts/validate-content.mjs` — Validates content data structure
+- `scripts/measure-page-prose.mjs [--thin] [--json]` — Lists, for every app page, the prose block it shows (note / everyday / none) and its prose words. Builds nothing. Logic in `scripts/lib/page-prose.mjs`, shared with `src/test/page-prose.test.js`
 - `scripts/shortcut-sync/run.mjs` — Full sync pipeline with `--dry-run` and `--health-check` flags
 - `scripts/sync-apple-docs.mjs` — Bulk sync script for Apple app shortcuts (18 apps, idempotent)
 
@@ -315,3 +316,14 @@ The sync pipeline scrapes official documentation pages, extracts shortcuts via G
 4. **`src/data/appCategories.js`** — Add display name to the appropriate category array
 5. **`scripts/shortcut-sync/sources.json`** — Add entry for the sync automation pipeline (alphabetically sorted)
 6. **Run `pnpm export`** to regenerate `public/data/` JSON files, then commit them
+7. **App note** — a page with 3 or more sections must show a note or the everyday block (3+ everyday shortcuts), or `src/test/page-prose.test.js` fails. Check with `node scripts/measure-page-prose.mjs --thin`; if the page is listed, write a note in `src/data/appNotes.js`
+
+### App notes (`src/data/appNotes.js`)
+
+Hand-written prose for app pages: an overview, 2–3 tips, 4–6 "start with these" actions.
+
+- `APP_NOTES[slug]` is shared by every platform the app is on and is checked on macOS. `APP_NOTES_BY_PLATFORM[platform][slug]` is for a platform whose data names actions differently, and for apps that are not on macOS. Pages read both through `getAppNote(slug, platform)`.
+- Keys are never typed. `{{Action name}}` is resolved from the page's data, so each platform shows its own keys.
+- `sections` lists the section names the text mentions. A note is used only on a page that has them (`noteFitsApp`).
+- No counts, no history, no claims the shortcut list does not show. `src/test/app-notes.test.js` also fails on a sentence that two apps share once the app name and the actions are removed.
+- `src/test/unsourced-claims.test.js` fails if "working days" or "Brainscape" appears anywhere under `src/` (an unsourced statistic, removed 2026-09-28).
