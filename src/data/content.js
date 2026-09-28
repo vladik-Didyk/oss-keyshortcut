@@ -208,9 +208,9 @@ export const CONTENT = {
           alt: 'KeyShortcut automatically detecting the active app and showing relevant shortcuts',
         },
         {
-          title: 'Your shortcuts, your rules',
-          description: 'Create custom shortcuts for anything — open apps, launch URLs, run Apple Shortcuts, or just keep a personal reference card. Assign a global hotkey and trigger them from anywhere on your Mac.',
-          screenshot: 'keyflow-search',
+          title: 'Search every app at once',
+          description: 'Type a word and KeyShortcut searches the shortcuts of every app. Results are grouped by app, and a counter shows how many were found.',
+          screenshot: 'keyflow-crosssearch',
           alt: 'KeyShortcut search showing results across multiple apps',
         },
       ],
@@ -307,7 +307,7 @@ export const CONTENT = {
       title: 'Shortcuts for the apps',
       titleAccent: 'you use every day',
       subtitle: `${MAC_APP_COUNT} apps. ${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts. From system essentials to pro tools.`,
-      footnote: 'Don\'t see your app? Import your own shortcut packs or create custom shortcuts for any app.',
+      footnote: 'Don\'t see your app? Import a shortcut pack in Settings.',
       rows: [
         [
           'Safari', 'Chrome', 'Arc', 'Firefox', 'Brave', 'Edge', 'Vivaldi',
@@ -362,7 +362,7 @@ export const CONTENT = {
         },
         {
           question: 'Does it work with my favorite app?',
-          answer: `KeyShortcut covers shortcuts for ${MAC_APP_COUNT} apps \u2014 from system essentials like Finder and Safari to professional tools like Figma, Xcode, Final Cut Pro, and Excel. Plus JetBrains IDEs, Google Workspace, project management tools, and more. You can also import custom shortcut packs or create your own.`,
+          answer: `KeyShortcut covers shortcuts for ${MAC_APP_COUNT} apps \u2014 from system essentials like Finder and Safari to professional tools like Figma, Xcode, Final Cut Pro, and Excel. Plus JetBrains IDEs, Google Workspace, project management tools, and more. You can also import shortcut packs.`,
         },
         {
           question: 'Is it private?',
@@ -370,7 +370,7 @@ export const CONTENT = {
         },
         {
           question: 'Can I add my own shortcuts?',
-          answer: 'Yes. Create custom shortcuts with any key combination. You can make them visual reference cards or assign actions \u2014 open an app, launch a URL, run an Apple Shortcut, or copy text to your clipboard.',
+          answer: 'Version 1.0 has no editor for your own shortcuts. It can import a shortcut pack, which is a .json file: open Settings and choose Import Pack.',
         },
         {
           question: 'Does it support my language?',
@@ -378,7 +378,7 @@ export const CONTENT = {
         },
         {
           question: 'How is KeyShortcut different from free alternatives?',
-          answer: 'Free tools typically show you a raw list of menu items when you hold a key \u2014 then disappear the moment you let go. KeyShortcut is always visible, beautifully organized, covers apps beyond the one you\'re in, detects your active app automatically, lets you search across everything, and supports custom shortcuts with global hotkeys. It\'s a shortcut companion, not a tooltip.',
+          answer: 'Free tools typically show you a raw list of menu items when you hold a key \u2014 then disappear the moment you let go. KeyShortcut is always visible, beautifully organized, covers apps beyond the one you\'re in, detects your active app automatically, and lets you search across everything. It\'s a shortcut companion, not a tooltip.',
         },
         {
           question: 'Can I use it on multiple Macs?',
@@ -397,7 +397,7 @@ export const CONTENT = {
           content: [
             'The KeyShortcut app does not collect, store, or transmit any personal data. No analytics or tracking frameworks are included in the app.',
             'The app downloads shortcut data from Supabase (read-only). No personal data or device identifiers are sent. The app registers with Apple\'s MetricKit framework. The released app does not read, store or send what it receives.',
-            'All user preferences (favorites, custom shortcuts, window position) are stored locally on your device using macOS UserDefaults.',
+            'All user preferences (favorites, references to imported shortcut packs, window position) are stored locally on your device using macOS UserDefaults.',
             'KeyShortcut does not request Accessibility permission and does not monitor your keystrokes. Active app detection reads only the identifier of the frontmost app.',
             'The keyshortcut.com website uses Cloudflare Web Analytics (cookie-free, no personal data) and Google AdSense. These services apply only to the website, not the app.',
           ],
@@ -750,7 +750,6 @@ export const CONTENT = {
               type: 'list',
               items: [
                 'Favorited shortcuts',
-                'Custom shortcuts you create',
                 'Window position and appearance settings',
                 'Language preference',
                 'Imported shortcut pack file references',

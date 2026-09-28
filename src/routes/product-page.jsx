@@ -94,7 +94,7 @@ const SOFTWARE_APP_JSONLD = JSON.stringify({
   name: 'KeyShortcut',
   operatingSystem: 'macOS',
   applicationCategory: 'UtilitiesApplication',
-  description: `Floating keyboard shortcut panel for macOS. ${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts across ${MAC_APP_COUNT} apps with active app detection, search, and custom shortcuts.`,
+  description: `Floating keyboard shortcut panel for macOS. ${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts across ${MAC_APP_COUNT} apps with active app detection and search.`,
   url: pageUrl('/mac-hud'),
   ...(APP_STORE_URL ? { downloadUrl: APP_STORE_URL } : {}),
   offers: {
