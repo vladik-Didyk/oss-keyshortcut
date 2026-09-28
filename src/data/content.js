@@ -419,7 +419,7 @@ export const CONTENT = {
             'Zero data collection in the app \u2014 we never see or access your information.',
             'All app data stays on your device in the macOS app sandbox.',
             'No third-party SDKs, analytics, or advertising frameworks in the app.',
-            'No cloud sync \u2014 your settings live exclusively on your Mac.',
+            'Your settings are not synced anywhere. They stay on your Mac.',
             'Uninstalling KeyShortcut removes all associated data from your system.',
             'The website uses Cloudflare Web Analytics and Google AdSense. See our full privacy policy for details.',
           ],
