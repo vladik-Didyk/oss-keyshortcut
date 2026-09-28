@@ -35,6 +35,7 @@ const staticPages = [
   { loc: '/guides', priority: '0.7', changefreq: 'weekly' },
   { loc: '/cheat-sheets', priority: '0.7', changefreq: 'weekly' },
   { loc: '/about', priority: '0.5', changefreq: 'monthly' },
+  { loc: '/sponsor', priority: '0.4', changefreq: 'monthly' },
   { loc: '/privacy', priority: '0.3', changefreq: 'yearly' },
 ]
 

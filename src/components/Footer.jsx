@@ -6,6 +6,8 @@ import { COMPARISONS } from '../data/comparisons.js'
 import { trackEvent } from '../lib/analytics'
 import { openCookieSettings } from '../lib/consent'
 import { HAS_AFFILIATE_LINKS } from '../data/affiliates'
+import { getSupportLink } from '../data/support'
+import SupportLink from './SupportLink'
 
 // Turn a comparison slug pair into a readable label, e.g.
 // { slugA: 'vscode', slugB: 'cursor' } → "VS Code vs Cursor".
@@ -91,6 +93,17 @@ export default function Footer() {
               >
                 {footer.cookieSettings}
               </button>
+              {getSupportLink() && (
+                <>
+                  {' · '}
+                  <SupportLink
+                    location="footer"
+                    className="text-[13px] text-theme-muted underline underline-offset-2 hover:text-theme-text"
+                  >
+                    {footer.supportLink}
+                  </SupportLink>
+                </>
+              )}
             </span>
             {HAS_AFFILIATE_LINKS && (
               <span className="text-[12px] text-theme-muted">{footer.affiliateNote}</span>

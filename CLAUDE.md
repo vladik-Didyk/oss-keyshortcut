@@ -81,6 +81,7 @@ Route modules live in `src/routes/` and export `loader`, `meta`, and a default c
 - `compare-page.jsx` — `/compare/:slug` Side-by-side app shortcut comparison (slug format: `appA-vs-appB`)
 - `privacy.jsx` — `/privacy` Privacy policy
 - `about.jsx` — `/about` About page
+- `sponsor.jsx` — `/sponsor` Sponsor offer: terms, prices, booking (server `loader` counts the app pages that hold the slot)
 - `redirect-directory.jsx` — `/directory` → `/` redirect (301)
 - `redirect-legacy.jsx` — `/shortcuts/*` legacy redirects (301)
 - `catch-all.jsx` — `*` 404 catch-all
@@ -231,7 +232,10 @@ Reference implementation (non-SSR variant) at `Personal-Portfolio/src/lib/analyt
 
 - **AdSense units:** `src/data/ads.js`. One In-article unit serves all placements (`IN_ARTICLE_UNIT`); a placement with an empty ID renders nothing. `AdSlot` never hides the slot with `display:none` before fill (AdSense then measures width 0 and never fills); card styling and the "Advertisements" label appear on fill, and `index.css` collapses `data-ad-status="unfilled"`. Ads render only in production builds.
 - **Affiliate links:** `src/data/affiliates.js`, keyed by app slug, plus `PLATFORM_FALLBACK` (Setapp on macOS pages). Kept out of Supabase because CI's `pnpm export` rewrites `public/data/`. Empty `url` = nothing renders. `AffiliateLink` uses `rel="sponsored nofollow noopener"`, puts the disclosure beside the button, fires `affiliate_clicked`. Programs: Adobe (Partnerize), Raycast (Rewardful), 1Password (CJ), Canva (Impact), Setapp (Impact). Figma closed its program (Jan 2025).
-- **Sponsors:** `src/data/sponsors.js` (`sitewide` or `byPath`). A sponsor replaces the mid-page AdSense unit on app pages; without one, a "sponsor this page" mailto link shows there. Sponsor images must be in `public/images/sponsors/` (CSP).
+- **Sponsors:** `src/data/sponsors.js` (`sitewide` or `byPath`). A sponsor replaces the mid-page AdSense unit on app pages; without one, a "sponsor this page" link to `/sponsor?page=<path>` shows there. Sponsor images must be in `public/images/sponsors/` (CSP).
+- **Sponsor offer (`/sponsor`):** prices, Stripe Payment Links and the go-live promise are `SPONSOR_OFFER` in `src/data/sponsors.js`; copy is `CONTENT.sponsorPage`. An option with an empty `paymentLink` books by email, so the page works before the links exist. `firstMonthCode` (a Stripe promotion code) switches the half-price line on. The page may state one audience figure, `SPONSOR_AUDIENCE`, always with its source and period; a test fails if the page mentions pageviews, click rates or income. `?page=` is accepted only when it has the shape of an app page (`isAppPagePath`).
+- **Selling a slot:** put the sponsor in `SPONSORS.sitewide` or `SPONSORS.byPath`, add the logo to `public/images/sponsors/`, deploy. A taken sitewide slot hides its booking button on `/sponsor`.
+- **Voluntary support:** `SUPPORT_LINK` in `src/data/support.js` (a Stripe Payment Link where the visitor chooses the amount). Empty = nothing renders. When set, `SupportLink` shows in the footer and on `/cheat-sheets`.
 - **Disclosures** live in three places: `content.js` (privacy + About "How the Site Is Funded"), `public/privacy.html` (served at `/privacy`, see Deployment), and next to each link.
 
 ### Deployment

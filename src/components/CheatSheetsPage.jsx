@@ -2,6 +2,9 @@ import { useState, useMemo } from 'react'
 import { Link, useLoaderData } from 'react-router'
 import { Search, X, Download } from '../utils/icons'
 import AdSlot from './AdSlot'
+import SupportLink from './SupportLink'
+import { getSupportLink } from '../data/support'
+import { CONTENT } from '../data/content'
 import GuideCtaBanner from './GuideCtaBanner'
 
 export default function CheatSheetsPage() {
@@ -55,6 +58,15 @@ export default function CheatSheetsPage() {
             nearby helps bridge the gap between looking them up and recalling them from
             muscle memory.
           </p>
+          {getSupportLink() && (
+            <p className="text-theme-muted leading-relaxed mt-4">
+              {CONTENT.support.cheatSheets.before}
+              <SupportLink location="cheat_sheets" className="text-accent underline underline-offset-2 hover:no-underline">
+                {CONTENT.support.cheatSheets.link}
+              </SupportLink>
+              {CONTENT.support.cheatSheets.after}
+            </p>
+          )}
         </div>
 
         {/* Filters */}

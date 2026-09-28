@@ -8,7 +8,7 @@ export default {
   routeDiscovery: { mode: "initial" },
   async prerender() {
     const dataDir = join(process.cwd(), "public/data");
-    const paths = ["/", "/mac-hud", "/privacy", "/about", "/guides", "/cheat-sheets", "/compare"];
+    const paths = ["/", "/mac-hud", "/privacy", "/about", "/sponsor", "/guides", "/cheat-sheets", "/compare"];
 
     // Guide pages — import slugs from guide data
     const { GUIDES } = await import("./src/data/guides/index.js");

@@ -1,5 +1,6 @@
 import { APP_COUNT, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL } from './siteConfig'
 import { APP_NOTES } from './appNotes'
+import { SPONSOR_OFFER, SPONSOR_AUDIENCE } from './sponsors'
 import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys } from '../utils/appCopy'
 
 /**
@@ -72,6 +73,7 @@ export const CONTENT = {
           heading: 'Company',
           links: [
             { label: 'About', to: '/about' },
+            { label: 'Sponsor', to: '/sponsor' },
             { label: 'Privacy Policy', to: '/privacy' },
             { label: 'Terms of Use', to: '/privacy#terms' },
           ],
@@ -107,6 +109,8 @@ export const CONTENT = {
       ],
       copyright: 'KeyShortcut. All rights reserved.',
       cookieSettings: 'Cookie settings',
+      // Shown only when SUPPORT_LINK is set (src/data/support.js).
+      supportLink: 'Support this site',
       affiliateNote: 'Some links on this site are affiliate links. If you buy through one, we may earn a commission at no extra cost to you.',
       bottomTagline: 'Made for people who love shortcuts.',
     },
@@ -667,6 +671,7 @@ export const CONTENT = {
             { type: 'paragraph', text: 'The website is free. It is paid for by ads, sponsors, affiliate links and the KeyShortcut Mac app.' },
             { type: 'paragraph', text: 'Some "Get" buttons on app pages are affiliate links, and each one is labeled. If you buy through one, we may earn a commission at no extra cost to you. The seller may set a cookie to credit the sale to us; that cookie is governed by the seller\u2019s privacy policy.' },
             { type: 'paragraph', text: 'Sponsored placements are labeled "Sponsored". Sponsors and affiliate programs do not change which shortcuts we list or how we describe them.' },
+            { type: 'paragraph', text: 'Payments for sponsorships and for voluntary support of the site are handled by Stripe. We never see or store card numbers. Stripe’s privacy policy applies to the payment.' },
           ],
         },
         {
@@ -866,7 +871,7 @@ export const CONTENT = {
         paragraphs: [
           'The directory is free. Ads (Google AdSense), page sponsors, affiliate links and the KeyShortcut Mac app pay for it.',
           'Affiliate links and sponsored placements are labeled. If you buy through an affiliate link, we may earn a commission at no extra cost to you. Sponsors and affiliate programs do not change which shortcuts we list or how we describe them.',
-          `To sponsor a page, email ${SUPPORT_EMAIL}.`,
+          `To sponsor the site or one page, see keyshortcut.com/sponsor, or email ${SUPPORT_EMAIL}.`,
         ],
       },
     ],
@@ -902,6 +907,88 @@ export const CONTENT = {
     },
   },
 
+  // ─── Sponsor page (/sponsor) ──────────────────────────────────────
+  // Every figure here is computed from the data or comes from SPONSOR_AUDIENCE,
+  // which carries its source and period. Do not add a number that was not measured.
+  sponsorPage: {
+    title: 'Sponsor KeyShortcut',
+    lead: 'One sponsor slot: a labeled card in the middle of the app pages. Month to month.',
+    fromPage: (path) => `You came from ${path}. You can book that page alone, or the whole site.`,
+
+    offer: {
+      title: 'What you get',
+      items: ({ slotPages, appPages }) => [
+        `A card labeled "Sponsored" in the middle of the shortcut list, on ${slotPages} of the ${appPages} app pages. The other pages are too short to hold one.`,
+        'Your name, one line of text and a link. A logo up to 96 px tall if you want one.',
+        'One sponsor per page. Your card takes the place of the ad in that spot.',
+        'Your link carries ?ref=keyshortcut, so the clicks show up in your own analytics.',
+      ],
+    },
+
+    audience: {
+      title: 'Who sees it',
+      items: () => [
+        `People looking up keyboard shortcuts for ${APP_COUNT} apps on macOS, Windows and Linux: ${formatShortcutCount()} shortcuts, taken from the apps’ official documentation.`,
+        `${SPONSOR_AUDIENCE.monthlyVisitors} unique visitors a month (${SPONSOR_AUDIENCE.source}, ${SPONSOR_AUDIENCE.period}).`,
+      ],
+      // The slot is new. Say so instead of guessing a click rate.
+      unknown: 'What I don’t have yet: click numbers for this slot. It is new.',
+      unknownWithOffer: 'What I don’t have yet: click numbers for this slot. It is new, which is why the first month is half price.',
+    },
+
+    price: {
+      title: 'Price',
+      sitewide: { name: 'The whole site', detail: 'Your card on every app page that has the slot.' },
+      page: { name: 'One page', detail: 'Your card on one app page of your choice.' },
+      perMonth: 'a month',
+      terms: 'Month to month. Cancel any time, and the card comes off at the end of the paid month.',
+      firstMonth: (code) => `The first month is half price with the code ${code} at checkout.`,
+      taken: 'Taken right now. Email me to be told when it opens.',
+    },
+
+    steps: {
+      title: 'How it works',
+      items: ({ email, days }) => [
+        'Pay by card. Stripe handles the payment.',
+        `Email your name, your line of text, your link and an optional logo to ${email}.`,
+        `Your card is live within ${days} business days of both. If it isn’t, I refund the month.`,
+      ],
+      byEmail: ({ email }) => [
+        `Email ${email} with your name, your line of text and your link.`,
+        'I reply with a payment link. Stripe handles the payment.',
+        'Your card goes live after the payment.',
+      ],
+    },
+
+    rules: {
+      title: 'Rules',
+      items: [
+        'Every card is labeled "Sponsored", and its link is marked as sponsored for search engines.',
+        'A sponsor does not change which shortcuts are listed or how they are described.',
+        'Not accepted: gambling, crypto, adult content, and medical, legal or financial advice.',
+        'I can decline a sponsor. If I decline after you paid, you get a full refund.',
+      ],
+    },
+
+    cta: {
+      sitewide: (price) => `Book the whole site — $${price} a month`,
+      page: (price) => `Book one page — $${price} a month`,
+      pageNamed: (path, price) => `Book ${path} — $${price} a month`,
+      byEmailNote: 'Card payment for this option is being set up. The button opens an email to me.',
+    },
+
+    contact: (email) => `Questions first? Write to ${email}.`,
+  },
+
+  // ─── Cheat sheets page: voluntary support (shown only when SUPPORT_LINK is set) ──
+  support: {
+    cheatSheets: {
+      before: 'The cheat sheets are free. If one saved you time, you can ',
+      link: 'support the site',
+      after: '.',
+    },
+  },
+
   // ─── Route meta (SEO) ─────────────────────────────────────────────
   meta: {
     home: {
@@ -923,6 +1010,11 @@ export const CONTENT = {
       title: 'About KeyShortcut \u2014 Keyboard Shortcuts Directory',
       description: 'Learn about KeyShortcut, the free keyboard shortcuts directory for macOS, Windows, and Linux. Our mission, approach, and how to get in touch.',
       url: 'https://keyshortcut.com/about',
+    },
+    sponsor: {
+      title: 'Sponsor KeyShortcut \u2014 One Slot on Every App Page',
+      description: `One labeled sponsor card on the app pages of a keyboard shortcuts directory covering ${APP_COUNT} apps. $${SPONSOR_OFFER.sitewide.price} a month sitewide, $${SPONSOR_OFFER.page.price} a month for one page. Month to month.`,
+      url: 'https://keyshortcut.com/sponsor',
     },
     guidesIndex: {
       title: 'Keyboard Shortcut Guides & Tips \u2014 KeyShortcut',

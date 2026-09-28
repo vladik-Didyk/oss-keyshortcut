@@ -5,6 +5,7 @@ export default [
     index("./routes/home.jsx"),
     route("privacy", "./routes/privacy.jsx"),
     route("about", "./routes/about.jsx"),
+    route("sponsor", "./routes/sponsor.jsx"),
     route("guides", "./routes/guides-index.jsx"),
     route("guides/:slug", "./routes/guide-page.jsx"),
     route("cheat-sheets", "./routes/cheat-sheets.jsx"),

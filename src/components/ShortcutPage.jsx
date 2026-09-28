@@ -11,7 +11,7 @@ import { APP_STORE_URL } from '../data/siteConfig'
 import AdSlot from './AdSlot'
 import AffiliateLink from './AffiliateLink'
 import { getAffiliate } from '../data/affiliates'
-import { getSponsor, sponsorMailto } from '../data/sponsors'
+import { getSponsor, sponsorPageLink, MIN_SECTIONS_FOR_SLOT } from '../data/sponsors'
 import { APP_NOTES } from '../data/appNotes'
 import { noteFitsApp, fittingTips, resolveNoteText, resolveEssentials, everydayShortcuts, largestSections } from '../utils/appCopy'
 import { tokenize } from '../utils/searchHelpers'
@@ -508,18 +508,18 @@ export default function ShortcutPage() {
                     </tbody>
                   </table>
                 </div>
-                {idx === 1 && filteredSections.length >= 3 && !search && (
+                {idx === 1 && filteredSections.length >= MIN_SECTIONS_FOR_SLOT && !search && (
                   <>
                     <AdSlot adSlot="shortcut_mid" variant="in-article" sponsor={sponsor} />
                     {!sponsor && (
                       <p className="text-center text-[12px] text-theme-muted -mt-2 mb-6">
-                        <a
-                          href={sponsorMailto(pagePath, app.displayName)}
+                        <Link
+                          to={sponsorPageLink(pagePath)}
                           onClick={() => trackEvent('sponsor_cta_clicked', { app: slug, platform })}
                           className="underline underline-offset-2 hover:text-theme-text"
                         >
                           {sp.sponsorCta(app.displayName)}
-                        </a>
+                        </Link>
                       </p>
                     )}
                   </>
