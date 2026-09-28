@@ -584,7 +584,7 @@ export const CONTENT = {
             fromNote
               ? {
                   question: `Which ${name} shortcuts should I learn first?`,
-                  answer: `Start with ${list}. They cover the actions you repeat most in ${name}; the sections below list the rest.`,
+                  answer: `Start with ${list}. The sections on this page list the rest.`,
                 }
               : {
                   question: `Which everyday actions have shortcuts in ${name}?`,
