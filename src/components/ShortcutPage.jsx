@@ -157,15 +157,24 @@ export default function ShortcutPage() {
 
   const activeId = useScrollspy(sectionIds)
 
-  // Measure header bottom to position sticky section titles below it
+  // Sticky section titles sit under the navbar (48px), plus the header when the
+  // header is itself sticky (lg and up). On phones the header scrolls away, so
+  // adding its height left the titles pinned mid-screen.
   useEffect(() => {
     const el = headerRef.current
     if (!el) return
-    const update = () => setStickyTop(48 + el.offsetHeight)
+    const update = () => {
+      const headerPinned = getComputedStyle(el).position === 'sticky'
+      setStickyTop(48 + (headerPinned ? el.offsetHeight : 0))
+    }
     update()
-    const ro = new ResizeObserver(update)
-    ro.observe(el)
-    return () => ro.disconnect()
+    const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(update) : null
+    ro?.observe(el)
+    window.addEventListener('resize', update)
+    return () => {
+      ro?.disconnect()
+      window.removeEventListener('resize', update)
+    }
   }, [])
 
   // Track shortcut page view (top of conversion funnel)
