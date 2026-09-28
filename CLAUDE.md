@@ -345,3 +345,9 @@ Hand-written prose for app pages: an overview, 2–3 tips, 4–6 "start with the
 - `sections` lists the section names the text mentions. A note is used only on a page that has them (`noteFitsApp`).
 - No counts, no history, no claims the shortcut list does not show. `src/test/app-notes.test.js` also fails on a sentence that two apps share once the app name and the actions are removed.
 - `src/test/unsourced-claims.test.js` fails if "working days" or "Brainscape" appears anywhere under `src/` (an unsourced statistic, removed 2026-09-28).
+
+### Official docs links
+
+- The link of an app is stored in Supabase (`apps.docs_url`) and exported to `public/data` as `docsUrl`. Change it with `node scripts/set-docs-url.mjs <slug> <https address | none>` (`--dry-run` shows the change), then `pnpm export` and deploy. A change in `public/data` alone is lost at the next export.
+- `node scripts/check-docs-links.mjs` checks every link the site shows. No database, no AI, no keys. `.github/workflows/docs-link-check.yml` runs it on Mondays and keeps one issue, "Dead official docs links".
+- The workflow "Shortcut Sync" has no schedule. It is started by hand and is a dry run unless told otherwise: its extraction is not reliable enough to write to the database unattended.

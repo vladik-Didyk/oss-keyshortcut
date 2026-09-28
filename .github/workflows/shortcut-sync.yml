@@ -1,11 +1,10 @@
 name: Shortcut Sync
 
+# Started by hand only, and as a dry run unless told otherwise. It ran on a
+# schedule until 2026; the extraction is not reliable enough to write to the
+# database unattended (it proposed Windows shortcuts for a macOS page). The
+# weekly check of the links is docs-link-check.yml.
 on:
-  schedule:
-    # Tier 1 apps: every Monday at 06:00 UTC
-    - cron: '0 6 * * 1'
-    # Tier 2 apps: 1st and 15th of each month at 07:00 UTC
-    - cron: '0 7 1,15 * *'
   workflow_dispatch:
     inputs:
       app_slug:
@@ -20,7 +19,7 @@ on:
       dry_run:
         description: 'Dry run (no writes)'
         type: boolean
-        default: false
+        default: true
 
 jobs:
   sync:
