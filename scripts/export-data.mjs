@@ -15,6 +15,7 @@ import { createClient } from "@supabase/supabase-js";
 import { mkdirSync, writeFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { cleanApps } from "./lib/clean-platform-data.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -203,7 +204,9 @@ async function main() {
 
   // Fetch apps for all platforms in parallel
   console.log("\nFetching apps per platform...");
-  const appResults = await Promise.all(platforms.map((p) => fetchPlatformApps(p.id)));
+  // cleanApps: humanize untranslated action keys, merge duplicate sections,
+  // drop duplicate rows (see scripts/lib/clean-platform-data.mjs).
+  const appResults = (await Promise.all(platforms.map((p) => fetchPlatformApps(p.id)))).map(cleanApps);
   const allApps = {};
   platforms.forEach((p, i) => { allApps[p.id] = appResults[i]; });
 

@@ -689,7 +689,7 @@
       "slug": "clickup",
       "displayName": "ClickUp",
       "category": "Productivity",
-      "shortcutCount": 130,
+      "shortcutCount": 128,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/clickup.webp",
       "docsUrl": "https://help.clickup.com/hc/en-us/articles/6309030550167-Use-keyboard-shortcuts",
       "sections": [
@@ -1203,11 +1203,6 @@
           "shortcuts": [
             {
               "modifiers": [],
-              "key": "M",
-              "action": "Assign to Self"
-            },
-            {
-              "modifiers": [],
               "key": "A",
               "action": "Add to Priorities"
             },
@@ -1351,13 +1346,6 @@
               ],
               "key": "C",
               "action": "Copy"
-            },
-            {
-              "modifiers": [
-                "Ctrl"
-              ],
-              "key": "V",
-              "action": "Paste"
             },
             {
               "modifiers": [

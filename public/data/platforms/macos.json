@@ -458,7 +458,7 @@
                 "⌘"
               ],
               "key": "G",
-              "action": "shortcuts.acrobat.findPreviousResult"
+              "action": "Find previous result"
             },
             {
               "modifiers": [
@@ -767,7 +767,7 @@
       "slug": "after-effects",
       "displayName": "After Effects",
       "category": "Design",
-      "shortcutCount": 244,
+      "shortcutCount": 241,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/after-effects.webp",
       "docsUrl": "https://helpx.adobe.com/after-effects/using/keyboard-shortcuts-reference.html",
       "sections": [
@@ -931,6 +931,209 @@
               ],
               "key": "[",
               "action": "Send To Back"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "Y",
+              "action": "New solid layer"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "Y",
+              "action": "New null layer"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "Y",
+              "action": "New adjustment layer"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "↓",
+              "action": "Select next layer in stacking order"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "↑",
+              "action": "Select previous layer in stacking order"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "↓",
+              "action": "Extend selection to next layer in stacking order"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "↑",
+              "action": "Extend selection to previous layer in stacking order"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "A",
+              "action": "Deselect all layers"
+            },
+            {
+              "modifiers": [],
+              "key": "X",
+              "action": "Scroll topmost selected layer to top of timeline panel"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "F4",
+              "action": "Show or hide parent column"
+            },
+            {
+              "modifiers": [],
+              "key": "F4",
+              "action": "Show or hide layer switches and modes columns"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "B",
+              "action": "Setting the sampling method for selected layers"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧"
+              ],
+              "key": "B",
+              "action": "Setting the sampling method for selected layers"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "V",
+              "action": "Turn video switch on or off for selected layers"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "V",
+              "action": "Turn off video switch for all video layers other than selected layers"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "Y",
+              "action": "Open settings dialog box for selected solid light camera null or adjustment layer"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "V",
+              "action": "Paste layers at current time"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "D",
+              "action": "Split selected layers"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "T",
+              "action": "Open effect controls panel for selected layers"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "R",
+              "action": "Reverse selected layers in time"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "T",
+              "action": "Enable time remapping for selected layers"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": ",",
+              "action": "Set in point or out point by timestretching"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "Home",
+              "action": "Move selected layers so that their in point is at beginning of composition"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "End",
+              "action": "Move selected layers so that their out point is at end of composition"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "L",
+              "action": "Lock selected layers"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "L",
+              "action": "Unlock all layers"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "(hyphen)",
+              "action": "Cycle forward or backward through blending modes for selected layers"
             }
           ]
         },
@@ -1022,17 +1225,17 @@
                 "⌘"
               ],
               "key": "A",
-              "action": "shortcuts.after-effects.selectAll"
+              "action": "Select all"
             },
             {
               "modifiers": [],
               "key": "F2",
-              "action": "shortcuts.after-effects.deselectAll"
+              "action": "Deselect all"
             },
             {
               "modifiers": [],
               "key": "↩",
-              "action": "shortcuts.after-effects.renameSelectedLayerCompositionFolderEffectGroupOrMask"
+              "action": "Rename selected layer composition folder effect group or mask"
             },
             {
               "modifiers": [
@@ -1040,7 +1243,7 @@
                 "⌘"
               ],
               "key": "↓",
-              "action": "shortcuts.after-effects.moveSelectedLayersMasksEffectsOrRenderItemsDownOrUpInStackingOrder"
+              "action": "Move selected layers masks effects or render items down or up in stacking order"
             },
             {
               "modifiers": [
@@ -1049,35 +1252,35 @@
                 "⌘"
               ],
               "key": "↓",
-              "action": "shortcuts.after-effects.moveSelectedLayersMasksEffectsOrRenderItemsToBottomOrTopOfStackingOrder"
+              "action": "Move selected layers masks effects or render items to bottom or top of stacking order"
             },
             {
               "modifiers": [
                 "⇧"
               ],
               "key": "↓",
-              "action": "shortcuts.after-effects.extendSelectionToNextItemInProjectPanelRenderQueuePanelOrEffectControlsPanel"
+              "action": "Extend selection to next item in project panel render queue panel or effect controls panel"
             },
             {
               "modifiers": [
                 "⇧"
               ],
               "key": "↑",
-              "action": "shortcuts.after-effects.extendSelectionToPreviousItemInProjectPanelRenderQueuePanelOrEffectControlsPanel"
+              "action": "Extend selection to previous item in project panel render queue panel or effect controls panel"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "Q",
-              "action": "shortcuts.after-effects.quit"
+              "action": "Quit"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "Z",
-              "action": "shortcuts.after-effects.undo"
+              "action": "Undo"
             },
             {
               "modifiers": [
@@ -1085,12 +1288,12 @@
                 "⌘"
               ],
               "key": "Z",
-              "action": "shortcuts.after-effects.redo"
+              "action": "Redo"
             },
             {
               "modifiers": [],
               "key": "Esc",
-              "action": "shortcuts.after-effects.interruptRunningAScript"
+              "action": "Interrupt running a script"
             },
             {
               "modifiers": [
@@ -1098,7 +1301,7 @@
                 "⌘"
               ],
               "key": "E",
-              "action": "shortcuts.after-effects.displayFilenameCorrespondingToTheFrameAtTheCurrentTimeInTheInfoPanel"
+              "action": "Display filename corresponding to the frame at the current time in the info panel"
             }
           ]
         },
@@ -1111,7 +1314,7 @@
                 "⌘"
               ],
               "key": "N",
-              "action": "shortcuts.after-effects.newProject2"
+              "action": "New project"
             },
             {
               "modifiers": [
@@ -1120,7 +1323,7 @@
                 "⌘"
               ],
               "key": "P",
-              "action": "shortcuts.after-effects.openMostRecentProject"
+              "action": "Open most recent project"
             },
             {
               "modifiers": [
@@ -1129,7 +1332,7 @@
                 "⌘"
               ],
               "key": "N",
-              "action": "shortcuts.after-effects.newFolderInProjectPanel"
+              "action": "New folder in project panel"
             },
             {
               "modifiers": [
@@ -1138,14 +1341,14 @@
                 "⌘"
               ],
               "key": "K",
-              "action": "shortcuts.after-effects.openProjectSettingsDialogBox"
+              "action": "Open project settings dialog box"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "F",
-              "action": "shortcuts.after-effects.findInProjectPanel"
+              "action": "Find in project panel"
             }
           ]
         },
@@ -1158,7 +1361,7 @@
                 "⌘"
               ],
               "key": ";",
-              "action": "shortcuts.after-effects.openPreferencesDialogBox"
+              "action": "Open preferences dialog box"
             }
           ]
         },
@@ -1170,7 +1373,7 @@
                 "⌘"
               ],
               "key": "0",
-              "action": "shortcuts.after-effects.openOrCloseProjectPanel"
+              "action": "Open or close project panel"
             },
             {
               "modifiers": [
@@ -1178,89 +1381,89 @@
                 "⌘"
               ],
               "key": "0",
-              "action": "shortcuts.after-effects.openOrCloseRenderQueuePanel"
+              "action": "Open or close render queue panel"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "1",
-              "action": "shortcuts.after-effects.openOrCloseToolsPanel"
+              "action": "Open or close tools panel"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "2",
-              "action": "shortcuts.after-effects.openOrCloseInfoPanel"
+              "action": "Open or close info panel"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "3",
-              "action": "shortcuts.after-effects.openOrClosePreviewPanel"
+              "action": "Open or close preview panel"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "4",
-              "action": "shortcuts.after-effects.openOrCloseAudioPanel"
+              "action": "Open or close audio panel"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "5",
-              "action": "shortcuts.after-effects.openOrCloseEffectsPresetsPanel"
+              "action": "Open or close effects presets panel"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "6",
-              "action": "shortcuts.after-effects.openOrCloseCharacterPanel"
+              "action": "Open or close character panel"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "7",
-              "action": "shortcuts.after-effects.openOrCloseParagraphPanel"
+              "action": "Open or close paragraph panel"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "8",
-              "action": "shortcuts.after-effects.openOrClosePaintPanel"
+              "action": "Open or close paint panel"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "9",
-              "action": "shortcuts.after-effects.openOrCloseBrushesPanel"
+              "action": "Open or close brushes panel"
             },
             {
               "modifiers": [],
               "key": "F3",
-              "action": "shortcuts.after-effects.openOrCloseEffectControlsPanelForSelectedLayer"
+              "action": "Open or close effect controls panel for selected layer"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "F11",
-              "action": "shortcuts.after-effects.openFlowchartPanelForProjectFlowchart"
+              "action": "Open flowchart panel for project flowchart"
             },
             {
               "modifiers": [
                 "⇧"
               ],
               "key": "F10, ⇧ F11,",
-              "action": "shortcuts.after-effects.switchToWorkspace"
+              "action": "Switch to workspace"
             },
             {
               "modifiers": [
@@ -1268,19 +1471,19 @@
                 "⌘"
               ],
               "key": "W",
-              "action": "shortcuts.after-effects.closeActivePanelOrAllViewersOfTypeOfActiveViewerForExampleIfATimelinePanelIsActiveThisCommandClosesAllTimelinePanels"
+              "action": "Close active panel or all viewers of type of active viewer for example if a timeline panel is active this command closes all timeline panels"
             },
             {
               "modifiers": [],
               "key": "`",
-              "action": "shortcuts.after-effects.maximizeOrRestorePanelUnderPointer"
+              "action": "Maximize or restore panel under pointer"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "\\\\",
-              "action": "shortcuts.after-effects.resizeApplicationWindowOrFloatingWindowToFitScreen"
+              "action": "Resize application window or floating window to fit screen"
             },
             {
               "modifiers": [
@@ -1288,19 +1491,19 @@
                 "⌘"
               ],
               "key": "\\\\",
-              "action": "shortcuts.after-effects.moveApplicationWindowOrFloatingWindowToMainMonitorResizeWindowToFitScreen"
+              "action": "Move application window or floating window to main monitor resize window to fit screen"
             },
             {
               "modifiers": [],
               "key": "\\\\",
-              "action": "shortcuts.after-effects.toggleActivationBetweenCompositionPanelAndTimelinePanelForCurrentComposition"
+              "action": "Toggle activation between composition panel and timeline panel for current composition"
             },
             {
               "modifiers": [
                 "⇧"
               ],
               "key": ",",
-              "action": "shortcuts.after-effects.cycleToPreviousOrNextItemInActiveViewer"
+              "action": "Cycle to previous or next item in active viewer"
             },
             {
               "modifiers": [
@@ -1308,1278 +1511,8 @@
                 "⇧"
               ],
               "key": ",",
-              "action": "shortcuts.after-effects.cycleToPreviousOrNextPanelInActiveFrame"
-            }
-          ]
-        },
-        {
-          "name": "Activate",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "W",
-              "action": "shortcuts.after-effects.activateRotoBrushTool"
+              "action": "Cycle to previous or next panel in active frame"
             },
-            {
-              "modifiers": [],
-              "key": "C",
-              "action": "shortcuts.after-effects.activateAndCycleThroughCameraTools"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "T",
-              "action": "shortcuts.after-effects.activateAndCycleThroughTypeTools"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "B",
-              "action": "shortcuts.after-effects.activateAndCycleThroughBrushCloneStampAndEraserTools"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "P",
-              "action": "shortcuts.after-effects.activateAndCycleThroughPuppetTools"
-            }
-          ]
-        },
-        {
-          "name": "Composition",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "B",
-              "action": "shortcuts.after-effects.setWorkAreaToDurationOfSelectedLayersOrIfNoLayersAreSelectedSetWorkAreaToCompositionDuration"
-            },
-            {
-              "modifiers": [],
-              "key": "Tab",
-              "action": "shortcuts.after-effects.openCompositionMiniflowchartForActiveComposition"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "Esc",
-              "action": "shortcuts.after-effects.activateTheMostRecentlyActiveCompositionThatIsInTheSameCompositionHierarchyAsTheCurrentlyActiveComposition"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "X",
-              "action": "shortcuts.after-effects.trimCompositionToWorkArea"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "\\\\",
-              "action": "shortcuts.after-effects.newCompositionFromSelection"
-            }
-          ]
-        },
-        {
-          "name": "Time navigation",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥",
-                "⇧"
-              ],
-              "key": "J",
-              "action": "shortcuts.after-effects.goToSpecificTime"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "Home",
-              "action": "shortcuts.after-effects.goToBeginningOrEndOfWorkArea"
-            },
-            {
-              "modifiers": [],
-              "key": "Page Down",
-              "action": "shortcuts.after-effects.goForward1frame"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "Page Down",
-              "action": "shortcuts.after-effects.goForward10frames"
-            },
-            {
-              "modifiers": [],
-              "key": "Page Up",
-              "action": "shortcuts.after-effects.goBackward1frame"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "Page Up",
-              "action": "shortcuts.after-effects.goBackward10frames"
-            },
-            {
-              "modifiers": [],
-              "key": "I",
-              "action": "shortcuts.after-effects.goToLayerInPoint"
-            },
-            {
-              "modifiers": [],
-              "key": "O",
-              "action": "shortcuts.after-effects.goToLayerOutPoint"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "←",
-              "action": "shortcuts.after-effects.goToPreviousInPointOrOutPoint"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "→",
-              "action": "shortcuts.after-effects.goToNextInPointOrOutPoint"
-            },
-            {
-              "modifiers": [],
-              "key": "D",
-              "action": "shortcuts.after-effects.scrollToCurrentTimeInTimelinePanel"
-            }
-          ]
-        },
-        {
-          "name": "Previews",
-          "shortcuts": [
-            {
-              "modifiers": [],
-              "key": "F5, F6, F7,",
-              "action": "shortcuts.after-effects.displaySnapshotInActiveViewer"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "1",
-              "action": "shortcuts.after-effects.fastPreviewsOff"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "2",
-              "action": "shortcuts.after-effects.fastPreviewsAdaptiveResolution"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "3",
-              "action": "shortcuts.after-effects.fastPreviewsDraft"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "4",
-              "action": "shortcuts.after-effects.fastPreviewsFastDraft"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "5",
-              "action": "shortcuts.after-effects.fastPreviewsWireframe"
-            }
-          ]
-        },
-        {
-          "name": "Views",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥",
-                "⇧"
-              ],
-              "key": "4",
-              "action": "shortcuts.after-effects.toggleShowingStraightRgbColor"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "5",
-              "action": "shortcuts.after-effects.showAlphaBoundaryInLayerPanel"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "6",
-              "action": "shortcuts.after-effects.showAlphaOverlayInLayerPanel"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "X",
-              "action": "shortcuts.after-effects.showRefineEdgeXray"
-            },
-            {
-              "modifiers": [],
-              "key": ",",
-              "action": "shortcuts.after-effects.zoomoutInCompositionLayerOrFootagePanel"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "/",
-              "action": "shortcuts.after-effects.zoomToFitInCompositionLayerOrFootagePanel"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "/",
-              "action": "shortcuts.after-effects.zoomUpTo100toFitInCompositionLayerOrFootagePanel"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "U",
-              "action": "shortcuts.after-effects.openViewOptionsDialogBoxForActiveCompositionPanel"
-            },
-            {
-              "modifiers": [],
-              "key": ";",
-              "action": "shortcuts.after-effects.zoomInTimelinePanelToSingleframeUnits"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": ";",
-              "action": "shortcuts.after-effects.zoomOutInTimelinePanelToShowTheEntireCompositionDuration"
-            },
-            {
-              "modifiers": [],
-              "key": "Caps Lock",
-              "action": "shortcuts.after-effects.preventImagesFromBeingRenderedForPreviewsInViewerPanels"
-            },
-            {
-              "modifiers": [],
-              "key": "'",
-              "action": "shortcuts.after-effects.showOrHideSafeZones"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "'",
-              "action": "shortcuts.after-effects.showOrHideGrid"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "'",
-              "action": "shortcuts.after-effects.showOrHideProportionalGrid"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "R",
-              "action": "shortcuts.after-effects.showOrHideRulers"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": ";",
-              "action": "shortcuts.after-effects.showOrHideGuides"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "'",
-              "action": "shortcuts.after-effects.turnSnappingToGridOnOrOff"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": ";",
-              "action": "shortcuts.after-effects.turnSnappingToGuidesOnOrOff"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": ";",
-              "action": "shortcuts.after-effects.lockOrUnlockGuides"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "H",
-              "action": "shortcuts.after-effects.showOrHideLayerControls"
-            }
-          ]
-        },
-        {
-          "name": "Footage",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "I",
-              "action": "shortcuts.after-effects.importMultipleFilesOrImageSequences"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "/",
-              "action": "shortcuts.after-effects.addSelectedItemsToMostRecentlyActivatedComposition"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "/",
-              "action": "shortcuts.after-effects.replaceSelectedSourceFootageForSelectedLayersWithFootageItemSelectedInProjectPanel"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "Delete",
-              "action": "shortcuts.after-effects.deleteAFootageItemWithoutAWarning"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "G",
-              "action": "shortcuts.after-effects.openInterpretFootageDialogBoxForSelectedFootageItem"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "C",
-              "action": "shortcuts.after-effects.rememberFootageInterpretation"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "E",
-              "action": "shortcuts.after-effects.editSelectedFootageItemInApplicationWithWhichItsAssociated"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "H",
-              "action": "shortcuts.after-effects.replaceSelectedFootageItem"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "L",
-              "action": "shortcuts.after-effects.reloadSelectedFootageItems"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "P",
-              "action": "shortcuts.after-effects.setProxyForSelectedFootageItem"
-            }
-          ]
-        },
-        {
-          "name": "Effects and animation presets",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "E",
-              "action": "shortcuts.after-effects.deleteAllEffectsFromSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "E",
-              "action": "shortcuts.after-effects.applyMostRecentlyAppliedEffectToSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "F",
-              "action": "shortcuts.after-effects.applyMostRecentlyAppliedAnimationPresetToSelectedLayers"
-            }
-          ]
-        },
-        {
-          "name": "Layers",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "Y",
-              "action": "shortcuts.after-effects.newSolidLayer"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "Y",
-              "action": "shortcuts.after-effects.newNullLayer"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "Y",
-              "action": "shortcuts.after-effects.newAdjustmentLayer"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "↓",
-              "action": "shortcuts.after-effects.selectNextLayerInStackingOrder"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "↑",
-              "action": "shortcuts.after-effects.selectPreviousLayerInStackingOrder"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "↓",
-              "action": "shortcuts.after-effects.extendSelectionToNextLayerInStackingOrder"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "↑",
-              "action": "shortcuts.after-effects.extendSelectionToPreviousLayerInStackingOrder"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "A",
-              "action": "shortcuts.after-effects.deselectAllLayers"
-            },
-            {
-              "modifiers": [],
-              "key": "X",
-              "action": "shortcuts.after-effects.scrollTopmostSelectedLayerToTopOfTimelinePanel"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "F4",
-              "action": "shortcuts.after-effects.showOrHideParentColumn"
-            },
-            {
-              "modifiers": [],
-              "key": "F4",
-              "action": "shortcuts.after-effects.showOrHideLayerSwitchesAndModesColumns"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "B",
-              "action": "shortcuts.after-effects.settingTheSamplingMethodForSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧"
-              ],
-              "key": "B",
-              "action": "shortcuts.after-effects.settingTheSamplingMethodForSelectedLayers2"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "V",
-              "action": "shortcuts.after-effects.turnVideoSwitchOnOrOffForSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "V",
-              "action": "shortcuts.after-effects.turnOffVideoSwitchForAllVideoLayersOtherThanSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "Y",
-              "action": "shortcuts.after-effects.openSettingsDialogBoxForSelectedSolidLightCameraNullOrAdjustmentLayer"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "V",
-              "action": "shortcuts.after-effects.pasteLayersAtCurrentTime"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "D",
-              "action": "shortcuts.after-effects.splitSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "T",
-              "action": "shortcuts.after-effects.openEffectControlsPanelForSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "R",
-              "action": "shortcuts.after-effects.reverseSelectedLayersInTime"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "T",
-              "action": "shortcuts.after-effects.enableTimeRemappingForSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": ",",
-              "action": "shortcuts.after-effects.setInPointOrOutPointByTimestretching"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "Home",
-              "action": "shortcuts.after-effects.moveSelectedLayersSoThatTheirInPointIsAtBeginningOfComposition"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "End",
-              "action": "shortcuts.after-effects.moveSelectedLayersSoThatTheirOutPointIsAtEndOfComposition"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "L",
-              "action": "shortcuts.after-effects.lockSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "L",
-              "action": "shortcuts.after-effects.unlockAllLayers"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "(hyphen)",
-              "action": "shortcuts.after-effects.cycleForwardOrBackwardThroughBlendingModesForSelectedLayers"
-            }
-          ]
-        },
-        {
-          "name": "Showing properties and groups in the Timeline panel",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "`",
-              "action": "shortcuts.after-effects.toggleExpansionOfSelectedLayersToShowAllProperties"
-            },
-            {
-              "modifiers": [],
-              "key": "L",
-              "action": "shortcuts.after-effects.showOnlyAudioLevelsProperty"
-            },
-            {
-              "modifiers": [],
-              "key": "F",
-              "action": "shortcuts.after-effects.showOnlyMaskFeatherProperty"
-            },
-            {
-              "modifiers": [],
-              "key": "M",
-              "action": "shortcuts.after-effects.showOnlyMaskPathProperty"
-            },
-            {
-              "modifiers": [],
-              "key": "TT",
-              "action": "shortcuts.after-effects.showOnlyMaskOpacityProperty"
-            },
-            {
-              "modifiers": [],
-              "key": "RR",
-              "action": "shortcuts.after-effects.showOnlyTimeRemapProperty"
-            },
-            {
-              "modifiers": [],
-              "key": "FF",
-              "action": "shortcuts.after-effects.showOnlyInstancesOfMissingEffects"
-            },
-            {
-              "modifiers": [],
-              "key": "MM",
-              "action": "shortcuts.after-effects.showOnlyMaskPropertyGroups"
-            },
-            {
-              "modifiers": [],
-              "key": "AA",
-              "action": "shortcuts.after-effects.showOnlyMaterialOptionsPropertyGroup"
-            },
-            {
-              "modifiers": [],
-              "key": "EE",
-              "action": "shortcuts.after-effects.showOnlyExpressions"
-            },
-            {
-              "modifiers": [],
-              "key": "UU",
-              "action": "shortcuts.after-effects.showOnlyModifiedProperties"
-            },
-            {
-              "modifiers": [],
-              "key": "PP",
-              "action": "shortcuts.after-effects.showOnlyPaintStrokesRotoBrushStrokesAndPuppetPins"
-            },
-            {
-              "modifiers": [],
-              "key": "LL",
-              "action": "shortcuts.after-effects.showOnlyAudioWaveform"
-            },
-            {
-              "modifiers": [],
-              "key": "SS",
-              "action": "shortcuts.after-effects.showOnlySelectedPropertiesAndGroups"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "property",
-              "action": "shortcuts.after-effects.addOrRemovePropertyOrGroupFromSetThatIsShown"
-            }
-          ]
-        },
-        {
-          "name": "Modifying layer properties",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "O",
-              "action": "shortcuts.after-effects.openAutoorientationDialogBoxForSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "O",
-              "action": "shortcuts.after-effects.openOpacityDialogBoxForSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "R",
-              "action": "shortcuts.after-effects.openRotationDialogBoxForSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "P",
-              "action": "shortcuts.after-effects.openPositionDialogBoxForSelectedLayers"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "Home",
-              "action": "shortcuts.after-effects.centerselectedLayersInView"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "Home",
-              "action": "shortcuts.after-effects.centerAnchorPointInTheVisibleContent"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "Page Up",
-              "action": "shortcuts.after-effects.moveSelectedLayers1frameEarlierOrLater"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧"
-              ],
-              "key": "Page Up",
-              "action": "shortcuts.after-effects.moveSelectedLayers10framesEarlierOrLater"
-            },
-            {
-              "modifiers": [],
-              "key": "(plus)",
-              "action": "shortcuts.after-effects.increaseOrDecreaseRotationOfSelectedLayersBy1"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "(plus)",
-              "action": "shortcuts.after-effects.increaseOrDecreaseRotationOfSelectedLayersBy10"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "(plus)",
-              "action": "shortcuts.after-effects.increaseScaleOfSelectedLayersBy1"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "(minus)",
-              "action": "shortcuts.after-effects.decreaseScaleOfSelectedLayersBy1"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "(plus)",
-              "action": "shortcuts.after-effects.increaseScaleOfSelectedLayersBy10"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "(minus)",
-              "action": "shortcuts.after-effects.decreaseScaleOfSelectedLayersBy10"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "F",
-              "action": "shortcuts.after-effects.scaleAndRepositionSelectedLayersToFitComposition"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "H",
-              "action": "shortcuts.after-effects.scaleAndRepositionSelectedLayersToFitCompositionWidthPreservingImageAspectRatioForEachLayer"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "G",
-              "action": "shortcuts.after-effects.scaleAndRepositionSelectedLayersToFitCompositionHeightPreservingImageAspectRatioForEachLayer"
-            }
-          ]
-        },
-        {
-          "name": "3D Layers",
-          "shortcuts": [
-            {
-              "modifiers": [],
-              "key": "F10",
-              "action": "shortcuts.after-effects.switchTo3dView1"
-            },
-            {
-              "modifiers": [],
-              "key": "F11",
-              "action": "shortcuts.after-effects.switchTo3dView2"
-            },
-            {
-              "modifiers": [],
-              "key": "F12",
-              "action": "shortcuts.after-effects.switchTo3dView3"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "L",
-              "action": "shortcuts.after-effects.newLight"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "C",
-              "action": "shortcuts.after-effects.newCamera"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "\\\\",
-              "action": "shortcuts.after-effects.moveTheCameraAndItsPointOfInterestToLookAtSelected3dLayers"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "F",
-              "action": "shortcuts.after-effects.withACameraToolSelectedMoveTheCameraAndItsPointOfInterestToLookAtAll3dLayers"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧"
-              ],
-              "key": "C",
-              "action": "shortcuts.after-effects.turnCastsShadowsPropertyOnOrOffForSelected3dLayers"
-            }
-          ]
-        },
-        {
-          "name": "Keyframes and the Graph Editor",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "F3",
-              "action": "shortcuts.after-effects.toggleBetweenGraphEditorAndLayerBarModes"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "A",
-              "action": "shortcuts.after-effects.selectAllVisibleKeyframesAndProperties"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "F2",
-              "action": "shortcuts.after-effects.deselectAllKeyframesPropertiesAndPropertyGroups"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "→",
-              "action": "shortcuts.after-effects.moveKeyframe1frameLaterOrEarlier"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧"
-              ],
-              "key": "→",
-              "action": "shortcuts.after-effects.moveKeyframe10framesLaterOrEarlier"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "K",
-              "action": "shortcuts.after-effects.setInterpolationForSelectedKeyframes"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "H",
-              "action": "shortcuts.after-effects.setKeyframeInterpolationMethodToHoldOrAutoBezier"
-            },
-            {
-              "modifiers": [],
-              "key": "F9",
-              "action": "shortcuts.after-effects.easyEaseSelectedKeyframes"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "F9",
-              "action": "shortcuts.after-effects.easyEaseSelectedKeyframesIn"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "F9",
-              "action": "shortcuts.after-effects.easyEaseSelectedKeyframesOut"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "K",
-              "action": "shortcuts.after-effects.setVelocityForSelectedKeyframes"
-            }
-          ]
-        },
-        {
-          "name": "Text",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "T",
-              "action": "shortcuts.after-effects.newTextLayer"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "→",
-              "action": "shortcuts.after-effects.extendOrReduceSelectionByOneCharacterToRightOrLeftInHorizontalText"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "→",
-              "action": "shortcuts.after-effects.extendOrReduceSelectionByOneWordToRightOrLeftInHorizontalText"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "Home",
-              "action": "shortcuts.after-effects.selectTextFromInsertionPointToBeginningOrEndOfTextFrame"
-            },
-            {
-              "modifiers": [],
-              "key": "←",
-              "action": "shortcuts.after-effects.inHorizontalTextMoveInsertionPointOneCharacterLeftOrRightOneLineUpOrDownOneWordLeftOrRightOrOneParagraphUpOrDown"
-            },
-            {
-              "modifiers": [],
-              "key": "↑",
-              "action": "shortcuts.after-effects.inVerticalTextMoveInsertionPointOneCharacterUpOrDownOneLeftOrRightOneWordUpOrDownOrOneParagraphLeftOrRight"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "=",
-              "action": "shortcuts.after-effects.turnSuperscriptOnOrOffForSelectedText"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "=",
-              "action": "shortcuts.after-effects.turnSubscriptOnOrOffForSelectedText"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "X",
-              "action": "shortcuts.after-effects.setVerticalScaleTo100forSelectedText"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "A",
-              "action": "shortcuts.after-effects.autoLeadingForSelectedText"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "J",
-              "action": "shortcuts.after-effects.justifyParagraphLeftAlignLastLine"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "J",
-              "action": "shortcuts.after-effects.justifyParagraphRightAlignLastLine"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": ",",
-              "action": "shortcuts.after-effects.decreaseOrIncreaseFontSizeOfSelectedTextBy10units"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "↓",
-              "action": "shortcuts.after-effects.increaseOrDecreaseLeadingBy2units"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧"
-              ],
-              "key": "↓",
-              "action": "shortcuts.after-effects.decreaseOrIncreaseBaselineShiftBy2units"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "←",
-              "action": "shortcuts.after-effects.decreaseOrIncreaseKerningOrTracking20units"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "←",
-              "action": "shortcuts.after-effects.decreaseOrIncreaseKerningOrTracking100units"
-            }
-          ]
-        },
-        {
-          "name": "Masks",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "`",
-              "action": "shortcuts.after-effects.selectNextOrPreviousMask"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "I",
-              "action": "shortcuts.after-effects.invertSelectedMask"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "M",
-              "action": "shortcuts.after-effects.openMaskShapeDialogBoxForSelectedMask"
-            }
-          ]
-        },
-        {
-          "name": "Paint tools",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "Page Up",
-              "action": "shortcuts.after-effects.moveEarlierOrLaterByNumberOfFramesSpecifiedForStrokeDuration"
-            }
-          ]
-        },
-        {
-          "name": "Shape Layers",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "G",
-              "action": "shortcuts.after-effects.groupSelectedShapes"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "G",
-              "action": "shortcuts.after-effects.ungroupSelectedShapes"
-            }
-          ]
-        },
-        {
-          "name": "Saving, exporting, and rendering",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "S",
-              "action": "shortcuts.after-effects.incrementAndSaveProject"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "/",
-              "action": "shortcuts.after-effects.addActiveCompositionOrSelectedItemsToRenderQueue"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "S",
-              "action": "shortcuts.after-effects.addCurrentFrameToRenderQueue"
-            }
-          ]
-        },
-        {
-          "name": "Panels, viewers, workspaces",
-          "shortcuts": [
             {
               "modifiers": [
                 "⌘"
@@ -2594,11 +1527,44 @@
               ],
               "key": "\\\\",
               "action": "Move application window or floating window to main monitor; resize window to fit screen. (Press again to resize window so that contents fill the screen.)"
+            }
+          ]
+        },
+        {
+          "name": "Activate",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "W",
+              "action": "Activate roto brush tool"
             },
             {
               "modifiers": [],
-              "key": "\\\\",
-              "action": "Toggle activation between Composition panel and Timeline panel for current composition"
+              "key": "C",
+              "action": "Activate and cycle through camera tools"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "T",
+              "action": "Activate and cycle through type tools"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "B",
+              "action": "Activate and cycle through brush clone stamp and eraser tools"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "P",
+              "action": "Activate and cycle through puppet tools"
             }
           ]
         },
@@ -2607,16 +1573,679 @@
           "shortcuts": [
             {
               "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "B",
+              "action": "Set work area to duration of selected layers or if no layers are selected set work area to composition duration"
+            },
+            {
+              "modifiers": [],
+              "key": "Tab",
+              "action": "Open composition miniflowchart for active composition"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "Esc",
+              "action": "Activate the most recently active composition that is in the same composition hierarchy as the currently active composition"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "X",
+              "action": "Trim composition to work area"
+            },
+            {
+              "modifiers": [
                 "⌥"
               ],
               "key": "\\\\",
-              "action": "New Composition from selection"
+              "action": "New composition from selection"
+            }
+          ]
+        },
+        {
+          "name": "Time navigation",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌥",
+                "⇧"
+              ],
+              "key": "J",
+              "action": "Go to specific time"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "Home",
+              "action": "Go to beginning or end of work area"
+            },
+            {
+              "modifiers": [],
+              "key": "Page Down",
+              "action": "Go forward 1frame"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "Page Down",
+              "action": "Go forward 10frames"
+            },
+            {
+              "modifiers": [],
+              "key": "Page Up",
+              "action": "Go backward 1frame"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "Page Up",
+              "action": "Go backward 10frames"
+            },
+            {
+              "modifiers": [],
+              "key": "I",
+              "action": "Go to layer in point"
+            },
+            {
+              "modifiers": [],
+              "key": "O",
+              "action": "Go to layer out point"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "←",
+              "action": "Go to previous in point or out point"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "→",
+              "action": "Go to next in point or out point"
+            },
+            {
+              "modifiers": [],
+              "key": "D",
+              "action": "Scroll to current time in timeline panel"
+            }
+          ]
+        },
+        {
+          "name": "Previews",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "F5, F6, F7,",
+              "action": "Display snapshot in active viewer"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "1",
+              "action": "Fast previews off"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "2",
+              "action": "Fast previews adaptive resolution"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "3",
+              "action": "Fast previews draft"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "4",
+              "action": "Fast previews fast draft"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "5",
+              "action": "Fast previews wireframe"
+            }
+          ]
+        },
+        {
+          "name": "Views",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌥",
+                "⇧"
+              ],
+              "key": "4",
+              "action": "Toggle showing straight RGB color"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "5",
+              "action": "Show alpha boundary in layer panel"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "6",
+              "action": "Show alpha overlay in layer panel"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "X",
+              "action": "Show refine edge xray"
+            },
+            {
+              "modifiers": [],
+              "key": ",",
+              "action": "Zoomout in composition layer or footage panel"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "/",
+              "action": "Zoom to fit in composition layer or footage panel"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "/",
+              "action": "Zoom up to 100to fit in composition layer or footage panel"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "U",
+              "action": "Open view options dialog box for active composition panel"
+            },
+            {
+              "modifiers": [],
+              "key": ";",
+              "action": "Zoom in timeline panel to singleframe units"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": ";",
+              "action": "Zoom out in timeline panel to show the entire composition duration"
+            },
+            {
+              "modifiers": [],
+              "key": "Caps Lock",
+              "action": "Prevent images from being rendered for previews in viewer panels"
+            },
+            {
+              "modifiers": [],
+              "key": "'",
+              "action": "Show or hide safe zones"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "'",
+              "action": "Show or hide grid"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "'",
+              "action": "Show or hide proportional grid"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "R",
+              "action": "Show or hide rulers"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": ";",
+              "action": "Show or hide guides"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "'",
+              "action": "Turn snapping to grid on or off"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": ";",
+              "action": "Turn snapping to guides on or off"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": ";",
+              "action": "Lock or unlock guides"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "H",
+              "action": "Show or hide layer controls"
+            }
+          ]
+        },
+        {
+          "name": "Footage",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "I",
+              "action": "Import multiple files or image sequences"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "/",
+              "action": "Add selected items to most recently activated composition"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "/",
+              "action": "Replace selected source footage for selected layers with footage item selected in project panel"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "Delete",
+              "action": "Delete a footage item without a warning"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "G",
+              "action": "Open interpret footage dialog box for selected footage item"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "C",
+              "action": "Remember footage interpretation"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "E",
+              "action": "Edit selected footage item in application with which its associated"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "H",
+              "action": "Replace selected footage item"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "L",
+              "action": "Reload selected footage items"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "P",
+              "action": "Set proxy for selected footage item"
+            }
+          ]
+        },
+        {
+          "name": "Effects and animation presets",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "E",
+              "action": "Delete all effects from selected layers"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "E",
+              "action": "Apply most recently applied effect to selected layers"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "F",
+              "action": "Apply most recently applied animation preset to selected layers"
+            }
+          ]
+        },
+        {
+          "name": "Showing properties and groups in the Timeline panel",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "`",
+              "action": "Toggle expansion of selected layers to show all properties"
+            },
+            {
+              "modifiers": [],
+              "key": "L",
+              "action": "Show only audio levels property"
+            },
+            {
+              "modifiers": [],
+              "key": "F",
+              "action": "Show only mask feather property"
+            },
+            {
+              "modifiers": [],
+              "key": "M",
+              "action": "Show only mask path property"
+            },
+            {
+              "modifiers": [],
+              "key": "TT",
+              "action": "Show only mask opacity property"
+            },
+            {
+              "modifiers": [],
+              "key": "RR",
+              "action": "Show only time remap property"
+            },
+            {
+              "modifiers": [],
+              "key": "FF",
+              "action": "Show only instances of missing effects"
+            },
+            {
+              "modifiers": [],
+              "key": "MM",
+              "action": "Show only mask property groups"
+            },
+            {
+              "modifiers": [],
+              "key": "AA",
+              "action": "Show only material options property group"
+            },
+            {
+              "modifiers": [],
+              "key": "EE",
+              "action": "Show only expressions"
+            },
+            {
+              "modifiers": [],
+              "key": "UU",
+              "action": "Show only modified properties"
+            },
+            {
+              "modifiers": [],
+              "key": "PP",
+              "action": "Show only paint strokes roto brush strokes and puppet pins"
+            },
+            {
+              "modifiers": [],
+              "key": "LL",
+              "action": "Show only audio waveform"
+            },
+            {
+              "modifiers": [],
+              "key": "SS",
+              "action": "Show only selected properties and groups"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "property",
+              "action": "Add or remove property or group from set that is shown"
+            }
+          ]
+        },
+        {
+          "name": "Modifying layer properties",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "O",
+              "action": "Open autoorientation dialog box for selected layers"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "O",
+              "action": "Open opacity dialog box for selected layers"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "R",
+              "action": "Open rotation dialog box for selected layers"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "P",
+              "action": "Open position dialog box for selected layers"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "Home",
+              "action": "Centerselected layers in view"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "Home",
+              "action": "Center anchor point in the visible content"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "Page Up",
+              "action": "Move selected layers 1frame earlier or later"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧"
+              ],
+              "key": "Page Up",
+              "action": "Move selected layers 10frames earlier or later"
+            },
+            {
+              "modifiers": [],
+              "key": "(plus)",
+              "action": "Increase or decrease rotation of selected layers by"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "(plus)",
+              "action": "Increase or decrease rotation of selected layers by"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "(plus)",
+              "action": "Increase scale of selected layers by"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "(minus)",
+              "action": "Decrease scale of selected layers by"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "(plus)",
+              "action": "Increase scale of selected layers by"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "(minus)",
+              "action": "Decrease scale of selected layers by"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "F",
+              "action": "Scale and reposition selected layers to fit composition"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "H",
+              "action": "Scale and reposition selected layers to fit composition width preserving image aspect ratio for each layer"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "G",
+              "action": "Scale and reposition selected layers to fit composition height preserving image aspect ratio for each layer"
             }
           ]
         },
         {
           "name": "3D Layers",
           "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "F10",
+              "action": "Switch to 3D view"
+            },
+            {
+              "modifiers": [],
+              "key": "F11",
+              "action": "Switch to 3D view"
+            },
+            {
+              "modifiers": [],
+              "key": "F12",
+              "action": "Switch to 3D view"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "L",
+              "action": "New light"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "C",
+              "action": "New camera"
+            },
             {
               "modifiers": [
                 "⌥",
@@ -2625,6 +2254,336 @@
               ],
               "key": "\\\\",
               "action": "Move the camera and its point of interest to look at selected 3D layers"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "F",
+              "action": "With a camera tool selected move the camera and its point of interest to look at all 3D layers"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧"
+              ],
+              "key": "C",
+              "action": "Turn casts shadows property on or off for selected 3D layers"
+            }
+          ]
+        },
+        {
+          "name": "Keyframes and the Graph Editor",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "F3",
+              "action": "Toggle between graph editor and layer bar modes"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "A",
+              "action": "Select all visible keyframes and properties"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "F2",
+              "action": "Deselect all keyframes properties and property groups"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "→",
+              "action": "Move keyframe 1frame later or earlier"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧"
+              ],
+              "key": "→",
+              "action": "Move keyframe 10frames later or earlier"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "K",
+              "action": "Set interpolation for selected keyframes"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "H",
+              "action": "Set keyframe interpolation method to hold or auto bezier"
+            },
+            {
+              "modifiers": [],
+              "key": "F9",
+              "action": "Easy ease selected keyframes"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "F9",
+              "action": "Easy ease selected keyframes in"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "F9",
+              "action": "Easy ease selected keyframes out"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "K",
+              "action": "Set velocity for selected keyframes"
+            }
+          ]
+        },
+        {
+          "name": "Text",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "T",
+              "action": "New text layer"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "→",
+              "action": "Extend or reduce selection by one character to right or left in horizontal text"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "→",
+              "action": "Extend or reduce selection by one word to right or left in horizontal text"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "Home",
+              "action": "Select text from insertion point to beginning or end of text frame"
+            },
+            {
+              "modifiers": [],
+              "key": "←",
+              "action": "In horizontal text move insertion point one character left or right one line up or down one word left or right or one paragraph up or down"
+            },
+            {
+              "modifiers": [],
+              "key": "↑",
+              "action": "In vertical text move insertion point one character up or down one left or right one word up or down or one paragraph left or right"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "=",
+              "action": "Turn superscript on or off for selected text"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "=",
+              "action": "Turn subscript on or off for selected text"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "X",
+              "action": "Set vertical scale to 100for selected text"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "A",
+              "action": "Auto leading for selected text"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "J",
+              "action": "Justify paragraph left align last line"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "J",
+              "action": "Justify paragraph right align last line"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": ",",
+              "action": "Decrease or increase font size of selected text by 10units"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "↓",
+              "action": "Increase or decrease leading by 2units"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧"
+              ],
+              "key": "↓",
+              "action": "Decrease or increase baseline shift by 2units"
+            },
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "←",
+              "action": "Decrease or increase kerning or tracking 20units"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "←",
+              "action": "Decrease or increase kerning or tracking 100units"
+            }
+          ]
+        },
+        {
+          "name": "Masks",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "`",
+              "action": "Select next or previous mask"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "I",
+              "action": "Invert selected mask"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "M",
+              "action": "Open mask shape dialog box for selected mask"
+            }
+          ]
+        },
+        {
+          "name": "Paint tools",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "Page Up",
+              "action": "Move earlier or later by number of frames specified for stroke duration"
+            }
+          ]
+        },
+        {
+          "name": "Shape Layers",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "G",
+              "action": "Group selected shapes"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "G",
+              "action": "Ungroup selected shapes"
+            }
+          ]
+        },
+        {
+          "name": "Saving, exporting, and rendering",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "S",
+              "action": "Increment and save project"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "/",
+              "action": "Add active composition or selected items to render queue"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "S",
+              "action": "Add current frame to render queue"
             }
           ]
         }
@@ -4629,7 +4588,7 @@
       "slug": "calendar",
       "displayName": "Calendar",
       "category": "Apple Apps",
-      "shortcutCount": 46,
+      "shortcutCount": 38,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/calendar.webp",
       "docsUrl": "https://support.apple.com/guide/calendar/keyboard-shortcuts-icld0006/mac",
       "sections": [
@@ -4785,43 +4744,6 @@
           "shortcuts": [
             {
               "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "T",
-              "action": "Go to a specific date"
-            },
-            {
-              "modifiers": [
-                "⌃",
-                "⌘"
-              ],
-              "key": "F",
-              "action": "Switch to full-screen view"
-            },
-            {
-              "modifiers": [],
-              "key": "Esc",
-              "action": "Exit full-screen view"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "N",
-              "action": "Add a new calendar group"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "S",
-              "action": "Add a new subscribed calendar"
-            },
-            {
-              "modifiers": [
                 "⌘"
               ],
               "key": "P",
@@ -4938,21 +4860,6 @@
           "name": "Event shortcuts",
           "shortcuts": [
             {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "E",
-              "action": "Edit the selected event"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "I",
-              "action": "Edit the selected event in the inspector window"
-            },
-            {
               "modifiers": [],
               "key": "Tab",
               "action": "Select the next event"
@@ -4963,14 +4870,6 @@
               ],
               "key": "Tab",
               "action": "Select the previous event"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "A",
-              "action": "Show or hide the Availability panel"
             },
             {
               "modifiers": [
@@ -5029,6 +4928,20 @@
               ],
               "key": "↩",
               "action": "Add www. and .com, New Window"
+            },
+            {
+              "modifiers": [
+                "⌃"
+              ],
+              "key": "L",
+              "action": "Jump to the address bar"
+            },
+            {
+              "modifiers": [
+                "⌃"
+              ],
+              "key": "K",
+              "action": "Search from anywhere on the page"
             }
           ]
         },
@@ -5440,25 +5353,6 @@
           ]
         },
         {
-          "name": "Address bar",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌃"
-              ],
-              "key": "L",
-              "action": "Jump to the address bar"
-            },
-            {
-              "modifiers": [
-                "⌃"
-              ],
-              "key": "K",
-              "action": "Search from anywhere on the page"
-            }
-          ]
-        },
-        {
           "name": "Webpage",
           "shortcuts": [
             {
@@ -5739,44 +5633,44 @@
             {
               "modifiers": [],
               "key": "Q",
-              "action": "shortcuts.clickup.showHideSidebar"
+              "action": "Show/hide sidebar"
             },
             {
               "modifiers": [],
               "key": "M",
-              "action": "shortcuts.clickup.assignCurrentTaskToYourself"
+              "action": "Assign current task to yourself"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "Click",
-              "action": "shortcuts.clickup.openLinkInNewTab"
+              "action": "Open link in new tab"
             },
             {
               "modifiers": [],
               "key": ":",
-              "action": "shortcuts.clickup.useEmojiPicker"
+              "action": "Use emoji picker"
             },
             {
               "modifiers": [],
               "key": "@",
-              "action": "shortcuts.clickup.tagAUser"
+              "action": "Tag a user"
             },
             {
               "modifiers": [],
               "key": "@@",
-              "action": "shortcuts.clickup.mentionATask"
+              "action": "Mention a task"
             },
             {
               "modifiers": [],
               "key": "@@@",
-              "action": "shortcuts.clickup.mentionADoc"
+              "action": "Mention a doc"
             },
             {
               "modifiers": [],
               "key": "↑",
-              "action": "shortcuts.clickup.editMostRecentComment"
+              "action": "Edit most recent comment"
             }
           ]
         },
@@ -5806,32 +5700,32 @@
             {
               "modifiers": [],
               "key": "L",
-              "action": "shortcuts.clickup.jumpToListView"
+              "action": "Jump to list view"
             },
             {
               "modifiers": [],
               "key": "B",
-              "action": "shortcuts.clickup.jumpToBoardView"
+              "action": "Jump to board view"
             },
             {
               "modifiers": [],
               "key": "X",
-              "action": "shortcuts.clickup.jumpToBoxView"
+              "action": "Jump to box view"
             },
             {
               "modifiers": [],
               "key": "C",
-              "action": "shortcuts.clickup.jumpToCalendarView"
+              "action": "Jump to calendar view"
             },
             {
               "modifiers": [],
               "key": "Esc",
-              "action": "shortcuts.clickup.closeAnyTaskOrWindow"
+              "action": "Close any task or window"
             },
             {
               "modifiers": [],
               "key": "Space",
-              "action": "shortcuts.clickup.reloadNotifications"
+              "action": "Reload notifications"
             },
             {
               "modifiers": [
@@ -5839,7 +5733,7 @@
                 "⇧"
               ],
               "key": "←",
-              "action": "shortcuts.clickup.moveToPreviousTask"
+              "action": "Move to previous task"
             },
             {
               "modifiers": [
@@ -5847,7 +5741,7 @@
                 "⇧"
               ],
               "key": "→",
-              "action": "shortcuts.clickup.moveToNextTask"
+              "action": "Move to next task"
             }
           ]
         },
@@ -5885,7 +5779,7 @@
                 "⌘"
               ],
               "key": "D",
-              "action": "shortcuts.clickup.duplicateTextBlock"
+              "action": "Duplicate text block"
             },
             {
               "modifiers": [
@@ -5901,7 +5795,7 @@
                 "⌘"
               ],
               "key": "M",
-              "action": "shortcuts.clickup.createCommentFromSelectedText"
+              "action": "Create comment from selected text"
             },
             {
               "modifiers": [
@@ -5909,7 +5803,7 @@
                 "⌘"
               ],
               "key": "T",
-              "action": "shortcuts.clickup.createTaskFromSelectedText"
+              "action": "Create task from selected text"
             },
             {
               "modifiers": [
@@ -5980,17 +5874,17 @@
             {
               "modifiers": [],
               "key": "1",
-              "action": "shortcuts.clickup.whileCreatingOpenTask"
+              "action": "While creating open task"
             },
             {
               "modifiers": [],
               "key": "2",
-              "action": "shortcuts.clickup.whileCreatingMoveToTray"
+              "action": "While creating move to tray"
             },
             {
               "modifiers": [],
               "key": "3",
-              "action": "shortcuts.clickup.whileCreatingCopyUrl"
+              "action": "While creating copy URL"
             }
           ]
         },
@@ -6002,14 +5896,14 @@
                 "⌘"
               ],
               "key": "E",
-              "action": "shortcuts.clickup.quickCreateNewTaskGlobal"
+              "action": "Quick create new task global"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "J",
-              "action": "shortcuts.clickup.openAiCommandBarGlobal"
+              "action": "Open AI command bar global"
             }
           ]
         }
@@ -6587,7 +6481,7 @@
                 "⌘"
               ],
               "key": "I",
-              "action": "shortcuts.discord.inbox"
+              "action": "Inbox"
             },
             {
               "modifiers": [],
@@ -8580,6 +8474,20 @@
               "modifiers": [],
               "key": "C",
               "action": "Comment"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "P",
+              "action": "Pencil tool"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "L",
+              "action": "Arrow tool"
             }
           ]
         },
@@ -8685,6 +8593,50 @@
               ],
               "key": "E",
               "action": "Export"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "C",
+              "action": "Copy"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "X",
+              "action": "Cut"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "V",
+              "action": "Paste"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "V",
+              "action": "Paste over selection"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "C",
+              "action": "Copy as PNG"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "L",
+              "action": "Copy Page Link to Clipboard"
             }
           ]
         },
@@ -8783,70 +8735,7 @@
               ],
               "key": "'",
               "action": "Show Rulers"
-            }
-          ]
-        },
-        {
-          "name": "Accessibility",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "Space",
-              "action": "Keyboard Box Selection"
             },
-            {
-              "modifiers": [
-                "⌃",
-                "⇧"
-              ],
-              "key": "?",
-              "action": "Shortcuts Panel"
-            }
-          ]
-        },
-        {
-          "name": "Essentials",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "\\\\",
-              "action": "Show / Hide UI"
-            },
-            {
-              "modifiers": [
-                "⌃"
-              ],
-              "key": "C",
-              "action": "Pick color"
-            }
-          ]
-        },
-        {
-          "name": "Tools",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "P",
-              "action": "Pencil tool"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "L",
-              "action": "Arrow tool"
-            }
-          ]
-        },
-        {
-          "name": "View",
-          "shortcuts": [
             {
               "modifiers": [
                 "⌥",
@@ -8924,6 +8813,45 @@
               ],
               "key": "0",
               "action": "Open inspect panel"
+            }
+          ]
+        },
+        {
+          "name": "Accessibility",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌥"
+              ],
+              "key": "Space",
+              "action": "Keyboard Box Selection"
+            },
+            {
+              "modifiers": [
+                "⌃",
+                "⇧"
+              ],
+              "key": "?",
+              "action": "Shortcuts Panel"
+            }
+          ]
+        },
+        {
+          "name": "Essentials",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "\\\\",
+              "action": "Show / Hide UI"
+            },
+            {
+              "modifiers": [
+                "⌃"
+              ],
+              "key": "C",
+              "action": "Pick color"
             }
           ]
         },
@@ -9193,55 +9121,6 @@
               "modifiers": [],
               "key": "Space",
               "action": "Move while resizing (while dragging)"
-            }
-          ]
-        },
-        {
-          "name": "Edit",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "C",
-              "action": "Copy"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "X",
-              "action": "Cut"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "V",
-              "action": "Paste"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "V",
-              "action": "Paste over selection"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "C",
-              "action": "Copy as PNG"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "L",
-              "action": "Copy Page Link to Clipboard"
             }
           ]
         },
@@ -10818,7 +10697,7 @@
       "slug": "github",
       "displayName": "GitHub",
       "category": "Productivity",
-      "shortcutCount": 75,
+      "shortcutCount": 74,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/github.webp",
       "docsUrl": "https://docs.github.com/en/get-started/accessibility/keyboard-shortcuts",
       "sections": [
@@ -11099,14 +10978,6 @@
               "modifiers": [],
               "key": "A",
               "action": "Set assignee"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "P",
-              "action": "Toggle write/preview"
             }
           ]
         },
@@ -11486,6 +11357,16 @@
               "modifiers": [],
               "key": "?",
               "action": "Show Shortcuts"
+            },
+            {
+              "modifiers": [],
+              "key": "`",
+              "action": "Go to next inbox section"
+            },
+            {
+              "modifiers": [],
+              "key": "~",
+              "action": "Go to previous inbox section"
             }
           ]
         },
@@ -11497,159 +11378,34 @@
                 "⇧"
               ],
               "key": "Esc",
-              "action": "shortcuts.gmail.focusMainWindow"
+              "action": "Focus main window"
             },
             {
               "modifiers": [],
               "key": "Esc",
-              "action": "shortcuts.gmail.focusLatestChatOrCompose"
+              "action": "Focus latest chat or compose"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": ".",
-              "action": "shortcuts.gmail.advanceToTheNextChatOrCompose"
+              "action": "Advance to the next chat or compose"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": ",",
-              "action": "shortcuts.gmail.advanceToPreviousChatOrCompose"
+              "action": "Advance to previous chat or compose"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": ";",
-              "action": "shortcuts.gmail.goToNextMisspelledWord"
-            }
-          ]
-        },
-        {
-          "name": "Actions",
-          "shortcuts": [
-            {
-              "modifiers": [],
-              "key": ",",
-              "action": "shortcuts.gmail.moveFocusToToolbar"
+              "action": "Go to next misspelled word"
             },
-            {
-              "modifiers": [],
-              "key": "X",
-              "action": "shortcuts.gmail.selectConversation"
-            },
-            {
-              "modifiers": [],
-              "key": "!",
-              "action": "shortcuts.gmail.reportAsSpam"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "R",
-              "action": "shortcuts.gmail.replyInANewWindow"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "A",
-              "action": "shortcuts.gmail.replyAllInANewWindow"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "F",
-              "action": "shortcuts.gmail.forwardInANewWindow"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "N",
-              "action": "shortcuts.gmail.updateConversation"
-            },
-            {
-              "modifiers": [],
-              "key": "]",
-              "action": "shortcuts.gmail.archiveConversationAndGoPreviousNext"
-            },
-            {
-              "modifiers": [],
-              "key": "Z",
-              "action": "shortcuts.gmail.undoLastAction"
-            },
-            {
-              "modifiers": [],
-              "key": "_",
-              "action": "shortcuts.gmail.markUnreadFromTheSelectedMessage"
-            },
-            {
-              "modifiers": [],
-              "key": "B",
-              "action": "shortcuts.gmail.snoozeNoteThisShortcutIsnTAvailableInClassicGmail"
-            },
-            {
-              "modifiers": [],
-              "key": ";",
-              "action": "shortcuts.gmail.expandEntireConversation"
-            },
-            {
-              "modifiers": [],
-              "key": ":",
-              "action": "shortcuts.gmail.collapseEntireConversation"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "T",
-              "action": "shortcuts.gmail.addConversationToTasks"
-            }
-          ]
-        },
-        {
-          "name": "Navigation",
-          "shortcuts": [
-            {
-              "modifiers": [],
-              "key": "`",
-              "action": "shortcuts.gmail.goToNextInboxSection"
-            },
-            {
-              "modifiers": [],
-              "key": "~",
-              "action": "shortcuts.gmail.goToPreviousInboxSection"
-            }
-          ]
-        },
-        {
-          "name": "Application",
-          "shortcuts": [
-            {
-              "modifiers": [],
-              "key": "D",
-              "action": "shortcuts.gmail.composeInANewTab"
-            },
-            {
-              "modifiers": [],
-              "key": "G",
-              "action": "shortcuts.gmail.searchChatContacts"
-            },
-            {
-              "modifiers": [],
-              "key": ".",
-              "action": "shortcuts.gmail.openMoreActionsMenu"
-            }
-          ]
-        },
-        {
-          "name": "Compose and chat",
-          "shortcuts": [
             {
               "modifiers": [
                 "⇧",
@@ -11680,6 +11436,111 @@
               ],
               "key": "M",
               "action": "Open spelling suggestions"
+            }
+          ]
+        },
+        {
+          "name": "Actions",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": ",",
+              "action": "Move focus to toolbar"
+            },
+            {
+              "modifiers": [],
+              "key": "X",
+              "action": "Select conversation"
+            },
+            {
+              "modifiers": [],
+              "key": "!",
+              "action": "Report as spam"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "R",
+              "action": "Reply in a new window"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "A",
+              "action": "Reply all in a new window"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "F",
+              "action": "Forward in a new window"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "N",
+              "action": "Update conversation"
+            },
+            {
+              "modifiers": [],
+              "key": "]",
+              "action": "Archive conversation and go previous next"
+            },
+            {
+              "modifiers": [],
+              "key": "Z",
+              "action": "Undo last action"
+            },
+            {
+              "modifiers": [],
+              "key": "_",
+              "action": "Mark unread from the selected message"
+            },
+            {
+              "modifiers": [],
+              "key": "B",
+              "action": "Snooze note this shortcut isn t available in classic gmail"
+            },
+            {
+              "modifiers": [],
+              "key": ";",
+              "action": "Expand entire conversation"
+            },
+            {
+              "modifiers": [],
+              "key": ":",
+              "action": "Collapse entire conversation"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "T",
+              "action": "Add conversation to tasks"
+            }
+          ]
+        },
+        {
+          "name": "Application",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "D",
+              "action": "Compose in a new tab"
+            },
+            {
+              "modifiers": [],
+              "key": "G",
+              "action": "Search chat contacts"
+            },
+            {
+              "modifiers": [],
+              "key": ".",
+              "action": "Open more actions menu"
             }
           ]
         },
@@ -13311,7 +13172,7 @@
       "slug": "illustrator",
       "displayName": "Illustrator",
       "category": "Design",
-      "shortcutCount": 248,
+      "shortcutCount": 246,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/illustrator.webp",
       "docsUrl": "https://helpx.adobe.com/illustrator/using/default-keyboard-shortcuts.html",
       "sections": [
@@ -14298,13 +14159,6 @@
             },
             {
               "modifiers": [
-                "⌘"
-              ],
-              "key": "J",
-              "action": "Join Paths"
-            },
-            {
-              "modifiers": [
                 "⌥",
                 "⌘"
               ],
@@ -14924,14 +14778,6 @@
               ],
               "key": "I",
               "action": "Show hidden characters"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "O",
-              "action": "Create Outlines"
             }
           ]
         },
@@ -20006,7 +19852,7 @@
       "slug": "pages",
       "displayName": "Pages",
       "category": "Apple Apps",
-      "shortcutCount": 151,
+      "shortcutCount": 144,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/pages.webp",
       "docsUrl": "https://support.apple.com/en-ca/guide/pages/tanc0ffef022/mac",
       "sections": [
@@ -20181,14 +20027,6 @@
             },
             {
               "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "I",
-              "action": "Show formatting characters"
-            },
-            {
-              "modifiers": [
                 "⌘"
               ],
               "key": "H",
@@ -20245,15 +20083,6 @@
               ],
               "key": "Q",
               "action": "Quit Pages and keep windows open"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "S",
-              "action": "Save As"
             },
             {
               "modifiers": [
@@ -20695,14 +20524,6 @@
             },
             {
               "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "|",
-              "action": "Justify text"
-            },
-            {
-              "modifiers": [
                 "⌘"
               ],
               "key": "X",
@@ -20816,28 +20637,6 @@
               "modifiers": [
                 "⌘"
               ],
-              "key": "F",
-              "action": "Find"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "G",
-              "action": "Find next"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "G",
-              "action": "Find previous"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
               "key": "E",
               "action": "Place selected text in Find field"
             },
@@ -20863,14 +20662,6 @@
               ],
               "key": ":",
               "action": "Show Spelling and Grammar window"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "H",
-              "action": "Highlight text"
             },
             {
               "modifiers": [
@@ -22172,6 +21963,34 @@
               ],
               "key": "Click",
               "action": "Sample as background color"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧"
+              ],
+              "key": "number",
+              "action": "Mixer Brush changes Mix setting"
+            },
+            {
+              "modifiers": [],
+              "key": "0",
+              "action": "Mixer Brush changes Wet and Mix to zero"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "(plus)",
+              "action": "Cycle through blending modes"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "Delete",
+              "action": "Fill from history"
             }
           ]
         },
@@ -22861,39 +22680,6 @@
               ],
               "key": "T",
               "action": "Free transform with duplicate data"
-            }
-          ]
-        },
-        {
-          "name": "Painting",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥",
-                "⇧"
-              ],
-              "key": "number",
-              "action": "Mixer Brush changes Mix setting"
-            },
-            {
-              "modifiers": [],
-              "key": "0",
-              "action": "Mixer Brush changes Wet and Mix to zero"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "(plus)",
-              "action": "Cycle through blending modes"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "Delete",
-              "action": "Fill from history"
             }
           ]
         },
@@ -25286,7 +25072,7 @@
       "slug": "safari",
       "displayName": "Safari",
       "category": "Browsers",
-      "shortcutCount": 63,
+      "shortcutCount": 58,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/safari.webp",
       "docsUrl": "https://support.apple.com/en-ca/guide/safari/cpsh003/mac",
       "sections": [
@@ -25320,7 +25106,7 @@
                 "⌘"
               ],
               "key": "T",
-              "action": "shortcuts.safari.reopenLastClosedTab"
+              "action": "Reopen last closed tab"
             },
             {
               "modifiers": [
@@ -25349,7 +25135,7 @@
                 "⌘"
               ],
               "key": "\\\\",
-              "action": "shortcuts.safari.showAllTabs"
+              "action": "Show all tabs"
             },
             {
               "modifiers": [
@@ -25501,44 +25287,11 @@
               ],
               "key": "C",
               "action": "Copy the selected item"
-            }
-          ]
-        },
-        {
-          "name": "Current webpage",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "F",
-              "action": "Search the current webpage"
             },
             {
               "modifiers": [],
               "key": "Esc",
               "action": "While typing in the Smart Search field, restore the current webpage address"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "P",
-              "action": "Print the current webpage"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "C",
-              "action": "Copy the selected item"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "V",
-              "action": "Paste the most recently copied item"
             }
           ]
         },
@@ -25639,14 +25392,6 @@
         {
           "name": "Settings",
           "shortcuts": [
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "H",
-              "action": "Go to your homepage"
-            },
             {
               "modifiers": [
                 "⌘"
@@ -25843,6 +25588,117 @@
               ],
               "key": "R",
               "action": "Run Last Plugin"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "C",
+              "action": "Copy"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "X",
+              "action": "Cut"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "V",
+              "action": "Paste"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "N",
+              "action": "New page"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "Z",
+              "action": "Undo"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "Z",
+              "action": "Redo"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "N",
+              "action": "New document"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "O",
+              "action": "Open document"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "W",
+              "action": "Close window"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "S",
+              "action": "Save document"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "S",
+              "action": "Duplicate document"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⇧",
+                "⌘"
+              ],
+              "key": "S",
+              "action": "Save document as…"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "P",
+              "action": "Page setup"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "H",
+              "action": "Hide Sketch"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "Q",
+              "action": "Quit Sketch"
             }
           ]
         },
@@ -26326,122 +26182,6 @@
           ]
         },
         {
-          "name": "General",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "C",
-              "action": "Copy"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "X",
-              "action": "Cut"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "V",
-              "action": "Paste"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "N",
-              "action": "New page"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "Z",
-              "action": "Undo"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "Z",
-              "action": "Redo"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "N",
-              "action": "New document"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "O",
-              "action": "Open document"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "W",
-              "action": "Close window"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "S",
-              "action": "Save document"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "S",
-              "action": "Duplicate document"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "S",
-              "action": "Save document as…"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "P",
-              "action": "Page setup"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "H",
-              "action": "Hide Sketch"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "Q",
-              "action": "Quit Sketch"
-            }
-          ]
-        },
-        {
           "name": "Inserting Layers",
           "shortcuts": [
             {
@@ -26797,14 +26537,14 @@
                 "⌘"
               ],
               "key": "N",
-              "action": "shortcuts.slack.composeNewMessage"
+              "action": "Compose new message"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "J",
-              "action": "shortcuts.slack.jumpToMostRecentUnread"
+              "action": "Jump to most recent unread"
             },
             {
               "modifiers": [
@@ -26812,7 +26552,7 @@
                 "⇧"
               ],
               "key": "↑",
-              "action": "shortcuts.slack.previousUnreadChannelDm"
+              "action": "Previous unread channel DM"
             },
             {
               "modifiers": [
@@ -26820,42 +26560,42 @@
                 "⇧"
               ],
               "key": "↓",
-              "action": "shortcuts.slack.nextUnreadChannelDm"
+              "action": "Next unread channel DM"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "↑",
-              "action": "shortcuts.slack.previousChannelDm"
+              "action": "Previous channel DM"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "↓",
-              "action": "shortcuts.slack.nextChannelDm"
+              "action": "Next channel DM"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "[",
-              "action": "shortcuts.slack.goBackInHistory"
+              "action": "Go back in history"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "]",
-              "action": "shortcuts.slack.goForwardInHistory"
+              "action": "Go forward in history"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "1",
-              "action": "shortcuts.slack.openHomeView"
+              "action": "Open home view"
             },
             {
               "modifiers": [
@@ -26871,14 +26611,14 @@
                 "⌘"
               ],
               "key": "M",
-              "action": "shortcuts.slack.openActivityView"
+              "action": "Open activity view"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "0",
-              "action": "shortcuts.slack.openMoreView"
+              "action": "Open more view"
             },
             {
               "modifiers": [
@@ -26886,7 +26626,7 @@
                 "⌘"
               ],
               "key": "T",
-              "action": "shortcuts.slack.openThreadsView"
+              "action": "Open threads view"
             },
             {
               "modifiers": [
@@ -26902,21 +26642,21 @@
                 "⌘"
               ],
               "key": "I",
-              "action": "shortcuts.slack.openConversationDetails"
+              "action": "Open conversation details"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": ",",
-              "action": "shortcuts.slack.openPreferences"
+              "action": "Open preferences"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": ".",
-              "action": "shortcuts.slack.hideRightSidebar"
+              "action": "Hide right sidebar"
             },
             {
               "modifiers": [
@@ -26924,7 +26664,7 @@
                 "⌘"
               ],
               "key": "E",
-              "action": "shortcuts.slack.openPeopleView"
+              "action": "Open people view"
             },
             {
               "modifiers": [
@@ -26932,7 +26672,7 @@
                 "⌘"
               ],
               "key": "A",
-              "action": "shortcuts.slack.openAllUnreads"
+              "action": "Open all unreads"
             },
             {
               "modifiers": [
@@ -26940,19 +26680,19 @@
                 "⌘"
               ],
               "key": "F",
-              "action": "shortcuts.slack.toggleFullscreen"
+              "action": "Toggle fullscreen"
             },
             {
               "modifiers": [],
               "key": "F6",
-              "action": "shortcuts.slack.moveFocusToNextSection"
+              "action": "Move focus to next section"
             },
             {
               "modifiers": [
                 "⇧"
               ],
               "key": "F6",
-              "action": "shortcuts.slack.moveFocusToPreviousSection"
+              "action": "Move focus to previous section"
             }
           ]
         },
@@ -26964,14 +26704,14 @@
                 "⌘"
               ],
               "key": "G",
-              "action": "shortcuts.slack.startSearch"
+              "action": "Start search"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "F",
-              "action": "shortcuts.slack.searchCurrentConversation"
+              "action": "Search current conversation"
             }
           ]
         },
@@ -26984,7 +26724,7 @@
                 "⌘"
               ],
               "key": "S",
-              "action": "shortcuts.slack.expandCollapseWorkspaceSwitcher"
+              "action": "Expand collapse workspace switcher"
             },
             {
               "modifiers": [
@@ -26992,21 +26732,21 @@
                 "⇧"
               ],
               "key": "Tab",
-              "action": "shortcuts.slack.switchToPreviousWorkspace"
+              "action": "Switch to previous workspace"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "Tab",
-              "action": "shortcuts.slack.switchToNextWorkspace"
+              "action": "Switch to next workspace"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "1",
-              "action": "shortcuts.slack.switchToSpecificWorkspace"
+              "action": "Switch to specific workspace"
             }
           ]
         },
@@ -27016,14 +26756,14 @@
             {
               "modifiers": [],
               "key": "Esc",
-              "action": "shortcuts.slack.markAllInCurrentConversationAsRead"
+              "action": "Mark all in current conversation as read"
             },
             {
               "modifiers": [
                 "⇧"
               ],
               "key": "Esc",
-              "action": "shortcuts.slack.markAllMessagesAsRead"
+              "action": "Mark all messages as read"
             }
           ]
         },
@@ -27043,17 +26783,17 @@
             {
               "modifiers": [],
               "key": "T",
-              "action": "shortcuts.slack.openReplyToThread"
+              "action": "Open reply to thread"
             },
             {
               "modifiers": [],
               "key": "F",
-              "action": "shortcuts.slack.forwardMessage"
+              "action": "Forward message"
             },
             {
               "modifiers": [],
               "key": "P",
-              "action": "shortcuts.slack.pinUnpinMessage"
+              "action": "Pin unpin message"
             },
             {
               "modifiers": [],
@@ -27063,7 +26803,7 @@
             {
               "modifiers": [],
               "key": "U",
-              "action": "shortcuts.slack.markMessagesAboveAsUnread"
+              "action": "Mark messages above as unread"
             },
             {
               "modifiers": [],
@@ -27073,7 +26813,7 @@
             {
               "modifiers": [],
               "key": "R",
-              "action": "shortcuts.slack.addEmojiReaction"
+              "action": "Add emoji reaction"
             }
           ]
         },
@@ -27085,7 +26825,7 @@
                 "⇧"
               ],
               "key": "↩",
-              "action": "shortcuts.slack.createNewLine"
+              "action": "Create new line"
             },
             {
               "modifiers": [
@@ -27106,7 +26846,7 @@
                 "⌘"
               ],
               "key": "U",
-              "action": "shortcuts.slack.underline"
+              "action": "Underline"
             },
             {
               "modifiers": [
@@ -27122,7 +26862,7 @@
                 "⌘"
               ],
               "key": "U",
-              "action": "shortcuts.slack.hyperlinkText"
+              "action": "Hyperlink text"
             },
             {
               "modifiers": [
@@ -27130,7 +26870,7 @@
                 "⌘"
               ],
               "key": "9",
-              "action": "shortcuts.slack.quoteText"
+              "action": "Quote text"
             },
             {
               "modifiers": [
@@ -27191,7 +26931,7 @@
                 "⌘"
               ],
               "key": "0",
-              "action": "shortcuts.slack.formatAsParagraph"
+              "action": "Format as paragraph"
             },
             {
               "modifiers": [
@@ -27199,7 +26939,7 @@
                 "⌘"
               ],
               "key": "1",
-              "action": "shortcuts.slack.formatAsBigHeading"
+              "action": "Format as big heading"
             },
             {
               "modifiers": [
@@ -27207,7 +26947,7 @@
                 "⌘"
               ],
               "key": "2",
-              "action": "shortcuts.slack.formatAsMediumHeading"
+              "action": "Format as medium heading"
             },
             {
               "modifiers": [
@@ -27215,7 +26955,7 @@
                 "⌘"
               ],
               "key": "3",
-              "action": "shortcuts.slack.formatAsSmallHeading"
+              "action": "Format as small heading"
             },
             {
               "modifiers": [
@@ -27223,7 +26963,7 @@
                 "⌘"
               ],
               "key": "0",
-              "action": "shortcuts.slack.formatAsChecklist"
+              "action": "Format as checklist"
             },
             {
               "modifiers": [
@@ -27231,7 +26971,7 @@
                 "⌘"
               ],
               "key": "T",
-              "action": "shortcuts.slack.viewCommentThread"
+              "action": "View comment thread"
             },
             {
               "modifiers": [
@@ -27239,7 +26979,7 @@
                 "⌘"
               ],
               "key": "R",
-              "action": "shortcuts.slack.showReaderEditView"
+              "action": "Show reader edit view"
             },
             {
               "modifiers": [
@@ -27247,21 +26987,21 @@
                 "⌘"
               ],
               "key": "/",
-              "action": "shortcuts.slack.openContextMenu"
+              "action": "Open context menu"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "F",
-              "action": "shortcuts.slack.findTextInCanvas"
+              "action": "Find text in canvas"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "G",
-              "action": "shortcuts.slack.findNext"
+              "action": "Find next"
             },
             {
               "modifiers": [
@@ -27269,7 +27009,7 @@
                 "⌘"
               ],
               "key": "G",
-              "action": "shortcuts.slack.findPrevious"
+              "action": "Find previous"
             },
             {
               "modifiers": [
@@ -27277,7 +27017,7 @@
                 "⌘"
               ],
               "key": "H",
-              "action": "shortcuts.slack.findAndReplace"
+              "action": "Find and replace"
             },
             {
               "modifiers": [
@@ -27285,14 +27025,14 @@
                 "⌥"
               ],
               "key": "Q",
-              "action": "shortcuts.slack.copyAnchorLink"
+              "action": "Copy anchor link"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "Z",
-              "action": "shortcuts.slack.undoLastAction"
+              "action": "Undo last action"
             },
             {
               "modifiers": [
@@ -27300,7 +27040,7 @@
                 "⌘"
               ],
               "key": "Z",
-              "action": "shortcuts.slack.redoLastAction"
+              "action": "Redo last action"
             },
             {
               "modifiers": [
@@ -27308,7 +27048,7 @@
                 "⌘"
               ],
               "key": "↑",
-              "action": "shortcuts.slack.moveListItemUp"
+              "action": "Move list item up"
             },
             {
               "modifiers": [
@@ -27316,7 +27056,7 @@
                 "⌘"
               ],
               "key": "↓",
-              "action": "shortcuts.slack.moveListItemDown"
+              "action": "Move list item down"
             }
           ]
         },
@@ -27329,7 +27069,7 @@
                 "⌘"
               ],
               "key": "H",
-              "action": "shortcuts.slack.startJoinLeaveHuddle"
+              "action": "Start join leave huddle"
             },
             {
               "modifiers": [
@@ -27337,7 +27077,7 @@
                 "⌘"
               ],
               "key": "Space",
-              "action": "shortcuts.slack.toggleHuddleMute"
+              "action": "Toggle huddle mute"
             }
           ]
         },
@@ -27357,7 +27097,7 @@
                 "⌘"
               ],
               "key": "J",
-              "action": "shortcuts.slack.viewDownloadedFiles"
+              "action": "View downloaded files"
             },
             {
               "modifiers": [
@@ -27373,7 +27113,7 @@
                 "⌘"
               ],
               "key": "N",
-              "action": "shortcuts.slack.createCanvas"
+              "action": "Create canvas"
             }
           ]
         },
@@ -27385,7 +27125,7 @@
                 "⌘"
               ],
               "key": "W",
-              "action": "shortcuts.slack.closeWindow"
+              "action": "Close window"
             },
             {
               "modifiers": [
@@ -27393,19 +27133,19 @@
                 "⌘"
               ],
               "key": "W",
-              "action": "shortcuts.slack.reopenLastClosedWindow"
+              "action": "Reopen last closed window"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "Q",
-              "action": "shortcuts.slack.quitSlack"
+              "action": "Quit slack"
             },
             {
               "modifiers": [],
               "key": "F1",
-              "action": "shortcuts.slack.openHelp"
+              "action": "Open help"
             }
           ]
         },
@@ -27417,14 +27157,14 @@
                 "⌃"
               ],
               "key": "Page Up",
-              "action": "shortcuts.slack.switchToPreviousTab"
+              "action": "Switch to previous tab"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "Page Down",
-              "action": "shortcuts.slack.switchToNextTab"
+              "action": "Switch to next tab"
             }
           ]
         }
@@ -27927,228 +27667,7 @@
               ],
               "key": "W",
               "action": "Wrap in HTML Tag"
-            }
-          ]
-        },
-        {
-          "name": "Navigation / Goto Anywhere",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "P",
-              "action": "Go to File"
             },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "R",
-              "action": "Go to Symbol"
-            },
-            {
-              "modifiers": [
-                "⌃"
-              ],
-              "key": "G",
-              "action": "Go to Line"
-            }
-          ]
-        },
-        {
-          "name": "General",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "P",
-              "action": "Command Palette"
-            },
-            {
-              "modifiers": [
-                "⌃",
-                "⌘"
-              ],
-              "key": "F",
-              "action": "Toggle Full Screen"
-            },
-            {
-              "modifiers": [
-                "⌃",
-                "⇧",
-                "⌘"
-              ],
-              "key": "F",
-              "action": "Distraction-Free Mode"
-            },
-            {
-              "modifiers": [
-                "⌃",
-                "⇧"
-              ],
-              "key": "P",
-              "action": "Show Scope"
-            }
-          ]
-        },
-        {
-          "name": "Find / Replace",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "F",
-              "action": "Find"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "F",
-              "action": "Replace"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "F",
-              "action": "Find in Files"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "I",
-              "action": "Incremental Find"
-            }
-          ]
-        },
-        {
-          "name": "Scrolling",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌃"
-              ],
-              "key": "V",
-              "action": "Scroll Down One Page"
-            },
-            {
-              "modifiers": [
-                "⌃"
-              ],
-              "key": "L",
-              "action": "Center Current Line"
-            }
-          ]
-        },
-        {
-          "name": "Tabs",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "T",
-              "action": "Reopen Closed Tab"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "[",
-              "action": "Cycle Tab Left"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "]",
-              "action": "Cycle Tab Right"
-            }
-          ]
-        },
-        {
-          "name": "Split Window",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "1",
-              "action": "Single Column"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "2",
-              "action": "Two Columns"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "3",
-              "action": "Three Columns"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "4",
-              "action": "Four Columns"
-            }
-          ]
-        },
-        {
-          "name": "Bookmarks",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "F2",
-              "action": "Toggle Bookmark"
-            },
-            {
-              "modifiers": [],
-              "key": "F2",
-              "action": "Next Bookmark"
-            },
-            {
-              "modifiers": [
-                "⇧"
-              ],
-              "key": "F2",
-              "action": "Previous Bookmark"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "F2",
-              "action": "Clear Bookmarks"
-            }
-          ]
-        },
-        {
-          "name": "Editing",
-          "shortcuts": [
             {
               "modifiers": [
                 "⌘"
@@ -28227,8 +27746,67 @@
           ]
         },
         {
+          "name": "Navigation / Goto Anywhere",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "P",
+              "action": "Go to File"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "R",
+              "action": "Go to Symbol"
+            },
+            {
+              "modifiers": [
+                "⌃"
+              ],
+              "key": "G",
+              "action": "Go to Line"
+            }
+          ]
+        },
+        {
           "name": "General",
           "shortcuts": [
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "P",
+              "action": "Command Palette"
+            },
+            {
+              "modifiers": [
+                "⌃",
+                "⌘"
+              ],
+              "key": "F",
+              "action": "Toggle Full Screen"
+            },
+            {
+              "modifiers": [
+                "⌃",
+                "⇧",
+                "⌘"
+              ],
+              "key": "F",
+              "action": "Distraction-Free Mode"
+            },
+            {
+              "modifiers": [
+                "⌃",
+                "⇧"
+              ],
+              "key": "P",
+              "action": "Show Scope"
+            },
             {
               "modifiers": [
                 "⌃"
@@ -28239,8 +27817,57 @@
           ]
         },
         {
+          "name": "Find / Replace",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "F",
+              "action": "Find"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "F",
+              "action": "Replace"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "F",
+              "action": "Find in Files"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "I",
+              "action": "Incremental Find"
+            }
+          ]
+        },
+        {
           "name": "Scrolling",
           "shortcuts": [
+            {
+              "modifiers": [
+                "⌃"
+              ],
+              "key": "V",
+              "action": "Scroll Down One Page"
+            },
+            {
+              "modifiers": [
+                "⌃"
+              ],
+              "key": "L",
+              "action": "Center Current Line"
+            },
             {
               "modifiers": [
                 "⌘"
@@ -28262,6 +27889,30 @@
           "shortcuts": [
             {
               "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "T",
+              "action": "Reopen Closed Tab"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "[",
+              "action": "Cycle Tab Left"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "]",
+              "action": "Cycle Tab Right"
+            },
+            {
+              "modifiers": [
                 "⌘"
               ],
               "key": "[NUM]",
@@ -28277,8 +27928,40 @@
           ]
         },
         {
-          "name": "Split window",
+          "name": "Split Window",
           "shortcuts": [
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "1",
+              "action": "Single Column"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "2",
+              "action": "Two Columns"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "3",
+              "action": "Three Columns"
+            },
+            {
+              "modifiers": [
+                "⌥",
+                "⌘"
+              ],
+              "key": "4",
+              "action": "Four Columns"
+            },
             {
               "modifiers": [
                 "⌥",
@@ -28301,6 +27984,38 @@
               ],
               "key": "[NUM]",
               "action": "Move file to specified group where num is 1-4"
+            }
+          ]
+        },
+        {
+          "name": "Bookmarks",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "F2",
+              "action": "Toggle Bookmark"
+            },
+            {
+              "modifiers": [],
+              "key": "F2",
+              "action": "Next Bookmark"
+            },
+            {
+              "modifiers": [
+                "⇧"
+              ],
+              "key": "F2",
+              "action": "Previous Bookmark"
+            },
+            {
+              "modifiers": [
+                "⇧",
+                "⌘"
+              ],
+              "key": "F2",
+              "action": "Clear Bookmarks"
             }
           ]
         }
@@ -28777,7 +28492,7 @@
                 "⌘"
               ],
               "key": "N",
-              "action": "shortcuts.telegram.newMessage"
+              "action": "New message"
             },
             {
               "modifiers": [
@@ -28791,7 +28506,7 @@
                 "⌘"
               ],
               "key": "K",
-              "action": "shortcuts.telegram.quickSearch"
+              "action": "Quick search"
             },
             {
               "modifiers": [
@@ -28799,7 +28514,7 @@
                 "⌘"
               ],
               "key": "N",
-              "action": "shortcuts.telegram.newChannel"
+              "action": "New channel"
             },
             {
               "modifiers": [
@@ -28820,7 +28535,7 @@
                 "⌘"
               ],
               "key": "W",
-              "action": "shortcuts.telegram.closeChat"
+              "action": "Close chat"
             },
             {
               "modifiers": [
@@ -28849,7 +28564,7 @@
                 "⌘"
               ],
               "key": "K",
-              "action": "shortcuts.telegram.addLink"
+              "action": "Add link"
             },
             {
               "modifiers": [
@@ -28866,7 +28581,7 @@
       "slug": "terminal",
       "displayName": "Terminal",
       "category": "Development",
-      "shortcutCount": 161,
+      "shortcutCount": 109,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/terminal.webp",
       "docsUrl": "https://support.apple.com/en-ca/guide/terminal/trmlshtcts/mac",
       "sections": [
@@ -29092,192 +28807,6 @@
               ],
               "key": "Page Down",
               "action": "Line down"
-            }
-          ]
-        },
-        {
-          "name": "Windows and Tabs",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌃"
-              ],
-              "key": "Tab",
-              "action": "Next Tab"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "T",
-              "action": "New tab"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "K",
-              "action": "New remote connection"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "-",
-              "action": "Make fonts smaller"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "W",
-              "action": "Close window"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "Page Up",
-              "action": "Page up"
-            },
-            {
-              "modifiers": [
-                "⌃",
-                "⌘"
-              ],
-              "key": "T",
-              "action": "New tab with same command"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "I",
-              "action": "Show or hide Inspector"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "`",
-              "action": "Next window"
-            },
-            {
-              "modifiers": [
-                "⌃",
-                "⇧"
-              ],
-              "key": "Tab",
-              "action": "Previous Tab"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "W",
-              "action": "Close other tabs"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "Page Down",
-              "action": "Page down"
-            },
-            {
-              "modifiers": [
-                "⌃",
-                "⌘"
-              ],
-              "key": "N",
-              "action": "New window with same command"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "N",
-              "action": "New command"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "+",
-              "action": "Make fonts bigger"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "W",
-              "action": "Close tab"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "End",
-              "action": "Scroll to bottom"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "T",
-              "action": "Show or hide tab bar"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "I",
-              "action": "Edit title"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "~",
-              "action": "Previous window"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "D",
-              "action": "Split window into two panes"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "W",
-              "action": "Close all"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "Page Up",
-              "action": "Line up"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "N",
-              "action": "New window"
             },
             {
               "modifiers": [
@@ -29286,37 +28815,6 @@
               ],
               "key": "\\",
               "action": "Show all tabs or exit tab overview"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "I",
-              "action": "Edit background color"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "D",
-              "action": "Close split pane"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "Home",
-              "action": "Scroll to top"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "Page Down",
-              "action": "Line down"
             }
           ]
         },
@@ -29447,27 +28945,6 @@
               ],
               "key": "K",
               "action": "Delete to End of Line"
-            },
-            {
-              "modifiers": [
-                "⌥"
-              ],
-              "key": "D",
-              "action": "Delete Forward to End of Word"
-            },
-            {
-              "modifiers": [
-                "⌃"
-              ],
-              "key": "W",
-              "action": "Delete Backward to Beginning of Word"
-            },
-            {
-              "modifiers": [
-                "⌃"
-              ],
-              "key": "T",
-              "action": "Transpose Two Characters"
             },
             {
               "modifiers": [
@@ -29602,97 +29079,6 @@
               ],
               "key": "J",
               "action": "Jump to the selected text"
-            }
-          ]
-        },
-        {
-          "name": "Select & Find",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "X",
-              "action": "Cut"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "C",
-              "action": "Copy"
-            },
-            {
-              "modifiers": [
-                "⌃",
-                "⇧",
-                "⌘"
-              ],
-              "key": "C",
-              "action": "Copy Without Background Color"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "C",
-              "action": "Copy plain text"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "V",
-              "action": "Paste"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "V",
-              "action": "Paste the Selection"
-            },
-            {
-              "modifiers": [
-                "⌃",
-                "⌘"
-              ],
-              "key": "V",
-              "action": "Paste Escaped Text"
-            },
-            {
-              "modifiers": [
-                "⌃",
-                "⇧",
-                "⌘"
-              ],
-              "key": "V",
-              "action": "Paste escaped selection"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "F",
-              "action": "Find"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "G",
-              "action": "Find next"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "G",
-              "action": "Find previous"
             },
             {
               "modifiers": [
@@ -29707,13 +29093,6 @@
               ],
               "key": "J",
               "action": "Jump to Selected Text"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "A",
-              "action": "Select all"
             },
             {
               "modifiers": [
@@ -29842,26 +29221,6 @@
               ],
               "key": "A",
               "action": "Select between marks"
-            }
-          ]
-        },
-        {
-          "name": "Marks and Bookmarks",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "U",
-              "action": "Mark"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "U",
-              "action": "Mark as bookmark"
             },
             {
               "modifiers": [
@@ -29878,22 +29237,6 @@
               ],
               "key": "Up",
               "action": "Jump to previous bookmark"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "A",
-              "action": "Select between marks"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "M",
-              "action": "Insert bookmark"
             },
             {
               "modifiers": [
@@ -29921,47 +29264,8 @@
               "modifiers": [
                 "⌘"
               ],
-              "key": "K",
-              "action": "Clear to start"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⇧",
-                "⌘"
-              ],
-              "key": "M",
-              "action": "Insert bookmark with name"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "L",
-              "action": "Clear to previous mark"
-            },
-            {
-              "modifiers": [
-                "⇧",
-                "⌘"
-              ],
-              "key": "U",
-              "action": "Unmark"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
               "key": "Up",
               "action": "Jump to previous mark"
-            },
-            {
-              "modifiers": [
-                "⌥",
-                "⌘"
-              ],
-              "key": "L",
-              "action": "Clear to previous bookmark"
             }
           ]
         },
@@ -30837,33 +30141,7 @@
               ],
               "key": "M",
               "action": "Add Comment"
-            }
-          ]
-        },
-        {
-          "name": "Global",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌃",
-                "⌘"
-              ],
-              "key": "T",
-              "action": "Show/hide Todoist"
             },
-            {
-              "modifiers": [
-                "⌃",
-                "⌘"
-              ],
-              "key": "A",
-              "action": "Open task Quick Add"
-            }
-          ]
-        },
-        {
-          "name": "General",
-          "shortcuts": [
             {
               "modifiers": [],
               "key": "M",
@@ -30895,6 +30173,27 @@
               ],
               "key": "V",
               "action": "Switch to the Board view"
+            }
+          ]
+        },
+        {
+          "name": "Global",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "⌃",
+                "⌘"
+              ],
+              "key": "T",
+              "action": "Show/hide Todoist"
+            },
+            {
+              "modifiers": [
+                "⌃",
+                "⌘"
+              ],
+              "key": "A",
+              "action": "Open task Quick Add"
             }
           ]
         },
@@ -31407,7 +30706,7 @@
       "slug": "vscode",
       "displayName": "VS Code",
       "category": "Development",
-      "shortcutCount": 72,
+      "shortcutCount": 71,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/vscode.webp",
       "docsUrl": "https://code.visualstudio.com/docs/getstarted/keybindings",
       "sections": [
@@ -31449,7 +30748,7 @@
                 "⌘"
               ],
               "key": "J",
-              "action": "shortcuts.vscode.togglePanel"
+              "action": "Toggle panel"
             },
             {
               "modifiers": [
@@ -31745,18 +31044,6 @@
               ],
               "key": "M",
               "action": "Toggle Tab moves focus"
-            }
-          ]
-        },
-        {
-          "name": "Editor management",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "\\\\",
-              "action": "Split editor"
             }
           ]
         },
@@ -33945,6 +33232,18 @@
               ],
               "key": "9",
               "action": "Reaction: Celebrate"
+            },
+            {
+              "modifiers": [],
+              "key": "Space",
+              "action": "Push to talk"
+            },
+            {
+              "modifiers": [
+                "⌃"
+              ],
+              "key": "\\\\",
+              "action": "Toggle the Always Show meeting controls option in General settings"
             }
           ]
         },
@@ -34001,6 +33300,13 @@
               ],
               "key": "I",
               "action": "Add Member to Chat"
+            },
+            {
+              "modifiers": [
+                "⌘"
+              ],
+              "key": "K",
+              "action": "Jump to chat with someone"
             }
           ]
         },
@@ -34063,35 +33369,6 @@
               ],
               "key": "T",
               "action": "Switch from one tab to the next"
-            }
-          ]
-        },
-        {
-          "name": "Meeting",
-          "shortcuts": [
-            {
-              "modifiers": [],
-              "key": "Space",
-              "action": "Push to talk"
-            },
-            {
-              "modifiers": [
-                "⌃"
-              ],
-              "key": "\\\\",
-              "action": "Toggle the Always Show meeting controls option in General settings"
-            }
-          ]
-        },
-        {
-          "name": "Chat",
-          "shortcuts": [
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "K",
-              "action": "Jump to chat with someone"
             }
           ]
         },
@@ -34437,7 +33714,7 @@
       "slug": "macos",
       "displayName": "macOS",
       "category": "macOS System",
-      "shortcutCount": 150,
+      "shortcutCount": 149,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/macos.webp",
       "docsUrl": "https://support.apple.com/en-us/102650",
       "sections": [
@@ -34915,13 +34192,6 @@
               "modifiers": [],
               "key": "↩",
               "action": "Rename the selected file"
-            },
-            {
-              "modifiers": [
-                "⌘"
-              ],
-              "key": "R",
-              "action": "Show the original file for a selected alias"
             },
             {
               "modifiers": [
@@ -36789,42 +36059,42 @@
                 "⌃"
               ],
               "key": "X ⌃F",
-              "action": "shortcuts.emacs.findOpenFile"
+              "action": "Find open file"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "X ⌃S",
-              "action": "shortcuts.emacs.saveFile"
+              "action": "Save file"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "X S",
-              "action": "shortcuts.emacs.saveSomeBuffers"
+              "action": "Save some buffers"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "X ⌃W",
-              "action": "shortcuts.emacs.writeFileSaveAs"
+              "action": "Write file save as"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "X ⌃C",
-              "action": "shortcuts.emacs.quitEmacs"
+              "action": "Quit emacs"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "X I",
-              "action": "shortcuts.emacs.insertFileAtCursor"
+              "action": "Insert file at cursor"
             }
           ]
         },
@@ -36836,70 +36106,70 @@
                 "⌃"
               ],
               "key": "W",
-              "action": "shortcuts.emacs.cutKillRegion"
+              "action": "Cut kill region"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "W",
-              "action": "shortcuts.emacs.copyKillRingSave"
+              "action": "Copy kill ring save"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "Y",
-              "action": "shortcuts.emacs.pasteYank"
+              "action": "Paste yank"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "Y",
-              "action": "shortcuts.emacs.cyclePasteYankPop"
+              "action": "Cycle paste yank pop"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "/",
-              "action": "shortcuts.emacs.undo"
+              "action": "Undo"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "G",
-              "action": "shortcuts.emacs.cancelCurrentCommand"
+              "action": "Cancel current command"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "K",
-              "action": "shortcuts.emacs.killToEndOfLine"
+              "action": "Kill to end of line"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "D",
-              "action": "shortcuts.emacs.killWordForward"
+              "action": "Kill word forward"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "⌫",
-              "action": "shortcuts.emacs.killWordBackward"
+              "action": "Kill word backward"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "D",
-              "action": "shortcuts.emacs.deleteCharacterForward"
+              "action": "Delete character forward"
             }
           ]
         },
@@ -36911,84 +36181,84 @@
                 "⌃"
               ],
               "key": "F",
-              "action": "shortcuts.emacs.forwardOneCharacter"
+              "action": "Forward one character"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "B",
-              "action": "shortcuts.emacs.backwardOneCharacter"
+              "action": "Backward one character"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "F",
-              "action": "shortcuts.emacs.forwardOneWord"
+              "action": "Forward one word"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "B",
-              "action": "shortcuts.emacs.backwardOneWord"
+              "action": "Backward one word"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "N",
-              "action": "shortcuts.emacs.nextLine"
+              "action": "Next line"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "P",
-              "action": "shortcuts.emacs.previousLine"
+              "action": "Previous line"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "A",
-              "action": "shortcuts.emacs.beginningOfLine"
+              "action": "Beginning of line"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "E",
-              "action": "shortcuts.emacs.endOfLine"
+              "action": "End of line"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "<",
-              "action": "shortcuts.emacs.beginningOfBuffer"
+              "action": "Beginning of buffer"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": ">",
-              "action": "shortcuts.emacs.endOfBuffer"
+              "action": "End of buffer"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "V",
-              "action": "shortcuts.emacs.scrollDownPage"
+              "action": "Scroll down page"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "V",
-              "action": "shortcuts.emacs.scrollUpPage"
+              "action": "Scroll up page"
             }
           ]
         },
@@ -37000,21 +36270,21 @@
                 "⌃"
               ],
               "key": "S",
-              "action": "shortcuts.emacs.incrementalSearchForward"
+              "action": "Incremental search forward"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "R",
-              "action": "shortcuts.emacs.incrementalSearchBackward"
+              "action": "Incremental search backward"
             },
             {
               "modifiers": [
                 "⌥"
               ],
               "key": "%",
-              "action": "shortcuts.emacs.queryReplace"
+              "action": "Query replace"
             }
           ]
         },
@@ -37026,42 +36296,42 @@
                 "⌃"
               ],
               "key": "X B",
-              "action": "shortcuts.emacs.switchBuffer"
+              "action": "Switch buffer"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "X K",
-              "action": "shortcuts.emacs.killBuffer"
+              "action": "Kill buffer"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "X 2",
-              "action": "shortcuts.emacs.splitWindowHorizontally"
+              "action": "Split window horizontally"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "X 3",
-              "action": "shortcuts.emacs.splitWindowVertically"
+              "action": "Split window vertically"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "X 1",
-              "action": "shortcuts.emacs.deleteOtherWindows"
+              "action": "Delete other windows"
             },
             {
               "modifiers": [
                 "⌃"
               ],
               "key": "X O",
-              "action": "shortcuts.emacs.switchToOtherWindow"
+              "action": "Switch to other window"
             }
           ]
         }
@@ -37183,7 +36453,7 @@
                 "⌘"
               ],
               "key": ",",
-              "action": "shortcuts.gimp.preferences"
+              "action": "Preferences"
             }
           ]
         },
@@ -38645,7 +37915,7 @@
                 "⌘"
               ],
               "key": "/",
-              "action": "shortcuts.matlab.commentuncommentLines"
+              "action": "Commentuncomment lines"
             },
             {
               "modifiers": [
@@ -39447,7 +38717,7 @@
                 "⌘"
               ],
               "key": "M",
-              "action": "shortcuts.opera.minimizeWindow"
+              "action": "Minimize window"
             },
             {
               "modifiers": [
@@ -40950,7 +40220,7 @@
                 "⌘"
               ],
               "key": "C",
-              "action": "shortcuts.tor-browser.toggleInspector"
+              "action": "Toggle inspector"
             },
             {
               "modifiers": [
@@ -40999,7 +40269,7 @@
                 "⌘"
               ],
               "key": "D",
-              "action": "shortcuts.tor-browser.bookmarkThisPage"
+              "action": "Bookmark this page"
             },
             {
               "modifiers": [
@@ -41007,7 +40277,7 @@
                 "⌘"
               ],
               "key": "B",
-              "action": "shortcuts.tor-browser.showBookmarks"
+              "action": "Show bookmarks"
             },
             {
               "modifiers": [
@@ -41015,7 +40285,7 @@
                 "⌘"
               ],
               "key": "B",
-              "action": "shortcuts.tor-browser.toggleBookmarksSidebar"
+              "action": "Toggle bookmarks sidebar"
             }
           ]
         }
@@ -41037,21 +40307,21 @@
                 "⌘"
               ],
               "key": "1",
-              "action": "shortcuts.tower.workingCopy"
+              "action": "Working copy"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "2",
-              "action": "shortcuts.tower.history"
+              "action": "History"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "3",
-              "action": "shortcuts.tower.stashes"
+              "action": "Stashes"
             },
             {
               "modifiers": [
@@ -41059,7 +40329,7 @@
                 "⌘"
               ],
               "key": "O",
-              "action": "shortcuts.tower.quickOpenRepository"
+              "action": "Quick open repository"
             }
           ]
         },
@@ -41072,7 +40342,7 @@
                 "⌘"
               ],
               "key": "F",
-              "action": "shortcuts.tower.fetch"
+              "action": "Fetch"
             },
             {
               "modifiers": [
@@ -41080,7 +40350,7 @@
                 "⌘"
               ],
               "key": "P",
-              "action": "shortcuts.tower.pull"
+              "action": "Pull"
             },
             {
               "modifiers": [
@@ -41088,14 +40358,14 @@
                 "⌘"
               ],
               "key": "U",
-              "action": "shortcuts.tower.push"
+              "action": "Push"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "R",
-              "action": "shortcuts.tower.refresh"
+              "action": "Refresh"
             }
           ]
         },
@@ -41107,7 +40377,7 @@
                 "⌘"
               ],
               "key": "B",
-              "action": "shortcuts.tower.createBranch"
+              "action": "Create branch"
             },
             {
               "modifiers": [
@@ -41115,7 +40385,7 @@
                 "⌘"
               ],
               "key": "T",
-              "action": "shortcuts.tower.createTag"
+              "action": "Create tag"
             },
             {
               "modifiers": [
@@ -41123,7 +40393,7 @@
                 "⌘"
               ],
               "key": "M",
-              "action": "shortcuts.tower.merge"
+              "action": "Merge"
             },
             {
               "modifiers": [
@@ -41131,7 +40401,7 @@
                 "⌘"
               ],
               "key": "R",
-              "action": "shortcuts.tower.rebase"
+              "action": "Rebase"
             }
           ]
         },
@@ -41144,19 +40414,19 @@
                 "⌘"
               ],
               "key": "C",
-              "action": "shortcuts.tower.commitDialog"
+              "action": "Commit dialog"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "↩",
-              "action": "shortcuts.tower.confirmCommit"
+              "action": "Confirm commit"
             },
             {
               "modifiers": [],
               "key": "Space",
-              "action": "shortcuts.tower.stageunstage"
+              "action": "Stageunstage"
             },
             {
               "modifiers": [
@@ -41164,7 +40434,7 @@
                 "⌘"
               ],
               "key": "A",
-              "action": "shortcuts.tower.stageAll"
+              "action": "Stage all"
             }
           ]
         },
@@ -41177,7 +40447,7 @@
                 "⌘"
               ],
               "key": "S",
-              "action": "shortcuts.tower.saveStash"
+              "action": "Save stash"
             },
             {
               "modifiers": [
@@ -41186,7 +40456,7 @@
                 "⌘"
               ],
               "key": "S",
-              "action": "shortcuts.tower.applyStash"
+              "action": "Apply stash"
             },
             {
               "modifiers": [
@@ -41194,7 +40464,7 @@
                 "⌘"
               ],
               "key": "D",
-              "action": "shortcuts.tower.externalDiff"
+              "action": "External diff"
             }
           ]
         }
@@ -41622,14 +40892,14 @@
                 "⌘"
               ],
               "key": "B",
-              "action": "shortcuts.visual-studio.buildAll"
+              "action": "Build all"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "K",
-              "action": "shortcuts.visual-studio.buildCurrentProject"
+              "action": "Build current project"
             },
             {
               "modifiers": [
@@ -41637,7 +40907,7 @@
                 "⌘"
               ],
               "key": "K",
-              "action": "shortcuts.visual-studio.clean"
+              "action": "Clean"
             }
           ]
         },
@@ -41755,7 +41025,7 @@
                 "⌘"
               ],
               "key": "R",
-              "action": "shortcuts.visual-studio.findReferences"
+              "action": "Find references"
             },
             {
               "modifiers": [
@@ -41769,7 +41039,7 @@
                 "⌘"
               ],
               "key": ".",
-              "action": "shortcuts.visual-studio.navigateTo"
+              "action": "Navigate to"
             },
             {
               "modifiers": [
@@ -41777,7 +41047,7 @@
                 "⌘"
               ],
               "key": "D",
-              "action": "shortcuts.visual-studio.goToFile"
+              "action": "Go to file"
             },
             {
               "modifiers": [
@@ -41785,7 +41055,7 @@
                 "⌘"
               ],
               "key": "T",
-              "action": "shortcuts.visual-studio.goToType"
+              "action": "Go to type"
             }
           ]
         },
@@ -41797,14 +41067,14 @@
                 "⌘"
               ],
               "key": "W",
-              "action": "shortcuts.visual-studio.closeFile"
+              "action": "Close file"
             },
             {
               "modifiers": [
                 "⌘"
               ],
               "key": "N",
-              "action": "shortcuts.visual-studio.newFile"
+              "action": "New file"
             },
             {
               "modifiers": [
@@ -41812,7 +41082,7 @@
                 "⌘"
               ],
               "key": "P",
-              "action": "shortcuts.visual-studio.commandPalette"
+              "action": "Command palette"
             },
             {
               "modifiers": [
@@ -41820,7 +41090,7 @@
                 "⌘"
               ],
               "key": "F",
-              "action": "shortcuts.visual-studio.fullScreen"
+              "action": "Full screen"
             }
           ]
         }
@@ -42122,7 +41392,7 @@
                 "⌘"
               ],
               "key": "J",
-              "action": "shortcuts.webstorm.quickDocumentationLiveTemplate"
+              "action": "Quick documentation live template"
             },
             {
               "modifiers": [
