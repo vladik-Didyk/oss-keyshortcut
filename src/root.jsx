@@ -65,6 +65,9 @@ export function Layout({ children }) {
         <meta name="theme-color" content="#F5F0E8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="google-adsense-account" content="ca-pub-7739329133284929" />
+        {/* Impact.com site ownership check (Setapp, Canva affiliate programs). Impact's
+            snippet uses `value`, not `content`. */}
+        <meta name="impact-site-verification" value="cb1c7e04-3c32-43cd-99c8-8eb37043e55e" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
