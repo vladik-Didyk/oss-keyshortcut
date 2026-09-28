@@ -61,6 +61,12 @@ async function main() {
   const results = []
 
   for (const { slug, config } of appsToCheck) {
+    // An app without a source is kept up by hand (gimp, tor-browser, xcode).
+    if (!config.sources) {
+      console.log(`► ${config.displayName || slug}: no source in sources.json, skipped`)
+      continue
+    }
+
     const platforms = args.platform
       ? [args.platform].filter(p => config.sources[p])
       : Object.keys(config.sources)
@@ -102,6 +108,13 @@ async function main() {
   if (args.dryRun) {
     console.log('\n(Dry run — no changes written)')
   }
+
+  const failed = results.filter(r => r.error)
+  console.log(`\n${results.length - failed.length} of ${results.length} source(s) checked, ${failed.length} could not be read.`)
+
+  // The run fails only when nothing could be checked: that is a broken job,
+  // not a page that changed.
+  if (results.length > 0 && failed.length === results.length) process.exitCode = 1
 }
 
 // ── Process a single app/platform ─────────────────────────────
@@ -172,11 +185,14 @@ async function processApp(slug, config, platformId) {
     action: args.dryRun ? 'dry-run' : action,
   })
 
-  // Update lastVerified on the app in platform JSON
+  // Update lastVerified on the app in platform JSON, only when the check agreed
+  // with the data: no difference, or a difference that was written. A difference
+  // left for review is not a passed check, and a dry run writes nothing.
   // Only set lastUpdated when changes were actually written
   const dateStr = timestamp.split('T')[0]  // YYYY-MM-DD for display
   const dataChanged = !args.dryRun && action === 'auto-approved'
-  updateLastVerified(slug, platformId, dateStr, dataChanged)
+  const agreed = !diff.hasChanges || dataChanged
+  if (agreed && !args.dryRun) updateLastVerified(slug, platformId, dateStr, dataChanged)
 
   return { slug, platformId, diff, summary, action }
 }

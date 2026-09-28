@@ -1,10 +1,43 @@
 /**
- * AI-powered scraper using Google Gemini 2.0 Flash (free tier).
+ * AI-powered scraper using Google Gemini (free tier).
  * Used as a fallback for pages with non-standard layouts.
+ *
+ * The model is named by its alias, not by a version: Google switches versions
+ * off ("gemini-2.0-flash is no longer available"), and a job that runs
+ * unattended then fails on every source. GEMINI_MODEL overrides the list.
  */
 import { GoogleGenAI } from '@google/genai'
 import * as cheerio from 'cheerio'
 import { BaseScraper } from './base-scraper.mjs'
+
+// Tried in order. The second is used when the first is unknown or overloaded.
+const MODELS = process.env.GEMINI_MODEL
+  ? [process.env.GEMINI_MODEL]
+  : ['gemini-flash-latest', 'gemini-flash-lite-latest']
+
+// The free tier allows a few requests a minute. One request every 7 seconds stays under it.
+const MIN_GAP_MS = 7000
+const MAX_TRIES = 3
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+/** HTTP status of a Gemini error, from the error object or from its JSON message. */
+export function errorStatus(err) {
+  if (typeof err?.status === 'number') return err.status
+  const match = /"code":\s*(\d{3})/.exec(String(err?.message || ''))
+  return match ? Number(match[1]) : null
+}
+
+/** True when the day's free quota is used up: waiting a minute does not help. */
+export function isDailyQuota(err) {
+  return errorStatus(err) === 429 && /PerDay/.test(String(err?.message || ''))
+}
+
+/** Seconds the API asks to wait ("retryDelay": "41s"), or null. */
+export function retryDelaySeconds(err) {
+  const match = /"retryDelay":\s*"(\d+)(?:\.\d+)?s"/.exec(String(err?.message || ''))
+  return match ? Number(match[1]) : null
+}
 
 export class AiScraper extends BaseScraper {
   constructor() {
@@ -14,6 +47,44 @@ export class AiScraper extends BaseScraper {
       throw new Error('GEMINI_API_KEY environment variable is required for AI extraction')
     }
     this.ai = new GoogleGenAI({ apiKey })
+    this.lastCallAt = 0
+    this.quotaUsedUp = false
+  }
+
+  /**
+   * One request to Gemini, paced and retried.
+   * 429 (per minute) and 503: wait and try again. 404 and 503 on the last try:
+   * the next model. 429 (per day): stop asking for the rest of the run.
+   */
+  async generate(prompt) {
+    if (this.quotaUsedUp) throw new Error('Gemini: the free quota of the day is used up')
+
+    let lastError
+    for (const model of MODELS) {
+      for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
+        const wait = this.lastCallAt + MIN_GAP_MS - Date.now()
+        if (wait > 0) await sleep(wait)
+        this.lastCallAt = Date.now()
+        try {
+          return await this.ai.models.generateContent({
+            model,
+            contents: prompt,
+            config: { temperature: 0.1, maxOutputTokens: 8192 },
+          })
+        } catch (err) {
+          lastError = err
+          const status = errorStatus(err)
+          if (isDailyQuota(err)) {
+            this.quotaUsedUp = true
+            throw new Error('Gemini: the free quota of the day is used up')
+          }
+          if (status === 404) break // this model is gone: the next one
+          if (status !== 429 && status !== 503) throw err
+          if (attempt < MAX_TRIES) await sleep((retryDelaySeconds(err) ?? 20 * attempt) * 1000)
+        }
+      }
+    }
+    throw lastError
   }
 
   /**
@@ -49,16 +120,9 @@ Rules:
 Page content:
 ${cleanedHtml}`
 
-    const response = await this.ai.models.generateContent({
-      model: 'gemini-2.0-flash',
-      contents: prompt,
-      config: {
-        temperature: 0.1,
-        maxOutputTokens: 8192,
-      },
-    })
+    const response = await this.generate(prompt)
 
-    const text = response.text.trim()
+    const text = (response.text || '').trim()
 
     // Parse the JSON response — handle potential markdown code fences
     let jsonStr = text
