@@ -3,7 +3,7 @@ export default {
   title: 'Top 10 Tools to Manage and Customize Your Keyboard Shortcuts',
   description: 'Discover the best tools for managing, customizing, and learning keyboard shortcuts on macOS, Windows, and Linux. From overlay apps to shortcut trainers.',
   published: '2026-03-31',
-  lastUpdated: '2026-03-31',
+  lastUpdated: '2026-09-28',
   readingTime: '9 min read',
   category: 'Tools',
   relatedSlugs: ['keyboard-shortcut-app-features', 'personalized-shortcut-workflow'],
@@ -44,13 +44,13 @@ export default {
       heading: '1. KeyShortcut (macOS)',
       content: [
         { type: 'paragraph', text: 'KeyShortcut is a floating shortcut panel for macOS that automatically detects your active application and displays its keyboard shortcuts in a clean, organized overlay. Unlike tools that require you to hold a key to see a temporary tooltip, KeyShortcut stays visible as long as you need it — pinned to any corner of your screen.' },
-        { type: 'paragraph', text: 'It ships with shortcuts for {macAppCount} apps, from Finder and Safari to Figma, VS Code, and the full JetBrains suite. You can also create custom shortcuts with global hotkeys, search across all apps instantly, and even see your clipboard contents in a live preview toast.' },
+        { type: 'paragraph', text: 'It ships with shortcuts for {macAppCount} apps, from Finder and Safari to Figma, VS Code, and the full JetBrains suite. You can also search across all apps, import shortcut packs, and see your clipboard contents in a preview toast.' },
         {
           type: 'list',
           items: [
             'Automatic active app detection with instant shortcut display.',
             'Search across all shortcuts in all apps from one search bar.',
-            'Custom shortcut creation with actions: open apps, URLs, Apple Shortcuts, or copy text.',
+            'Import of shortcut packs (.json files).',
             'Modifier key highlighting — press a key and see it light up in the panel.',
             'Available in 11 languages with full right-to-left support.',
             'One-time purchase — no subscription, no tracking, no data collection.',

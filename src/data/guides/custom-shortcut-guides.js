@@ -1,11 +1,11 @@
 export default {
   slug: 'custom-shortcut-guides',
-  title: 'Enhance Your Digital Workflow with KeyShortcut\'s Custom Guides',
-  description: 'Create custom keyboard shortcuts, build personal reference cards, and automate actions with KeyShortcut\'s custom shortcut system on macOS.',
+  title: 'How to Add Your Own Keyboard Shortcuts on a Mac',
+  description: 'Two ways to add your own keyboard shortcuts on macOS: App Shortcuts in System Settings for menu commands, and the Shortcuts app for actions.',
   published: '2026-03-31',
-  lastUpdated: '2026-03-31',
-  readingTime: '7 min read',
-  category: 'Product',
+  lastUpdated: '2026-09-28',
+  readingTime: '4 min read',
+  category: 'Reference',
   relatedSlugs: ['shortcut-collections', 'personalized-shortcut-workflow'],
   relatedApps: [
     { label: 'Finder Shortcuts', to: '/macos/macos#finder' },
@@ -17,42 +17,39 @@ export default {
       heading: 'Beyond Built-In Shortcuts',
       content: [
         { type: 'paragraph', text: 'Every app comes with its own keyboard shortcuts, but they\'re designed for the average user. Your workflow is different. You have specific files you open daily, URLs you visit repeatedly, commands you run in sequence, and actions no app developer anticipated.' },
-        { type: 'paragraph', text: 'KeyShortcut\'s custom shortcut system lets you go beyond what apps provide. Create your own keyboard shortcuts for any action — from simple reference cards to powerful automations — and access them with a global hotkey from anywhere on your Mac.' },
+        { type: 'paragraph', text: 'macOS has two ways to add your own. App Shortcuts in System Settings give a key combination to a menu command. The Shortcuts app gives a key combination to an action, such as opening an app or a web page. Both come with macOS.' },
       ],
     },
     {
-      id: 'reference-cards',
-      heading: 'Custom Reference Cards',
+      id: 'menu-commands',
+      heading: 'Shortcuts for Menu Commands',
       content: [
-        { type: 'paragraph', text: 'The simplest custom shortcut is a reference card — a key combination paired with a label that appears in KeyShortcut\'s panel. No action is triggered; it\'s just a visual reminder of shortcuts you want to remember.' },
-        { type: 'paragraph', text: 'Reference cards are useful for:' },
+        { type: 'paragraph', text: 'If a menu command has no shortcut, or has one you do not like, you can set your own:' },
         {
           type: 'list',
           items: [
-            'App-specific shortcuts you\'re currently learning and want to see alongside the built-in list.',
-            'System-level shortcuts that aren\'t tied to any single app (like macOS accessibility shortcuts).',
-            'Custom macOS keyboard shortcuts you\'ve set up via System Settings → Keyboard → Keyboard Shortcuts.',
-            'Terminal commands or Git shortcuts you use frequently but haven\'t fully memorized.',
+            'Open System Settings → Keyboard → Keyboard Shortcuts → App Shortcuts.',
+            'Click the + button and choose one app, or All Applications.',
+            'Type the menu title exactly as the app shows it.',
+            'Press the key combination and click Done.',
           ],
         },
-        { type: 'paragraph', text: 'Think of reference cards as a digital sticky note on your screen — except they\'re organized, searchable, and automatically categorized alongside your other shortcuts.' },
+        { type: 'paragraph', text: 'This works only for commands that are in an app\'s menus. It cannot open an app or a web page.' },
       ],
     },
     {
       id: 'actionable-shortcuts',
-      heading: 'Actionable Shortcuts',
+      heading: 'Shortcuts That Run an Action',
       content: [
-        { type: 'paragraph', text: 'Custom shortcuts become truly powerful when you assign actions to them. KeyShortcut supports several action types:' },
+        { type: 'paragraph', text: 'The Shortcuts app can run an action when you press a key combination. Make a shortcut, open its details and choose Add Keyboard Shortcut. Actions that are useful every day:' },
         {
           type: 'list',
           items: [
-            'Open an app — Launch any application with a single key press. Assign ⌃⌥T to open Terminal, or ⌃⌥F to open Finder.',
-            'Open a URL — One shortcut to open a specific web page. Daily standup meeting link, project dashboard, documentation page — anything you visit regularly.',
-            'Run an Apple Shortcut — Trigger any Apple Shortcuts automation from a key combination. This connects KeyShortcut to the entire Apple Shortcuts ecosystem.',
-            'Copy text to clipboard — Instantly copy a pre-defined text string. Email signatures, code snippets, template responses, or frequently-typed phrases.',
+            'Open an app — start Terminal, Finder or any other app.',
+            'Open a URL — a meeting link, a project board, a documentation page.',
+            'Copy text to the clipboard — an email signature, a code snippet, a reply you type often.',
           ],
         },
-        { type: 'paragraph', text: 'Each custom shortcut can be assigned a global hotkey — meaning it works from anywhere on your Mac, regardless of which app is in the foreground. Press the key combination and the action fires immediately.' },
         { type: 'ad', variant: 'in-article' },
       ],
     },
@@ -60,7 +57,7 @@ export default {
       id: 'workflow-examples',
       heading: 'Workflow Examples',
       content: [
-        { type: 'paragraph', text: 'Here are practical examples of custom shortcuts that solve real workflow problems:' },
+        { type: 'paragraph', text: 'Examples of shortcuts you can make in the Shortcuts app:' },
         {
           type: 'shortcut-table',
           shortcuts: [
@@ -69,10 +66,10 @@ export default {
             { keys: '⌃⌥ G', action: 'Open GitHub notifications page', platform: 'macos' },
             { keys: '⌃⌥ S', action: 'Copy email signature to clipboard', platform: 'macos' },
             { keys: '⌃⌥ T', action: 'Open Terminal app', platform: 'macos' },
-            { keys: '⌃⌥ N', action: 'Run "New Meeting Note" Apple Shortcut', platform: 'macos' },
+            { keys: '⌃⌥ N', action: 'Make a new meeting note', platform: 'macos' },
           ],
         },
-        { type: 'paragraph', text: 'The key insight is consistency: once you build a set of ⌃⌥ (Control+Option) shortcuts for your daily actions, they become second nature within a week. You no longer need to remember URLs, navigate bookmark folders, or click through menus — every action is one key press away.' },
+        { type: 'paragraph', text: 'Use the same modifier keys for all of them, for example ⌃⌥ (Control+Option). They are then easier to remember.' },
       ],
     },
     {
@@ -93,21 +90,26 @@ export default {
     },
     {
       id: 'apple-shortcuts',
-      heading: 'Integration with Apple Shortcuts',
+      heading: 'More Than One Action',
       content: [
-        { type: 'paragraph', text: 'The Apple Shortcuts integration is where custom shortcuts get seriously powerful. Apple Shortcuts can automate almost anything on macOS — from controlling system settings and managing files to interacting with third-party apps and web services.' },
-        { type: 'paragraph', text: 'By assigning a KeyShortcut hotkey to an Apple Shortcut, you can trigger complex automations with a single key press:' },
+        { type: 'paragraph', text: 'A shortcut in the Shortcuts app can hold several actions. One key combination then runs all of them:' },
         {
           type: 'list',
           items: [
             'Start a focus mode, open specific apps, and arrange windows for a work session.',
             'Create a new note in Apple Notes with today\'s date as the title.',
-            'Take a screenshot and immediately upload it to a shared folder.',
-            'Generate a daily summary from your calendar and copy it to the clipboard.',
+            'Take a screenshot and save it to a shared folder.',
+            'Collect today\'s calendar events and copy them to the clipboard.',
             'Toggle system dark mode.',
           ],
         },
-        { type: 'paragraph', text: 'The combination of KeyShortcut\'s global hotkeys and Apple Shortcuts\' automation capabilities gives you a keyboard-driven control center for your entire Mac.' },
+      ],
+    },
+    {
+      id: 'keyshortcut',
+      heading: 'Where KeyShortcut Fits',
+      content: [
+        { type: 'paragraph', text: 'KeyShortcut for Mac shows the shortcuts that apps already have. Version 1.0 has no editor for your own shortcuts. It can import a shortcut pack, which is a .json file: open Settings and choose Import Pack.' },
       ],
     },
     {
@@ -115,7 +117,7 @@ export default {
       heading: 'Getting Started',
       content: [
         { type: 'paragraph', text: 'Start with three custom shortcuts that solve your most repetitive daily tasks. The ones that make the biggest difference are usually the actions you perform multiple times a day — opening a specific URL, launching a specific app, or typing a specific phrase.' },
-        { type: 'paragraph', text: 'Once those three are muscle memory (usually within a week), add three more. Within a month, you\'ll have a personalized shortcut system that saves you meaningful time every day.' },
+        { type: 'paragraph', text: 'Once you use those three without thinking, add three more.' },
         { type: 'cta', variant: 'mac-app' },
       ],
     },
