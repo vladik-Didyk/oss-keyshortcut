@@ -3,10 +3,18 @@ import { execFileSync } from 'child_process'
 import { readFileSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { pageUrl } from '../utils/siteUrl'
+import routerConfig from '../../react-router.config.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..', '..')
 const sitemapPath = join(ROOT, 'public/sitemap.xml')
+const SUB_SITEMAPS = ['sitemap-pages.xml', 'sitemap-guides.xml', 'sitemap-compare.xml', 'sitemap-macos.xml', 'sitemap-windows.xml', 'sitemap-linux.xml']
+
+function readLocs(name) {
+  const xml = readFileSync(join(ROOT, 'public', name), 'utf-8')
+  return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1])
+}
 
 describe('sitemap generation', () => {
   let indexXml
@@ -23,7 +31,7 @@ describe('sitemap generation', () => {
   })
 
   it('references expected sub-sitemaps', () => {
-    for (const name of ['sitemap-pages.xml', 'sitemap-guides.xml', 'sitemap-compare.xml', 'sitemap-macos.xml', 'sitemap-windows.xml', 'sitemap-linux.xml']) {
+    for (const name of SUB_SITEMAPS) {
       expect(indexXml).toContain(`<loc>https://keyshortcut.com/${name}</loc>`)
     }
   })
@@ -36,17 +44,41 @@ describe('sitemap generation', () => {
 
   it('contains static pages in sitemap-pages.xml', () => {
     const xml = readFileSync(join(ROOT, 'public/sitemap-pages.xml'), 'utf-8')
-    for (const path of ['/', '/mac-hud', '/privacy']) {
+    for (const path of ['/', '/mac-hud/', '/privacy']) {
       expect(xml).toContain(`<loc>https://keyshortcut.com${path}</loc>`)
     }
   })
 
   it('contains platform index and app pages in platform sub-sitemaps', () => {
     const macosXml = readFileSync(join(ROOT, 'public/sitemap-macos.xml'), 'utf-8')
-    expect(macosXml).toContain('<loc>https://keyshortcut.com/macos</loc>')
+    expect(macosXml).toContain('<loc>https://keyshortcut.com/macos/</loc>')
     // Spot-check well-known apps
     for (const slug of ['figma', 'chrome', 'slack']) {
-      expect(macosXml).toContain(`/macos/${slug}</loc>`)
+      expect(macosXml).toContain(`<loc>https://keyshortcut.com/macos/${slug}/</loc>`)
+    }
+  })
+
+  // Cloudflare Pages serves a pre-rendered page at the address with the slash
+  // and redirects the other form (308). A sitemap must list what returns 200.
+  it('lists every URL in the form that is served', () => {
+    for (const name of SUB_SITEMAPS) {
+      for (const loc of readLocs(name)) {
+        if (loc === 'https://keyshortcut.com/privacy') continue // served from public/privacy.html
+        expect(loc.endsWith('/'), `${name}: ${loc}`).toBe(true)
+      }
+    }
+  })
+
+  it('lists the pre-rendered routes, all of them and nothing else', async () => {
+    const routes = await routerConfig.prerender()
+    const locs = SUB_SITEMAPS.flatMap(readLocs)
+    expect(new Set(locs).size).toBe(locs.length)
+    expect([...locs].sort()).toEqual(routes.map(pageUrl).sort())
+  })
+
+  it('does not list the not-found page', () => {
+    for (const loc of SUB_SITEMAPS.flatMap(readLocs)) {
+      expect(loc).not.toMatch(/\/404/)
     }
   })
 

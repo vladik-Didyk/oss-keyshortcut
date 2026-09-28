@@ -2,12 +2,12 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
+import { SITE_ORIGIN, pageUrl } from '../src/utils/siteUrl.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
 const DATA_DIR = join(ROOT, 'public/data')
 
-const DOMAIN = 'https://keyshortcut.com'
 const today = new Date().toISOString().split('T')[0]
 
 function readJSON(relativePath) {
@@ -18,7 +18,7 @@ function buildUrlset(pages) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages.map(p => `  <url>
-    <loc>${DOMAIN}${p.loc}</loc>
+    <loc>${pageUrl(p.loc)}</loc>
     <lastmod>${p.lastmod || today}</lastmod>
     <changefreq>${p.changefreq}</changefreq>
     <priority>${p.priority}</priority>
@@ -28,6 +28,7 @@ ${pages.map(p => `  <url>
 }
 
 // ─── Static pages ───────────────────────────────────────────────────
+// `loc` is the route path; pageUrl() turns it into the address that answers 200.
 
 const staticPages = [
   { loc: '/', priority: '1.0', changefreq: 'weekly' },
@@ -105,7 +106,7 @@ const subSitemaps = [
 const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${subSitemaps.map(f => `  <sitemap>
-    <loc>${DOMAIN}/${f}</loc>
+    <loc>${SITE_ORIGIN}/${f}</loc>
     <lastmod>${today}</lastmod>
   </sitemap>`).join('\n')}
 </sitemapindex>

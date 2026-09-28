@@ -19,7 +19,7 @@ export async function loader({ params }) {
 export function meta({ data }) {
   if (!data) return buildMeta(CONTENT.meta.catchAll);
   const { appA, appB } = data;
-  return buildMeta(CONTENT.meta.compare(appA.displayName, appB.displayName));
+  return buildMeta(CONTENT.meta.compare(appA.displayName, appB.displayName, appA.slug, appB.slug));
 }
 
 export default function ComparePageRoute() {

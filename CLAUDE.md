@@ -92,6 +92,8 @@ Route modules live in `src/routes/` and export `loader`, `meta`, and a default c
 
 **SEO**: Route modules export `meta()` functions that return title, description, OG tags, Twitter Card tags, and canonical links (via `{ tagName: "link", rel: "canonical", ... }`). All meta is rendered server-side into pre-rendered HTML.
 
+**Page URLs**: `pageUrl(path)` in `src/utils/siteUrl.js` is the one place that builds the address of a page: `pageUrl('/macos/figma')` → `https://keyshortcut.com/macos/figma/`. Cloudflare Pages serves a pre-rendered page at the address with the trailing slash and 308-redirects the form without it; `/` and `/privacy` (served from `public/privacy.html`) are the exceptions. Canonical, og:url, JSON-LD, the sitemap, the RSS feed and the README app links all use it. Never write `https://keyshortcut.com/...` for a page by hand; a test fails on it. Internal `<Link to>` paths are still written without the slash (about 30 files, no shared helper): React Router matches both forms, a crawler following one takes the 308.
+
 Product page sections use anchor links (`#features`, `#faq`, `#policies`, `#download`) for in-page navigation.
 
 ### Key directories
@@ -190,7 +192,8 @@ Vitest with jsdom environment, globals enabled, setup in `src/test/setup.js` (im
 - `data-integrity.test.js` — validates platform JSON structure across all platforms
 - `directory-helpers.test.js` — tests platformHelpers utility functions
 - `search-helpers.test.js` — tests search/filtering utilities
-- `sitemap.test.js` — validates sitemap.xml generation
+- `sitemap.test.js` — validates sitemap.xml generation (URLs in the served form, same set as the pre-rendered routes)
+- `site-url.test.js` — `pageUrl()`, canonical and og:url of every page type, RSS links, no hand-written page URLs in the source; with a build present, canonical/og:url/JSON-LD of every pre-rendered page
 - `not-found.test.jsx` — the not-found page, its meta, and `404.html` in the build
 - `content.test.js` — validates content data structure
 - `deployment.test.js` — validates deployment configuration

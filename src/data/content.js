@@ -2,6 +2,7 @@ import { APP_COUNT, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, formatS
 import { APP_NOTES } from './appNotes'
 import { SPONSOR_OFFER, SPONSOR_AUDIENCE } from './sponsors'
 import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys } from '../utils/appCopy'
+import { pageUrl } from '../utils/siteUrl'
 
 /**
  * Single source of truth for all website content.
@@ -1030,52 +1031,53 @@ export const CONTENT = {
     home: {
       title: 'Keyboard Shortcuts Directory \u2014 KeyShortcut',
       description: `Browse ${formatShortcutCount()} keyboard shortcuts for macOS, Windows, and Linux apps. Find shortcuts for any app, organized by category.`,
-      url: 'https://keyshortcut.com/',
+      url: pageUrl('/'),
     },
     productPage: {
       title: 'KeyShortcut for Mac \u2014 Floating Shortcut Panel',
       description: `A floating keyboard shortcut panel for macOS that detects your active app and shows every shortcut at a glance. ${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts across ${MAC_APP_COUNT} apps. One-time purchase.`,
-      url: 'https://keyshortcut.com/mac-hud',
+      url: pageUrl('/mac-hud'),
     },
     privacy: {
       title: 'Privacy Policy & Terms \u2014 KeyShortcut',
       description: 'KeyShortcut privacy policy, terms of use, and website data practices.',
-      url: 'https://keyshortcut.com/privacy',
+      url: pageUrl('/privacy'),
     },
     about: {
       title: 'About KeyShortcut \u2014 Keyboard Shortcuts Directory',
       description: 'Learn about KeyShortcut, the free keyboard shortcuts directory for macOS, Windows, and Linux. Our mission, approach, and how to get in touch.',
-      url: 'https://keyshortcut.com/about',
+      url: pageUrl('/about'),
     },
     sponsor: {
       title: 'Sponsor KeyShortcut \u2014 One Slot on Every App Page',
       description: `One labeled sponsor card on the app pages of a keyboard shortcuts directory covering ${APP_COUNT} apps. $${SPONSOR_OFFER.sitewide.price} a month sitewide, $${SPONSOR_OFFER.page.price} a month for one page. Month to month.`,
-      url: 'https://keyshortcut.com/sponsor',
+      url: pageUrl('/sponsor'),
     },
     guidesIndex: {
       title: 'Keyboard Shortcut Guides & Tips \u2014 KeyShortcut',
       description: 'Practical guides on keyboard shortcuts, productivity workflows, and shortcut management for macOS, Windows, and Linux.',
-      url: 'https://keyshortcut.com/guides',
+      url: pageUrl('/guides'),
     },
     compareIndex: {
       title: 'Keyboard Shortcut Comparisons \u2014 KeyShortcut',
       description: 'Side-by-side keyboard shortcut comparisons between popular apps. See how shortcuts map across Figma vs Sketch, VS Code vs Cursor, Chrome vs Safari, and more.',
-      url: 'https://keyshortcut.com/compare',
+      url: pageUrl('/compare'),
     },
-    compare: (nameA, nameB) => ({
+    compare: (nameA, nameB, slugA, slugB) => ({
       title: `${nameA} vs ${nameB} Keyboard Shortcuts \u2014 KeyShortcut`,
       description: `Compare keyboard shortcuts between ${nameA} and ${nameB}. Side-by-side view of shared and unique shortcuts to help you switch between apps faster.`,
-      url: `https://keyshortcut.com/compare/${nameA.toLowerCase().replace(/\s+/g, '-')}-vs-${nameB.toLowerCase().replace(/\s+/g, '-')}`,
+      // From the slugs, not the names: "VS Code" is /compare/vscode-vs-...
+      url: pageUrl(`/compare/${slugA}-vs-${slugB}`),
     }),
     cheatSheets: {
       title: 'Keyboard Shortcut Cheat Sheets \u2014 Free Printable PDFs \u2014 KeyShortcut',
       description: `Download free printable keyboard shortcut cheat sheets for ${APP_COUNT}+ apps. PDF format with organized shortcuts and keycap-style key labels for macOS, Windows, and Linux.`,
-      url: 'https://keyshortcut.com/cheat-sheets',
+      url: pageUrl('/cheat-sheets'),
     },
     guide: (guide) => ({
       title: `${guide.title} \u2014 KeyShortcut`,
       description: guide.description,
-      url: `https://keyshortcut.com/guides/${guide.slug}`,
+      url: pageUrl(`/guides/${guide.slug}`),
       image: `https://keyshortcut.com/images/og/${guide.slug}.png`,
       publishedTime: guide.published,
       modifiedTime: guide.lastUpdated || guide.published,
@@ -1090,13 +1092,13 @@ export const CONTENT = {
     platformIndex: (platformName, appCount, shortcutCount, platformId) => ({
       title: `${platformName} App Shortcuts \u2014 KeyShortcut`,
       description: `Browse keyboard shortcuts for ${appCount} ${platformName} apps. ${shortcutCount.toLocaleString()}+ shortcuts.`,
-      url: `https://keyshortcut.com/${platformId}`,
+      url: pageUrl(`/${platformId}`),
       image: `https://keyshortcut.com/images/og/${platformId}.png`,
     }),
     shortcutPage: (appName, platformName, shortcutCount, platformId, slug) => ({
       title: `${appName} ${platformName} Shortcuts \u2014 KeyShortcut`,
       description: `All ${shortcutCount} ${appName} keyboard shortcuts for ${platformName}.`,
-      url: `https://keyshortcut.com/${platformId}/${slug}`,
+      url: pageUrl(`/${platformId}/${slug}`),
       image: `https://keyshortcut.com/images/og/${platformId}-${slug}.png`,
     }),
   },
@@ -1107,11 +1109,11 @@ export const CONTENT = {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'KeyShortcut',
-      url: 'https://keyshortcut.com',
+      url: pageUrl('/'),
       description: 'Browse keyboard shortcuts for macOS, Windows, and Linux apps. Find shortcuts for any app, organized by category.',
       potentialAction: {
         '@type': 'SearchAction',
-        target: 'https://keyshortcut.com/?search={search_term_string}',
+        target: `${pageUrl('/')}?search={search_term_string}`,
         'query-input': 'required name=search_term_string',
       },
     },

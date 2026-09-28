@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 import { useScrollspy } from '../hooks/useScrollspy'
 import { getGuideBySlug } from '../data/guides'
+import { pageUrl } from '../utils/siteUrl'
 import AdSlot from './AdSlot'
 import GuideCtaBanner from './GuideCtaBanner'
 
@@ -25,11 +26,11 @@ function buildArticleJsonLd(guide) {
     publisher: {
       '@type': 'Organization',
       name: 'KeyShortcut',
-      url: 'https://keyshortcut.com',
+      url: pageUrl('/'),
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://keyshortcut.com/guides/${guide.slug}`,
+      '@id': pageUrl(`/guides/${guide.slug}`),
     },
   })
 }
@@ -176,9 +177,9 @@ export default function GuidePage({ guide }) {
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://keyshortcut.com/' },
-            { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://keyshortcut.com/guides' },
-            { '@type': 'ListItem', position: 3, name: guide.title, item: `https://keyshortcut.com/guides/${guide.slug}` },
+            { '@type': 'ListItem', position: 1, name: 'Home', item: pageUrl('/') },
+            { '@type': 'ListItem', position: 2, name: 'Guides', item: pageUrl('/guides') },
+            { '@type': 'ListItem', position: 3, name: guide.title, item: pageUrl(`/guides/${guide.slug}`) },
           ],
         }) }}
       />

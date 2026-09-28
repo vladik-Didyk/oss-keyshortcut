@@ -9,6 +9,7 @@ import { readFileSync, writeFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { createClient } from "@supabase/supabase-js";
+import { pageUrl } from "../src/utils/siteUrl.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -41,7 +42,7 @@ const COLS = 8; // apps per row in the grid
 
 function appCell(app, platformId) {
   const icon = app.icon_url || "";
-  const url = `https://keyshortcut.com/${platformId}/${app.slug}`;
+  const url = pageUrl(`/${platformId}/${app.slug}`);
   return `<td align="center"><a href="${url}"><img src="${icon}" width="36" height="36" alt="${app.display_name}" /><br /><sub>${app.display_name}</sub></a></td>`;
 }
 

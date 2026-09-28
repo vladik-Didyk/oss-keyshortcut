@@ -8,6 +8,7 @@ import AppCard from './directory/AppCard'
 import { useScrollspy } from '../hooks/useScrollspy'
 import { CONTENT } from '../data/content'
 import { APP_STORE_URL } from '../data/siteConfig'
+import { pageUrl } from '../utils/siteUrl'
 import AdSlot from './AdSlot'
 import AffiliateLink from './AffiliateLink'
 import { getAffiliate } from '../data/affiliates'
@@ -697,9 +698,9 @@ function BreadcrumbSchema({ appName, platformName, platformId, slug }) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://keyshortcut.com/' },
-      { '@type': 'ListItem', position: 2, name: `${platformName} Shortcuts`, item: `https://keyshortcut.com/${platformId}` },
-      { '@type': 'ListItem', position: 3, name: `${appName} Shortcuts`, item: `https://keyshortcut.com/${platformId}/${slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: pageUrl('/') },
+      { '@type': 'ListItem', position: 2, name: `${platformName} Shortcuts`, item: pageUrl(`/${platformId}`) },
+      { '@type': 'ListItem', position: 3, name: `${appName} Shortcuts`, item: pageUrl(`/${platformId}/${slug}`) },
     ],
   })
   // Safe: jsonLd is built from our own static app/platform data (not user input)

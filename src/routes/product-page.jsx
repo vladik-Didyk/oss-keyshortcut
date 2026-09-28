@@ -3,6 +3,7 @@ import { CONTENT, buildMeta } from "../data/content";
 import { getPlatformApps, getCategories } from "../utils/supabase.server";
 import { groupByCategories } from "../utils/platformHelpers";
 import { MAC_APP_COUNT, PRICE, APP_STORE_URL, MAC_SHORTCUT_COUNT, formatShortcutCount } from "../data/siteConfig";
+import { pageUrl } from "../utils/siteUrl";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Problem from "../components/Problem";
@@ -94,7 +95,7 @@ const SOFTWARE_APP_JSONLD = JSON.stringify({
   operatingSystem: 'macOS',
   applicationCategory: 'UtilitiesApplication',
   description: `Floating keyboard shortcut panel for macOS. ${formatShortcutCount(MAC_SHORTCUT_COUNT)} shortcuts across ${MAC_APP_COUNT} apps with active app detection, search, and custom shortcuts.`,
-  url: 'https://keyshortcut.com/mac-hud',
+  url: pageUrl('/mac-hud'),
   ...(APP_STORE_URL ? { downloadUrl: APP_STORE_URL } : {}),
   offers: {
     '@type': 'Offer',

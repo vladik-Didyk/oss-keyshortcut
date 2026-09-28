@@ -145,7 +145,7 @@ describe('meta template functions', () => {
     expect(meta.title).toContain('macOS')
     expect(meta.title).toContain('KeyShortcut')
     expect(meta.description).toContain('85')
-    expect(meta.url).toBe('https://keyshortcut.com/macos')
+    expect(meta.url).toBe('https://keyshortcut.com/macos/')
   })
 
   it('shortcutPage returns correct meta', () => {
@@ -153,7 +153,13 @@ describe('meta template functions', () => {
     expect(meta.title).toContain('Figma')
     expect(meta.title).toContain('macOS')
     expect(meta.description).toContain('120')
-    expect(meta.url).toBe('https://keyshortcut.com/macos/figma')
+    expect(meta.url).toBe('https://keyshortcut.com/macos/figma/')
+  })
+
+  it('compare builds its URL from the slugs, not the display names', () => {
+    const meta = CONTENT.meta.compare('IntelliJ IDEA', 'VS Code', 'intellij', 'vscode')
+    expect(meta.title).toContain('IntelliJ IDEA vs VS Code')
+    expect(meta.url).toBe('https://keyshortcut.com/compare/intellij-vs-vscode/')
   })
 })
 

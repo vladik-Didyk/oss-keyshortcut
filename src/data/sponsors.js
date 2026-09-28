@@ -10,6 +10,7 @@
 // Example: sitewide: { name: 'Acme', url: 'https://acme.com/?ref=keyshortcut', tagline: 'Short line' }
 
 import { SUPPORT_EMAIL } from './siteConfig'
+import { pageUrl } from '../utils/siteUrl'
 
 export const SPONSORS = {
   // One sponsor on every app page. null = none.
@@ -62,7 +63,7 @@ export function isSitewideOpen(sponsors = SPONSORS) {
 /** mailto: link for the "Sponsor this page" call to action. */
 export function sponsorMailto(pathname, appName) {
   const subject = `Sponsor keyshortcut.com${pathname}`
-  const body = `Hi, I'd like to sponsor the ${appName} shortcuts page (https://keyshortcut.com${pathname}).`
+  const body = `Hi, I'd like to sponsor the ${appName} shortcuts page (${pageUrl(pathname)}).`
   return `mailto:${SPONSOR_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 }
 
@@ -105,7 +106,7 @@ export function paymentUrl(kind, pathname, offer = SPONSOR_OFFER) {
 export function bookingMailto(kind, pathname, offer = SPONSOR_OFFER) {
   const price = offer[kind]?.price
   const what = kind === 'page'
-    ? (isAppPagePath(pathname) ? `the page https://keyshortcut.com${pathname}` : 'one app page')
+    ? (isAppPagePath(pathname) ? `the page ${pageUrl(pathname)}` : 'one app page')
     : 'the sitewide slot'
   const subject = `Sponsor keyshortcut.com: ${kind === 'page' ? 'one page' : 'sitewide'}`
   const body = `Hi, I'd like to book ${what} at $${price} a month.\n\nName on the card:\nOne line of text:\nLink:\n`

@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { useEffect } from 'react'
 import AdSlot from './AdSlot'
 import { trackEvent } from '../lib/analytics'
+import { pageUrl } from '../utils/siteUrl'
 
 export default function ComparePage({ appA, appB, comparison }) {
   // Track comparison page view (top of funnel)
@@ -37,9 +38,9 @@ export default function ComparePage({ appA, appB, comparison }) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://keyshortcut.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Comparisons', item: 'https://keyshortcut.com/compare' },
-      { '@type': 'ListItem', position: 3, name: `${appA.displayName} vs ${appB.displayName}`, item: `https://keyshortcut.com/compare/${appA.slug}-vs-${appB.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: pageUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Comparisons', item: pageUrl('/compare') },
+      { '@type': 'ListItem', position: 3, name: `${appA.displayName} vs ${appB.displayName}`, item: pageUrl(`/compare/${appA.slug}-vs-${appB.slug}`) },
     ],
   })
 

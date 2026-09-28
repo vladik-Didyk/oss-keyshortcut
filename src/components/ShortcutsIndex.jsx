@@ -3,6 +3,7 @@ import { Link, useLoaderData, useNavigate } from 'react-router'
 import { Search, X } from '../utils/icons'
 import { groupByCategories } from '../utils/platformHelpers'
 import { buildSearchIndex, searchIndex, parseAppQuery } from '../utils/searchHelpers'
+import { pageUrl } from '../utils/siteUrl'
 import { categoryConfig } from '../data/categoryConfig'
 import { CONTENT } from '../data/content'
 import AppCard from './directory/AppCard'
@@ -231,8 +232,8 @@ function BreadcrumbSchema({ platformName, platformId }) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://keyshortcut.com/' },
-      { '@type': 'ListItem', position: 2, name: `${platformName} Shortcuts`, item: `https://keyshortcut.com/${platformId}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: pageUrl('/') },
+      { '@type': 'ListItem', position: 2, name: `${platformName} Shortcuts`, item: pageUrl(`/${platformId}`) },
     ],
   })
   // Safe: jsonLd is built from our own static platform data (not user input)
