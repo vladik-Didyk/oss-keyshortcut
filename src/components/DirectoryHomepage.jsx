@@ -64,6 +64,28 @@ export default function DirectoryHomepage() {
   const currentPlatform = platforms?.find(p => p.id === selectedPlatform)
   const categoryOrder = useMemo(() => currentPlatform?.categories || [], [currentPlatform])
 
+  // Edge fades on the category row: shown only on a side that has more chips.
+  const [chipEdges, setChipEdges] = useState({ left: false, right: false })
+  const chipsVisible = !search
+  useEffect(() => {
+    const el = chipsRef.current
+    if (!el) return
+    const update = () => {
+      const max = el.scrollWidth - el.clientWidth
+      setChipEdges({ left: el.scrollLeft > 2, right: el.scrollLeft < max - 2 })
+    }
+    update()
+    el.addEventListener('scroll', update, { passive: true })
+    // The row's width changes with the viewport and when the web font loads.
+    const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(update) : null
+    ro?.observe(el)
+    if (el.firstElementChild) ro?.observe(el.firstElementChild)
+    return () => {
+      el.removeEventListener('scroll', update)
+      ro?.disconnect()
+    }
+  }, [categoryOrder, chipsVisible])
+
   // Horizontal scroll: mouse drag + wheel
   useEffect(() => {
     const el = chipsRef.current
@@ -104,7 +126,7 @@ export default function DirectoryHomepage() {
       el.removeEventListener('mousemove', onMouseMove)
       el.removeEventListener('wheel', onWheel)
     }
-  }, [categoryOrder])
+  }, [categoryOrder, chipsVisible])
 
   // Smart search index — built once per platform data change
   const deferredSearch = useDeferredValue(search)
@@ -246,33 +268,29 @@ export default function DirectoryHomepage() {
       {/* Reduced top padding (was pt-24 md:pt-32) so the app grid sits higher / above the fold. */}
       <section className="pt-20 md:pt-24 pb-8 px-5 md:px-6">
         <div className="mx-auto max-w-[780px] text-center">
-          <h1 className="text-[2.5rem] sm:text-[3.25rem] md:text-[4rem] font-bold tracking-tight leading-[1.08] mb-5">
+          <h1 className="text-[2rem] sm:text-[3.25rem] md:text-[4rem] font-bold tracking-tight leading-[1.08] mb-3">
             <span className="text-theme-text">{CONTENT.home.title}</span>
             <br />
             <span className="text-accent">{CONTENT.home.titleAccent}</span>
           </h1>
 
-          {/* Quantified value prop from siteConfig constants. */}
-          <p className="text-theme-muted text-[1.125rem] md:text-[1.25rem] mb-8 max-w-xl mx-auto leading-relaxed">
-            Search {SHORTCUT_COUNT.toLocaleString('en-US')}+ shortcuts across {APP_COUNT}+ apps on macOS, Windows &amp; Linux.
+          {/* Counts come from the data at build time (siteConfig). */}
+          <p className="text-theme-muted text-[1.0625rem] md:text-[1.125rem] mb-6 tabular-nums">
+            {CONTENT.home.stats(SHORTCUT_COUNT.toLocaleString('en-US'), APP_COUNT)}
           </p>
 
-          {/* Platform Toggle */}
-          {/* NOTE: This intentionally duplicates directory/PlatformToggle.jsx — the
-              homepage variant uses a transparent inactive background to blend into the
-              hero, while the shared component uses bg-theme-base-alt. Kept inline to
-              avoid visual drift; consolidate only if the two styles are unified. */}
+          {/* Platform switch: iOS-style segmented control (track + raised selected segment).
+              Inline rather than directory/PlatformToggle.jsx, which nothing imports. */}
           {!search && platforms && (
-            <div className="flex justify-center mb-10">
+            <div className="flex justify-center mb-4">
               <div
                 role="radiogroup"
                 aria-label="Choose platform"
-                className="inline-flex items-center rounded-xl border border-theme-border"
+                className="grid w-full max-w-[380px] p-0.5 rounded-xl bg-theme-surface"
+                style={{ gridTemplateColumns: `repeat(${platforms.length}, minmax(0, 1fr))` }}
               >
-                {platforms.map((p, i) => {
+                {platforms.map((p) => {
                   const isActive = p.id === selectedPlatform
-                  const isFirst = i === 0
-                  const isLast = i === platforms.length - 1
                   return (
                     <button
                       key={p.id}
@@ -280,11 +298,9 @@ export default function DirectoryHomepage() {
                       aria-checked={isActive}
                       onClick={() => setPlatform(p.id)}
                       onMouseEnter={() => prefetchPlatform(p.id)}
-                      className={`group flex items-center gap-2 px-5 py-3 min-h-[44px] text-[15px] font-medium transition-all cursor-pointer border-none outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-theme-accent ${
-                        isFirst ? 'rounded-l-xl' : ''
-                      } ${isLast ? 'rounded-r-xl' : ''} ${
+                      className={`flex items-center justify-center gap-2 min-h-[40px] px-2 rounded-[10px] text-[15px] font-medium transition-all cursor-pointer border-none outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-theme-accent ${
                         isActive
-                          ? 'bg-theme-accent text-theme-base'
+                          ? 'bg-theme-base text-theme-text shadow-[0_1px_3px_rgba(26,26,26,0.14),0_0_0_0.5px_rgba(26,26,26,0.1)]'
                           : 'bg-transparent text-theme-muted hover:text-theme-text'
                       }`}
                     >
@@ -309,12 +325,12 @@ export default function DirectoryHomepage() {
           {/* Search */}
           <div ref={searchContainerRef} className="relative max-w-[600px] mx-auto">
             <div
-              className={`relative rounded-xl border-[1.5px] border-theme-border hover:border-theme-border-hover transition-all duration-300 ${
+              className={`relative rounded-xl bg-theme-surface border border-transparent hover:border-theme-border transition-all duration-300 ${
                 searchFocused ? 'directory-search-focused' : ''
               }`}
             >
               <Search
-                size={20}
+                size={18}
                 className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-theme-muted"
                 aria-hidden="true"
               />
@@ -335,7 +351,9 @@ export default function DirectoryHomepage() {
                 onFocus={() => { setSearchFocused(true); if (search.trim()) setDropdownOpen(true) }}
                 onBlur={() => setSearchFocused(false)}
                 aria-label={CONTENT.home.searchAriaLabel}
-                className="directory-search w-full pl-12 pr-28 py-4.5 bg-transparent outline-none text-[17px] text-theme-text caret-theme-accent"
+                className={`directory-search w-full h-12 pl-11 bg-transparent outline-none text-[17px] text-theme-text caret-theme-accent ${
+                  search ? 'pr-28' : 'pr-4 sm:pr-20'
+                }`}
               />
               {/* Live result count next to the input */}
               {search && (
@@ -349,8 +367,8 @@ export default function DirectoryHomepage() {
               )}
               {!search && (
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 pointer-events-none select-none">
-                  <kbd className="px-1.5 py-0.5 rounded text-[11px] font-medium text-theme-muted border border-theme-border">⌘</kbd>
-                  <kbd className="px-1.5 py-0.5 rounded text-[11px] font-medium text-theme-muted border border-theme-border">K</kbd>
+                  <kbd className="px-1.5 py-0.5 rounded bg-theme-base text-[11px] font-medium text-theme-muted">⌘</kbd>
+                  <kbd className="px-1.5 py-0.5 rounded bg-theme-base text-[11px] font-medium text-theme-muted">K</kbd>
                 </span>
               )}
               {search && (
@@ -381,33 +399,40 @@ export default function DirectoryHomepage() {
 
       {/* ─── Category Chips ─── */}
       {!search && (
-        <div className="px-5 md:px-6 mb-10">
-          {/* relative wrapper hosts the right-edge fade affordance (mobile scroll hint) */}
-          <div className="mx-auto max-w-[1080px] relative">
-            <nav ref={chipsRef} className="chips-scroll flex flex-nowrap gap-2 py-2 pr-8 overflow-x-auto select-none" aria-label="Filter by category">
-              <ChipButton active={!activeCategory} onClick={() => setCategory(null)}>
-                {CONTENT.home.allCategory}
-              </ChipButton>
-              {categoryOrder.map(cat => {
-                const config = categoryConfig[cat]
-                const CatIcon = config?.icon
-                return (
-                  <ChipButton
-                    key={cat}
-                    active={activeCategory === cat}
-                    onClick={() => setCategory(activeCategory === cat ? null : cat)}
-                    icon={CatIcon}
-                    color={config?.color}
-                  >
-                    {cat}
-                  </ChipButton>
-                )
-              })}
+        <div className="px-5 md:px-6 mb-8">
+          {/* Wider than the 1080px grid so all chips fit on one centred line on a 1280px screen */}
+          <div className="mx-auto max-w-[1240px] relative">
+            {/* w-max + mx-auto: centred when the chips fit, scrollable from the first chip when they don't */}
+            <nav ref={chipsRef} className="chips-scroll overflow-x-auto select-none py-1" aria-label="Filter by category">
+              <div className="flex flex-nowrap gap-1 w-max mx-auto">
+                <ChipButton active={!activeCategory} onClick={() => setCategory(null)}>
+                  {CONTENT.home.allCategory}
+                </ChipButton>
+                {categoryOrder.map(cat => {
+                  const config = categoryConfig[cat]
+                  return (
+                    <ChipButton
+                      key={cat}
+                      active={activeCategory === cat}
+                      onClick={() => setCategory(activeCategory === cat ? null : cat)}
+                      icon={config?.icon}
+                      color={config?.color}
+                    >
+                      {config?.short || cat}
+                    </ChipButton>
+                  )
+                })}
+              </div>
             </nav>
-            {/* Right-edge fade so the horizontal scroll is discoverable on touch */}
+            {/* Edge fades: the scroll hint, on any screen size, only where more chips are hidden */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:hidden"
+              className={`pointer-events-none absolute left-0 top-0 bottom-0 w-12 transition-opacity ${chipEdges.left ? 'opacity-100' : 'opacity-0'}`}
+              style={{ background: 'linear-gradient(to left, transparent, var(--color-theme-base))' }}
+            />
+            <div
+              aria-hidden="true"
+              className={`pointer-events-none absolute right-0 top-0 bottom-0 w-12 transition-opacity ${chipEdges.right ? 'opacity-100' : 'opacity-0'}`}
               style={{ background: 'linear-gradient(to right, transparent, var(--color-theme-base))' }}
             />
           </div>
@@ -604,18 +629,19 @@ export default function DirectoryHomepage() {
 }
 
 /* ─── Chip button with optional icon ─── */
+// 44px tap height on touch screens, a slimmer 36px pill with a mouse.
 function ChipButton({ active, onClick, children, icon: Icon, color }) {
   return (
     <button
       onClick={onClick}
       aria-pressed={active}
-      className={`flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] rounded-full text-[15px] font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 border-none outline-none focus-visible:ring-2 focus-visible:ring-theme-accent ${
+      className={`flex items-center gap-1.5 px-3 min-h-[44px] pointer-fine:min-h-9 rounded-full text-[14px] font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 border-none outline-none focus-visible:ring-2 focus-visible:ring-theme-accent ${
         active
           ? 'bg-theme-accent text-theme-base'
           : 'bg-transparent text-theme-muted hover:text-theme-text hover:bg-theme-base-alt'
       }`}
     >
-      {Icon && <Icon size={13} style={!active && color ? { color } : undefined} />}
+      {Icon && <Icon size={15} aria-hidden="true" style={!active && color ? { color } : undefined} />}
       {children}
     </button>
   )
