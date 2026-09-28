@@ -12,6 +12,8 @@ import AdSlot from './AdSlot'
 import AffiliateLink from './AffiliateLink'
 import { getAffiliate } from '../data/affiliates'
 import { getSponsor, sponsorMailto } from '../data/sponsors'
+import { APP_NOTES } from '../data/appNotes'
+import { noteFitsApp, fittingTips, resolveNoteText, resolveEssentials, everydayShortcuts, largestSections } from '../utils/appCopy'
 import { tokenize } from '../utils/searchHelpers'
 import { parseKeyParts } from '../utils/platformHelpers'
 import { COMPARISONS } from '../data/comparisons'
@@ -69,6 +71,41 @@ function CopyableShortcut({ parts, action, appSlug, platform }) {
   )
 }
 
+/** Note text with {{Action}} placeholders rendered as the page's own keys. */
+function NoteText({ segments }) {
+  return segments.map((seg, i) =>
+    seg.text !== undefined ? (
+      <React.Fragment key={i}>{seg.text}</React.Fragment>
+    ) : (
+      <span key={i} className="whitespace-nowrap">
+        {seg.action}
+        {seg.shortcut && (
+          <>
+            {' '}
+            {parseKeyParts(seg.shortcut.modifiers, seg.shortcut.key).map((k, j) => (
+              <kbd key={j} className="keycap-mini ml-0.5">{k}</kbd>
+            ))}
+          </>
+        )}
+      </span>
+    )
+  )
+}
+
+/** A short list of shortcuts: action on the left, copyable keycaps on the right. */
+function ShortcutList({ shortcuts, appSlug, platform }) {
+  return (
+    <ul className="divide-y divide-theme-border">
+      {shortcuts.map((sc, i) => (
+        <li key={i} className="flex items-center justify-between gap-3 py-2">
+          <span className="text-[14px] text-theme-text">{sc.action}</span>
+          <CopyableShortcut parts={parseKeyParts(sc.modifiers, sc.key)} action={sc.action} appSlug={appSlug} platform={platform} />
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 export default function ShortcutPage() {
   const {
     platformId: platform,
@@ -104,6 +141,10 @@ export default function ShortcutPage() {
   const pagePath = `/${platform}/${slug}`
   const affiliate = getAffiliate(slug, platform)
   const sponsor = getSponsor(pagePath)
+  const note = APP_NOTES[slug]
+  const noteFits = useMemo(() => noteFitsApp(note, app), [note, app])
+  const noteTips = useMemo(() => (noteFits ? fittingTips(note, app) : []), [noteFits, note, app])
+  const everyday = useMemo(() => (noteFits ? [] : everydayShortcuts(app)), [noteFits, app])
 
   const sectionIds = useMemo(() => {
     const counts = {}
@@ -320,31 +361,45 @@ export default function ShortcutPage() {
       {/* ─── Intro text ─── */}
       <div className="mx-auto max-w-[980px] px-5 md:px-6 pt-8 pb-2">
         <p className="text-theme-muted text-[15px] leading-relaxed max-w-[720px]">
-          {sp.intro(app.displayName, platformName, app.shortcutCount, app.sections.length)}
+          {sp.intro(app.displayName, platformName, app.shortcutCount, app.sections.length)}{' '}
+          {sp.sectionsSummary(largestSections(app))}
         </p>
         <LastCheckedBadge date={app.lastVerified} updatedDate={app.lastUpdated} docsUrl={app.docsUrl} variant="block" />
         <AffiliateLink affiliate={affiliate} appSlug={slug} platform={platform} className="mt-4 max-w-[720px]" />
-        <p className="text-theme-muted text-[15px] leading-relaxed max-w-[720px] mt-3">
-          {sp.learnMore(app.displayName)}
-        </p>
-        <p className="text-theme-muted text-[15px] leading-relaxed max-w-[720px] mt-3">
-          {sp.whyShortcuts(app.displayName, platformName)}
-        </p>
 
-        {/* ─── Quick Tips ─── */}
-        <div className="mt-8 max-w-[720px] rounded-2xl bg-theme-base-alt border border-theme-border p-6">
-          <h2 className="text-base font-semibold tracking-tight flex items-center gap-2 mb-4">
-            <Lightbulb size={16} className="text-theme-muted" />
-            {sp.tipsTitle}
-          </h2>
-          <ul className="space-y-3">
-            {sp.tips(app.displayName, platformName).slice(0, 3).map((tip, i) => (
-              <li key={i} className="text-theme-muted text-[14px] leading-relaxed pl-4 border-l-2 border-theme-border">
-                {tip}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* ─── App note (hand-written, src/data/appNotes.js) or everyday shortcuts from the data ─── */}
+        {noteFits ? (
+          <>
+            <p className="text-theme-text text-[15px] leading-relaxed max-w-[720px] mt-4">
+              <NoteText segments={resolveNoteText(note.overview, app)} />
+            </p>
+            <div className="mt-8 max-w-[720px] rounded-2xl bg-theme-base-alt border border-theme-border p-6">
+              <h2 className="text-base font-semibold tracking-tight mb-4">{sp.startWithTitle}</h2>
+              <ShortcutList shortcuts={resolveEssentials(note.essentials, app)} appSlug={slug} platform={platform} />
+              {noteTips.length > 0 && (
+                <>
+                  <h3 className="text-base font-semibold tracking-tight flex items-center gap-2 mt-6 mb-3">
+                    <Lightbulb size={16} className="text-theme-muted" />
+                    {sp.appTipsTitle(app.displayName)}
+                  </h3>
+                  <ul className="space-y-3">
+                    {noteTips.map((tip, i) => (
+                      <li key={i} className="text-theme-muted text-[14px] leading-relaxed pl-4 border-l-2 border-theme-border">
+                        <NoteText segments={resolveNoteText(tip, app)} />
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
+          </>
+        ) : everyday.length >= 3 ? (
+          <div className="mt-8 max-w-[720px] rounded-2xl bg-theme-base-alt border border-theme-border p-6">
+            <h2 className="text-base font-semibold tracking-tight mb-1">{sp.everydayTitle(app.displayName)}</h2>
+            <p className="text-[13px] text-theme-muted mb-4">{sp.everydayIntro}</p>
+            <ShortcutList shortcuts={everyday} appSlug={slug} platform={platform} />
+          </div>
+        ) : null}
 
         {/* ─── Inline CTA (Mac HUD nudge — always renders; /mac-hud is a valid route) ─── */}
         <div className="mt-8 max-w-[720px] flex flex-col sm:flex-row sm:items-center gap-4 rounded-2xl border border-theme-border bg-theme-base-alt p-5">

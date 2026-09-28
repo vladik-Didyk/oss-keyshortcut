@@ -1,4 +1,6 @@
 import { APP_COUNT, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL } from './siteConfig'
+import { APP_NOTES } from './appNotes'
+import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys } from '../utils/appCopy'
 
 /**
  * Single source of truth for all website content.
@@ -529,24 +531,20 @@ export const CONTENT = {
     downloadTitle: 'Download shortcuts as PDF',
     alsoOnLabel: 'Also on:',
     intro: (appName, platformName, shortcutCount, sectionCount) =>
-      `This page is a complete keyboard shortcut reference for ${appName} on ${platformName}, covering all ${shortcutCount} shortcuts organized into ${sectionCount} sections. Whether you\u2019re new to ${appName} or looking to master advanced features, this cheat sheet has every key combination you need \u2014 from basic editing and navigation to app-specific power-user actions.`,
-    learnMore: (appName) =>
-      `Keyboard shortcuts are the fastest way to work in ${appName}. Every time you use a shortcut instead of reaching for the mouse, you save a few seconds \u2014 and those seconds compound into hours over weeks and months. Start with the shortcuts you use most (copy, paste, undo, save), then gradually add app-specific ones as they become relevant to your workflow. Bookmark this page or download the PDF cheat sheet for quick reference.`,
-    whyShortcuts: (appName, platformName) =>
-      `Using keyboard shortcuts in ${appName} reduces context switching between keyboard and mouse, helping you maintain focus and work more efficiently. Research shows that shortcut-driven workflows can save up to 8 working days per year compared to menu-driven navigation. On ${platformName}, most ${appName} shortcuts follow standard conventions \u2014 once you learn the modifier key patterns, new shortcuts become intuitive.`,
-    tips: (appName, platformName) => [
-      `Practice one new ${appName} shortcut each day. Muscle memory builds faster when you focus on a single combination at a time rather than trying to learn them all at once.`,
-      `Print or bookmark this page for quick reference while working in ${appName}. Having shortcuts visible nearby helps bridge the gap between looking them up and recalling them from memory.`,
-      `Start with the shortcuts you use most. In ${appName}, common actions like copy, paste, undo, and save are worth learning first since they apply across nearly every workflow.`,
-      `On ${platformName}, modifier keys are the foundation of every shortcut. Familiarize yourself with them so you can read shortcut combinations at a glance without pausing to decode each symbol.`,
-      `Customize your workspace in ${appName} to reduce mouse usage. The fewer times you reach for the mouse, the more time you save — and shortcuts become second nature faster.`,
-    ],
-    tipsTitle: 'Tips for Learning Shortcuts',
+      `This page lists all ${shortcutCount} ${appName} keyboard shortcuts for ${platformName}, grouped into ${sectionCount} ${sectionCount === 1 ? 'section' : 'sections'}.`,
+    // largest: [{ name, count }] from largestSections() in utils/appCopy.
+    sectionsSummary: (largest) =>
+      largest.length < 2
+        ? ''
+        : `The largest are ${largest.map((s, i) => `${i === largest.length - 1 ? 'and ' : ''}${s.name} (${s.count})`).join(largest.length > 2 ? ', ' : ' ')}.`,
+    startWithTitle: 'Start with these',
+    appTipsTitle: (appName) => `Tips for ${appName}`,
+    everydayTitle: (appName) => `Everyday ${appName} shortcuts`,
+    everydayIntro: 'Everyday actions this app has shortcuts for:',
     faqItems: (app, platformName) => {
       const name = typeof app === 'string' ? app : app.displayName
       const count = typeof app === 'string' ? null : app.shortcutCount
       const sections = typeof app === 'string' ? [] : (app.sections || [])
-      const category = typeof app === 'string' ? null : app.category
       const sectionNames = sections.slice(0, 4).map(s => s.name)
       const docsUrl = typeof app === 'string' ? null : app.docsUrl
 
@@ -560,37 +558,27 @@ export const CONTENT = {
         })
       }
 
-      // 2. Category-specific question
-      if (category === 'Browsers') {
-        items.push({
-          question: `What are the most useful ${name} shortcuts to learn first?`,
-          answer: `Start with tab management: new tab, close tab, reopen closed tab, and switching between tabs. Then learn navigation shortcuts like back, forward, and address bar focus. These cover the actions most people repeat dozens of times daily in ${name}.`,
-        })
-      } else if (category === 'Development') {
-        items.push({
-          question: `What are the most useful ${name} shortcuts for developers?`,
-          answer: `The highest-impact ${name} shortcuts are file navigation (Quick Open / Go to File), search across files, multi-cursor editing, and toggling the integrated terminal. These eliminate the most common mouse interactions during coding and have the biggest effect on editing speed.`,
-        })
-      } else if (category === 'Design') {
-        items.push({
-          question: `What are the most important ${name} shortcuts for designers?`,
-          answer: `Focus on tool selection shortcuts first (single-key shortcuts like V for Move, R for Rectangle, T for Text) since they\u2019re used constantly. Then learn grouping, alignment, and layer ordering shortcuts. In ${name}, combining keyboard tool selection with mouse positioning is the fastest way to work.`,
-        })
-      } else if (category === 'Communication') {
-        items.push({
-          question: `What are the most useful ${name} shortcuts?`,
-          answer: `The most impactful ${name} shortcuts are message navigation (jumping to conversations, marking as read), formatting shortcuts (bold, italic, code blocks), and quick switching between channels or conversations. These reduce the time spent clicking through the interface during conversations.`,
-        })
-      } else if (category === 'Productivity' || category === 'Microsoft Office') {
-        items.push({
-          question: `What are the essential ${name} shortcuts to learn?`,
-          answer: `Start with the shortcuts you\u2019d use in any document workflow: formatting (bold, italic, headings), navigation (jump to beginning/end, find/replace), and structure (create new items, indent/outdent, move items up/down). These transfer across most productivity apps and save the most time in ${name}.`,
-        })
-      } else {
-        items.push({
-          question: `What are the most useful ${name} shortcuts?`,
-          answer: `Start with the shortcuts for actions you perform most frequently in ${name}. Look through the sections on this page and identify the 3\u20135 actions you currently do with the mouse. Learning those shortcuts first gives you the biggest immediate time savings.`,
-        })
+      // 2. What to learn first: the app's hand-written essentials if its note fits
+      //    this page, otherwise the everyday actions it has (utils/appCopy).
+      if (typeof app !== 'string') {
+        const platformId = platformName === 'macOS' ? 'macos' : platformName.toLowerCase()
+        const note = APP_NOTES[app.slug]
+        const fromNote = noteFitsApp(note, app)
+        const picks = fromNote ? resolveEssentials(note.essentials, app) : everydayShortcuts(app)
+        if (picks.length >= 3) {
+          const list = picks.map((sc) => `${sc.action} (${formatKeys(sc, platformId)})`).join(', ')
+          items.push(
+            fromNote
+              ? {
+                  question: `Which ${name} shortcuts should I learn first?`,
+                  answer: `Start with ${list}. They cover the actions you repeat most in ${name}; the sections below list the rest.`,
+                }
+              : {
+                  question: `Which everyday actions have shortcuts in ${name}?`,
+                  answer: `On ${platformName}, ${name} has shortcuts for everyday actions such as ${list}. The sections on this page list all the others.`,
+                }
+          )
+        }
       }
 
       // 3. PDF / reference question
