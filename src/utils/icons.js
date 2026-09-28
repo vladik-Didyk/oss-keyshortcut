@@ -26,7 +26,6 @@ export {
   Play,
   Search,
   ShieldCheck,
-  Star,
   Sun,
   CircleCheck,
   Smartphone,

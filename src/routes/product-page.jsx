@@ -117,7 +117,6 @@ export default function ProductPageRoute() {
         <Problem />
         {/* CTA after the problem narrative — long page, keep buy action nearby */}
         <InlineCTA location="after_problem" />
-        {/* SocialProof hidden until there are real Mac App Store reviews — the quotes in CONTENT.productPage.socialProof are placeholders */}
         <Features />
         {/* CTA after the feature walkthrough */}
         <InlineCTA location="after_features" />

@@ -253,28 +253,6 @@ export const CONTENT = {
       ],
     },
 
-    socialProof: {
-      ratingLabel: 'Loved by Mac users',
-      ratingSource: 'Mac App Store',
-      testimonials: [
-        {
-          quote: 'I never realized how many shortcuts I was missing until I saw them all laid out. Now I reach for the keyboard instead of the mouse every time.',
-          name: 'Alex K.',
-          role: 'Software Developer',
-        },
-        {
-          quote: 'The floating panel is genius. It sits in the corner, knows what app I\'m in, and just shows me the shortcuts. No searching, no guessing.',
-          name: 'Maria L.',
-          role: 'UX Designer',
-        },
-        {
-          quote: 'Worth every penny. I use Figma, VS Code, and Terminal daily — having all the shortcuts visible in one place changed my workflow completely.',
-          name: 'James R.',
-          role: 'Product Engineer',
-        },
-      ],
-    },
-
     shortcutPreview: {
       title: 'Beautiful shortcut cards',
       subtitle: 'Every shortcut displayed with styled keycap badges — just like the real keys on your keyboard.',
