@@ -1,0 +1,30 @@
+name: Redirect check
+
+# Once a week: do the old addresses (/shortcuts/..., /directory) on
+# keyshortcut.com still answer with one 301 and end at a page that answers 200?
+# Only reads the site. No database, no secrets, and it changes nothing.
+# The run fails when an address answers wrongly.
+
+on:
+  schedule:
+    # Mondays at 06:30 UTC
+    - cron: '30 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check the old addresses
+        run: node scripts/check-redirects.mjs

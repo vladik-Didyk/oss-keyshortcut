@@ -115,3 +115,9 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: pnpm wrangler pages deploy build/client --project-name=keyshortcut --commit-dirty=true
+
+      # The old addresses (/shortcuts/..., /directory) on the live site: one 301
+      # each, ending at 200. Fails the run only on a wrong answer; a server that
+      # refuses the robot is a warning.
+      - name: Check legacy redirects on the live site
+        run: node scripts/check-redirects.mjs --wait=90

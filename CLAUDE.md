@@ -32,6 +32,7 @@ pnpm sync:health  # Health check for sync sources
 pnpm readme       # Regenerate README app directory from Supabase
 pnpm add-app      # Interactive CLI to add a new app (icon, shortcuts, all files)
 pnpm add-app:dry  # Preview add-app without writing
+pnpm check:redirects [base] [--all] [--wait=90]  # Legacy redirects on a running server (default keyshortcut.com): one 301, ending at 200
 ```
 
 Add an app from JSON: `pnpm add-app -- --from-json path/to/app.json`
@@ -212,6 +213,7 @@ Vitest with jsdom environment, globals enabled, setup in `src/test/setup.js` (im
 - `sitemap.test.js` — validates sitemap.xml generation
 - `content.test.js` — validates content data structure
 - `deployment.test.js` — validates deployment configuration
+- `legacy-redirects.test.js` — `public/_redirects` against the data: every old address of every page, the same page as `redirect-legacy.jsx`, and how `scripts/check-redirects.mjs` reads a server's answers
 - `headers.test.js` — `public/_headers`: security headers unchanged, the `/assets/*` cache rule, no long cache for a page, `/data/` or a file without a hash
 - `structured-data.test.jsx` — JSON-LD builders, the `ItemList` against the rendered platform index, and the JSON-LD of three built pages when a build is on disk
 - `use-platform-data.test.js` — tests usePlatformData hook (loading, fetch, error, cache)
@@ -282,10 +284,14 @@ A push to `main` also deploys, through CI. All ~175 routes are pre-rendered as s
 Cloudflare Pages config files in `public/`:
 - `_headers` — security headers (X-Frame-Options, HSTS, etc.) on `/*`, and `Cache-Control: public, max-age=31536000, immutable` on `/assets/*`. Only `/assets/`: Vite puts a content hash in those file names. HTML, `/data/*.json`, icons, OG images, sitemaps and `llms.txt` keep their name when they change, so they must not get a long cache. Check a change with `wrangler pages dev build/client` and `curl -sI`.
 - `_redirects` — legacy redirects (`/shortcuts/...`, `/directory`), each one 301 straight to the address with the closing slash. Cloudflare applies this file before anything else, so `redirect-legacy.jsx` and `redirect-directory.jsx` answer only in `pnpm dev` / `pnpm preview`; change both together. No splats: `/:splat` costs a second redirect, `/:splat/` doubles the slash. Test a change with `wrangler pages dev build/client`.
+  - `src/test/legacy-redirects.test.js` checks the file without a network: the old addresses of every platform and app page in `public/data` must lead to a page the build pre-renders.
+  - `pnpm check:redirects` (`scripts/check-redirects.mjs`) asks a running server: one 301, ending at 200. Default is keyshortcut.com; pass `http://127.0.0.1:<port>` for `wrangler pages dev`, `--all` for every page, `--wait=90` after a deploy. It exits 1 only on a wrong answer. A server that refuses the robot or is down is a warning, because `update-readme.yml` runs only after a CI/CD run that succeeded.
+  - The list asked on every run is `SHORT_LIST` in that script. A new rule needs an entry there.
 
 ### CI/CD Workflows (`.github/workflows/`)
 
-- **`ci.yml`** — Main pipeline: lint → test → build → deploy to Cloudflare Pages (on main push only). Node 24, pnpm 9. Supabase credentials from GitHub Secrets.
+- **`ci.yml`** — Main pipeline: lint → test → build → deploy to Cloudflare Pages (on main push only), then the legacy redirects are checked on the live site. Node 24, pnpm 9. Supabase credentials from GitHub Secrets.
+- **`redirect-check.yml`** — The same check of the legacy redirects, on Mondays (06:30 UTC) or by hand. Reads the site only, no secrets.
 - **`update-readme.yml`** — Auto-updates README app directory from Supabase. Runs weekly (Monday 6:00 UTC), after successful CI/CD deploy, or manually via `workflow_dispatch`.
 - **`shortcut-sync.yml`** — Runs shortcut sync pipeline (scrape external docs → extract shortcuts via Gemini AI → diff → create PR).
 - **`shortcut-sync-deploy.yml`** — Auto-deploys after merging PRs with `shortcut-sync` label.
