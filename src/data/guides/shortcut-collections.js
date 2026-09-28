@@ -56,7 +56,7 @@ export default {
             'System: Finder, Mail, Notes, Calendar, Music.',
           ],
         },
-        { type: 'paragraph', text: 'New app collections are added regularly based on user requests and usage data. If your app isn\'t covered, you can import a shortcut pack for it (see below).' },
+        { type: 'paragraph', text: 'If your app isn\'t covered, you can import a shortcut pack for it (see below).' },
         { type: 'ad', variant: 'in-article' },
       ],
     },

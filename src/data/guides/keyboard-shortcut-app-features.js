@@ -143,13 +143,13 @@ export default {
         {
           type: 'list',
           items: [
-            'One-time purchase: Pay once, use forever. Best value long-term. No recurring costs, no risk of losing access.',
+            'One-time purchase: Pay once. No recurring costs.',
             'Subscription: Ongoing monthly or annual cost. May include cloud sync and regular content updates. Be wary of subscriptions for tools that work offline.',
             'Freemium: Basic features free, premium features paid. Good for trying before buying. Check what\'s actually locked behind the paywall.',
             'Free / Open source: No cost. May lack polish or regular updates. Community-maintained tools can be excellent but may require technical setup.',
           ],
         },
-        { type: 'paragraph', text: 'For a tool you\'ll use every day, a one-time purchase typically offers the best value. A $10-20 one-time purchase that saves you 30+ hours per year is an exceptional investment.' },
+        { type: 'paragraph', text: 'For a tool you\'ll use every day, a one-time purchase is the simplest to reason about: you know the full cost on the day you buy.' },
       ],
     },
     {
