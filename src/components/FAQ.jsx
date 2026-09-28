@@ -45,7 +45,7 @@ export default function FAQ() {
         </div>
       </div>
 
-      {/* FAQ JSON-LD — static data from our own faq.js, safe to inject */}
+      {/* FAQ JSON-LD — static data from our own content.js, safe to inject */}
       <FaqJsonLd items={faqItems} />
     </section>
   )
@@ -65,7 +65,7 @@ function FaqJsonLd({ items }) {
     })),
   })
 
-  // Static data sourced from our own faq.js — no user input involved, safe to render
+  // Static data sourced from our own content.js — no user input involved, safe to render
   // This is the standard React pattern for injecting JSON-LD structured data
   const markup = { __html: jsonLd }
   return <script type="application/ld+json" dangerouslySetInnerHTML={markup} />

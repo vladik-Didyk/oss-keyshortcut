@@ -146,17 +146,16 @@ Supabase DB  →  pnpm export  →  public/data/*.json  →  build reads local J
 
 **App icons**: Stored in Supabase Storage bucket `icons/app-icons/` (public URLs, no auth needed). Downloaded at build time by `scripts/download-icons.mjs` using URLs from the exported JSON.
 
-**Centralized copy**: `content.js` — single source of truth for all UI/marketing text. Imports computed values from `siteConfig.js`. Use `content.js` for all new copy; `copy.js` is legacy.
+**Centralized copy**: `content.js` — single source of truth for all UI/marketing text. Imports computed values from `siteConfig.js`. Use `content.js` for all new copy.
 
 **Other data files** in `src/data/`:
 - `siteConfig.js` — `APP_COUNT` / `SHORTCUT_COUNT` (whole directory, unique apps) and `MAC_APP_COUNT` / `MAC_SHORTCUT_COUNT` (macOS, used in Mac app copy: the app syncs the macOS data). Computed at build time from `public/data/` by `scripts/site-stats.mjs`, injected as `__SITE_STATS__` via `define` in both `vite.config.js` and `vitest.config.js`. Also `APP_PAGE_COUNT` (every app page) and `PAGES_WITH_DOCS` (pages that link to their official docs), used on the About page. **Never type a count in copy**: `src/test/site-counts.test.jsx` fails on text like "60+ apps". Guides are plain data that Node scripts load without Vite, so they cannot import `siteConfig.js`; a guide writes `{appCount}` or `{macAppCount}` and the guide route fills it in (`withCounts`). `pnpm stats` prints the current numbers for text written outside the site. Also `PRICE`, `APP_STORE_URL`, etc.
 - `ads.js`, `affiliates.js`, `sponsors.js` — monetization config (see Monetization).
 - `categoryConfig.js` — unified category metadata (icon + color per category) for all platforms.
 - `keyboardLayout.js` — keyboard row definitions and shortcut databases for Hero and InteractiveKeyboard.
-- `details.js` — detail card items for the Details section.
 - `guides/` — Guide articles (each exports `meta` + `content`); `guides/index.js` re-exports all for pre-render discovery
 - `comparisons.js` — App comparison pairs; auto-discovered by pre-render config
-- Hand-maintained: `features.js`, `faq.js`, `policies.js`, `shortcuts.js`, `appCategories.js`, `heroDemoData.js`
+- Hand-maintained: `appCategories.js`, `heroDemoData.js`
 
 **Adding a new platform**: Create `public/data/platforms/{platform}.json`, add entry to `manifest.json`, run `pnpm build`. No code changes needed — pre-rendering config auto-discovers platforms.
 
