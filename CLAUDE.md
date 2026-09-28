@@ -24,7 +24,7 @@ pnpm test:perf    # Run performance benchmarks
 pnpm test:perf:browser  # Run Playwright E2E performance tests
 pnpm run deploy   # Build + deploy the WORKING TREE (uncommitted changes included)
 scripts/deploy-clean.sh [--dry-run]  # Build committed HEAD in a clean folder, verify, deploy (preferred manual deploy)
-node scripts/verify-build.mjs [dir] [--strict]  # Check a build has the AdSense tag (+ analytics IDs with --strict)
+node scripts/verify-build.mjs [dir] [--strict]  # Check a build has the AdSense tag and JSON-LD that parses (+ analytics IDs with --strict)
 pnpm export       # Export Supabase data to public/data/ JSON (maintainer only, needs .env)
 pnpm sync         # Run shortcut sync pipeline (scrape → diff → write to Supabase)
 pnpm sync:dry     # Dry run (no writes to Supabase)
@@ -89,6 +89,22 @@ Route modules live in `src/routes/` and export `loader`, `meta`, and a default c
 **Layout**: `src/layouts/directory-layout.jsx` wraps directory routes (home, platform-index, shortcut-page, privacy, about) with `<Navbar />` + `<Footer />`. The product page has its own Navbar/Footer.
 
 **SEO**: Route modules export `meta()` functions that return title, description, OG tags, Twitter Card tags, and canonical links (via `{ tagName: "link", rel: "canonical", ... }`). All meta is rendered server-side into pre-rendered HTML.
+
+**Structured data (JSON-LD)**: built in `src/utils/structuredData.js`, written by `<JsonLd>` (`src/components/JsonLd.jsx`) from the route modules.
+
+| Page | JSON-LD | Built in |
+|---|---|---|
+| every page | `WebSite` with `SearchAction` and `creator` | `buildWebSiteJsonLd()`, written by `root.jsx` |
+| platform index | `ItemList` of the app pages, in the order shown; `BreadcrumbList` | `buildPlatformItemList()`; breadcrumb in `ShortcutsIndex.jsx` |
+| app page | `WebPage` with the application under `about`; `FAQPage`; `BreadcrumbList` | `buildAppPageJsonLd()`; the other two in `ShortcutPage.jsx` |
+| About | `Person` (name, link, `sameAs` from `CONTENT.about.cards.creator`) | `buildAuthorJsonLd()` |
+| guide, compare, `/mac-hud` | `Article`, `BreadcrumbList`, `SoftwareApplication` with the real price | inside `GuidePage.jsx`, `ComparePage.jsx`, `product-page.jsx` |
+
+- Every value comes from the data or from text the page shows. Page addresses go through `pageUrl()` (`src/utils/siteUrl.js`).
+- App pages state no `offers`, `aggregateRating`, `review` or date: the data has none, and a test fails on them. That is also why an app page is a `WebPage` about the application and not a `SoftwareApplication` of its own.
+- `applicationCategory` is set only for the directory categories in `APPLICATION_CATEGORY`. The documentation link is `softwareHelp`, present only when the data has `docsUrl`.
+- A page about the operating system (category `macOS System` or `Windows System`, or slug equal to the platform id) gets no app entity.
+- `scripts/lib/json-ld.mjs` reads the JSON-LD of a built page; `verify-build.mjs` fails a build whose JSON-LD does not parse or lacks a type on `/macos/`, `/macos/figma/` or `/about/`.
 
 Product page sections use anchor links (`#features`, `#faq`, `#policies`, `#download`) for in-page navigation.
 
@@ -197,6 +213,8 @@ Vitest with jsdom environment, globals enabled, setup in `src/test/setup.js` (im
 - `sitemap.test.js` — validates sitemap.xml generation
 - `content.test.js` — validates content data structure
 - `deployment.test.js` — validates deployment configuration
+- `headers.test.js` — `public/_headers`: security headers unchanged, the `/assets/*` cache rule, no long cache for a page, `/data/` or a file without a hash
+- `structured-data.test.jsx` — JSON-LD builders, the `ItemList` against the rendered platform index, and the JSON-LD of three built pages when a build is on disk
 - `use-platform-data.test.js` — tests usePlatformData hook (loading, fetch, error, cache)
 - `key-words.test.js` — key symbols in words; scans `public/data/platforms/` for a symbol or punctuation key without a word
 - `shortcut-page.test.jsx` — app page: FAQ answers in the rendered and server-rendered HTML, accordion, hidden shortcut words, clipboard, author line
@@ -262,7 +280,7 @@ A push to `main` also deploys, through CI. All ~175 routes are pre-rendered as s
 **`/privacy` is served from `public/privacy.html`**, not from the pre-rendered React page (Cloudflare prefers `privacy.html`). It is also the Mac App Store privacy URL. Edit both it and `content.js` together.
 
 Cloudflare Pages config files in `public/`:
-- `_headers` — security headers (X-Frame-Options, HSTS, etc.)
+- `_headers` — security headers (X-Frame-Options, HSTS, etc.) on `/*`, and `Cache-Control: public, max-age=31536000, immutable` on `/assets/*`. Only `/assets/`: Vite puts a content hash in those file names. HTML, `/data/*.json`, icons, OG images, sitemaps and `llms.txt` keep their name when they change, so they must not get a long cache. Check a change with `wrangler pages dev build/client` and `curl -sI`.
 - `_redirects` — legacy redirects (`/shortcuts/...`, `/directory`), each one 301 straight to the address with the closing slash. Cloudflare applies this file before anything else, so `redirect-legacy.jsx` and `redirect-directory.jsx` answer only in `pnpm dev` / `pnpm preview`; change both together. No splats: `/:splat` costs a second redirect, `/:splat/` doubles the slash. Test a change with `wrangler pages dev build/client`.
 
 ### CI/CD Workflows (`.github/workflows/`)
