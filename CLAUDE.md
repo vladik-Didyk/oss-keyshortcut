@@ -10,7 +10,7 @@ Keyboard shortcuts directory website — a React site that serves as a multi-pla
 
 ```bash
 pnpm dev          # Start React Router dev server (HMR)
-pnpm build        # Icons + sitemap + RSS + OG images + React Router build (SSR + pre-render) + 404.html → build/
+pnpm build        # Build icons + sitemap + React Router build (SSR + pre-render) → build/
 pnpm sitemap      # Regenerate sitemap.xml only
 pnpm rss          # Regenerate rss.xml only
 pnpm og-images    # Regenerate Open Graph images only
@@ -24,7 +24,7 @@ pnpm test:perf    # Run performance benchmarks
 pnpm test:perf:browser  # Run Playwright E2E performance tests
 pnpm run deploy   # Build + deploy the WORKING TREE (uncommitted changes included)
 scripts/deploy-clean.sh [--dry-run]  # Build committed HEAD in a clean folder, verify, deploy (preferred manual deploy)
-node scripts/verify-build.mjs [dir] [--strict]  # Check a build has the AdSense tag and 404.html (+ analytics IDs with --strict)
+node scripts/verify-build.mjs [dir] [--strict]  # Check a build has the AdSense tag (+ analytics IDs with --strict)
 pnpm export       # Export Supabase data to public/data/ JSON (maintainer only, needs .env)
 pnpm sync         # Run shortcut sync pipeline (scrape → diff → write to Supabase)
 pnpm sync:dry     # Dry run (no writes to Supabase)
@@ -84,15 +84,11 @@ Route modules live in `src/routes/` and export `loader`, `meta`, and a default c
 - `sponsor.jsx` — `/sponsor` Sponsor offer: terms, prices, booking (server `loader` counts the app pages that hold the slot)
 - `redirect-directory.jsx` — `/directory` → `/` redirect (301)
 - `redirect-legacy.jsx` — `/shortcuts/*` legacy redirects (301)
-- `catch-all.jsx` — `*` 404 catch-all (only throws the 404; the page is the root route's `ErrorBoundary`)
-
-**Not-found page**: `ErrorBoundary` and `meta` in `src/root.jsx` render it (Navbar, `NotFound`, Footer, title from `CONTENT.meta.catchAll`, `noindex`). `scripts/generate-404.mjs` saves it as `build/client/404.html`, and Cloudflare Pages serves that file with status 404 for every URL that has no file. It must stay on the root route: the one file is hydrated at any address, and an error held by a route the browser doesn't match there (the catch-all, at `/macos/typo`) ends in "Application Error". Don't give `catch-all.jsx` an `ErrorBoundary`.
+- `catch-all.jsx` — `*` 404 catch-all
 
 **Layout**: `src/layouts/directory-layout.jsx` wraps directory routes (home, platform-index, shortcut-page, privacy, about) with `<Navbar />` + `<Footer />`. The product page has its own Navbar/Footer.
 
 **SEO**: Route modules export `meta()` functions that return title, description, OG tags, Twitter Card tags, and canonical links (via `{ tagName: "link", rel: "canonical", ... }`). All meta is rendered server-side into pre-rendered HTML.
-
-**Page URLs**: `pageUrl(path)` in `src/utils/siteUrl.js` is the one place that builds the address of a page: `pageUrl('/macos/figma')` → `https://keyshortcut.com/macos/figma/`. Cloudflare Pages serves a pre-rendered page at the address with the trailing slash and 308-redirects the form without it; `/` and `/privacy` (served from `public/privacy.html`) are the exceptions. Canonical, og:url, JSON-LD, the sitemap, the RSS feed and the README app links all use it. Never write `https://keyshortcut.com/...` for a page by hand; a test fails on it. Internal `<Link to>` paths are still written without the slash (about 30 files, no shared helper): React Router matches both forms, a crawler following one takes the 308.
 
 Product page sections use anchor links (`#features`, `#faq`, `#policies`, `#download`) for in-page navigation.
 
@@ -168,6 +164,12 @@ Hero uses an HTML/CSS animated keyboard mockup with `AppPanelMockup` — no 3D/c
 
 `src/utils/searchHelpers.js` powers the directory search. It builds a flat index from all apps/shortcuts, parses natural-language queries ("figma copy", "paste in chrome"), and returns results grouped by app with modifier keycaps. Used by both `SearchDropdown` (overlay) and `SearchResultsInline` (main content area) in `DirectoryHomepage.jsx`. Search also works per-app on `ShortcutPage` and `ShortcutsIndex`.
 
+### App pages (`ShortcutPage.jsx`)
+
+- **FAQ** is native `<details>` / `<summary>`, so every answer is in the pre-rendered HTML and opens without JavaScript. The FAQPage JSON-LD may only describe text that is on the page: do not mount answers on click. `faq_item_expanded` fires from `onToggle`, on open only.
+- **Shortcut rows** show keycaps (`aria-hidden`) and carry the same shortcut in words, in a `sr-only` span and in the copy button's `aria-label`: ⌘ ⇧ P → "Command + Shift + P" (`keysToWords()` in `src/utils/platformHelpers.js`). The hidden text holds the shortcut and nothing else. The clipboard, the tooltip and the `shortcut_copied` event keep the symbols. A new symbol in the data needs a word in `KEY_SYMBOL_WORDS`; `key-words.test.js` fails until it has one.
+- **Author line** (`AuthorLine.jsx`) sits under the verification badge: label and target from `CONTENT.shortcutPage.author`, name from `CONTENT.about.cards.creator.name`.
+
 ### Icon imports
 
 `src/utils/icons.js` is a barrel re-export of `lucide-react` icons. Import icons from `../utils/icons` (not directly from `lucide-react`) to keep the tree-shake list centralized and Vite dev server compatible.
@@ -192,12 +194,12 @@ Vitest with jsdom environment, globals enabled, setup in `src/test/setup.js` (im
 - `data-integrity.test.js` — validates platform JSON structure across all platforms
 - `directory-helpers.test.js` — tests platformHelpers utility functions
 - `search-helpers.test.js` — tests search/filtering utilities
-- `sitemap.test.js` — validates sitemap.xml generation (URLs in the served form, same set as the pre-rendered routes)
-- `site-url.test.js` — `pageUrl()`, canonical and og:url of every page type, RSS links, no hand-written page URLs in the source; with a build present, canonical/og:url/JSON-LD of every pre-rendered page
-- `not-found.test.jsx` — the not-found page, its meta, and `404.html` in the build
+- `sitemap.test.js` — validates sitemap.xml generation
 - `content.test.js` — validates content data structure
 - `deployment.test.js` — validates deployment configuration
 - `use-platform-data.test.js` — tests usePlatformData hook (loading, fetch, error, cache)
+- `key-words.test.js` — key symbols in words; scans `public/data/platforms/` for a symbol or punctuation key without a word
+- `shortcut-page.test.jsx` — app page: FAQ answers in the rendered and server-rendered HTML, accordion, hidden shortcut words, clipboard, author line
 - `performance.test.js` — benchmarks page load and rendering
 
 ### ESLint
@@ -263,8 +265,6 @@ Cloudflare Pages config files in `public/`:
 - `_headers` — security headers (X-Frame-Options, HSTS, etc.)
 - `_redirects` — legacy redirect rules (`/shortcuts/*`, `/directory`)
 
-**Unknown URLs return 404** because the build has a top-level `404.html` (see Not-found page). Without that file Cloudflare Pages treats the site as a single-page app and answers every unknown URL with the home page and status 200. Nothing depends on that fallback: every route is pre-rendered, and the two that are not (`/directory`, `/shortcuts/*`) are in `_redirects`. Never add a `/*` rewrite to `_redirects`. Cloudflare also serves the file at `/404` with status 200, which is why it carries `noindex`. Check locally with `arch -arm64 node node_modules/wrangler/bin/wrangler.js pages dev build/client --port <free port>`; stop it before `pnpm lint`, which otherwise reads `.wrangler/tmp/`.
-
 ### CI/CD Workflows (`.github/workflows/`)
 
 - **`ci.yml`** — Main pipeline: lint → test → build → deploy to Cloudflare Pages (on main push only). Node 24, pnpm 9. Supabase credentials from GitHub Secrets.
@@ -280,7 +280,6 @@ During `pnpm build`, scripts run in order:
 3. `scripts/generate-rss.mjs` — Generates `public/rss.xml`
 4. `scripts/generate-og-images.mjs` — Generates Open Graph images
 5. React Router build — SSR + pre-renders all ~175 pages to `build/client/`
-6. `scripts/generate-404.mjs` — Renders the not-found page with the server build (`build/server`) and saves it as `build/client/404.html`
 
 **Pre-render route discovery** (`react-router.config.ts`): Reads `public/data/platforms.json` and each platform's app list at build time to generate all `/:platformId` and `/:platformId/:slug` routes. Also imports guide slugs from `src/data/guides/index.js` and comparison pairs from `src/data/comparisons.js`. Adding a new platform JSON or guide/comparison entry automatically creates new pre-rendered pages.
 

@@ -25,6 +25,9 @@ dist-ssr
 public/images/app-icons/
 public/images/platform-icons/
 
+# Written on every build by scripts/generate-llms-txt.mjs
+public/llms.txt
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

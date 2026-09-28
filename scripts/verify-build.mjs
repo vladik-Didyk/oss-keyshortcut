@@ -72,6 +72,9 @@ if (notFoundPage === null) {
   errors.push("404.html has no noindex tag");
 }
 
+// 6. llms.txt (scripts/generate-llms-txt.mjs)
+if (read("llms.txt") === null) warnings.push("llms.txt missing");
+
 for (const w of warnings) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`FAIL  ${e}`);
 console.log(`INFO  App Store download buttons: ${appStoreLive ? "SHOWN" : "hidden"}`);
