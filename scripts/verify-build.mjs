@@ -9,7 +9,7 @@
  *   buildDir  defaults to build/client
  *   --strict  missing analytics IDs fail the check (default: warn only)
  *
- * Always fails when the AdSense script tag or the ads.txt line is missing.
+ * Always fails when the AdSense script tag, the ads.txt line or 404.html is missing.
  */
 import { existsSync, readFileSync, readdirSync } from "fs";
 import { join } from "path";
@@ -62,6 +62,15 @@ for (const [name, re] of analytics) {
 
 // 4. App Store buttons: report state so a deploy never flips it by accident.
 const appStoreLive = /apps\.apple\.com\/app\/keyshortcut\/id\d+/.test(js);
+
+// 5. 404.html (scripts/generate-404.mjs). Without it Cloudflare Pages answers
+// every unknown URL with the home page and status 200.
+const notFoundPage = read("404.html");
+if (notFoundPage === null) {
+  errors.push("404.html missing: unknown URLs would return the home page with status 200");
+} else if (!notFoundPage.includes('<meta name="robots" content="noindex"/>')) {
+  errors.push("404.html has no noindex tag");
+}
 
 for (const w of warnings) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`FAIL  ${e}`);

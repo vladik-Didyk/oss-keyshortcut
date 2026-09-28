@@ -6,7 +6,7 @@
   "scripts": {
     "icons": "node scripts/download-icons.mjs",
     "dev": "node scripts/download-icons.mjs && react-router dev",
-    "build": "node scripts/download-icons.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-rss.mjs && node scripts/generate-og-images.mjs && react-router build",
+    "build": "node scripts/download-icons.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-rss.mjs && node scripts/generate-og-images.mjs && react-router build && node scripts/generate-404.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "rss": "node scripts/generate-rss.mjs",
     "og-images": "node scripts/generate-og-images.mjs",

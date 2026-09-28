@@ -10,7 +10,7 @@ Keyboard shortcuts directory website — a React site that serves as a multi-pla
 
 ```bash
 pnpm dev          # Start React Router dev server (HMR)
-pnpm build        # Build icons + sitemap + React Router build (SSR + pre-render) → build/
+pnpm build        # Icons + sitemap + RSS + OG images + React Router build (SSR + pre-render) + 404.html → build/
 pnpm sitemap      # Regenerate sitemap.xml only
 pnpm rss          # Regenerate rss.xml only
 pnpm og-images    # Regenerate Open Graph images only
@@ -24,7 +24,7 @@ pnpm test:perf    # Run performance benchmarks
 pnpm test:perf:browser  # Run Playwright E2E performance tests
 pnpm run deploy   # Build + deploy the WORKING TREE (uncommitted changes included)
 scripts/deploy-clean.sh [--dry-run]  # Build committed HEAD in a clean folder, verify, deploy (preferred manual deploy)
-node scripts/verify-build.mjs [dir] [--strict]  # Check a build has the AdSense tag (+ analytics IDs with --strict)
+node scripts/verify-build.mjs [dir] [--strict]  # Check a build has the AdSense tag and 404.html (+ analytics IDs with --strict)
 pnpm export       # Export Supabase data to public/data/ JSON (maintainer only, needs .env)
 pnpm sync         # Run shortcut sync pipeline (scrape → diff → write to Supabase)
 pnpm sync:dry     # Dry run (no writes to Supabase)
@@ -84,7 +84,9 @@ Route modules live in `src/routes/` and export `loader`, `meta`, and a default c
 - `sponsor.jsx` — `/sponsor` Sponsor offer: terms, prices, booking (server `loader` counts the app pages that hold the slot)
 - `redirect-directory.jsx` — `/directory` → `/` redirect (301)
 - `redirect-legacy.jsx` — `/shortcuts/*` legacy redirects (301)
-- `catch-all.jsx` — `*` 404 catch-all
+- `catch-all.jsx` — `*` 404 catch-all (only throws the 404; the page is the root route's `ErrorBoundary`)
+
+**Not-found page**: `ErrorBoundary` and `meta` in `src/root.jsx` render it (Navbar, `NotFound`, Footer, title from `CONTENT.meta.catchAll`, `noindex`). `scripts/generate-404.mjs` saves it as `build/client/404.html`, and Cloudflare Pages serves that file with status 404 for every URL that has no file. It must stay on the root route: the one file is hydrated at any address, and an error held by a route the browser doesn't match there (the catch-all, at `/macos/typo`) ends in "Application Error". Don't give `catch-all.jsx` an `ErrorBoundary`.
 
 **Layout**: `src/layouts/directory-layout.jsx` wraps directory routes (home, platform-index, shortcut-page, privacy, about) with `<Navbar />` + `<Footer />`. The product page has its own Navbar/Footer.
 
@@ -189,6 +191,7 @@ Vitest with jsdom environment, globals enabled, setup in `src/test/setup.js` (im
 - `directory-helpers.test.js` — tests platformHelpers utility functions
 - `search-helpers.test.js` — tests search/filtering utilities
 - `sitemap.test.js` — validates sitemap.xml generation
+- `not-found.test.jsx` — the not-found page, its meta, and `404.html` in the build
 - `content.test.js` — validates content data structure
 - `deployment.test.js` — validates deployment configuration
 - `use-platform-data.test.js` — tests usePlatformData hook (loading, fetch, error, cache)
@@ -257,6 +260,8 @@ Cloudflare Pages config files in `public/`:
 - `_headers` — security headers (X-Frame-Options, HSTS, etc.)
 - `_redirects` — legacy redirect rules (`/shortcuts/*`, `/directory`)
 
+**Unknown URLs return 404** because the build has a top-level `404.html` (see Not-found page). Without that file Cloudflare Pages treats the site as a single-page app and answers every unknown URL with the home page and status 200. Nothing depends on that fallback: every route is pre-rendered, and the two that are not (`/directory`, `/shortcuts/*`) are in `_redirects`. Never add a `/*` rewrite to `_redirects`. Cloudflare also serves the file at `/404` with status 200, which is why it carries `noindex`. Check locally with `arch -arm64 node node_modules/wrangler/bin/wrangler.js pages dev build/client --port <free port>`; stop it before `pnpm lint`, which otherwise reads `.wrangler/tmp/`.
+
 ### CI/CD Workflows (`.github/workflows/`)
 
 - **`ci.yml`** — Main pipeline: lint → test → build → deploy to Cloudflare Pages (on main push only). Node 24, pnpm 9. Supabase credentials from GitHub Secrets.
@@ -272,6 +277,7 @@ During `pnpm build`, scripts run in order:
 3. `scripts/generate-rss.mjs` — Generates `public/rss.xml`
 4. `scripts/generate-og-images.mjs` — Generates Open Graph images
 5. React Router build — SSR + pre-renders all ~175 pages to `build/client/`
+6. `scripts/generate-404.mjs` — Renders the not-found page with the server build (`build/server`) and saves it as `build/client/404.html`
 
 **Pre-render route discovery** (`react-router.config.ts`): Reads `public/data/platforms.json` and each platform's app list at build time to generate all `/:platformId` and `/:platformId/:slug` routes. Also imports guide slugs from `src/data/guides/index.js` and comparison pairs from `src/data/comparisons.js`. Adding a new platform JSON or guide/comparison entry automatically creates new pre-rendered pages.
 

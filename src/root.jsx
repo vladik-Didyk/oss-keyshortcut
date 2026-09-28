@@ -1,10 +1,13 @@
 import { useEffect } from "react";
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation, useNavigation } from "react-router";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse, useLocation, useNavigation, useRouteError } from "react-router";
 import { ThemeProvider } from "./hooks/useTheme";
-import ErrorBoundary from "./components/ErrorBoundary";
+import RenderErrorBoundary from "./components/ErrorBoundary";
 import CookieConsent from "./components/CookieConsent";
+import Navbar from "./components/Navbar";
+import NotFound from "./components/NotFound";
+import Footer from "./components/Footer";
 import { hasConsented, initAnalytics, trackPageView } from "./lib/analytics";
-import { CONTENT } from "./data/content";
+import { CONTENT, buildMeta } from "./data/content";
 import { ADSENSE_CLIENT } from "./data/ads";
 import "./index.css";
 
@@ -159,13 +162,41 @@ export default function Root() {
       <div className="relative">
         <NavigationLoader />
         <AnalyticsTracker />
-        <ErrorBoundary>
+        <RenderErrorBoundary>
           <Outlet />
-        </ErrorBoundary>
+        </RenderErrorBoundary>
         <CookieConsent />
       </div>
     </ThemeProvider>
   );
+}
+
+// Only the not-found page gets its meta from the root route: a route's own
+// meta() wins on every other page.
+export function meta({ error }) {
+  if (!isRouteErrorResponse(error) || error.status !== 404) return [];
+  return [...buildMeta(CONTENT.meta.catchAll), { name: "robots", content: "noindex" }];
+}
+
+// The not-found page. scripts/generate-404.mjs saves it as build/client/404.html,
+// which Cloudflare Pages serves, with status 404, for every URL that has no file.
+// It belongs to the root route because that one file is hydrated at any address:
+// the root is the only route that matches them all, and an error held by a route
+// the browser doesn't match crashes hydration.
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error) && error.status === 404) {
+    return (
+      <>
+        <Navbar />
+        <NotFound />
+        <Footer />
+      </>
+    );
+  }
+
+  throw error;
 }
 
 export function HydrateFallback() {
