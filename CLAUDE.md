@@ -218,6 +218,7 @@ Vitest with jsdom environment, globals enabled, setup in `src/test/setup.js` (im
 - `key-words.test.js` — key symbols in words; scans `public/data/platforms/` for a symbol or punctuation key without a word
 - `shortcut-page.test.jsx` — app page: FAQ answers in the rendered and server-rendered HTML, accordion, hidden shortcut words, clipboard, author line
 - `performance.test.js` — benchmarks page load and rendering
+- `mac-app-claims.test.jsx` — copy about the Mac app, checked against the app's source (build 3): fails on a promise of custom shortcuts (the app only imports packs), on "use it forever" and on "sends nothing over the internet"; also the "Switch it on in Settings." note for active app detection (once per page) and the `offers` block of the structured data (only with `APP_STORE_URL`)
 
 ### ESLint
 
