@@ -8,7 +8,7 @@ export default {
   category: 'Product',
   relatedSlugs: ['shortcut-collections', 'personalized-shortcut-workflow'],
   relatedApps: [
-    { label: 'macOS and Finder Shortcuts', to: '/macos/macos' },
+    { label: 'Finder Shortcuts', to: '/macos/macos#finder' },
     { label: 'Safari Shortcuts', to: '/macos/safari' },
   ],
   sections: [

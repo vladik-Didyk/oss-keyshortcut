@@ -8,7 +8,7 @@ export default {
   category: 'Reference',
   relatedSlugs: ['keyboard-shortcuts-productivity-guide', 'linux-keyboard-shortcuts'],
   relatedApps: [
-    { label: 'macOS and Finder Shortcuts', to: '/macos/macos' },
+    { label: 'Finder Shortcuts', to: '/macos/macos#finder' },
     { label: 'Chrome macOS Shortcuts', to: '/macos/chrome' },
     { label: 'Chrome Windows Shortcuts', to: '/windows/chrome' },
   ],

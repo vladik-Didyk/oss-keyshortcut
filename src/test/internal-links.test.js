@@ -1,49 +1,58 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeAll } from 'vitest'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { GUIDES } from '../data/guides/index.js'
-import { COMPARISONS } from '../data/comparisons.js'
 import { CONTENT } from '../data/content'
+import routerConfig from '../../react-router.config.ts'
 
-// Unknown URLs now answer 404 instead of showing the home page, so a link to a
-// page that does not exist is a broken link a visitor can see. These tests keep
-// hand-written links pointing at real pages.
+// Links written by hand, checked against the pages the build pre-renders.
+// A link to anything else is a 404.
+let routes
 
-const ROOT = process.cwd()
-const DATA = join(ROOT, 'public/data')
-const readJSON = (path) => JSON.parse(readFileSync(join(DATA, path), 'utf-8'))
+beforeAll(async () => {
+  routes = new Set(await routerConfig.prerender())
+})
 
-function knownPaths() {
-  const paths = new Set(['/', '/mac-hud', '/privacy', '/about', '/sponsor', '/guides', '/cheat-sheets', '/compare'])
-  for (const guide of GUIDES) paths.add(`/guides/${guide.slug}`)
-  for (const c of COMPARISONS) paths.add(`/compare/${c.slugA}-vs-${c.slugB}`)
-  for (const platform of readJSON('platforms.json')) {
-    paths.add(`/${platform.id}`)
-    for (const app of readJSON(`platforms/${platform.id}.json`).apps) paths.add(`/${platform.id}/${app.slug}`)
+const readJSON = file =>
+  JSON.parse(readFileSync(join(process.cwd(), 'public/data', file), 'utf-8'))
+
+describe('guide related links', () => {
+  // Every "Browse Shortcuts" link of every guide. A link is a path, optionally
+  // followed by "#section" of the app page it points at.
+  const links = GUIDES.flatMap(guide =>
+    (guide.relatedApps || []).map(link => ({ guide: guide.slug, label: link.label, to: link.to }))
+  )
+
+  // Same rule ShortcutPage uses for the id of a section.
+  const sectionId = name => name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+
+  function readApp(path) {
+    const [, platformId, slug] = path.split('/')
+    return readJSON(`platforms/${platformId}.json`).apps.find(app => app.slug === slug)
   }
-  return paths
-}
 
-// "/macos/figma/", "/mac-hud#faq" and "/macos/figma" all name the page "/macos/figma".
-const pageOf = (to) => {
-  const path = to.split('#')[0].split('?')[0]
-  return path.length > 1 ? path.replace(/\/$/, '') : path
-}
-
-describe('internal links', () => {
-  const paths = knownPaths()
-
-  it('guide related links point at pages that exist', () => {
-    const broken = []
-    for (const guide of GUIDES) {
-      for (const link of guide.relatedApps || []) {
-        if (link.to?.startsWith('/') && !paths.has(pageOf(link.to))) broken.push(`${guide.slug}: ${link.to}`)
-      }
-    }
-    expect(broken).toEqual([])
+  it('has links to check', () => {
+    expect(links.length).toBeGreaterThan(0)
+    expect(routes.size).toBeGreaterThan(100)
   })
 
-  it('guide related guides point at guides that exist', () => {
+  it.each(links)('$guide: $label → $to is a pre-rendered page', ({ to }) => {
+    const [path] = to.split('#')
+    expect(routes.has(path), `${path} is not in the pre-render route list`).toBe(true)
+  })
+
+  it.each(links.filter(link => link.to.includes('#')))(
+    '$guide: $label → $to names a section of that page',
+    ({ to }) => {
+      const [path, hash] = to.split('#')
+      const sections = (readApp(path)?.sections || []).map(s => sectionId(s.name))
+      expect(sections).toContain(hash)
+    }
+  )
+})
+
+describe('guide related guides', () => {
+  it('point at guides that exist', () => {
     const slugs = new Set(GUIDES.map((guide) => guide.slug))
     const broken = []
     for (const guide of GUIDES) {
@@ -51,20 +60,24 @@ describe('internal links', () => {
     }
     expect(broken).toEqual([])
   })
+})
 
-  it('finds the related links of the guides (the test reads the right field)', () => {
-    const total = GUIDES.reduce((n, guide) => n + (guide.relatedApps || []).length, 0)
-    expect(total).toBeGreaterThan(0)
-  })
+describe('navbar and footer links', () => {
+  // "/mac-hud#faq" and "/macos/figma/" both name a pre-rendered page.
+  const pageOf = (to) => {
+    const path = to.split('#')[0].split('?')[0]
+    return path.length > 1 ? path.replace(/\/$/, '') : path
+  }
 
-  it('navbar and footer links point at pages that exist', () => {
+  it('point at pages that exist', () => {
     const { navbar, footer } = CONTENT.shared
     const links = [
       ...navbar.platformLinks, ...navbar.resourceLinks, ...navbar.secondaryLinks, navbar.homeLink,
       ...footer.columns.flatMap((column) => column.links),
       ...footer.popularApps, ...footer.resourcesStaticLinks,
     ]
-    const broken = links.filter((link) => !paths.has(pageOf(link.to))).map((link) => link.to)
+    expect(links.length).toBeGreaterThan(20)
+    const broken = links.filter((link) => !routes.has(pageOf(link.to))).map((link) => link.to)
     expect(broken).toEqual([])
   })
 })

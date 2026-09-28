@@ -10,7 +10,7 @@ export default {
   relatedApps: [
     { label: 'Chrome Shortcuts', to: '/macos/chrome' },
     { label: 'VS Code Shortcuts', to: '/macos/vscode' },
-    { label: 'macOS and Finder Shortcuts', to: '/macos/macos' },
+    { label: 'Finder Shortcuts', to: '/macos/macos#finder' },
   ],
   sections: [
     {
