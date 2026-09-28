@@ -11,6 +11,7 @@
 
 import { SUPPORT_EMAIL } from './siteConfig'
 import { pageUrl } from '../utils/siteUrl'
+import { siteMailto } from '../utils/siteMailto'
 
 export const SPONSORS = {
   // One sponsor on every app page. null = none.
@@ -63,9 +64,11 @@ export function isSitewideOpen(sponsors = SPONSORS) {
 
 /** mailto: link for the "Sponsor this page" call to action. */
 export function sponsorMailto(pathname, appName) {
-  const subject = `Sponsor keyshortcut.com${pathname}`
-  const body = `Hi, I'd like to sponsor the ${appName} shortcuts page (${pageUrl(pathname)}).`
-  return `mailto:${SPONSOR_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  return siteMailto({
+    topic: `Sponsor: ${pathname}`,
+    page: pathname,
+    body: `Hi, I'd like to sponsor the ${appName} shortcuts page (${pageUrl(pathname)}).`,
+  })
 }
 
 /**
@@ -109,7 +112,9 @@ export function bookingMailto(kind, pathname, offer = SPONSOR_OFFER) {
   const what = kind === 'page'
     ? (isAppPagePath(pathname) ? `the page ${pageUrl(pathname)}` : 'one app page')
     : 'the sitewide slot'
-  const subject = `Sponsor keyshortcut.com: ${kind === 'page' ? 'one page' : 'sitewide'}`
-  const body = `Hi, I'd like to book ${what} at $${price} a month.\n\nName on the card:\nOne line of text:\nLink:\n`
-  return `mailto:${SPONSOR_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  return siteMailto({
+    topic: `Sponsor: ${kind === 'page' ? 'one page' : 'whole site'}`,
+    page: '/sponsor',
+    body: `Hi, I'd like to book ${what} at $${price} a month.\n\nName on the card:\nOne line of text:\nLink:\n`,
+  })
 }

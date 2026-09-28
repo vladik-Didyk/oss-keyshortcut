@@ -1,4 +1,5 @@
 import { APP_COUNT, SHORTCUT_COUNT, APP_PAGE_COUNT, PAGES_WITH_DOCS, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, APP_STORE_URL, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL } from './siteConfig'
+import { siteMailto } from '../utils/siteMailto'
 import { getAppNote } from './appNotes'
 import { SPONSOR_OFFER, SPONSOR_AUDIENCE } from './sponsors'
 import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys } from '../utils/appCopy'
@@ -687,7 +688,7 @@ export const CONTENT = {
               ],
             },
             { type: 'paragraph', text: 'Since KeyShortcut does not collect personal data through its app, these rights primarily apply to any data collected by third-party services on the website (Google AdSense). You can opt out of personalized ads via Google Ads Settings, Google\u2019s consent message, or "Cookie settings" in the footer.' },
-            { type: 'contact', text: 'To exercise any of these rights, contact us at' },
+            { type: 'contact', topic: 'Privacy request', text: 'To exercise any of these rights, contact us at' },
           ],
         },
         {
@@ -704,7 +705,7 @@ export const CONTENT = {
               ],
             },
             { type: 'paragraph', text: 'KeyShortcut does not sell personal information. Google AdSense on the website may use data for ad targeting, which may qualify as "sharing" under CCPA. You can opt out via Google Ads Settings, the privacy choices link Google shows to visitors in US states that require one, or "Cookie settings" in the footer (declining gives non-personalised ads).' },
-            { type: 'contact', text: 'For CCPA requests, contact us at' },
+            { type: 'contact', topic: 'CCPA request', text: 'For CCPA requests, contact us at' },
           ],
         },
         {
@@ -770,7 +771,7 @@ export const CONTENT = {
         {
           heading: 'Contact',
           content: [
-            { type: 'contact', text: 'If you have questions about this privacy policy, contact us at' },
+            { type: 'contact', topic: 'Privacy question', text: 'If you have questions about this privacy policy, contact us at' },
           ],
         },
       ],
@@ -807,7 +808,7 @@ export const CONTENT = {
         {
           heading: 'Contact',
           content: [
-            { type: 'contact', text: 'For questions about these terms, contact us at' },
+            { type: 'contact', topic: 'Terms question', text: 'For questions about these terms, contact us at' },
           ],
         },
       ],
@@ -855,7 +856,7 @@ export const CONTENT = {
         title: 'Missing something?',
         text: 'Can\u2019t find your favorite app or noticed a wrong shortcut? Let me know and I\u2019ll add it. Every suggestion makes this resource better for everyone.',
         buttonLabel: 'Suggest an app',
-        buttonHref: `mailto:${SUPPORT_EMAIL}?subject=App%20suggestion%20for%20KeyShortcut`,
+        buttonHref: siteMailto({ topic: 'App suggestion', page: '/about', body: 'App:\nWhere its shortcuts are listed (link):\n' }),
       },
       openSource: {
         label: 'Open source',

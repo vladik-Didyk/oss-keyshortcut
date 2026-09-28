@@ -1,5 +1,6 @@
 import { CONTENT } from '../data/content'
 import { SUPPORT_EMAIL } from '../data/siteConfig'
+import { siteMailto } from '../utils/siteMailto'
 
 export default function PrivacyPage() {
   const { policy, terms } = CONTENT.privacy
@@ -43,7 +44,7 @@ function ContentBlock({ block }) {
     return (
       <p className="text-theme-muted mb-4 leading-relaxed">
         {block.text}{' '}
-        <a href={`mailto:${SUPPORT_EMAIL}`} className="text-accent hover:underline">{SUPPORT_EMAIL}</a>.
+        <a href={siteMailto({ topic: block.topic, page: '/privacy' })} className="text-accent hover:underline">{SUPPORT_EMAIL}</a>.
       </p>
     )
   }

@@ -77,7 +77,7 @@ describe('sponsors', () => {
   it('builds a mailto link with the page in the subject', () => {
     const href = sponsorMailto('/macos/figma', 'Figma')
     expect(href).toMatch(/^mailto:/)
-    expect(decodeURIComponent(href)).toContain('Sponsor keyshortcut.com/macos/figma')
+    expect(decodeURIComponent(href)).toContain('subject=[KeyShortcut] Sponsor: /macos/figma')
   })
 
   it('returns a sponsor object or null', () => {

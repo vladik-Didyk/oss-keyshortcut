@@ -351,3 +351,7 @@ Hand-written prose for app pages: an overview, 2–3 tips, 4–6 "start with the
 - The link of an app is stored in Supabase (`apps.docs_url`) and exported to `public/data` as `docsUrl`. Change it with `node scripts/set-docs-url.mjs <slug> <https address | none>` (`--dry-run` shows the change), then `pnpm export` and deploy. A change in `public/data` alone is lost at the next export.
 - `node scripts/check-docs-links.mjs` checks every link the site shows. No database, no AI, no keys. `.github/workflows/docs-link-check.yml` runs it on Mondays and keeps one issue, "Dead official docs links".
 - The workflow "Shortcut Sync" has no schedule. It is started by hand and is a dry run unless told otherwise: its extraction is not reliable enough to write to the database unattended.
+
+### Email links
+
+Every `mailto:` link is built by `siteMailto({ topic, page, body })` in `src/utils/siteMailto.js`. The subject opens with `[KeyShortcut]` and the body ends with "Sent from <page address>", so a message written from the site is recognisable in the inbox. `public/privacy.html` is static and carries the same tag, typed in. `src/test/site-mailto.test.jsx` fails on a link written by hand.

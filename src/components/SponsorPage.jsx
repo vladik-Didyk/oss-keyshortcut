@@ -8,6 +8,7 @@ import {
   paymentUrl,
   bookingMailto,
 } from '../data/sponsors'
+import { siteMailto } from '../utils/siteMailto'
 import { trackEvent } from '../lib/analytics'
 
 const noSubscription = () => () => {}
@@ -115,7 +116,7 @@ export default function SponsorPage({ stats, offer = SPONSOR_OFFER, sitewideOpen
 
         <p className="text-theme-muted leading-relaxed">
           <a
-            href={`mailto:${SPONSOR_EMAIL}`}
+            href={siteMailto({ topic: 'Sponsor question', page: '/sponsor' })}
             onClick={() => trackEvent('sponsor_contact_clicked', { location: 'sponsor_page' })}
             className="text-accent underline underline-offset-2 hover:no-underline"
           >
