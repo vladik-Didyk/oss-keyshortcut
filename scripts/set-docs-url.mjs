@@ -10,10 +10,12 @@
  *   node scripts/set-docs-url.mjs <slug> <https-url> --dry-run  # show, write nothing
  *
  * Needs VITE_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (.env, or the environment).
- * A new link must answer 200 to this script, or the write is refused.
+ * A new link must open for this script, or the write is refused. It asks the
+ * same way as the weekly check (scripts/check-docs-links.mjs).
  */
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { statusOf, classify } from './check-docs-links.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 try { process.loadEnvFile(join(ROOT, '.env')) } catch { /* env vars from the environment */ }
@@ -51,9 +53,9 @@ async function readRow() {
 }
 
 if (docsUrl) {
-  const page = await fetch(docsUrl, { redirect: 'follow', headers: { 'User-Agent': 'Mozilla/5.0 (KeyShortcut link check)' } })
-  if (page.status !== 200) {
-    console.error(`The new link answers ${page.status}, not 200: ${docsUrl}`)
+  const status = await statusOf(docsUrl)
+  if (classify(status) !== 'ok') {
+    console.error(`The new link does not open (answer: ${status || 'none'}): ${docsUrl}`)
     process.exit(1)
   }
 }

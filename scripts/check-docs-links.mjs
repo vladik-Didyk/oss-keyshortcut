@@ -51,7 +51,8 @@ export function collectLinks(root = process.cwd()) {
   return [...byUrl].map(([url, pages]) => ({ url, pages }))
 }
 
-async function statusOf(url) {
+/** The HTTP status the address answers with, asked the way a browser asks. 0 = no answer. */
+export async function statusOf(url) {
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const res = await fetch(url, {

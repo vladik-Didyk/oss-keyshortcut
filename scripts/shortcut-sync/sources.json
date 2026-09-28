@@ -12,16 +12,16 @@
       "displayName": "Acrobat",
       "tier": 3,
       "sources": {
-        "macos": { "url": "https://helpx.adobe.com/express/web/get-started/keyboard-shortcuts.html", "parser": "ai-extract", "platformFilter": "mac" },
-        "windows": { "url": "https://helpx.adobe.com/express/web/get-started/keyboard-shortcuts.html", "parser": "ai-extract", "platformFilter": "windows" }
+        "macos": { "url": "https://helpx.adobe.com/acrobat/desktop/get-started/preferences-and-settings/keyboard-shortcuts.html", "parser": "ai-extract", "platformFilter": "mac" },
+        "windows": { "url": "https://helpx.adobe.com/acrobat/desktop/get-started/preferences-and-settings/keyboard-shortcuts.html", "parser": "ai-extract", "platformFilter": "windows" }
       }
     },
     "adobe-xd": {
       "displayName": "Adobe XD",
       "tier": 3,
       "sources": {
-        "macos": { "url": "https://helpx.adobe.com/acrobat/desktop/get-started/preferences-and-settings/keyboard-shortcuts.html", "parser": "ai-extract", "platformFilter": "mac" },
-        "windows": { "url": "https://helpx.adobe.com/acrobat/desktop/get-started/preferences-and-settings/keyboard-shortcuts.html", "parser": "ai-extract", "platformFilter": "windows" }
+        "macos": { "url": "https://helpx.adobe.com/xd/desktop/introduction/keyboard-shortcuts.html", "parser": "ai-extract", "platformFilter": "mac" },
+        "windows": { "url": "https://helpx.adobe.com/xd/desktop/introduction/keyboard-shortcuts.html", "parser": "ai-extract", "platformFilter": "windows" }
       }
     },
     "after-effects": {
