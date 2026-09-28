@@ -1,11 +1,12 @@
 import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, within, fireEvent, waitFor } from '@testing-library/react'
 import { renderToString } from 'react-dom/server'
 import { createRoutesStub } from 'react-router'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import ShortcutPage from '../components/ShortcutPage'
 import { CONTENT } from '../data/content'
+import { keysToWords, parseKeyParts } from '../utils/platformHelpers'
 import { trackEvent } from '../lib/analytics'
 
 vi.mock('../lib/analytics', async (importOriginal) => ({
@@ -154,5 +155,77 @@ describe('app page FAQ', () => {
     fireEvent.click(summary)
     await waitFor(() => expect(closed).toBe(true))
     expect(expandedCalls()).toHaveLength(1)
+  })
+})
+
+describe('app page shortcut rows', () => {
+  const rowOf = (action) => screen.getAllByText(action).map((el) => el.closest('tr')).find(Boolean)
+
+  it('carries the shortcut in words, hidden visually, next to keycaps hidden from screen readers', () => {
+    render(page())
+    const row = rowOf('Command Palette')
+
+    const words = within(row).getByText('Command + Shift + P')
+    expect(words.tagName).toBe('SPAN')
+    expect(words).toHaveClass('sr-only')
+    expect(row.querySelectorAll('.sr-only')).toHaveLength(1)
+
+    const keycaps = [...row.querySelectorAll('kbd')]
+    expect(keycaps.map((k) => k.textContent)).toEqual(['⌘', '⇧', 'P'])
+    for (const keycap of keycaps) expect(keycap).toHaveAttribute('aria-hidden', 'true')
+
+    expect(within(row).getByRole('button')).toHaveAccessibleName(
+      'Copy shortcut Command + Shift + P for Command Palette'
+    )
+  })
+
+  it('reads key symbols and punctuation keys as words', () => {
+    render(page())
+    expect(within(rowOf('Delete Line')).getByText('Command + Delete')).toHaveClass('sr-only')
+    expect(within(rowOf('Settings')).getByText('Command + Comma')).toHaveClass('sr-only')
+    expect(within(rowOf('Move Up')).getByText('Option + Up Arrow')).toHaveClass('sr-only')
+    expect(within(rowOf('Next Tab')).getByText('Control + Tab')).toHaveClass('sr-only')
+  })
+
+  it('holds nothing in the hidden text but the shortcut of its own row', () => {
+    const { container } = render(page())
+    const shortcuts = APP.sections.flatMap((s) => s.shortcuts)
+    const rows = [...container.querySelectorAll('table.shortcut-table tbody tr')]
+    expect(rows).toHaveLength(shortcuts.length)
+    rows.forEach((row, i) => {
+      const parts = parseKeyParts(shortcuts[i].modifiers, shortcuts[i].key)
+      expect(row.querySelector('.sr-only').textContent).toBe(keysToWords(parts, 'macos'))
+      expect([...row.querySelectorAll('kbd')].map((k) => k.textContent)).toEqual(parts)
+    })
+  })
+
+  it('uses the words Windows pages already show', () => {
+    const app = {
+      ...APP,
+      sections: [{ name: 'General', shortcuts: [{ action: 'Send', modifiers: ['Ctrl'], key: '↩' }] }],
+      shortcutCount: 1,
+    }
+    render(page(pageData(app, 'windows', 'Windows')))
+    expect(within(rowOf('Send')).getByText('Ctrl + Enter')).toHaveClass('sr-only')
+  })
+
+  it('still copies the keys as shown', async () => {
+    const writeText = vi.fn().mockResolvedValue()
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true })
+    render(page())
+
+    fireEvent.click(within(rowOf('Command Palette')).getByRole('button'))
+
+    expect(writeText).toHaveBeenCalledTimes(1)
+    expect(writeText).toHaveBeenCalledWith('⌘ + ⇧ + P')
+    await waitFor(() =>
+      expect(trackEvent).toHaveBeenCalledWith('shortcut_copied', {
+        app: 'test-app',
+        platform: 'macos',
+        action: 'Command Palette',
+        combo: '⌘ + ⇧ + P',
+      })
+    )
+    delete navigator.clipboard
   })
 })

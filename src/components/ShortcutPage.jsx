@@ -16,17 +16,19 @@ import { getSponsor, sponsorPageLink, MIN_SECTIONS_FOR_SLOT } from '../data/spon
 import { APP_NOTES } from '../data/appNotes'
 import { noteFitsApp, fittingTips, resolveNoteText, resolveEssentials, everydayShortcuts, largestSections } from '../utils/appCopy'
 import { tokenize } from '../utils/searchHelpers'
-import { parseKeyParts } from '../utils/platformHelpers'
+import { parseKeyParts, keysToWords } from '../utils/platformHelpers'
 import { COMPARISONS } from '../data/comparisons'
 import { trackEvent } from '../lib/analytics'
 
 function Keycap({ children }) {
-  return <kbd className="keycap">{children}</kbd>
+  return <kbd className="keycap" aria-hidden="true">{children}</kbd>
 }
 
 /**
  * A shortcut's keycaps, clickable to copy the human-readable combo to the
  * clipboard. Shows a transient "Copied" state for ~1.2s.
+ * The keycaps are hidden from assistive technology; the same shortcut in words
+ * (⌘ ⇧ P → "Command + Shift + P") is in the label and in a visually hidden span.
  */
 function CopyableShortcut({ parts, action, appSlug, platform }) {
   const [copied, setCopied] = useState(false)
@@ -35,6 +37,7 @@ function CopyableShortcut({ parts, action, appSlug, platform }) {
   useEffect(() => () => clearTimeout(timerRef.current), [])
 
   const combo = parts.join(' + ')
+  const words = keysToWords(parts, platform)
 
   const onCopy = useCallback(() => {
     if (!navigator.clipboard?.writeText) return
@@ -54,9 +57,10 @@ function CopyableShortcut({ parts, action, appSlug, platform }) {
       type="button"
       onClick={onCopy}
       title={copied ? 'Copied' : `Copy shortcut: ${combo}`}
-      aria-label={copied ? `Copied ${combo}` : `Copy shortcut ${combo} for ${action}`}
+      aria-label={copied ? `Copied ${words}` : `Copy shortcut ${words} for ${action}`}
       className="group/copy inline-flex items-center gap-1.5 flex-wrap justify-end bg-transparent border-none p-0 m-0 cursor-pointer align-middle"
     >
+      <span className="sr-only">{words}</span>
       {parts.map((part, k) => (
         <Keycap key={k}>{part}</Keycap>
       ))}

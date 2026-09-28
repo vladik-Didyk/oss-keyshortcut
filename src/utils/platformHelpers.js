@@ -80,6 +80,93 @@ export function parseKeyParts(modifiers, key) {
   return parts
 }
 
+/**
+ * Words for the key symbols in the shortcut data, so a screen reader or a
+ * machine gets "Command + Shift + P" where the page shows ⌘ ⇧ P.
+ * Modifier names follow scripts/shortcut-sync/pipeline/modifier-map.mjs; key
+ * names are the ones printed on a Mac keyboard. src/test/key-words.test.js
+ * scans public/data/platforms/ and fails when a symbol there is missing here.
+ */
+export const KEY_SYMBOL_WORDS = {
+  '⌘': 'Command',
+  '⌥': 'Option',
+  '⌃': 'Control',
+  '⇧': 'Shift',
+  '↩': 'Return',
+  '⏎': 'Return',
+  '⌫': 'Delete',
+  '⌦': 'Forward Delete',
+  '⎋': 'Escape',
+  '⇥': 'Tab',
+  '↑': 'Up Arrow',
+  '↓': 'Down Arrow',
+  '←': 'Left Arrow',
+  '→': 'Right Arrow',
+  '⏻': 'Power Button',
+}
+
+/** The same keys as Windows and Linux keyboards name them. */
+const KEY_SYMBOL_WORDS_PC = {
+  '↩': 'Enter',
+  '⏎': 'Enter',
+  '⌫': 'Backspace',
+  '⌦': 'Delete',
+}
+
+/** A key that is one punctuation character: screen readers often skip these. */
+export const PUNCTUATION_KEY_WORDS = {
+  '!': 'Exclamation Mark',
+  '"': 'Quotation Mark',
+  '#': 'Hash',
+  '$': 'Dollar Sign',
+  '%': 'Percent',
+  '&': 'Ampersand',
+  "'": 'Apostrophe',
+  '(': 'Left Parenthesis',
+  ')': 'Right Parenthesis',
+  '*': 'Asterisk',
+  '+': 'Plus',
+  ',': 'Comma',
+  '-': 'Minus',
+  '.': 'Period',
+  '/': 'Slash',
+  ':': 'Colon',
+  ';': 'Semicolon',
+  '<': 'Less Than',
+  '=': 'Equals',
+  '>': 'Greater Than',
+  '?': 'Question Mark',
+  '@': 'At Sign',
+  '[': 'Left Bracket',
+  '\\': 'Backslash',
+  ']': 'Right Bracket',
+  '^': 'Caret',
+  '_': 'Underscore',
+  '`': 'Backtick',
+  '{': 'Left Brace',
+  '|': 'Vertical Bar',
+  '}': 'Right Brace',
+  '~': 'Tilde',
+}
+
+const KEY_SYMBOL_PATTERN = new RegExp(`[${Object.keys(KEY_SYMBOL_WORDS).join('')}]`, 'gu')
+
+/** One keycap part in words. Text that holds no symbol comes back unchanged. */
+export function keyPartToWords(part, platformId = 'macos') {
+  if (Object.hasOwn(PUNCTUATION_KEY_WORDS, part)) return PUNCTUATION_KEY_WORDS[part]
+  const pc = platformId !== 'macos'
+  const words = part.replace(
+    KEY_SYMBOL_PATTERN,
+    (symbol) => ` ${(pc && KEY_SYMBOL_WORDS_PC[symbol]) || KEY_SYMBOL_WORDS[symbol]} `
+  )
+  return words === part ? part : words.replace(/\s+/g, ' ').trim()
+}
+
+/** A whole shortcut in words: parts from parseKeyParts() → "Command + Shift + P". */
+export function keysToWords(parts, platformId = 'macos') {
+  return parts.map((part) => keyPartToWords(part, platformId)).join(' + ')
+}
+
 export function groupByCategories(apps, categoryOrder) {
   if (!apps) return []
 
