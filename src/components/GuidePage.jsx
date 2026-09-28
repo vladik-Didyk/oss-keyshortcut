@@ -236,7 +236,7 @@ function ContentBlock({ block }) {
   }
 
   if (block.type === 'cta') {
-    return <GuideCtaBanner />
+    return <GuideCtaBanner settingsNote={false} />
   }
 
   if (block.type === 'ad') {

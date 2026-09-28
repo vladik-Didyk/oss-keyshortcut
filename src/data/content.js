@@ -203,7 +203,7 @@ export const CONTENT = {
         },
         {
           title: 'Knows what you\'re using',
-          description: 'Switch to Figma, and Figma shortcuts appear. Switch to VS Code, and you see VS Code shortcuts. KeyShortcut detects your active app and shows the right shortcuts automatically.',
+          description: 'Switch to Figma, and Figma shortcuts appear. Switch to VS Code, and you see VS Code shortcuts. KeyShortcut detects your active app and shows the right shortcuts automatically. This is off by default. Switch it on in Settings.',
           screenshot: 'keyflow-appview',
           alt: 'KeyShortcut automatically detecting the active app and showing relevant shortcuts',
         },
@@ -613,7 +613,7 @@ export const CONTENT = {
     moreAppsTitle: (platformName) => `Explore more ${platformName} apps`,
     faqTitle: 'Frequently Asked Questions',
     ctaTitle: (appName) => `Access ${appName} shortcuts from your menu bar`,
-    ctaSubtitle: 'KeyShortcut detects the active app and shows its shortcuts instantly. No memorization needed.',
+    ctaSubtitle: 'KeyShortcut detects the active app and shows its shortcuts instantly. Switch it on in Settings. No memorization needed.',
     ctaButton: 'Download KeyShortcut',
     errorTitle: 'App not found',
     errorSubtitle: 'We don\'t have shortcuts for this app yet.',
@@ -871,7 +871,7 @@ export const CONTENT = {
         avatar: '/images/avatar.webp',
         title: 'Full-Stack Developer & Systems Engineer',
         location: 'Toronto, Canada',
-        bio: 'Like what you see? The Mac app takes it further \u2014 it detects your active app and shows its shortcuts instantly. Support the project and have every shortcut at your fingertips.',
+        bio: 'Like what you see? The Mac app takes it further \u2014 it detects your active app and shows its shortcuts instantly. Switch it on in Settings. Support the project and have every shortcut at your fingertips.',
         links: {
           linkedin: 'https://linkedin.com/in/vladislav-didyk',
           github: 'https://github.com/vladik-Didyk',
