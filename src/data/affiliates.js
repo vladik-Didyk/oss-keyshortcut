@@ -14,7 +14,6 @@ export const AFFILIATES = {
   'after-effects': { program: 'Adobe (Partnerize)', label: 'Get After Effects', url: '' },
   'premiere-pro': { program: 'Adobe (Partnerize)', label: 'Get Premiere Pro', url: '' },
   acrobat: { program: 'Adobe (Partnerize)', label: 'Get Acrobat', url: '' },
-  figma: { program: 'Figma (PartnerStack)', label: 'Get Figma', url: '' },
   raycast: { program: 'Raycast (Rewardful)', label: 'Get Raycast', url: '' },
   '1password': { program: '1Password (CJ)', label: 'Get 1Password', url: '' },
   canva: { program: 'Canva (Impact)', label: 'Get Canva Pro', url: '' },
