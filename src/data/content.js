@@ -469,7 +469,7 @@ export const CONTENT = {
       ],
       whyTitle: 'Why Keyboard Shortcuts Matter',
       whyParagraphs: [
-        'Research consistently shows that keyboard shortcuts save significant time over mouse-driven workflows. A study by Brainscape found that the average user can save up to 8 working days per year by using shortcuts instead of navigating menus. Every second you spend reaching for the mouse, finding the right menu, and clicking adds up.',
+        'A keyboard shortcut replaces several steps with one. Without it you reach for the mouse, find the right menu, and click. With it you press a key combination and keep typing. The saving on one action is small, but the same actions repeat all day: copy, paste, save, undo, switch tabs. The more often you repeat an action, the more its shortcut is worth learning.',
         'Beyond speed, shortcuts reduce cognitive load. When a key combination becomes muscle memory, it no longer requires conscious thought — your hands execute the action while your mind stays focused on the task. This is why professional designers, developers, and writers all rely heavily on shortcut-driven workflows.',
       ],
       // Homepage app row: the apps with the most shortcuts. No traffic data yet, so not "Popular".
