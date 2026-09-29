@@ -14,7 +14,7 @@ import { pageUrl } from '../utils/siteUrl'
 import AdSlot from './AdSlot'
 import AffiliateLink from './AffiliateLink'
 import { getAffiliate } from '../data/affiliates'
-import { getSponsor, sponsorPageLink, MIN_SECTIONS_FOR_SLOT } from '../data/sponsors'
+import { getSponsor, MIN_SECTIONS_FOR_SLOT } from '../data/sponsors'
 import { getAppNote } from '../data/appNotes'
 import { noteFitsApp, fittingTips, resolveNoteText, resolveEssentials, everydayShortcuts, largestSections } from '../utils/appCopy'
 import { tokenize } from '../utils/searchHelpers'
@@ -537,21 +537,10 @@ export default function ShortcutPage() {
                     </tbody>
                   </table>
                 </div>
+                {/* The one slot of the page: a sponsor's card, else the ad, else nothing.
+                    No line that asks for a sponsor: the offer is at /sponsor, linked from the footer. */}
                 {idx === 1 && filteredSections.length >= MIN_SECTIONS_FOR_SLOT && !search && (
-                  <>
-                    <AdSlot adSlot="shortcut_mid" variant="in-article" sponsor={sponsor} />
-                    {!sponsor && (
-                      <p className="text-center text-[12px] text-theme-muted -mt-2 mb-6">
-                        <Link
-                          to={sponsorPageLink(pagePath)}
-                          onClick={() => trackEvent('sponsor_cta_clicked', { app: slug, platform })}
-                          className="underline underline-offset-2 hover:text-theme-text"
-                        >
-                          {sp.sponsorCta(app.displayName)}
-                        </Link>
-                      </p>
-                    )}
-                  </>
+                  <AdSlot adSlot="shortcut_mid" variant="in-article" sponsor={sponsor} />
                 )}
               </React.Fragment>
             ))}
