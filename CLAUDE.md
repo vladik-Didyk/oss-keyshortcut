@@ -210,8 +210,12 @@ Visitors say whether the shortcuts of a page work, and a page may show its views
 - **One vote per network address and shortcut.** The address is stored only as a hash, salted with a value that lives in the database; hashes older than 90 days are deleted. 40 votes a day per address.
 - **A vote is accepted only for an id the served page has.** Rows carry `data-item` (`shortcutIds()` in `src/utils/feedbackIds.js`: section and action, in small letters and dashes); the function reads the page through `env.ASSETS`. Renaming a section or an action starts its count from zero.
 - **The browser** (`src/lib/feedback.js`) keeps the visitor's own votes in `localStorage` and the pages counted in this tab in `sessionStorage`. No cookie. A browser driven by a program is not counted.
-- **On the page:** the question under the list (`PageVote.jsx`; "No" opens the report panel), the numbers of the page, a count on a confirmed row, and for a mouse a "works for me" button on the row. The rules live on the server, so tests run them against a real SQLite (`src/test/helpers/d1.js`, `node:sqlite`).
-- **Local:** `wrangler pages dev build/client --d1 DB` gives a local database in `.wrangler/`.
+- **The switch** is `VOTES_SWITCH` in `src/lib/feedback.js`, off until the project has its database. Off means no request and nothing on the page. Set it to `true` in the change that follows the day the binding exists. `VITE_VOTES=on pnpm build` switches it on for one build, for a local preview.
+- **On the page:** a green bar (`VoteBar.jsx`) right under the header, which stays in view while the list scrolls: the navbar, the header (from `lg` up), the bar, then the title of the section stick in that order, and `ShortcutPage.jsx` measures the bar to place the titles. First line: "Confirmed by N visitors", or the question while there are none. Second line: views and PDF downloads (a phone shows the first), or a hint. Buttons: "Works" and "Not right"; "Not right" also opens the report panel. The bar is in the page as it is served and always has two lines, so nothing moves when the numbers arrive. If the server says it keeps no votes, the bar goes away.
+- **Rows:** a green count on a confirmed row, and for a mouse a "works for me" button on hover.
+- **The green** is `--theme-good` and its three companions in `index.css`; a test computes their contrast (text 4.5:1, borders 3:1).
+- The rules live on the server, so tests run them against a real SQLite (`src/test/helpers/d1.js`, `node:sqlite`).
+- **Local:** `VITE_VOTES=on pnpm build`, then `wrangler pages dev build/client --d1 DB` gives a local database in `.wrangler/`.
 - **Reading the votes against a shortcut:** in the Cloudflare dashboard, D1 → the database → Console: `SELECT page, item, works, broken FROM votes WHERE broken > 0 ORDER BY broken DESC`.
 - The privacy page says what is kept: `CONTENT.privacy` and `public/privacy.html`, changed together.
 

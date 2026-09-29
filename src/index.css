@@ -35,6 +35,13 @@
   /* Border used for interactive control boundaries: 3.27:1 on base — passes WCAG 1.4.11 (the
      decorative --color-theme-border #C8C0B4 is only ~1.59:1, kept for soft card outlines) */
   --theme-control-border: #8B8478;
+  /* Votes: the green of "it works". White on it is 6.5:1; as text it is 5.7:1 on
+     the base and 5.5:1 on its own soft green (WCAG 1.4.3 needs 4.5:1).
+     The border is 3.4:1 on the soft green and 3.6:1 on the base (WCAG 1.4.11 needs 3:1). */
+  --theme-good: #1F6B3F;
+  --theme-good-hover: #185633;
+  --theme-good-soft: #E3F0E1;
+  --theme-good-border: #4F8B5B;
 }
 
 /* =========================================
@@ -62,6 +69,10 @@
   --color-theme-keycap-sublabel: var(--theme-keycap-sublabel, #6B6560);
   --color-theme-light-tint: var(--theme-light-tint, #F5F0E8);
   --color-theme-pattern: var(--pattern-color, rgba(0, 0, 0, 0.03));
+  --color-theme-good: var(--theme-good, #1F6B3F);
+  --color-theme-good-hover: var(--theme-good-hover, #185633);
+  --color-theme-good-soft: var(--theme-good-soft, #E3F0E1);
+  --color-theme-good-border: var(--theme-good-border, #4F8B5B);
 
   --radius-panel: 12px;
   --radius-card: 10px;
@@ -153,6 +164,23 @@ body {
   0% { opacity: 0; transform: translateY(10px) scale(0.85); }
   60% { transform: translateY(-3px) scale(1.04); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* A vote that was just cast: the button answers with one small jump. */
+@keyframes vote-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.14); }
+  100% { transform: scale(1); }
+}
+
+.vote-pop {
+  animation: vote-pop 0.35s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vote-pop {
+    animation: none;
+  }
 }
 
 @keyframes kb-pop {

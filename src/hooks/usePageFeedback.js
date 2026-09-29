@@ -1,30 +1,37 @@
 import { useCallback, useEffect, useState } from 'react'
-import { myVotes, sendVote, visitPage } from '../lib/feedback'
+import { myVotes, sendVote, visitPage, votesOn } from '../lib/feedback'
 
 const NONE = { views: null, downloads: null, confirmed: null, items: {} }
-const START = { enabled: false, numbers: NONE, mine: {} }
 
 /**
  * Votes and counts of one app page.
  *
- *   enabled   false until the server says it keeps votes (it needs a database)
+ *   enabled   the switch is on (votesOn) and the server has not said that it
+ *             keeps no votes. True from the first render, so the bar is in the
+ *             page as it is served.
  *   numbers   { views, downloads, confirmed, items }: null or absent = not shown
  *   mine      the visitor's own votes, { <item>: 'works' | 'broken' }
  *   vote      (item, 'works' | 'broken') => sends it
  */
 export function usePageFeedback(page) {
-  const [state, setState] = useState(START)
+  const on = votesOn()
+  const [state, setState] = useState({ enabled: on, numbers: NONE, mine: {} })
 
   useEffect(() => {
+    if (!on) return
     let live = true
     visitPage(page).then((answer) => {
       if (!live) return
-      setState(answer.enabled ? { enabled: true, numbers: answer.numbers || NONE, mine: myVotes(page) } : START)
+      setState(
+        answer.enabled
+          ? { enabled: true, numbers: answer.numbers || NONE, mine: myVotes(page) }
+          : { enabled: false, numbers: NONE, mine: {} }
+      )
     })
     return () => {
       live = false
     }
-  }, [page])
+  }, [page, on])
 
   const vote = useCallback(
     async (item, value) => {

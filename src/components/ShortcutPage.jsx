@@ -4,7 +4,7 @@ import { Search, X, Download, Lightbulb, ChevronDown, ChevronLeft, ChevronRight,
 import LastCheckedBadge from './LastCheckedBadge'
 import AuthorLine from './AuthorLine'
 import ReportProblem from './ReportProblem'
-import PageVote from './PageVote'
+import VoteBar from './VoteBar'
 import MacAppStoreButton from './MacAppStoreButton'
 import AppIcon from './directory/AppIcon'
 import { PlatformGlyph } from './PlatformIcons'
@@ -156,9 +156,16 @@ export default function ShortcutPage() {
   const [search, setSearch] = useState('')
   const searchInputRef = useRef(null)
   const headerRef = useRef(null)
+  // Where the vote bar sticks, and where the section titles stick under it.
+  const barRef = useRef(null)
+  const [barTop, setBarTop] = useState(48)
   const [stickyTop, setStickyTop] = useState(48)
   const sp = CONTENT.shortcutPage
   const pagePath = `/${platform}/${slug}`
+  // Votes and counts. Nothing of it shows while the switch is off, and a number
+  // shows only when the server sent it. The ids are in the served page
+  // (data-item): the server accepts a vote only for an id the page has.
+  const feedback = usePageFeedback(pagePath)
   const affiliate = getAffiliate(slug, platform)
   const sponsor = getSponsor(pagePath)
   const note = getAppNote(slug, platform)
@@ -177,25 +184,29 @@ export default function ShortcutPage() {
 
   const activeId = useScrollspy(sectionIds)
 
-  // Sticky section titles sit under the navbar (48px), plus the header when the
-  // header is itself sticky (lg and up). On phones the header scrolls away, so
-  // adding its height left the titles pinned mid-screen.
+  // What sticks, from the top: the navbar (48px), the header when it is itself
+  // sticky (lg and up), the vote bar, then the title of the section in view.
+  // On phones the header scrolls away, so adding its height left the titles
+  // pinned mid-screen.
   useEffect(() => {
     const el = headerRef.current
     if (!el) return
     const update = () => {
       const headerPinned = getComputedStyle(el).position === 'sticky'
-      setStickyTop(48 + (headerPinned ? el.offsetHeight : 0))
+      const under = 48 + (headerPinned ? el.offsetHeight : 0)
+      setBarTop(under)
+      setStickyTop(under + (barRef.current?.offsetHeight ?? 0))
     }
     update()
     const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(update) : null
     ro?.observe(el)
+    if (barRef.current) ro?.observe(barRef.current)
     window.addEventListener('resize', update)
     return () => {
       ro?.disconnect()
       window.removeEventListener('resize', update)
     }
-  }, [])
+  }, [feedback.enabled])
 
   // Track shortcut page view (top of conversion funnel)
   useEffect(() => {
@@ -244,10 +255,6 @@ export default function ShortcutPage() {
     openReport()
   }, [openReport])
 
-  // Votes and counts. Nothing of it shows until the server says it keeps votes,
-  // and a number shows only when the server sent it. The ids are in the served
-  // page (data-item): the server accepts a vote only for an id the page has.
-  const feedback = usePageFeedback(pagePath)
   const itemIds = useMemo(() => shortcutIds(app.sections), [app])
   const votePage = useCallback((value) => {
     feedback.vote('page', value)
@@ -351,14 +358,6 @@ export default function ShortcutPage() {
                       ))}
                     </li>
                   )}
-                  {feedback.numbers.confirmed != null && (
-                    <li className={FACT}>
-                      <span className="inline-flex items-baseline gap-1">
-                        <CircleCheck size={12} className="self-center" aria-hidden="true" />
-                        {sp.feedback.confirmed(feedback.numbers.confirmed)}
-                      </span>
-                    </li>
-                  )}
                   {(app.lastVerified || app.docsUrl) && (
                     <li className={FACT}>
                       <LastCheckedBadge
@@ -434,6 +433,11 @@ export default function ShortcutPage() {
           )}
         </div>
       </header>
+
+      {/* ─── Votes and counts: a green bar that stays in view while the list scrolls ─── */}
+      {feedback.enabled && (
+        <VoteBar numbers={feedback.numbers} mine={feedback.mine.page} onVote={votePage} top={barTop} barRef={barRef} />
+      )}
 
       {/* ─── Intro text: the hand-written note, or one sentence from the data when the page has none ─── */}
       <div className="mx-auto max-w-[980px] px-5 md:px-6 pt-8 pb-2">
@@ -578,9 +582,9 @@ export default function ShortcutPage() {
                             {feedback.numbers.items[itemIds.get(s)] != null && (
                               <span
                                 title={sp.feedback.rowConfirmed(feedback.numbers.items[itemIds.get(s)], s.action)}
-                                className="ml-2 inline-flex items-center gap-0.5 align-middle text-[11px] text-theme-muted"
+                                className="ml-2 inline-flex items-center gap-0.5 px-1.5 py-0.5 align-middle rounded-full bg-theme-good-soft text-[11px] font-semibold text-theme-good"
                               >
-                                <CircleCheck size={12} aria-hidden="true" />
+                                <CircleCheck size={11} aria-hidden="true" />
                                 <span aria-hidden="true">{feedback.numbers.items[itemIds.get(s)]}</span>
                                 <span className="sr-only">{sp.feedback.confirmed(feedback.numbers.items[itemIds.get(s)])}</span>
                               </span>
@@ -596,7 +600,7 @@ export default function ShortcutPage() {
                                 }}
                                 title={sp.feedback.rowWorks(s.action)}
                                 aria-label={sp.feedback.rowWorks(s.action)}
-                                className={`ml-1.5 -my-1 inline-flex items-center justify-center w-6 h-6 align-middle rounded bg-transparent border-none cursor-pointer transition-opacity hover:!opacity-100 focus-visible:opacity-100 ${feedback.mine[itemIds.get(s)] === 'works' ? 'text-theme-text opacity-100' : 'text-theme-muted opacity-0 group-hover/row:opacity-60'}`}
+                                className={`ml-1.5 -my-1 inline-flex items-center justify-center w-6 h-6 align-middle rounded bg-transparent border-none cursor-pointer transition-opacity hover:!opacity-100 focus-visible:opacity-100 ${feedback.mine[itemIds.get(s)] === 'works' ? 'text-theme-good opacity-100' : 'text-theme-good opacity-0 group-hover/row:opacity-70'}`}
                               >
                                 <ThumbsUp size={12} aria-hidden="true" />
                               </button>
@@ -648,11 +652,6 @@ export default function ShortcutPage() {
       </div>
 
       <div className="mx-auto max-w-[980px] px-5 md:px-6 pb-14">
-        {/* ─── Votes and counts of the page, while the server keeps them ─── */}
-        {feedback.enabled && (
-          <PageVote numbers={feedback.numbers} mine={feedback.mine.page} onVote={votePage} className="max-w-[720px] mb-4" />
-        )}
-
         {/* ─── What to fix, add or remove: by email or on GitHub ─── */}
         <ReportProblem
           page={pagePath}
