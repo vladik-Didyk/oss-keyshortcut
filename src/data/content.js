@@ -621,7 +621,6 @@ export const CONTENT = {
       disclosure: 'Affiliate link: we may earn a commission if you buy, at no extra cost to you.',
       learnMore: 'How we make money',
     },
-    sponsorCta: (appName) => `Reach people who use ${appName}: sponsor this page`,
     moreAppsTitle: (platformName) => `Explore more ${platformName} apps`,
     faqTitle: 'Frequently Asked Questions',
     ctaTitle: (appName) => `Access ${appName} shortcuts from your menu bar`,

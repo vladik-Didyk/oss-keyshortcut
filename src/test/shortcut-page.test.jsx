@@ -308,6 +308,32 @@ describe('app page top', () => {
   })
 })
 
+// The slot in the middle of the list holds a sponsor's card or the ad. The page
+// itself asks nobody to become a sponsor: about 54 visitors a month per page
+// (9,280 over 171 pages, Cloudflare, August 2026) is too few to sell one page,
+// and the line was read by every visitor. The offer stays at /sponsor.
+describe('app page: no line that asks for a sponsor', () => {
+  const figma = JSON.parse(read('public/data/platforms/macos.json')).apps.find((a) => a.slug === 'figma')
+
+  it('a page long enough to hold the slot has no link to the offer', () => {
+    expect(figma.sections.length).toBeGreaterThanOrEqual(3)
+    render(page(pageData(figma)))
+    expect(document.querySelector('a[href^="/sponsor"]')).toBeNull()
+    expect(document.body.textContent).not.toMatch(/sponsor this page/i)
+    expect(renderToString(page(pageData(figma)))).not.toMatch(/sponsor this page/i)
+  })
+
+  it('the copy and the event of the line are gone', () => {
+    expect(CONTENT.shortcutPage.sponsorCta).toBeUndefined()
+    expect(read('src/components/ShortcutPage.jsx')).not.toContain('sponsor_cta_clicked')
+  })
+
+  it('the offer is still reachable: the footer links to it', () => {
+    const links = CONTENT.shared.footer.columns.flatMap((column) => column.links)
+    expect(links).toContainEqual({ label: 'Sponsor', to: '/sponsor' })
+  })
+})
+
 // The top of the page on a phone. jsdom lays nothing out, so these read the
 // classes: a class without a breakpoint is what a phone gets.
 describe('app page top on a phone', () => {

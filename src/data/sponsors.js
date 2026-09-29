@@ -79,7 +79,11 @@ export function isAppPagePath(value) {
   return typeof value === 'string' && /^\/[a-z0-9-]{1,40}\/[a-z0-9-]{1,80}$/.test(value)
 }
 
-/** Link from an app page to the offer, carrying the page it came from. */
+/**
+ * Link to the offer that carries an app page, so /sponsor can offer that page.
+ * No page of the site links with it since 2026-09-28: the line "sponsor this
+ * page" came off the app pages. Kept for a link sent by hand.
+ */
 export function sponsorPageLink(pathname) {
   return isAppPagePath(pathname) ? `/sponsor?page=${encodeURIComponent(pathname)}` : '/sponsor'
 }
