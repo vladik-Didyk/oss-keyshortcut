@@ -46,6 +46,41 @@ export const SPONSOR_AUDIENCE = {
   period: 'August 2026',
 }
 
+// App icons shown under "Who sees it" on /sponsor, each a link to its macOS page.
+// A test checks every one against the data: the slug, the name, the page.
+export const SPONSOR_PAGE_APPS = [
+  { slug: 'figma', name: 'Figma' },
+  { slug: 'vscode', name: 'VS Code' },
+  { slug: 'photoshop', name: 'Photoshop' },
+  { slug: 'chrome', name: 'Chrome' },
+  { slug: 'slack', name: 'Slack' },
+  { slug: 'notion', name: 'Notion' },
+  { slug: 'excel', name: 'Excel' },
+  { slug: 'blender', name: 'Blender' },
+  { slug: 'xcode', name: 'Xcode' },
+  { slug: 'premiere-pro', name: 'Premiere Pro' },
+  { slug: 'illustrator', name: 'Illustrator' },
+  { slug: 'terminal', name: 'Terminal' },
+]
+
+// The small app page drawn on /sponsor to show where the card sits. Real
+// shortcuts of a real page: a test compares them with the data.
+export const SPONSOR_MOCK = {
+  platform: 'macos',
+  slug: 'figma',
+  name: 'Figma',
+  section: 'Edit',
+  before: [
+    { action: 'Duplicate', keys: ['\u2318', 'D'] },
+    { action: 'Group', keys: ['\u2318', 'G'] },
+    { action: 'Ungroup', keys: ['\u21E7', '\u2318', 'G'] },
+  ],
+  after: [
+    { action: 'Bring Forward', keys: ['\u2318', ']'] },
+    { action: 'Send Backward', keys: ['\u2318', '['] },
+  ],
+}
+
 // A sponsor card sits after the second section, so a page needs three or more.
 // ShortcutPage.jsx applies the same rule when it renders the slot.
 export const MIN_SECTIONS_FOR_SLOT = 3
