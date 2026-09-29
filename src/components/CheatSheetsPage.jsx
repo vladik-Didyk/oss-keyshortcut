@@ -3,6 +3,7 @@ import { Link, useLoaderData } from 'react-router'
 import { Search, X, Download } from '../utils/icons'
 import AdSlot from './AdSlot'
 import SupportLink from './SupportLink'
+import PdfBundleOffer from './PdfBundleOffer'
 import { getSupportLink } from '../data/support'
 import { CONTENT } from '../data/content'
 import GuideCtaBanner from './GuideCtaBanner'
@@ -68,6 +69,9 @@ export default function CheatSheetsPage() {
             </p>
           )}
         </div>
+
+        {/* The bundle that is sold; nothing while it has no link and price */}
+        <PdfBundleOffer className="max-w-[720px] mb-10" />
 
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-3 mb-8">

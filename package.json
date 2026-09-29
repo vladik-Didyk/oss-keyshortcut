@@ -28,6 +28,7 @@
     "export": "node scripts/export-data.mjs",
     "clean-data": "node scripts/clean-data.mjs",
     "stats": "node scripts/site-stats.mjs",
+    "pdf-bundle": "node scripts/build-pdf-bundle.mjs",
     "check:redirects": "node scripts/check-redirects.mjs"
   },
   "dependencies": {

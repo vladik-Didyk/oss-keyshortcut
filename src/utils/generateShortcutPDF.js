@@ -265,9 +265,13 @@ function simulateMasonry(sections) {
    Public API
    ════════════════════════════════════════════════ */
 
-export function generateShortcutPDF(app) {
-  const doc = new jsPDF({ unit: 'mm', format: 'a4' })
-
+/**
+ * Draws the cheat sheet of one app into `doc`, from the page the document is
+ * on. The page must be empty; more pages are added as needed.
+ * `title` prints the app's name in the bar at the top (the bundle needs it:
+ * a sheet of its own is named by its file).
+ */
+export function drawAppSheet(doc, app, { title = false } = {}) {
   // Auto-group large sections
   const allSections = app.sections.flatMap(s =>
     s.shortcuts.length ? autoGroupSection(s) : []
@@ -281,12 +285,17 @@ export function generateShortcutPDF(app) {
     setScale(scale)
   }
 
-  initPage(doc)
+  const startPage = () => {
+    initPage(doc)
+    if (title) drawSheetTitle(doc, app.displayName)
+  }
+
+  startPage()
   let leftY = START_Y, rightY = START_Y
 
   const newPage = () => {
     doc.addPage()
-    initPage(doc)
+    startPage()
     leftY = START_Y
     rightY = START_Y
   }
@@ -323,9 +332,179 @@ export function generateShortcutPDF(app) {
   }
 
   fillWithNotes(doc, leftY, rightY)
+}
+
+/** The app's name in the bar at the top of a sheet, right of the three dots. */
+function drawSheetTitle(doc, name) {
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(8)
+  doc.setTextColor(...INK)
+  doc.text(name, PW / 2, OUTER + 5.6, { align: 'center' })
+  doc.setFont('helvetica', 'normal')
+}
+
+export function generateShortcutPDF(app) {
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' })
+
+  drawAppSheet(doc, app)
 
   const total = doc.getNumberOfPages()
   for (let p = 1; p <= total; p++) { doc.setPage(p); drawFooter(doc, p, total) }
 
   doc.save(`${app.displayName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-shortcuts.pdf`)
+}
+
+/* ════════════════════════════════════════════════
+   The bundle: every sheet of a platform in one file
+   ════════════════════════════════════════════════ */
+
+function drawCover(doc, { platformName, apps, shortcutCount, date }) {
+  initPage(doc)
+  doc.setTextColor(...INK)
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(30)
+  doc.text(`${platformName} shortcuts`, PW / 2, 108, { align: 'center' })
+  doc.setFontSize(15)
+  doc.setFont('helvetica', 'normal')
+  doc.text('Every cheat sheet in one file', PW / 2, 120, { align: 'center' })
+
+  const keys = ['K', 'E', 'Y', 'S']
+  let x = PW / 2 - (keys.length * 13 - 3) / 2
+  for (const key of keys) {
+    doc.setFillColor(...SHADOW)
+    doc.roundedRect(x + 0.5, 136.6, 10, 10, 2, 2, 'F')
+    doc.setFillColor(...KEYCAP_BG)
+    doc.roundedRect(x, 136, 10, 10, 2, 2, 'F')
+    doc.setTextColor(...KEYCAP_FG)
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(12)
+    doc.text(key, x + 5, 142.6, { align: 'center' })
+    x += 13
+  }
+
+  doc.setFont('helvetica', 'normal')
+  doc.setFontSize(10)
+  doc.setTextColor(...MUTED)
+  doc.text(`${apps.length} apps  \u00B7  ${shortcutCount.toLocaleString('en-US')} shortcuts`, PW / 2, 162, { align: 'center' })
+  doc.text(`keyshortcut.com  \u00B7  ${date}`, PW / 2, 169, { align: 'center' })
+}
+
+// Contents: the apps by category, three columns, each with its page.
+function drawContents(doc, entries) {
+  const COLS = 3
+  const colW = CW / COLS
+  const rowH = 4.6
+  const top = START_Y + 14
+  let col = 0
+  let y = top
+
+  const startPage = () => {
+    initPage(doc)
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(14)
+    doc.setTextColor(...INK)
+    doc.text('Contents', LEFT, START_Y + 5)
+    col = 0
+    y = top
+  }
+  const next = (rows = 1) => {
+    if (y + rows * rowH <= BOTTOM) return
+    col += 1
+    y = top
+    if (col >= COLS) { doc.addPage(); startPage() }
+  }
+
+  startPage()
+  let category = null
+  for (const entry of entries) {
+    if (entry.category !== category) {
+      // A heading is never the last line of a column.
+      next(2)
+      if (y > top) y += 2
+      category = entry.category
+      doc.setFont('helvetica', 'bold')
+      doc.setFontSize(7.5)
+      doc.setTextColor(...INK)
+      doc.text(category, LEFT + col * colW, y)
+      y += rowH
+    }
+    next()
+    const x = LEFT + col * colW
+    doc.setFont('helvetica', 'normal')
+    doc.setFontSize(7.5)
+    doc.setTextColor(...INK)
+    doc.text(entry.name, x + 1.5, y)
+    doc.setTextColor(...MUTED)
+    doc.text(String(entry.page), x + colW - 6, y, { align: 'right' })
+    y += rowH
+  }
+}
+
+/**
+ * Every cheat sheet of a platform in one document: cover, contents, then the
+ * sheets by category. Returns { doc, pages, entries }; the caller saves it
+ * (scripts/build-pdf-bundle.mjs). Nothing here touches the browser.
+ *
+ *   apps          the platform's apps, as in public/data/platforms/<id>.json
+ *   platformName  "macOS"
+ *   date          as printed on the cover, e.g. "September 2026"
+ */
+export function buildBundle({ apps, platformName, date }) {
+  const sorted = [...apps]
+    .filter((app) => app.sections.some((s) => s.shortcuts.length))
+    .sort((a, b) => (a.category || '').localeCompare(b.category || '') || a.displayName.localeCompare(b.displayName))
+  const shortcutCount = sorted.reduce((sum, app) => sum + app.shortcutCount, 0)
+
+  // The sheets are drawn first, in a document of their own, to learn the page
+  // of each app. The contents need those numbers before they can be drawn.
+  const measure = new jsPDF({ unit: 'mm', format: 'a4' })
+  const lengths = sorted.map((app, i) => {
+    if (i > 0) measure.addPage()
+    const before = measure.getNumberOfPages()
+    drawAppSheet(measure, app, { title: true })
+    return measure.getNumberOfPages() - before + 1
+  })
+
+  const contentsPages = (firstSheet) => {
+    const trial = new jsPDF({ unit: 'mm', format: 'a4' })
+    let page = firstSheet
+    drawContents(trial, sorted.map((app, i) => {
+      const entry = { category: app.category || 'Other', name: app.displayName, page }
+      page += lengths[i]
+      return entry
+    }))
+    return trial.getNumberOfPages()
+  }
+  // Cover is page 1. The contents push the sheets back by their own length.
+  const contentsLength = contentsPages(3)
+  let page = 2 + contentsLength
+  const entries = sorted.map((app, i) => {
+    const entry = { category: app.category || 'Other', name: app.displayName, slug: app.slug, page }
+    page += lengths[i]
+    return entry
+  })
+
+  const doc = new jsPDF({ unit: 'mm', format: 'a4', compress: true })
+  drawCover(doc, { platformName, apps: sorted, shortcutCount, date })
+  doc.addPage()
+  drawContents(doc, entries)
+  const names = new Map()
+  for (const app of sorted) {
+    doc.addPage()
+    const first = doc.getNumberOfPages()
+    drawAppSheet(doc, app, { title: true })
+    for (let p = first; p <= doc.getNumberOfPages(); p++) names.set(p, app.displayName)
+  }
+
+  const total = doc.getNumberOfPages()
+  for (let p = 2; p <= total; p++) {
+    doc.setPage(p)
+    doc.setFont('helvetica', 'normal')
+    doc.setFontSize(6.5)
+    doc.setTextColor(...MUTED)
+    doc.text(names.has(p) ? `keyshortcut.com  \u00B7  ${names.get(p)}` : 'keyshortcut.com', LEFT, PH - OUTER - 3)
+    doc.text(`${p} / ${total}`, RIGHT, PH - OUTER - 3, { align: 'right' })
+  }
+
+  return { doc, pages: total, entries, apps: sorted.length, shortcuts: shortcutCount }
 }

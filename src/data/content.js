@@ -697,6 +697,7 @@ export const CONTENT = {
             { type: 'paragraph', text: 'Some "Get" buttons on app pages are affiliate links, and each one is labeled. If you buy through one, we may earn a commission at no extra cost to you. The seller may set a cookie to credit the sale to us; that cookie is governed by the seller\u2019s privacy policy.' },
             { type: 'paragraph', text: 'Sponsored placements are labeled "Sponsored". Sponsors and affiliate programs do not change which shortcuts we list or how we describe them.' },
             { type: 'paragraph', text: 'Payments for sponsorships and for voluntary support of the site are handled by Stripe. We never see or store card numbers. Stripe’s privacy policy applies to the payment.' },
+            { type: 'paragraph', text: 'The PDF bundle of cheat sheets is sold and delivered by the seller named on its checkout page. The seller takes the payment and sends the file; its privacy policy applies. We receive the buyer’s email address with the order and use it only for that order.' },
           ],
         },
         {
@@ -1085,6 +1086,17 @@ export const CONTENT = {
   },
 
   // ─── Cheat sheets page: voluntary support (shown only when SUPPORT_LINK is set) ──
+  // The PDF bundle on /cheat-sheets (src/data/products.js). Shown only while
+  // the bundle has a link and a price.
+  cheatSheetsPage: {
+    bundle: {
+      label: 'PDF bundle',
+      title: `All ${MAC_APP_COUNT} macOS cheat sheets in one PDF`,
+      text: 'One file with a list of contents, ready to print. The single sheets below stay free.',
+      button: (price) => `Get the bundle \u2014 ${price}`,
+    },
+  },
+
   support: {
     cheatSheets: {
       before: 'The cheat sheets are free. If one saved you time, you can ',

@@ -22,6 +22,7 @@ export {
   CodeXml,
   Download,
   ExternalLink,
+  FileDown,
   Linkedin,
   MapPin,
   FileSpreadsheet,
