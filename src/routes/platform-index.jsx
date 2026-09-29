@@ -1,6 +1,7 @@
 import { isRouteErrorResponse, useLoaderData, useRouteError } from "react-router";
 import { getPlatformApps, getPlatforms, getOtherPlatformsMap } from "../utils/supabase.server";
 import { buildPlatformItemList } from "../utils/structuredData";
+import { slimApps, slimOtherPlatforms } from "../utils/slimApps";
 import { CONTENT, buildMeta } from "../data/content";
 import NotFound from "../components/NotFound";
 import ShortcutsIndex from "../components/ShortcutsIndex";
@@ -12,9 +13,11 @@ export async function loader({ params }) {
   const valid = platforms.find((p) => p.id === platformId);
   if (!valid) throw new Response("Not Found", { status: 404 });
 
-  const apps = await getPlatformApps(platformId);
+  // The list of apps, without their shortcuts: the page lists apps, and the
+  // search loads the shortcuts when somebody starts to search.
+  const apps = slimApps(await getPlatformApps(platformId));
   const categories = [...new Set(apps.map((a) => a.category))];
-  const otherPlatformsMap = await getOtherPlatformsMap(platformId);
+  const otherPlatformsMap = slimOtherPlatforms(await getOtherPlatformsMap(platformId));
 
   return {
     platformId,

@@ -1,0 +1,414 @@
+{
+  "slug": "windows-terminal",
+  "displayName": "Windows Terminal",
+  "category": "development",
+  "docsUrl": "https://learn.microsoft.com/en-us/windows/terminal/customize-settings/actions",
+  "platform": "windows",
+  "sections": [
+    {
+      "name": "Application & Windows",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F4",
+          "action": "Close Window"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F",
+          "action": "Open Search Dialog Box"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Space",
+          "action": "Open Dropdown Menu"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": ",",
+          "action": "Open Settings"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": ",",
+          "action": "Open Settings File"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": ",",
+          "action": "Open Default Settings File"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Space",
+          "action": "Open System Menu"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Enter",
+          "action": "Toggle Full Screen"
+        },
+        {
+          "modifiers": [],
+          "key": "F11",
+          "action": "Toggle Full Screen"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "N",
+          "action": "New Window"
+        }
+      ]
+    },
+    {
+      "name": "Tab Management",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "D",
+          "action": "Duplicate Tab"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "T",
+          "action": "New Tab"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "1-9",
+          "action": "New Tab With Profile by Position"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Tab",
+          "action": "Next Tab"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Previous Tab"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "1-8",
+          "action": "Switch to Tab by Position"
+        }
+      ]
+    },
+    {
+      "name": "Pane Management",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "D",
+          "action": "Duplicate Pane, Split Automatically"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "-",
+          "action": "Duplicate Pane, Split Down"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "+",
+          "action": "Duplicate Pane, Split Right"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "W",
+          "action": "Close Pane"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "↓",
+          "action": "Move Focus to Pane Below"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "←",
+          "action": "Move Focus to Pane on the Left"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "→",
+          "action": "Move Focus to Pane on the Right"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "↑",
+          "action": "Move Focus to Pane Above"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "←",
+          "action": "Move Focus to Most Recently Used Pane"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Resize Pane Down"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "←",
+          "action": "Resize Pane Left"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "→",
+          "action": "Resize Pane Right"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Resize Pane Up"
+        }
+      ]
+    },
+    {
+      "name": "Clipboard",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "C",
+          "action": "Copy Selection"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "C",
+          "action": "Copy Selection"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Insert",
+          "action": "Copy Selection"
+        },
+        {
+          "modifiers": [],
+          "key": "Enter",
+          "action": "Copy Selection"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "V",
+          "action": "Paste"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "V",
+          "action": "Paste"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Insert",
+          "action": "Paste"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "A",
+          "action": "Select All"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "M",
+          "action": "Toggle Mark Mode"
+        }
+      ]
+    },
+    {
+      "name": "Scrollback",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Scroll Up"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Scroll Down"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Page Up",
+          "action": "Scroll Up One Page"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Page Down",
+          "action": "Scroll Down One Page"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Home",
+          "action": "Scroll to Top of Buffer"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "End",
+          "action": "Scroll to Bottom of Buffer"
+        }
+      ]
+    },
+    {
+      "name": "Visual Adjustment",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "+",
+          "action": "Increase Font Size"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "-",
+          "action": "Decrease Font Size"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Numpad +",
+          "action": "Increase Font Size"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Numpad -",
+          "action": "Decrease Font Size"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "0",
+          "action": "Reset Font Size"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Numpad 0",
+          "action": "Reset Font Size"
+        }
+      ]
+    }
+  ]
+}

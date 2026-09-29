@@ -1,0 +1,1114 @@
+{
+  "slug": "word",
+  "displayName": "Word",
+  "category": "microsoft-office",
+  "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-word-95ef89dd-7142-4b50-afb2-f762f663ceb2",
+  "platform": "windows",
+  "tab": "windows",
+  "fetched": "2026-09-29",
+  "sectionOrder": [
+    "Formatting",
+    "Editing",
+    "Navigation",
+    "View",
+    "Frequently Used",
+    "Ribbon",
+    "Selection",
+    "Special Characters",
+    "Tables",
+    "Review",
+    "References",
+    "Mail Merge and Fields",
+    "Languages",
+    "Outline",
+    "Function Keys"
+  ],
+  "sections": {
+    "Frequently used shortcuts": "Frequently Used",
+    "Ribbon keyboard shortcuts > Use the Access Keys for ribbon tabs": "Ribbon",
+    "Ribbon keyboard shortcuts > Work in the ribbon with the keyboard": "Ribbon",
+    "Navigate the document": "Navigation",
+    "Navigate the document > Preview and print documents": "View",
+    "Select text and graphics": "Selection",
+    "Select text and graphics > Extend a selection": "Selection",
+    "Edit text and graphics": "Editing",
+    "Edit text and graphics > Align and format paragraphs": "Formatting",
+    "Edit text and graphics > Format characters": "Formatting",
+    "Edit text and graphics > Manage text formatting": "Formatting",
+    "Edit text and graphics > Insert special characters": "Special Characters",
+    "Work with web content": "Navigation",
+    "Work with tables > Move around in a table": "Tables",
+    "Work with tables > Select table content": "Tables",
+    "Work with tables > Insert paragraphs and tab characters in a table": "Tables",
+    "Review a document": "Review",
+    "Work with references, citations, and indexing": "References",
+    "Work with mail merge and fields > Perform a mail merge": "Mail Merge and Fields",
+    "Work with mail merge and fields > Work with fields": "Mail Merge and Fields",
+    "Work with text in other languages > Set the proofing language": "Languages",
+    "Work with text in other languages > Insert international characters": "Special Characters",
+    "Work with text in other languages > Use Input Method Editors for East Asian languages": "Languages",
+    "Work with document views > Switch the document view": "View",
+    "Work with document views > Outline a document": "Outline",
+    "Work with document views > Move through the document in Read Mode": "View",
+    "Zoom and adjust view": "View",
+    "Use function key shortcuts": "Function Keys"
+  },
+  "rows": {
+    "T0R1": {
+      "keys": "Ctrl+O",
+      "doc": "6894866a",
+      "action": "Open Document"
+    },
+    "T0R2": {
+      "keys": "Ctrl+N",
+      "doc": "725823a8",
+      "action": "Create New Document"
+    },
+    "T0R3": {
+      "keys": "Ctrl+S",
+      "doc": "58e523cb",
+      "action": "Save Document"
+    },
+    "T0R4": {
+      "keys": "Ctrl+W",
+      "doc": "75a73203",
+      "action": "Close Document"
+    },
+    "T0R5": {
+      "keys": "Ctrl+X",
+      "doc": "7ab4917d",
+      "action": "Cut Selected Content to Clipboard",
+      "section": "Editing"
+    },
+    "T0R6": {
+      "keys": "Ctrl+C",
+      "doc": "d48ed8a7",
+      "action": "Copy Selected Content to Clipboard",
+      "section": "Editing"
+    },
+    "T0R7": {
+      "keys": "Ctrl+V",
+      "doc": "28cc8517",
+      "action": "Paste Clipboard Contents",
+      "section": "Editing"
+    },
+    "T0R8": {
+      "keys": "Ctrl+Shift+V",
+      "doc": "106fc6f6",
+      "action": "Paste Text Only",
+      "section": "Editing"
+    },
+    "T0R13": {
+      "keys": "Ctrl+Left bracket ([)",
+      "doc": "3cafea9f",
+      "action": "Decrease Font Size by 1 Point",
+      "section": "Formatting"
+    },
+    "T0R14": {
+      "keys": "Ctrl+Right bracket (])",
+      "doc": "49c810fd",
+      "action": "Increase Font Size by 1 Point",
+      "section": "Formatting"
+    },
+    "T0R18": {
+      "keys": "Esc",
+      "doc": "2f2701a3",
+      "action": "Cancel Command"
+    },
+    "T0R19": {
+      "keys": "Ctrl+Z",
+      "doc": "2000ff0b",
+      "action": "Undo Previous Action",
+      "section": "Editing"
+    },
+    "T0R20": {
+      "keys": "Ctrl+Y",
+      "doc": "f50a16fc",
+      "action": "Redo Previous Action",
+      "section": "Editing"
+    },
+    "T0R23": {
+      "keys": "Ctrl+0",
+      "doc": "e614bc88",
+      "action": "Return to 100% Zoom",
+      "section": "View"
+    },
+    "T0R25": {
+      "keys": "Ctrl+Alt+S",
+      "doc": "324e4f8f",
+      "action": "Split Document Window",
+      "section": "View"
+    },
+    "T1R1": {
+      "keys": "Alt, Q, then enter the search term.",
+      "doc": "27c6e5d6",
+      "action": "Go to Tell Me or Search Field on the Ribbon"
+    },
+    "T1R2": {
+      "keys": "Alt, F",
+      "doc": "e9d22171",
+      "action": "Open File Page for Backstage View"
+    },
+    "T1R3": {
+      "keys": "Alt, H",
+      "doc": "a05514fe",
+      "action": "Open Home Tab"
+    },
+    "T1R4": {
+      "keys": "Alt, N",
+      "doc": "bc68df0b",
+      "action": "Open Insert Tab"
+    },
+    "T1R5": {
+      "keys": "Alt, G",
+      "doc": "cdcbeeeb",
+      "action": "Open Design Tab"
+    },
+    "T1R6": {
+      "keys": "Alt, P",
+      "doc": "7dcaaf52",
+      "action": "Open Layout Tab"
+    },
+    "T1R7": {
+      "keys": "Alt, S",
+      "doc": "b96d9e90",
+      "action": "Open References Tab"
+    },
+    "T1R8": {
+      "keys": "Alt, M",
+      "doc": "e2e5ba5e",
+      "action": "Open Mailings Tab"
+    },
+    "T1R9": {
+      "keys": "Alt, R",
+      "doc": "91c32621",
+      "action": "Open Review Tab"
+    },
+    "T1R10": {
+      "keys": "Alt, W",
+      "doc": "8962424a",
+      "action": "Open View Tab"
+    },
+    "T1R12": {
+      "keys": "Alt, L",
+      "doc": "e44b9ca2",
+      "skip": "doubt: the page says \"Developer box\", unclear what opens"
+    },
+    "T2R5": {
+      "keys": "Ctrl+Shift+F10",
+      "doc": "8409205f",
+      "action": "Show Tooltip for Focused Ribbon Element"
+    },
+    "T2R7": {
+      "keys": "Down arrow key",
+      "doc": "66e69ae5",
+      "skip": "plain arrow key: kept for tables (move to next row)"
+    },
+    "T2R8": {
+      "keys": "Alt+Down arrow key",
+      "doc": "a0208223",
+      "action": "Open Menu for Selected Button"
+    },
+    "T2R9": {
+      "keys": "Down arrow key",
+      "doc": "28f3cc67",
+      "skip": "plain arrow key: kept for tables (move to next row)"
+    },
+    "T2R10": {
+      "keys": "Ctrl+F1",
+      "doc": "90b84e6a",
+      "action": "Expand or Collapse Ribbon"
+    },
+    "T2R12": {
+      "keys": "Right arrow key",
+      "doc": "2db87cbd",
+      "action": "Move to Submenu When a Main Menu Is Open"
+    },
+    "T2R13": {
+      "keys": "Alt+Z, A",
+      "doc": "8155b374",
+      "action": "Toggle AutoSave On or Off"
+    },
+    "T2R15": {
+      "keys": "Alt+B",
+      "doc": "ecdbf82f",
+      "action": "Open Dialog to Rename or Save to Another Location"
+    },
+    "T3R1": {
+      "keys": "Ctrl+Left arrow key",
+      "doc": "36201021",
+      "action": "Move Cursor One Word Left"
+    },
+    "T3R2": {
+      "keys": "Ctrl+Right arrow key",
+      "doc": "4b63ec99",
+      "action": "Move Cursor One Word Right"
+    },
+    "T3R3": {
+      "keys": "Ctrl+Up arrow key",
+      "doc": "454ac581",
+      "action": "Move Cursor Up One Paragraph"
+    },
+    "T3R4": {
+      "keys": "Ctrl+Down arrow key",
+      "doc": "6abaa0b7",
+      "action": "Move Cursor Down One Paragraph"
+    },
+    "T3R5": {
+      "keys": "End",
+      "doc": "6c165965",
+      "action": "Move Cursor to End of Line"
+    },
+    "T3R6": {
+      "keys": "Home",
+      "doc": "e751a2ce",
+      "action": "Move Cursor to Beginning of Line"
+    },
+    "T3R7": {
+      "keys": "Ctrl+Alt+Page up",
+      "doc": "512406e4",
+      "action": "Move Cursor to Top of Screen"
+    },
+    "T3R8": {
+      "keys": "Ctrl+Alt+Page down",
+      "doc": "dbd0a9a5",
+      "action": "Move Cursor to Bottom of Screen"
+    },
+    "T3R9": {
+      "keys": "Page up",
+      "doc": "5aee575c",
+      "action": "Scroll Up One Screen"
+    },
+    "T3R10": {
+      "keys": "Page down",
+      "doc": "51754afb",
+      "action": "Scroll Down One Screen"
+    },
+    "T3R11": {
+      "keys": "Ctrl+Page down",
+      "doc": "8db4e955",
+      "action": "Move Cursor to Top of Next Page"
+    },
+    "T3R12": {
+      "keys": "Ctrl+Page up",
+      "doc": "b555c78b",
+      "action": "Move Cursor to Top of Previous Page"
+    },
+    "T3R15": {
+      "keys": "Shift+F5",
+      "doc": "79947c81",
+      "action": "Move Cursor to Previous Revision"
+    },
+    "T3R21": {
+      "keys": "Ctrl+Alt+Z",
+      "doc": "22554fe8",
+      "action": "Cycle Through Locations of Four Previous Changes"
+    },
+    "T4R1": {
+      "keys": "Ctrl+P",
+      "doc": "94f56010",
+      "action": "Print Document",
+      "section": "Frequently Used"
+    },
+    "T4R2": {
+      "keys": "Ctrl+Alt+I",
+      "doc": "cbbc8238",
+      "action": "Switch to Print Preview"
+    },
+    "T5R2": {
+      "keys": "Ctrl+Shift+Left arrow key",
+      "doc": "dc47c855",
+      "action": "Select Word to the Left"
+    },
+    "T5R3": {
+      "keys": "Ctrl+Shift+Right arrow key",
+      "doc": "04796b2a",
+      "action": "Select Word to the Right"
+    },
+    "T5R4": {
+      "keys": "Shift+Home",
+      "doc": "31b27e2f",
+      "action": "Select to Beginning of Line"
+    },
+    "T5R5": {
+      "keys": "Shift+End",
+      "doc": "b46aaf30",
+      "action": "Select to End of Line"
+    },
+    "T5R6": {
+      "keys": "Ctrl+Shift+Up arrow key",
+      "doc": "7e646e8d",
+      "action": "Select to Beginning of Paragraph"
+    },
+    "T5R7": {
+      "keys": "Ctrl+Shift+Down arrow key",
+      "doc": "0d89d964",
+      "action": "Select to End of Paragraph"
+    },
+    "T5R8": {
+      "keys": "Shift+Page up",
+      "doc": "07d6eec9",
+      "action": "Select to Top of Screen"
+    },
+    "T5R9": {
+      "keys": "Shift+Page down",
+      "doc": "9253e847",
+      "action": "Select to Bottom of Screen"
+    },
+    "T5R10": {
+      "keys": "Ctrl+Shift+Home",
+      "doc": "26e69586",
+      "action": "Select to Beginning of Document"
+    },
+    "T5R11": {
+      "keys": "Ctrl+Shift+End",
+      "doc": "d9bf0312",
+      "action": "Select to End of Document"
+    },
+    "T5R12": {
+      "keys": "Ctrl+Alt+Shift+Page down",
+      "doc": "eaa23cdd",
+      "action": "Select to Bottom of Window"
+    },
+    "T6R1": {
+      "keys": "F8 ¶ In the extend selection mode, clicking a location in the document extends the current selection to that location.",
+      "doc": "ee01f68a",
+      "action": "Start Extending Selection"
+    },
+    "T6R4": {
+      "keys": "Shift+F8",
+      "doc": "041efcb8",
+      "action": "Reduce Selection"
+    },
+    "T7R1": {
+      "keys": "Ctrl+Backspace",
+      "doc": "6eb41360",
+      "action": "Delete One Word to the Left"
+    },
+    "T7R2": {
+      "keys": "Ctrl+Delete",
+      "doc": "d07ece16",
+      "action": "Delete One Word to the Right"
+    },
+    "T7R3": {
+      "keys": "Alt, H, F, O",
+      "doc": "321a2de8",
+      "action": "Open Clipboard Task Pane"
+    },
+    "T7R9": {
+      "keys": "Alt+F3",
+      "doc": "4cefb65c",
+      "action": "Define AutoText Block from Selection"
+    },
+    "T7R11": {
+      "keys": "Ctrl+F3",
+      "doc": "04f0777c",
+      "action": "Cut Selected Content to the Spike"
+    },
+    "T7R12": {
+      "keys": "Ctrl+Shift+F3",
+      "doc": "301149aa",
+      "action": "Paste Contents of the Spike"
+    },
+    "T7R13": {
+      "keys": "Ctrl+Alt+C",
+      "doc": "2120874f",
+      "action": "Copy Selected Text Formatting"
+    },
+    "T7R14": {
+      "keys": "Ctrl+Alt+V",
+      "doc": "b5e5f264",
+      "action": "Paste Selected Text Formatting"
+    },
+    "T7R16": {
+      "keys": "Alt+Shift+R",
+      "doc": "7e0575ea",
+      "action": "Copy Header or Footer from Previous Section"
+    },
+    "T7R18": {
+      "keys": "Alt, N, J, J",
+      "doc": "56b83c27",
+      "action": "Display Object Dialog to Insert File Object"
+    },
+    "T7R19": {
+      "keys": "Alt, N, M",
+      "doc": "5a23a113",
+      "action": "Insert SmartArt Graphic"
+    },
+    "T7R20": {
+      "keys": "Alt, N, W",
+      "doc": "e12c2ef2",
+      "action": "Insert WordArt Graphic"
+    },
+    "T8R5": {
+      "keys": "Ctrl+M",
+      "doc": "13838292",
+      "action": "Indent Paragraph"
+    },
+    "T8R6": {
+      "keys": "Ctrl+Shift+M",
+      "doc": "7eabfa6f",
+      "action": "Remove Paragraph Indent"
+    },
+    "T8R7": {
+      "keys": "Ctrl+T",
+      "doc": "b87cc351",
+      "action": "Create Hanging Indent"
+    },
+    "T8R8": {
+      "keys": "Ctrl+Shift+T",
+      "doc": "8617541d",
+      "action": "Remove Hanging Indent"
+    },
+    "T8R9": {
+      "keys": "Ctrl+Q",
+      "doc": "e93fdb06",
+      "action": "Remove Paragraph Formatting"
+    },
+    "T8R10": {
+      "keys": "Ctrl+1",
+      "doc": "a304907f",
+      "action": "Apply Single Spacing to Paragraph"
+    },
+    "T8R11": {
+      "keys": "Ctrl+2",
+      "doc": "035de853",
+      "action": "Apply Double Spacing to Paragraph"
+    },
+    "T8R12": {
+      "keys": "Ctrl+5",
+      "doc": "21404a99",
+      "action": "Apply 1.5-Line Spacing to Paragraph"
+    },
+    "T8R13": {
+      "keys": "Ctrl+Alt+K",
+      "doc": "788e3ed1",
+      "action": "Enable AutoFormat"
+    },
+    "T8R14": {
+      "keys": "Ctrl+Shift+N",
+      "doc": "f1eb3429",
+      "action": "Apply Normal Style"
+    },
+    "T8R15": {
+      "keys": "Ctrl+Alt+1",
+      "doc": "35aa4da5",
+      "action": "Apply Heading 1 Style"
+    },
+    "T8R16": {
+      "keys": "Ctrl+Alt+2",
+      "doc": "5e49e00e",
+      "action": "Apply Heading 2 Style"
+    },
+    "T8R17": {
+      "keys": "Ctrl+Alt+3",
+      "doc": "c054f045",
+      "action": "Apply Heading 3 Style"
+    },
+    "T8R18": {
+      "keys": "Ctrl+Shift+S",
+      "doc": "d6cd584f",
+      "action": "Display Apply Styles Task Pane"
+    },
+    "T8R19": {
+      "keys": "Ctrl+Alt+Shift+S",
+      "doc": "7e3b2484",
+      "action": "Display Styles Task Pane"
+    },
+    "T9R6": {
+      "keys": "Shift+F3",
+      "doc": "e59913ef",
+      "action": "Switch Text Between Upper, Lower, and Title Case"
+    },
+    "T9R7": {
+      "keys": "Ctrl+Shift+A",
+      "doc": "2fe19475",
+      "action": "Change Text to All Upper Case"
+    },
+    "T9R8": {
+      "keys": "Ctrl+Shift+H",
+      "doc": "4609433f",
+      "action": "Hide Selected Text"
+    },
+    "T9R10": {
+      "keys": "Ctrl+Shift+L",
+      "doc": "0f677e77",
+      "action": "Add Bulleted List"
+    },
+    "T9R12": {
+      "keys": "Ctrl+Shift+W",
+      "doc": "f1bc5e01",
+      "action": "Underline Words, Not Spaces"
+    },
+    "T9R13": {
+      "keys": "Ctrl+Shift+D",
+      "doc": "9472c137",
+      "action": "Apply Double Underline"
+    },
+    "T9R15": {
+      "keys": "Ctrl+Shift+K",
+      "doc": "eb4cf523",
+      "action": "Apply Small Caps"
+    },
+    "T9R16": {
+      "keys": "Ctrl+Shift+Minus sign (-)",
+      "doc": "ba1b75fc",
+      "skip": "doubt: the page gives this combination for subscript; it differs from what Word is known for, check in the app"
+    },
+    "T9R17": {
+      "keys": "Ctrl+Shift+Plus sign (+)",
+      "doc": "f2e838a0",
+      "action": "Apply Superscript"
+    },
+    "T9R18": {
+      "keys": "Ctrl+Spacebar",
+      "doc": "dc03df91",
+      "action": "Remove Manual Character Formatting"
+    },
+    "T9R19": {
+      "keys": "Ctrl+Shift+Q",
+      "doc": "91c1fec1",
+      "action": "Change Selected Text to Symbol Font"
+    },
+    "T10R2": {
+      "keys": "Shift+F1",
+      "doc": "671a06c7",
+      "action": "Display Reveal Formatting Task Pane"
+    },
+    "T11R1": {
+      "keys": "Shift+Enter",
+      "doc": "58d7ffdb",
+      "action": "Insert Line Break"
+    },
+    "T11R3": {
+      "keys": "Ctrl+Shift+Enter",
+      "doc": "12352d12",
+      "action": "Insert Column Break"
+    },
+    "T11R6": {
+      "keys": "Ctrl+Alt+Minus sign (-)",
+      "doc": "53c7326d",
+      "skip": "doubt: the page gives this combination for the optional hyphen; it differs from what Word is known for, check in the app"
+    },
+    "T11R7": {
+      "keys": "Shift+Alt+Minus sign(-)",
+      "doc": "2dbac588",
+      "skip": "doubt: the page gives this combination for the nonbreaking hyphen; it differs from what Word is known for, check in the app"
+    },
+    "T11R8": {
+      "keys": "Ctrl+Shift+Spacebar",
+      "doc": "bf362b6c",
+      "action": "Insert Nonbreaking Space"
+    },
+    "T11R10": {
+      "keys": "Ctrl+Alt+R",
+      "doc": "17d9ef8e",
+      "action": "Insert Registered Trademark Symbol"
+    },
+    "T11R11": {
+      "keys": "Ctrl+Alt+T",
+      "doc": "8231d87a",
+      "action": "Insert Trademark Symbol"
+    },
+    "T11R12": {
+      "keys": "Ctrl+Alt+Period (.)",
+      "doc": "66ef3b54",
+      "action": "Insert Ellipsis"
+    },
+    "T12R2": {
+      "keys": "Alt+Left arrow key",
+      "doc": "ae37a5be",
+      "action": "Go Back One Page"
+    },
+    "T12R3": {
+      "keys": "Alt+Right arrow key",
+      "doc": "5efcdcc5",
+      "action": "Go Forward One Page"
+    },
+    "T12R4": {
+      "keys": "F9",
+      "doc": "fadbfb12",
+      "skip": "kept with its meaning for fields (update selected fields), which the function key table repeats"
+    },
+    "T13R1": {
+      "keys": "Tab key",
+      "doc": "728ef7ff",
+      "action": "Move to Next Cell in Row and Select Its Content"
+    },
+    "T13R2": {
+      "keys": "Shift+Tab",
+      "doc": "f220bfea",
+      "action": "Move to Previous Cell in Row and Select Its Content"
+    },
+    "T13R3": {
+      "keys": "Alt+Home",
+      "doc": "d82b65e1",
+      "action": "Move to First Cell in Row"
+    },
+    "T13R4": {
+      "keys": "Alt+End",
+      "doc": "9f0df9fa",
+      "action": "Move to Last Cell in Row"
+    },
+    "T13R5": {
+      "keys": "Alt+Page up",
+      "doc": "800625f8",
+      "action": "Move to First Cell in Column"
+    },
+    "T13R6": {
+      "keys": "Alt+Page down",
+      "doc": "b2a4554a",
+      "action": "Move to Last Cell in Column"
+    },
+    "T13R7": {
+      "keys": "Up arrow key",
+      "doc": "02087a36",
+      "action": "Move to Previous Row"
+    },
+    "T13R8": {
+      "keys": "Down arrow key",
+      "doc": "f21d248b",
+      "action": "Move to Next Row"
+    },
+    "T13R9": {
+      "keys": "Alt+Shift+Up arrow key",
+      "doc": "7f7156f9",
+      "action": "Move One Row Up"
+    },
+    "T13R10": {
+      "keys": "Alt+Shift+Down arrow key",
+      "doc": "bbfd4416",
+      "action": "Move One Row Down"
+    },
+    "T15R1": {
+      "keys": "Enter",
+      "doc": "92008bb2",
+      "action": "Insert New Paragraph in Cell"
+    },
+    "T15R2": {
+      "keys": "Ctrl+Tab",
+      "doc": "1ea3e87e",
+      "action": "Insert Tab Character in Cell"
+    },
+    "T16R2": {
+      "keys": "Alt, R, P, 1, L",
+      "doc": "055fd0b8",
+      "action": "Show List of Comments"
+    },
+    "T16R3": {
+      "keys": "Ctrl+Alt+M",
+      "doc": "9e34829a",
+      "action": "Insert Comment"
+    },
+    "T16R4": {
+      "keys": "Ctrl+Shift+E",
+      "doc": "93a1f587",
+      "action": "Turn Change Tracking On or Off"
+    },
+    "T16R5": {
+      "keys": "Alt+Shift+C",
+      "doc": "291855eb",
+      "action": "Close Reviewing Pane"
+    },
+    "T17R1": {
+      "keys": "Alt+Shift+O",
+      "doc": "35411ee5",
+      "action": "Mark Table of Contents Entry"
+    },
+    "T17R2": {
+      "keys": "Alt+Shift+I",
+      "doc": "c0ec604c",
+      "action": "Mark Table of Authorities Entry (Citation)"
+    },
+    "T17R4": {
+      "keys": "Alt+Shift+X",
+      "doc": "3ca70177",
+      "action": "Mark Index Entry"
+    },
+    "T17R5": {
+      "keys": "Ctrl+Alt+F",
+      "doc": "e992a454",
+      "action": "Insert Footnote"
+    },
+    "T17R6": {
+      "keys": "Ctrl+Alt+D",
+      "doc": "3eaadde8",
+      "action": "Insert Endnote"
+    },
+    "T17R7": {
+      "keys": "Alt+Shift+Right angle bracket (>)",
+      "doc": "5c30d2f9",
+      "action": "Go to Next Footnote"
+    },
+    "T17R8": {
+      "keys": "Alt+Shift+Left angle bracket (<)",
+      "doc": "b2acee0d",
+      "action": "Go to Previous Footnote"
+    },
+    "T18R1": {
+      "keys": "Alt+Shift+K",
+      "doc": "e3a25dfd",
+      "action": "Preview Mail Merge"
+    },
+    "T18R2": {
+      "keys": "Alt+Shift+N",
+      "doc": "d8aec964",
+      "action": "Merge Document"
+    },
+    "T18R3": {
+      "keys": "Alt+Shift+M",
+      "doc": "391f2aea",
+      "action": "Print Merged Document"
+    },
+    "T18R4": {
+      "keys": "Alt+Shift+E",
+      "doc": "a967359b",
+      "action": "Edit Mail Merge Data Document"
+    },
+    "T18R5": {
+      "keys": "Alt+Shift+F",
+      "doc": "879a0a05",
+      "action": "Insert Merge Field"
+    },
+    "T19R1": {
+      "keys": "Alt+Shift+D",
+      "doc": "a9b9254a",
+      "action": "Insert DATE Field"
+    },
+    "T19R2": {
+      "keys": "Ctrl+Alt+L",
+      "doc": "87b4ef06",
+      "action": "Insert LISTNUM Field"
+    },
+    "T19R3": {
+      "keys": "Alt+Shift+P",
+      "doc": "1527538c",
+      "action": "Insert PAGE Field"
+    },
+    "T19R4": {
+      "keys": "Alt+Shift+T",
+      "doc": "883374a5",
+      "action": "Insert TIME Field"
+    },
+    "T19R5": {
+      "keys": "Ctrl+F9",
+      "doc": "25e2d65c",
+      "action": "Insert Empty Field"
+    },
+    "T19R6": {
+      "keys": "Ctrl+Shift+F7",
+      "doc": "843f7dc2",
+      "action": "Update Linked Information in Source Document"
+    },
+    "T19R7": {
+      "keys": "F9",
+      "doc": "0f60f0a7",
+      "action": "Update Selected Fields"
+    },
+    "T19R8": {
+      "keys": "Ctrl+Shift+F9",
+      "doc": "06ac2570",
+      "action": "Unlink Field"
+    },
+    "T19R9": {
+      "keys": "Shift+F9",
+      "doc": "4d15cbca",
+      "action": "Switch Between Field Code and Its Result"
+    },
+    "T19R10": {
+      "keys": "Alt+F9",
+      "doc": "b3785c6f",
+      "action": "Switch Between All Field Codes and Their Results"
+    },
+    "T19R11": {
+      "keys": "Alt+Shift+F9",
+      "doc": "fbf58bd6",
+      "action": "Run GOTOBUTTON or MACROBUTTON from Field Results"
+    },
+    "T19R12": {
+      "keys": "F11",
+      "doc": "4e47af10",
+      "action": "Go to Next Field"
+    },
+    "T19R13": {
+      "keys": "Shift+F11",
+      "doc": "118c7ba2",
+      "action": "Go to Previous Field"
+    },
+    "T19R14": {
+      "keys": "Ctrl+F11",
+      "doc": "0c674eb4",
+      "action": "Lock Field"
+    },
+    "T19R15": {
+      "keys": "Ctrl+Shift+F11",
+      "doc": "f0e39541",
+      "action": "Unlock Field"
+    },
+    "T20R1": {
+      "keys": "Alt+R, U, L",
+      "doc": "2cd9dc37",
+      "action": "Display Language Dialog to Set Proofing Language"
+    },
+    "T20R2": {
+      "keys": "Alt+R, L",
+      "doc": "d5b8b7d9",
+      "action": "Set Default Languages"
+    },
+    "T21R12": {
+      "keys": "Ctrl+Alt+Shift+Question mark (?)",
+      "doc": "1b989a74",
+      "action": "Insert Inverted Question Mark"
+    },
+    "T21R13": {
+      "keys": "Ctrl+Alt+Shift+Exclamation point (!)",
+      "doc": "b8ebe410",
+      "action": "Insert Inverted Exclamation Mark"
+    },
+    "T22R1": {
+      "keys": "Alt+Back quote (`)",
+      "doc": "42748694",
+      "action": "Switch to Japanese Input Method Editor"
+    },
+    "T23R1": {
+      "keys": "Alt+W, F",
+      "doc": "f9a98aff",
+      "action": "Switch to Read Mode View"
+    },
+    "T23R2": {
+      "keys": "Ctrl+Alt+P",
+      "doc": "6f4a3e1d",
+      "action": "Switch to Print Layout View"
+    },
+    "T23R3": {
+      "keys": "Ctrl+Alt+O",
+      "doc": "96f90d06",
+      "action": "Switch to Outline View"
+    },
+    "T23R4": {
+      "keys": "Ctrl+Alt+N",
+      "doc": "9cb0a04f",
+      "action": "Switch to Draft View"
+    },
+    "T24R1": {
+      "keys": "Alt+Shift+Left arrow key",
+      "doc": "ed7b0779",
+      "action": "Promote Paragraph"
+    },
+    "T24R2": {
+      "keys": "Alt+Shift+Right arrow key",
+      "doc": "8d263150",
+      "action": "Demote Paragraph"
+    },
+    "T24R6": {
+      "keys": "Alt+Shift+Plus sign (+)",
+      "doc": "cae2ce4c",
+      "skip": "the page gives this combination two meanings in the same table (expand and collapse)"
+    },
+    "T24R7": {
+      "keys": "Alt+Shift+Plus sign (+)",
+      "doc": "377abef3",
+      "skip": "the page gives this combination two meanings in the same table (expand and collapse)"
+    },
+    "T24R8": {
+      "keys": "Alt+Shift+A",
+      "doc": "47dfbbd5",
+      "action": "Expand or Collapse All Text or Headings"
+    },
+    "T24R10": {
+      "keys": "Alt+Shift+L",
+      "doc": "a9faa568",
+      "action": "Show First Line of Body Text or All Body Text"
+    },
+    "T24R11": {
+      "keys": "Alt+Shift+1",
+      "doc": "201b56a3",
+      "action": "Show All Headings with Heading 1 Style"
+    },
+    "T27R1L1": {
+      "keys": "F1 alone",
+      "doc": "f8a5f41e",
+      "action": "Display Help Task Pane"
+    },
+    "T27R1L4": {
+      "keys": "Alt+F1",
+      "doc": "bd2f871b",
+      "action": "Move to Next Field"
+    },
+    "T27R1L5": {
+      "keys": "Alt+Shift+F1",
+      "doc": "edbfa652",
+      "action": "Move to Previous Field"
+    },
+    "T27R2L1": {
+      "keys": "F2 alone",
+      "doc": "c4752665",
+      "action": "Move Selected Text or Graphic"
+    },
+    "T27R2L2": {
+      "keys": "Shift+F2",
+      "doc": "93e3b3b5",
+      "action": "Copy Selected Text or Graphic"
+    },
+    "T27R2L3": {
+      "keys": "Ctrl+F2",
+      "doc": "812a8832",
+      "action": "Display Print Preview on the Print Tab"
+    },
+    "T27R2L4": {
+      "keys": "Alt+Shift+F2",
+      "doc": "a95aaed4",
+      "action": "Save Document"
+    },
+    "T27R2L5": {
+      "keys": "Ctrl+Alt+F2",
+      "doc": "8b186a62",
+      "action": "Display Open Dialog"
+    },
+    "T27R4L1": {
+      "keys": "F4 alone",
+      "doc": "c7e911f2",
+      "action": "Repeat Last Command or Action"
+    },
+    "T27R4L2": {
+      "keys": "Shift+F4",
+      "doc": "76681a47",
+      "action": "Repeat Last Find or Go To Action"
+    },
+    "T27R4L3": {
+      "keys": "Ctrl+F4",
+      "doc": "cc5a66ed",
+      "action": "Close Current Document"
+    },
+    "T27R4L4": {
+      "keys": "Alt+F4",
+      "doc": "1271154c",
+      "action": "Close Word"
+    },
+    "T27R5L1": {
+      "keys": "F5 alone",
+      "doc": "d823530a",
+      "action": "Display Go To Dialog"
+    },
+    "T27R5L3": {
+      "keys": "Ctrl+Shift+F5",
+      "doc": "8a9b634b",
+      "action": "Display Bookmark Dialog"
+    },
+    "T27R5L4": {
+      "keys": "Alt+F5",
+      "doc": "dda01d73",
+      "action": "Restore Document Window Size"
+    },
+    "T27R6L1": {
+      "keys": "F6 alone",
+      "doc": "8ed43882",
+      "action": "Switch Among Document, Task Pane, Status Bar, and Ribbon"
+    },
+    "T27R6L2": {
+      "keys": "Shift+F6",
+      "doc": "c921b614",
+      "action": "Switch Among Document, Ribbon, Status Bar, and Task Pane"
+    },
+    "T27R6L3": {
+      "keys": "Ctrl+F6",
+      "doc": "133d6195",
+      "action": "Switch to Next Document Window"
+    },
+    "T27R6L4": {
+      "keys": "Ctrl+Shift+F6",
+      "doc": "51676965",
+      "action": "Switch to Previous Document Window"
+    },
+    "T27R6L5": {
+      "keys": "Alt+F6",
+      "doc": "265d874f",
+      "action": "Move from Open Dialog Back to Document"
+    },
+    "T27R7L1": {
+      "keys": "F7 alone",
+      "doc": "b1664838",
+      "action": "Display Editor Task Pane to Check Spelling and Grammar"
+    },
+    "T27R7L2": {
+      "keys": "Shift+F7",
+      "doc": "a321e9d5",
+      "action": "Display Thesaurus Task Pane"
+    },
+    "T27R7L4": {
+      "keys": "Alt+F7",
+      "doc": "37f88198",
+      "action": "Find Next Spelling or Grammatical Error"
+    },
+    "T27R7L5": {
+      "keys": "Alt+Shift+F7",
+      "doc": "4cfb807b",
+      "action": "Display Translator Task Pane"
+    },
+    "T27R8L3": {
+      "keys": "Ctrl+Shift+F8",
+      "doc": "a660c662",
+      "action": "Turn Extend Selection Mode On and Off"
+    },
+    "T27R8L4": {
+      "keys": "Alt+F8",
+      "doc": "2a02f325",
+      "action": "Display Macro Dialog"
+    },
+    "T27R10L1": {
+      "keys": "F10 alone",
+      "doc": "89c762ce",
+      "action": "Turn KeyTips On or Off"
+    },
+    "T27R10L2": {
+      "keys": "Shift+F10",
+      "doc": "317c2a13",
+      "action": "Display Shortcut Menu for Selected Item"
+    },
+    "T27R10L3": {
+      "keys": "Ctrl+F10",
+      "doc": "ebe26187",
+      "action": "Maximize or Restore Document Window"
+    },
+    "T27R10L4": {
+      "keys": "Alt+F10",
+      "doc": "3fe20e0b",
+      "action": "Display Selection Task Pane"
+    },
+    "T27R10L5": {
+      "keys": "Alt+Shift+F10",
+      "doc": "77b96443",
+      "action": "Display Menu or Message for Available Actions"
+    },
+    "T27R11L5": {
+      "keys": "Alt+F11",
+      "doc": "2fa40070",
+      "action": "Open Visual Basic for Applications Editor"
+    },
+    "T27R12L1": {
+      "keys": "F12 alone",
+      "doc": "db796f0a",
+      "action": "Display Save As Dialog"
+    },
+    "T27R12L2": {
+      "keys": "Shift+F12",
+      "doc": "a95aaed4",
+      "action": "Save Document"
+    },
+    "T27R12L3": {
+      "keys": "Ctrl+F12",
+      "doc": "8b186a62",
+      "action": "Display Open Dialog"
+    },
+    "T27R12L4": {
+      "keys": "Ctrl+Shift+F12",
+      "doc": "2aea8e60",
+      "action": "Display Print Tab in Backstage View"
+    },
+    "T27R12L5": {
+      "keys": "Alt+Shift+F12",
+      "doc": "b762eb31",
+      "action": "Select Table of Contents Button in Its Container"
+    }
+  }
+}

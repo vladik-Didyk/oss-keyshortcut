@@ -1,0 +1,1531 @@
+{
+  "slug": "word",
+  "displayName": "Word",
+  "category": "microsoft-office",
+  "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-word-95ef89dd-7142-4b50-afb2-f762f663ceb2",
+  "platform": "windows",
+  "sections": [
+    {
+      "name": "Formatting",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "[",
+          "action": "Decrease Font Size by 1 Point"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "]",
+          "action": "Increase Font Size by 1 Point"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "M",
+          "action": "Indent Paragraph"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "M",
+          "action": "Remove Paragraph Indent"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "T",
+          "action": "Create Hanging Indent"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "T",
+          "action": "Remove Hanging Indent"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Q",
+          "action": "Remove Paragraph Formatting"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "1",
+          "action": "Apply Single Spacing to Paragraph"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "2",
+          "action": "Apply Double Spacing to Paragraph"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "5",
+          "action": "Apply 1.5-Line Spacing to Paragraph"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "K",
+          "action": "Enable AutoFormat"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "N",
+          "action": "Apply Normal Style"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "1",
+          "action": "Apply Heading 1 Style"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "2",
+          "action": "Apply Heading 2 Style"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "3",
+          "action": "Apply Heading 3 Style"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "S",
+          "action": "Display Apply Styles Task Pane"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "S",
+          "action": "Display Styles Task Pane"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F3",
+          "action": "Switch Text Between Upper, Lower, and Title Case"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "A",
+          "action": "Change Text to All Upper Case"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "H",
+          "action": "Hide Selected Text"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "L",
+          "action": "Add Bulleted List"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "W",
+          "action": "Underline Words, Not Spaces"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "D",
+          "action": "Apply Double Underline"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "K",
+          "action": "Apply Small Caps"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "+",
+          "action": "Apply Superscript"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Space",
+          "action": "Remove Manual Character Formatting"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Q",
+          "action": "Change Selected Text to Symbol Font"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F1",
+          "action": "Display Reveal Formatting Task Pane"
+        }
+      ]
+    },
+    {
+      "name": "Editing",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "X",
+          "action": "Cut Selected Content to Clipboard"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "C",
+          "action": "Copy Selected Content to Clipboard"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "V",
+          "action": "Paste Clipboard Contents"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "V",
+          "action": "Paste Text Only"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Z",
+          "action": "Undo Previous Action"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Y",
+          "action": "Redo Previous Action"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Backspace",
+          "action": "Delete One Word to the Left"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Delete",
+          "action": "Delete One Word to the Right"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H F O",
+          "action": "Open Clipboard Task Pane"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F3",
+          "action": "Define AutoText Block from Selection"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F3",
+          "action": "Cut Selected Content to the Spike"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F3",
+          "action": "Paste Contents of the Spike"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "C",
+          "action": "Copy Selected Text Formatting"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "V",
+          "action": "Paste Selected Text Formatting"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "R",
+          "action": "Copy Header or Footer from Previous Section"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N J J",
+          "action": "Display Object Dialog to Insert File Object"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N M",
+          "action": "Insert SmartArt Graphic"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N W",
+          "action": "Insert WordArt Graphic"
+        }
+      ]
+    },
+    {
+      "name": "Navigation",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "←",
+          "action": "Move Cursor One Word Left"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "→",
+          "action": "Move Cursor One Word Right"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "↑",
+          "action": "Move Cursor Up One Paragraph"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "↓",
+          "action": "Move Cursor Down One Paragraph"
+        },
+        {
+          "modifiers": [],
+          "key": "End",
+          "action": "Move Cursor to End of Line"
+        },
+        {
+          "modifiers": [],
+          "key": "Home",
+          "action": "Move Cursor to Beginning of Line"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "Page Up",
+          "action": "Move Cursor to Top of Screen"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "Page Down",
+          "action": "Move Cursor to Bottom of Screen"
+        },
+        {
+          "modifiers": [],
+          "key": "Page Up",
+          "action": "Scroll Up One Screen"
+        },
+        {
+          "modifiers": [],
+          "key": "Page Down",
+          "action": "Scroll Down One Screen"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Page Down",
+          "action": "Move Cursor to Top of Next Page"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Page Up",
+          "action": "Move Cursor to Top of Previous Page"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F5",
+          "action": "Move Cursor to Previous Revision"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "Z",
+          "action": "Cycle Through Locations of Four Previous Changes"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "←",
+          "action": "Go Back One Page"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "→",
+          "action": "Go Forward One Page"
+        }
+      ]
+    },
+    {
+      "name": "View",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "0",
+          "action": "Return to 100% Zoom"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "S",
+          "action": "Split Document Window"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "I",
+          "action": "Switch to Print Preview"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "W F",
+          "action": "Switch to Read Mode View"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "P",
+          "action": "Switch to Print Layout View"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "O",
+          "action": "Switch to Outline View"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "N",
+          "action": "Switch to Draft View"
+        }
+      ]
+    },
+    {
+      "name": "Frequently Used",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "O",
+          "action": "Open Document"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "N",
+          "action": "Create New Document"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "S",
+          "action": "Save Document"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "W",
+          "action": "Close Document"
+        },
+        {
+          "modifiers": [],
+          "key": "Esc",
+          "action": "Cancel Command"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "P",
+          "action": "Print Document"
+        }
+      ]
+    },
+    {
+      "name": "Ribbon",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Q",
+          "action": "Go to Tell Me or Search Field on the Ribbon"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F",
+          "action": "Open File Page for Backstage View"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H",
+          "action": "Open Home Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N",
+          "action": "Open Insert Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "G",
+          "action": "Open Design Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "P",
+          "action": "Open Layout Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "S",
+          "action": "Open References Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "M",
+          "action": "Open Mailings Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "R",
+          "action": "Open Review Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "W",
+          "action": "Open View Tab"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F10",
+          "action": "Show Tooltip for Focused Ribbon Element"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "↓",
+          "action": "Open Menu for Selected Button"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F1",
+          "action": "Expand or Collapse Ribbon"
+        },
+        {
+          "modifiers": [],
+          "key": "→",
+          "action": "Move to Submenu When a Main Menu Is Open"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Z A",
+          "action": "Toggle AutoSave On or Off"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "B",
+          "action": "Open Dialog to Rename or Save to Another Location"
+        }
+      ]
+    },
+    {
+      "name": "Selection",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "←",
+          "action": "Select Word to the Left"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "→",
+          "action": "Select Word to the Right"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Home",
+          "action": "Select to Beginning of Line"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "End",
+          "action": "Select to End of Line"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Select to Beginning of Paragraph"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Select to End of Paragraph"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Page Up",
+          "action": "Select to Top of Screen"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Page Down",
+          "action": "Select to Bottom of Screen"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Home",
+          "action": "Select to Beginning of Document"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "End",
+          "action": "Select to End of Document"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "Page Down",
+          "action": "Select to Bottom of Window"
+        },
+        {
+          "modifiers": [],
+          "key": "F8",
+          "action": "Start Extending Selection"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F8",
+          "action": "Reduce Selection"
+        }
+      ]
+    },
+    {
+      "name": "Special Characters",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Enter",
+          "action": "Insert Line Break"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Enter",
+          "action": "Insert Column Break"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Space",
+          "action": "Insert Nonbreaking Space"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "R",
+          "action": "Insert Registered Trademark Symbol"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "T",
+          "action": "Insert Trademark Symbol"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": ".",
+          "action": "Insert Ellipsis"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "?",
+          "action": "Insert Inverted Question Mark"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "!",
+          "action": "Insert Inverted Exclamation Mark"
+        }
+      ]
+    },
+    {
+      "name": "Tables",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "Tab",
+          "action": "Move to Next Cell in Row and Select Its Content"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Move to Previous Cell in Row and Select Its Content"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Home",
+          "action": "Move to First Cell in Row"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "End",
+          "action": "Move to Last Cell in Row"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Page Up",
+          "action": "Move to First Cell in Column"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Page Down",
+          "action": "Move to Last Cell in Column"
+        },
+        {
+          "modifiers": [],
+          "key": "↑",
+          "action": "Move to Previous Row"
+        },
+        {
+          "modifiers": [],
+          "key": "↓",
+          "action": "Move to Next Row"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Move One Row Up"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Move One Row Down"
+        },
+        {
+          "modifiers": [],
+          "key": "Enter",
+          "action": "Insert New Paragraph in Cell"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Tab",
+          "action": "Insert Tab Character in Cell"
+        }
+      ]
+    },
+    {
+      "name": "Review",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "R P 1 L",
+          "action": "Show List of Comments"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "M",
+          "action": "Insert Comment"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "E",
+          "action": "Turn Change Tracking On or Off"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "C",
+          "action": "Close Reviewing Pane"
+        }
+      ]
+    },
+    {
+      "name": "References",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "O",
+          "action": "Mark Table of Contents Entry"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "I",
+          "action": "Mark Table of Authorities Entry (Citation)"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "X",
+          "action": "Mark Index Entry"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "F",
+          "action": "Insert Footnote"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "D",
+          "action": "Insert Endnote"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": ">",
+          "action": "Go to Next Footnote"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "<",
+          "action": "Go to Previous Footnote"
+        }
+      ]
+    },
+    {
+      "name": "Mail Merge and Fields",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "K",
+          "action": "Preview Mail Merge"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "N",
+          "action": "Merge Document"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "M",
+          "action": "Print Merged Document"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "E",
+          "action": "Edit Mail Merge Data Document"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "F",
+          "action": "Insert Merge Field"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "D",
+          "action": "Insert DATE Field"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "L",
+          "action": "Insert LISTNUM Field"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "P",
+          "action": "Insert PAGE Field"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "T",
+          "action": "Insert TIME Field"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F9",
+          "action": "Insert Empty Field"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F7",
+          "action": "Update Linked Information in Source Document"
+        },
+        {
+          "modifiers": [],
+          "key": "F9",
+          "action": "Update Selected Fields"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F9",
+          "action": "Unlink Field"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F9",
+          "action": "Switch Between Field Code and Its Result"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F9",
+          "action": "Switch Between All Field Codes and Their Results"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "F9",
+          "action": "Run GOTOBUTTON or MACROBUTTON from Field Results"
+        },
+        {
+          "modifiers": [],
+          "key": "F11",
+          "action": "Go to Next Field"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F11",
+          "action": "Go to Previous Field"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F11",
+          "action": "Lock Field"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F11",
+          "action": "Unlock Field"
+        }
+      ]
+    },
+    {
+      "name": "Languages",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "R U L",
+          "action": "Display Language Dialog to Set Proofing Language"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "R L",
+          "action": "Set Default Languages"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "`",
+          "action": "Switch to Japanese Input Method Editor"
+        }
+      ]
+    },
+    {
+      "name": "Outline",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "←",
+          "action": "Promote Paragraph"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "→",
+          "action": "Demote Paragraph"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "A",
+          "action": "Expand or Collapse All Text or Headings"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "L",
+          "action": "Show First Line of Body Text or All Body Text"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "1",
+          "action": "Show All Headings with Heading 1 Style"
+        }
+      ]
+    },
+    {
+      "name": "Function Keys",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "F1",
+          "action": "Display Help Task Pane"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F1",
+          "action": "Move to Next Field"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "F1",
+          "action": "Move to Previous Field"
+        },
+        {
+          "modifiers": [],
+          "key": "F2",
+          "action": "Move Selected Text or Graphic"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F2",
+          "action": "Copy Selected Text or Graphic"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F2",
+          "action": "Display Print Preview on the Print Tab"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "F2",
+          "action": "Save Document"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "F2",
+          "action": "Display Open Dialog"
+        },
+        {
+          "modifiers": [],
+          "key": "F4",
+          "action": "Repeat Last Command or Action"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F4",
+          "action": "Repeat Last Find or Go To Action"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F4",
+          "action": "Close Current Document"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F4",
+          "action": "Close Word"
+        },
+        {
+          "modifiers": [],
+          "key": "F5",
+          "action": "Display Go To Dialog"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F5",
+          "action": "Display Bookmark Dialog"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F5",
+          "action": "Restore Document Window Size"
+        },
+        {
+          "modifiers": [],
+          "key": "F6",
+          "action": "Switch Among Document, Task Pane, Status Bar, and Ribbon"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F6",
+          "action": "Switch Among Document, Ribbon, Status Bar, and Task Pane"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F6",
+          "action": "Switch to Next Document Window"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F6",
+          "action": "Switch to Previous Document Window"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F6",
+          "action": "Move from Open Dialog Back to Document"
+        },
+        {
+          "modifiers": [],
+          "key": "F7",
+          "action": "Display Editor Task Pane to Check Spelling and Grammar"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F7",
+          "action": "Display Thesaurus Task Pane"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F7",
+          "action": "Find Next Spelling or Grammatical Error"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "F7",
+          "action": "Display Translator Task Pane"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F8",
+          "action": "Turn Extend Selection Mode On and Off"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F8",
+          "action": "Display Macro Dialog"
+        },
+        {
+          "modifiers": [],
+          "key": "F10",
+          "action": "Turn KeyTips On or Off"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F10",
+          "action": "Display Shortcut Menu for Selected Item"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F10",
+          "action": "Maximize or Restore Document Window"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F10",
+          "action": "Display Selection Task Pane"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "F10",
+          "action": "Display Menu or Message for Available Actions"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F11",
+          "action": "Open Visual Basic for Applications Editor"
+        },
+        {
+          "modifiers": [],
+          "key": "F12",
+          "action": "Display Save As Dialog"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F12",
+          "action": "Save Document"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F12",
+          "action": "Display Open Dialog"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F12",
+          "action": "Display Print Tab in Backstage View"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "F12",
+          "action": "Select Table of Contents Button in Its Container"
+        }
+      ]
+    }
+  ]
+}

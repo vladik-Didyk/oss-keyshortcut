@@ -16,7 +16,7 @@
  *   "docsUrl": "https://...",
  *   "iconPath": "/path/to/icon.png",       (optional — .png, .webp, .icns, or .svg)
  *   "iconFromApp": "/Applications/App.app", (optional — extract from macOS app)
- *   "platform": "macos",
+ *   "platform": "macos",                     (macos, windows or linux; default macos)
  *   "sections": [
  *     {
  *       "name": "General",
@@ -27,6 +27,11 @@
  *     }
  *   ]
  * }
+ *
+ * The file is checked before anything is written (scripts/lib/app-input.mjs).
+ * An app that exists gets the platform of the file added, and only shortcuts
+ * whose keys its section does not have yet: nothing that is there is changed,
+ * except the text of an action with the same stored key.
  */
 import { createClient } from '@supabase/supabase-js'
 import { readFileSync, writeFileSync, existsSync } from 'fs'
@@ -34,6 +39,8 @@ import { join, dirname, extname } from 'path'
 import { fileURLToPath } from 'url'
 import { execFileSync } from 'child_process'
 import { createInterface } from 'readline'
+import { inputFaults, actionKey, CATEGORY_IDS } from './lib/app-input.mjs'
+import { MODIFIER_ORDER } from './shortcut-sync/pipeline/modifier-map.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
@@ -73,21 +80,10 @@ function info(msg) { console.log(`  -> ${msg}`) }
 
 // ── Data helpers ────────────────────────────────────────────
 
-function generateActionKey(slug, action) {
-  const camel = action
-    .replace(/[^a-zA-Z0-9\s]/g, '')
-    .trim()
-    .split(/\s+/)
-    .map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
-    .join('')
-  return `shortcuts.${slug}.${camel}`
-}
+const generateActionKey = actionKey
 
-const VALID_MODIFIERS = ['command', 'option', 'control', 'shift', 'fn', 'alt', 'super']
-const CATEGORIES = [
-  'apple-apps', 'macos-system', 'browsers', 'development', 'communication',
-  'productivity', 'design', 'microsoft-office', 'media', 'windows-system', 'system-utils'
-]
+const VALID_MODIFIERS = [...new Set(Object.values(MODIFIER_ORDER).flat())]
+const CATEGORIES = CATEGORY_IDS
 
 // ── Shell helper (safe, no injection) ───────────────────────
 
@@ -183,20 +179,25 @@ async function uploadIcon(slug, localPath) {
 
 // ── Supabase writes ─────────────────────────────────────────
 
-async function createApp(slug, displayName, categoryId, docsUrl, iconUrl) {
-  const { data: existing } = await supabase.from('apps').select('id').eq('slug', slug)
+// `platformId` is the platform of the input file. Until 2026-09-29 every app
+// was linked to macOS here, whatever the file said: a Windows app would have
+// shown on macOS, empty, and not on Windows.
+async function createApp(slug, displayName, categoryId, docsUrl, iconUrl, platformId) {
+  const { data: existing } = await supabase.from('apps').select('id, docs_url').eq('slug', slug)
   if (existing?.length) {
-    info(`App "${slug}" already exists -- updating`)
+    info(`App "${slug}" already exists -- adding to it`)
     const updates = {}
-    if (docsUrl) updates.docs_url = docsUrl
+    // The link of an app that has one is changed with scripts/set-docs-url.mjs.
+    if (docsUrl && !existing[0].docs_url) updates.docs_url = docsUrl
     if (iconUrl) updates.icon_url = iconUrl
     if (Object.keys(updates).length) {
       await supabase.from('apps').update(updates).eq('id', existing[0].id)
     }
-    await supabase.from('app_platforms').upsert(
-      { app_id: existing[0].id, platform_id: 'macos' },
+    const { error } = await supabase.from('app_platforms').upsert(
+      { app_id: existing[0].id, platform_id: platformId },
       { onConflict: 'app_id,platform_id' }
     )
+    if (error) throw new Error(`Failed to link "${slug}" to ${platformId}: ${error.message}`)
     return existing[0].id
   }
 
@@ -210,12 +211,19 @@ async function createApp(slug, displayName, categoryId, docsUrl, iconUrl) {
 
   if (error) throw new Error(`Failed to create app: ${error.message}`)
 
-  await supabase.from('app_platforms').insert({ app_id: created[0].id, platform_id: 'macos' })
+  const { error: linkError } = await supabase.from('app_platforms').insert({ app_id: created[0].id, platform_id: platformId })
+  if (linkError) throw new Error(`Failed to link "${slug}" to ${platformId}: ${linkError.message}`)
   return created[0].id
 }
 
 async function writeShortcuts(appId, slug, platformId, sections) {
   let created = 0, updated = 0
+
+  // A new section goes after the sections the app has on this platform, and a
+  // new shortcut after the shortcuts its section has: what is there keeps its place.
+  const { data: present } = await supabase.from('sections')
+    .select('sort_order').eq('app_id', appId).eq('platform_id', platformId)
+  let nextSection = Math.max(-1, ...(present || []).map((s) => s.sort_order ?? 0)) + 1
 
   for (let si = 0; si < sections.length; si++) {
     const section = sections[si]
@@ -228,11 +236,14 @@ async function writeShortcuts(appId, slug, platformId, sections) {
       sectionId = existing[0].id
     } else {
       const { data: sec, error } = await supabase.from('sections')
-        .insert({ app_id: appId, platform_id: platformId, name: section.name, sort_order: si })
+        .insert({ app_id: appId, platform_id: platformId, name: section.name, sort_order: nextSection++ })
         .select('id')
       if (error) throw new Error(`Section "${section.name}": ${error.message}`)
       sectionId = sec[0].id
     }
+
+    const { data: inSection } = await supabase.from('shortcuts').select('sort_order').eq('section_id', sectionId)
+    let nextShortcut = Math.max(-1, ...(inSection || []).map((sc) => sc.sort_order ?? 0)) + 1
 
     for (let i = 0; i < section.shortcuts.length; i++) {
       const { modifiers, key, action } = section.shortcuts[i]
@@ -256,7 +267,7 @@ async function writeShortcuts(appId, slug, platformId, sections) {
         updated++
       } else {
         const { error } = await supabase.from('shortcuts').insert({
-          section_id: sectionId, modifiers, key, action_key: actionKey, sort_order: i,
+          section_id: sectionId, modifiers, key, action_key: actionKey, sort_order: nextShortcut++,
         })
         if (error) warn(`Shortcut ${modifiers.join('+')}+${key}: ${error.message}`)
         else created++
@@ -338,22 +349,23 @@ function updateAppCategories(displayName, categoryId) {
   success(`Added to appCategories.js -> ${catName}`)
 }
 
-function updateSourcesJson(slug, displayName, docsUrl) {
+function updateSourcesJson(slug, displayName, docsUrl, platformId) {
   const filePath = join(ROOT, 'scripts/shortcut-sync/sources.json')
   const sources = JSON.parse(readFileSync(filePath, 'utf-8'))
 
   if (sources.apps[slug]) {
     info(`sources.json already has "${slug}"`)
-    if (docsUrl && sources.apps[slug].sources?.macos?.url !== docsUrl) {
-      sources.apps[slug].sources = sources.apps[slug].sources || {}
-      sources.apps[slug].sources.macos = { url: docsUrl, parser: 'ai-extract' }
-      success('Updated docs URL in sources.json')
+    const entry = sources.apps[slug]
+    entry.sources = entry.sources || {}
+    if (!entry.sources[platformId]) {
+      entry.sources[platformId] = { url: docsUrl, parser: 'ai-extract' }
+      success(`Added the ${platformId} source to sources.json`)
     }
   } else {
     sources.apps[slug] = {
       displayName,
       tier: 3,
-      sources: { macos: { url: docsUrl, parser: 'ai-extract' } },
+      sources: { [platformId]: { url: docsUrl, parser: 'ai-extract' } },
     }
     success('Added to sources.json')
   }
@@ -444,6 +456,13 @@ async function main() {
 
   const { slug, displayName, category, docsUrl, iconSource, platform, sections } = appData
 
+  const faults = inputFaults(appData)
+  if (faults.length) {
+    heading(`The input has ${faults.length} fault(s). Nothing was written.`)
+    for (const fault of faults) warn(fault)
+    process.exit(1)
+  }
+
   if (DRY_RUN) heading('DRY RUN -- no writes will be made')
 
   // Step 1: Process icon
@@ -465,8 +484,8 @@ async function main() {
   // Step 2: Create app in Supabase
   heading('Step 2: Database')
   if (!DRY_RUN) {
-    const appId = await createApp(slug, displayName, category, docsUrl, iconUrl)
-    success(`App created/updated (${appId})`)
+    const appId = await createApp(slug, displayName, category, docsUrl, iconUrl, platform)
+    success(`App created/updated (${appId}), on ${platform}`)
 
     if (sections.length) {
       const { created, updated } = await writeShortcuts(appId, slug, platform, sections)
@@ -475,7 +494,7 @@ async function main() {
       info('No shortcuts provided -- add them later or run pnpm sync')
     }
   } else {
-    log(`Would create app: ${slug} (${displayName})`)
+    log(`Would create or add to app: ${slug} (${displayName}), on ${platform}`)
     log(`Category: ${category}, Docs: ${docsUrl}`)
     for (const s of sections) {
       log(`Section "${s.name}": ${s.shortcuts.length} shortcuts`)
@@ -485,8 +504,10 @@ async function main() {
   // Step 3: Update frontend files
   heading('Step 3: Frontend Files')
   updateDirectoryHelpers(slug, displayName)
-  updateAppCategories(displayName, category)
-  if (docsUrl) updateSourcesJson(slug, displayName, docsUrl)
+  // appCategories.js is the list of apps on the page of the Mac app.
+  if (platform === 'macos') updateAppCategories(displayName, category)
+  else info('appCategories.js left as it is: it lists the apps of the Mac app')
+  if (docsUrl) updateSourcesJson(slug, displayName, docsUrl, platform)
 
   // Summary
   heading('Done!')
@@ -498,8 +519,9 @@ async function main() {
 
   if (!DRY_RUN) {
     console.log('\n  Next steps:')
-    console.log('    1. rm -rf node_modules/.cache/supabase')
-    console.log('    2. pnpm run deploy')
+    console.log('    1. pnpm export        (the database into public/data)')
+    console.log('    2. pnpm page-dates    (the day each list changed, for the sitemap)')
+    console.log('    3. pnpm test, then commit and deploy')
   }
 }
 

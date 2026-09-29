@@ -1,132 +1,59 @@
-import React, { useState, useDeferredValue, useMemo, useRef, useEffect, useCallback } from 'react'
+import { useState, useMemo, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
 import { useLoaderData, useNavigate } from 'react-router'
 import Link from './SiteLink'
 import { Search, X, ArrowRight } from '../utils/icons'
-import { usePlatformData, prefetchPlatform } from '../hooks/usePlatformData'
-import { groupByCategories, getPopularApps, parseKeyParts } from '../utils/platformHelpers'
-import { detectPlatform } from '../utils/detectPlatform'
-import { buildSearchIndex, searchIndex, parseAppQuery, flattenSearchResults } from '../utils/searchHelpers'
-import AppCard from './directory/AppCard'
+import { usePlatformSearch } from '../hooks/usePlatformSearch'
+import { parseKeyParts } from '../utils/platformHelpers'
+import { preferredPlatform, rememberPlatform, platformScript, platformStyles } from '../utils/preferredPlatform'
+import { flattenSearchResults } from '../utils/searchHelpers'
+import PlatformPanel from './directory/PlatformPanel'
 import SearchDropdown from './SearchDropdown'
-import { categoryConfig } from '../data/categoryConfig'
-import { useInView } from '../hooks/useInView'
 import { CONTENT } from '../data/content'
-import AdSlot from './AdSlot'
 import { APP_STORE_URL, APP_COUNT, SHORTCUT_COUNT } from '../data/siteConfig'
 import { trackEvent } from '../lib/analytics'
 import { POPULAR_APPS } from '../data/popularApps'
 import { linkPath } from '../utils/siteUrl'
 
+// In the browser the choice of platform must be known before the page is drawn
+// again; on the server there is nothing to draw, and React warns about a layout
+// effect there.
+const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
+
+const NO_PLATFORMS = []
+
+/**
+ * The home page: search, and the directory of each platform.
+ *
+ * It is served with the app list of every platform in it (directory), so a
+ * crawler reads all of them and a visitor's own platform needs no request. A
+ * script at the top of the page chooses the list to show before the first
+ * paint; after hydration `selectedPlatform` holds the same choice.
+ * The shortcuts themselves are not in the page. The search loads them when the
+ * visitor turns to it.
+ */
 export default function DirectoryHomepage() {
   const loaderData = useLoaderData()
+  const platforms = loaderData?.manifest?.platforms ?? NO_PLATFORMS
+  const directory = loaderData?.directory
+  const defaultPlatformId = loaderData?.defaultPlatformId || 'macos'
+  const platformIds = useMemo(() => platforms.map((p) => p.id), [platforms])
+
   const [search, setSearch] = useState('')
-  const [activeCategory, setActiveCategory] = useState(null)
-  const [selectedPlatform, setSelectedPlatform] = useState(
-    () => (typeof navigator !== 'undefined' ? detectPlatform() : loaderData?.defaultPlatformId || 'macos')
-  )
+  // The server's choice first, so that hydration finds the page it expects.
+  const [selectedPlatform, setSelectedPlatform] = useState(defaultPlatformId)
+  useBrowserLayoutEffect(() => {
+    setSelectedPlatform(preferredPlatform(platformIds, defaultPlatformId))
+  }, [platformIds, defaultPlatformId])
+
   const searchRef = useRef(null)
   const searchContainerRef = useRef(null)
-  const chipsRef = useRef(null)
   const [searchFocused, setSearchFocused] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(-1)
   const listId = 'directory-search-listbox'
 
-  const platforms = loaderData?.manifest?.platforms ?? null
-  const isInitialPlatform = selectedPlatform === (loaderData?.defaultPlatformId || 'macos')
-  const { apps: switchedApps, otherPlatformsMap: switchedOPMap, loading: switchedLoading, error } = usePlatformData(
-    isInitialPlatform ? null : selectedPlatform
-  )
-  const apps = isInitialPlatform ? loaderData?.platformData?.apps : switchedApps
-  const otherPlatformsMap = isInitialPlatform ? (loaderData?.platformData?.otherPlatformsMap || {}) : switchedOPMap
-  const loading = isInitialPlatform ? false : switchedLoading
-
-  // Eagerly prefetch other platforms in the background when browser is idle
-  // so switching is instant without bloating the server-rendered HTML
-  useEffect(() => {
-    if (!platforms) return
-    const defaultId = loaderData?.defaultPlatformId || 'macos'
-    const others = platforms.filter(p => p.id !== defaultId)
-    if (others.length === 0) return
-
-    const schedule = typeof requestIdleCallback === 'function'
-      ? (cb) => { const id = requestIdleCallback(cb); return () => cancelIdleCallback(id) }
-      : (cb) => { const id = setTimeout(cb, 2000); return () => clearTimeout(id) }
-
-    const cancel = schedule(() => others.forEach(p => prefetchPlatform(p.id)))
-    return cancel
-  }, [platforms, loaderData?.defaultPlatformId])
-  const currentPlatform = platforms?.find(p => p.id === selectedPlatform)
-  const categoryOrder = useMemo(() => currentPlatform?.categories || [], [currentPlatform])
-
-  // Edge fades on the category row: shown only on a side that has more chips.
-  const [chipEdges, setChipEdges] = useState({ left: false, right: false })
-  const chipsVisible = !search
-  useEffect(() => {
-    const el = chipsRef.current
-    if (!el) return
-    const update = () => {
-      const max = el.scrollWidth - el.clientWidth
-      setChipEdges({ left: el.scrollLeft > 2, right: el.scrollLeft < max - 2 })
-    }
-    update()
-    el.addEventListener('scroll', update, { passive: true })
-    // The row's width changes with the viewport and when the web font loads.
-    const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(update) : null
-    ro?.observe(el)
-    if (el.firstElementChild) ro?.observe(el.firstElementChild)
-    return () => {
-      el.removeEventListener('scroll', update)
-      ro?.disconnect()
-    }
-  }, [categoryOrder, chipsVisible])
-
-  // Horizontal scroll: mouse drag + wheel
-  useEffect(() => {
-    const el = chipsRef.current
-    if (!el) return
-    let isDown = false, startX = 0, scrollLeft = 0
-
-    const onMouseDown = (e) => {
-      isDown = true
-      el.style.cursor = 'grabbing'
-      startX = e.pageX - el.offsetLeft
-      scrollLeft = el.scrollLeft
-    }
-    const onMouseUp = () => { isDown = false; el.style.cursor = 'grab' }
-    const onMouseLeave = () => { isDown = false; el.style.cursor = 'grab' }
-    const onMouseMove = (e) => {
-      if (!isDown) return
-      e.preventDefault()
-      el.scrollLeft = scrollLeft - (e.pageX - el.offsetLeft - startX)
-    }
-    const onWheel = (e) => {
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return // native horizontal scroll
-      if (el.scrollWidth <= el.clientWidth) return // nothing to scroll
-      e.preventDefault()
-      el.scrollLeft += e.deltaY
-    }
-
-    el.style.cursor = 'grab'
-    el.addEventListener('mousedown', onMouseDown)
-    el.addEventListener('mouseup', onMouseUp)
-    el.addEventListener('mouseleave', onMouseLeave)
-    el.addEventListener('mousemove', onMouseMove)
-    el.addEventListener('wheel', onWheel, { passive: false })
-
-    return () => {
-      el.removeEventListener('mousedown', onMouseDown)
-      el.removeEventListener('mouseup', onMouseUp)
-      el.removeEventListener('mouseleave', onMouseLeave)
-      el.removeEventListener('mousemove', onMouseMove)
-      el.removeEventListener('wheel', onWheel)
-    }
-  }, [categoryOrder, chipsVisible])
-
-  // Smart search index — built once per platform data change
-  const deferredSearch = useDeferredValue(search)
-  const searchIdx = useMemo(() => buildSearchIndex(apps), [apps])
-  const smartResults = useMemo(() => searchIndex(searchIdx, deferredSearch), [searchIdx, deferredSearch])
+  const apps = directory?.[selectedPlatform]?.apps
+  const { results: smartResults, wake: wakeSearch, ready: searchReady, error } = usePlatformSearch(selectedPlatform, apps, search)
 
   const navigate = useNavigate()
   const hasSmartResults = smartResults.appMatches.length > 0 || smartResults.shortcutMatches.length > 0
@@ -145,7 +72,6 @@ export default function DirectoryHomepage() {
     setSearch(value)
     setActiveIndex(-1)
     setDropdownOpen(value.trim().length > 0)
-    setActiveCategory(null)
   }, [])
 
   useEffect(() => {
@@ -177,46 +103,9 @@ export default function DirectoryHomepage() {
   }, [showDropdown])
 
 
-  const setCategory = useCallback((cat) => {
-    setActiveCategory(cat)
-    if (cat) trackEvent('category_filtered', { category: cat, platform: selectedPlatform })
-  }, [selectedPlatform])
-
-  // Sticky category bar: `chipsStuck` adds its bottom hairline once it pins under the navbar.
-  const chipsSentinelRef = useRef(null)
-  const [chipsStuck, setChipsStuck] = useState(false)
-  useEffect(() => {
-    const el = chipsSentinelRef.current
-    if (!el || typeof IntersectionObserver !== 'function') return
-    const io = new IntersectionObserver(
-      ([entry]) => setChipsStuck(!entry.isIntersecting && entry.boundingClientRect.top < 60),
-      { rootMargin: '-49px 0px 0px 0px' }
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [chipsVisible])
-
-  // Picking a category: centre the chip in the row and, if the list was scrolled
-  // past, jump back to its top so the filtered apps are in view.
-  const pickCategory = useCallback((cat, chip) => {
-    const behavior = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
-    const nav = chipsRef.current
-    if (nav && chip && nav.scrollWidth > nav.clientWidth) {
-      const n = nav.getBoundingClientRect()
-      const c = chip.getBoundingClientRect()
-      nav.scrollTo({ left: nav.scrollLeft + c.left - n.left - (n.width - c.width) / 2, behavior })
-    }
-    const sentinel = chipsSentinelRef.current
-    if (chipsStuck && sentinel) {
-      const navbarBottom = document.querySelector('nav.fixed')?.getBoundingClientRect().bottom ?? 48
-      window.scrollTo({ top: sentinel.getBoundingClientRect().top + window.scrollY - navbarBottom, behavior })
-    }
-    setCategory(cat)
-  }, [chipsStuck, setCategory])
-
   const setPlatform = useCallback((id) => {
     setSelectedPlatform(id)
-    setActiveCategory(null)
+    rememberPlatform(id)
     setSearch('')
     setDropdownOpen(false)
     trackEvent('platform_switched', { platform: id })
@@ -262,34 +151,11 @@ export default function DirectoryHomepage() {
     }
   }, [search, flatResults, activeIndex, smartResults, selectedPlatform, hasSmartResults, navigate])
 
-  // Platform is detected at initialization via useState initializer above
-
-  const grouped = useMemo(() => {
-    if (!apps) return []
-    let filtered = apps
-    if (search) {
-      const appNames = apps.map(a => ({ name: a.displayName, slug: a.slug }))
-      const parsed = parseAppQuery(search, appNames)
-      if (parsed.app) {
-        filtered = apps.filter(a => a.slug === parsed.app.slug)
-      } else {
-        filtered = apps.filter(a => {
-          const lower = a.displayName.toLowerCase()
-          return parsed.allTokens.some(t => lower.includes(t))
-        })
-      }
-    }
-    const groups = groupByCategories(filtered, categoryOrder)
-    if (activeCategory && !search) {
-      return groups.filter(g => g.name === activeCategory)
-    }
-    return groups
-  }, [apps, search, activeCategory, categoryOrder])
-
-  const popularApps = useMemo(() => getPopularApps(apps, 9), [apps])
-
   return (
-    <div className="min-h-screen bg-theme-base">
+    <div className="min-h-screen bg-theme-base" data-home="" data-platform={selectedPlatform} suppressHydrationWarning>
+      {/* Chooses the platform before the first paint. Must stay the first child. */}
+      <script dangerouslySetInnerHTML={{ __html: platformScript(platformIds, defaultPlatformId) }} />
+      <style dangerouslySetInnerHTML={{ __html: platformStyles(platformIds) }} />
 
       {/* ─── Hero ─── */}
       {/* Reduced top padding (was pt-24 md:pt-32) so the app grid sits higher / above the fold. */}
@@ -308,11 +174,11 @@ export default function DirectoryHomepage() {
 
           {/* Platform switch: iOS-style segmented control (track + raised selected segment).
               Inline rather than directory/PlatformToggle.jsx, which nothing imports. */}
-          {!search && platforms && (
+          {!search && platforms.length > 0 && (
             <div className="flex justify-center mb-4">
               <div
                 role="radiogroup"
-                aria-label="Choose platform"
+                aria-label={CONTENT.home.platformLabel}
                 className="grid w-full max-w-[380px] p-0.5 rounded-xl bg-theme-surface"
                 style={{ gridTemplateColumns: `repeat(${platforms.length}, minmax(0, 1fr))` }}
               >
@@ -323,13 +189,9 @@ export default function DirectoryHomepage() {
                       key={p.id}
                       role="radio"
                       aria-checked={isActive}
+                      data-tab={p.id}
                       onClick={() => setPlatform(p.id)}
-                      onMouseEnter={() => prefetchPlatform(p.id)}
-                      className={`flex items-center justify-center gap-2 min-h-[40px] px-2 rounded-[10px] text-[15px] font-medium transition-all cursor-pointer border-none outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-theme-accent ${
-                        isActive
-                          ? 'bg-theme-base text-theme-text shadow-[0_1px_3px_rgba(26,26,26,0.14),0_0_0_0.5px_rgba(26,26,26,0.1)]'
-                          : 'bg-transparent text-theme-muted hover:text-theme-text'
-                      }`}
+                      className="flex items-center justify-center gap-2 min-h-[44px] pointer-fine:min-h-[40px] px-2 rounded-[10px] text-[15px] font-medium transition-all cursor-pointer border-none outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-theme-accent bg-transparent text-theme-muted hover:text-theme-text"
                     >
                       {p.icon && (
                         <img
@@ -376,7 +238,7 @@ export default function DirectoryHomepage() {
                 }
                 onChange={e => onSearchChange(e.target.value)}
                 onKeyDown={onSearchKeyDown}
-                onFocus={() => { setSearchFocused(true); if (search.trim()) setDropdownOpen(true) }}
+                onFocus={() => { setSearchFocused(true); wakeSearch(); if (search.trim()) setDropdownOpen(true) }}
                 onBlur={() => setSearchFocused(false)}
                 aria-label={CONTENT.home.searchAriaLabel}
                 className={`directory-search w-full h-12 pl-11 bg-transparent outline-none text-[17px] text-theme-text caret-theme-accent ${
@@ -395,7 +257,7 @@ export default function DirectoryHomepage() {
               )}
               {!search && (
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 pointer-events-none select-none">
-                  <kbd className="px-1.5 py-0.5 rounded bg-theme-base text-[11px] font-medium text-theme-muted">⌘</kbd>
+                  <kbd className="px-1.5 py-0.5 rounded bg-theme-base text-[11px] font-medium text-theme-muted">{selectedPlatform === 'macos' ? '⌘' : 'Ctrl'}</kbd>
                   <kbd className="px-1.5 py-0.5 rounded bg-theme-base text-[11px] font-medium text-theme-muted">K</kbd>
                 </span>
               )}
@@ -418,6 +280,7 @@ export default function DirectoryHomepage() {
                 query={search}
                 listId={listId}
                 activeIndex={activeIndex}
+                loading={!searchReady && !error}
                 onClose={() => { setSearch(''); setDropdownOpen(false); searchRef.current?.blur() }}
               />
             )}
@@ -425,151 +288,75 @@ export default function DirectoryHomepage() {
         </div>
       </section>
 
-      {/* Directory: category bar + app list. The bar sticks under the navbar only
-          while the list is on screen (the wrapper bounds the sticky element). */}
-      <div>
-      {/* ─── Category Chips ─── */}
-      {!search && (
-        <>
-        <div ref={chipsSentinelRef} aria-hidden="true" />
-        <div
-          className={`sticky z-30 bg-theme-base px-5 md:px-6 mb-6 border-b transition-colors ${chipsStuck ? 'border-theme-border' : 'border-transparent'}`}
-          style={{ top: 'calc(3rem + env(safe-area-inset-top))' }}
-        >
-          {/* Wider than the 1080px grid so all chips fit on one centred line on a 1280px screen */}
-          <div className="mx-auto max-w-[1240px] relative">
-            {/* w-max + mx-auto: centred when the chips fit, scrollable from the first chip when they don't */}
-            <nav ref={chipsRef} className="chips-scroll overflow-x-auto select-none py-1" aria-label="Filter by category">
-              <div className="flex flex-nowrap gap-1 w-max mx-auto">
-                <ChipButton active={!activeCategory} onClick={(e) => pickCategory(null, e.currentTarget)}>
-                  {CONTENT.home.allCategory}
-                </ChipButton>
-                {categoryOrder.map(cat => {
-                  const config = categoryConfig[cat]
-                  return (
-                    <ChipButton
-                      key={cat}
-                      active={activeCategory === cat}
-                      onClick={(e) => pickCategory(activeCategory === cat ? null : cat, e.currentTarget)}
-                      icon={config?.icon}
-                      color={config?.color}
-                    >
-                      {config?.short || cat}
-                    </ChipButton>
-                  )
-                })}
+      {/* Directory: one panel per platform, all in the page as it is served.
+          CSS shows the one of the chosen platform. */}
+      {!search && directory && platforms.map((p) => (
+        <PlatformPanel
+          key={p.id}
+          platform={p}
+          apps={directory[p.id]?.apps}
+          otherPlatformsMap={directory[p.id]?.otherPlatformsMap}
+          active={p.id === selectedPlatform}
+        />
+      ))}
+
+      {search && (
+        <div className="mx-auto max-w-[1080px] px-5 md:px-6 pb-16 min-h-[420px]">
+          {/* ─── Search Results (inline, same as dropdown) ─── */}
+          {hasSmartResults && (
+            <SearchResultsInline results={smartResults} platform={selectedPlatform} />
+          )}
+
+          {/* The shortcuts are on their way: say so instead of "no results". */}
+          {!hasSmartResults && !searchReady && !error && (
+            <p className="py-16 text-center text-theme-muted" role="status" aria-live="polite">{CONTENT.home.loadingShortcuts}</p>
+          )}
+
+          {!hasSmartResults && error && (
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <p className="text-theme-muted mb-4">{CONTENT.home.error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-5 py-2.5 min-h-[44px] rounded-full font-medium cursor-pointer border-none transition-opacity hover:opacity-90 bg-theme-accent text-theme-accent-text"
+              >
+                {CONTENT.home.refreshButton}
+              </button>
+            </div>
+          )}
+
+          {/* ─── No-results empty state — suggest popular apps as chips ─── */}
+          {!hasSmartResults && searchReady && (
+            <div className="py-16 text-center" role="status" aria-live="polite">
+              <p className="text-theme-text text-[17px] font-medium mb-1">
+                No results for &ldquo;{search}&rdquo;
+              </p>
+              <p className="text-theme-muted text-sm mb-6">
+                Try one of these popular apps instead.
+              </p>
+              <div className="flex flex-wrap justify-center gap-2.5">
+                {POPULAR_APPS.map(app => (
+                  <button
+                    key={app.slug}
+                    onClick={() => { setSearch(''); setDropdownOpen(false); navigate(linkPath(`/${selectedPlatform}/${app.slug}`)) }}
+                    className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-full border border-theme-border bg-theme-base-alt hover:border-theme-border-hover transition-colors cursor-pointer text-[14px] text-theme-text outline-none focus-visible:ring-2 focus-visible:ring-theme-accent"
+                  >
+                    <img
+                      decoding="async"
+                      src={`/images/app-icons/${app.slug}.webp`}
+                      alt=""
+                      width={18}
+                      height={18}
+                      className="rounded shrink-0"
+                      onError={e => { e.target.style.display = 'none' }}
+                    />
+                    {app.name}
+                  </button>
+                ))}
               </div>
-            </nav>
-            {/* Edge fades: the scroll hint, on any screen size, only where more chips are hidden */}
-            <div
-              aria-hidden="true"
-              className={`pointer-events-none absolute left-0 top-0 bottom-0 w-12 transition-opacity ${chipEdges.left ? 'opacity-100' : 'opacity-0'}`}
-              style={{ background: 'linear-gradient(to left, transparent, var(--color-theme-base))' }}
-            />
-            <div
-              aria-hidden="true"
-              className={`pointer-events-none absolute right-0 top-0 bottom-0 w-12 transition-opacity ${chipEdges.right ? 'opacity-100' : 'opacity-0'}`}
-              style={{ background: 'linear-gradient(to right, transparent, var(--color-theme-base))' }}
-            />
-          </div>
+            </div>
+          )}
         </div>
-        </>
       )}
-
-      {/* min-height reserves space so the platform-switch loading skeleton swap
-          doesn't reflow / cause CLS at the point of focus (the app grid). */}
-      <div className="mx-auto max-w-[1080px] px-5 md:px-6 pb-16 min-h-[420px]">
-
-        {/* ─── Error state ─── */}
-        {error && (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <p className="text-theme-muted mb-4">{CONTENT.home.error}</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-5 py-2.5 rounded-full font-medium cursor-pointer border-none transition-opacity hover:opacity-90 bg-theme-accent text-theme-accent-text"
-            >
-              {CONTENT.home.refreshButton}
-            </button>
-          </div>
-        )}
-
-        {/* ─── Loading skeleton ─── */}
-        {!error && loading && (
-          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <div key={i} className="flex flex-col items-center py-6 sm:py-10 px-2 sm:px-4 rounded-2xl animate-pulse border border-theme-border">
-                <div className="w-16 h-16 rounded-2xl mb-4 bg-black/6" />
-                <div className="w-20 h-3 rounded bg-black/6" />
-                <div className="w-12 h-2.5 rounded mt-2 bg-black/4" />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* ─── Search Results (inline, same as dropdown) ─── */}
-        {!error && !loading && search && hasSmartResults && (
-          <SearchResultsInline results={smartResults} platform={selectedPlatform} />
-        )}
-
-        {/* ─── No-results empty state — suggest popular apps as chips ─── */}
-        {!error && !loading && search && !hasSmartResults && (
-          <div className="py-16 text-center" role="status" aria-live="polite">
-            <p className="text-theme-text text-[17px] font-medium mb-1">
-              No results for &ldquo;{search}&rdquo;
-            </p>
-            <p className="text-theme-muted text-sm mb-6">
-              Try one of these popular apps instead.
-            </p>
-            <div className="flex flex-wrap justify-center gap-2.5">
-              {POPULAR_APPS.map(app => (
-                <button
-                  key={app.slug}
-                  onClick={() => { setSearch(''); setDropdownOpen(false); navigate(linkPath(`/${selectedPlatform}/${app.slug}`)) }}
-                  className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-full border border-theme-border bg-theme-base-alt hover:border-theme-border-hover transition-colors cursor-pointer text-[14px] text-theme-text outline-none focus-visible:ring-2 focus-visible:ring-theme-accent"
-                >
-                  <img
-                    decoding="async"
-                    src={`/images/app-icons/${app.slug}.webp`}
-                    alt=""
-                    width={18}
-                    height={18}
-                    className="rounded shrink-0"
-                    onError={e => { e.target.style.display = 'none' }}
-                  />
-                  {app.name}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ─── Category Sections (when not searching) ─── */}
-        {/* ─── Apps with the most shortcuts ─── */}
-        {!error && !loading && !search && !activeCategory && popularApps.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-theme-muted mb-4">{CONTENT.home.aboutSection.mostShortcutsTitle}</h2>
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:[&>*:nth-child(9)]:hidden">
-              {popularApps.map(app => (
-                <AppCard key={app.slug} app={app} platform={selectedPlatform} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {!error && !loading && !search && grouped.map((group, index) => (
-          <React.Fragment key={group.name}>
-            <CategorySection group={group} platform={selectedPlatform} otherPlatformsMap={otherPlatformsMap} />
-            {index === 2 && grouped.length > 4 && (
-              <AdSlot adSlot="home_mid" variant="in-article" />
-            )}
-          </React.Fragment>
-        ))}
-
-        {!error && !loading && grouped.length === 0 && !search && (
-          <p className="text-center py-20 text-theme-muted">{CONTENT.home.emptyCategory}</p>
-        )}
-      </div>
-      </div>
 
       {/* ─── About Section ─── */}
       {!search && (
@@ -667,25 +454,6 @@ export default function DirectoryHomepage() {
   )
 }
 
-/* ─── Chip button with optional icon ─── */
-// 44px tap height on touch screens, a slimmer 36px pill with a mouse.
-function ChipButton({ active, onClick, children, icon: Icon, color }) {
-  return (
-    <button
-      onClick={onClick}
-      aria-pressed={active}
-      className={`flex items-center gap-1.5 px-3 min-h-[44px] pointer-fine:min-h-9 rounded-full text-[14px] font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 border-none outline-none focus-visible:ring-2 focus-visible:ring-theme-accent ${
-        active
-          ? 'bg-theme-accent text-theme-base'
-          : 'bg-transparent text-theme-muted hover:text-theme-text hover:bg-theme-base-alt'
-      }`}
-    >
-      {Icon && <Icon size={15} aria-hidden="true" style={!active && color ? { color } : undefined} />}
-      {children}
-    </button>
-  )
-}
-
 /* ─── Inline search results — mirrors SearchDropdown content ─── */
 function SearchResultsInline({ results, platform }) {
   const { appMatches = [], shortcutMatches = [], otherApps = [] } = results || {}
@@ -779,41 +547,5 @@ function SearchResultsInline({ results, platform }) {
         </p>
       )}
     </div>
-  )
-}
-
-/* ─── Category section — matches ShortcutsIndex layout ─── */
-function CategorySection({ group, platform, otherPlatformsMap = {} }) {
-  const [ref, visible] = useInView({ threshold: 0.05 })
-  const config = categoryConfig[group.name]
-  const CatIcon = config?.icon
-
-  return (
-    <section ref={ref} className={`mb-12 md:mb-20 fade-in-up ${visible ? 'visible' : ''}`}>
-      <div className="flex flex-col md:flex-row gap-4 md:gap-10">
-        {/* Left: Category label */}
-        <div className="md:w-44 shrink-0 flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 md:pt-4">
-          <div
-            className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center md:mb-4"
-            style={{ backgroundColor: config?.color || 'var(--theme-accent)' }}
-          >
-            {CatIcon && <CatIcon size={24} className="text-white" />}
-          </div>
-          <div>
-            <h2 className="text-xl md:text-2xl font-semibold text-theme-text leading-tight">
-              {group.name}
-            </h2>
-            <p className="text-theme-muted text-sm mt-0.5">{CONTENT.home.categoryCount(group.apps.length)}</p>
-          </div>
-        </div>
-
-        {/* Right: App grid */}
-        <div className="flex-1 grid grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
-          {group.apps.map(app => (
-            <AppCard key={app.slug} app={app} platform={platform} otherPlatforms={otherPlatformsMap[app.slug]} />
-          ))}
-        </div>
-      </div>
-    </section>
   )
 }

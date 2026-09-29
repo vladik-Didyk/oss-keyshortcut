@@ -10,6 +10,30 @@
 export const CONSENT_KEY = "cookie-consent";
 export const OPEN_SETTINGS_EVENT = "ks:open-cookie-settings";
 
+// Where the page keeps the answer of the region check it started itself.
+export const REGION_PROMISE = "__ksRegion";
+
+/**
+ * A script for the head of every page: it asks for the visitor's region at
+ * once, for a visitor who has not answered the banner yet. The banner needs the
+ * region before it can show, and used to ask only after every script of the
+ * page had loaded and run, which on a slow phone was seconds later.
+ */
+export const REGION_SCRIPT =
+  `try{if(!localStorage.getItem(${JSON.stringify(CONSENT_KEY)}))` +
+  `window.${REGION_PROMISE}=fetch('/api/geo').then(function(r){return r.ok?r.json():{gdpr:false}})` +
+  `.catch(function(){return{gdpr:false}})}catch(e){}`;
+
+/** { gdpr: boolean }: the answer the page already asked for, else a request of its own. */
+export function visitorRegion() {
+  if (typeof window === "undefined") return Promise.resolve({ gdpr: false });
+  const asked = window[REGION_PROMISE];
+  if (asked) return asked;
+  return fetch("/api/geo")
+    .then((r) => (r.ok ? r.json() : { gdpr: false }))
+    .catch(() => ({ gdpr: false }));
+}
+
 function fcQueue() {
   window.googlefc = window.googlefc || {};
   window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];

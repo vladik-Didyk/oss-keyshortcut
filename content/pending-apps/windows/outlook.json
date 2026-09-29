@@ -1,0 +1,385 @@
+{
+  "slug": "outlook",
+  "displayName": "Outlook",
+  "category": "microsoft-office",
+  "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-for-outlook-3cdeb221-7ae5-4c1d-8c1d-9e63216c1efd",
+  "platform": "windows",
+  "sections": [
+    {
+      "name": "Frequently Used",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "N",
+          "action": "Create New Message or Calendar Event"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Enter",
+          "action": "Open Selected Message in New Window"
+        },
+        {
+          "modifiers": [],
+          "key": "Delete",
+          "action": "Delete Message or Item"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F",
+          "action": "Forward Message"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "2",
+          "action": "Go to Calendar"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "R",
+          "action": "Select Reply All Option"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "R",
+          "action": "Reply to Email Message"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Enter",
+          "action": "Send Email Message"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "↓",
+          "action": "Open Split Buttons"
+        },
+        {
+          "modifiers": [],
+          "key": "?",
+          "action": "Open Keyboard Shortcuts"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "1",
+          "action": "Go to Mail"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "3",
+          "action": "Go to Copilot"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "4",
+          "action": "Go to People"
+        }
+      ]
+    },
+    {
+      "name": "Edit Text",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "C",
+          "action": "Copy Selection to Clipboard"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "X",
+          "action": "Cut Selected Text"
+        },
+        {
+          "modifiers": [],
+          "key": "Backspace",
+          "action": "Delete Selected Text or Characters to the Left"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Backspace",
+          "action": "Delete Word to the Left of Cursor"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "K",
+          "action": "Insert Hyperlink"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "V",
+          "action": "Paste Clipboard Content at Current Location"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Y",
+          "action": "Repeat Most Recent Action"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Z",
+          "action": "Reverse Most Recent Action"
+        }
+      ]
+    },
+    {
+      "name": "Format Text",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "B",
+          "action": "Bold"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "I",
+          "action": "Italic"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "U",
+          "action": "Underline"
+        }
+      ]
+    },
+    {
+      "name": "Mail",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "←",
+          "action": "Collapse Selected Section"
+        },
+        {
+          "modifiers": [],
+          "key": "→",
+          "action": "Expand Selected Section"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Q",
+          "action": "Mark Selected Conversation or Message as Read"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Delete",
+          "action": "Permanently Delete Selected Message or Item"
+        },
+        {
+          "modifiers": [],
+          "key": "Insert",
+          "action": "Flag Message or Mark Flagged Message as Complete"
+        },
+        {
+          "modifiers": [],
+          "key": "Esc",
+          "action": "Cancel Search"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Select Current and Next Message in List"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Select Current and Previous Message in List"
+        },
+        {
+          "modifiers": [],
+          "key": "End",
+          "action": "Go to Bottom of Conversation or Message"
+        },
+        {
+          "modifiers": [],
+          "key": "Home",
+          "action": "Go to Top of Conversation or Message"
+        },
+        {
+          "modifiers": [],
+          "key": "Page Down",
+          "action": "Move Down One Page in Conversation or Message"
+        },
+        {
+          "modifiers": [],
+          "key": "Page Up",
+          "action": "Move Up One Page in Conversation or Message"
+        }
+      ]
+    },
+    {
+      "name": "Calendar",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "Enter",
+          "action": "Open Selected Item"
+        },
+        {
+          "modifiers": [],
+          "key": "Tab",
+          "action": "Move to Next Event or Area in Current View"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Move to Previous Event or Area in Current View"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "→",
+          "action": "Go to Next Time Period"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "←",
+          "action": "Go to Previous Time Period"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "1",
+          "action": "Switch to Day View"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "2",
+          "action": "Switch to Work Week View"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "3",
+          "action": "Switch to Three-Day View"
+        }
+      ]
+    },
+    {
+      "name": "People",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "E",
+          "action": "Search for a Contact"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "S",
+          "action": "Save Contact or Contact List"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "A",
+          "action": "Select All Contacts or Contact Lists"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "E",
+          "action": "Edit Contact or Contact List"
+        },
+        {
+          "modifiers": [],
+          "key": "↓",
+          "action": "Move Down in Contact List or Hub List"
+        },
+        {
+          "modifiers": [],
+          "key": "↑",
+          "action": "Move Up in Contact List or Hub List"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "L",
+          "action": "Create Contact List"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H",
+          "action": "Move Focus to Home Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "V",
+          "action": "Move Focus to View Tab"
+        }
+      ]
+    }
+  ]
+}

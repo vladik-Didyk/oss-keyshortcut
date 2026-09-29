@@ -1,6 +1,5 @@
 import { APP_COUNT, SHORTCUT_COUNT, APP_PAGE_COUNT, PAGES_WITH_DOCS, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, APP_STORE_URL, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL, REPO_URL } from './siteConfig'
 import { reportEmail, reportIssue } from '../utils/reportLinks'
-import { getAppNote } from './appNotes'
 import { SPONSOR_OFFER, SPONSOR_AUDIENCE, hasAudienceFigure } from './sponsors'
 import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys, fitList } from '../utils/appCopy'
 import { pageUrl } from '../utils/siteUrl'
@@ -52,6 +51,15 @@ export const CONTENT = {
       closeMenuLabel: 'Close menu',
     },
 
+    // The search of the navigation bar, on every page without a search field of its own.
+    siteSearch: {
+      button: 'Search',
+      open: 'Search apps and shortcuts',
+      title: 'Search apps and shortcuts',
+      close: 'Close search',
+      field: (platformName) => `Search ${platformName} apps and shortcuts`,
+    },
+
     footer: {
       tagline: 'Keyboard shortcuts for every app.',
       // Static, hand-curated columns (kept for direct crawl/discovery value).
@@ -84,22 +92,22 @@ export const CONTENT = {
           ],
         },
       ],
-      // Curated set of high-traffic app pages across all platforms — a
-      // static internal-linking asset that helps crawlers and deep-page
-      // visitors reach popular references. Slugs verified against
-      // public/data/platforms/*.json.
+      // A chosen set of app pages, on every page of the site: links that lead
+      // a visitor and a crawler to them from anywhere. Windows has as many as
+      // macOS: until 2026-09-29 it had two of twelve. A test checks every link
+      // against public/data/platforms/*.json.
       popularAppsHeading: 'Popular Apps',
       popularApps: [
         { label: 'VS Code (macOS)', to: '/macos/vscode' },
         { label: 'Figma (macOS)', to: '/macos/figma' },
         { label: 'Chrome (macOS)', to: '/macos/chrome' },
-        { label: 'Safari (macOS)', to: '/macos/safari' },
         { label: 'Photoshop (macOS)', to: '/macos/photoshop' },
         { label: 'Excel (macOS)', to: '/macos/excel' },
-        { label: 'Slack (macOS)', to: '/macos/slack' },
-        { label: 'Notion (macOS)', to: '/macos/notion' },
-        { label: 'Chrome (Windows)', to: '/windows/chrome' },
         { label: 'Excel (Windows)', to: '/windows/excel' },
+        { label: 'Word (Windows)', to: '/windows/word' },
+        { label: 'Chrome (Windows)', to: '/windows/chrome' },
+        { label: 'VS Code (Windows)', to: '/windows/vscode' },
+        { label: 'Windows system', to: '/windows/windows' },
         { label: 'VS Code (Linux)', to: '/linux/vscode' },
         { label: 'Vim (Linux)', to: '/linux/vim' },
       ],
@@ -434,6 +442,9 @@ export const CONTENT = {
     stats: (shortcuts, apps) => `${shortcuts} shortcuts \u00b7 ${apps} apps`,
     searchPlaceholder: 'Search apps or shortcuts',
     searchAriaLabel: 'Search for an app',
+    platformLabel: 'Choose platform',
+    categoryNavLabel: (platformName) => `Filter ${platformName} apps by category`,
+    loadingShortcuts: 'Loading shortcuts…',
     allCategory: 'All',
     categoryCount: (n) => `${n} ${n === 1 ? 'app' : 'apps'}`,
     error: 'Something went wrong. Please try refreshing.',
@@ -611,7 +622,9 @@ export const CONTENT = {
       clearLabel: 'Report about the whole page',
       rowLabel: (action) => `Report a problem with ${action}`,
     },
-    faqItems: (app, platformName) => {
+    // `note`: the hand-written note of the page, or null. It comes from the
+    // loader, so that the notes of every other app stay on the server.
+    faqItems: (app, platformName, note = null) => {
       const name = typeof app === 'string' ? app : app.displayName
       const count = typeof app === 'string' ? null : app.shortcutCount
       const sections = typeof app === 'string' ? [] : (app.sections || [])
@@ -632,7 +645,6 @@ export const CONTENT = {
       //    this page, otherwise the everyday actions it has (utils/appCopy).
       if (typeof app !== 'string') {
         const platformId = platformName === 'macOS' ? 'macos' : platformName.toLowerCase()
-        const note = getAppNote(app.slug, platformId)
         const fromNote = noteFitsApp(note, app)
         const picks = fromNote ? resolveEssentials(note.essentials, app) : everydayShortcuts(app)
         if (picks.length >= 3) {

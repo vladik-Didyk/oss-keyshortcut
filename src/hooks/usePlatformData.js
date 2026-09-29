@@ -10,6 +10,12 @@ async function fetchPlatformData(platformId) {
   return { apps: data.apps, otherPlatformsMap: data.otherPlatforms || {} }
 }
 
+/** Forgets what was loaded. For tests: the cache outlives a component. */
+export function resetPlatformData() {
+  cache.clear()
+  inflight.clear()
+}
+
 /** Prefetch platform data in the background (call on hover) */
 export function prefetchPlatform(platformId) {
   if (!platformId || cache.has(platformId) || inflight.has(platformId)) return

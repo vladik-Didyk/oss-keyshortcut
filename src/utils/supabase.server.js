@@ -1,9 +1,20 @@
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_DIR = join(__dirname, "../../public/data");
+// public/data of the project this file runs in. The file runs from src/utils/
+// (dev, tests) and from the server build, where its depth depends on how the
+// build splits its files: so the folder is looked for, upward, not counted to.
+function findDataDir(from) {
+  for (let dir = from; ; dir = dirname(dir)) {
+    const candidate = join(dir, "public/data");
+    if (existsSync(join(candidate, "manifest.json"))) return candidate;
+    if (dirname(dir) === dir) break;
+  }
+  throw new Error(`public/data not found above ${from}`);
+}
+
+const DATA_DIR = findDataDir(dirname(fileURLToPath(import.meta.url)));
 
 function readJSON(relativePath) {
   return JSON.parse(readFileSync(join(DATA_DIR, relativePath), "utf-8"));

@@ -6,6 +6,7 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 import ShortcutPage from '../components/ShortcutPage'
 import { CONTENT } from '../data/content'
+import { getAppNote } from '../data/appNotes'
 import { shortcutIds } from '../utils/feedbackIds'
 import { myVotes, visitPage, countViewOnSign, sendVote, countDownload, votesOn, VOTES_SWITCH } from '../lib/feedback'
 import { GUARD_DAYS, isItemId } from '../../server/feedback.js'
@@ -26,7 +27,7 @@ const PAGE = '/macos/figma'
 const NONE = { views: null, downloads: null, confirmed: null, items: {} }
 
 function page(app = figma, platformId = 'macos', platformName = 'macOS') {
-  const data = { platformId, platformName, app, otherPlatforms: [], relatedApps: [], moreApps: [], otherPlatformsMap: {} }
+  const data = { platformId, platformName, app, note: getAppNote(app.slug, platformId) ?? null, otherPlatforms: [], relatedApps: [], moreApps: [], otherPlatformsMap: {} }
   const Stub = createRoutesStub([{ id: 'app', path: '/:platformId/:slug', Component: ShortcutPage }])
   return <Stub initialEntries={[`/${platformId}/${app.slug}`]} hydrationData={{ loaderData: { app: data } }} />
 }

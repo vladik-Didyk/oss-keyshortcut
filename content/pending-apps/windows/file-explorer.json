@@ -1,0 +1,224 @@
+{
+  "slug": "file-explorer",
+  "displayName": "File Explorer",
+  "category": "windows-system",
+  "docsUrl": "https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec",
+  "platform": "windows",
+  "sections": [
+    {
+      "name": "Navigation",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "D",
+          "action": "Select Address Bar"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "→",
+          "action": "View Next Folder"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "↑",
+          "action": "Move Up a Level in Folder Path"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "L",
+          "action": "Focus Address Bar"
+        },
+        {
+          "modifiers": [],
+          "key": "End",
+          "action": "Scroll to Bottom of Window"
+        },
+        {
+          "modifiers": [],
+          "key": "F3",
+          "action": "Search for File or Folder"
+        },
+        {
+          "modifiers": [],
+          "key": "F4",
+          "action": "Select Address Bar to Change Path"
+        },
+        {
+          "modifiers": [],
+          "key": "F6",
+          "action": "Cycle Through Elements in Window"
+        },
+        {
+          "modifiers": [],
+          "key": "Home",
+          "action": "Scroll to Top of Window"
+        },
+        {
+          "modifiers": [],
+          "key": "←",
+          "action": "Collapse Selection or Select Parent Folder"
+        },
+        {
+          "modifiers": [],
+          "key": "→",
+          "action": "Display Selection or Select First Subfolder"
+        }
+      ]
+    },
+    {
+      "name": "Tabs & Windows",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "N",
+          "action": "Open New Window"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "1-9",
+          "action": "Move to Tab by Number"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Move to Previous Tab"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "T",
+          "action": "Open New Tab"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "W",
+          "action": "Close Active Tab"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Tab",
+          "action": "Move to Next Tab"
+        },
+        {
+          "modifiers": [],
+          "key": "F11",
+          "action": "Maximize or Minimize Window"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "E",
+          "action": "Open File Explorer"
+        }
+      ]
+    },
+    {
+      "name": "Files & Folders",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Enter",
+          "action": "Display Properties of Selected Item"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "N",
+          "action": "Create New Folder"
+        },
+        {
+          "modifiers": [],
+          "key": "F2",
+          "action": "Rename Selected Item"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Delete",
+          "action": "Permanently Delete Selected Item"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F10",
+          "action": "Display Context Menu of Selected Item"
+        }
+      ]
+    },
+    {
+      "name": "View",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "P",
+          "action": "Show or Hide Preview Pane"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "P",
+          "action": "Show or Hide Details Pane"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Numpad +",
+          "action": "Resize All Columns to Fit Text"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "E",
+          "action": "Expand All Folders in Navigation Pane"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "1-9",
+          "action": "Change View Style"
+        },
+        {
+          "modifiers": [],
+          "key": "F5",
+          "action": "Refresh Window"
+        }
+      ]
+    }
+  ]
+}

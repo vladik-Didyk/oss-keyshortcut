@@ -1,0 +1,308 @@
+{
+  "slug": "outlook",
+  "displayName": "Outlook",
+  "category": "microsoft-office",
+  "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-for-outlook-3cdeb221-7ae5-4c1d-8c1d-9e63216c1efd",
+  "platform": "windows",
+  "tab": "new-outlook",
+  "fetched": "2026-09-29",
+  "sectionOrder": [
+    "Frequently Used",
+    "Edit Text",
+    "Format Text",
+    "Mail",
+    "Calendar",
+    "People"
+  ],
+  "sections": {
+    "Frequently used shortcuts": "Frequently Used",
+    "Edit text": "Edit Text",
+    "Format text": "Format Text",
+    "Mail keyboard shortcuts in new Outlook > Use the Folder pane": "Mail",
+    "Mail keyboard shortcuts in new Outlook > Use the message and reading list": "Mail",
+    "Mail keyboard shortcuts in new Outlook > Use the message list": "Mail",
+    "Mail keyboard shortcuts in new Outlook > Use the reading list": "Mail",
+    "Calendar keyboard shortcuts in new Outlook": "Calendar",
+    "Contacts (People) keyboard shortcuts": "People"
+  },
+  "rows": {
+    "T0R1": {
+      "keys": "Ctrl+N",
+      "doc": "c42e3a41",
+      "action": "Create New Message or Calendar Event"
+    },
+    "T0R2": {
+      "keys": "Shift+Enter",
+      "doc": "ea530e83",
+      "action": "Open Selected Message in New Window"
+    },
+    "T0R3": {
+      "keys": "Delete",
+      "doc": "a6812272",
+      "action": "Delete Message or Item"
+    },
+    "T0R4": {
+      "keys": "Ctrl+F",
+      "doc": "ba40202a",
+      "action": "Forward Message"
+    },
+    "T0R5": {
+      "keys": "Ctrl+2",
+      "doc": "d533e5f1",
+      "action": "Go to Calendar"
+    },
+    "T0R6": {
+      "keys": "Ctrl+Shift+R",
+      "doc": "48f3fd64",
+      "action": "Select Reply All Option"
+    },
+    "T0R7": {
+      "keys": "Ctrl+R",
+      "doc": "142256a5",
+      "action": "Reply to Email Message"
+    },
+    "T0R8": {
+      "keys": "Ctrl+Enter",
+      "doc": "5f8551f0",
+      "action": "Send Email Message"
+    },
+    "T0R9": {
+      "keys": "Alt+Down arrow key",
+      "doc": "8b334f9b",
+      "action": "Open Split Buttons"
+    },
+    "T0R10": {
+      "keys": "Question mark (?)",
+      "doc": "1f45336a",
+      "action": "Open Keyboard Shortcuts"
+    },
+    "T1R1": {
+      "keys": "Ctrl+C",
+      "doc": "abcca6a4",
+      "action": "Copy Selection to Clipboard"
+    },
+    "T1R2": {
+      "keys": "Ctrl+X",
+      "doc": "cccb4505",
+      "action": "Cut Selected Text"
+    },
+    "T1R3": {
+      "keys": "Backspace",
+      "doc": "8eb80673",
+      "action": "Delete Selected Text or Characters to the Left"
+    },
+    "T1R4": {
+      "keys": "Ctrl+Backspace",
+      "doc": "ce5e43da",
+      "action": "Delete Word to the Left of Cursor"
+    },
+    "T1R5": {
+      "keys": "Ctrl+K",
+      "doc": "00f9fe5c",
+      "action": "Insert Hyperlink"
+    },
+    "T1R6": {
+      "keys": "Ctrl+V",
+      "doc": "422f2f9e",
+      "action": "Paste Clipboard Content at Current Location"
+    },
+    "T1R7": {
+      "keys": "Ctrl+Y",
+      "doc": "9c06d0e4",
+      "action": "Repeat Most Recent Action"
+    },
+    "T1R8": {
+      "keys": "Ctrl+Z",
+      "doc": "86918915",
+      "action": "Reverse Most Recent Action"
+    },
+    "T2R1": {
+      "keys": "Ctrl+B",
+      "doc": "aea7e082",
+      "action": "Bold"
+    },
+    "T2R2": {
+      "keys": "Ctrl+I",
+      "doc": "65368e59",
+      "action": "Italic"
+    },
+    "T2R3": {
+      "keys": "Ctrl+U",
+      "doc": "f39467e2",
+      "action": "Underline"
+    },
+    "T3R3": {
+      "keys": "Left arrow key",
+      "doc": "d950de18",
+      "action": "Collapse Selected Section"
+    },
+    "T3R4": {
+      "keys": "Right arrow key",
+      "doc": "10860612",
+      "action": "Expand Selected Section"
+    },
+    "T4R2": {
+      "keys": "Ctrl+Q",
+      "doc": "3d348849",
+      "action": "Mark Selected Conversation or Message as Read"
+    },
+    "T4R4": {
+      "keys": "Shift+Delete",
+      "doc": "850fe0ab",
+      "action": "Permanently Delete Selected Message or Item"
+    },
+    "T4R5": {
+      "keys": "Insert",
+      "doc": "ebaf84fe",
+      "action": "Flag Message or Mark Flagged Message as Complete"
+    },
+    "T4R6": {
+      "keys": "Esc",
+      "doc": "508f84c8",
+      "action": "Cancel Search"
+    },
+    "T4R7": {
+      "keys": "Ctrl+>",
+      "doc": "1ab75ed1",
+      "skip": "doubt: the page writes the key as a bare \">\" sign; unclear whether Shift is part of the shortcut"
+    },
+    "T4R8": {
+      "keys": "Ctrl+<",
+      "doc": "34220b2a",
+      "skip": "doubt: the page writes the key as a bare \"<\" sign; unclear whether Shift is part of the shortcut"
+    },
+    "T5R1": {
+      "keys": "Shift+Down arrow key",
+      "doc": "996cdb30",
+      "action": "Select Current and Next Message in List"
+    },
+    "T5R2": {
+      "keys": "Shift+Up arrow key",
+      "doc": "c3042478",
+      "action": "Select Current and Previous Message in List"
+    },
+    "T6R4": {
+      "keys": "End",
+      "doc": "99fcc51d",
+      "action": "Go to Bottom of Conversation or Message"
+    },
+    "T6R5": {
+      "keys": "Home",
+      "doc": "4d600215",
+      "action": "Go to Top of Conversation or Message"
+    },
+    "T6R6": {
+      "keys": "Page down",
+      "doc": "feeb5b18",
+      "action": "Move Down One Page in Conversation or Message"
+    },
+    "T6R7": {
+      "keys": "Page up",
+      "doc": "7b3cc2c8",
+      "action": "Move Up One Page in Conversation or Message"
+    },
+    "T7R3": {
+      "keys": "Enter",
+      "doc": "9baa3ab6",
+      "action": "Open Selected Item"
+    },
+    "T7R11": {
+      "keys": "Tab key",
+      "doc": "55fcbc47",
+      "action": "Move to Next Event or Area in Current View"
+    },
+    "T7R12": {
+      "keys": "Shift+Tab",
+      "doc": "399e2125",
+      "action": "Move to Previous Event or Area in Current View"
+    },
+    "T7R13": {
+      "keys": "Ctrl+Alt+Right arrow key",
+      "doc": "be56206d",
+      "action": "Go to Next Time Period"
+    },
+    "T7R14": {
+      "keys": "Ctrl+Alt+Left arrow key",
+      "doc": "f4430a7d",
+      "action": "Go to Previous Time Period"
+    },
+    "T7R17": {
+      "keys": "Ctrl+Alt+1",
+      "doc": "d804d539",
+      "action": "Switch to Day View"
+    },
+    "T7R20": {
+      "keys": "Ctrl+Alt+2",
+      "doc": "ea440deb",
+      "action": "Switch to Work Week View"
+    },
+    "T7R21": {
+      "keys": "Alt+3",
+      "doc": "f8dc999b",
+      "action": "Switch to Three-Day View"
+    },
+    "T8R1": {
+      "keys": "Ctrl+1",
+      "doc": "2ca7beba",
+      "action": "Go to Mail",
+      "section": "Frequently Used"
+    },
+    "T8R3": {
+      "keys": "Ctrl+3",
+      "doc": "e45d657f",
+      "action": "Go to Copilot",
+      "section": "Frequently Used"
+    },
+    "T8R4": {
+      "keys": "Ctrl+4",
+      "doc": "bbacfd91",
+      "action": "Go to People",
+      "section": "Frequently Used"
+    },
+    "T8R7": {
+      "keys": "Ctrl+E",
+      "doc": "ebbdfdb3",
+      "action": "Search for a Contact"
+    },
+    "T8R9": {
+      "keys": "Ctrl+S",
+      "doc": "725ee1dc",
+      "action": "Save Contact or Contact List"
+    },
+    "T8R10": {
+      "keys": "Ctrl+A",
+      "doc": "0e35d2dd",
+      "action": "Select All Contacts or Contact Lists"
+    },
+    "T8R12": {
+      "keys": "Shift+E",
+      "doc": "dffeef33",
+      "action": "Edit Contact or Contact List"
+    },
+    "T8R13": {
+      "keys": "Down arrow key",
+      "doc": "2f7a35d8",
+      "action": "Move Down in Contact List or Hub List"
+    },
+    "T8R14": {
+      "keys": "Up arrow key",
+      "doc": "01e6c7d6",
+      "action": "Move Up in Contact List or Hub List"
+    },
+    "T8R15": {
+      "keys": "Ctrl+L",
+      "doc": "410e60b2",
+      "action": "Create Contact List"
+    },
+    "T8R17": {
+      "keys": "Alt, H",
+      "doc": "4a601cf6",
+      "action": "Move Focus to Home Tab"
+    },
+    "T8R18": {
+      "keys": "Alt, V",
+      "doc": "02e11233",
+      "action": "Move Focus to View Tab"
+    }
+  }
+}

@@ -1,0 +1,636 @@
+{
+  "slug": "teams",
+  "displayName": "Teams",
+  "category": "communication",
+  "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-for-microsoft-teams-2e8e2a70-e8d8-4a19-949b-4c36dd5292d2",
+  "platform": "windows",
+  "tab": "windows",
+  "fetched": "2026-09-29",
+  "sectionOrder": [
+    "Navigation",
+    "Messaging",
+    "Meetings",
+    "General",
+    "Compose",
+    "Calendar"
+  ],
+  "sections": {
+    "General": "General",
+    "Navigation": "Navigation",
+    "Messaging": "Messaging",
+    "Compose": "Compose",
+    "Meetings, Calls, and Calendar > Meetings and Calls": "Meetings",
+    "Meetings, Calls, and Calendar > Navigate calendar": "Calendar",
+    "Meetings, Calls, and Calendar > Calendar actions": "Calendar",
+    "Meetings, Calls, and Calendar > Create events": "Calendar",
+    "Activity feed": "General",
+    "Debug": "General"
+  },
+  "rows": {
+    "T0R3": {
+      "keys": "Ctrl+Shift+F",
+      "doc": "ccbb644f",
+      "action": "Open the Filter"
+    },
+    "T0R5": {
+      "keys": "Ctrl+Shift+N",
+      "doc": "48bff0f1",
+      "action": "Start Chat in New Window"
+    },
+    "T0R6": {
+      "keys": "Ctrl+Comma (,)",
+      "doc": "7b60c77c",
+      "action": "Open Settings"
+    },
+    "T0R7": {
+      "keys": "F1",
+      "doc": "eca5d6fd",
+      "action": "Open Help"
+    },
+    "T0R8": {
+      "keys": "Esc",
+      "doc": "c0eabe09",
+      "action": "Close"
+    },
+    "T0R9": {
+      "keys": "Ctrl+Equals sign (=)",
+      "doc": "030d4d50",
+      "action": "Increase Zoom Level"
+    },
+    "T0R10": {
+      "keys": "Ctrl+Minus sign (-)",
+      "doc": "3ace1102",
+      "action": "Decrease Zoom Level"
+    },
+    "T0R11": {
+      "keys": "Ctrl+0",
+      "doc": "dbbaccaf",
+      "action": "Reset the Zoom Level"
+    },
+    "T0R12": {
+      "keys": "Ctrl+Alt+Shift+R",
+      "doc": "95a1a66d",
+      "action": "Report a Problem"
+    },
+    "T0R13": {
+      "keys": "Ctrl+G",
+      "doc": "1bb3ab4d",
+      "action": "Go to Specific Chat or Channel"
+    },
+    "T0R14": {
+      "keys": "Ctrl+Alt+Enter",
+      "doc": "5d0fd53c",
+      "action": "Move Focus to Pane Divider"
+    },
+    "T0R15": {
+      "keys": "Ctrl+Shift+Enter",
+      "doc": "27105d6f",
+      "action": "Return Pane to Default Width"
+    },
+    "T0R16": {
+      "keys": "Ctrl+Shift+T",
+      "doc": "d89e8056",
+      "action": "Pin Window on Top"
+    },
+    "T0R17": {
+      "keys": "Ctrl+O",
+      "doc": "15146215",
+      "action": "Open Existing Conversation in New Window"
+    },
+    "T1R5": {
+      "keys": "Ctrl+5",
+      "doc": "8d9ce60f",
+      "action": "Open 5th App on App Bar"
+    },
+    "T1R6": {
+      "keys": "Ctrl+6",
+      "doc": "3e6021e7",
+      "action": "Open 6th App on App Bar"
+    },
+    "T1R7": {
+      "keys": "Ctrl+7",
+      "doc": "13daf30b",
+      "action": "Open 7th App on App Bar"
+    },
+    "T1R8": {
+      "keys": "Ctrl+8",
+      "doc": "c0409c94",
+      "action": "Open 8th App on App Bar"
+    },
+    "T1R9": {
+      "keys": "Ctrl+9",
+      "doc": "b2d7a1fe",
+      "action": "Open 9th App on App Bar"
+    },
+    "T1R10": {
+      "keys": "Alt+Shift+L",
+      "doc": "e1d0eaba",
+      "skip": "doubt: the page gives \"Add Loop paragraph\" to two combinations (here, in the Navigation table, and in Compose)"
+    },
+    "T1R11": {
+      "keys": "Ctrl+L",
+      "doc": "83bd36a5",
+      "action": "Move Focus to Chat or Channel List"
+    },
+    "T1R12": {
+      "keys": "Ctrl+M",
+      "doc": "e0ebba42",
+      "action": "Move Focus to Message Pane"
+    },
+    "T1R13": {
+      "keys": "Ctrl+Alt+T",
+      "doc": "adcb5a52",
+      "action": "Move Focus to Toast"
+    },
+    "T1R14": {
+      "keys": "Ctrl+R",
+      "doc": "c9f8a3a2",
+      "action": "Go to Compose Box"
+    },
+    "T1R15": {
+      "keys": "Ctrl+H",
+      "doc": "04ac3a2c",
+      "action": "Open History Menu"
+    },
+    "T1R16": {
+      "keys": "Ctrl+Shift+F6",
+      "doc": "056e57a0",
+      "action": "Move to Previous Section"
+    },
+    "T1R17": {
+      "keys": "Ctrl+F6",
+      "doc": "065debe3",
+      "action": "Move to Next Section"
+    },
+    "T1R18": {
+      "keys": "Ctrl+Alt+Shift+Up arrow key",
+      "doc": "bc87a204",
+      "action": "Move Selected Chat or Channel Up in List"
+    },
+    "T1R19": {
+      "keys": "Ctrl+Alt+Shift+Down arrow key",
+      "doc": "fd810b4f",
+      "action": "Move Selected Chat or Channel Down in List"
+    },
+    "T1R20": {
+      "keys": "Alt+Left arrow key",
+      "doc": "28858492",
+      "action": "Go Back"
+    },
+    "T1R21": {
+      "keys": "Alt+Right arrow key",
+      "doc": "96844833",
+      "action": "Go Forward"
+    },
+    "T1R22": {
+      "keys": "Windows logo key+Shift+Y",
+      "doc": "56d4c5df",
+      "action": "Move Focus to Notification"
+    },
+    "T2R1": {
+      "keys": "Alt+Q",
+      "doc": "8ee9aa6e",
+      "action": "Collapse All Conversational Folders"
+    },
+    "T2R2": {
+      "keys": "Shift+Escape",
+      "doc": "0d43f2bb",
+      "action": "Mark All as Read"
+    },
+    "T2R3": {
+      "keys": "Ctrl+J",
+      "doc": "4b6c24c4",
+      "action": "Jump to Last Read or Newest Message"
+    },
+    "T2R4": {
+      "keys": "Ctrl+F",
+      "doc": "c723bd96",
+      "action": "Find in Current Chat or Channel"
+    },
+    "T2R5": {
+      "keys": "Alt+1",
+      "doc": "1ccecc49",
+      "action": "Open 1st Tab on Chat Header"
+    },
+    "T2R6": {
+      "keys": "Alt+2",
+      "doc": "06317a6a",
+      "action": "Open 2nd Tab on Chat Header"
+    },
+    "T2R7": {
+      "keys": "Alt+3",
+      "doc": "5c580944",
+      "action": "Open 3rd Tab on Chat Header"
+    },
+    "T2R8": {
+      "keys": "Alt+4",
+      "doc": "d84d8c88",
+      "action": "Open 4th Tab on Chat Header"
+    },
+    "T2R9": {
+      "keys": "Alt+5",
+      "doc": "ed08867f",
+      "action": "Open 5th Tab on Chat Header"
+    },
+    "T2R10": {
+      "keys": "Alt+6",
+      "doc": "5f0459be",
+      "action": "Open 6th Tab on Chat Header"
+    },
+    "T2R11": {
+      "keys": "Alt+7",
+      "doc": "b881c552",
+      "action": "Open 7th Tab on Chat Header"
+    },
+    "T2R12": {
+      "keys": "Alt+8",
+      "doc": "66827755",
+      "action": "Open 8th Tab on Chat Header"
+    },
+    "T2R13": {
+      "keys": "Alt+9",
+      "doc": "df1ef455",
+      "action": "Open 9th Tab on Chat Header"
+    },
+    "T2R14": {
+      "keys": "Alt+P",
+      "doc": "88dab07c",
+      "action": "Toggle Details Pane"
+    },
+    "T2R15": {
+      "keys": "Alt+Shift+R",
+      "doc": "2f680d6b",
+      "action": "Reply to Last Message"
+    },
+    "T2R16": {
+      "keys": "Ctrl+Alt+R",
+      "doc": "cb10390f",
+      "action": "React to Last Message"
+    },
+    "T2R17": {
+      "keys": "Ctrl+Alt+U",
+      "doc": "7fa5d27c",
+      "action": "See All Unread Chats"
+    },
+    "T2R18": {
+      "keys": "Ctrl+Alt+C",
+      "doc": "597c1e1c",
+      "action": "See All Chat Conversations"
+    },
+    "T2R19": {
+      "keys": "Ctrl+Alt+A",
+      "doc": "6f37eb01",
+      "action": "See All Channel Conversations"
+    },
+    "T2R20": {
+      "keys": "Ctrl+Alt+B",
+      "doc": "96f2381c",
+      "action": "See All Meeting Chats"
+    },
+    "T2R21": {
+      "keys": "Ctrl+Alt+Z",
+      "doc": "45e108d0",
+      "action": "Clear All Filters"
+    },
+    "T3R1": {
+      "keys": "Ctrl+Shift+X",
+      "doc": "990f6134",
+      "action": "Expand the Compose Box"
+    },
+    "T3R2": {
+      "keys": "Ctrl+Enter",
+      "doc": "d862a78e",
+      "action": "Send from Expanded Compose Box"
+    },
+    "T3R3": {
+      "keys": "Ctrl+Alt+P",
+      "doc": "f144b39e",
+      "action": "Paragraph Style"
+    },
+    "T3R4": {
+      "keys": "Ctrl+Alt+4",
+      "doc": "3f524f14",
+      "action": "Insert Block Quote"
+    },
+    "T3R5": {
+      "keys": "Alt+Shift+O",
+      "doc": "7944ade0",
+      "action": "Attach a File"
+    },
+    "T3R7": {
+      "keys": "Ctrl+Alt+1",
+      "doc": "6ef071c8",
+      "action": "Apply Heading 1 Style"
+    },
+    "T3R8": {
+      "keys": "Ctrl+Alt+2",
+      "doc": "c9b4d437",
+      "action": "Apply Heading 2 Style"
+    },
+    "T3R9": {
+      "keys": "Ctrl+Alt+3",
+      "doc": "0bad5fb9",
+      "action": "Apply Heading 3 Style"
+    },
+    "T3R12": {
+      "keys": "Ctrl+U",
+      "doc": "36eaa634",
+      "action": "Underline"
+    },
+    "T3R13": {
+      "keys": "Ctrl+Alt+X",
+      "doc": "e91866e9",
+      "action": "Strikethrough"
+    },
+    "T3R14": {
+      "keys": "Ctrl+Shift+I",
+      "doc": "86101d5a",
+      "action": "Mark Message as Important"
+    },
+    "T3R15": {
+      "keys": "Alt+A",
+      "doc": "7ab06655",
+      "action": "Rewrite with Copilot"
+    },
+    "T3R16": {
+      "keys": "Alt+Shift+E",
+      "doc": "efdf69e5",
+      "action": "Open Video Recorder"
+    },
+    "T3R17": {
+      "keys": "Ctrl+Alt+L",
+      "doc": "e1d0eaba",
+      "skip": "doubt: the page gives \"Add Loop paragraph\" to two combinations (here and in the Navigation table)"
+    },
+    "T3R18": {
+      "keys": "Ctrl+K",
+      "doc": "840b60c9",
+      "action": "Insert Link"
+    },
+    "T3R19": {
+      "keys": "Ctrl+Shift+C",
+      "doc": "f68ab0cc",
+      "action": "Insert Inline Code"
+    },
+    "T3R21": {
+      "keys": "Ctrl+Alt+5",
+      "doc": "942e22ce",
+      "action": "Insert Code"
+    },
+    "T4R1": {
+      "keys": "Ctrl+Shift+A",
+      "doc": "964cff70",
+      "action": "Accept Video Call or Screen Share"
+    },
+    "T4R2": {
+      "keys": "Ctrl+Shift+S",
+      "doc": "2169db5f",
+      "action": "Accept an Audio Call"
+    },
+    "T4R3": {
+      "keys": "Ctrl+Shift+D",
+      "doc": "f8716418",
+      "action": "Decline Call or Screen Share"
+    },
+    "T4R4": {
+      "keys": "Alt+Shift+A",
+      "doc": "66f3b754",
+      "action": "Start an Audio Call"
+    },
+    "T4R5": {
+      "keys": "Alt+Shift+V",
+      "doc": "9f3bd01c",
+      "action": "Start a Video Call"
+    },
+    "T4R6": {
+      "keys": "F11",
+      "doc": "27374a5e",
+      "action": "Toggle Full Screen"
+    },
+    "T4R7": {
+      "keys": "Alt+Shift+Plus sign (+)",
+      "doc": "474745c2",
+      "action": "Zoom In Shared Content"
+    },
+    "T4R8": {
+      "keys": "Alt+Shift+Minus sign (-)",
+      "doc": "4edd3184",
+      "action": "Zoom Out Shared Content"
+    },
+    "T4R9": {
+      "keys": "Alt+Shift+0",
+      "doc": "55acd36f",
+      "action": "Reset Zoom for Shared Content"
+    },
+    "T4R10": {
+      "keys": "Ctrl+Shift+H",
+      "doc": "33846ecd",
+      "action": "End Audio or Video Call"
+    },
+    "T4R13": {
+      "keys": "Ctrl+Shift+U",
+      "doc": "4e0b2a5a",
+      "action": "Toggle Speaker"
+    },
+    "T4R14": {
+      "keys": "Ctrl+Spacebar",
+      "doc": "60dcffc2",
+      "action": "Temporarily Unmute"
+    },
+    "T4R15": {
+      "keys": "Ctrl+Shift+L",
+      "doc": "13cc12d3",
+      "action": "Announce Raised Hands with Screen Reader"
+    },
+    "T4R19": {
+      "keys": "Ctrl+Shift+Spacebar",
+      "doc": "8d70a271",
+      "action": "Go to the Sharing Toolbar"
+    },
+    "T4R22": {
+      "keys": "Ctrl+Shift+Y",
+      "doc": "ee33a050",
+      "action": "Admit People from the Lobby Notification"
+    },
+    "T4R23": {
+      "keys": "Alt+N",
+      "doc": "3b59a99e",
+      "action": "Schedule Meeting"
+    },
+    "T4R24": {
+      "keys": "Alt+F10",
+      "doc": "dbcc094f",
+      "action": "Move Focus to Toolbar in an Edit Field"
+    },
+    "T4R25": {
+      "keys": "Ctrl+S",
+      "doc": "9c1786db",
+      "action": "Save or Send Meeting Request"
+    },
+    "T4R26": {
+      "keys": "Alt+Shift+J",
+      "doc": "3f913472",
+      "action": "Join from the Meeting Details"
+    },
+    "T4R27": {
+      "keys": "Alt+Shift+S",
+      "doc": "61c03af4",
+      "action": "Go to the Suggested Time"
+    },
+    "T4R28": {
+      "keys": "Ctrl+Shift+J",
+      "doc": "3325e342",
+      "action": "Join from Meeting Started Toast"
+    },
+    "T4R29": {
+      "keys": "Ctrl+Shift+R",
+      "doc": "e847c1b3",
+      "action": "Open Meeting Chat from Meeting Notification"
+    },
+    "T4R30": {
+      "keys": "Alt+Shift+Up arrow key",
+      "doc": "b359316f",
+      "action": "Pan Shared Content Up"
+    },
+    "T4R31": {
+      "keys": "Alt+Shift+Down arrow key",
+      "doc": "db40f281",
+      "action": "Pan Shared Content Down"
+    },
+    "T4R32": {
+      "keys": "Alt+Shift+Left arrow key",
+      "doc": "bdb286d4",
+      "action": "Pan Shared Content Left"
+    },
+    "T4R33": {
+      "keys": "Alt+Shift+Right arrow key",
+      "doc": "9e9247ad",
+      "action": "Pan Shared Content Right"
+    },
+    "T5R2": {
+      "keys": "Enter",
+      "doc": "9baa3ab6",
+      "action": "Open Selected Item"
+    },
+    "T5R3": {
+      "keys": "Delete",
+      "doc": "239243bc",
+      "action": "Delete Selected Item"
+    },
+    "T5R4": {
+      "keys": "Alt+Shift+1",
+      "doc": "51c46bd3",
+      "action": "Open Day View"
+    },
+    "T5R5": {
+      "keys": "Alt+Shift+2",
+      "doc": "d949169d",
+      "action": "Open Work Week View"
+    },
+    "T5R6": {
+      "keys": "Alt+Shift+3",
+      "doc": "b8ce1091",
+      "action": "Open Week View"
+    },
+    "T5R7": {
+      "keys": "Alt+Shift+4",
+      "doc": "7ed1bd08",
+      "action": "Open Month View"
+    },
+    "T5R8": {
+      "keys": "Alt+Shift+5",
+      "doc": "0faef5f5",
+      "action": "Open Agenda in Month View"
+    },
+    "T5R9": {
+      "keys": "Ctrl+Alt+Left arrow key",
+      "doc": "19c04b70",
+      "action": "Go to Previous Time Period"
+    },
+    "T5R10": {
+      "keys": "Ctrl+Alt+Right arrow key",
+      "doc": "be3c75f7",
+      "action": "Go to Next Time Period"
+    },
+    "T5R18": {
+      "keys": "Alt+Down arrow key",
+      "doc": "7bb009ca",
+      "action": "Go to Next Week"
+    },
+    "T5R19": {
+      "keys": "Alt+Up arrow key",
+      "doc": "27e3f0e4",
+      "action": "Go to Previous Week"
+    },
+    "T5R20": {
+      "keys": "Alt+PageDown",
+      "doc": "786ac3c4",
+      "action": "Go to Next Month"
+    },
+    "T5R21": {
+      "keys": "Alt+PageUp",
+      "doc": "bc60afef",
+      "action": "Go to Previous Month"
+    },
+    "T5R22": {
+      "keys": "Alt+F1",
+      "doc": "9bfc152e",
+      "action": "Open or Collapse Left Pane"
+    },
+    "T5R24": {
+      "keys": "Tab key",
+      "doc": "55fcbc47",
+      "action": "Move to Next Event or Area in Current View"
+    },
+    "T5R25": {
+      "keys": "Shift+Tab",
+      "doc": "399e2125",
+      "action": "Move to Previous Event or Area in Current View"
+    },
+    "T6R4": {
+      "keys": "Ctrl+P",
+      "doc": "ab2d6706",
+      "action": "Print Calendar"
+    },
+    "T6R6": {
+      "keys": "?",
+      "doc": "6aef985e",
+      "action": "Show Help"
+    },
+    "T6R7": {
+      "keys": "Ctrl+Alt+F",
+      "doc": "b9257a19",
+      "action": "Forward an Event"
+    },
+    "T6R8": {
+      "keys": "Alt+R",
+      "doc": "a5908396",
+      "action": "Reply to Meeting"
+    },
+    "T7R6": {
+      "keys": "Ctrl+Z",
+      "doc": "afd158dd",
+      "action": "Undo Action"
+    },
+    "T7R8": {
+      "keys": "Ctrl+Shift+Q",
+      "doc": "02de9d80",
+      "action": "Create Meeting Request"
+    },
+    "T8R1": {
+      "keys": "Ctrl+Alt+K",
+      "doc": "0d43f2bb",
+      "action": "Mark All Activity as Read"
+    },
+    "T8R4": {
+      "keys": "Ctrl+Alt+M",
+      "doc": "cb1f2057",
+      "action": "Filter Activity to @ Mentions"
+    },
+    "T9R1": {
+      "keys": "Ctrl+Alt+Shift+1",
+      "doc": "31b2a6c3",
+      "action": "Download the Diagnostic Logs"
+    }
+  }
+}

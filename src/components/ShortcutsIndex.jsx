@@ -1,9 +1,10 @@
-import React, { useState, useDeferredValue, useMemo, useRef, useEffect } from 'react'
+import React, { useState, useMemo, useRef, useEffect } from 'react'
 import { useLoaderData, useNavigate } from 'react-router'
 import Link from './SiteLink'
 import { Search, X } from '../utils/icons'
 import { groupByCategories } from '../utils/platformHelpers'
-import { buildSearchIndex, searchIndex, parseAppQuery } from '../utils/searchHelpers'
+import { parseAppQuery } from '../utils/searchHelpers'
+import { usePlatformSearch } from '../hooks/usePlatformSearch'
 import { linkPath, pageUrl } from '../utils/siteUrl'
 import { categoryConfig } from '../data/categoryConfig'
 import { CONTENT } from '../data/content'
@@ -23,10 +24,8 @@ export default function ShortcutsIndex() {
     return apps.reduce((s, a) => s + a.shortcutCount, 0)
   }, [apps])
 
-  // Smart search index
-  const deferredSearch = useDeferredValue(search)
-  const searchIdx = useMemo(() => buildSearchIndex(apps), [apps])
-  const smartResults = useMemo(() => searchIndex(searchIdx, deferredSearch), [searchIdx, deferredSearch])
+  // The page has the list of apps. The shortcuts load when the visitor turns to the search.
+  const { results: smartResults, wake: wakeSearch, ready: searchReady, error: searchError } = usePlatformSearch(platform, apps, search)
   const hasSmartResults = smartResults.appMatches.length > 0 || smartResults.shortcutMatches.length > 0
 
   const grouped = useMemo(() => {
@@ -104,7 +103,7 @@ export default function ShortcutsIndex() {
               placeholder={CONTENT.directory.searchPlaceholder}
               value={search}
               onChange={e => { setSearch(e.target.value); setDropdownOpen(true) }}
-              onFocus={() => setDropdownOpen(true)}
+              onFocus={() => { wakeSearch(); setDropdownOpen(true) }}
               onKeyDown={e => {
                 if (e.key === 'Enter' && search) {
                   e.preventDefault()
@@ -140,6 +139,7 @@ export default function ShortcutsIndex() {
                 platform={platform}
                 onClose={() => setSearch('')}
                 query={search}
+                loading={!searchReady && !searchError}
               />
             )}
           </div>
@@ -187,7 +187,9 @@ export default function ShortcutsIndex() {
         })}
 
         {grouped.length === 0 && search && !hasSmartResults && (
-          <p className="text-center text-theme-muted py-20">No apps found for &ldquo;{search}&rdquo;</p>
+          <p className="text-center text-theme-muted py-20" role="status" aria-live="polite">
+            {searchReady || searchError ? <>No apps found for &ldquo;{search}&rdquo;</> : CONTENT.home.loadingShortcuts}
+          </p>
         )}
 
         {/* ─── About this platform: intro + modifier keys (below the grid, so apps come first) ─── */}

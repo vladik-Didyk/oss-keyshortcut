@@ -1,0 +1,810 @@
+{
+  "slug": "excel",
+  "displayName": "Excel",
+  "category": "microsoft-office",
+  "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f",
+  "platform": "windows",
+  "tab": "windows",
+  "fetched": "2026-09-29",
+  "sectionOrder": [
+    "Navigation",
+    "Editing",
+    "Formatting",
+    "Formulas",
+    "Frequently Used",
+    "Ribbon",
+    "Selection",
+    "Paste Special Dialog",
+    "Data",
+    "Power Pivot",
+    "Copilot",
+    "Function Keys"
+  ],
+  "sections": {
+    "Frequently used shortcuts": "Frequently Used",
+    "Ribbon keyboard shortcuts > Use the Access keys for ribbon tabs": "Ribbon",
+    "Ribbon keyboard shortcuts > Work in the ribbon with the keyboard": "Ribbon",
+    "Keyboard shortcuts for navigating in cells": "Navigation",
+    "Keyboard shortcuts for formatting cells": "Formatting",
+    "Keyboard shortcuts for formatting cells > Keyboard shortcuts in the Paste Special dialog box in Excel": "Paste Special Dialog",
+    "Keyboard shortcuts for making selections and performing actions": "Selection",
+    "Keyboard shortcuts for working with data, functions, and the formula bar": "Formulas",
+    "Keyboard shortcuts for refreshing external data": "Data",
+    "Power Pivot keyboard shortcuts": "Power Pivot",
+    "Copilot in Excel": "Copilot",
+    "Function keys": "Function Keys"
+  },
+  "rows": {
+    "T0R1": {
+      "keys": "Ctrl+W",
+      "doc": "ea9fb185",
+      "action": "Close Workbook"
+    },
+    "T0R2": {
+      "keys": "Ctrl+O",
+      "doc": "d5b95a32",
+      "action": "Open Workbook"
+    },
+    "T0R3": {
+      "keys": "Alt+H",
+      "doc": "c9f2ba31",
+      "action": "Go to Home Tab",
+      "section": "Ribbon"
+    },
+    "T0R4": {
+      "keys": "Ctrl+S",
+      "doc": "81932045",
+      "action": "Save Workbook"
+    },
+    "T0R5": {
+      "keys": "Ctrl+C",
+      "doc": "1ade321d",
+      "action": "Copy Selection",
+      "section": "Editing"
+    },
+    "T0R6": {
+      "keys": "Ctrl+V",
+      "doc": "bb7b0764",
+      "action": "Paste Selection",
+      "section": "Editing"
+    },
+    "T0R7": {
+      "keys": "Ctrl+Z",
+      "doc": "d2a22283",
+      "action": "Undo Recent Action",
+      "section": "Editing"
+    },
+    "T0R8": {
+      "keys": "Delete",
+      "doc": "dc88bbed",
+      "action": "Remove Cell Contents",
+      "section": "Editing"
+    },
+    "T0R9": {
+      "keys": "Alt+H, H",
+      "doc": "828f4846",
+      "action": "Choose Fill Color"
+    },
+    "T0R10": {
+      "keys": "Ctrl+X",
+      "doc": "9c7ebd38",
+      "action": "Cut Selection",
+      "section": "Editing"
+    },
+    "T0R11": {
+      "keys": "Alt+N",
+      "doc": "df7bab79",
+      "action": "Go to Insert Tab",
+      "section": "Ribbon"
+    },
+    "T0R13": {
+      "keys": "Alt+H, A, C",
+      "doc": "eb2052b5",
+      "action": "Center Align Cell Contents"
+    },
+    "T0R14": {
+      "keys": "Alt+P",
+      "doc": "2dc2d7e1",
+      "action": "Go to Page Layout Tab",
+      "section": "Ribbon"
+    },
+    "T0R15": {
+      "keys": "Alt+A",
+      "doc": "60f5c83a",
+      "action": "Go to Data Tab",
+      "section": "Ribbon"
+    },
+    "T0R16": {
+      "keys": "Alt+W",
+      "doc": "29093364",
+      "action": "Go to View Tab",
+      "section": "Ribbon"
+    },
+    "T0R18": {
+      "keys": "Alt+H, B",
+      "doc": "33c4ee9c",
+      "action": "Add Borders"
+    },
+    "T0R19": {
+      "keys": "Alt+H, D, C",
+      "doc": "48abf7d3",
+      "action": "Delete Column"
+    },
+    "T0R20": {
+      "keys": "Alt+M",
+      "doc": "4a0d123b",
+      "action": "Go to Formulas Tab",
+      "section": "Ribbon"
+    },
+    "T0R21": {
+      "keys": "Ctrl+9",
+      "doc": "0b97df6c",
+      "action": "Hide Selected Rows"
+    },
+    "T0R22": {
+      "keys": "Ctrl+0",
+      "doc": "227bdf0b",
+      "action": "Hide Selected Columns"
+    },
+    "T1R1": {
+      "keys": "Alt+Q, then enter the search term.",
+      "doc": "01238f7a",
+      "action": "Go to Search Field on the Ribbon"
+    },
+    "T1R2": {
+      "keys": "Alt+F",
+      "doc": "dd7bb792",
+      "action": "Open File Menu"
+    },
+    "T1R8": {
+      "keys": "Alt+R",
+      "doc": "14900d3e",
+      "action": "Open Review Tab"
+    },
+    "T2R4": {
+      "keys": "Ctrl+Shift+F10",
+      "doc": "8409205f",
+      "action": "Show Tooltip for Focused Ribbon Element"
+    },
+    "T2R6": {
+      "keys": "Down arrow key",
+      "doc": "a6512ea8",
+      "skip": "plain arrow key: kept for the worksheet (navigating in cells)"
+    },
+    "T2R7": {
+      "keys": "Alt+Down arrow key",
+      "doc": "26f96472",
+      "action": "Open Menu for Selected Button"
+    },
+    "T2R8": {
+      "keys": "Down arrow key",
+      "doc": "28f3cc67",
+      "skip": "plain arrow key: kept for the worksheet (navigating in cells)"
+    },
+    "T2R9": {
+      "keys": "Ctrl+F1",
+      "doc": "90b84e6a",
+      "action": "Expand or Collapse Ribbon"
+    },
+    "T2R11": {
+      "keys": "Left arrow key",
+      "doc": "2db87cbd",
+      "skip": "plain arrow key: kept for the worksheet (navigating in cells)"
+    },
+    "T3R1": {
+      "keys": "Shift+Tab",
+      "doc": "aa225858",
+      "action": "Move to Previous Cell or Previous Dialog Option"
+    },
+    "T3R2": {
+      "keys": "Up arrow key",
+      "doc": "477737ec",
+      "action": "Move One Cell Up"
+    },
+    "T3R3": {
+      "keys": "Down arrow key",
+      "doc": "dc85c83e",
+      "action": "Move One Cell Down"
+    },
+    "T3R4": {
+      "keys": "Left arrow key",
+      "doc": "220295dd",
+      "action": "Move One Cell Left"
+    },
+    "T3R5": {
+      "keys": "Right arrow key",
+      "doc": "56ae67c4",
+      "action": "Move One Cell Right"
+    },
+    "T3R9": {
+      "keys": "Ctrl+Shift+End",
+      "doc": "40aac48e",
+      "action": "Extend Selection to Last Used Cell"
+    },
+    "T3R12": {
+      "keys": "Page down",
+      "doc": "97cc391c",
+      "action": "Move One Screen Down"
+    },
+    "T3R14": {
+      "keys": "Alt+Page down",
+      "doc": "fa7d015c",
+      "action": "Move One Screen Right"
+    },
+    "T3R15": {
+      "keys": "Page up",
+      "doc": "86e35158",
+      "action": "Move One Screen Up"
+    },
+    "T3R16": {
+      "keys": "Alt+Page up",
+      "doc": "7119e1d7",
+      "action": "Move One Screen Left"
+    },
+    "T3R21": {
+      "keys": "Esc",
+      "doc": "f6b9a0cf",
+      "skip": "narrow meaning (floating shapes): the key is kept with its general meaning from the formula bar table"
+    },
+    "T3R23": {
+      "keys": "Ctrl+Alt+Equal sign (=)",
+      "doc": "030d4d50",
+      "action": "Zoom In"
+    },
+    "T3R24": {
+      "keys": "Ctrl+Alt+Minus sign (-)",
+      "doc": "3ace1102",
+      "action": "Zoom Out"
+    },
+    "T4R2": {
+      "keys": "Ctrl+Shift+F",
+      "doc": "7cd682c2",
+      "action": "Format Fonts in Format Cells Dialog"
+    },
+    "T4R4": {
+      "keys": "Shift+F2 ¶ Shift+F2",
+      "doc": "d0f97b3d",
+      "action": "Insert or Edit Cell Note",
+      "section": "Editing"
+    },
+    "T4R5": {
+      "keys": "Ctrl+Shift+F2 ¶ Ctrl+Shift+F2",
+      "doc": "2d2dbd6e",
+      "action": "Insert or Reply to Threaded Comment",
+      "section": "Editing"
+    },
+    "T4R6": {
+      "keys": "Ctrl+Shift+Plus sign (+)",
+      "doc": "ad3e9303",
+      "action": "Open Insert Dialog to Insert Blank Cells",
+      "section": "Editing"
+    },
+    "T4R7": {
+      "keys": "Ctrl+Minus sign (-)",
+      "doc": "ff0eb4d3",
+      "action": "Open Delete Dialog to Delete Selected Cells",
+      "section": "Editing"
+    },
+    "T4R11": {
+      "keys": "Ctrl+Apostrophe (')",
+      "doc": "d37b2a30",
+      "action": "Copy Formula from Cell Above",
+      "section": "Editing"
+    },
+    "T4R15": {
+      "keys": "Ctrl+Alt+V",
+      "doc": "b6b03af2",
+      "action": "Open Paste Special Dialog",
+      "section": "Editing"
+    },
+    "T4R19": {
+      "keys": "Ctrl+5",
+      "doc": "4ef1013d",
+      "action": "Apply or Remove Strikethrough"
+    },
+    "T4R20": {
+      "keys": "Ctrl+6",
+      "doc": "20244f92",
+      "action": "Switch Among Hidden, Displayed, and Placeholder Objects"
+    },
+    "T4R21": {
+      "keys": "Ctrl+Shift+Ampersand sign (&)",
+      "doc": "748e6c82",
+      "action": "Apply Outline Border to Selected Cells"
+    },
+    "T4R22": {
+      "keys": "Ctrl+Shift+Underscore (_)",
+      "doc": "c9a3bf59",
+      "action": "Remove Outline Border from Selected Cells"
+    },
+    "T4R23": {
+      "keys": "Ctrl+8",
+      "doc": "cde78eaf",
+      "action": "Display or Hide Outline Symbols"
+    },
+    "T4R25": {
+      "keys": "Ctrl+Shift+Tilde sign (~)",
+      "doc": "269c2abf",
+      "action": "Apply General Number Format"
+    },
+    "T4R28": {
+      "keys": "Ctrl+Shift+Caret sign (^)",
+      "doc": "84193765",
+      "action": "Apply Scientific Number Format"
+    },
+    "T4R29": {
+      "keys": "Ctrl+Shift+Number sign (#)",
+      "doc": "615f71f1",
+      "action": "Apply Date Format with Day, Month, and Year"
+    },
+    "T4R30": {
+      "keys": "Ctrl+Shift+At sign (@)",
+      "doc": "df4f0dff",
+      "action": "Apply Time Format with Hour and Minute"
+    },
+    "T4R31": {
+      "keys": "Ctrl+Shift+Exclamation point (!)",
+      "doc": "1326d925",
+      "action": "Apply Number Format with Two Decimal Places"
+    },
+    "T4R32": {
+      "keys": "Ctrl+K",
+      "doc": "31d958c1",
+      "action": "Open Insert Hyperlink Dialog",
+      "section": "Editing"
+    },
+    "T4R33": {
+      "keys": "F7",
+      "doc": "beb79aed",
+      "action": "Check Spelling",
+      "section": "Editing"
+    },
+    "T4R34": {
+      "keys": "Ctrl+Q",
+      "doc": "196330f3",
+      "action": "Display Quick Analysis Options"
+    },
+    "T4R36": {
+      "keys": "Ctrl+Shift+G",
+      "doc": "aec0a8e0",
+      "action": "Open Workbook Statistics Dialog"
+    },
+    "T5R1": {
+      "keys": "A",
+      "doc": "e4ce3ca9",
+      "action": "Paste All Cell Contents and Formatting"
+    },
+    "T5R2": {
+      "keys": "F",
+      "doc": "d45b058e",
+      "action": "Paste Only Formulas"
+    },
+    "T5R3": {
+      "keys": "V",
+      "doc": "c5f76dad",
+      "action": "Paste Only Values"
+    },
+    "T5R4": {
+      "keys": "T",
+      "doc": "eabad439",
+      "action": "Paste Only Formatting"
+    },
+    "T5R5": {
+      "keys": "C",
+      "doc": "0978060b",
+      "action": "Paste Only Comments and Notes"
+    },
+    "T5R6": {
+      "keys": "N",
+      "doc": "2cf49e46",
+      "action": "Paste Only Data Validation Settings"
+    },
+    "T5R7": {
+      "keys": "H",
+      "doc": "681b39a7",
+      "action": "Paste All Contents and Formatting from Copied Cells"
+    },
+    "T5R8": {
+      "keys": "X",
+      "doc": "581d21c4",
+      "action": "Paste All Cell Contents Without Borders"
+    },
+    "T5R9": {
+      "keys": "W",
+      "doc": "6159b05b",
+      "action": "Paste Only Column Widths"
+    },
+    "T5R10": {
+      "keys": "R",
+      "doc": "c950785d",
+      "action": "Paste Only Formulas and Number Formats"
+    },
+    "T5R11": {
+      "keys": "U",
+      "doc": "3e99f020",
+      "action": "Paste Only Values and Number Formats"
+    },
+    "T6R2": {
+      "keys": "Ctrl+Shift+Page down",
+      "doc": "6c97a711",
+      "action": "Select Current and Next Sheet"
+    },
+    "T6R3": {
+      "keys": "Ctrl+Shift+Page up",
+      "doc": "c66121eb",
+      "action": "Select Current and Previous Sheet"
+    },
+    "T6R6": {
+      "keys": "F8",
+      "doc": "3276d2ef",
+      "action": "Turn Extend Selection Mode On or Off"
+    },
+    "T6R7": {
+      "keys": "Shift+F8",
+      "doc": "bb501567",
+      "action": "Add Non-Adjacent Cell or Range to Selection"
+    },
+    "T6R8": {
+      "keys": "Alt+Enter",
+      "doc": "fc525b89",
+      "action": "Start New Line in Same Cell",
+      "section": "Editing"
+    },
+    "T6R10": {
+      "keys": "Shift+Enter",
+      "doc": "a6cf1244",
+      "action": "Complete Cell Entry and Select Cell Above",
+      "section": "Editing"
+    },
+    "T6R11": {
+      "keys": "Ctrl+Spacebar",
+      "doc": "d37dcc32",
+      "action": "Select Entire Column"
+    },
+    "T6R12": {
+      "keys": "Shift+Spacebar",
+      "doc": "02f083ce",
+      "action": "Select Entire Row"
+    },
+    "T6R13": {
+      "keys": "Ctrl+Shift+Spacebar",
+      "doc": "9fbd68e0",
+      "action": "Select All Objects When an Object Is Selected"
+    },
+    "T6R14": {
+      "keys": "Ctrl+Shift+Home",
+      "doc": "38ef1ec6",
+      "action": "Extend Selection to Beginning of Worksheet"
+    },
+    "T6R16": {
+      "keys": "Ctrl+Shift+Asterisk sign (*)",
+      "doc": "4f5bcedc",
+      "action": "Select Current Region Around Active Cell"
+    },
+    "T6R17": {
+      "keys": "Home",
+      "doc": "9595730b",
+      "action": "Select First Command When a Menu Is Visible"
+    },
+    "T6R18": {
+      "keys": "Ctrl+Y",
+      "doc": "01fe928f",
+      "action": "Repeat Last Command or Action",
+      "section": "Editing"
+    },
+    "T7R1": {
+      "keys": "Ctrl+Alt+P",
+      "doc": "0690c81d",
+      "action": "Turn Formula Checking Tooltips On or Off"
+    },
+    "T7R3": {
+      "keys": "Ctrl+Shift+U",
+      "doc": "de17f9d8",
+      "action": "Expand or Collapse Formula Bar"
+    },
+    "T7R4": {
+      "keys": "Esc",
+      "doc": "08552dc7",
+      "action": "Cancel Entry in Cell or Formula Bar",
+      "section": "Editing"
+    },
+    "T7R5": {
+      "keys": "Enter",
+      "doc": "6e593364",
+      "action": "Complete Formula Bar Entry and Select Cell Below",
+      "section": "Editing"
+    },
+    "T7R8": {
+      "keys": "F9",
+      "doc": "d6afd665",
+      "action": "Calculate All Worksheets in All Open Workbooks"
+    },
+    "T7R9": {
+      "keys": "Shift+F9",
+      "doc": "d890790c",
+      "action": "Calculate Active Worksheet"
+    },
+    "T7R10": {
+      "keys": "Ctrl+Alt+F9",
+      "doc": "0d42a5a6",
+      "action": "Calculate All Open Workbooks, Changed or Not"
+    },
+    "T7R11": {
+      "keys": "Ctrl+Alt+Shift+F9",
+      "doc": "e173ca9c",
+      "action": "Check Dependent Formulas, Then Calculate All Cells"
+    },
+    "T7R12": {
+      "keys": "Alt+Shift+F10",
+      "doc": "b6290f54",
+      "action": "Display Menu or Message for Error Checking Button"
+    },
+    "T7R13": {
+      "keys": "Ctrl+A",
+      "doc": "0731e0fe",
+      "action": "Show Function Arguments After a Function Name"
+    },
+    "T7R14": {
+      "keys": "Ctrl+Shift+A",
+      "doc": "b10b40a8",
+      "action": "Insert Argument Names and Parentheses for a Function"
+    },
+    "T7R16": {
+      "keys": "Ctrl+E",
+      "doc": "0c170a7c",
+      "action": "Invoke Flash Fill for Current Column",
+      "section": "Data"
+    },
+    "T7R18": {
+      "keys": "Shift+F3",
+      "doc": "d0ae731e",
+      "action": "Insert Function"
+    },
+    "T7R19": {
+      "keys": "Ctrl+Shift+Straight quotation mark (\")",
+      "doc": "96094c27",
+      "action": "Copy Value from Cell Above",
+      "section": "Editing"
+    },
+    "T7R20": {
+      "keys": "Alt+F1",
+      "doc": "0dc5e6ef",
+      "action": "Create Embedded Chart from Current Range",
+      "section": "Data"
+    },
+    "T7R21": {
+      "keys": "F11",
+      "doc": "ede77c0c",
+      "action": "Create Chart in Separate Chart Sheet",
+      "section": "Data"
+    },
+    "T7R22": {
+      "keys": "Alt+M, M, D",
+      "doc": "a08b2f3c",
+      "action": "Define Name to Use in References"
+    },
+    "T7R23": {
+      "keys": "F3",
+      "doc": "493e1959",
+      "action": "Paste Name from Paste Name Dialog"
+    },
+    "T7R25": {
+      "keys": "Alt+F8",
+      "doc": "067fe3a7",
+      "action": "Create, Run, Edit, or Delete Macro",
+      "section": "Data"
+    },
+    "T7R26": {
+      "keys": "Alt+F11",
+      "doc": "cf967253",
+      "action": "Open Visual Basic for Applications Editor",
+      "section": "Data"
+    },
+    "T7R27": {
+      "keys": "Alt+F12",
+      "doc": "61897e74",
+      "action": "Open Power Query Editor",
+      "section": "Data"
+    },
+    "T8R2": {
+      "keys": "Ctrl+F5",
+      "doc": "6da6b78f",
+      "skip": "the page gives this combination two meanings (refresh data here, restore window size under Function keys)"
+    },
+    "T8R3": {
+      "keys": "Ctrl+Alt+F5",
+      "doc": "065a329e",
+      "action": "Refresh All Data in Workbook"
+    },
+    "T9R1": {
+      "keys": "Shift+F10",
+      "doc": "6ba50c0e",
+      "skip": "kept under Function Keys, where the page lists it for any selected item"
+    },
+    "T9R5": {
+      "keys": "Ctrl+M",
+      "doc": "ac425a67",
+      "action": "Move Table"
+    },
+    "T9R12": {
+      "keys": "Shift+Page down",
+      "doc": "4477ff1e",
+      "action": "Select from Current Cell to Last Cell of Column"
+    },
+    "T9R13": {
+      "keys": "Shift+Page up",
+      "doc": "eca7036f",
+      "action": "Select from Current Cell to First Cell of Column"
+    },
+    "T9R14": {
+      "keys": "Shift+End",
+      "doc": "d19fa622",
+      "action": "Select from Current Cell to Last Cell of Row"
+    },
+    "T9R15": {
+      "keys": "Shift+Home",
+      "doc": "f679eebe",
+      "action": "Select from Current Cell to First Cell of Row"
+    },
+    "T9R20": {
+      "keys": "Ctrl+Left arrow key",
+      "doc": "e7f32e9e",
+      "action": "Move to First Cell of Selected Row"
+    },
+    "T9R21": {
+      "keys": "Ctrl+Right arrow key",
+      "doc": "d7750c02",
+      "action": "Move to Last Cell of Selected Row"
+    },
+    "T9R22": {
+      "keys": "Ctrl+Up arrow key",
+      "doc": "cdd0ae0f",
+      "action": "Move to First Cell of Selected Column"
+    },
+    "T9R23": {
+      "keys": "Ctrl+Down arrow key",
+      "doc": "d0607c8f",
+      "action": "Move to Last Cell of Selected Column"
+    },
+    "T9R24": {
+      "keys": "Ctrl+Esc",
+      "doc": "a704c428",
+      "action": "Close Dialog Box or Cancel a Process"
+    },
+    "T9R26": {
+      "keys": "F5",
+      "doc": "c4bb34b9",
+      "skip": "kept under Function Keys, where the page lists it for the whole app"
+    },
+    "T10R4": {
+      "keys": "Ctrl+Shift+M",
+      "doc": "4216f169",
+      "action": "Switch Between Edit, Chat, and Plan Mode"
+    },
+    "T10R5": {
+      "keys": "Alt+C",
+      "doc": "7ae5b583",
+      "skip": "the page gives this combination two meanings in the same table"
+    },
+    "T10R8": {
+      "keys": "Alt+C",
+      "doc": "8955a6dc",
+      "skip": "the page gives this combination two meanings in the same table"
+    },
+    "T10R6": {
+      "keys": "Ctrl+J",
+      "doc": "dfa71440",
+      "action": "Confirm Use of Selected Files"
+    },
+    "T10R7": {
+      "keys": "Alt+Shift+H",
+      "doc": "549b77ab",
+      "action": "Start Dictation for Copilot"
+    },
+    "T10R9": {
+      "keys": "F6",
+      "doc": "444e5411",
+      "skip": "kept under Function Keys with its general meaning"
+    },
+    "T11R1L1": {
+      "keys": "F1 alone",
+      "doc": "59f4e912",
+      "action": "Display Help Task Pane"
+    },
+    "T11R1L4": {
+      "keys": "Alt+Shift+F1",
+      "doc": "78ad6294",
+      "action": "Insert New Worksheet"
+    },
+    "T11R1L5": {
+      "keys": "Ctrl+Shift+F1",
+      "doc": "42d71140",
+      "action": "Toggle Full Screen Mode"
+    },
+    "T11R2L3": {
+      "keys": "Ctrl+F2",
+      "doc": "8169838d",
+      "action": "Edit Active Cell in Formula Bar"
+    },
+    "T11R4L3": {
+      "keys": "Ctrl+F4",
+      "doc": "ae1fe547",
+      "action": "Close Selected Workbook Window"
+    },
+    "T11R4L4": {
+      "keys": "Alt+F4",
+      "doc": "181f41cc",
+      "action": "Close Excel"
+    },
+    "T11R5L1": {
+      "keys": "F5 alone",
+      "doc": "d823530a",
+      "action": "Display Go To Dialog"
+    },
+    "T11R5L2": {
+      "keys": "Ctrl+F5",
+      "doc": "a5b0c991",
+      "skip": "the page gives this combination two meanings (restore window size here, refresh data under external data)"
+    },
+    "T11R6L1": {
+      "keys": "F6 alone",
+      "doc": "cdf9fe99",
+      "action": "Switch Between Worksheet, Ribbon, Task Pane, and Zoom"
+    },
+    "T11R6L2": {
+      "keys": "Shift+F6",
+      "doc": "ed9f663a",
+      "action": "Switch Between Worksheet, Zoom, Task Pane, and Ribbon"
+    },
+    "T11R6L3": {
+      "keys": "Ctrl+F6",
+      "doc": "5fe29e92",
+      "action": "Switch Between Two Excel Windows"
+    },
+    "T11R6L4": {
+      "keys": "Ctrl+Shift+F6",
+      "doc": "09a7cf03",
+      "action": "Switch Between All Excel Windows"
+    },
+    "T11R7L2": {
+      "keys": "Ctrl+F7",
+      "doc": "f409f990",
+      "action": "Move Workbook Window When Not Maximized"
+    },
+    "T11R8L3": {
+      "keys": "Ctrl+F8",
+      "doc": "d2643acb",
+      "action": "Size Workbook Window When Not Maximized"
+    },
+    "T11R9L5": {
+      "keys": "Ctrl+F9",
+      "doc": "a26405f1",
+      "action": "Minimize Workbook Window to an Icon"
+    },
+    "T11R10L1": {
+      "keys": "F10 alone",
+      "doc": "6e2d2746",
+      "action": "Turn Key Tips On or Off"
+    },
+    "T11R10L2": {
+      "keys": "Shift+F10",
+      "doc": "152337c0",
+      "action": "Display Context Menu for Selected Item"
+    },
+    "T11R10L4": {
+      "keys": "Ctrl+F10",
+      "doc": "4e2995f4",
+      "action": "Maximize or Restore Selected Workbook Window"
+    },
+    "T11R11L2": {
+      "keys": "Shift+F11",
+      "doc": "78ad6294",
+      "action": "Insert New Worksheet"
+    },
+    "T11R12L1": {
+      "keys": "F12 alone",
+      "doc": "db796f0a",
+      "action": "Display Save As Dialog"
+    }
+  }
+}

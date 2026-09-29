@@ -24,7 +24,6 @@ import HouseCard from './HouseCard'
 import AffiliateLink from './AffiliateLink'
 import { getAffiliate } from '../data/affiliates'
 import { getSponsor, showsHouseCard, MIN_SECTIONS_FOR_SLOT } from '../data/sponsors'
-import { getAppNote } from '../data/appNotes'
 import { noteFitsApp, fittingTips, resolveNoteText, resolveEssentials, everydayShortcuts, largestSections } from '../utils/appCopy'
 import { tokenize } from '../utils/searchHelpers'
 import { parseKeyParts } from '../utils/platformHelpers'
@@ -69,6 +68,7 @@ export default function ShortcutPage() {
     moreApps = [],
     otherPlatformsMap = {},
     shortcutLinks = {},
+    note = null,
   } = useLoaderData()
   const slug = app.slug
   // Paths of the shortcuts that have a page of their own, by action.
@@ -104,7 +104,6 @@ export default function ShortcutPage() {
   const feedback = usePageFeedback(pagePath)
   const affiliate = getAffiliate(slug, platform)
   const sponsor = getSponsor(pagePath)
-  const note = getAppNote(slug, platform)
   const noteFits = useMemo(() => noteFitsApp(note, app), [note, app])
   const noteTips = useMemo(() => (noteFits ? fittingTips(note, app) : []), [noteFits, note, app])
   const everyday = useMemo(() => (noteFits ? [] : everydayShortcuts(app)), [noteFits, app])
@@ -480,7 +479,7 @@ export default function ShortcutPage() {
                     <li key={i}>
                       <a
                         href={`#${sectionIds[i]}`}
-                        className="inline-block px-3 py-1.5 rounded-full bg-theme-base border border-theme-border text-theme-text text-[13px] no-underline hover:border-theme-border-hover transition-colors"
+                        className="inline-flex items-center min-h-[44px] pointer-fine:min-h-0 px-3 py-1.5 rounded-full bg-theme-base border border-theme-border text-theme-text text-[13px] no-underline hover:border-theme-border-hover transition-colors"
                       >
                         {section.name}
                       </a>
@@ -686,7 +685,7 @@ export default function ShortcutPage() {
         <div className="mx-auto max-w-[980px] px-5 md:px-6 py-14">
           <h2 className="text-xl font-semibold tracking-tight mb-6">{sp.faqTitle}</h2>
           <div className="space-y-2 max-w-[720px]">
-            {sp.faqItems(app, platformName).map((item, i) => (
+            {sp.faqItems(app, platformName, note).map((item, i) => (
               <FaqAccordion key={i} question={item.question} answer={item.answer} />
             ))}
           </div>
@@ -721,7 +720,7 @@ export default function ShortcutPage() {
         </div>
       )}
 
-      <FaqSchema app={app} platformName={platformName} />
+      <FaqSchema app={app} platformName={platformName} note={note} />
       <BreadcrumbSchema appName={app.displayName} platformName={platformName} platformId={platform} slug={slug} />
     </div>
   )
@@ -732,12 +731,12 @@ export default function ShortcutPage() {
  * All values come from our own static content data (CONTENT.shortcutPage.faqItems),
  * not from user input, so the serialized JSON is safe to embed directly.
  */
-function FaqSchema({ app, platformName }) {
+function FaqSchema({ app, platformName, note }) {
   const sp = CONTENT.shortcutPage
   const jsonLd = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: sp.faqItems(app, platformName).map(item => ({
+    mainEntity: sp.faqItems(app, platformName, note).map(item => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: { '@type': 'Answer', text: item.answer },

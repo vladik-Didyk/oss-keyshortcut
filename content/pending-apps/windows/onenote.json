@@ -1,0 +1,1146 @@
+{
+  "slug": "onenote",
+  "displayName": "OneNote",
+  "category": "microsoft-office",
+  "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-onenote-44b8b3f4-c274-4bcc-a089-e80fdcc87950",
+  "platform": "windows",
+  "sections": [
+    {
+      "name": "Frequently Used",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "M",
+          "action": "Open New OneNote Window"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "D",
+          "action": "Dock OneNote Window"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Z",
+          "action": "Undo Previous Action"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Y",
+          "action": "Redo Previous Action"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "A",
+          "action": "Select All Items on Current Page"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "X",
+          "action": "Cut Selected Text or Item"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "C",
+          "action": "Copy Selected Text or Item to Clipboard"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "V",
+          "action": "Paste Clipboard Contents"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "V",
+          "action": "Paste Text Only"
+        },
+        {
+          "modifiers": [],
+          "key": "Home",
+          "action": "Move to Beginning of Line"
+        },
+        {
+          "modifiers": [],
+          "key": "End",
+          "action": "Move to End of Line"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "←",
+          "action": "Move One Word to the Left"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "→",
+          "action": "Move One Word to the Right"
+        },
+        {
+          "modifiers": [],
+          "key": "Backspace",
+          "action": "Delete One Character to the Left"
+        },
+        {
+          "modifiers": [],
+          "key": "Delete",
+          "action": "Delete One Character to the Right"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Backspace",
+          "action": "Delete One Word to the Left"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Delete",
+          "action": "Delete One Word to the Right"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Enter",
+          "action": "Insert Line Break Without New Paragraph"
+        },
+        {
+          "modifiers": [],
+          "key": "F7",
+          "action": "Check Spelling"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F7",
+          "action": "Open Thesaurus for Selected Word"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "W",
+          "action": "Perform Action Suggested on Information Bar"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "P",
+          "action": "Play Selected Audio Recording"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "S",
+          "action": "Stop Audio Recording Playback"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "Y",
+          "action": "Skip Audio Recording Backward 10 Seconds"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "U",
+          "action": "Skip Audio Recording Forward 10 Seconds"
+        }
+      ]
+    },
+    {
+      "name": "Format Notes",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "H",
+          "action": "Highlight Selected Text"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "K",
+          "action": "Insert Hyperlink"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "C",
+          "action": "Copy Formatting of Selected Text"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "V",
+          "action": "Paste Formatting to Selected Text"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "B",
+          "action": "Apply or Remove Bold"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "I",
+          "action": "Apply or Remove Italics"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "U",
+          "action": "Apply or Remove Underline"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "+",
+          "action": "Apply or Remove Superscript"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": ".",
+          "action": "Apply or Remove Bulleted List"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "/",
+          "action": "Apply or Remove Numbered List"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "1",
+          "action": "Apply Heading 1 Style to Current Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "2",
+          "action": "Apply Heading 2 Style to Current Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "3",
+          "action": "Apply Heading 3 Style to Current Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "4",
+          "action": "Apply Heading 4 Style to Current Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "5",
+          "action": "Apply Heading 5 Style to Current Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "6",
+          "action": "Apply Heading 6 Style to Current Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "N",
+          "action": "Clear All Formatting of Selected Text"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "L",
+          "action": "Align Paragraph to the Left"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "R",
+          "action": "Align Paragraph to the Right"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": ">",
+          "action": "Increase Font Size of Selected Text"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "<",
+          "action": "Decrease Font Size of Selected Text"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "R",
+          "action": "Show or Hide Rule Lines on Current Page"
+        }
+      ]
+    },
+    {
+      "name": "Insert Items",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N F",
+          "action": "Insert Document or File on Current Page"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N O",
+          "action": "Insert Document or File as Printout"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "P",
+          "action": "Show or Hide Document Printouts in High Contrast"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N P",
+          "action": "Insert Picture from File"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N S",
+          "action": "Insert Sticker"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "D",
+          "action": "Insert Current Date"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "F",
+          "action": "Insert Current Date and Time"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "T",
+          "action": "Insert Current Time"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "=",
+          "action": "Start Math Equation or Convert Selected Text to One"
+        }
+      ]
+    },
+    {
+      "name": "Tables",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "Enter",
+          "action": "Create Another Row at End Cell of Table"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Enter",
+          "action": "Create Another Paragraph in Same Table Cell"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "R",
+          "action": "Create Column to the Right of Current Column"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "E",
+          "action": "Create Column to the Left of Current Column"
+        }
+      ]
+    },
+    {
+      "name": "Select Text and Objects",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "End",
+          "action": "Select to End of Line"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "T",
+          "action": "Jump to Page Title and Select It"
+        },
+        {
+          "modifiers": [],
+          "key": "Esc",
+          "action": "Cancel Selecting Outline or Page"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Move Selected Paragraphs Up"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Move Selected Paragraphs Down"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "←",
+          "action": "Go Back to Last Page Visited"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "→",
+          "action": "Go Forward to Next Page Visited"
+        }
+      ]
+    },
+    {
+      "name": "Tag Notes",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "1",
+          "action": "Apply, Select, or Clear To Do Tag"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "2",
+          "action": "Apply or Clear Important Tag"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "3",
+          "action": "Apply or Clear Question Tag"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "4",
+          "action": "Apply or Clear Remember for Later Tag"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "5",
+          "action": "Apply or Clear Definition Tag"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "6",
+          "action": "Apply or Clear Highlight Tag"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "7",
+          "action": "Apply or Clear Contact Tag"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "8",
+          "action": "Apply or Clear Address Tag"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "9",
+          "action": "Apply or Clear Phone Number Tag"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "0",
+          "action": "Remove All Selected Note Tags"
+        }
+      ]
+    },
+    {
+      "name": "Outlines",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "1",
+          "action": "Collapse Selected Outline to Level 1"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "2",
+          "action": "Expand Outline to Level 2"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "3",
+          "action": "Expand Outline to Level 3"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "4",
+          "action": "Expand Outline to Level 4"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "5",
+          "action": "Expand Outline to Level 5"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "6",
+          "action": "Expand Outline to Level 6"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "7",
+          "action": "Expand Outline to Level 7"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "8",
+          "action": "Expand Outline to Level 8"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "9",
+          "action": "Expand Outline to Level 9"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "0",
+          "action": "Expand All Levels of Outline"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "=",
+          "action": "Expand Selected Heading"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "-",
+          "action": "Collapse Selected Heading"
+        },
+        {
+          "modifiers": [],
+          "key": "Tab",
+          "action": "Increase Indent by One Level"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Decrease Indent by One Level"
+        }
+      ]
+    },
+    {
+      "name": "Pages",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "F11",
+          "action": "Enable or Disable Full-Page View"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "M",
+          "action": "Create Quick Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "*",
+          "action": "Expand or Collapse Page Group in Navigation Pane"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "P",
+          "action": "Print Current Page"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "N",
+          "action": "Add New Page at End of Selected Section"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "[",
+          "action": "Increase Width of Page Navigation Pane"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "]",
+          "action": "Decrease Width of Page Navigation Pane"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "[",
+          "action": "Decrease Indent Level of Current Page"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "]",
+          "action": "Increase Indent Level of Current Page"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "N",
+          "action": "Create New Subpage Below Current Page"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "A",
+          "action": "Select Current Page"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Page Up",
+          "action": "Go to First Page in Visible Set of Pages"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Page Down",
+          "action": "Go to Last Page in Visible Set of Pages"
+        },
+        {
+          "modifiers": [],
+          "key": "Page Up",
+          "action": "Scroll Up in Current Page"
+        },
+        {
+          "modifiers": [],
+          "key": "Page Down",
+          "action": "Scroll Down in Current Page"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Home",
+          "action": "Scroll to Top of Current Page"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "End",
+          "action": "Scroll to Bottom of Current Page"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "↓",
+          "action": "Go to Next Paragraph"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "↑",
+          "action": "Go to Previous Paragraph"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "↑",
+          "action": "Move Cursor Up or Expand Page Upward"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "↓",
+          "action": "Move Cursor Down or Expand Page Downward"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "←",
+          "action": "Move Cursor Left or Expand Page Leftward"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "→",
+          "action": "Move Cursor Right or Expand Page Rightward"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "↓",
+          "action": "Go to Next Note Container"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "+",
+          "action": "Zoom In"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "-",
+          "action": "Zoom Out"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "S",
+          "action": "Synchronize Notebook"
+        }
+      ]
+    },
+    {
+      "name": "Notebooks and Sections",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "N",
+          "action": "Open OneNote"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "O",
+          "action": "Open Notebook"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "O",
+          "action": "Open Section"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "T",
+          "action": "Create New Section"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Tab",
+          "action": "Go to Next Section"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Go to Previous Section"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Page Down",
+          "action": "Go to Next Page in Section"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Page Up",
+          "action": "Go to Previous Page in Section"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Home",
+          "action": "Go to First Page in Section"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "End",
+          "action": "Go to Last Page in Section"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "M",
+          "action": "Move or Copy Current Page"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "G",
+          "action": "Put Focus on Current Page Tab"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "G",
+          "action": "Put Focus on Current Section Tab"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "L",
+          "action": "Lock All Password-Protected Sections"
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "E",
+          "action": "Go to Search Box to Search All Notebooks"
+        },
+        {
+          "modifiers": [],
+          "key": "↓",
+          "action": "Preview Next Result While Searching All Notebooks"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F",
+          "action": "Search Current Page"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F3",
+          "action": "Go to Previous Result While Searching Current Page"
+        }
+      ]
+    },
+    {
+      "name": "Share Notes",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "E",
+          "action": "Send Selected Pages in Email Message"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "1",
+          "action": "Create Today Outlook Task from Selected Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "2",
+          "action": "Create Tomorrow Outlook Task from Selected Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "3",
+          "action": "Create This Week Outlook Task from Selected Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "4",
+          "action": "Create Next Week Outlook Task from Selected Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "5",
+          "action": "Create No Date Outlook Task from Selected Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "K",
+          "action": "Open Selected Outlook Task"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "9",
+          "action": "Mark Selected Outlook Task as Complete"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "0",
+          "action": "Delete Selected Outlook Task"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F9",
+          "action": "Synchronize Changes in Current Shared Notebook"
+        },
+        {
+          "modifiers": [],
+          "key": "F9",
+          "action": "Synchronize Changes in All Shared Notebooks"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Q",
+          "action": "Mark Current Page as Unread"
+        }
+      ]
+    }
+  ]
+}

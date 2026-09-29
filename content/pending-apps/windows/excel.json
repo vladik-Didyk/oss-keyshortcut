@@ -1,0 +1,1001 @@
+{
+  "slug": "excel",
+  "displayName": "Excel",
+  "category": "microsoft-office",
+  "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f",
+  "platform": "windows",
+  "sections": [
+    {
+      "name": "Navigation",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Move to Previous Cell or Previous Dialog Option"
+        },
+        {
+          "modifiers": [],
+          "key": "↑",
+          "action": "Move One Cell Up"
+        },
+        {
+          "modifiers": [],
+          "key": "↓",
+          "action": "Move One Cell Down"
+        },
+        {
+          "modifiers": [],
+          "key": "←",
+          "action": "Move One Cell Left"
+        },
+        {
+          "modifiers": [],
+          "key": "→",
+          "action": "Move One Cell Right"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "End",
+          "action": "Extend Selection to Last Used Cell"
+        },
+        {
+          "modifiers": [],
+          "key": "Page Down",
+          "action": "Move One Screen Down"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Page Down",
+          "action": "Move One Screen Right"
+        },
+        {
+          "modifiers": [],
+          "key": "Page Up",
+          "action": "Move One Screen Up"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Page Up",
+          "action": "Move One Screen Left"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "=",
+          "action": "Zoom In"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "-",
+          "action": "Zoom Out"
+        }
+      ]
+    },
+    {
+      "name": "Editing",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "C",
+          "action": "Copy Selection"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "V",
+          "action": "Paste Selection"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Z",
+          "action": "Undo Recent Action"
+        },
+        {
+          "modifiers": [],
+          "key": "Delete",
+          "action": "Remove Cell Contents"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "X",
+          "action": "Cut Selection"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F2",
+          "action": "Insert or Edit Cell Note"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F2",
+          "action": "Insert or Reply to Threaded Comment"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "+",
+          "action": "Open Insert Dialog to Insert Blank Cells"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "-",
+          "action": "Open Delete Dialog to Delete Selected Cells"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "'",
+          "action": "Copy Formula from Cell Above"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "V",
+          "action": "Open Paste Special Dialog"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "K",
+          "action": "Open Insert Hyperlink Dialog"
+        },
+        {
+          "modifiers": [],
+          "key": "F7",
+          "action": "Check Spelling"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Enter",
+          "action": "Start New Line in Same Cell"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Enter",
+          "action": "Complete Cell Entry and Select Cell Above"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Y",
+          "action": "Repeat Last Command or Action"
+        },
+        {
+          "modifiers": [],
+          "key": "Esc",
+          "action": "Cancel Entry in Cell or Formula Bar"
+        },
+        {
+          "modifiers": [],
+          "key": "Enter",
+          "action": "Complete Formula Bar Entry and Select Cell Below"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "\"",
+          "action": "Copy Value from Cell Above"
+        }
+      ]
+    },
+    {
+      "name": "Formatting",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F",
+          "action": "Format Fonts in Format Cells Dialog"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "5",
+          "action": "Apply or Remove Strikethrough"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "6",
+          "action": "Switch Among Hidden, Displayed, and Placeholder Objects"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "&",
+          "action": "Apply Outline Border to Selected Cells"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "_",
+          "action": "Remove Outline Border from Selected Cells"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "8",
+          "action": "Display or Hide Outline Symbols"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "~",
+          "action": "Apply General Number Format"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "^",
+          "action": "Apply Scientific Number Format"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "#",
+          "action": "Apply Date Format with Day, Month, and Year"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "@",
+          "action": "Apply Time Format with Hour and Minute"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "!",
+          "action": "Apply Number Format with Two Decimal Places"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Q",
+          "action": "Display Quick Analysis Options"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "G",
+          "action": "Open Workbook Statistics Dialog"
+        }
+      ]
+    },
+    {
+      "name": "Formulas",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "P",
+          "action": "Turn Formula Checking Tooltips On or Off"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "U",
+          "action": "Expand or Collapse Formula Bar"
+        },
+        {
+          "modifiers": [],
+          "key": "F9",
+          "action": "Calculate All Worksheets in All Open Workbooks"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F9",
+          "action": "Calculate Active Worksheet"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "F9",
+          "action": "Calculate All Open Workbooks, Changed or Not"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "F9",
+          "action": "Check Dependent Formulas, Then Calculate All Cells"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "F10",
+          "action": "Display Menu or Message for Error Checking Button"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "A",
+          "action": "Show Function Arguments After a Function Name"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "A",
+          "action": "Insert Argument Names and Parentheses for a Function"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F3",
+          "action": "Insert Function"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "M M D",
+          "action": "Define Name to Use in References"
+        },
+        {
+          "modifiers": [],
+          "key": "F3",
+          "action": "Paste Name from Paste Name Dialog"
+        }
+      ]
+    },
+    {
+      "name": "Frequently Used",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "W",
+          "action": "Close Workbook"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "O",
+          "action": "Open Workbook"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "S",
+          "action": "Save Workbook"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H H",
+          "action": "Choose Fill Color"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H A C",
+          "action": "Center Align Cell Contents"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H B",
+          "action": "Add Borders"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H D C",
+          "action": "Delete Column"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "9",
+          "action": "Hide Selected Rows"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "0",
+          "action": "Hide Selected Columns"
+        }
+      ]
+    },
+    {
+      "name": "Ribbon",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H",
+          "action": "Go to Home Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N",
+          "action": "Go to Insert Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "P",
+          "action": "Go to Page Layout Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "A",
+          "action": "Go to Data Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "W",
+          "action": "Go to View Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "M",
+          "action": "Go to Formulas Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Q",
+          "action": "Go to Search Field on the Ribbon"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F",
+          "action": "Open File Menu"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "R",
+          "action": "Open Review Tab"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F10",
+          "action": "Show Tooltip for Focused Ribbon Element"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "↓",
+          "action": "Open Menu for Selected Button"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F1",
+          "action": "Expand or Collapse Ribbon"
+        }
+      ]
+    },
+    {
+      "name": "Selection",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Page Down",
+          "action": "Select Current and Next Sheet"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Page Up",
+          "action": "Select Current and Previous Sheet"
+        },
+        {
+          "modifiers": [],
+          "key": "F8",
+          "action": "Turn Extend Selection Mode On or Off"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F8",
+          "action": "Add Non-Adjacent Cell or Range to Selection"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Space",
+          "action": "Select Entire Column"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Space",
+          "action": "Select Entire Row"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Space",
+          "action": "Select All Objects When an Object Is Selected"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Home",
+          "action": "Extend Selection to Beginning of Worksheet"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "*",
+          "action": "Select Current Region Around Active Cell"
+        },
+        {
+          "modifiers": [],
+          "key": "Home",
+          "action": "Select First Command When a Menu Is Visible"
+        }
+      ]
+    },
+    {
+      "name": "Paste Special Dialog",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "A",
+          "action": "Paste All Cell Contents and Formatting"
+        },
+        {
+          "modifiers": [],
+          "key": "F",
+          "action": "Paste Only Formulas"
+        },
+        {
+          "modifiers": [],
+          "key": "V",
+          "action": "Paste Only Values"
+        },
+        {
+          "modifiers": [],
+          "key": "T",
+          "action": "Paste Only Formatting"
+        },
+        {
+          "modifiers": [],
+          "key": "C",
+          "action": "Paste Only Comments and Notes"
+        },
+        {
+          "modifiers": [],
+          "key": "N",
+          "action": "Paste Only Data Validation Settings"
+        },
+        {
+          "modifiers": [],
+          "key": "H",
+          "action": "Paste All Contents and Formatting from Copied Cells"
+        },
+        {
+          "modifiers": [],
+          "key": "X",
+          "action": "Paste All Cell Contents Without Borders"
+        },
+        {
+          "modifiers": [],
+          "key": "W",
+          "action": "Paste Only Column Widths"
+        },
+        {
+          "modifiers": [],
+          "key": "R",
+          "action": "Paste Only Formulas and Number Formats"
+        },
+        {
+          "modifiers": [],
+          "key": "U",
+          "action": "Paste Only Values and Number Formats"
+        }
+      ]
+    },
+    {
+      "name": "Data",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "E",
+          "action": "Invoke Flash Fill for Current Column"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F1",
+          "action": "Create Embedded Chart from Current Range"
+        },
+        {
+          "modifiers": [],
+          "key": "F11",
+          "action": "Create Chart in Separate Chart Sheet"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F8",
+          "action": "Create, Run, Edit, or Delete Macro"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F11",
+          "action": "Open Visual Basic for Applications Editor"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F12",
+          "action": "Open Power Query Editor"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "F5",
+          "action": "Refresh All Data in Workbook"
+        }
+      ]
+    },
+    {
+      "name": "Power Pivot",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "M",
+          "action": "Move Table"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Page Down",
+          "action": "Select from Current Cell to Last Cell of Column"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Page Up",
+          "action": "Select from Current Cell to First Cell of Column"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "End",
+          "action": "Select from Current Cell to Last Cell of Row"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Home",
+          "action": "Select from Current Cell to First Cell of Row"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "←",
+          "action": "Move to First Cell of Selected Row"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "→",
+          "action": "Move to Last Cell of Selected Row"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "↑",
+          "action": "Move to First Cell of Selected Column"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "↓",
+          "action": "Move to Last Cell of Selected Column"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Esc",
+          "action": "Close Dialog Box or Cancel a Process"
+        }
+      ]
+    },
+    {
+      "name": "Copilot",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "M",
+          "action": "Switch Between Edit, Chat, and Plan Mode"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "J",
+          "action": "Confirm Use of Selected Files"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "H",
+          "action": "Start Dictation for Copilot"
+        }
+      ]
+    },
+    {
+      "name": "Function Keys",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "F1",
+          "action": "Display Help Task Pane"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "F1",
+          "action": "Insert New Worksheet"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F1",
+          "action": "Toggle Full Screen Mode"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F2",
+          "action": "Edit Active Cell in Formula Bar"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F4",
+          "action": "Close Selected Workbook Window"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F4",
+          "action": "Close Excel"
+        },
+        {
+          "modifiers": [],
+          "key": "F5",
+          "action": "Display Go To Dialog"
+        },
+        {
+          "modifiers": [],
+          "key": "F6",
+          "action": "Switch Between Worksheet, Ribbon, Task Pane, and Zoom"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F6",
+          "action": "Switch Between Worksheet, Zoom, Task Pane, and Ribbon"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F6",
+          "action": "Switch Between Two Excel Windows"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F6",
+          "action": "Switch Between All Excel Windows"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F7",
+          "action": "Move Workbook Window When Not Maximized"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F8",
+          "action": "Size Workbook Window When Not Maximized"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F9",
+          "action": "Minimize Workbook Window to an Icon"
+        },
+        {
+          "modifiers": [],
+          "key": "F10",
+          "action": "Turn Key Tips On or Off"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F10",
+          "action": "Display Context Menu for Selected Item"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F10",
+          "action": "Maximize or Restore Selected Workbook Window"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F11",
+          "action": "Insert New Worksheet"
+        },
+        {
+          "modifiers": [],
+          "key": "F12",
+          "action": "Display Save As Dialog"
+        }
+      ]
+    }
+  ]
+}

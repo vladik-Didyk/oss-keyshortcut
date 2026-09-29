@@ -61,6 +61,10 @@ export async function loader({ params }) {
     otherPlatformsMap: cardOtherPlatformsMap,
     // { <action>: <id> } of the shortcuts that have a page of their own.
     shortcutLinks: shortcutLinksOf(platformId, app),
+    // The hand-written note of this page, or null. Only the loader reads
+    // src/data/appNotes.js: the notes of all apps are 126 KB, and until
+    // 2026-09-29 every page of the site loaded them.
+    note: getAppNote(slug, platformId) ?? null,
   };
 }
 
@@ -68,8 +72,8 @@ export function meta({ data }) {
   if (!data) {
     return buildMeta(CONTENT.meta.notFound);
   }
-  const { app, platformName, platformId } = data;
-  const lead = leadShortcuts(app, getAppNote(app.slug, platformId)).map((sc) => `${sc.action} ${formatKeys(sc, platformId)}`);
+  const { app, platformName, platformId, note } = data;
+  const lead = leadShortcuts(app, note).map((sc) => `${sc.action} ${formatKeys(sc, platformId)}`);
   return buildMeta(CONTENT.meta.shortcutPage(app.displayName, platformName, app.shortcutCount, platformId, app.slug, lead));
 }
 

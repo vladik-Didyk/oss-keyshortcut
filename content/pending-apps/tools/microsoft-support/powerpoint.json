@@ -1,0 +1,657 @@
+{
+  "slug": "powerpoint",
+  "displayName": "PowerPoint",
+  "category": "microsoft-office",
+  "docsUrl": "https://support.microsoft.com/en-us/office/use-keyboard-shortcuts-to-create-powerpoint-presentations-ebb3d20e-dcd4-444f-a38e-bb5c5ed180f4",
+  "platform": "windows",
+  "tab": "windows",
+  "fetched": "2026-09-29",
+  "sectionOrder": [
+    "Editing",
+    "Navigation",
+    "Frequently Used",
+    "Presentations and Slides",
+    "Objects",
+    "Select Text",
+    "Format Text",
+    "Tables",
+    "Views and Panes",
+    "Selection Pane",
+    "Ribbon"
+  ],
+  "sections": {
+    "Frequently used shortcuts": "Frequently Used",
+    "Work with presentations and slides": "Presentations and Slides",
+    "Work with objects and text > Copy objects and text": "Editing",
+    "Work with objects and text > Work in objects and text": "Objects",
+    "Work with objects and text > Select text": "Select Text",
+    "Work with objects and text > Rewrite text with Copilot": "Editing",
+    "Work with objects and text > Delete text": "Editing",
+    "Work with objects and text > Move around in text": "Navigation",
+    "Work with objects and text > Find and replace text": "Editing",
+    "Work with objects and text > Format text": "Format Text",
+    "Work with objects and text > Work with tables": "Tables",
+    "Move a slide": "Presentations and Slides",
+    "Work with views and panes": "Views and Panes",
+    "Work with views and panes > Work with the Selection pane": "Selection Pane",
+    "Work with views and panes > Work with the task pane": "Views and Panes",
+    "Ribbon keyboard shortcuts > Open the ribbon tabs": "Ribbon",
+    "Ribbon keyboard shortcuts > Work in the ribbon with the keyboard": "Ribbon",
+    "Ribbon keyboard shortcuts > Other useful ribbon keyboard shortcuts": "Ribbon"
+  },
+  "rows": {
+    "T0R1": {
+      "keys": "Ctrl+N",
+      "doc": "e47881fd",
+      "action": "Create New Presentation"
+    },
+    "T0R3": {
+      "keys": "Ctrl+B",
+      "doc": "33e83a59",
+      "action": "Bold",
+      "section": "Format Text"
+    },
+    "T0R4": {
+      "keys": "Ctrl+T",
+      "doc": "4d03c5dc",
+      "action": "Open Font Dialog",
+      "section": "Format Text"
+    },
+    "T0R5": {
+      "keys": "Ctrl+X",
+      "doc": "44331ea9",
+      "action": "Cut Selected Text, Object, or Slide",
+      "section": "Editing"
+    },
+    "T0R6": {
+      "keys": "Ctrl+C",
+      "doc": "ec12aa33",
+      "action": "Copy Selected Text, Object, or Slide",
+      "section": "Editing"
+    },
+    "T0R7": {
+      "keys": "Ctrl+V",
+      "doc": "484b8164",
+      "action": "Paste Cut or Copied Text, Object, or Slide",
+      "section": "Editing"
+    },
+    "T0R8": {
+      "keys": "Ctrl+K",
+      "doc": "00f9fe5c",
+      "action": "Insert Hyperlink",
+      "section": "Editing"
+    },
+    "T0R9": {
+      "keys": "Ctrl+Alt+M",
+      "doc": "f911809f",
+      "action": "Insert New Comment",
+      "section": "Editing"
+    },
+    "T0R10": {
+      "keys": "Ctrl+Z",
+      "doc": "7d770ed4",
+      "action": "Undo Last Action",
+      "section": "Editing"
+    },
+    "T0R11": {
+      "keys": "Ctrl+Y",
+      "doc": "92203f49",
+      "action": "Redo Last Action",
+      "section": "Editing"
+    },
+    "T0R16": {
+      "keys": "Ctrl+P",
+      "doc": "02f5069b",
+      "action": "Print Presentation"
+    },
+    "T0R17": {
+      "keys": "Ctrl+S",
+      "doc": "b99fee8f",
+      "action": "Save Presentation"
+    },
+    "T0R18": {
+      "keys": "Ctrl+Q",
+      "doc": "1f77296c",
+      "action": "Close PowerPoint"
+    },
+    "T1R4": {
+      "keys": "Ctrl+Minus sign (-)",
+      "doc": "3ace1102",
+      "action": "Zoom Out"
+    },
+    "T1R5": {
+      "keys": "Ctrl+Plus sign (+)",
+      "doc": "030d4d50",
+      "action": "Zoom In"
+    },
+    "T1R6": {
+      "keys": "Ctrl+Alt+O",
+      "doc": "5a4a7bb4",
+      "action": "Zoom to Fit"
+    },
+    "T1R7": {
+      "keys": "Ctrl+Shift+D",
+      "doc": "f4068b2f",
+      "action": "Make Copy of Selected Slide"
+    },
+    "T1R8": {
+      "keys": "Ctrl+O",
+      "doc": "6808bc39",
+      "action": "Open Presentation"
+    },
+    "T1R10": {
+      "keys": "Ctrl+Shift+S",
+      "doc": "32adbe2b",
+      "action": "Save with Different Name, Location, or File Format"
+    },
+    "T2R7": {
+      "keys": "Alt+Shift+C ¶ Office 2010 and Office 2007: Not available",
+      "doc": "dd085ecd",
+      "action": "Copy Animation Painter"
+    },
+    "T2R8": {
+      "keys": "Alt+Shift+V ¶ Office 2010 and Office 2007: Not available",
+      "doc": "1ef12c8e",
+      "action": "Paste Animation Painter"
+    },
+    "T2R9": {
+      "keys": "Ctrl+Alt+V",
+      "doc": "b6b03af2",
+      "action": "Open Paste Special Dialog"
+    },
+    "T3R1": {
+      "keys": "Ctrl+Alt+5",
+      "doc": "5c11ed12",
+      "action": "Move Focus to First Floating Shape"
+    },
+    "T3R3": {
+      "keys": "Ctrl+Shift+Left bracket ([) ¶ Office 2010 and Office 2007: Not available",
+      "doc": "48d81d08",
+      "action": "Send Object Back One Position"
+    },
+    "T3R4": {
+      "keys": "Ctrl+Shift+Right bracket (]) ¶ Office 2010 and Office 2007: Not available",
+      "doc": "dbe94022",
+      "action": "Bring Object Forward One Position"
+    },
+    "T3R5": {
+      "keys": "Ctrl+A",
+      "doc": "4a65cf38",
+      "action": "Select All Objects on Slide"
+    },
+    "T3R8": {
+      "keys": "Ctrl+Shift+J",
+      "doc": "a942b886",
+      "action": "Regroup Selected Objects"
+    },
+    "T3R9": {
+      "keys": "Alt+Right arrow key",
+      "doc": "8ebf3090",
+      "action": "Rotate Object Clockwise 15 Degrees"
+    },
+    "T3R10": {
+      "keys": "Alt+Left arrow key",
+      "doc": "8552f453",
+      "action": "Rotate Object Counterclockwise 15 Degrees"
+    },
+    "T3R11": {
+      "keys": "Ctrl+Spacebar",
+      "doc": "b1dddf0b",
+      "action": "Play or Pause Media"
+    },
+    "T3R14": {
+      "keys": "Alt+Equal sign ( = )",
+      "doc": "0179ecc5",
+      "action": "Insert Equation"
+    },
+    "T4R1": {
+      "keys": "Shift+Right arrow key",
+      "doc": "4a1411d4",
+      "action": "Select One Character to the Right"
+    },
+    "T4R2": {
+      "keys": "Shift+Left arrow key",
+      "doc": "86a9b2b9",
+      "action": "Select One Character to the Left"
+    },
+    "T4R3": {
+      "keys": "Ctrl+Shift+Right arrow key",
+      "doc": "199d196c",
+      "action": "Select to End of Word"
+    },
+    "T4R4": {
+      "keys": "Ctrl+Shift+Left arrow key",
+      "doc": "348f9387",
+      "action": "Select to Beginning of Word"
+    },
+    "T4R5": {
+      "keys": "Shift+Up arrow key",
+      "doc": "50e17bb5",
+      "action": "Select One Line Up"
+    },
+    "T4R6": {
+      "keys": "Shift+Down arrow key",
+      "doc": "ec7b3708",
+      "action": "Select One Line Down"
+    },
+    "T4R7": {
+      "keys": "Ctrl+Shift+Down arrow key",
+      "doc": "2476d8d3",
+      "action": "Select to End of Paragraph"
+    },
+    "T4R8": {
+      "keys": "Ctrl+Shift+Up arrow key",
+      "doc": "f4069768",
+      "action": "Select to Beginning of Paragraph"
+    },
+    "T4R9": {
+      "keys": "Enter",
+      "doc": "9371ff77",
+      "action": "Select Text Within Selected Object"
+    },
+    "T5R1": {
+      "keys": "Shift+F8",
+      "doc": "1968fe06",
+      "action": "Open Copilot Options for Rewriting Selected Text Box"
+    },
+    "T6R1": {
+      "keys": "Backspace",
+      "doc": "d155100d",
+      "action": "Delete One Character to the Left"
+    },
+    "T6R2": {
+      "keys": "Ctrl+Backspace",
+      "doc": "6eb41360",
+      "action": "Delete One Word to the Left"
+    },
+    "T6R3": {
+      "keys": "Delete",
+      "doc": "3855eddc",
+      "action": "Delete One Character to the Right"
+    },
+    "T6R4": {
+      "keys": "Ctrl+Delete",
+      "doc": "4c03511b",
+      "action": "Delete One Word to the Right"
+    },
+    "T7R1": {
+      "keys": "Left arrow key",
+      "doc": "206e472f",
+      "action": "Move One Character to the Left"
+    },
+    "T7R2": {
+      "keys": "Right arrow key",
+      "doc": "3fe15962",
+      "action": "Move One Character to the Right"
+    },
+    "T7R3": {
+      "keys": "Up arrow key",
+      "doc": "6faa9d74",
+      "action": "Move One Line Up"
+    },
+    "T7R4": {
+      "keys": "Down arrow key",
+      "doc": "c0603055",
+      "action": "Move One Line Down"
+    },
+    "T7R5": {
+      "keys": "Ctrl+Left arrow key",
+      "doc": "f8434bad",
+      "action": "Move One Word to the Left"
+    },
+    "T7R6": {
+      "keys": "Ctrl+Right arrow key",
+      "doc": "c18ab192",
+      "action": "Move One Word to the Right"
+    },
+    "T7R7": {
+      "keys": "End",
+      "doc": "55f7afbd",
+      "action": "Move to End of Line"
+    },
+    "T7R8": {
+      "keys": "Home",
+      "doc": "08fe75a3",
+      "action": "Move to Beginning of Line"
+    },
+    "T7R9": {
+      "keys": "Ctrl+Up arrow key",
+      "doc": "aaaa24fc",
+      "action": "Move Up One Paragraph"
+    },
+    "T7R10": {
+      "keys": "Ctrl+Down arrow key",
+      "doc": "b82e2949",
+      "action": "Move Down One Paragraph"
+    },
+    "T7R13": {
+      "keys": "Ctrl+Enter",
+      "doc": "20683be9",
+      "action": "Move to Next Title or Body Text Placeholder"
+    },
+    "T7R14": {
+      "keys": "Alt+Shift+Left arrow key",
+      "doc": "ed7b0779",
+      "action": "Promote Paragraph",
+      "section": "Editing"
+    },
+    "T7R15": {
+      "keys": "Alt+Shift+Right arrow key",
+      "doc": "8d263150",
+      "action": "Demote Paragraph",
+      "section": "Editing"
+    },
+    "T7R16": {
+      "keys": "Alt+Shift+Up arrow key",
+      "doc": "c4acdb89",
+      "action": "Move Selected Paragraphs Up",
+      "section": "Editing"
+    },
+    "T7R17": {
+      "keys": "Alt+Shift+Down arrow key",
+      "doc": "9aea981e",
+      "action": "Move Selected Paragraphs Down",
+      "section": "Editing"
+    },
+    "T8R1": {
+      "keys": "Ctrl+F",
+      "doc": "db8534b6",
+      "action": "Open Find Dialog"
+    },
+    "T8R2": {
+      "keys": "Ctrl+H",
+      "doc": "f5802cda",
+      "action": "Open Replace Dialog"
+    },
+    "T8R3": {
+      "keys": "Shift+F4",
+      "doc": "f20485bc",
+      "action": "Repeat Last Find Action"
+    },
+    "T9R2": {
+      "keys": "Ctrl+Shift+Right angle bracket (>)",
+      "doc": "a8c1d9a3",
+      "action": "Increase Font Size"
+    },
+    "T9R3": {
+      "keys": "Ctrl+Shift+Left angle bracket (<)",
+      "doc": "30be278d",
+      "action": "Decrease Font Size"
+    },
+    "T9R4": {
+      "keys": "Shift+F3",
+      "doc": "29f05e4e",
+      "action": "Switch Between Sentence Case, Lowercase, Uppercase"
+    },
+    "T9R6": {
+      "keys": "Ctrl+U",
+      "doc": "8221b8b0",
+      "action": "Underline"
+    },
+    "T9R7": {
+      "keys": "Ctrl+I",
+      "doc": "65368e59",
+      "action": "Italic"
+    },
+    "T9R8": {
+      "keys": "Ctrl+Equal sign ( = )",
+      "doc": "913704c3",
+      "action": "Apply Subscript"
+    },
+    "T9R9": {
+      "keys": "Ctrl+Shift+Plus sign (+)",
+      "doc": "80632741",
+      "action": "Apply Superscript"
+    },
+    "T9R11": {
+      "keys": "Ctrl+E",
+      "doc": "52681cdd",
+      "action": "Center Paragraph"
+    },
+    "T9R12": {
+      "keys": "Ctrl+J",
+      "doc": "7b17757a",
+      "action": "Justify Paragraph"
+    },
+    "T9R13": {
+      "keys": "Ctrl+L",
+      "doc": "36d2638a",
+      "action": "Left Align Paragraph"
+    },
+    "T9R14": {
+      "keys": "Ctrl+R",
+      "doc": "ae10d1ea",
+      "action": "Right Align Paragraph"
+    },
+    "T10R1": {
+      "keys": "Tab key",
+      "doc": "e7f69f2f",
+      "action": "Move to Next Cell"
+    },
+    "T10R2": {
+      "keys": "Shift+Tab",
+      "doc": "5916e6be",
+      "action": "Move to Preceding Cell"
+    },
+    "T10R5": {
+      "keys": "Ctrl+Tab",
+      "doc": "e947c333",
+      "action": "Insert Tab in Cell"
+    },
+    "T12R1": {
+      "keys": "Alt+F5",
+      "doc": "a77fc0e7",
+      "action": "Switch to Presenter View"
+    },
+    "T12R3": {
+      "keys": "Ctrl+Shift+Tab",
+      "doc": "7fd2ca38",
+      "action": "Toggle Between Outline and Thumbnail Views"
+    },
+    "T12R4": {
+      "keys": "Ctrl+F1",
+      "doc": "3ed81f69",
+      "skip": "the same key is described again under Ribbon (expand or collapse the ribbon): kept there"
+    },
+    "T12R5": {
+      "keys": "Alt+F9",
+      "doc": "b1abf750",
+      "action": "Show or Hide Guides"
+    },
+    "T12R6": {
+      "keys": "Shift+F9",
+      "doc": "1d385c31",
+      "action": "Show or Hide Grid"
+    },
+    "T12R7": {
+      "keys": "F6",
+      "doc": "b5294d50",
+      "action": "Cycle Clockwise Through Panes in Normal View"
+    },
+    "T12R8": {
+      "keys": "Shift+F6",
+      "doc": "cf7b85ba",
+      "action": "Cycle Counterclockwise Through Panes in Normal View"
+    },
+    "T12R10": {
+      "keys": "Alt+Shift+1",
+      "doc": "5c95cec9",
+      "action": "Show Outline View Level 1 Headings"
+    },
+    "T12R11": {
+      "keys": "Alt+Shift+Plus sign (+)",
+      "doc": "f00806a3",
+      "action": "Expand Outline View Text Below a Heading"
+    },
+    "T12R12": {
+      "keys": "Alt+Shift+Minus sign (-)",
+      "doc": "64c87f0a",
+      "action": "Collapse Outline View Text Below a Heading"
+    },
+    "T12R15": {
+      "keys": "F1",
+      "doc": "d375143d",
+      "action": "Show Help Menu"
+    },
+    "T13R13": {
+      "keys": "Ctrl+Shift+F",
+      "doc": "46282d20",
+      "action": "Move Selected Item Forward"
+    },
+    "T13R14": {
+      "keys": "Ctrl+Shift+B",
+      "doc": "52b97bc9",
+      "action": "Move Selected Item Backward"
+    },
+    "T13R16": {
+      "keys": "F2",
+      "doc": "cd4f436b",
+      "action": "Rename Focused Item"
+    },
+    "T13R19": {
+      "keys": "Alt+Shift+9",
+      "doc": "71b8f2d7",
+      "action": "Expand All Groups"
+    },
+    "T15R1": {
+      "keys": "Alt+Q, then type the search term.",
+      "doc": "8c81b3cd",
+      "action": "Go to Tell Me or Search Field on the Ribbon"
+    },
+    "T15R2": {
+      "keys": "Alt+F",
+      "doc": "dd7bb792",
+      "action": "Open File Menu"
+    },
+    "T15R3": {
+      "keys": "Alt+H",
+      "doc": "52e76e25",
+      "action": "Open Home Tab"
+    },
+    "T15R4": {
+      "keys": "Alt+N",
+      "doc": "fb51d795",
+      "action": "Open Insert Tab"
+    },
+    "T15R5": {
+      "keys": "Alt+J, I",
+      "doc": "16cb0059",
+      "action": "Open Draw Tab"
+    },
+    "T15R6": {
+      "keys": "Alt+G",
+      "doc": "ebfb28ec",
+      "action": "Open Design Tab"
+    },
+    "T15R7": {
+      "keys": "Alt+K",
+      "doc": "b9ed132f",
+      "action": "Open Transitions Tab"
+    },
+    "T15R8": {
+      "keys": "Alt+A",
+      "doc": "a212387a",
+      "action": "Open Animations Tab"
+    },
+    "T15R9": {
+      "keys": "Alt+S",
+      "doc": "04ec91ee",
+      "action": "Open Slide Show Tab"
+    },
+    "T15R10": {
+      "keys": "Alt+R",
+      "doc": "8e94355c",
+      "action": "Open Review Tab"
+    },
+    "T15R11": {
+      "keys": "Alt+W",
+      "doc": "8b492f7f",
+      "action": "Open View Tab"
+    },
+    "T15R12": {
+      "keys": "Alt+E",
+      "doc": "44b09c26",
+      "action": "Open Recording Tab"
+    },
+    "T15R13": {
+      "keys": "Alt+Y, 2",
+      "doc": "126ba3ef",
+      "action": "Open Help Tab"
+    },
+    "T16R4": {
+      "keys": "Ctrl+Shift+F10",
+      "doc": "8409205f",
+      "action": "Show Tooltip for Focused Ribbon Element"
+    },
+    "T16R7": {
+      "keys": "Alt+Down arrow key",
+      "doc": "26f96472",
+      "action": "Open Menu for Selected Button"
+    },
+    "T16R9": {
+      "keys": "Ctrl+F1",
+      "doc": "90b84e6a",
+      "action": "Expand or Collapse Ribbon"
+    },
+    "T17R1": {
+      "keys": "Alt+H, F, S",
+      "doc": "287411ab",
+      "action": "Change Font Size for Selected Text"
+    },
+    "T17R2": {
+      "keys": "Alt+W, Q",
+      "doc": "ce6bdd1b",
+      "action": "Open Zoom Dialog"
+    },
+    "T17R3": {
+      "keys": "Alt+P, P",
+      "doc": "66bc9638",
+      "action": "Print All Slides as Full Page Slides"
+    },
+    "T17R4": {
+      "keys": "Alt+G, H",
+      "doc": "b634a1a9",
+      "action": "Select Theme"
+    },
+    "T17R5": {
+      "keys": "Alt+H, L",
+      "doc": "577641c0",
+      "action": "Select Slide Layout"
+    },
+    "T17R6": {
+      "keys": "Alt+W, P, N",
+      "doc": "8336f84f",
+      "action": "Show or Hide Notes Pane in Normal View"
+    },
+    "T17R7": {
+      "keys": "Alt+H, F, O",
+      "doc": "b105bdf7",
+      "action": "Open Clipboard"
+    },
+    "T17R8": {
+      "keys": "Alt+N, X",
+      "doc": "138a80bd",
+      "action": "Insert Text Box"
+    },
+    "T17R9": {
+      "keys": "Alt+N, J",
+      "doc": "c64eba6e",
+      "action": "Insert Embedded Document or Spreadsheet as Object"
+    },
+    "T17R10": {
+      "keys": "Alt+N, W",
+      "doc": "fa093b0f",
+      "action": "Insert WordArt"
+    },
+    "T17R11": {
+      "keys": "Alt+N, P, D",
+      "doc": "800fd801",
+      "action": "Insert Picture from Device"
+    },
+    "T17R12": {
+      "keys": "Alt+N, S, H",
+      "doc": "f5e9a479",
+      "action": "Insert Shape"
+    }
+  }
+}

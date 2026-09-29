@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./fonts.css";
 
 /* =========================================
    RETRO STATIONERY THEME (single mode)
@@ -77,7 +78,7 @@
   --radius-panel: 12px;
   --radius-card: 10px;
   --blur-glass: 0px;
-  --font-sans: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+  --font-sans: 'IBM Plex Serif', 'IBM Plex Serif Fallback Georgia', 'IBM Plex Serif Fallback Noto', 'IBM Plex Serif Fallback Times', Georgia, 'Times New Roman', serif;
   --font-mono: 'IBM Plex Mono', 'SF Mono', 'Menlo', monospace;
 }
 

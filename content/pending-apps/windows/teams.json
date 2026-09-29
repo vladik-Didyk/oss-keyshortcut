@@ -1,0 +1,925 @@
+{
+  "slug": "teams",
+  "displayName": "Teams",
+  "category": "communication",
+  "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-for-microsoft-teams-2e8e2a70-e8d8-4a19-949b-4c36dd5292d2",
+  "platform": "windows",
+  "sections": [
+    {
+      "name": "Navigation",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "5",
+          "action": "Open 5th App on App Bar"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "6",
+          "action": "Open 6th App on App Bar"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "7",
+          "action": "Open 7th App on App Bar"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "8",
+          "action": "Open 8th App on App Bar"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "9",
+          "action": "Open 9th App on App Bar"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "L",
+          "action": "Move Focus to Chat or Channel List"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "M",
+          "action": "Move Focus to Message Pane"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "T",
+          "action": "Move Focus to Toast"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "R",
+          "action": "Go to Compose Box"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "H",
+          "action": "Open History Menu"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F6",
+          "action": "Move to Previous Section"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F6",
+          "action": "Move to Next Section"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Move Selected Chat or Channel Up in List"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Move Selected Chat or Channel Down in List"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "←",
+          "action": "Go Back"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "→",
+          "action": "Go Forward"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "Y",
+          "action": "Move Focus to Notification"
+        }
+      ]
+    },
+    {
+      "name": "Messaging",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Q",
+          "action": "Collapse All Conversational Folders"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Esc",
+          "action": "Mark All as Read"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "J",
+          "action": "Jump to Last Read or Newest Message"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F",
+          "action": "Find in Current Chat or Channel"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "1",
+          "action": "Open 1st Tab on Chat Header"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "2",
+          "action": "Open 2nd Tab on Chat Header"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "3",
+          "action": "Open 3rd Tab on Chat Header"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "4",
+          "action": "Open 4th Tab on Chat Header"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "5",
+          "action": "Open 5th Tab on Chat Header"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "6",
+          "action": "Open 6th Tab on Chat Header"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "7",
+          "action": "Open 7th Tab on Chat Header"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "8",
+          "action": "Open 8th Tab on Chat Header"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "9",
+          "action": "Open 9th Tab on Chat Header"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "P",
+          "action": "Toggle Details Pane"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "R",
+          "action": "Reply to Last Message"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "R",
+          "action": "React to Last Message"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "U",
+          "action": "See All Unread Chats"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "C",
+          "action": "See All Chat Conversations"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "A",
+          "action": "See All Channel Conversations"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "B",
+          "action": "See All Meeting Chats"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "Z",
+          "action": "Clear All Filters"
+        }
+      ]
+    },
+    {
+      "name": "Meetings",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "A",
+          "action": "Accept Video Call or Screen Share"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "S",
+          "action": "Accept an Audio Call"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "D",
+          "action": "Decline Call or Screen Share"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "A",
+          "action": "Start an Audio Call"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "V",
+          "action": "Start a Video Call"
+        },
+        {
+          "modifiers": [],
+          "key": "F11",
+          "action": "Toggle Full Screen"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "+",
+          "action": "Zoom In Shared Content"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "-",
+          "action": "Zoom Out Shared Content"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "0",
+          "action": "Reset Zoom for Shared Content"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "H",
+          "action": "End Audio or Video Call"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "U",
+          "action": "Toggle Speaker"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Space",
+          "action": "Temporarily Unmute"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "L",
+          "action": "Announce Raised Hands with Screen Reader"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Space",
+          "action": "Go to the Sharing Toolbar"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Y",
+          "action": "Admit People from the Lobby Notification"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N",
+          "action": "Schedule Meeting"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F10",
+          "action": "Move Focus to Toolbar in an Edit Field"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "S",
+          "action": "Save or Send Meeting Request"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "J",
+          "action": "Join from the Meeting Details"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "S",
+          "action": "Go to the Suggested Time"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "J",
+          "action": "Join from Meeting Started Toast"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "R",
+          "action": "Open Meeting Chat from Meeting Notification"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Pan Shared Content Up"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Pan Shared Content Down"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "←",
+          "action": "Pan Shared Content Left"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "→",
+          "action": "Pan Shared Content Right"
+        }
+      ]
+    },
+    {
+      "name": "General",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F",
+          "action": "Open the Filter"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "N",
+          "action": "Start Chat in New Window"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": ",",
+          "action": "Open Settings"
+        },
+        {
+          "modifiers": [],
+          "key": "F1",
+          "action": "Open Help"
+        },
+        {
+          "modifiers": [],
+          "key": "Esc",
+          "action": "Close"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "=",
+          "action": "Increase Zoom Level"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "-",
+          "action": "Decrease Zoom Level"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "0",
+          "action": "Reset the Zoom Level"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "R",
+          "action": "Report a Problem"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "G",
+          "action": "Go to Specific Chat or Channel"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "Enter",
+          "action": "Move Focus to Pane Divider"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Enter",
+          "action": "Return Pane to Default Width"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "T",
+          "action": "Pin Window on Top"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "O",
+          "action": "Open Existing Conversation in New Window"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "K",
+          "action": "Mark All Activity as Read"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "M",
+          "action": "Filter Activity to @ Mentions"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt",
+            "shift"
+          ],
+          "key": "1",
+          "action": "Download the Diagnostic Logs"
+        }
+      ]
+    },
+    {
+      "name": "Compose",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "X",
+          "action": "Expand the Compose Box"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Enter",
+          "action": "Send from Expanded Compose Box"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "P",
+          "action": "Paragraph Style"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "4",
+          "action": "Insert Block Quote"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "O",
+          "action": "Attach a File"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "1",
+          "action": "Apply Heading 1 Style"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "2",
+          "action": "Apply Heading 2 Style"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "3",
+          "action": "Apply Heading 3 Style"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "U",
+          "action": "Underline"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "X",
+          "action": "Strikethrough"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "I",
+          "action": "Mark Message as Important"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "A",
+          "action": "Rewrite with Copilot"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "E",
+          "action": "Open Video Recorder"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "K",
+          "action": "Insert Link"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "C",
+          "action": "Insert Inline Code"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "5",
+          "action": "Insert Code"
+        }
+      ]
+    },
+    {
+      "name": "Calendar",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "Enter",
+          "action": "Open Selected Item"
+        },
+        {
+          "modifiers": [],
+          "key": "Delete",
+          "action": "Delete Selected Item"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "1",
+          "action": "Open Day View"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "2",
+          "action": "Open Work Week View"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "3",
+          "action": "Open Week View"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "4",
+          "action": "Open Month View"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "5",
+          "action": "Open Agenda in Month View"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "←",
+          "action": "Go to Previous Time Period"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "→",
+          "action": "Go to Next Time Period"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "↓",
+          "action": "Go to Next Week"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "↑",
+          "action": "Go to Previous Week"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Page Down",
+          "action": "Go to Next Month"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Page Up",
+          "action": "Go to Previous Month"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F1",
+          "action": "Open or Collapse Left Pane"
+        },
+        {
+          "modifiers": [],
+          "key": "Tab",
+          "action": "Move to Next Event or Area in Current View"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Move to Previous Event or Area in Current View"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "P",
+          "action": "Print Calendar"
+        },
+        {
+          "modifiers": [],
+          "key": "?",
+          "action": "Show Help"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "F",
+          "action": "Forward an Event"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "R",
+          "action": "Reply to Meeting"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Z",
+          "action": "Undo Action"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Q",
+          "action": "Create Meeting Request"
+        }
+      ]
+    }
+  ]
+}

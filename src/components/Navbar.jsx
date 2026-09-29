@@ -5,6 +5,16 @@ import { Menu, X } from '../utils/icons'
 import { CONTENT } from '../data/content'
 import { APP_STORE_URL } from '../data/siteConfig'
 import { trackEvent } from '../lib/analytics'
+import SiteSearch from './SiteSearch'
+
+const { navbar: NAV } = CONTENT.shared
+// { id: 'macos', label: 'macOS' }, from the links of the bar itself.
+const PLATFORMS = NAV.platformLinks.map((link) => ({ id: link.to.replace(/\//g, ''), label: link.label }))
+// The home page and the platform pages have a search field of their own.
+const hasOwnSearch = (pathname) => {
+  const path = pathname.replace(/\/+$/, '')
+  return path === '' || PLATFORMS.some((p) => path === `/${p.id}`)
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -44,7 +54,7 @@ export default function Navbar() {
   const linkClassDesktop =
     'text-[13px] text-theme-muted hover:text-theme-text transition-colors no-underline'
   const linkClassMobile =
-    'text-[14px] text-theme-muted hover:text-theme-text transition-colors no-underline py-2 px-2 rounded-lg hover:bg-theme-base-alt'
+    'flex items-center min-h-[44px] text-[15px] text-theme-muted hover:text-theme-text transition-colors no-underline px-2 rounded-lg hover:bg-theme-base-alt'
 
   return (
     <nav
@@ -75,7 +85,9 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1 md:gap-3">
+          <SiteSearch platforms={PLATFORMS} hidden={hasOwnSearch(location.pathname)} />
+
           {APP_STORE_URL && isProductPage && (
             <a
               href="#download"
@@ -87,7 +99,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setMenuOpen(prev => !prev)}
-            className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg text-theme-text hover:bg-theme-base-alt transition-colors"
+            className="md:hidden flex items-center justify-center w-[44px] h-[44px] -mr-2 rounded-lg text-theme-text hover:bg-theme-base-alt transition-colors cursor-pointer border-none bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-theme-accent"
             aria-label={menuOpen ? navbar.closeMenuLabel : navbar.openMenuLabel}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"

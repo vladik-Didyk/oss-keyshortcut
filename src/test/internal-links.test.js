@@ -3,6 +3,7 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 import { GUIDES } from '../data/guides/index.js'
 import { POPULAR_APPS } from '../data/popularApps.js'
+import { FOOTER_GUIDES } from '../data/guideLinks.js'
 import { CONTENT } from '../data/content'
 import routerConfig from '../../react-router.config.ts'
 
@@ -80,6 +81,11 @@ describe('navbar and footer links', () => {
     const path = to.split('#')[0].split('?')[0]
     return path.length > 1 ? path.replace(/\/$/, '') : path
   }
+
+  // The footer names three guides without importing them (src/data/guideLinks.js).
+  it('name the first three guides as the guides name themselves', () => {
+    expect(FOOTER_GUIDES).toEqual(GUIDES.slice(0, 3).map(({ slug, title }) => ({ slug, title })))
+  })
 
   it('point at pages that exist', () => {
     const { navbar, footer } = CONTENT.shared

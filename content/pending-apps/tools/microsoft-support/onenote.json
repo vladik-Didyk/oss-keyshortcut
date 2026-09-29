@@ -1,0 +1,809 @@
+{
+  "slug": "onenote",
+  "displayName": "OneNote",
+  "category": "microsoft-office",
+  "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-onenote-44b8b3f4-c274-4bcc-a089-e80fdcc87950",
+  "platform": "windows",
+  "tab": "windows",
+  "fetched": "2026-09-29",
+  "sectionOrder": [
+    "Frequently Used",
+    "Format Notes",
+    "Insert Items",
+    "Tables",
+    "Select Text and Objects",
+    "Tag Notes",
+    "Outlines",
+    "Pages",
+    "Notebooks and Sections",
+    "Search",
+    "Share Notes"
+  ],
+  "sections": {
+    "Frequently used shortcuts": "Frequently Used",
+    "Format notes": "Format Notes",
+    "Insert items on a page": "Insert Items",
+    "Work with tables": "Tables",
+    "Select text and objects": "Select Text and Objects",
+    "Tag notes": "Tag Notes",
+    "Use outlines": "Outlines",
+    "Specify language settings": "Outlines",
+    "Work with pages": "Pages",
+    "Work with notebooks and sections": "Notebooks and Sections",
+    "Search through notes": "Search",
+    "Share notes": "Share Notes",
+    "Protect notes": "Notebooks and Sections"
+  },
+  "rows": {
+    "T0R1": {
+      "keys": "Ctrl+M",
+      "doc": "6e215ba5",
+      "action": "Open New OneNote Window"
+    },
+    "T0R3": {
+      "keys": "Ctrl+Alt+D",
+      "doc": "ea590a03",
+      "action": "Dock OneNote Window"
+    },
+    "T0R4": {
+      "keys": "Ctrl+Z",
+      "doc": "2000ff0b",
+      "action": "Undo Previous Action"
+    },
+    "T0R5": {
+      "keys": "Ctrl+Y",
+      "doc": "f50a16fc",
+      "action": "Redo Previous Action"
+    },
+    "T0R6": {
+      "keys": "Ctrl+A ¶ To expand the selection, press Ctrl+A again.",
+      "doc": "cbeb77bf",
+      "action": "Select All Items on Current Page"
+    },
+    "T0R7": {
+      "keys": "Ctrl+X",
+      "doc": "bdcf6beb",
+      "action": "Cut Selected Text or Item"
+    },
+    "T0R8": {
+      "keys": "Ctrl+C",
+      "doc": "4738194e",
+      "action": "Copy Selected Text or Item to Clipboard"
+    },
+    "T0R9": {
+      "keys": "Ctrl+V",
+      "doc": "a773b5b1",
+      "action": "Paste Clipboard Contents"
+    },
+    "T0R10": {
+      "keys": "Ctrl+Shift+V",
+      "doc": "6ecde00d",
+      "action": "Paste Text Only"
+    },
+    "T0R11": {
+      "keys": "Home",
+      "doc": "c169f61d",
+      "action": "Move to Beginning of Line"
+    },
+    "T0R12": {
+      "keys": "End",
+      "doc": "2a6ce964",
+      "action": "Move to End of Line"
+    },
+    "T0R13": {
+      "keys": "Ctrl+Left arrow key",
+      "doc": "f8434bad",
+      "action": "Move One Word to the Left"
+    },
+    "T0R14": {
+      "keys": "Ctrl+Right arrow key",
+      "doc": "c18ab192",
+      "action": "Move One Word to the Right"
+    },
+    "T0R15": {
+      "keys": "Backspace",
+      "doc": "d155100d",
+      "action": "Delete One Character to the Left"
+    },
+    "T0R16": {
+      "keys": "Delete",
+      "doc": "3855eddc",
+      "action": "Delete One Character to the Right"
+    },
+    "T0R17": {
+      "keys": "Ctrl+Backspace",
+      "doc": "6eb41360",
+      "action": "Delete One Word to the Left"
+    },
+    "T0R18": {
+      "keys": "Ctrl+Delete",
+      "doc": "d07ece16",
+      "action": "Delete One Word to the Right"
+    },
+    "T0R19": {
+      "keys": "Shift+Enter",
+      "doc": "b9030e21",
+      "action": "Insert Line Break Without New Paragraph"
+    },
+    "T0R20": {
+      "keys": "F7",
+      "doc": "997e011d",
+      "action": "Check Spelling"
+    },
+    "T0R21": {
+      "keys": "Shift+F7",
+      "doc": "28a35cbc",
+      "action": "Open Thesaurus for Selected Word"
+    },
+    "T0R23": {
+      "keys": "Ctrl+Shift+W",
+      "doc": "0a2b24ea",
+      "action": "Perform Action Suggested on Information Bar"
+    },
+    "T0R24": {
+      "keys": "Ctrl+Alt+P",
+      "doc": "1defdeb9",
+      "action": "Play Selected Audio Recording"
+    },
+    "T0R25": {
+      "keys": "Ctrl+Alt+S",
+      "doc": "fc97bab7",
+      "action": "Stop Audio Recording Playback"
+    },
+    "T0R26": {
+      "keys": "Ctrl+Alt+Y",
+      "doc": "7689fc3d",
+      "action": "Skip Audio Recording Backward 10 Seconds"
+    },
+    "T0R27": {
+      "keys": "Ctrl+Alt+U",
+      "doc": "7d9d3880",
+      "action": "Skip Audio Recording Forward 10 Seconds"
+    },
+    "T1R1": {
+      "keys": "Ctrl+Alt+H",
+      "doc": "05d9f725",
+      "action": "Highlight Selected Text"
+    },
+    "T1R2": {
+      "keys": "Ctrl+K",
+      "doc": "00f9fe5c",
+      "action": "Insert Hyperlink"
+    },
+    "T1R3": {
+      "keys": "Ctrl+Alt+C",
+      "doc": "53006f1d",
+      "action": "Copy Formatting of Selected Text"
+    },
+    "T1R4": {
+      "keys": "Ctrl+Alt+V",
+      "doc": "575e75f3",
+      "action": "Paste Formatting to Selected Text"
+    },
+    "T1R6": {
+      "keys": "Ctrl+B",
+      "doc": "5c853cd6",
+      "action": "Apply or Remove Bold"
+    },
+    "T1R7": {
+      "keys": "Ctrl+I",
+      "doc": "707e5f2d",
+      "action": "Apply or Remove Italics"
+    },
+    "T1R8": {
+      "keys": "Ctrl+U",
+      "doc": "df42f077",
+      "action": "Apply or Remove Underline"
+    },
+    "T1R9": {
+      "keys": "Alt+Hyphen (-)",
+      "doc": "4ef1013d",
+      "skip": "doubt: the page gives this combination for strikethrough; it differs from what OneNote is known for, check in the app"
+    },
+    "T1R10": {
+      "keys": "Ctrl+Shift+Plus(+)",
+      "doc": "d0276290",
+      "action": "Apply or Remove Superscript"
+    },
+    "T1R11": {
+      "keys": "Ctrl+Shift+Minus(-)",
+      "doc": "0311ff61",
+      "skip": "the page gives this combination two meanings (subscript here, select paragraph and its subordinates under Select text and objects)"
+    },
+    "T1R12": {
+      "keys": "Ctrl+Period (.)",
+      "doc": "501636c0",
+      "action": "Apply or Remove Bulleted List"
+    },
+    "T1R13": {
+      "keys": "Ctrl+Forward slash (/)",
+      "doc": "7a765d67",
+      "action": "Apply or Remove Numbered List"
+    },
+    "T1R14": {
+      "keys": "Ctrl+Alt+1",
+      "doc": "2a8b643a",
+      "action": "Apply Heading 1 Style to Current Note"
+    },
+    "T1R15": {
+      "keys": "Ctrl+Alt+2",
+      "doc": "0324c6d8",
+      "action": "Apply Heading 2 Style to Current Note"
+    },
+    "T1R16": {
+      "keys": "Ctrl+Alt+3",
+      "doc": "05c6b81d",
+      "action": "Apply Heading 3 Style to Current Note"
+    },
+    "T1R17": {
+      "keys": "Ctrl+Alt+4",
+      "doc": "660f8221",
+      "action": "Apply Heading 4 Style to Current Note"
+    },
+    "T1R18": {
+      "keys": "Ctrl+Alt+5",
+      "doc": "f3a847d3",
+      "action": "Apply Heading 5 Style to Current Note"
+    },
+    "T1R19": {
+      "keys": "Ctrl+Alt+6",
+      "doc": "bcfaeb4f",
+      "action": "Apply Heading 6 Style to Current Note"
+    },
+    "T1R20": {
+      "keys": "Ctrl+Shift+N",
+      "doc": "3422cd35",
+      "action": "Clear All Formatting of Selected Text"
+    },
+    "T1R23": {
+      "keys": "Ctrl+L",
+      "doc": "ccc63879",
+      "action": "Align Paragraph to the Left"
+    },
+    "T1R24": {
+      "keys": "Ctrl+R",
+      "doc": "796e09cc",
+      "action": "Align Paragraph to the Right"
+    },
+    "T1R25": {
+      "keys": "Ctrl+Shift+Right angle bracket (>)",
+      "doc": "1a306d33",
+      "action": "Increase Font Size of Selected Text"
+    },
+    "T1R26": {
+      "keys": "Ctrl+Shift+Left angle bracket (<)",
+      "doc": "2b195969",
+      "action": "Decrease Font Size of Selected Text"
+    },
+    "T1R27": {
+      "keys": "Ctrl+Shift+R",
+      "doc": "6e99bf38",
+      "action": "Show or Hide Rule Lines on Current Page"
+    },
+    "T2R1": {
+      "keys": "Alt+N, F",
+      "doc": "af16d92e",
+      "action": "Insert Document or File on Current Page"
+    },
+    "T2R2": {
+      "keys": "Alt+N, O",
+      "doc": "7f5731c8",
+      "action": "Insert Document or File as Printout"
+    },
+    "T2R3": {
+      "keys": "Alt+Shift+P",
+      "doc": "0d0e5b6f",
+      "action": "Show or Hide Document Printouts in High Contrast"
+    },
+    "T2R4": {
+      "keys": "Alt+N, P",
+      "doc": "a23634b1",
+      "action": "Insert Picture from File"
+    },
+    "T2R5": {
+      "keys": "Alt+N, S",
+      "doc": "10816734",
+      "action": "Insert Sticker"
+    },
+    "T2R7": {
+      "keys": "Alt+Shift+D",
+      "doc": "9b7ec6df",
+      "action": "Insert Current Date"
+    },
+    "T2R8": {
+      "keys": "Alt+Shift+F",
+      "doc": "ec368a1a",
+      "action": "Insert Current Date and Time"
+    },
+    "T2R9": {
+      "keys": "Alt+Shift+T",
+      "doc": "f5a3e2c8",
+      "action": "Insert Current Time"
+    },
+    "T2R11": {
+      "keys": "Alt+Equal sign ( = )",
+      "doc": "15c0e3de",
+      "action": "Start Math Equation or Convert Selected Text to One"
+    },
+    "T3R2": {
+      "keys": "Tab key",
+      "doc": "9f41c736",
+      "skip": "narrow meaning (table with a single row): the key is kept as increase indent, from Use outlines"
+    },
+    "T3R3": {
+      "keys": "Enter ¶ Note: Press Enter again to finish creating the table.",
+      "doc": "3f062e89",
+      "action": "Create Another Row at End Cell of Table"
+    },
+    "T3R5": {
+      "keys": "Alt+Enter",
+      "doc": "9bbb7a36",
+      "action": "Create Another Paragraph in Same Table Cell"
+    },
+    "T3R6": {
+      "keys": "Ctrl+Alt+R",
+      "doc": "1d3d326f",
+      "action": "Create Column to the Right of Current Column"
+    },
+    "T3R7": {
+      "keys": "Ctrl+Alt+E",
+      "doc": "cfa69396",
+      "action": "Create Column to the Left of Current Column"
+    },
+    "T4R2": {
+      "keys": "Shift+End",
+      "doc": "98be3199",
+      "action": "Select to End of Line"
+    },
+    "T4R4": {
+      "keys": "Ctrl+Shift+T",
+      "doc": "999b2bf1",
+      "action": "Jump to Page Title and Select It"
+    },
+    "T4R5": {
+      "keys": "Esc",
+      "doc": "65069c16",
+      "action": "Cancel Selecting Outline or Page"
+    },
+    "T4R6": {
+      "keys": "Alt+Shift+Up arrow key",
+      "doc": "1cde5fec",
+      "action": "Move Selected Paragraphs Up"
+    },
+    "T4R7": {
+      "keys": "Alt+Shift+Down arrow key",
+      "doc": "9de6b6ae",
+      "action": "Move Selected Paragraphs Down"
+    },
+    "T4R8": {
+      "keys": "Alt+Shift+Left arrow key",
+      "doc": "8e584fbc",
+      "skip": "the page gives the opposite direction for increase indent in the Format notes table"
+    },
+    "T4R9": {
+      "keys": "Alt+Shift+Right arrow key",
+      "doc": "903dc1db",
+      "skip": "the page gives the opposite direction for decrease indent in the Format notes table"
+    },
+    "T4R10": {
+      "keys": "Ctrl+Shift+Hyphen (-)",
+      "doc": "655080ee",
+      "skip": "the page gives this combination two meanings (select paragraph here, subscript under Format notes)"
+    },
+    "T4R14": {
+      "keys": "Alt+Left arrow key",
+      "doc": "6fd04c41",
+      "action": "Go Back to Last Page Visited"
+    },
+    "T4R15": {
+      "keys": "Alt+Right arrow key",
+      "doc": "48071287",
+      "action": "Go Forward to Next Page Visited"
+    },
+    "T5R1": {
+      "keys": "Ctrl+1",
+      "doc": "e7acc895",
+      "action": "Apply, Select, or Clear To Do Tag"
+    },
+    "T5R2": {
+      "keys": "Ctrl+2",
+      "doc": "0d610ab4",
+      "action": "Apply or Clear Important Tag"
+    },
+    "T5R3": {
+      "keys": "Ctrl+3",
+      "doc": "efb851f2",
+      "action": "Apply or Clear Question Tag"
+    },
+    "T5R4": {
+      "keys": "Ctrl+4",
+      "doc": "a9ea58e3",
+      "action": "Apply or Clear Remember for Later Tag"
+    },
+    "T5R5": {
+      "keys": "Ctrl+5",
+      "doc": "320a8a87",
+      "action": "Apply or Clear Definition Tag"
+    },
+    "T5R6": {
+      "keys": "Ctrl+6",
+      "doc": "734a4fb3",
+      "action": "Apply or Clear Highlight Tag"
+    },
+    "T5R7": {
+      "keys": "Ctrl+7",
+      "doc": "32a49111",
+      "action": "Apply or Clear Contact Tag"
+    },
+    "T5R8": {
+      "keys": "Ctrl+8",
+      "doc": "d53ce2dd",
+      "action": "Apply or Clear Address Tag"
+    },
+    "T5R9": {
+      "keys": "Ctrl+9",
+      "doc": "7393594c",
+      "action": "Apply or Clear Phone Number Tag"
+    },
+    "T5R10": {
+      "keys": "Ctrl+0",
+      "doc": "8b16186e",
+      "action": "Remove All Selected Note Tags"
+    },
+    "T6R1": {
+      "keys": "Alt+Shift+1",
+      "doc": "da298016",
+      "action": "Collapse Selected Outline to Level 1"
+    },
+    "T6R2": {
+      "keys": "Alt+Shift+2",
+      "doc": "bd6757ff",
+      "action": "Expand Outline to Level 2"
+    },
+    "T6R3": {
+      "keys": "Alt+Shift+3",
+      "doc": "d02b2e9a",
+      "action": "Expand Outline to Level 3"
+    },
+    "T6R4": {
+      "keys": "Alt+Shift+4",
+      "doc": "1d9be833",
+      "action": "Expand Outline to Level 4"
+    },
+    "T6R5": {
+      "keys": "Alt+Shift+5",
+      "doc": "936de30a",
+      "action": "Expand Outline to Level 5"
+    },
+    "T6R6": {
+      "keys": "Alt+Shift+6",
+      "doc": "c67111b7",
+      "action": "Expand Outline to Level 6"
+    },
+    "T6R7": {
+      "keys": "Alt+Shift+7",
+      "doc": "a4f385cd",
+      "action": "Expand Outline to Level 7"
+    },
+    "T6R8": {
+      "keys": "Alt+Shift+8",
+      "doc": "c6a3a53b",
+      "action": "Expand Outline to Level 8"
+    },
+    "T6R9": {
+      "keys": "Alt+Shift+9",
+      "doc": "e28eed15",
+      "action": "Expand Outline to Level 9"
+    },
+    "T6R10": {
+      "keys": "Alt+Shift+0",
+      "doc": "ff2fb63d",
+      "action": "Expand All Levels of Outline"
+    },
+    "T6R11": {
+      "keys": "Alt+Shift+Equal sign ( = )",
+      "doc": "c1ae6254",
+      "action": "Expand Selected Heading"
+    },
+    "T6R12": {
+      "keys": "Alt+Shift+Hyphen (-)",
+      "doc": "06c862bd",
+      "action": "Collapse Selected Heading"
+    },
+    "T6R13": {
+      "keys": "Tab key",
+      "doc": "e2e9e8a3",
+      "action": "Increase Indent by One Level"
+    },
+    "T6R14": {
+      "keys": "Shift+Tab",
+      "doc": "c9bce53c",
+      "action": "Decrease Indent by One Level"
+    },
+    "T8R1": {
+      "keys": "F11",
+      "doc": "aa1339c0",
+      "action": "Enable or Disable Full-Page View"
+    },
+    "T8R3": {
+      "keys": "Ctrl+Shift+M",
+      "doc": "577cd033",
+      "action": "Create Quick Note"
+    },
+    "T8R4": {
+      "keys": "Ctrl+Shift+Asterisk (*)",
+      "doc": "4a535067",
+      "action": "Expand or Collapse Page Group in Navigation Pane"
+    },
+    "T8R5": {
+      "keys": "Ctrl+P",
+      "doc": "eb8246fc",
+      "action": "Print Current Page"
+    },
+    "T8R6": {
+      "keys": "Ctrl+N",
+      "doc": "3ffada38",
+      "action": "Add New Page at End of Selected Section"
+    },
+    "T8R7": {
+      "keys": "Ctrl+Shift+Left bracket ([)",
+      "doc": "9be5e87c",
+      "action": "Increase Width of Page Navigation Pane"
+    },
+    "T8R8": {
+      "keys": "Ctrl+Shift+Right bracket (])",
+      "doc": "41af107f",
+      "action": "Decrease Width of Page Navigation Pane"
+    },
+    "T8R9": {
+      "keys": "Ctrl+Alt+Left bracket ([)",
+      "doc": "537ba6c9",
+      "action": "Decrease Indent Level of Current Page"
+    },
+    "T8R10": {
+      "keys": "Ctrl+Alt+Right bracket (])",
+      "doc": "0831b1be",
+      "action": "Increase Indent Level of Current Page"
+    },
+    "T8R11": {
+      "keys": "Ctrl+Shift+Alt+N",
+      "doc": "4a7d5f7f",
+      "action": "Create New Subpage Below Current Page"
+    },
+    "T8R13": {
+      "keys": "Ctrl+Shift+A ¶ If the selected page is part of a group, press Ctrl+A to select all of the pages in the group.",
+      "doc": "98770943",
+      "action": "Select Current Page"
+    },
+    "T8R17": {
+      "keys": "Alt+Page up",
+      "doc": "15c2dbb0",
+      "action": "Go to First Page in Visible Set of Pages"
+    },
+    "T8R18": {
+      "keys": "Alt+Page down",
+      "doc": "47a68864",
+      "action": "Go to Last Page in Visible Set of Pages"
+    },
+    "T8R19": {
+      "keys": "Page up",
+      "doc": "59bf3dd3",
+      "action": "Scroll Up in Current Page"
+    },
+    "T8R20": {
+      "keys": "Page down",
+      "doc": "3d95cd6d",
+      "action": "Scroll Down in Current Page"
+    },
+    "T8R21": {
+      "keys": "Ctrl+Home",
+      "doc": "cde1491a",
+      "action": "Scroll to Top of Current Page"
+    },
+    "T8R22": {
+      "keys": "Ctrl+End",
+      "doc": "9f145173",
+      "action": "Scroll to Bottom of Current Page"
+    },
+    "T8R23": {
+      "keys": "Ctrl+Down arrow key",
+      "doc": "f7e2c77f",
+      "action": "Go to Next Paragraph"
+    },
+    "T8R24": {
+      "keys": "Ctrl+Up arrow key",
+      "doc": "adb846c3",
+      "action": "Go to Previous Paragraph"
+    },
+    "T8R25": {
+      "keys": "Ctrl+Alt+Up arrow key",
+      "doc": "5968aaaf",
+      "action": "Move Cursor Up or Expand Page Upward"
+    },
+    "T8R26": {
+      "keys": "Ctrl+Alt+Down arrow key",
+      "doc": "84ea8552",
+      "action": "Move Cursor Down or Expand Page Downward"
+    },
+    "T8R27": {
+      "keys": "Ctrl+Alt+Left arrow key",
+      "doc": "bfe2583c",
+      "action": "Move Cursor Left or Expand Page Leftward"
+    },
+    "T8R28": {
+      "keys": "Ctrl+Alt+Right arrow key",
+      "doc": "4930f090",
+      "action": "Move Cursor Right or Expand Page Rightward"
+    },
+    "T8R29": {
+      "keys": "Alt+Down arrow key",
+      "doc": "b07954cd",
+      "action": "Go to Next Note Container"
+    },
+    "T8R34": {
+      "keys": "Ctrl+Plus sign (+)",
+      "doc": "030d4d50",
+      "action": "Zoom In"
+    },
+    "T8R35": {
+      "keys": "Ctrl+Minus sign (-)",
+      "doc": "3ace1102",
+      "action": "Zoom Out"
+    },
+    "T8R36": {
+      "keys": "Ctrl+S",
+      "doc": "75b25d76",
+      "action": "Synchronize Notebook"
+    },
+    "T9R1": {
+      "keys": "Windows key+Shift+N",
+      "doc": "a1209d59",
+      "action": "Open OneNote"
+    },
+    "T9R2": {
+      "keys": "Ctrl+O",
+      "doc": "73f755b2",
+      "action": "Open Notebook"
+    },
+    "T9R3": {
+      "keys": "Ctrl+Alt+Shift+O",
+      "doc": "7df67964",
+      "action": "Open Section"
+    },
+    "T9R4": {
+      "keys": "Ctrl+T",
+      "doc": "7a655303",
+      "action": "Create New Section"
+    },
+    "T9R5": {
+      "keys": "Ctrl+Tab",
+      "doc": "85999b5a",
+      "action": "Go to Next Section"
+    },
+    "T9R6": {
+      "keys": "Ctrl+Shift+Tab",
+      "doc": "1d1beda7",
+      "action": "Go to Previous Section"
+    },
+    "T9R7": {
+      "keys": "Ctrl+Page down",
+      "doc": "84b5db2f",
+      "action": "Go to Next Page in Section"
+    },
+    "T9R8": {
+      "keys": "Ctrl+Page up",
+      "doc": "80183639",
+      "action": "Go to Previous Page in Section"
+    },
+    "T9R9": {
+      "keys": "Alt+Home",
+      "doc": "68424343",
+      "action": "Go to First Page in Section"
+    },
+    "T9R10": {
+      "keys": "Alt+End",
+      "doc": "0f830a92",
+      "action": "Go to Last Page in Section"
+    },
+    "T9R13": {
+      "keys": "Ctrl+Alt+M",
+      "doc": "87537653",
+      "action": "Move or Copy Current Page"
+    },
+    "T9R14": {
+      "keys": "Ctrl+Alt+G",
+      "doc": "6c678f63",
+      "action": "Put Focus on Current Page Tab"
+    },
+    "T9R16": {
+      "keys": "Ctrl+Shift+G",
+      "doc": "1e725069",
+      "action": "Put Focus on Current Section Tab"
+    },
+    "T10R1": {
+      "keys": "Ctrl+E",
+      "doc": "fb5a4473",
+      "action": "Go to Search Box to Search All Notebooks"
+    },
+    "T10R2": {
+      "keys": "Down arrow key",
+      "doc": "39a8fb72",
+      "action": "Preview Next Result While Searching All Notebooks"
+    },
+    "T10R6": {
+      "keys": "Ctrl+F",
+      "doc": "305d0578",
+      "action": "Search Current Page"
+    },
+    "T10R8": {
+      "keys": "Shift+F3",
+      "doc": "af6f0cd8",
+      "action": "Go to Previous Result While Searching Current Page"
+    },
+    "T11R1": {
+      "keys": "Ctrl+Shift+E",
+      "doc": "77d9a4cb",
+      "action": "Send Selected Pages in Email Message"
+    },
+    "T11R2": {
+      "keys": "Ctrl+Shift+1",
+      "doc": "e7ccf5f8",
+      "action": "Create Today Outlook Task from Selected Note"
+    },
+    "T11R3": {
+      "keys": "Ctrl+Shift+2",
+      "doc": "403c8d7a",
+      "action": "Create Tomorrow Outlook Task from Selected Note"
+    },
+    "T11R4": {
+      "keys": "Ctrl+Shift+3",
+      "doc": "3e02bd2e",
+      "action": "Create This Week Outlook Task from Selected Note"
+    },
+    "T11R5": {
+      "keys": "Ctrl+Shift+4",
+      "doc": "04763d18",
+      "action": "Create Next Week Outlook Task from Selected Note"
+    },
+    "T11R6": {
+      "keys": "Ctrl+Shift+5",
+      "doc": "ab1222a7",
+      "action": "Create No Date Outlook Task from Selected Note"
+    },
+    "T11R7": {
+      "keys": "Ctrl+Shift+K",
+      "doc": "37606ca6",
+      "action": "Open Selected Outlook Task"
+    },
+    "T11R8": {
+      "keys": "Ctrl+Shift+9",
+      "doc": "6e3d441d",
+      "action": "Mark Selected Outlook Task as Complete"
+    },
+    "T11R9": {
+      "keys": "Ctrl+Shift+0",
+      "doc": "6853825c",
+      "action": "Delete Selected Outlook Task"
+    },
+    "T11R10": {
+      "keys": "Shift+F9",
+      "doc": "809bef0b",
+      "action": "Synchronize Changes in Current Shared Notebook"
+    },
+    "T11R11": {
+      "keys": "F9",
+      "doc": "0c4a2629",
+      "action": "Synchronize Changes in All Shared Notebooks"
+    },
+    "T11R12": {
+      "keys": "Ctrl+Q",
+      "doc": "3e27baa3",
+      "action": "Mark Current Page as Unread"
+    },
+    "T12R1": {
+      "keys": "Ctrl+Alt+L",
+      "doc": "6a795b55",
+      "action": "Lock All Password-Protected Sections"
+    }
+  }
+}

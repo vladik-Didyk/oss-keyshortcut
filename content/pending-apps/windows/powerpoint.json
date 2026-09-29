@@ -1,0 +1,901 @@
+{
+  "slug": "powerpoint",
+  "displayName": "PowerPoint",
+  "category": "microsoft-office",
+  "docsUrl": "https://support.microsoft.com/en-us/office/use-keyboard-shortcuts-to-create-powerpoint-presentations-ebb3d20e-dcd4-444f-a38e-bb5c5ed180f4",
+  "platform": "windows",
+  "sections": [
+    {
+      "name": "Editing",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "X",
+          "action": "Cut Selected Text, Object, or Slide"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "C",
+          "action": "Copy Selected Text, Object, or Slide"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "V",
+          "action": "Paste Cut or Copied Text, Object, or Slide"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "K",
+          "action": "Insert Hyperlink"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "M",
+          "action": "Insert New Comment"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Z",
+          "action": "Undo Last Action"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Y",
+          "action": "Redo Last Action"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "C",
+          "action": "Copy Animation Painter"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "V",
+          "action": "Paste Animation Painter"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "V",
+          "action": "Open Paste Special Dialog"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F8",
+          "action": "Open Copilot Options for Rewriting Selected Text Box"
+        },
+        {
+          "modifiers": [],
+          "key": "Backspace",
+          "action": "Delete One Character to the Left"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Backspace",
+          "action": "Delete One Word to the Left"
+        },
+        {
+          "modifiers": [],
+          "key": "Delete",
+          "action": "Delete One Character to the Right"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Delete",
+          "action": "Delete One Word to the Right"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "←",
+          "action": "Promote Paragraph"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "→",
+          "action": "Demote Paragraph"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Move Selected Paragraphs Up"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Move Selected Paragraphs Down"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F",
+          "action": "Open Find Dialog"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "H",
+          "action": "Open Replace Dialog"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F4",
+          "action": "Repeat Last Find Action"
+        }
+      ]
+    },
+    {
+      "name": "Navigation",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "←",
+          "action": "Move One Character to the Left"
+        },
+        {
+          "modifiers": [],
+          "key": "→",
+          "action": "Move One Character to the Right"
+        },
+        {
+          "modifiers": [],
+          "key": "↑",
+          "action": "Move One Line Up"
+        },
+        {
+          "modifiers": [],
+          "key": "↓",
+          "action": "Move One Line Down"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "←",
+          "action": "Move One Word to the Left"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "→",
+          "action": "Move One Word to the Right"
+        },
+        {
+          "modifiers": [],
+          "key": "End",
+          "action": "Move to End of Line"
+        },
+        {
+          "modifiers": [],
+          "key": "Home",
+          "action": "Move to Beginning of Line"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "↑",
+          "action": "Move Up One Paragraph"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "↓",
+          "action": "Move Down One Paragraph"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Enter",
+          "action": "Move to Next Title or Body Text Placeholder"
+        }
+      ]
+    },
+    {
+      "name": "Frequently Used",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "N",
+          "action": "Create New Presentation"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "P",
+          "action": "Print Presentation"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "S",
+          "action": "Save Presentation"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Q",
+          "action": "Close PowerPoint"
+        }
+      ]
+    },
+    {
+      "name": "Presentations and Slides",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "-",
+          "action": "Zoom Out"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "+",
+          "action": "Zoom In"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "O",
+          "action": "Zoom to Fit"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "D",
+          "action": "Make Copy of Selected Slide"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "O",
+          "action": "Open Presentation"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "S",
+          "action": "Save with Different Name, Location, or File Format"
+        }
+      ]
+    },
+    {
+      "name": "Objects",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "5",
+          "action": "Move Focus to First Floating Shape"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "[",
+          "action": "Send Object Back One Position"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "]",
+          "action": "Bring Object Forward One Position"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "A",
+          "action": "Select All Objects on Slide"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "J",
+          "action": "Regroup Selected Objects"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "→",
+          "action": "Rotate Object Clockwise 15 Degrees"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "←",
+          "action": "Rotate Object Counterclockwise 15 Degrees"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Space",
+          "action": "Play or Pause Media"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "=",
+          "action": "Insert Equation"
+        }
+      ]
+    },
+    {
+      "name": "Select Text",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "→",
+          "action": "Select One Character to the Right"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "←",
+          "action": "Select One Character to the Left"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "→",
+          "action": "Select to End of Word"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "←",
+          "action": "Select to Beginning of Word"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Select One Line Up"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Select One Line Down"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Select to End of Paragraph"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Select to Beginning of Paragraph"
+        },
+        {
+          "modifiers": [],
+          "key": "Enter",
+          "action": "Select Text Within Selected Object"
+        }
+      ]
+    },
+    {
+      "name": "Format Text",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "B",
+          "action": "Bold"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "T",
+          "action": "Open Font Dialog"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": ">",
+          "action": "Increase Font Size"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "<",
+          "action": "Decrease Font Size"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F3",
+          "action": "Switch Between Sentence Case, Lowercase, Uppercase"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "U",
+          "action": "Underline"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "I",
+          "action": "Italic"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "=",
+          "action": "Apply Subscript"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "+",
+          "action": "Apply Superscript"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "E",
+          "action": "Center Paragraph"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "J",
+          "action": "Justify Paragraph"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "L",
+          "action": "Left Align Paragraph"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "R",
+          "action": "Right Align Paragraph"
+        }
+      ]
+    },
+    {
+      "name": "Tables",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "Tab",
+          "action": "Move to Next Cell"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Move to Preceding Cell"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Tab",
+          "action": "Insert Tab in Cell"
+        }
+      ]
+    },
+    {
+      "name": "Views and Panes",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F5",
+          "action": "Switch to Presenter View"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Toggle Between Outline and Thumbnail Views"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F9",
+          "action": "Show or Hide Guides"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F9",
+          "action": "Show or Hide Grid"
+        },
+        {
+          "modifiers": [],
+          "key": "F6",
+          "action": "Cycle Clockwise Through Panes in Normal View"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "F6",
+          "action": "Cycle Counterclockwise Through Panes in Normal View"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "1",
+          "action": "Show Outline View Level 1 Headings"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "+",
+          "action": "Expand Outline View Text Below a Heading"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "-",
+          "action": "Collapse Outline View Text Below a Heading"
+        },
+        {
+          "modifiers": [],
+          "key": "F1",
+          "action": "Show Help Menu"
+        }
+      ]
+    },
+    {
+      "name": "Selection Pane",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F",
+          "action": "Move Selected Item Forward"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "B",
+          "action": "Move Selected Item Backward"
+        },
+        {
+          "modifiers": [],
+          "key": "F2",
+          "action": "Rename Focused Item"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "shift"
+          ],
+          "key": "9",
+          "action": "Expand All Groups"
+        }
+      ]
+    },
+    {
+      "name": "Ribbon",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Q",
+          "action": "Go to Tell Me or Search Field on the Ribbon"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F",
+          "action": "Open File Menu"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H",
+          "action": "Open Home Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N",
+          "action": "Open Insert Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "J I",
+          "action": "Open Draw Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "G",
+          "action": "Open Design Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "K",
+          "action": "Open Transitions Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "A",
+          "action": "Open Animations Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "S",
+          "action": "Open Slide Show Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "R",
+          "action": "Open Review Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "W",
+          "action": "Open View Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "E",
+          "action": "Open Recording Tab"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Y 2",
+          "action": "Open Help Tab"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "F10",
+          "action": "Show Tooltip for Focused Ribbon Element"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "↓",
+          "action": "Open Menu for Selected Button"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F1",
+          "action": "Expand or Collapse Ribbon"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H F S",
+          "action": "Change Font Size for Selected Text"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "W Q",
+          "action": "Open Zoom Dialog"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "P P",
+          "action": "Print All Slides as Full Page Slides"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "G H",
+          "action": "Select Theme"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H L",
+          "action": "Select Slide Layout"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "W P N",
+          "action": "Show or Hide Notes Pane in Normal View"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "H F O",
+          "action": "Open Clipboard"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N X",
+          "action": "Insert Text Box"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N J",
+          "action": "Insert Embedded Document or Spreadsheet as Object"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N W",
+          "action": "Insert WordArt"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N P D",
+          "action": "Insert Picture from Device"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "N S H",
+          "action": "Insert Shape"
+        }
+      ]
+    }
+  ]
+}

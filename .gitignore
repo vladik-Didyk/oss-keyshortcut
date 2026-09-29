@@ -48,3 +48,7 @@ public/llms.txt
 
 # Orphan setup reports / scratch notes
 posthog-setup-report.md
+
+# Reports and parsers that quote the documentation pages of other vendors:
+# kept on disk for the owner, not published
+content/pending-apps/local/

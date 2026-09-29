@@ -1,0 +1,887 @@
+{
+  "slug": "windows",
+  "displayName": "Windows",
+  "category": "windows-system",
+  "docsUrl": "https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec",
+  "platform": "windows",
+  "sections": [
+    {
+      "name": "General",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "A",
+          "action": "Focus First Icon in Suggested Actions Menu"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Esc",
+          "action": "Cycle Through Windows in Order Opened"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "F8",
+          "action": "Show Password on Sign-In Screen"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "←",
+          "action": "Go Back"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Page Down",
+          "action": "Move Down One Screen"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Page Up",
+          "action": "Move Up One Screen"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "→",
+          "action": "Go Forward"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "Insert",
+          "action": "Return Focus From Windows Sandbox to Host"
+        },
+        {
+          "modifiers": [
+            "alt"
+          ],
+          "key": "Space",
+          "action": "Open Context Menu of Active Window"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "Delete",
+          "action": "Open Security Screen"
+        },
+        {
+          "modifiers": [
+            "control",
+            "alt"
+          ],
+          "key": "Tab",
+          "action": "View Thumbnails of All Open Apps"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Esc",
+          "action": "Open Start Menu"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "F4",
+          "action": "Close Active Document"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Space",
+          "action": "Turn Chinese Input Method Editor On or Off"
+        },
+        {
+          "modifiers": [],
+          "key": "Esc",
+          "action": "Stop Current Task or Dismiss Dialog Box"
+        },
+        {
+          "modifiers": [],
+          "key": "F5",
+          "action": "Refresh Active Window"
+        },
+        {
+          "modifiers": [],
+          "key": "F6",
+          "action": "Cycle Through Elements in Window or Desktop"
+        },
+        {
+          "modifiers": [],
+          "key": "F10",
+          "action": "Activate Menu Bar"
+        }
+      ]
+    },
+    {
+      "name": "Window Management",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt",
+            "super"
+          ],
+          "key": "↓",
+          "action": "Snap Window to Bottom Half"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "super"
+          ],
+          "key": "↑",
+          "action": "Snap Window to Top Half"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "Home",
+          "action": "Minimize or Restore All Other Windows"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "M",
+          "action": "Minimize All Windows"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "↓",
+          "action": "Restore Snapped or Maximized Window"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "Enter",
+          "action": "Make UWP App Full Screen"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "←",
+          "action": "Move Window to Left Monitor"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "M",
+          "action": "Restore Minimized Windows"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "→",
+          "action": "Move Window to Right Monitor"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "↑",
+          "action": "Stretch Window to Top and Bottom of Screen"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "Z",
+          "action": "Open Snap Layouts"
+        }
+      ]
+    },
+    {
+      "name": "Windows Key",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "A",
+          "action": "Open Action Center"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "A",
+          "action": "Set Focus to Windows Tip"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "super"
+          ],
+          "key": "B",
+          "action": "Turn HDR On or Off"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "C",
+          "action": "Open Copilot"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "super"
+          ],
+          "key": "D",
+          "action": "Show or Hide Date and Time on Desktop"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "super"
+          ],
+          "key": "H",
+          "action": "Set Focus to Keyboard in Voice Typing"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "super"
+          ],
+          "key": "K",
+          "action": "Mute or Unmute Microphone"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": ",",
+          "action": "Peek at Desktop"
+        },
+        {
+          "modifiers": [
+            "control",
+            "super"
+          ],
+          "key": "C",
+          "action": "Turn Color Filters On or Off"
+        },
+        {
+          "modifiers": [
+            "control",
+            "super"
+          ],
+          "key": "Enter",
+          "action": "Open Narrator"
+        },
+        {
+          "modifiers": [
+            "control",
+            "super"
+          ],
+          "key": "F",
+          "action": "Search for Devices on Network"
+        },
+        {
+          "modifiers": [
+            "control",
+            "super"
+          ],
+          "key": "Q",
+          "action": "Open Quick Assist"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift",
+            "super"
+          ],
+          "key": "B",
+          "action": "Wake Device From Blank or Black Screen"
+        },
+        {
+          "modifiers": [
+            "control",
+            "super"
+          ],
+          "key": "Space",
+          "action": "Change to Previous Input Option"
+        },
+        {
+          "modifiers": [
+            "control",
+            "super"
+          ],
+          "key": "V",
+          "action": "Open Sound Output in Quick Settings"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "Esc",
+          "action": "Close Magnifier"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "F",
+          "action": "Open Feedback Hub"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "/",
+          "action": "Start IME Reconversion"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "G",
+          "action": "Open Game Bar"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "H",
+          "action": "Open Voice Dictation"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "J",
+          "action": "Open Recall"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "K",
+          "action": "Open Cast to Connect to a Display"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "-",
+          "action": "Zoom Out in Magnifier"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "N",
+          "action": "Open Notification Center and Calendar"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "O",
+          "action": "Lock Device Orientation"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "P",
+          "action": "Choose Presentation Display Mode"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "Pause",
+          "action": "Open About Page in Settings"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "+",
+          "action": "Zoom In With Magnifier"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "Q",
+          "action": "Open Search"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "S",
+          "action": "Open Search"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "R",
+          "action": "Record Video of Screen Region"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "Space",
+          "action": "Previous Input Language or Keyboard Layout"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "V",
+          "action": "Cycle Through Notifications"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "Space",
+          "action": "Next Input Language or Keyboard Layout"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "U",
+          "action": "Open Accessibility Settings"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "V",
+          "action": "Open Clipboard History"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "W",
+          "action": "Open Widgets"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "X",
+          "action": "Open Quick Link Menu"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "Y",
+          "action": "Switch Input Between Mixed Reality and Desktop"
+        }
+      ]
+    },
+    {
+      "name": "Taskbar",
+      "shortcuts": [
+        {
+          "modifiers": [
+            "alt",
+            "super"
+          ],
+          "key": "Enter",
+          "action": "Open Taskbar Settings"
+        },
+        {
+          "modifiers": [
+            "alt",
+            "super"
+          ],
+          "key": "0-9",
+          "action": "Open Jump List of Pinned App by Position"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "B",
+          "action": "Focus First Icon in Notification Area"
+        },
+        {
+          "modifiers": [
+            "control",
+            "super"
+          ],
+          "key": "0-9",
+          "action": "Switch to Last Active Window of Pinned App"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift",
+            "super"
+          ],
+          "key": "0-9",
+          "action": "Open New Instance of Pinned App as Administrator"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "0-9",
+          "action": "Open or Switch to Pinned App by Position"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "0-9",
+          "action": "Start New Instance of Pinned App"
+        },
+        {
+          "modifiers": [
+            "super"
+          ],
+          "key": "T",
+          "action": "Cycle Through Apps in Taskbar"
+        },
+        {
+          "modifiers": [
+            "shift",
+            "super"
+          ],
+          "key": "T",
+          "action": "Move to Previous App in Taskbar"
+        }
+      ]
+    },
+    {
+      "name": "Text Editing",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "Backspace",
+          "action": "Delete Character to the Left"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "B",
+          "action": "Bold Selected Text"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Backspace",
+          "action": "Delete Word to the Left"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Delete",
+          "action": "Delete Word to the Right"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "↓",
+          "action": "Move Cursor to Next Paragraph"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "End",
+          "action": "Move Cursor to End of Document"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "H",
+          "action": "Find and Replace Text"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Home",
+          "action": "Move Cursor to Start of Document"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "I",
+          "action": "Italicize Selected Text"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "←",
+          "action": "Move Cursor to Previous Word"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "→",
+          "action": "Move Cursor to Next Word"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "V",
+          "action": "Paste as Plain Text"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "U",
+          "action": "Underline Selected Text"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "↑",
+          "action": "Move Cursor to Previous Paragraph"
+        },
+        {
+          "modifiers": [],
+          "key": "Delete",
+          "action": "Delete Character to the Right"
+        },
+        {
+          "modifiers": [],
+          "key": "↓",
+          "action": "Move Cursor to Next Line"
+        },
+        {
+          "modifiers": [],
+          "key": "End",
+          "action": "Move Cursor to End of Line"
+        },
+        {
+          "modifiers": [],
+          "key": "Home",
+          "action": "Move Cursor to Start of Line"
+        },
+        {
+          "modifiers": [],
+          "key": "←",
+          "action": "Move Cursor to Previous Character"
+        },
+        {
+          "modifiers": [],
+          "key": "Page Down",
+          "action": "Move Cursor Forward One Page"
+        },
+        {
+          "modifiers": [],
+          "key": "Page Up",
+          "action": "Move Cursor Backward One Page"
+        },
+        {
+          "modifiers": [],
+          "key": "→",
+          "action": "Move Cursor to Next Character"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Select Paragraphs Forward"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "End",
+          "action": "Select to End of Document"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Home",
+          "action": "Select to Start of Document"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "←",
+          "action": "Select Words Backward"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "→",
+          "action": "Select Words Forward"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Select Paragraphs Backward"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "↓",
+          "action": "Select Lines Forward"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "End",
+          "action": "Select to End of Line"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Home",
+          "action": "Select to Start of Line"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "←",
+          "action": "Select Characters Backward"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Page Down",
+          "action": "Select One Page Forward"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Page Up",
+          "action": "Select One Page Backward"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "→",
+          "action": "Select Characters Forward"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "↑",
+          "action": "Select Lines Backward"
+        },
+        {
+          "modifiers": [],
+          "key": "Tab",
+          "action": "Indent One Tab Stop"
+        },
+        {
+          "modifiers": [],
+          "key": "↑",
+          "action": "Move Cursor to Previous Line"
+        }
+      ]
+    },
+    {
+      "name": "Dialog Boxes",
+      "shortcuts": [
+        {
+          "modifiers": [],
+          "key": "F4",
+          "action": "Display Items in Active List"
+        },
+        {
+          "modifiers": [
+            "control"
+          ],
+          "key": "Tab",
+          "action": "Move Forward Through Tabs"
+        },
+        {
+          "modifiers": [
+            "control",
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Move Back Through Tabs"
+        },
+        {
+          "modifiers": [
+            "shift"
+          ],
+          "key": "Tab",
+          "action": "Move Back Through Options"
+        },
+        {
+          "modifiers": [],
+          "key": "Space",
+          "action": "Select or Clear Check Box"
+        }
+      ]
+    }
+  ]
+}

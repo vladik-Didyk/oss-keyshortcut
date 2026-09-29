@@ -3,6 +3,7 @@ import { ArrowRight } from '../utils/icons'
 import { parseKeyParts } from '../utils/platformHelpers'
 import { POPULAR_APPS } from '../data/popularApps'
 import { linkPath } from '../utils/siteUrl'
+import { CONTENT } from '../data/content'
 
 /**
  * Anchored search dropdown rendered under the homepage search input.
@@ -12,8 +13,10 @@ import { linkPath } from '../utils/siteUrl'
  * and aria-selected, so the parent input can wire aria-activedescendant +
  * Up/Down/Enter keyboard navigation. The `n` counter increments in the same
  * order as flattenSearchResults() in searchHelpers.js.
+ *
+ * `loading`: the shortcuts of the platform are not there yet (usePlatformSearch).
  */
-export default function SearchDropdown({ results, platform, onClose, query, listId, activeIndex = -1 }) {
+export default function SearchDropdown({ results, platform, onClose, query, listId, activeIndex = -1, loading = false }) {
   const navigate = useNavigate()
   const { appMatches = [], shortcutMatches = [], otherApps = [] } = results || {}
   const hasResults = appMatches.length > 0 || shortcutMatches.length > 0
@@ -27,6 +30,17 @@ export default function SearchDropdown({ results, platform, onClose, query, list
 
   if (!hasResults) {
     if (!query) return null
+    // The shortcuts are on their way: "no results" would be said too early.
+    if (loading) {
+      return (
+        <div
+          className="absolute left-0 right-0 top-full mt-2 bg-theme-base border border-theme-border rounded-xl shadow-lg overflow-hidden z-50 p-4 text-left"
+          role="status"
+        >
+          <p className="text-sm text-theme-muted m-0">{CONTENT.home.loadingShortcuts}</p>
+        </div>
+      )
+    }
     return (
       <div
         className="absolute left-0 right-0 top-full mt-2 bg-theme-base border border-theme-border rounded-xl shadow-lg overflow-hidden z-50 p-4 text-left"

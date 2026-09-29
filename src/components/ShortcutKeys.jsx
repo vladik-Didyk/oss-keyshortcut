@@ -44,7 +44,8 @@ export function CopyableShortcut({ parts, action, appSlug, platform }) {
       onClick={onCopy}
       title={copied ? 'Copied' : `Copy shortcut: ${combo}`}
       aria-label={copied ? `Copied ${words}` : `Copy shortcut ${words} for ${action}`}
-      className="group/copy inline-flex items-center gap-1.5 flex-wrap justify-end bg-transparent border-none p-0 m-0 cursor-pointer align-middle"
+      // py-2 with -my-2: a target of 44 px for a finger, in a row that keeps its height.
+      className="group/copy inline-flex items-center gap-1.5 flex-wrap justify-end bg-transparent border-none px-0 py-2 -my-2 mx-0 cursor-pointer align-middle"
     >
       <span className="sr-only">{words}</span>
       {parts.map((part, k) => (

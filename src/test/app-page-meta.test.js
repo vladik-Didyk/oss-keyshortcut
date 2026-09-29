@@ -10,7 +10,7 @@ import { getAppNote } from '../data/appNotes'
 const PLATFORMS = { macos: 'macOS', windows: 'Windows', linux: 'Linux' }
 const appsOf = (id) => JSON.parse(readFileSync(join(process.cwd(), `public/data/platforms/${id}.json`), 'utf-8')).apps
 const pages = Object.entries(PLATFORMS).flatMap(([platformId, platformName]) =>
-  appsOf(platformId).map((app) => ({ platformId, platformName, app, path: `${platformId}/${app.slug}` }))
+  appsOf(platformId).map((app) => ({ platformId, platformName, app, note: getAppNote(app.slug, platformId) ?? null, path: `${platformId}/${app.slug}` }))
 )
 const tag = (tags, find) => tags.find(find)
 const titleOf = (page) => tag(meta({ data: page }), (t) => 'title' in t).title

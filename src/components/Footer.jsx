@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Link from './SiteLink'
 import { CONTENT } from '../data/content'
-import { GUIDES } from '../data/guides/index.js'
+import { FOOTER_GUIDES } from '../data/guideLinks.js'
 import { COMPARISONS } from '../data/comparisons.js'
 import { trackEvent } from '../lib/analytics'
 import { openCookieSettings } from '../lib/consent'
@@ -28,7 +28,7 @@ function prettySlug(slug) {
 }
 
 // Top resource links: static entry points + a few top guides + top comparisons.
-const TOP_GUIDES = GUIDES.slice(0, 3).map((g) => ({
+const TOP_GUIDES = FOOTER_GUIDES.map((g) => ({
   label: g.title.length > 42 ? `${g.title.slice(0, 40)}…` : g.title,
   to: `/guides/${g.slug}`,
 }))
@@ -91,7 +91,7 @@ export default function Footer() {
               <button
                 type="button"
                 onClick={openCookieSettings}
-                className="bg-transparent border-none p-0 cursor-pointer text-[13px] text-theme-muted underline underline-offset-2 hover:text-theme-text"
+                className="bg-transparent border-none px-0 py-3 -my-3 cursor-pointer text-[13px] text-theme-muted underline underline-offset-2 hover:text-theme-text"
               >
                 {footer.cookieSettings}
               </button>
@@ -169,7 +169,8 @@ function FooterAvatar({ src, name }) {
 function FooterLink({ to, heading, children }) {
   const hasHash = to.includes('#')
   // py-1.5 inline-block gives ~36px touch targets with comfortable spacing.
-  const cls = "text-[14px] text-theme-muted hover:text-theme-text transition-colors no-underline py-1.5 inline-block"
+  // 44 px for a finger, the compact row for a mouse.
+  const cls = "text-[14px] text-theme-muted hover:text-theme-text transition-colors no-underline py-1.5 pointer-coarse:py-3 inline-block"
   const onClick = () => trackEvent('footer_link_clicked', { label: typeof children === 'string' ? children : to, to, section: heading })
   return (
     <li className="list-none">

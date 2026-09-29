@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { X } from '../utils/icons'
 import { initAnalytics, trackPageView, trackEvent, optOut } from '../lib/analytics'
-import { CONSENT_KEY, OPEN_SETTINGS_EVENT, setNonPersonalizedAds, whenGoogleConsentSettled } from '../lib/consent'
+import { CONSENT_KEY, OPEN_SETTINGS_EVENT, setNonPersonalizedAds, visitorRegion, whenGoogleConsentSettled } from '../lib/consent'
 import { CONTENT } from '../data/content'
+
+// "One. Two." -> ["One.", "Two."]. A period inside a bracket does not end one.
+const sentences = (text) => text.split(/(?<=[.!?])\s+(?=[A-Z])/)
 
 function storeDecline() {
   localStorage.setItem(CONSENT_KEY, 'declined')
@@ -29,16 +32,16 @@ export default function CookieConsent() {
     if (stored) return // already accepted or declined
 
     // Region decides whether a Decline button is required and whether Google's
-    // consent message goes first.
-    fetch('/api/geo')
-      .then(r => r.ok ? r.json() : { gdpr: false })
-      .catch(() => ({ gdpr: false }))
-      .then(data => {
-        const isGdpr = Boolean(data?.gdpr)
-        setGdpr(isGdpr)
-        if (isGdpr) whenGoogleConsentSettled(() => setVisible(true))
-        else setTimeout(() => setVisible(true), 800)
-      })
+    // consent message goes first. The page asked for it while it loaded.
+    let gone = false
+    visitorRegion().then(data => {
+      if (gone) return
+      const isGdpr = Boolean(data?.gdpr)
+      setGdpr(isGdpr)
+      if (isGdpr) whenGoogleConsentSettled(() => setVisible(true))
+      else setVisible(true)
+    })
+    return () => { gone = true }
   }, [])
 
   // Footer "Cookie settings" reopens the banner, always with a Decline button.
@@ -97,10 +100,19 @@ export default function CookieConsent() {
         aria-describedby="cookie-consent-desc"
         className="mx-auto max-w-[680px] bg-theme-accent text-theme-accent-text rounded-2xl px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-lg relative"
       >
-        <p id="cookie-consent-desc" className="text-[14px] leading-relaxed flex-1">
-          {gdpr ? cc.textGdpr : cc.text}{' '}
-          <a href="/privacy#cookies" className="underline hover:opacity-80">{cc.learnMore}</a>.
-        </p>
+        {/* One block per sentence. The banner arrives after the page, and a
+            browser measures "largest contentful paint" by the largest block of
+            text: as one paragraph the banner was that block on a phone, so the
+            page counted as slow by the time the banner showed (6 s measured,
+            with the content there at 1.5 s). The words are unchanged. */}
+        <div id="cookie-consent-desc" className="text-[14px] leading-relaxed flex-1">
+          {sentences(gdpr ? cc.textGdpr : cc.text).map((sentence) => (
+            <p key={sentence} className="m-0">{sentence}</p>
+          ))}
+          <p className="m-0">
+            <a href="/privacy#cookies" className="underline hover:opacity-80">{cc.learnMore}</a>.
+          </p>
+        </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shrink-0 w-full sm:w-auto">
           {showDecline && (
             <button

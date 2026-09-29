@@ -9,10 +9,19 @@ import Footer from "./components/Footer";
 import { hasConsented, initAnalytics, trackPageView } from "./lib/analytics";
 import { CONTENT, buildMeta } from "./data/content";
 import { ADSENSE_CLIENT } from "./data/ads";
+import { REGION_SCRIPT } from "./lib/consent";
 import { buildWebSiteJsonLd } from "./utils/structuredData";
+import { cloudflareToken } from "./utils/cloudflareToken";
+import SERIF_REGULAR from "@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-normal.woff2?url";
+import SERIF_BOLD from "@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-normal.woff2?url";
 import "./index.css";
 
 const JSON_LD = JSON.stringify(buildWebSiteJsonLd());
+
+// A token of Cloudflare Web Analytics is 32 hex characters. Anything else gets
+// no tag: on 2026-09-29 the live site carried the token "s", and every page
+// logged failed requests to cloudflareinsights.com because of it.
+const CF_ANALYTICS_TOKEN = cloudflareToken(import.meta.env.VITE_CF_ANALYTICS_TOKEN);
 
 // Hosts Google AdSense needs for scripts, pixels, beacons and ad iframes.
 const GOOGLE_ADS_HOSTS = [
@@ -72,12 +81,10 @@ export function Layout({ children }) {
         {/* Impact.com site ownership check (Setapp, Canva affiliate programs). Impact's
             snippet uses `value`, not `content`. */}
         <meta name="impact-site-verification" value="cb1c7e04-3c32-43cd-99c8-8eb37043e55e" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-          rel="stylesheet"
-        />
+        {/* The fonts are the site's own files (src/fonts.css). The two that the
+            top of every page is set in are asked for before the stylesheet is read. */}
+        <link rel="preload" as="font" type="font/woff2" href={SERIF_REGULAR} crossOrigin="anonymous" />
+        <link rel="preload" as="font" type="font/woff2" href={SERIF_BOLD} crossOrigin="anonymous" />
         <link rel="alternate" type="application/rss+xml" title="KeyShortcut Guides" href="/rss.xml" />
 
         {/* Open Graph defaults */}
@@ -100,6 +107,9 @@ export function Layout({ children }) {
         />
         <meta property="og:locale" content="en_US" />
 
+        {/* The cookie banner needs the visitor's region: ask while the page loads. */}
+        <script dangerouslySetInnerHTML={{ __html: REGION_SCRIPT }} />
+
         {/* JSON-LD WebSite — static content, safe to inline */}
         <script type="application/ld+json">{JSON_LD}</script>
 
@@ -121,12 +131,13 @@ export function Layout({ children }) {
           <script dangerouslySetInnerHTML={{ __html: ADS_LOADER_SCRIPT }} />
         )}
 
-        {/* Analytics: Cloudflare Web Analytics (production only) */}
-        {import.meta.env.PROD && import.meta.env.VITE_CF_ANALYTICS_TOKEN && (
+        {/* Analytics: Cloudflare Web Analytics (production only). Cloudflare also
+            puts its own tag into the pages it serves, so this one is a second way in. */}
+        {import.meta.env.PROD && CF_ANALYTICS_TOKEN && (
           <script
             defer
             src="https://static.cloudflareinsights.com/beacon.min.js"
-            data-cf-beacon={`{"token": "${import.meta.env.VITE_CF_ANALYTICS_TOKEN}"}`}
+            data-cf-beacon={`{"token": "${CF_ANALYTICS_TOKEN}"}`}
           />
         )}
       </body>

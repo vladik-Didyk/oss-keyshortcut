@@ -6,6 +6,7 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 import ShortcutPage from '../components/ShortcutPage'
 import { CONTENT } from '../data/content'
+import { getAppNote } from '../data/appNotes'
 import { keysToWords, parseKeyParts } from '../utils/platformHelpers'
 import { trackEvent } from '../lib/analytics'
 import { HOUSE_CARD, MIN_SECTIONS_FOR_SLOT, showsHouseCard } from '../data/sponsors'
@@ -46,6 +47,7 @@ const pageData = (app, platformId = 'macos', platformName = 'macOS') => ({
   platformId,
   platformName,
   app,
+  note: getAppNote(app.slug, platformId) ?? null,
   otherPlatforms: [],
   relatedApps: [],
   moreApps: [],
@@ -62,7 +64,7 @@ function page(data = pageData(APP)) {
   )
 }
 
-const faqItems = (app = APP) => CONTENT.shortcutPage.faqItems(app, 'macOS')
+const faqItems = (app = APP) => CONTENT.shortcutPage.faqItems(app, 'macOS', getAppNote(app.slug, 'macos') ?? null)
 const expandedCalls = () => trackEvent.mock.calls.filter(([name]) => name === 'faq_item_expanded')
 const faqParts = (item) => {
   const answer = screen.getByText(item.answer)

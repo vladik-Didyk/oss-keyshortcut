@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { APP_NOTES, APP_NOTES_BY_PLATFORM, getAppNote } from '../data/appNotes'
+import { APP_NOTES, APP_NOTES_BY_PLATFORM, APP_NOTES_FOR_PENDING, getAppNote } from '../data/appNotes'
+import { mergePending } from '../../scripts/preview-pending-apps.mjs'
 import { CONTENT } from '../data/content'
 import {
   noteFitsApp,
@@ -16,12 +17,22 @@ import {
 const load = (p) => JSON.parse(readFileSync(join(process.cwd(), `public/data/platforms/${p}.json`), 'utf-8')).apps
 const mac = load('macos')
 
+// A note written ahead of its data is checked against the data as it will be:
+// the site's data with the files of content/pending-apps/ merged in. Every
+// other note is checked against the data as it is.
+const ahead = mergePending().data
+const PENDING_NOTES = Object.entries(APP_NOTES_FOR_PENDING).flatMap(([platform, notes]) =>
+  Object.entries(notes).map(([slug, note]) => ({ slug, note, platform, label: `${platform}/${slug}`, pending: true }))
+)
+const appOf = ({ slug, platform, pending }) => (pending ? ahead[platform].apps : load(platform)).find((a) => a.slug === slug)
+
 // Every note in the file: the shared ones are checked on macOS, the others on their own platform.
 const ALL_NOTES = [
   ...Object.entries(APP_NOTES).map(([slug, note]) => ({ slug, note, platform: 'macos', label: slug })),
   ...Object.entries(APP_NOTES_BY_PLATFORM).flatMap(([platform, notes]) =>
     Object.entries(notes).map(([slug, note]) => ({ slug, note, platform, label: `${platform}/${slug}` }))
   ),
+  ...PENDING_NOTES,
 ]
 
 // macOS Figma lists the three zoom commands twice, in View and in Zoom, with
@@ -29,8 +40,9 @@ const ALL_NOTES = [
 const KNOWN_DOUBLE_ENTRIES = { figma: ['Zoom to Selection', 'Zoom to Fit', 'Zoom to 100%'] }
 
 describe('app notes', () => {
-  for (const { slug, note, platform, label } of ALL_NOTES) {
-    const app = load(platform).find((a) => a.slug === slug)
+  for (const entry of ALL_NOTES) {
+    const { slug, note, platform, label } = entry
+    const app = appOf(entry)
 
     it(`${label}: exists on ${platform} and every {{action}} resolves there`, () => {
       expect(app, `no ${platform} app "${slug}"`).toBeTruthy()
@@ -88,8 +100,9 @@ describe('app notes', () => {
   it('no sentence is a template shared by the notes of two different apps', () => {
     const seen = new Map()
     const repeated = []
-    for (const { slug, note, platform } of ALL_NOTES) {
-      const appName = load(platform).find((a) => a.slug === slug).displayName
+    for (const entry of ALL_NOTES) {
+      const { slug, note } = entry
+      const appName = appOf(entry).displayName
       for (const sentence of [note.overview, ...note.tips].join(' ').split(/(?<=[.:])\s+/)) {
         const key = sentence.replaceAll(appName, 'APP').replace(/\{\{[^}]+\}\}/g, 'X').replace(/\s+/g, ' ').trim().toLowerCase()
         if (key.replace(/x|app|[^a-z]/g, '').length < 12) continue

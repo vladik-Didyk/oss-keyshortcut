@@ -1404,6 +1404,74 @@ const CHROME_DESKTOP = {
   sections: ['Developer', 'Tabs', 'Navigation', 'Page'],
 }
 
+// Notes written ahead of their data: for the lists of content/pending-apps/,
+// which are not in the database yet. Each shows on its page from the day the
+// page exists. Until then a test checks it against the pending file itself.
+// Written on 2026-09-29, with the action names of Microsoft's own pages.
+export const APP_NOTES_FOR_PENDING = {
+  windows: {
+  edge: {
+    overview:
+      'In the Tabs & Windows section of the Edge list, Shift turns {{New Tab}} into {{Reopen Closed Tab}} and {{New Window}} into {{New InPrivate Window}}. {{Switch to a Specific Tab}} reaches the first eight tabs by their number, and {{Switch to Last Tab}} the last one. Favorites & History has {{Add Favorite}}, {{Open Favorites}}, {{Open History}} and {{Open Downloads}}.',
+    tips: [
+      'In Find & Search, {{Find Previous}} is {{Find Next}} with Shift held as well.',
+      'In PDF, {{Rotate PDF Counterclockwise}} and {{Rotate PDF Clockwise}} use the two bracket keys with one modifier.',
+      '{{Save All Tabs as Favorites}} differs from {{Add Favorite}} only by Shift.',
+    ],
+    essentials: ['New Tab', 'Reopen Closed Tab', 'New InPrivate Window', 'Add Favorite', 'Find on Page', 'Open History'],
+    sections: ['Tabs & Windows', 'Favorites & History', 'Find & Search', 'PDF'],
+  },
+
+  'file-explorer': {
+    overview:
+      'File Explorer has tabs, and its list has the shortcuts for them in Tabs & Windows: {{Open New Tab}}, {{Close Active Tab}}, {{Move to Next Tab}} and {{Move to Previous Tab}}, with {{Open New Window}} for a second window. Files & Folders has {{Create New Folder}}, {{Rename Selected Item}} and {{Display Properties of Selected Item}}.',
+    tips: [
+      'In View, {{Show or Hide Preview Pane}} and {{Show or Hide Details Pane}} share a letter, and the second one holds Shift too.',
+      'Two shortcuts of Navigation lead to the address bar: {{Select Address Bar}} and {{Focus Address Bar}}.',
+      '{{Open File Explorer}} works from anywhere in Windows, not only inside a File Explorer window.',
+    ],
+    essentials: ['Open File Explorer', 'Open New Tab', 'Create New Folder', 'Rename Selected Item', 'Focus Address Bar', 'Display Properties of Selected Item'],
+    sections: ['Tabs & Windows', 'Files & Folders', 'View', 'Navigation'],
+  },
+
+  outlook: {
+    overview:
+      'This list is for the new Outlook for Windows. Its Frequently Used section holds the shortcuts of daily mail: {{Create New Message or Calendar Event}}, {{Reply to Email Message}}, {{Forward Message}} and {{Send Email Message}}. A number with one modifier switches between the parts of Outlook: {{Go to Mail}}, {{Go to Calendar}} and {{Go to People}}.',
+    tips: [
+      'In Frequently Used, the reply to everyone, {{Select Reply All Option}}, has the keys of {{Reply to Email Message}} and Shift.',
+      'In Calendar, {{Go to Next Time Period}} and {{Go to Previous Time Period}} use the right and the left arrow key with the same two modifiers.',
+      'In Mail, {{Select Current and Next Message in List}} and {{Select Current and Previous Message in List}} build a selection of several messages, one message at a time.',
+    ],
+    essentials: ['Create New Message or Calendar Event', 'Send Email Message', 'Reply to Email Message', 'Forward Message', 'Go to Calendar', 'Mark Selected Conversation or Message as Read'],
+    sections: ['Frequently Used', 'Calendar', 'Mail'],
+  },
+
+  onenote: {
+    overview:
+      'OneNote keeps notes in notebooks, sections and pages, and its list has a shortcut for each step: {{Open Notebook}}, {{Create New Section}} and {{Add New Page at End of Selected Section}}. {{Create Quick Note}} starts a note at once. {{Search Current Page}} looks in the page you are on, and {{Go to Search Box to Search All Notebooks}} in all of them.',
+    tips: [
+      'In Tag Notes, the number keys with one modifier set the tags: {{Apply, Select, or Clear To Do Tag}} is on the first number and {{Apply or Clear Important Tag}} on the second.',
+      'In Insert Items, {{Insert Current Date}}, {{Insert Current Time}} and {{Insert Current Date and Time}} have the same two modifiers and a letter each.',
+      'In Format Notes, {{Copy Formatting of Selected Text}} and {{Paste Formatting to Selected Text}} are on the letters of copy and paste, with one modifier more.',
+    ],
+    essentials: ['Add New Page at End of Selected Section', 'Create New Section', 'Create Quick Note', 'Search Current Page', 'Apply, Select, or Clear To Do Tag', 'Highlight Selected Text'],
+    sections: ['Tag Notes', 'Insert Items', 'Format Notes'],
+  },
+
+  'windows-terminal': {
+    overview:
+      'Tab Management in the Windows Terminal list has {{New Tab}}, {{Duplicate Tab}}, {{Next Tab}} and {{Previous Tab}}. Pane Management splits a tab into panes with {{Duplicate Pane, Split Right}} and {{Duplicate Pane, Split Down}}, and {{Close Pane}} closes the pane that has the focus.',
+    tips: [
+      'In Pane Management, the arrow keys with one modifier move the focus between panes: {{Move Focus to Pane on the Left}}, {{Move Focus to Pane on the Right}}, {{Move Focus to Pane Above}} and {{Move Focus to Pane Below}}.',
+      'With Shift held too, the same arrow keys resize the pane: {{Resize Pane Left}}, {{Resize Pane Right}}, {{Resize Pane Up}} and {{Resize Pane Down}}.',
+      'Every shortcut of Scrollback has the same two modifiers, {{Scroll to Top of Buffer}} and {{Scroll to Bottom of Buffer}} among them.',
+    ],
+    essentials: ['New Tab', 'Duplicate Tab', 'Duplicate Pane, Split Right', 'Close Pane', 'Open Search Dialog Box', 'Open Settings'],
+    sections: ['Tab Management', 'Pane Management', 'Scrollback'],
+  },
+  },
+}
+
 // Notes for one platform only: APP_NOTES_BY_PLATFORM[platformId][slug].
 // For pages whose data names actions differently from the shared note, and for
 // apps that are not on macOS. Same shape and rules as APP_NOTES.
@@ -1624,5 +1692,5 @@ export const APP_NOTES_BY_PLATFORM = {
 
 /** The note for one app page: the platform's own note if it has one, else the shared note. */
 export function getAppNote(slug, platform) {
-  return APP_NOTES_BY_PLATFORM[platform]?.[slug] ?? APP_NOTES[slug]
+  return APP_NOTES_BY_PLATFORM[platform]?.[slug] ?? APP_NOTES_FOR_PENDING[platform]?.[slug] ?? APP_NOTES[slug]
 }
