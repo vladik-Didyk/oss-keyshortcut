@@ -2,6 +2,14 @@
 // Named imports from lucide-react tree-shake correctly in production builds.
 export {
   ArrowRight,
+  AppWindow,
+  BadgeCheck,
+  CreditCard,
+  LayoutList,
+  MousePointerClick,
+  PenLine,
+  Send,
+  Users,
   ChevronDown,
   ChevronLeft,
   ChevronRight,

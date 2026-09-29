@@ -898,26 +898,62 @@ export const CONTENT = {
   // Every figure here is computed from the data or comes from SPONSOR_AUDIENCE,
   // which carries its source and period. Do not add a number that was not measured.
   sponsorPage: {
-    title: 'Sponsor KeyShortcut',
-    lead: 'One sponsor slot: a labeled card in the middle of the app pages. Month to month.',
-    fromPage: (path) => `You came from ${path}. You can book that page alone, or the whole site.`,
+    eyebrow: 'Sponsor KeyShortcut',
+    title: 'Reach people at the keyboard',
+    lead: (price) => `One labeled card inside the shortcut lists people read while they work. One sponsor per page. From $${price} a month.`,
+    heroCta: { prices: 'See prices', preview: 'Try your card' },
+    mockCaption: 'Your card sits in the middle of the list.',
+    fromPage: (path) => `You came from ${path}. Book that page alone, or the whole site.`,
+
+    // Tiles under the top of the page. The visitor figure is printed with its
+    // source and period in the same tile (SponsorPage.jsx).
+    stats: {
+      visitors: 'unique visitors a month',
+      apps: 'apps',
+      shortcuts: 'shortcuts',
+      slot: 'app pages hold the card',
+    },
 
     offer: {
       title: 'What you get',
       items: ({ slotPages, appPages }) => [
-        `A card labeled "Sponsored" in the middle of the shortcut list, on ${slotPages} of the ${appPages} app pages. The other pages are too short to hold one.`,
-        'Your name, one line of text and a link. A logo up to 96 px tall if you want one.',
-        'One sponsor per page. Your card takes the place of the ad in that spot.',
-        'Your link carries ?ref=keyshortcut, so the clicks show up in your own analytics.',
+        {
+          icon: 'list',
+          title: 'A card in the list',
+          text: `Labeled "Sponsored", in the middle of the shortcut list, on ${slotPages} of the ${appPages} app pages. The rest are too short to hold one.`,
+        },
+        {
+          icon: 'badge',
+          title: 'The page is yours',
+          text: 'One sponsor per page. Your card takes the place of the ad in that spot.',
+        },
+        {
+          icon: 'pen',
+          title: 'Your words',
+          text: 'Your name, one line and a link. A logo up to 96 px tall if you want one.',
+        },
+        {
+          icon: 'click',
+          title: 'Your own numbers',
+          text: 'Your link carries ?ref=keyshortcut, so the clicks show up in your own analytics.',
+        },
       ],
+    },
+
+    preview: {
+      title: 'Try your card',
+      lead: 'Type your name and one line. This is how it looks in a list.',
+      nameLabel: 'Name',
+      lineLabel: 'One line',
+      nameDefault: 'Your product',
+      lineDefault: 'One line about what it does.',
+      note: 'Only a preview. Nothing you type is sent or saved.',
     },
 
     audience: {
       title: 'Who sees it',
-      items: () => [
-        `People looking up keyboard shortcuts for ${APP_COUNT} apps on macOS, Windows and Linux: ${formatShortcutCount()} shortcuts, taken from the apps’ official documentation.`,
-        `${SPONSOR_AUDIENCE.monthlyVisitors} unique visitors a month (${SPONSOR_AUDIENCE.source}, ${SPONSOR_AUDIENCE.period}).`,
-      ],
+      lead: `People looking up a shortcut for the app they have open. ${formatShortcutCount()} shortcuts for ${APP_COUNT} apps, taken from the apps’ official documentation.`,
+      moreApps: (count) => `and ${count} more`,
       // The slot is new. Say so instead of guessing a click rate.
       unknown: 'What I don’t have yet: click numbers for this slot. It is new.',
       unknownWithOffer: 'What I don’t have yet: click numbers for this slot. It is new, which is why the first month is half price.',
@@ -928,6 +964,7 @@ export const CONTENT = {
       sitewide: { name: 'The whole site', detail: ({ slotPages }) => `Your card on all ${slotPages} app pages that hold the slot.` },
       page: { name: 'One page', detail: ({ slotPages }) => `Your card on one app page of your choice, from the ${slotPages} that hold the slot.` },
       perMonth: 'a month',
+      compare: 'The whole site costs less than four single pages.',
       terms: 'Month to month. Cancel any time, and the card comes off at the end of the paid month.',
       firstMonth: (code) => `The first month is half price with the code ${code} at checkout.`,
       taken: 'Taken right now. Email me to be told when it opens.',
@@ -937,18 +974,18 @@ export const CONTENT = {
       title: 'How it works',
       items: ({ email, days }) => [
         'Pay by card. Stripe handles the payment.',
-        `Email your name, your line of text, your link and an optional logo to ${email}.`,
+        `Email your name, your line, your link and an optional logo to ${email}.`,
         `Your card is live within ${days} business days of both. If it isn’t, I refund the month.`,
       ],
       byEmail: ({ email }) => [
-        `Email ${email} with your name, your line of text and your link.`,
+        `Email ${email} with your name, your line and your link.`,
         'I reply with a payment link. Stripe handles the payment.',
         'Your card goes live after the payment.',
       ],
     },
 
     rules: {
-      title: 'Rules',
+      title: 'The rules',
       items: [
         'Every card is labeled "Sponsored", and its link is marked as sponsored for search engines.',
         'A sponsor does not change which shortcuts are listed or how they are described.',
@@ -970,16 +1007,16 @@ export const CONTENT = {
       title: 'Questions',
       items: ({ slotPages, appPages, email, days }) => [
         {
-          q: 'Where exactly does my card appear?',
-          a: `In the middle of the shortcut list on an app page, after the second group of shortcuts, on phones and on desktop. It carries the label "Sponsored". ${slotPages} of the ${appPages} app pages are long enough to hold it.`,
+          q: 'Where does my card appear?',
+          a: `In the middle of the shortcut list, after the second group of shortcuts, on phones and on desktop. ${slotPages} of the ${appPages} app pages are long enough to hold it.`,
         },
         {
           q: 'How many people will click it?',
-          a: `I don’t know yet. The site gets ${SPONSOR_AUDIENCE.monthlyVisitors} unique visitors a month (${SPONSOR_AUDIENCE.source}, ${SPONSOR_AUDIENCE.period}), but the slot is new and has no click history. Your link carries ?ref=keyshortcut, so you can count the clicks yourself from the first day.`,
+          a: `I don’t know yet. The site gets ${SPONSOR_AUDIENCE.monthlyVisitors} unique visitors a month (${SPONSOR_AUDIENCE.source}, ${SPONSOR_AUDIENCE.period}), but the slot is new. Your link carries ?ref=keyshortcut, so you can count the clicks yourself from the first day.`,
         },
         {
           q: 'Which page should I pick?',
-          a: 'The page of the app your customers already use, or one close to it. If your product works with many apps, the whole site costs less than four single pages.',
+          a: 'The page of the app your customers already use. If your product works with many apps, take the whole site.',
         },
         {
           q: 'Can I change my text or link later?',
@@ -991,16 +1028,20 @@ export const CONTENT = {
         },
         {
           q: 'Will you review my product or change the shortcuts for me?',
-          a: 'No. The card is the only thing for sale. Which shortcuts are listed, and how they are described, does not depend on who sponsors the site.',
+          a: 'No. The card is the only thing for sale. The shortcuts do not depend on who sponsors the site.',
         },
         {
           q: 'Do I get a receipt?',
-          a: `Stripe emails a receipt for every payment. If you need an invoice with your company details on it, email ${email}.`,
+          a: `Stripe emails a receipt for every payment. For an invoice with your company details, email ${email}.`,
         },
       ],
     },
 
-    contact: (email) => `Questions first? Write to ${email}.`,
+    closing: {
+      title: 'Not sure yet?',
+      text: 'Write to me. A person answers.',
+    },
+    contact: (email) => `Write to ${email}`,
   },
 
   // ─── Cheat sheets page: voluntary support (shown only when SUPPORT_LINK is set) ──
@@ -1035,8 +1076,8 @@ export const CONTENT = {
       url: pageUrl('/about'),
     },
     sponsor: {
-      title: 'Sponsor KeyShortcut \u2014 One Slot on Every App Page',
-      description: `One labeled sponsor card on the app pages of a keyboard shortcuts directory covering ${APP_COUNT} apps. $${SPONSOR_OFFER.sitewide.price} a month sitewide, $${SPONSOR_OFFER.page.price} a month for one page. Month to month.`,
+      title: 'Sponsor KeyShortcut: Advertise to Keyboard Power Users',
+      description: `Put your product inside the shortcut lists of ${APP_COUNT} apps. One labeled card, one sponsor per page. From $${SPONSOR_OFFER.page.price} a month, cancel any time.`,
       url: pageUrl('/sponsor'),
     },
     guidesIndex: {

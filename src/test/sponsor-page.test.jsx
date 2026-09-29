@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen, within } from '@testing-library/react'
+import { render, screen, within, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import { readFileSync } from 'fs'
 import { join } from 'path'
@@ -12,6 +12,8 @@ import {
   SPONSOR_OFFER,
   SPONSOR_AUDIENCE,
   SPONSOR_EMAIL,
+  SPONSOR_PAGE_APPS,
+  SPONSOR_MOCK,
   MIN_SECTIONS_FOR_SLOT,
   isSitewideOpen,
   isAppPagePath,
@@ -272,6 +274,101 @@ describe('SponsorPage', () => {
     renderPage({ offer: NO_LINKS, sitewideOpen: true })
     const rules = screen.getByRole('heading', { name: CONTENT.sponsorPage.rules.title }).parentElement
     expect(within(rules).getByText(/gambling, crypto, adult content/)).toBeInTheDocument()
+  })
+})
+
+describe('SponsorPage: what it shows', () => {
+  const c = CONTENT.sponsorPage
+  const macApps = readPlatform('macos').apps
+
+  it('the buttons at the top lead down to the prices and to the preview', () => {
+    const { container } = renderPage({ offer: WITH_LINKS, sitewideOpen: true })
+    for (const [label, target] of [[c.heroCta.prices, 'price'], [c.heroCta.preview, 'preview']]) {
+      expect(screen.getByRole('link', { name: label })).toHaveAttribute('href', `#${target}`)
+      expect(container.querySelector(`#${target}`)).not.toBeNull()
+    }
+  })
+
+  it('has each booking button once: in its price card', () => {
+    renderPage({ offer: WITH_LINKS, sitewideOpen: true })
+    expect(screen.getAllByRole('link', { name: /^Book / })).toHaveLength(2)
+  })
+
+  it('draws the card in a list of real shortcuts of a real page', () => {
+    const app = macApps.find((a) => a.slug === SPONSOR_MOCK.slug)
+    expect(app.displayName).toBe(SPONSOR_MOCK.name)
+    const section = app.sections.find((s) => s.name === SPONSOR_MOCK.section)
+    const inData = section.shortcuts.map((sc) => `${sc.action}: ${[...(sc.modifiers || []), sc.key].join(' ')}`)
+    for (const { action, keys } of [...SPONSOR_MOCK.before, ...SPONSOR_MOCK.after]) {
+      expect(inData).toContain(`${action}: ${keys.join(' ')}`)
+    }
+  })
+
+  it('shows apps that are on the site, each a link to its page', () => {
+    renderPage({ offer: WITH_LINKS, sitewideOpen: true })
+    expect(SPONSOR_PAGE_APPS.length).toBeGreaterThanOrEqual(8)
+    for (const { slug, name } of SPONSOR_PAGE_APPS) {
+      expect(macApps.find((a) => a.slug === slug)?.displayName, slug).toBe(name)
+      expect(screen.getByRole('link', { name })).toHaveAttribute('href', `/macos/${slug}`)
+    }
+  })
+
+  it('the card in the preview carries what the visitor types, and the default when the field is empty', () => {
+    renderPage({ offer: WITH_LINKS, sitewideOpen: true })
+    const preview = screen.getByRole('heading', { name: c.preview.title }).closest('section')
+    const name = within(preview).getByLabelText(c.preview.nameLabel)
+    const line = within(preview).getByLabelText(c.preview.lineLabel)
+
+    expect(within(preview).getByText(c.preview.nameDefault)).toBeInTheDocument()
+    fireEvent.change(name, { target: { value: 'Acme Fonts' } })
+    fireEvent.change(line, { target: { value: 'Typefaces for interface design.' } })
+    expect(within(preview).getByText('Acme Fonts')).toBeInTheDocument()
+    expect(within(preview).getByText('Typefaces for interface design.')).toBeInTheDocument()
+    expect(within(preview).queryByText(c.preview.nameDefault)).not.toBeInTheDocument()
+
+    fireEvent.change(name, { target: { value: '   ' } })
+    expect(within(preview).getByText(c.preview.nameDefault)).toBeInTheDocument()
+  })
+
+  it('keeps what is typed short, and says that it goes nowhere', () => {
+    renderPage({ offer: WITH_LINKS, sitewideOpen: true })
+    expect(screen.getByLabelText(c.preview.nameLabel)).toHaveAttribute('maxlength', '40')
+    expect(screen.getByLabelText(c.preview.lineLabel)).toHaveAttribute('maxlength', '80')
+    expect(screen.getByText(c.preview.note)).toBeInTheDocument()
+    expect(read('src/components/SponsorPage.jsx')).not.toMatch(/fetch\(|localStorage|sessionStorage/)
+  })
+
+  it('says the whole site costs less than four pages only while that is true', () => {
+    renderPage({ offer: WITH_LINKS, sitewideOpen: true })
+    expect(screen.getByText(c.price.compare)).toBeInTheDocument()
+    const dear = { ...WITH_LINKS, sitewide: { ...WITH_LINKS.sitewide, price: 200 } }
+    renderPage({ offer: dear, sitewideOpen: true })
+    expect(screen.getAllByText(c.price.compare)).toHaveLength(1)
+  })
+
+  it('every answer is in the page before any click', () => {
+    const { container } = renderPage({ offer: WITH_LINKS, sitewideOpen: true })
+    const items = c.faq.items({ ...STATS, email: SPONSOR_EMAIL, days: 2 })
+    expect(container.querySelectorAll('details')).toHaveLength(items.length)
+    for (const details of container.querySelectorAll('details')) expect(details.open).toBe(false)
+  })
+})
+
+describe('sponsor page in search results', () => {
+  const { title, description } = CONTENT.meta.sponsor
+
+  it('has a title and a description that fit', () => {
+    expect(title.length).toBeLessThanOrEqual(60)
+    expect(description.length).toBeGreaterThanOrEqual(110)
+    expect(description.length).toBeLessThanOrEqual(160)
+    expect(title).toMatch(/Sponsor/)
+    expect(description).toContain(`$${SPONSOR_OFFER.page.price}`)
+  })
+
+  it('leaves the visitor figure out: there is no room for its source and period', () => {
+    const figure = SPONSOR_AUDIENCE.monthlyVisitors
+    expect(title).not.toContain(figure)
+    expect(description).not.toContain(figure)
   })
 })
 
