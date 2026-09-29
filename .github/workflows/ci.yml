@@ -121,3 +121,9 @@ jobs:
       # refuses the robot is a warning.
       - name: Check legacy redirects on the live site
         run: node scripts/check-redirects.mjs --wait=90
+
+      # Pages that changed in the last two days, reported to Bing and the other
+      # search engines that read IndexNow. Never fails the run.
+      - name: Report changed pages to search engines (IndexNow)
+        continue-on-error: true
+        run: node scripts/indexnow.mjs --since=2

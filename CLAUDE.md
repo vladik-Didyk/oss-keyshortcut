@@ -36,6 +36,8 @@ pnpm add-app:dry  # Preview add-app without writing
 pnpm check:redirects [base] [--all] [--wait=90]  # Legacy redirects on a running server (default keyshortcut.com): one 301, ending at 200
 pnpm pdf-bundle [platform] [--out dir]  # The PDF bundle that is sold: every cheat sheet of a platform in one file → dist/products/
 pnpm affiliates [--open]  # Affiliate programs: which have a link, which wait, where to apply
+pnpm indexnow [--since=2] [--all] [--dry-run]  # Report new and changed pages to Bing and the other IndexNow search engines
+node scripts/preview-pending-apps.mjs [--out=dir]  # What the data would be with the files of content/pending-apps/ in it
 ```
 
 Add an app from JSON: `pnpm add-app -- --from-json path/to/app.json`
@@ -62,7 +64,13 @@ A clean-folder build without `.env` still gets the AdSense ID but not the analyt
 
 **Stack**: React 19 + React Router v7 (framework mode) + Vite 7 + Tailwind CSS 4 (via `@tailwindcss/vite`) + jspdf
 
-**Framework mode**: The site uses React Router v7's framework mode for SSR + static pre-rendering. All ~175 pages are pre-rendered at build time to `build/client/` as static HTML. No Node.js server needed in production — deploy as static files.
+**Framework mode**: The site uses React Router v7's framework mode for SSR + static pre-rendering. All pages (369 on 2026-09-29) are pre-rendered at build time to `build/client/` as static HTML. No Node.js server needed in production — deploy as static files.
+
+**What a page sends to the browser.** Three rules, each with a test in `page-weight.test.js`:
+- A page gets the data it shows, from its loader, and not the data of other pages. The app notes (`src/data/appNotes.js`, 126 KB) are read by the loader of the app page only, which hands the page its one note; `CONTENT.shortcutPage.faqItems(app, platformName, note)` takes the note as an argument. Until 2026-09-29 `content.js` imported the notes, so every page loaded all of them.
+- Nothing that is on every page imports the guides. The footer takes its three guide links from `src/data/guideLinks.js`; a test compares them with the guides.
+- A list of apps gets `slimApps()` (`src/utils/slimApps.js`): name, category, count. The shortcuts load when the visitor turns to the search (`usePlatformSearch`).
+- Scripts as they travel (gzip), before and after 2026-09-29: app page 217 KB → 160 KB, home page 211 KB → 155 KB. HTML of the home page: 139 KB → 29 KB.
 
 **Entry flow**: `src/root.jsx` (HTML shell with `<Layout>` + `<Outlet>`) → `src/routes.ts` (route config) → route modules in `src/routes/`
 
@@ -195,7 +203,20 @@ Single light theme — no light/dark toggle. All colors defined as CSS custom pr
 
 Hero uses an HTML/CSS animated keyboard mockup with `AppPanelMockup` — no 3D/canvas. On large screens, a two-column layout shows the panel + animated keyboard. Mobile shows a static screenshot fallback.
 
+### Home page (`DirectoryHomepage.jsx`)
+
+- **It is served with the app lists of all three platforms in it**, one panel each (`directory/PlatformPanel.jsx`, `data-panel`). CSS shows the panel whose id is in `data-platform` on the root of the page. A crawler reads every list, and no visitor waits for a request to see their own.
+- **A script at the top of the page sets `data-platform` before the first paint** (`platformScript()` in `src/utils/preferredPlatform.js`): the platform the visitor chose last (`localStorage`, key `ks-platform`), else the one of their system. `preferredPlatform()` makes the same choice for React, which takes it over after hydration. The two must agree: `home-page.test.jsx` runs both against the same visitors.
+- **React starts with the server's platform** (`macos`) and changes in a layout effect. Starting with the visitor's platform would make hydration find another page than the one served. Before 2026-09-29 it did, and a Windows visitor got the macOS list, then a skeleton, then a request.
+- The look of the chosen tab comes from the same attribute (`data-tab`), so the tab does not jump either.
+- The ad slot is rendered in the panel React holds for active only: AdSense measures a hidden slot as zero wide and never fills it.
+- The panel of a platform has its own category bar and its own chosen category.
+
 ### Search system
+
+**Where the shortcuts come from.** The pages that list apps do not carry shortcuts. `usePlatformSearch(platformId, apps, query)` (`src/hooks/usePlatformSearch.js`) loads `/data/platforms/<id>.json` when the visitor focuses the field or types, and finds apps by name until it is there. While it loads, the results say "Loading shortcuts…", never "No results".
+
+**Search from every page** (`SiteSearch.jsx`, in the navigation bar): a button that opens a field over the page; Command + K and Control + K open it too. The field, the results and the search code are in `SiteSearchDialog.jsx`, loaded when it opens. The home page and the platform pages have a field of their own and do not show the button (`hasOwnSearch` in `Navbar.jsx`). Tab stays inside while it is open, Escape closes it and gives the focus back to the button.
 
 `src/utils/searchHelpers.js` powers the directory search. It builds a flat index from all apps/shortcuts, parses natural-language queries ("figma copy", "paste in chrome"), and returns results grouped by app with modifier keycaps. Used by both `SearchDropdown` (overlay) and `SearchResultsInline` (main content area) in `DirectoryHomepage.jsx`. Search also works per-app on `ShortcutPage` and `ShortcutsIndex`.
 
@@ -276,7 +297,7 @@ Visitors say whether the shortcuts of a page work, and a page may show its views
 - Custom CSS classes: `.text-accent`, `.text-gradient`, `.fade-in-up`, `.section-alt`, `.screenshot-shadow`, `.keycap`, `.keycap-mini`, `.keycap-tiny`
 - Flat cards with `rounded-2xl bg-theme-base-alt` — no glass-morphism
 - Icons from `lucide-react`, app brand icons from `simple-icons`
-- Font: IBM Plex Serif / IBM Plex Mono
+- Font: IBM Plex Serif / IBM Plex Mono, served by the site itself (`src/fonts.css`, files of `@fontsource`). Weights in use: Serif 400, 400 italic, 500, 600, 700; Mono 400, 500. A new weight needs a rule in `fonts.css` first. The two fonts of the top of a page are preloaded in `root.jsx`. `fonts.css` also defines system fonts scaled to the measures of IBM Plex Serif (`IBM Plex Serif Fallback ...`): the text is set in one of them until the web font arrives, and no line breaks differently afterwards (layout shift 0.075 → 0 on the VS Code page).
 
 ### Testing
 
@@ -298,6 +319,12 @@ Vitest with jsdom environment, globals enabled, setup in `src/test/setup.js` (im
 - `shortcut-notes.test.js` — notes of the pages about one shortcut: every name against the data, the rules of the text, title and description of every page, pre-render list, sitemap, nothing of it in the browser
 - `shortcut-detail.test.jsx` — the page about one shortcut as it is served, its structured data, and the links to it from the app page
 - `app-page-meta.test.js` — title and description of every app page
+- `home-page.test.jsx` — the home page: the lists of every platform in the served page, no shortcut in it, the platform a visitor gets (script and code against the same visitors), search that loads on demand
+- `site-search.test.jsx` — the search of the navigation bar, and the 44 px targets of the bar on a phone
+- `page-weight.test.js` — what must not reach every page (app notes, guides), and the weight of the scripts of a build
+- `cookie-banner.test.jsx` — the banner's words, its blocks, the region check started by the page
+- `pending-apps.test.js` — the files of `content/pending-apps/`
+- `indexnow.test.js`, `site-verification.test.js`, `cloudflare-token.test.js` — the key file and what is reported; the ownership tag on the home page only; the analytics token
 - `feedback-ui.test.jsx` — votes and counts on the app page: nothing without a database, only numbers the server sent, ids of every shortcut of every page
 - `pdf-bundle.test.jsx` — the bundle file (contents, page numbers) and its offer, shown only with a link and a price
 - `mac-app-claims.test.jsx` — copy about the Mac app, checked against the app's source (build 3): fails on a promise of custom shortcuts (the app only imports packs), on "use it forever" and on "sends nothing over the internet"; also the "Switch it on in Settings." note for active app detection (once per page) and the `offers` block of the structured data (only with `APP_STORE_URL`)
@@ -322,6 +349,15 @@ Three consent-gated tools live behind a single wrapper at `src/lib/analytics.js`
 2. **CSP allowlist** — every analytics origin must be in the inline CSP meta tag in `src/root.jsx` (`script-src` / `connect-src` / `img-src`). Adding a new tool requires extending the allowlist in the same change; a missing origin makes the script silently fail.
 3. **SSR-safe** — every entry point in `analytics.js` must guard `if (typeof window === "undefined") return;`. This is a React Router v7 SSR app and the wrapper is imported by pre-rendered route modules.
 4. **Idempotent init** — `initAnalytics()` short-circuits on second call via the `initialized` flag. Safe to call from both `CookieConsent.accept()` and `AnalyticsTracker`.
+
+**Cloudflare Web Analytics**: Cloudflare puts its own tag into the pages it serves. The site's own tag is printed only for a token of 32 hex characters (`cloudflareToken()`): on 2026-09-29 the build got the value "s" from the secret `VITE_CF_ANALYTICS_TOKEN`, and every page logged failed requests because of it.
+
+**Search consoles**: the proof of ownership is a meta tag on the home page, from `SITE_VERIFICATION` in `siteConfig.js`. Google Search Console has the property `https://keyshortcut.com/` since 2026-09-29. Taking the tag out ends the verification.
+
+**The banner and page speed.** A browser measures "largest contentful paint" by the largest block of text or image, and the banner arrives after the page. Two things keep it from counting as the page:
+- Its text is set as one block per sentence (the words are unchanged).
+- The region check it waits for starts with the page: `REGION_SCRIPT` (`src/lib/consent.js`) in the head asks `/api/geo` at once for a visitor who has not answered, and the banner uses that answer (`visitorRegion()`). It used to ask after all scripts had run, and then wait 0.8 s more.
+- On the platform pages the banner is still the largest block on a slow phone: their own heading is smaller than one sentence of it. Shortening the banner's text would end that; the text is the owner's.
 
 **Consent banner** lives at `src/components/CookieConsent.jsx`. The `cookie-consent` localStorage key holds `accepted` | `declined` (absent = banner shown). GDPR region detection runs through the Cloudflare Function at `functions/api/geo.js` to decide whether the Decline button is rendered.
 
@@ -367,11 +403,15 @@ scripts/deploy-clean.sh   # Preferred manual deploy: committed HEAD only, .env c
 pnpm run deploy           # Build + deploy the working tree as-is (uncommitted changes ship too)
 ```
 
-A push to `main` also deploys, through CI. All ~175 routes are pre-rendered as static HTML. No Node.js server needed. Traps (arm64 workerd, stale OAuth token, `--branch=main`): `~/Desktop/Developing/toolbox/playbooks/2026-09-24-wrangler-pages-deploy-traps.md`.
+A push to `main` also deploys, through CI. All routes are pre-rendered as static HTML. No Node.js server needed. Traps (arm64 workerd, stale OAuth token, `--branch=main`): `~/Desktop/Developing/toolbox/playbooks/2026-09-24-wrangler-pages-deploy-traps.md`.
 
 **keysticker.app** (the Mac app's old name, Pages project `keysticker`) only redirects to keyshortcut.com since 2026-09-27: `/` → `/mac-hud/`, a page → the same page with its closing slash, a file → the same file, each in one redirect. It is a Pages project of its own: a change to `deploy/keysticker-app/_redirects` goes live only with the deploy command in `deploy/keysticker-app/README.md`. A new file at the top level of `public/` needs a line there; `src/test/legacy-redirects.test.js` fails until it has one.
 
 **`/privacy` is served from `public/privacy.html`**, not from the pre-rendered React page (Cloudflare prefers `privacy.html`). It is also the Mac App Store privacy URL. Edit both it and `content.js` together.
+
+**IndexNow** (`scripts/indexnow.mjs`, `scripts/lib/indexnow.mjs`): reports new and changed pages to Bing, Yandex, Seznam and Naver. The key is a file at the top level of `public/` with the key as its name and its content; it is public by design. Only pages whose day of change in the sitemap is recent are reported: a list changed in the database but not yet recorded by `pnpm page-dates` states the day of the build, and would be reported on every deploy until the record is committed.
+
+**The server code finds `public/data` by looking upward** from its own file (`findDataDir` in `supabase.server.js`). The build may split the server code into a subfolder, and a path counted in folders then points beside the project.
 
 Cloudflare Pages config files in `public/`:
 - `_headers` — security headers (X-Frame-Options, HSTS, etc.) on `/*`, and `Cache-Control: public, max-age=31536000, immutable` on `/assets/*`. Only `/assets/`: Vite puts a content hash in those file names. HTML, `/data/*.json`, icons, OG images, sitemaps and `llms.txt` keep their name when they change, so they must not get a long cache. Check a change with `wrangler pages dev build/client` and `curl -sI`.
@@ -382,7 +422,7 @@ Cloudflare Pages config files in `public/`:
 
 ### CI/CD Workflows (`.github/workflows/`)
 
-- **`ci.yml`** — Main pipeline: lint → test → build → deploy to Cloudflare Pages (on main push only), then the legacy redirects are checked on the live site. Node 24, pnpm 9. Supabase credentials from GitHub Secrets.
+- **`ci.yml`** — Main pipeline: lint → test → build → deploy to Cloudflare Pages (on main push only), then the legacy redirects are checked on the live site, then the pages that changed in the last two days are reported to IndexNow (`scripts/indexnow.mjs`, never fails the run). The three tests that ask Supabase can time out on GitHub; the run of 2026-09-29 passed when it was run again. Node 24, pnpm 9. Supabase credentials from GitHub Secrets.
 - **`redirect-check.yml`** — The same check of the legacy redirects, on Mondays (06:30 UTC) or by hand. Reads the site only, no secrets.
 - **`update-readme.yml`** — Auto-updates README app directory from Supabase. Runs weekly (Monday 6:00 UTC), after successful CI/CD deploy, or manually via `workflow_dispatch`.
 - **`shortcut-sync.yml`** — Runs shortcut sync pipeline (scrape external docs → extract shortcuts via Gemini AI → diff → create PR).
@@ -395,7 +435,7 @@ During `pnpm build`, scripts run in order:
 2. `scripts/generate-sitemap.mjs` — Generates `public/sitemap.xml` from pre-rendered routes
 3. `scripts/generate-rss.mjs` — Generates `public/rss.xml`
 4. `scripts/generate-og-images.mjs` — Generates Open Graph images
-5. React Router build — SSR + pre-renders all ~175 pages to `build/client/`
+5. React Router build — SSR + pre-renders all pages to `build/client/`
 
 **Pre-render route discovery** (`react-router.config.ts`): Reads `public/data/platforms.json` and each platform's app list at build time to generate all `/:platformId` and `/:platformId/:slug` routes. Also imports guide slugs from `src/data/guides/index.js` and comparison pairs from `src/data/comparisons.js`. Adding a new platform JSON or guide/comparison entry automatically creates new pre-rendered pages.
 
@@ -433,6 +473,17 @@ The sync pipeline scrapes official documentation pages, extracts shortcuts via G
 5. **`scripts/shortcut-sync/sources.json`** — Add entry for the sync automation pipeline (alphabetically sorted)
 6. **Run `pnpm export`** to regenerate `public/data/` JSON files, then commit them
 7. **App note** — a page with 3 or more sections must show a note or the everyday block (3+ everyday shortcuts), or `src/test/page-prose.test.js` fails. Check with `node scripts/measure-page-prose.mjs --thin`; if the page is listed, write a note in `src/data/appNotes.js`
+
+### Lists that wait for the database (`content/pending-apps/`)
+
+Files for `pnpm add-app -- --from-json <file>`, prepared on 2026-09-29 from the vendors' own pages: 1,126 shortcuts, most of them for Windows (Excel 22 → 159, Word 20 → 220, Windows 30 → 150), and five new pages. Its `README.md` is written for the owner.
+
+- **Nothing of it is in `public/data`**: that folder is an export, and the next export would undo it. `node scripts/preview-pending-apps.mjs` shows the data as it would be.
+- **`pending-apps.test.js` is the gate**: every file against `inputFaults()` (`scripts/lib/app-input.mjs`), no keys the app already has, no text of an existing action changed, a word for every key. A file whose every shortcut is in the data has been written and passes.
+- **`scripts/add-app.mjs`** checks its input with the same `inputFaults()` before it writes, links the app to the platform of the file (until 2026-09-29: always macOS), puts a new shortcut after the ones its section has, and leaves `appCategories.js` alone for a platform other than macOS: that file lists the apps of the Mac app.
+- **The text of an action is stored once per app, for every platform** (`shortcuts.<slug>.<camelCase>`). A new action whose key equals that of an existing one replaces its text on every platform. The test fails on that.
+- **Notes for the five new pages** are in `APP_NOTES_FOR_PENDING` (`appNotes.js`) and show from the day the pages exist. `app-notes.test.js` checks them against the data with the pending files merged in.
+- **`content/pending-apps/local/`** is not in git: the full reports and the parsers that quote the vendors' pages at length.
 
 ### App notes (`src/data/appNotes.js`)
 

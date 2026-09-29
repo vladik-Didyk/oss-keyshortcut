@@ -4,6 +4,7 @@ import { join } from 'path'
 import routerConfig from '../../react-router.config.ts'
 import { pagePath, pageUrl, SITE_ORIGIN } from '../utils/siteUrl'
 import { loader as legacyRoute } from '../routes/redirect-legacy'
+import { INDEXNOW_KEY } from '../../scripts/lib/indexnow.mjs'
 import {
   SHORT_LIST,
   allAddresses,
@@ -161,6 +162,8 @@ describe('keysticker.app: one redirect to the address that is served', () => {
       .filter((entry) => entry.isFile() && !entry.name.startsWith('_') && !entry.name.startsWith('.'))
       .map((entry) => entry.name)
       .filter((name) => !name.endsWith('.html'))
+      // The IndexNow key proves who owns keyshortcut.com. Nobody asks the old domain for it.
+      .filter((name) => name !== `${INDEXNOW_KEY}.txt`)
     expect(topLevel.length).toBeGreaterThan(5)
 
     const inFolders = ['/images/og-image.png', '/images/app-icons/figma.webp', '/data/platforms.json', '/data/platforms/macos.json', '/assets/entry.client-abc123.js']

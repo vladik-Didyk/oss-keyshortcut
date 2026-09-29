@@ -343,3 +343,143 @@ The figure the site quotes, "9,000+ monthly visitors (Cloudflare, August 2026)",
 3. **The visitor figure on `/sponsor`**: decide what it should say.
 4. **Next batch**: more notes can be added app by app. Each one needs the same check against the app's documentation.
 
+
+---
+
+# Phases 3 to 6: platforms, search, speed, measurement
+
+Done on 2026-09-29, on the branch `growth-ux-overhaul`. Phase 2, the sponsor page without its visitor figure, and the tag for Search Console were deployed the same day (main `d4ad44d`). What follows is built and tested, and not deployed.
+
+The owner's word for this part: "do all your recommendation, your goal is to achieve real 50000 users monthly".
+
+## 1. Where the site stands
+
+| | Figure | Source |
+|---|---|---|
+| Visits in 30 days | about 150 | Cloudflare Web Analytics |
+| Goal | 50,000 a month | the owner |
+| Search data | none until 2026-09-29 | Search Console was added that day |
+
+Code does not close a gap of this size. What can: pages that answer a search better than the pages that rank now, other sites that link here, and time. This part of the work prepares the first and makes the third shorter. The second is in `LAUNCH_CHECKLIST.md`, and is the owner's to do.
+
+## 2. Phase 3: platforms
+
+| Item of the brief | What was done |
+|---|---|
+| Windows and Linux pages with every block | Were there already (Phase 0, section 7) |
+| Home page opens on the visitor's platform | It is served with the app lists of all three platforms in it. A script at its top shows the one of the visitor's system before anything is drawn. Before: a Windows visitor got the macOS list, then a skeleton, then a request |
+| All three lists in the HTML, for crawlers | Done: 171 app pages are linked from the home page, before 113 |
+| The choice is remembered | In `localStorage`, read inside a try/catch |
+| Lists of popular apps by platform | The footer, which is on every page, has five macOS, five Windows and two Linux pages. Before: eight, two and two. The row "Most shortcuts" of the home page follows the platform |
+| New Windows pages as draft files in the data folder | Not as drafts in `public/data`, which the export overwrites. Prepared as input files for the database: see 3 |
+
+## 3. The Windows lists
+
+The thinnest part of the site, and the part with the most searches. Two agents read the vendors' own pages with parsers and wrote input files for `pnpm add-app`. Nothing was written to the database.
+
+| App (Windows) | Shortcuts on the site | With the file |
+|---|---|---|
+| Excel | 22 | 159 |
+| Word | 20 | 220 |
+| PowerPoint | 15 | 134 |
+| Teams | 14 | 133 |
+| Windows | 30 | 150 |
+| Chrome | 28 | 59 |
+| Outlook, OneNote, Edge, File Explorer, Windows Terminal | no page | 53, 148, 82, 30, 50 |
+
+Chrome for Linux: 22 to 59. Together 1,126 shortcuts and five new pages.
+
+- A trial on this machine put the files into a copy of the data and built the site: 376 pages, every test green, every new page with its note.
+- `scripts/add-app.mjs` linked every app to macOS, whatever the file said. Corrected. With the old script the five new apps would have shown on macOS, empty.
+- Not verified: no shortcut was tried in its app. 180 were compared by eye with the vendor's page.
+- Firefox is not done: Mozilla's page refuses requests that do not come from a browser.
+- Found in the data of today, and not changed: see the table in `content/pending-apps/README.md` (Teams, PowerPoint, Windows, Chrome, and 30 macOS shortcuts with a doubled backslash).
+
+## 4. Phase 4: search and targets, inside the present design
+
+| Item of the brief | What was done |
+|---|---|
+| Search on every page | A button in the navigation bar opens a search field over the page. Command + K and Control + K open it. It searches the visitor's platform and can switch. Its code loads when it is opened |
+| Search without JavaScript, on a server-rendered `/search?q=` | Not done. The site is static files, and a page rendered for each query needs a server |
+| Targets of 44 px on a phone | Navigation bar (menu button was 36 px, menu links 37 px), copy buttons of the shortcut rows (28 px), section links of the app page (34 px), footer links (33 px), "Cookie settings" (20 px, below the 24 px the standard asks for) |
+| "No votes to show yet" | Gone since the votes were built |
+| Dark theme, Material look, new navigation, bottom bar | Not done, by the owner's answer to Phase 0 |
+| App page: left rail, rows as one link, vote card below the table | Not done. The top of the app page was approved on 2026-09-28, and the vote card is where the owner put it |
+
+## 5. Phase 5: speed
+
+Scripts and HTML as they travel (gzip). "Before" is the site as it is live (main `d4ad44d`), built on this machine:
+
+| Page | Scripts before | Scripts after | HTML before | HTML after |
+|---|---|---|---|---|
+| `/` | 211 KB | 155 KB | 139 KB | 29 KB |
+| `/macos/` | 207 KB | 151 KB | 138 KB | 20 KB |
+| `/windows/` | 207 KB | 151 KB | 45 KB | 13 KB |
+| `/macos/vscode/` | 217 KB | 160 KB | 22 KB | 23 KB |
+| `/macos/vscode/toggle-comment/` | 202 KB | 145 KB | 9 KB | 9 KB |
+
+| Change | Effect |
+|---|---|
+| The notes of all apps (126 KB of text) and the text of all ten guides (110 KB) were in the scripts of every page: `content.js` imported the notes, the footer the guides. Now a page gets its own note from its loader, and the footer three titles | 60 KB less on every page, as it travels |
+| Home and platform pages carried every shortcut of their platform, as HTML data | The home page's HTML: 704 KB to 409 KB, 139 KB to 29 KB as it travels. The search loads the shortcuts when somebody searches |
+| Fonts from Google: a stylesheet from a second host, font files from a third | The fonts are the site's own files. Two are preloaded |
+| A fallback font with other measures | System fonts scaled to the measures of IBM Plex Serif. Layout shift on the VS Code page: 0.075 to 0 |
+| The cookie banner counted as the largest element of the page, and came late | One block per sentence, and the region check starts with the page. Largest paint on a phone: home page 6.3 s to 1.6 s, Excel page 6.4 s to 1.5 s |
+| A broken analytics tag: the token "s" | No tag for a value that is no token. Every page logged failed requests because of it |
+| Links | Fetch their page when the visitor points at them |
+
+Left as it is:
+
+| Item of the brief | Why |
+|---|---|
+| Scripts under 60 KB | React and React Router are about 100 KB. 145 to 160 KB is what is reached; the brief forbids another framework |
+| HTML of an app page under 120 KB | 196 KB unpacked, 23 KB as it travels. The list is the page |
+| Critical CSS inline | The stylesheet is 12 KB as it travels and comes from the same host. Measured first paint on a slow phone: 1.6 s |
+| Platform pages on a slow phone | The banner is still their largest block: their heading is smaller than one sentence of it. Shorter banner text would end it, and the text is the owner's |
+| Best practices 77 | The cookies of AdSense. The site cannot change them |
+
+## 6. Phase 6: measurement
+
+| Item of the brief | What was done |
+|---|---|
+| Analytics with events | Was there. Two new events: `site_search_opened`, `site_search_performed` |
+| Search Console | Property added and verified, sitemap submitted, 2026-09-29 |
+| Bing and others | IndexNow: after a deploy, the pages that changed in the last two days are reported. Bing Webmaster Tools itself needs the owner's sign-in |
+| `llms.txt`, robots, RSS | Were there |
+| "Embed this cheat sheet" as an image with a link | Not done. There is no image of a cheat sheet: the PDF is drawn in the visitor's browser. An image per page would be 171 files to build and keep right |
+| "Was this page helpful?" on guides | Not done. The ten guides get a small part of 150 visits; votes there would stay empty |
+| `LAUNCH_CHECKLIST.md` | Written: what is done, what waits for the owner, drafts for Show HN, Reddit and Product Hunt |
+
+What the events measure, by the HEART scheme of the brief:
+
+| | Measured by |
+|---|---|
+| Happiness | Votes "Works" and "Not right" on app pages, reports of a problem |
+| Engagement | `shortcut_copied`, `faq_item_expanded`, pages per visit |
+| Adoption | PDF downloads (counted on the server), `mac_hud_promo_clicked` |
+| Retention | Returning visitors in Cloudflare Web Analytics |
+| Task success | `directory_search_performed` and `site_search_performed` with `has_results`, then the page opened |
+
+## 7. Lighthouse
+
+Lighthouse 12.8 on this machine, both builds served by the same local server. "Before" is the site as it is live (main `d4ad44d`). Phone: median of three runs with real throttling (slow 4G, CPU four times slower). Desktop: one run. Nothing else ran on the machine during a run.
+
+| Page | Device | Build | Performance | Accessibility | Best practices | SEO | Largest paint | Layout shift | Blocking time |
+|---|---|---|---|---|---|---|---|---|---|
+| `/` | phone | before | 75 | 100 | 77 | 100 | 6.3 s | 0.002 | 27 ms |
+| `/` | phone | after | 99 | 100 | 77 | 100 | 1.6 s | 0.000 | 38 ms |
+| `/macos/vscode/` | phone | before | 98 | 100 | 77 | 100 | 1.5 s | 0.075 | 26 ms |
+| `/macos/vscode/` | phone | after | 99 | 100 | 77 | 100 | 1.6 s | 0.000 | 25 ms |
+| `/windows/excel/` | phone | before | 77 | 100 | 77 | 100 | 6.4 s | 0.013 | 27 ms |
+| `/windows/excel/` | phone | after | 99 | 100 | 77 | 100 | 1.5 s | 0.000 | 25 ms |
+| `/macos/vscode/toggle-comment/` | phone | before | 100 | 100 | 77 | 100 | 1.4 s | 0.002 | 28 ms |
+| `/macos/vscode/toggle-comment/` | phone | after | 99 | 100 | 77 | 100 | 1.6 s | 0.000 | 31 ms |
+| `/windows/` | phone | before | 77 | 100 | 77 | 100 | 6.3 s | 0.000 | 28 ms |
+| `/windows/` | phone | after | 80 | 100 | 77 | 100 | 5.1 s | 0.000 | 27 ms |
+| all five | desktop | before | 99 to 100 | 100 | 77 | 100 | 0.2 to 1.0 s | 0 to 0.051 | 0 ms |
+| all five | desktop | after | 100 | 100 | 77 | 100 | 0.1 s | 0.000 | 0 ms |
+
+- The pages that were slow on a phone because of the banner are fast now: the home page and the Excel page.
+- The pages that were fast stay where they were. The page about one shortcut went from 1.4 s to 1.6 s: it now preloads two fonts, which it then has from the first paint on.
+- `/windows/` and the other two platform pages are the exception, see section 5.
+- These are laboratory numbers from one machine. Numbers from real visitors (Core Web Vitals in Search Console) need more visits than the site has.
