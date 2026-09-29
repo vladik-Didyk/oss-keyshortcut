@@ -25,8 +25,9 @@ DRY_RUN=0
 [[ -f .env ]] || { echo "No .env in $ROOT (needed for analytics IDs and CLOUDFLARE_API_TOKEN)." >&2; exit 1; }
 
 # wrangler uploads functions/ from THIS folder, not from the clean build.
-if [[ -n "$(git status --porcelain -- functions/)" ]]; then
-  echo "functions/ has uncommitted changes. Commit or revert them first." >&2
+# The functions import their rules from server/.
+if [[ -n "$(git status --porcelain -- functions/ server/)" ]]; then
+  echo "functions/ or server/ has uncommitted changes. Commit or revert them first." >&2
   exit 1
 fi
 
