@@ -255,6 +255,8 @@ describe('app page with the switch on', () => {
     })
 
     it('shows "You said it is not right" for the other answer', async () => {
+      // "Not right" also opens the report panel and scrolls to it.
+      Element.prototype.scrollIntoView = vi.fn()
       const calls = server({
         '/api/visit': { enabled: true, numbers: NONE },
         '/api/vote': { enabled: true, changed: true, numbers: NONE },
