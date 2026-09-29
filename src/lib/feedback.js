@@ -7,12 +7,17 @@
 // SSR-safe: every entry point guards `typeof window`.
 
 // The switch. Off: no request is sent and the pages show nothing of it.
-// Set VOTES_SWITCH to true in the change that follows the day the Pages project
-// got its database (the binding DB). The bar is then in the page as it is
-// served, so nothing moves when the numbers arrive.
-// VITE_VOTES=on in the shell switches it on for one build: a local preview.
-export const VOTES_SWITCH = false
-export const votesOn = () => VOTES_SWITCH || import.meta.env.VITE_VOTES === 'on'
+// On since the Pages project has its database (the binding DB, 2026-09-29).
+// The card is in the page as it is served, so nothing moves when the numbers
+// arrive. VITE_VOTES=off in the shell switches it off for one build, and
+// VITE_VOTES=on switches it on whatever the constant says.
+export const VOTES_SWITCH = true
+export const votesOn = () => {
+  const forced = import.meta.env.VITE_VOTES
+  if (forced === 'on') return true
+  if (forced === 'off') return false
+  return VOTES_SWITCH
+}
 
 const VOTES_KEY = 'ks-votes'
 const SEEN_KEY = 'ks-seen'

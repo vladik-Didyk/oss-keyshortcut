@@ -101,9 +101,16 @@ describe('ids of the shortcuts', () => {
   })
 })
 
-// The switch (votesOn) is off until the site has its database. Off means off:
-// no request, nothing on the page.
+// The switch (votesOn) can be put off for one build. Off means off: no request,
+// nothing on the page.
 describe('app page while the switch is off', () => {
+  beforeEach(() => {
+    vi.stubEnv('VITE_VOTES', 'off')
+  })
+  afterEach(() => {
+    vi.unstubAllEnvs()
+  })
+
   it('asks the server nothing and shows nothing of it', async () => {
     const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
     render(page())
@@ -121,9 +128,18 @@ describe('app page while the switch is off', () => {
     expect(html).not.toMatch(/Confirmed by/)
   })
 
-  it('is off in the code that is committed', () => {
-    expect(VOTES_SWITCH).toBe(false)
+  it('is off for the build that asks for it', () => {
     expect(votesOn()).toBe(false)
+  })
+})
+
+describe('the switch in the code that is committed', () => {
+  it('is on, and one build can put it off', () => {
+    expect(VOTES_SWITCH).toBe(true)
+    expect(votesOn()).toBe(true)
+    vi.stubEnv('VITE_VOTES', 'off')
+    expect(votesOn()).toBe(false)
+    vi.unstubAllEnvs()
   })
 })
 

@@ -206,17 +206,18 @@ A visitor tells the developer what to fix, add or remove. Step 1 of three; votes
 Visitors say whether the shortcuts of a page work, and a page may show its views and PDF downloads.
 
 - **Storage** is a Cloudflare D1 database bound to the Pages project as `DB`. The tables are made on first use. Without the binding the three functions (`functions/api/visit.js`, `vote.js`, `download.js`) answer `{ enabled: false }` and the pages show nothing of it.
+- **The database** is `keyshortcut-votes`, made on 2026-09-29. The binding is set in the dashboard (Workers & Pages → keyshortcut → Settings → Bindings), for Production only: a preview deployment keeps no votes. The project has no `wrangler.toml`; adding one with `pages_build_output_dir` would take the settings over from the dashboard.
 - **A number below its minimum never leaves the server** (`MINIMUM`: 3 confirmations, 100 views in 30 days, 10 downloads). The page prints only numbers it received. Votes against a shortcut are never sent.
 - **One vote per network address and shortcut.** The address is stored only as a hash, salted with a value that lives in the database; hashes older than 90 days are deleted. 40 votes a day per address.
 - **A vote is accepted only for an id the served page has.** Rows carry `data-item` (`shortcutIds()` in `src/utils/feedbackIds.js`: section and action, in small letters and dashes); the function reads the page through `env.ASSETS`. Renaming a section or an action starts its count from zero.
 - **The browser** (`src/lib/feedback.js`) keeps the visitor's own votes in `localStorage` and the pages counted in this tab in `sessionStorage`. No cookie. A browser driven by a program is not counted.
-- **The switch** is `VOTES_SWITCH` in `src/lib/feedback.js`, off until the project has its database. Off means no request and nothing on the page. Set it to `true` in the change that follows the day the binding exists. `VITE_VOTES=on pnpm build` switches it on for one build, for a local preview.
+- **The switch** is `VOTES_SWITCH` in `src/lib/feedback.js`, on since the project has its database. Off means no request and nothing on the page. `VITE_VOTES=off pnpm build` switches it off for one build; `VITE_VOTES=on` switches it on whatever the constant says.
 - **On the page:** a green card (`VoteCard.jsx`) at the top, right under the header. It scrolls with the page: Vlad tried it sticky and asked for it released (2026-09-28). Left: the numbers, large, each with a label ("say it works", "views in a month", "PDF downloads"); they count up once when they arrive, not for a visitor who asked for less motion. Right (on a phone: below): the question with "Works" and "Not right"; "Not right" also opens the report panel. The card is in the page as it is served, and the place of the numbers has the same height before and after they arrive, so nothing below moves. If the server says it keeps no votes, the card goes away.
 - **The page prints what the database counted.** The code has no starting value and no multiplier. Large numbers in a local preview are samples written into the local database by hand (`sqlite3` on the file under `.wrangler/state/v3/d1/`).
 - **Rows:** a green count on a confirmed row, and for a mouse a "works for me" button on hover.
 - **The green** is `--theme-good` and its three companions in `index.css`; a test computes their contrast (text 4.5:1, borders 3:1).
 - The rules live on the server, so tests run them against a real SQLite (`src/test/helpers/d1.js`, `node:sqlite`).
-- **Local:** `VITE_VOTES=on pnpm build`, then `wrangler pages dev build/client --d1 DB` gives a local database in `.wrangler/`.
+- **Local:** `pnpm build`, then `wrangler pages dev build/client --d1 DB` gives a local database in `.wrangler/`.
 - **Reading the votes against a shortcut:** in the Cloudflare dashboard, D1 → the database → Console: `SELECT page, item, works, broken FROM votes WHERE broken > 0 ORDER BY broken DESC`.
 - The privacy page says what is kept: `CONTENT.privacy` and `public/privacy.html`, changed together.
 
