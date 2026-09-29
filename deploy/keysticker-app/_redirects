@@ -1,6 +1,69 @@
-# keysticker.app (the Mac app's old name) now redirects to keyshortcut.com.
+# keysticker.app (the Mac app's old name) redirects to keyshortcut.com.
 # Deployed to the Cloudflare Pages project "keysticker" (production branch main).
-# First match wins: the homepage goes to the Mac app page, every other path to
-# the same path on keyshortcut.com. 301 = permanent.
-/   https://keyshortcut.com/mac-hud  301
-/*  https://keyshortcut.com/:splat   301
+#
+# keysticker.app was a copy of keyshortcut.com, so its addresses have the same
+# shapes. Every rule answers in one redirect and names the address that
+# returns 200: a page ends with a slash, a file keeps its name.
+# The homepage goes to the Mac app page. 301 = permanent.
+#
+# Rules without a placeholder or a splat are tried first. The others are tried
+# in the order written, so the order of the blocks below matters.
+# Why a splat cannot add the slash: see public/_redirects.
+# Checked by src/test/legacy-redirects.test.js.
+
+# Exact paths
+/              https://keyshortcut.com/mac-hud/  301
+/privacy       https://keyshortcut.com/privacy   301
+/privacy/      https://keyshortcut.com/privacy   301
+/privacy.html  https://keyshortcut.com/privacy   301
+
+# Files at the top level keep their name. A new file in public/ needs a line here.
+/ads.txt              https://keyshortcut.com/ads.txt              301
+/favicon.ico          https://keyshortcut.com/favicon.ico          301
+/llms.txt             https://keyshortcut.com/llms.txt             301
+/manifest.json        https://keyshortcut.com/manifest.json        301
+/robots.txt           https://keyshortcut.com/robots.txt           301
+/rss.xml              https://keyshortcut.com/rss.xml              301
+/sitemap.xml          https://keyshortcut.com/sitemap.xml          301
+/sitemap-compare.xml  https://keyshortcut.com/sitemap-compare.xml  301
+/sitemap-guides.xml   https://keyshortcut.com/sitemap-guides.xml   301
+/sitemap-linux.xml    https://keyshortcut.com/sitemap-linux.xml    301
+/sitemap-macos.xml    https://keyshortcut.com/sitemap-macos.xml    301
+/sitemap-pages.xml    https://keyshortcut.com/sitemap-pages.xml    301
+/sitemap-windows.xml  https://keyshortcut.com/sitemap-windows.xml  301
+
+# The old addresses /shortcuts/... and /directory, as in public/_redirects,
+# sent straight to the page instead of to the old address on keyshortcut.com.
+/shortcuts           https://keyshortcut.com/macos/    301
+/shortcuts/          https://keyshortcut.com/macos/    301
+/shortcuts/macos     https://keyshortcut.com/macos/    301
+/shortcuts/macos/    https://keyshortcut.com/macos/    301
+/shortcuts/windows   https://keyshortcut.com/windows/  301
+/shortcuts/windows/  https://keyshortcut.com/windows/  301
+/shortcuts/linux     https://keyshortcut.com/linux/    301
+/shortcuts/linux/    https://keyshortcut.com/linux/    301
+/directory           https://keyshortcut.com/          301
+/directory/          https://keyshortcut.com/          301
+
+# Folders of files: the path stays as it is.
+/images/*  https://keyshortcut.com/images/:splat  301
+/data/*    https://keyshortcut.com/data/:splat    301
+/assets/*  https://keyshortcut.com/assets/:splat  301
+
+/shortcuts/macos/:app     https://keyshortcut.com/macos/:app/    301
+/shortcuts/macos/:app/    https://keyshortcut.com/macos/:app/    301
+/shortcuts/windows/:app   https://keyshortcut.com/windows/:app/  301
+/shortcuts/windows/:app/  https://keyshortcut.com/windows/:app/  301
+/shortcuts/linux/:app     https://keyshortcut.com/linux/:app/    301
+/shortcuts/linux/:app/    https://keyshortcut.com/linux/:app/    301
+/shortcuts/:app           https://keyshortcut.com/macos/:app/    301
+/shortcuts/:app/          https://keyshortcut.com/macos/:app/    301
+
+# Pages: one or two parts, with or without the closing slash.
+/:a        https://keyshortcut.com/:a/     301
+/:a/       https://keyshortcut.com/:a/     301
+/:a/:b     https://keyshortcut.com/:a/:b/  301
+/:a/:b/    https://keyshortcut.com/:a/:b/  301
+
+# Anything else keeps its path.
+/*  https://keyshortcut.com/:splat  301

@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeAll } from 'vitest'
-import { readFileSync, existsSync } from 'fs'
+import { readFileSync, readdirSync, existsSync } from 'fs'
 import { join } from 'path'
 import routerConfig from '../../react-router.config.ts'
-import { pagePath } from '../utils/siteUrl'
+import { pagePath, pageUrl, SITE_ORIGIN } from '../utils/siteUrl'
 import { loader as legacyRoute } from '../routes/redirect-legacy'
 import {
   SHORT_LIST,
@@ -118,6 +118,80 @@ describe('legacy redirects: every page in the data', () => {
     const all = new Set(addresses.map(([from, to]) => `${from} ${to}`))
     const unknown = SHORT_LIST.filter(([from, to]) => to !== null && !all.has(`${from} ${to}`))
     expect(unknown).toEqual([])
+  })
+})
+
+// keysticker.app was a copy of this site and now only redirects to it
+// (deploy/keysticker-app, a Cloudflare Pages project of its own).
+describe('keysticker.app: one redirect to the address that is served', () => {
+  const rules = readRules(ROOT, 'deploy/keysticker-app/_redirects')
+  const bothForms = (path) => (path === '/' ? [path] : [path, `${path}/`])
+  let routes
+
+  beforeAll(async () => {
+    routes = await routerConfig.prerender()
+  })
+
+  const wrongAmong = (cases) =>
+    cases
+      .map(([from, to]) => ({ from, to, got: followRule(rules, from) }))
+      .filter(({ to, got }) => got !== to)
+      .map(({ from, to, got }) => `${from}: goes to ${got}, expected ${to}`)
+
+  it('the homepage goes to the Mac app page', () => {
+    expect(followRule(rules, '/')).toBe(pageUrl('/mac-hud'))
+  })
+
+  it('every page of the site, with and without the closing slash', () => {
+    expect(routes.length).toBeGreaterThan(100)
+    const cases = routes
+      .filter((route) => route !== '/')
+      .flatMap((route) => bothForms(route).map((from) => [from, pageUrl(route)]))
+    expect(wrongAmong(cases)).toEqual([])
+  })
+
+  it('every old address goes straight to its page, not to the old address on the site', () => {
+    const cases = allAddresses(ROOT).map(([from, to]) => [from, `${SITE_ORIGIN}${to}`])
+    expect(wrongAmong(cases)).toEqual([])
+  })
+
+  it('a file keeps its name', () => {
+    // Every file at the top level of public/, and llms.txt, which the build writes there.
+    const topLevel = readdirSync(join(ROOT, 'public'), { withFileTypes: true })
+      .filter((entry) => entry.isFile() && !entry.name.startsWith('_') && !entry.name.startsWith('.'))
+      .map((entry) => entry.name)
+      .filter((name) => !name.endsWith('.html'))
+    expect(topLevel.length).toBeGreaterThan(5)
+
+    const inFolders = ['/images/og-image.png', '/images/app-icons/figma.webp', '/data/platforms.json', '/data/platforms/macos.json', '/assets/entry.client-abc123.js']
+    const cases = [...new Set([...topLevel, 'llms.txt'])].map((name) => `/${name}`).concat(inFolders)
+    expect(wrongAmong(cases.map((path) => [path, `${SITE_ORIGIN}${path}`]))).toEqual([])
+  })
+
+  it('/privacy.html goes to the address the privacy page is served at', () => {
+    expect(followRule(rules, '/privacy.html')).toBe(pageUrl('/privacy'))
+  })
+
+  it('every rule is a 301 to keyshortcut.com, and none puts a slash after a splat', () => {
+    expect(rules.length).toBeGreaterThan(0)
+    for (const rule of rules) {
+      expect(rule.status).toBe(301)
+      expect(rule.to.startsWith(`${SITE_ORIGIN}/`)).toBe(true)
+      expect(rule.to).not.toContain(':splat/')
+    }
+  })
+
+  // Cloudflare Pages: 2,000 rules without a placeholder, 100 with one.
+  it('stays inside the limits of Cloudflare Pages', () => {
+    const dynamic = rules.filter((rule) => /[:*]/.test(rule.from))
+    expect(dynamic.length).toBeLessThanOrEqual(100)
+    expect(rules.length - dynamic.length).toBeLessThanOrEqual(2000)
+  })
+
+  it('the fallback page names the same address as the rule for the homepage', () => {
+    const html = read('deploy/keysticker-app/index.html')
+    expect(html).toContain(`<link rel="canonical" href="${pageUrl('/mac-hud')}" />`)
+    expect(html).toContain(`url=${pageUrl('/mac-hud')}"`)
   })
 })
 

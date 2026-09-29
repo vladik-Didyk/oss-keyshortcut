@@ -82,9 +82,9 @@ export function allAddresses(root = process.cwd()) {
   return list
 }
 
-/** The rules of public/_redirects: [{ from, to, status }]. */
-export function readRules(root = process.cwd()) {
-  return readFileSync(join(root, 'public/_redirects'), 'utf-8')
+/** The rules of a _redirects file: [{ from, to, status }]. */
+export function readRules(root = process.cwd(), file = 'public/_redirects') {
+  return readFileSync(join(root, file), 'utf-8')
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line && !line.startsWith('#'))
