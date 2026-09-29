@@ -25,6 +25,21 @@ export const SITE_NAME = 'KeyShortcut'
 // The public repository: the code, and the issues visitors open from the site.
 export const REPO_URL = 'https://github.com/vladik-Didyk/oss-keyshortcut'
 
+// Proof of ownership for the search engines' consoles, printed as a meta tag on
+// the home page and nowhere else. Each value is public. Taking one out ends the
+// verification of that console. Empty = no tag.
+export const SITE_VERIFICATION = {
+  // Google Search Console, the property of the https address (added 2026-09-29).
+  'google-site-verification': 'rDfUq55k13K9WHBO8rGjN2wPR_81GtQPblW9KoFRMRg',
+  // Bing Webmaster Tools.
+  'msvalidate.01': '',
+}
+
+export const siteVerificationMeta = (values = SITE_VERIFICATION) =>
+  Object.entries(values)
+    .filter(([, content]) => /^[A-Za-z0-9_-]{10,100}$/.test(content))
+    .map(([name, content]) => ({ name, content }))
+
 export function formatShortcutCount(count = SHORTCUT_COUNT) {
   return count.toLocaleString('en-US') + '+'
 }
