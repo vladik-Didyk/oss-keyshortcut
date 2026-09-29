@@ -5,8 +5,8 @@
       "hash": "1e72b4c7def129c5"
     },
     "linux/chrome": {
-      "changed": "2026-03-31",
-      "hash": "7bc65544f95acb75"
+      "changed": "2026-09-29",
+      "hash": "dc10e24c0599d31e"
     },
     "linux/discord": {
       "changed": "2026-03-31",
@@ -505,8 +505,8 @@
       "hash": "070b84c2bf551cfc"
     },
     "windows/chrome": {
-      "changed": "2026-03-31",
-      "hash": "f106fddbb6dfc202"
+      "changed": "2026-09-29",
+      "hash": "f62c863f53dd26f9"
     },
     "windows/clickup": {
       "changed": "2026-09-28",
@@ -532,9 +532,13 @@
       "changed": "2026-03-31",
       "hash": "7ef0b094780f4ca1"
     },
+    "windows/edge": {
+      "changed": "2026-09-29",
+      "hash": "102df05fc447efe6"
+    },
     "windows/excel": {
-      "changed": "2026-03-31",
-      "hash": "bfb47a1178f9b8ab"
+      "changed": "2026-09-29",
+      "hash": "5e01822a55fb377f"
     },
     "windows/figma": {
       "changed": "2026-03-31",
@@ -605,8 +609,8 @@
       "hash": "06d6498c4d794c03"
     },
     "windows/powerpoint": {
-      "changed": "2026-03-31",
-      "hash": "d222b97c167ca85e"
+      "changed": "2026-09-29",
+      "hash": "da3d1c696b302ed0"
     },
     "windows/premiere-pro": {
       "changed": "2026-03-31",
@@ -637,8 +641,8 @@
       "hash": "3935b7784ef06957"
     },
     "windows/teams": {
-      "changed": "2026-03-31",
-      "hash": "f649997258f01397"
+      "changed": "2026-09-29",
+      "hash": "e318e514a9b574b4"
     },
     "windows/tor-browser": {
       "changed": "2026-03-31",
@@ -673,12 +677,12 @@
       "hash": "816cc17b8ce885b5"
     },
     "windows/windows": {
-      "changed": "2026-03-31",
-      "hash": "c04920bb3cd2dd85"
+      "changed": "2026-09-29",
+      "hash": "7eee29e8bc7a6ca7"
     },
     "windows/word": {
-      "changed": "2026-03-31",
-      "hash": "2e5b4374abec7930"
+      "changed": "2026-09-29",
+      "hash": "d2c590e4aaf19802"
     },
     "windows/wordpress": {
       "changed": "2026-03-31",

@@ -389,7 +389,10 @@ The thinnest part of the site, and the part with the most searches. Two agents r
 
 Chrome for Linux: 22 to 59. Together 1,126 shortcuts and five new pages.
 
-- A trial on this machine put the files into a copy of the data and built the site: 376 pages, every test green, every new page with its note.
+- **Written to the database on 2026-09-29, at the owner's word: eight of the twelve files, 845 shortcuts.** Excel, Word, PowerPoint, Teams, Windows and Chrome for Windows, a new Edge page for Windows, Chrome for Linux. Checked after the export: no app, section or shortcut that was there moved or is missing. The site went from 7,372 to 8,217 shortcuts and from 171 to 172 app pages.
+- Four files wait for icons: Outlook, OneNote, File Explorer, Windows Terminal.
+- The export gave the new shortcuts in a mixed order: it took them as the database answered. It now keeps the order of the last export and places new shortcuts by their number (`scripts/lib/keep-order.mjs`). Sorting by the number alone was tried first and would have moved shortcuts on many macOS pages, so it was not kept.
+- A trial on this machine, before the import, put all twelve files into a copy of the data and built the site: 376 pages, every test green, every new page with its note.
 - `scripts/add-app.mjs` linked every app to macOS, whatever the file said. Corrected. With the old script the five new apps would have shown on macOS, empty.
 - Not verified: no shortcut was tried in its app. 180 were compared by eye with the vendor's page.
 - Firefox is not done: Mozilla's page refuses requests that do not come from a browser.

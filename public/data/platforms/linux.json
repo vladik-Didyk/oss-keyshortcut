@@ -128,7 +128,7 @@
       "slug": "chrome",
       "displayName": "Chrome",
       "category": "Browsers",
-      "shortcutCount": 22,
+      "shortcutCount": 59,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/chrome.webp",
       "docsUrl": "https://support.google.com/chrome/answer/157179",
       "sections": [
@@ -171,6 +171,35 @@
               ],
               "key": "Tab",
               "action": "Previous Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "N",
+              "action": "New Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "N",
+              "action": "New Incognito Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "1-8",
+              "action": "Jump to a Specific Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "9",
+              "action": "Jump to Rightmost Tab"
             }
           ]
         },
@@ -212,6 +241,23 @@
               ],
               "key": "R",
               "action": "Hard Reload (Ignore Cache)"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Home",
+              "action": "Open Home Page"
+            },
+            {
+              "modifiers": [],
+              "key": "F11",
+              "action": "Toggle Fullscreen"
+            },
+            {
+              "modifiers": [],
+              "key": "Esc",
+              "action": "Stop Loading"
             }
           ]
         },
@@ -252,6 +298,28 @@
               ],
               "key": "P",
               "action": "Print"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "G",
+              "action": "Find Next"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "G",
+              "action": "Find Previous"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "S",
+              "action": "Save Page"
             }
           ]
         },
@@ -279,6 +347,37 @@
               ],
               "key": "H",
               "action": "Open History"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "O",
+              "action": "Open Bookmarks Manager"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "J",
+              "action": "Open Downloads"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Delete",
+              "action": "Open Delete Browsing Data Options"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "D",
+              "action": "Bookmark All Tabs"
             }
           ]
         },
@@ -312,6 +411,174 @@
               ],
               "key": "U",
               "action": "View Page Source"
+            }
+          ]
+        },
+        {
+          "name": "Chrome Features",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Esc",
+              "action": "Open Chrome Task Manager"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "T",
+              "action": "Focus First Item in Chrome Toolbar"
+            },
+            {
+              "modifiers": [],
+              "key": "F10",
+              "action": "Focus Rightmost Item in Chrome Toolbar"
+            },
+            {
+              "modifiers": [],
+              "key": "F6",
+              "action": "Switch Focus to Dialog and Toolbars"
+            },
+            {
+              "modifiers": [],
+              "key": "F1",
+              "action": "Open Chrome Help Center"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "M",
+              "action": "Switch User or Browse as Guest"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "I",
+              "action": "Open Feedback Form"
+            },
+            {
+              "modifiers": [],
+              "key": "F7",
+              "action": "Turn On Caret Browsing"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F6",
+              "action": "Skip to Web Contents"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "A",
+              "action": "Focus Inactive Dialogs"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "N",
+              "action": "Open Split View in Active Tab"
+            }
+          ]
+        },
+        {
+          "name": "Address Bar",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Enter",
+              "action": "Add www. and .com, Open in Current Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Enter",
+              "action": "Add www. and .com, Open in New Window"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Enter",
+              "action": "Search in New Tab"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Delete",
+              "action": "Remove Highlighted Prediction"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F5",
+              "action": "Move Cursor to Address Bar"
+            }
+          ]
+        },
+        {
+          "name": "Webpage",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "Tab",
+              "action": "Browse Clickable Items Forward"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Browse Clickable Items Backward"
+            },
+            {
+              "modifiers": [],
+              "key": "Home",
+              "action": "Go to Top of Page"
+            },
+            {
+              "modifiers": [],
+              "key": "End",
+              "action": "Go to Bottom of Page"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "←",
+              "action": "Move Cursor to Previous Word"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "→",
+              "action": "Move Cursor to Next Word"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Backspace",
+              "action": "Delete Previous Word"
             }
           ]
         }

@@ -10,13 +10,13 @@ Numbers in the drafts come from `pnpm stats`. Run it on the day you post and cor
 |---|---|---|
 | Visits in 30 days | about 150 | Cloudflare Web Analytics, to 2026-09-29 |
 | Page views in 30 days | 810, of which 590 from one automatic reader | the same |
-| Pages | 369: 171 app pages, 163 pages about one shortcut, 35 others | the build |
+| Pages | 370: 172 app pages, 163 pages about one shortcut, 35 others | the build |
 | Search data | none yet | Search Console was added on 2026-09-29 |
 
 The goal is 50,000 visits a month. That is more than 300 times today's figure. Code alone does not get there. Three things do, in this order of weight:
 
 1. **Other sites linking to this one.** Today almost none do. Sections 4 to 7 are about this.
-2. **Pages that answer what people search for, better than the pages that rank now.** The Windows pages are the weakest part: Excel for Windows lists 22 shortcuts, Microsoft documents more than 200. Section 3.
+2. **Pages that answer what people search for, better than the pages that rank now.** The Windows pages were the weakest part: Excel for Windows listed 22 shortcuts. Seven of them were filled on 2026-09-29. Section 3.
 3. **Time.** A site with few links is crawled slowly and trusted slowly. Expect months, not weeks. Nobody can promise a date.
 
 ## 2. Search engines
@@ -33,7 +33,7 @@ After four weeks, read in Search Console:
 
 | Report | What to look for |
 |---|---|
-| Pages → Indexed | How many of the 369 are in. "Crawled, currently not indexed" on the pages about one shortcut means Google finds them too thin: write no more of them until that changes |
+| Pages → Indexed | How many of the 370 are in. "Crawled, currently not indexed" on the pages about one shortcut means Google finds them too thin: write no more of them until that changes |
 | Performance → Queries | Searches where the site is shown on positions 8 to 20. These are the pages to improve first |
 | Performance → Pages | Which app pages get shown. The next notes and the next data go there |
 
@@ -41,7 +41,9 @@ After four weeks, read in Search Console:
 
 | Item | State | What you do |
 |---|---|---|
-| Complete Windows lists for Excel, Word, PowerPoint, Outlook, OneNote, Teams, Windows, File Explorer, Windows Terminal, Edge, Chrome, Firefox | Prepared as files in `content/pending-apps/`, parsed from the vendors' own pages. Not in the database | Read `content/pending-apps/README.md`, then run the command it gives for each file |
+| Windows lists for Excel, Word, PowerPoint, Teams, Windows, Edge, Chrome | In the database and live since 2026-09-29: 845 shortcuts | Nothing |
+| Windows lists for Outlook, OneNote, File Explorer, Windows Terminal | Prepared as files in `content/pending-apps/`. Not in the database | An icon for each, then the commands of `content/pending-apps/README.md` |
+| Firefox for Windows and Linux | Not done: Mozilla's page refuses requests that do not come from a browser | Decide whether to copy the page by hand |
 | More pages about one shortcut | 100 notes written. Wait for the index report of section 2 | Nothing now |
 
 ## 4. Show HN (draft)
@@ -50,9 +52,9 @@ Rules of the site: the title starts with "Show HN:", the thing must be usable at
 
 > **Show HN: KeyShortcut – keyboard shortcuts for 119 apps, with printable PDFs**
 >
-> I collect the keyboard shortcuts of apps from their official documentation and put them in one searchable place: 7,372 shortcuts for macOS, Windows and Linux. Every page links to the documentation it was taken from and prints as a one-page PDF. The code and the data are open: https://github.com/vladik-Didyk/oss-keyshortcut
+> I collect the keyboard shortcuts of apps from their official documentation and put them in one searchable place: 8,217 shortcuts for macOS, Windows and Linux. Every page links to the documentation it was taken from and prints as a one-page PDF. The code and the data are open: https://github.com/vladik-Didyk/oss-keyshortcut
 
-Post it when the Windows lists of section 3 are in. A reader who opens Excel for Windows and finds 22 shortcuts will say so in the thread.
+The Windows lists are in, so nothing holds this back. Run `pnpm stats` for the two numbers on the day you post.
 
 ## 5. Reddit (drafts)
 
@@ -63,7 +65,7 @@ One community a week. Read the rules of each before posting: most limit links to
 | r/vscode | `https://keyshortcut.com/macos/vscode/` | Now |
 | r/FigmaDesign | `https://keyshortcut.com/macos/figma/` | Now |
 | r/blender | `https://keyshortcut.com/macos/blender/` | Now |
-| r/excel | `https://keyshortcut.com/windows/excel/` | After the Windows list of section 3 is in |
+| r/excel | `https://keyshortcut.com/windows/excel/` | Now: the page has 159 shortcuts |
 | r/macapps | `https://keyshortcut.com/mac-hud/` | After Apple approves the app |
 
 Draft for the first three, with the app's name changed:

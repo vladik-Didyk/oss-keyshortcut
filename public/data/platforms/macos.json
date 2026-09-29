@@ -44348,6 +44348,12 @@
         "name": "Linux"
       }
     ],
+    "edge": [
+      {
+        "id": "windows",
+        "name": "Windows"
+      }
+    ],
     "excel": [
       {
         "id": "windows",

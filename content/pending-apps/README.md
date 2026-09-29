@@ -8,28 +8,24 @@ The Windows pages are the thinnest part of the site, and Windows is where most p
 
 ## What the files add
 
-| Platform | App | On the site | With the file | Page |
-|---|---|---|---|---|
-| Windows | Excel | 22 | 159 | exists |
-| Windows | Word | 20 | 220 | exists |
-| Windows | PowerPoint | 15 | 134 | exists |
-| Windows | Teams | 14 | 133 | exists |
-| Windows | Windows | 30 | 150 | exists |
-| Windows | Chrome | 28 | 59 | exists |
-| Windows | Outlook | none | 53 | new |
-| Windows | OneNote | none | 148 | new |
-| Windows | Edge | none | 82 | new on Windows |
-| Windows | File Explorer | none | 30 | new |
-| Windows | Windows Terminal | none | 50 | new |
-| Linux | Chrome | 22 | 59 | exists |
+Eight of the twelve files were written to the database on 2026-09-29 and are live: Excel 22 → 159, Word 20 → 220, PowerPoint 15 → 134, Teams 14 → 133, Windows 30 → 150, Chrome 28 → 59, a new Edge page with 82, and Chrome for Linux 22 → 59. Together 845 shortcuts. Their files are gone from this folder.
 
-Together: 1,126 shortcuts and five new pages. `node scripts/preview-pending-apps.mjs` prints this table from the files.
+Four wait, because their apps need an icon first:
+
+| Platform | App | Shortcuts | Page |
+|---|---|---|---|
+| Windows | Outlook | 53 | new |
+| Windows | OneNote | 148 | new |
+| Windows | File Explorer | 30 | new |
+| Windows | Windows Terminal | 50 | new |
+
+`node scripts/preview-pending-apps.mjs` prints this table from the files.
 
 ## Where they come from
 
 - Each list was read from the vendor's own page, the one the file names in `docsUrl`, on 2026-09-29. A script read the keys; the action names were written by hand, in the site's own words.
 - A file holds only keys its app does not have on the site. Nothing that is there is changed.
-- 180 shortcuts were compared by eye with the page, 15 per file. All agreed.
+- 180 shortcuts of the twelve files were compared by eye with the page, 15 per file. All agreed.
 - **No shortcut was tried in its app.** Several of Microsoft's pages contradict themselves; where they do, the row was left out.
 
 ## How to write them to the database
@@ -39,12 +35,14 @@ An icon is needed first for the four apps the site does not know: Outlook, OneNo
 For each file, first the trial, then the real run:
 
 ```bash
-node scripts/add-app.mjs --from-json content/pending-apps/windows/excel.json --dry-run
+node scripts/add-app.mjs --from-json content/pending-apps/windows/outlook.json --dry-run
 ```
 
 ```bash
-node scripts/add-app.mjs --from-json content/pending-apps/windows/excel.json
+node scripts/add-app.mjs --from-json content/pending-apps/windows/outlook.json
 ```
+
+The script also rewrites `scripts/shortcut-sync/sources.json` in another layout. Take that change back with `git checkout -- scripts/shortcut-sync/sources.json` unless the app is new.
 
 Then, once for all of them:
 
@@ -52,7 +50,7 @@ Then, once for all of them:
 pnpm export && pnpm page-dates && pnpm test
 ```
 
-Delete the files that were written, commit, deploy. The notes for the five new pages are already in `src/data/appNotes.js` and show from the day the pages exist.
+Delete the files that were written, commit, deploy. The notes for the new pages are already in `src/data/appNotes.js` and show from the day the pages exist.
 
 `scripts/add-app.mjs` was corrected on 2026-09-29 for this: it used to link every app to macOS, whatever the file said.
 

@@ -455,7 +455,7 @@
       "slug": "chrome",
       "displayName": "Chrome",
       "category": "Browsers",
-      "shortcutCount": 28,
+      "shortcutCount": 59,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/chrome.webp",
       "docsUrl": "https://support.google.com/chrome/answer/157179",
       "sections": [
@@ -512,6 +512,21 @@
               ],
               "key": "9",
               "action": "Go to Last Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "N",
+              "action": "New Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "N",
+              "action": "New Incognito Window"
             }
           ]
         },
@@ -558,6 +573,18 @@
               "modifiers": [],
               "key": "F11",
               "action": "Toggle Fullscreen"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Home",
+              "action": "Open Home Page"
+            },
+            {
+              "modifiers": [],
+              "key": "Esc",
+              "action": "Stop Loading"
             }
           ]
         },
@@ -620,6 +647,13 @@
               ],
               "key": "P",
               "action": "Print"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "S",
+              "action": "Save Page"
             }
           ]
         },
@@ -654,6 +688,30 @@
               ],
               "key": "J",
               "action": "Open Downloads"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "O",
+              "action": "Open Bookmarks Manager"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Delete",
+              "action": "Open Delete Browsing Data Options"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "D",
+              "action": "Bookmark All Tabs"
             }
           ]
         },
@@ -680,6 +738,174 @@
               "modifiers": [],
               "key": "F12",
               "action": "Toggle DevTools"
+            }
+          ]
+        },
+        {
+          "name": "Chrome Features",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Esc",
+              "action": "Open Chrome Task Manager"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "T",
+              "action": "Focus First Item in Chrome Toolbar"
+            },
+            {
+              "modifiers": [],
+              "key": "F10",
+              "action": "Focus Rightmost Item in Chrome Toolbar"
+            },
+            {
+              "modifiers": [],
+              "key": "F6",
+              "action": "Switch Focus to Dialog and Toolbars"
+            },
+            {
+              "modifiers": [],
+              "key": "F1",
+              "action": "Open Chrome Help Center"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "M",
+              "action": "Switch User or Browse as Guest"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "I",
+              "action": "Open Feedback Form"
+            },
+            {
+              "modifiers": [],
+              "key": "F7",
+              "action": "Turn On Caret Browsing"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F6",
+              "action": "Skip to Web Contents"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "A",
+              "action": "Focus Inactive Dialogs"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "N",
+              "action": "Open Split View in Active Tab"
+            }
+          ]
+        },
+        {
+          "name": "Address Bar",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Enter",
+              "action": "Add www. and .com, Open in Current Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Enter",
+              "action": "Add www. and .com, Open in New Window"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Enter",
+              "action": "Search in New Tab"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Delete",
+              "action": "Remove Highlighted Prediction"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F5",
+              "action": "Move Cursor to Address Bar"
+            }
+          ]
+        },
+        {
+          "name": "Webpage",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "Tab",
+              "action": "Browse Clickable Items Forward"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Browse Clickable Items Backward"
+            },
+            {
+              "modifiers": [],
+              "key": "Home",
+              "action": "Go to Top of Page"
+            },
+            {
+              "modifiers": [],
+              "key": "End",
+              "action": "Go to Bottom of Page"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "←",
+              "action": "Move Cursor to Previous Word"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "→",
+              "action": "Move Cursor to Next Word"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Backspace",
+              "action": "Delete Previous Word"
             }
           ]
         }
@@ -1678,10 +1904,627 @@
       ]
     },
     {
+      "slug": "edge",
+      "displayName": "Edge",
+      "category": "Browsers",
+      "shortcutCount": 82,
+      "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/edge.webp",
+      "docsUrl": "https://support.microsoft.com/en-us/microsoft-edge/keyboard-shortcuts-in-microsoft-edge-50d3edab-30d9-c7e4-21ce-37fe2713cfad",
+      "sections": [
+        {
+          "name": "Tabs & Windows",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "K",
+              "action": "Duplicate Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "M",
+              "action": "Toggle Tab Mute"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "N",
+              "action": "New Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "N",
+              "action": "New InPrivate Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "T",
+              "action": "New Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "T",
+              "action": "Reopen Closed Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "W",
+              "action": "Close Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "W",
+              "action": "Close Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "1-8",
+              "action": "Switch to a Specific Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "9",
+              "action": "Switch to Last Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Tab",
+              "action": "Next Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Previous Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F4",
+              "action": "Close Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F4",
+              "action": "Close Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Page Down",
+              "action": "Next Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Page Up",
+              "action": "Previous Tab"
+            }
+          ]
+        },
+        {
+          "name": "Navigation",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "D",
+              "action": "Select URL in Address Bar"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "L",
+              "action": "Select URL in Address Bar"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "L",
+              "action": "Paste and Search or Paste and Go"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "R",
+              "action": "Reload"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "R",
+              "action": "Reload Ignoring Cache"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Enter",
+              "action": "Add www. and .com to Text in Address Bar"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "←",
+              "action": "Go Back"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "→",
+              "action": "Go Forward"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Home",
+              "action": "Open Home Page"
+            },
+            {
+              "modifiers": [],
+              "key": "F4",
+              "action": "Select URL in Address Bar"
+            },
+            {
+              "modifiers": [],
+              "key": "F5",
+              "action": "Reload"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F5",
+              "action": "Reload Ignoring Cache"
+            },
+            {
+              "modifiers": [],
+              "key": "Esc",
+              "action": "Stop Loading Page or Close Dialog"
+            },
+            {
+              "modifiers": [],
+              "key": "Space",
+              "action": "Scroll Down One Screen"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Space",
+              "action": "Scroll Up One Screen"
+            },
+            {
+              "modifiers": [],
+              "key": "Page Down",
+              "action": "Scroll Down One Screen"
+            },
+            {
+              "modifiers": [],
+              "key": "Page Up",
+              "action": "Scroll Up One Screen"
+            },
+            {
+              "modifiers": [],
+              "key": "Home",
+              "action": "Go to Top of Page"
+            },
+            {
+              "modifiers": [],
+              "key": "End",
+              "action": "Go to Bottom of Page"
+            }
+          ]
+        },
+        {
+          "name": "Favorites & History",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "B",
+              "action": "Toggle Favorites Bar"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "D",
+              "action": "Add Favorite"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "D",
+              "action": "Save All Tabs as Favorites"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "H",
+              "action": "Open History"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "J",
+              "action": "Open Downloads"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "O",
+              "action": "Open Favorites"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Y",
+              "action": "Open Collections"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Delete",
+              "action": "Open Clear Browsing Data Options"
+            }
+          ]
+        },
+        {
+          "name": "Find & Search",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "E",
+              "action": "Search in Sidebar"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "E",
+              "action": "Open Search Query in Address Bar"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F",
+              "action": "Find on Page"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "G",
+              "action": "Find Next"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "G",
+              "action": "Find Previous"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "K",
+              "action": "Open Search Query in Address Bar"
+            },
+            {
+              "modifiers": [],
+              "key": "F3",
+              "action": "Find in Current Tab"
+            }
+          ]
+        },
+        {
+          "name": "Page Actions",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "I",
+              "action": "Open Send Feedback Dialog"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "M",
+              "action": "Switch User or Guest"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "O",
+              "action": "Open File"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "P",
+              "action": "Print"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "P",
+              "action": "Print Using System Dialog"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "S",
+              "action": "Save Current Page"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "U",
+              "action": "Start or Stop Read Aloud"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "V",
+              "action": "Paste Without Formatting"
+            },
+            {
+              "modifiers": [],
+              "key": "F1",
+              "action": "Open Help"
+            }
+          ]
+        },
+        {
+          "name": "Zoom & View",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "0",
+              "action": "Reset Zoom"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "+",
+              "action": "Zoom In"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "-",
+              "action": "Zoom Out"
+            },
+            {
+              "modifiers": [],
+              "key": "F9",
+              "action": "Toggle Immersive Reader"
+            },
+            {
+              "modifiers": [],
+              "key": "F11",
+              "action": "Toggle Full Screen"
+            }
+          ]
+        },
+        {
+          "name": "Focus & Menus",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "B",
+              "action": "Focus First Item in Favorites Bar"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "E",
+              "action": "Open Settings and More Menu"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F",
+              "action": "Open Settings and More Menu"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "T",
+              "action": "Focus First Item in App Bar Toolbar"
+            },
+            {
+              "modifiers": [],
+              "key": "F6",
+              "action": "Move Focus to Next Pane"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F6",
+              "action": "Move Focus to Previous Pane"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F6",
+              "action": "Move Focus to Web Content Pane"
+            },
+            {
+              "modifiers": [],
+              "key": "F7",
+              "action": "Turn Caret Browsing On or Off"
+            },
+            {
+              "modifiers": [],
+              "key": "F10",
+              "action": "Focus Settings and More Button"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F10",
+              "action": "Open Context Menu"
+            },
+            {
+              "modifiers": [],
+              "key": "Tab",
+              "action": "Go to Next Tab Stop"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Go to Previous Tab Stop"
+            }
+          ]
+        },
+        {
+          "name": "Developer",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "I",
+              "action": "Open Developer Tools"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "U",
+              "action": "View Source"
+            },
+            {
+              "modifiers": [],
+              "key": "F12",
+              "action": "Open Developer Tools"
+            }
+          ]
+        },
+        {
+          "name": "PDF",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "\\",
+              "action": "Toggle PDF Fit"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "[",
+              "action": "Rotate PDF Counterclockwise"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "]",
+              "action": "Rotate PDF Clockwise"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "slug": "excel",
       "displayName": "Excel",
       "category": "Microsoft Office",
-      "shortcutCount": 22,
+      "shortcutCount": 159,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/excel.webp",
       "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f",
       "sections": [
@@ -1722,6 +2565,81 @@
               ],
               "key": "Page Down",
               "action": "Next Sheet"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Move to Previous Cell or Previous Dialog Option"
+            },
+            {
+              "modifiers": [],
+              "key": "↑",
+              "action": "Move One Cell Up"
+            },
+            {
+              "modifiers": [],
+              "key": "↓",
+              "action": "Move One Cell Down"
+            },
+            {
+              "modifiers": [],
+              "key": "←",
+              "action": "Move One Cell Left"
+            },
+            {
+              "modifiers": [],
+              "key": "→",
+              "action": "Move One Cell Right"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "End",
+              "action": "Extend Selection to Last Used Cell"
+            },
+            {
+              "modifiers": [],
+              "key": "Page Down",
+              "action": "Move One Screen Down"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Page Down",
+              "action": "Move One Screen Right"
+            },
+            {
+              "modifiers": [],
+              "key": "Page Up",
+              "action": "Move One Screen Up"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Page Up",
+              "action": "Move One Screen Left"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "=",
+              "action": "Zoom In"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "-",
+              "action": "Zoom Out"
             }
           ]
         },
@@ -1768,6 +2686,135 @@
               ],
               "key": "R",
               "action": "Fill Right"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "C",
+              "action": "Copy Selection"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "V",
+              "action": "Paste Selection"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Z",
+              "action": "Undo Recent Action"
+            },
+            {
+              "modifiers": [],
+              "key": "Delete",
+              "action": "Remove Cell Contents"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "X",
+              "action": "Cut Selection"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F2",
+              "action": "Insert or Edit Cell Note"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F2",
+              "action": "Insert or Reply to Threaded Comment"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "+",
+              "action": "Open Insert Dialog to Insert Blank Cells"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "-",
+              "action": "Open Delete Dialog to Delete Selected Cells"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "'",
+              "action": "Copy Formula from Cell Above"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "V",
+              "action": "Open Paste Special Dialog"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "K",
+              "action": "Open Insert Hyperlink Dialog"
+            },
+            {
+              "modifiers": [],
+              "key": "F7",
+              "action": "Check Spelling"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Enter",
+              "action": "Start New Line in Same Cell"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Enter",
+              "action": "Complete Cell Entry and Select Cell Above"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Y",
+              "action": "Repeat Last Command or Action"
+            },
+            {
+              "modifiers": [],
+              "key": "Esc",
+              "action": "Cancel Entry in Cell or Formula Bar"
+            },
+            {
+              "modifiers": [],
+              "key": "Enter",
+              "action": "Complete Formula Bar Entry and Select Cell Below"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "\"",
+              "action": "Copy Value from Cell Above"
             }
           ]
         },
@@ -1817,6 +2864,106 @@
               ],
               "key": "%",
               "action": "Percentage Format"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F",
+              "action": "Format Fonts in Format Cells Dialog"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "5",
+              "action": "Apply or Remove Strikethrough"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "6",
+              "action": "Switch Among Hidden, Displayed, and Placeholder Objects"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "&",
+              "action": "Apply Outline Border to Selected Cells"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "_",
+              "action": "Remove Outline Border from Selected Cells"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "8",
+              "action": "Display or Hide Outline Symbols"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "~",
+              "action": "Apply General Number Format"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "^",
+              "action": "Apply Scientific Number Format"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "#",
+              "action": "Apply Date Format with Day, Month, and Year"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "@",
+              "action": "Apply Time Format with Hour and Minute"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "!",
+              "action": "Apply Number Format with Two Decimal Places"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Q",
+              "action": "Display Quick Analysis Options"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "G",
+              "action": "Open Workbook Statistics Dialog"
             }
           ]
         },
@@ -1854,6 +3001,674 @@
               "modifiers": [],
               "key": "Tab",
               "action": "Accept AutoComplete"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "P",
+              "action": "Turn Formula Checking Tooltips On or Off"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "U",
+              "action": "Expand or Collapse Formula Bar"
+            },
+            {
+              "modifiers": [],
+              "key": "F9",
+              "action": "Calculate All Worksheets in All Open Workbooks"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F9",
+              "action": "Calculate Active Worksheet"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "F9",
+              "action": "Calculate All Open Workbooks, Changed or Not"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt",
+                "Shift"
+              ],
+              "key": "F9",
+              "action": "Check Dependent Formulas, Then Calculate All Cells"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "F10",
+              "action": "Display Menu or Message for Error Checking Button"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "A",
+              "action": "Show Function Arguments After a Function Name"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "A",
+              "action": "Insert Argument Names and Parentheses for a Function"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F3",
+              "action": "Insert Function"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "M M D",
+              "action": "Define Name to Use in References"
+            },
+            {
+              "modifiers": [],
+              "key": "F3",
+              "action": "Paste Name from Paste Name Dialog"
+            }
+          ]
+        },
+        {
+          "name": "Frequently Used",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "W",
+              "action": "Close Workbook"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "O",
+              "action": "Open Workbook"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "S",
+              "action": "Save Workbook"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H H",
+              "action": "Choose Fill Color"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H A C",
+              "action": "Center Align Cell Contents"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H B",
+              "action": "Add Borders"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H D C",
+              "action": "Delete Column"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "9",
+              "action": "Hide Selected Rows"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "0",
+              "action": "Hide Selected Columns"
+            }
+          ]
+        },
+        {
+          "name": "Ribbon",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H",
+              "action": "Go to Home Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N",
+              "action": "Go to Insert Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "P",
+              "action": "Go to Page Layout Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "A",
+              "action": "Go to Data Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "W",
+              "action": "Go to View Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "M",
+              "action": "Go to Formulas Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Q",
+              "action": "Go to Search Field on the Ribbon"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F",
+              "action": "Open File Menu"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "R",
+              "action": "Open Review Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F10",
+              "action": "Show Tooltip for Focused Ribbon Element"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "↓",
+              "action": "Open Menu for Selected Button"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F1",
+              "action": "Expand or Collapse Ribbon"
+            }
+          ]
+        },
+        {
+          "name": "Selection",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Page Down",
+              "action": "Select Current and Next Sheet"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Page Up",
+              "action": "Select Current and Previous Sheet"
+            },
+            {
+              "modifiers": [],
+              "key": "F8",
+              "action": "Turn Extend Selection Mode On or Off"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F8",
+              "action": "Add Non-Adjacent Cell or Range to Selection"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Space",
+              "action": "Select Entire Column"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Space",
+              "action": "Select Entire Row"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Space",
+              "action": "Select All Objects When an Object Is Selected"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Home",
+              "action": "Extend Selection to Beginning of Worksheet"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "*",
+              "action": "Select Current Region Around Active Cell"
+            },
+            {
+              "modifiers": [],
+              "key": "Home",
+              "action": "Select First Command When a Menu Is Visible"
+            }
+          ]
+        },
+        {
+          "name": "Paste Special Dialog",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "A",
+              "action": "Paste All Cell Contents and Formatting"
+            },
+            {
+              "modifiers": [],
+              "key": "F",
+              "action": "Paste Only Formulas"
+            },
+            {
+              "modifiers": [],
+              "key": "V",
+              "action": "Paste Only Values"
+            },
+            {
+              "modifiers": [],
+              "key": "T",
+              "action": "Paste Only Formatting"
+            },
+            {
+              "modifiers": [],
+              "key": "C",
+              "action": "Paste Only Comments and Notes"
+            },
+            {
+              "modifiers": [],
+              "key": "N",
+              "action": "Paste Only Data Validation Settings"
+            },
+            {
+              "modifiers": [],
+              "key": "H",
+              "action": "Paste All Contents and Formatting from Copied Cells"
+            },
+            {
+              "modifiers": [],
+              "key": "X",
+              "action": "Paste All Cell Contents Without Borders"
+            },
+            {
+              "modifiers": [],
+              "key": "W",
+              "action": "Paste Only Column Widths"
+            },
+            {
+              "modifiers": [],
+              "key": "R",
+              "action": "Paste Only Formulas and Number Formats"
+            },
+            {
+              "modifiers": [],
+              "key": "U",
+              "action": "Paste Only Values and Number Formats"
+            }
+          ]
+        },
+        {
+          "name": "Data",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "E",
+              "action": "Invoke Flash Fill for Current Column"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F1",
+              "action": "Create Embedded Chart from Current Range"
+            },
+            {
+              "modifiers": [],
+              "key": "F11",
+              "action": "Create Chart in Separate Chart Sheet"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F8",
+              "action": "Create, Run, Edit, or Delete Macro"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F11",
+              "action": "Open Visual Basic for Applications Editor"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F12",
+              "action": "Open Power Query Editor"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "F5",
+              "action": "Refresh All Data in Workbook"
+            }
+          ]
+        },
+        {
+          "name": "Power Pivot",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "M",
+              "action": "Move Table"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Page Down",
+              "action": "Select from Current Cell to Last Cell of Column"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Page Up",
+              "action": "Select from Current Cell to First Cell of Column"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "End",
+              "action": "Select from Current Cell to Last Cell of Row"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Home",
+              "action": "Select from Current Cell to First Cell of Row"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "←",
+              "action": "Move to First Cell of Selected Row"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "→",
+              "action": "Move to Last Cell of Selected Row"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "↑",
+              "action": "Move to First Cell of Selected Column"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "↓",
+              "action": "Move to Last Cell of Selected Column"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Esc",
+              "action": "Close Dialog Box or Cancel a Process"
+            }
+          ]
+        },
+        {
+          "name": "Copilot",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "M",
+              "action": "Switch Between Edit, Chat, and Plan Mode"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "J",
+              "action": "Confirm Use of Selected Files"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "H",
+              "action": "Start Dictation for Copilot"
+            }
+          ]
+        },
+        {
+          "name": "Function Keys",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "F1",
+              "action": "Display Help Task Pane"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "F1",
+              "action": "Insert New Worksheet"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F1",
+              "action": "Toggle Full Screen Mode"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F2",
+              "action": "Edit Active Cell in Formula Bar"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F4",
+              "action": "Close Selected Workbook Window"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F4",
+              "action": "Close Excel"
+            },
+            {
+              "modifiers": [],
+              "key": "F5",
+              "action": "Display Go To Dialog"
+            },
+            {
+              "modifiers": [],
+              "key": "F6",
+              "action": "Switch Between Worksheet, Ribbon, Task Pane, and Zoom"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F6",
+              "action": "Switch Between Worksheet, Zoom, Task Pane, and Ribbon"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F6",
+              "action": "Switch Between Two Excel Windows"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F6",
+              "action": "Switch Between All Excel Windows"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F7",
+              "action": "Move Workbook Window When Not Maximized"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F8",
+              "action": "Size Workbook Window When Not Maximized"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F9",
+              "action": "Minimize Workbook Window to an Icon"
+            },
+            {
+              "modifiers": [],
+              "key": "F10",
+              "action": "Turn Key Tips On or Off"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F10",
+              "action": "Display Context Menu for Selected Item"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F10",
+              "action": "Maximize or Restore Selected Workbook Window"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F11",
+              "action": "Insert New Worksheet"
+            },
+            {
+              "modifiers": [],
+              "key": "F12",
+              "action": "Display Save As Dialog"
             }
           ]
         }
@@ -2495,7 +4310,7 @@
       "slug": "powerpoint",
       "displayName": "PowerPoint",
       "category": "Microsoft Office",
-      "shortcutCount": 15,
+      "shortcutCount": 134,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/powerpoint.webp",
       "docsUrl": "https://support.microsoft.com/en-us/office/use-keyboard-shortcuts-to-create-powerpoint-presentations-ebb3d20e-dcd4-444f-a38e-bb5c5ed180f4",
       "sections": [
@@ -2578,6 +4393,164 @@
               ],
               "key": "V",
               "action": "Paste Formatting"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "X",
+              "action": "Cut Selected Text, Object, or Slide"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "C",
+              "action": "Copy Selected Text, Object, or Slide"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "V",
+              "action": "Paste Cut or Copied Text, Object, or Slide"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "K",
+              "action": "Insert Hyperlink"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "M",
+              "action": "Insert New Comment"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Z",
+              "action": "Undo Last Action"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Y",
+              "action": "Redo Last Action"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "C",
+              "action": "Copy Animation Painter"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "V",
+              "action": "Paste Animation Painter"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "V",
+              "action": "Open Paste Special Dialog"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F8",
+              "action": "Open Copilot Options for Rewriting Selected Text Box"
+            },
+            {
+              "modifiers": [],
+              "key": "Backspace",
+              "action": "Delete One Character to the Left"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Backspace",
+              "action": "Delete One Word to the Left"
+            },
+            {
+              "modifiers": [],
+              "key": "Delete",
+              "action": "Delete One Character to the Right"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Delete",
+              "action": "Delete One Word to the Right"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "←",
+              "action": "Promote Paragraph"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "→",
+              "action": "Demote Paragraph"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "↑",
+              "action": "Move Selected Paragraphs Up"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "↓",
+              "action": "Move Selected Paragraphs Down"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F",
+              "action": "Open Find Dialog"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "H",
+              "action": "Open Replace Dialog"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F4",
+              "action": "Repeat Last Find Action"
             }
           ]
         },
@@ -2607,6 +4580,730 @@
               "modifiers": [],
               "key": "Page Down",
               "action": "Next Slide"
+            },
+            {
+              "modifiers": [],
+              "key": "←",
+              "action": "Move One Character to the Left"
+            },
+            {
+              "modifiers": [],
+              "key": "→",
+              "action": "Move One Character to the Right"
+            },
+            {
+              "modifiers": [],
+              "key": "↑",
+              "action": "Move One Line Up"
+            },
+            {
+              "modifiers": [],
+              "key": "↓",
+              "action": "Move One Line Down"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "←",
+              "action": "Move One Word to the Left"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "→",
+              "action": "Move One Word to the Right"
+            },
+            {
+              "modifiers": [],
+              "key": "End",
+              "action": "Move to End of Line"
+            },
+            {
+              "modifiers": [],
+              "key": "Home",
+              "action": "Move to Beginning of Line"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "↑",
+              "action": "Move Up One Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "↓",
+              "action": "Move Down One Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Enter",
+              "action": "Move to Next Title or Body Text Placeholder"
+            }
+          ]
+        },
+        {
+          "name": "Frequently Used",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "N",
+              "action": "Create New Presentation"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "P",
+              "action": "Print Presentation"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "S",
+              "action": "Save Presentation"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Q",
+              "action": "Close PowerPoint"
+            }
+          ]
+        },
+        {
+          "name": "Presentations and Slides",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "-",
+              "action": "Zoom Out"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "+",
+              "action": "Zoom In"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "O",
+              "action": "Zoom to Fit"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "D",
+              "action": "Make Copy of Selected Slide"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "O",
+              "action": "Open Presentation"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "S",
+              "action": "Save with Different Name, Location, or File Format"
+            }
+          ]
+        },
+        {
+          "name": "Objects",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "5",
+              "action": "Move Focus to First Floating Shape"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "[",
+              "action": "Send Object Back One Position"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "]",
+              "action": "Bring Object Forward One Position"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "A",
+              "action": "Select All Objects on Slide"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "J",
+              "action": "Regroup Selected Objects"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "→",
+              "action": "Rotate Object Clockwise 15 Degrees"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "←",
+              "action": "Rotate Object Counterclockwise 15 Degrees"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Space",
+              "action": "Play or Pause Media"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "=",
+              "action": "Insert Equation"
+            }
+          ]
+        },
+        {
+          "name": "Select Text",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "→",
+              "action": "Select One Character to the Right"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "←",
+              "action": "Select One Character to the Left"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "→",
+              "action": "Select to End of Word"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "←",
+              "action": "Select to Beginning of Word"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "↑",
+              "action": "Select One Line Up"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "↓",
+              "action": "Select One Line Down"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "↓",
+              "action": "Select to End of Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "↑",
+              "action": "Select to Beginning of Paragraph"
+            },
+            {
+              "modifiers": [],
+              "key": "Enter",
+              "action": "Select Text Within Selected Object"
+            }
+          ]
+        },
+        {
+          "name": "Format Text",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "B",
+              "action": "Bold"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "T",
+              "action": "Open Font Dialog"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": ">",
+              "action": "Increase Font Size"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "<",
+              "action": "Decrease Font Size"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F3",
+              "action": "Switch Between Sentence Case, Lowercase, Uppercase"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "U",
+              "action": "Underline"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "I",
+              "action": "Italic"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "=",
+              "action": "Apply Subscript"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "+",
+              "action": "Apply Superscript"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "E",
+              "action": "Center Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "J",
+              "action": "Justify Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "L",
+              "action": "Left Align Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "R",
+              "action": "Right Align Paragraph"
+            }
+          ]
+        },
+        {
+          "name": "Tables",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "Tab",
+              "action": "Move to Next Cell"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Move to Preceding Cell"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Tab",
+              "action": "Insert Tab in Cell"
+            }
+          ]
+        },
+        {
+          "name": "Views and Panes",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F5",
+              "action": "Switch to Presenter View"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Toggle Between Outline and Thumbnail Views"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F9",
+              "action": "Show or Hide Guides"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F9",
+              "action": "Show or Hide Grid"
+            },
+            {
+              "modifiers": [],
+              "key": "F6",
+              "action": "Cycle Clockwise Through Panes in Normal View"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F6",
+              "action": "Cycle Counterclockwise Through Panes in Normal View"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "1",
+              "action": "Show Outline View Level 1 Headings"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "+",
+              "action": "Expand Outline View Text Below a Heading"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "-",
+              "action": "Collapse Outline View Text Below a Heading"
+            },
+            {
+              "modifiers": [],
+              "key": "F1",
+              "action": "Show Help Menu"
+            }
+          ]
+        },
+        {
+          "name": "Selection Pane",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F",
+              "action": "Move Selected Item Forward"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "B",
+              "action": "Move Selected Item Backward"
+            },
+            {
+              "modifiers": [],
+              "key": "F2",
+              "action": "Rename Focused Item"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "9",
+              "action": "Expand All Groups"
+            }
+          ]
+        },
+        {
+          "name": "Ribbon",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Q",
+              "action": "Go to Tell Me or Search Field on the Ribbon"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F",
+              "action": "Open File Menu"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H",
+              "action": "Open Home Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N",
+              "action": "Open Insert Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "J I",
+              "action": "Open Draw Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "G",
+              "action": "Open Design Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "K",
+              "action": "Open Transitions Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "A",
+              "action": "Open Animations Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "S",
+              "action": "Open Slide Show Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "R",
+              "action": "Open Review Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "W",
+              "action": "Open View Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "E",
+              "action": "Open Recording Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Y 2",
+              "action": "Open Help Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F10",
+              "action": "Show Tooltip for Focused Ribbon Element"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "↓",
+              "action": "Open Menu for Selected Button"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F1",
+              "action": "Expand or Collapse Ribbon"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H F S",
+              "action": "Change Font Size for Selected Text"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "W Q",
+              "action": "Open Zoom Dialog"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "P P",
+              "action": "Print All Slides as Full Page Slides"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "G H",
+              "action": "Select Theme"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H L",
+              "action": "Select Slide Layout"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "W P N",
+              "action": "Show or Hide Notes Pane in Normal View"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H F O",
+              "action": "Open Clipboard"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N X",
+              "action": "Insert Text Box"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N J",
+              "action": "Insert Embedded Document or Spreadsheet as Object"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N W",
+              "action": "Insert WordArt"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N P D",
+              "action": "Insert Picture from Device"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N S H",
+              "action": "Insert Shape"
             }
           ]
         }
@@ -2774,7 +5471,7 @@
       "slug": "teams",
       "displayName": "Teams",
       "category": "Communication",
-      "shortcutCount": 14,
+      "shortcutCount": 133,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/teams.webp",
       "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-for-microsoft-teams-2e8e2a70-e8d8-4a19-949b-4c36dd5292d2",
       "sections": [
@@ -2815,6 +5512,132 @@
               ],
               "key": "E",
               "action": "Search"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "5",
+              "action": "Open 5th App on App Bar"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "6",
+              "action": "Open 6th App on App Bar"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "7",
+              "action": "Open 7th App on App Bar"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "8",
+              "action": "Open 8th App on App Bar"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "9",
+              "action": "Open 9th App on App Bar"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "L",
+              "action": "Move Focus to Chat or Channel List"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "M",
+              "action": "Move Focus to Message Pane"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "T",
+              "action": "Move Focus to Toast"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "R",
+              "action": "Go to Compose Box"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "H",
+              "action": "Open History Menu"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F6",
+              "action": "Move to Previous Section"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F6",
+              "action": "Move to Next Section"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt",
+                "Shift"
+              ],
+              "key": "↑",
+              "action": "Move Selected Chat or Channel Up in List"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt",
+                "Shift"
+              ],
+              "key": "↓",
+              "action": "Move Selected Chat or Channel Down in List"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "←",
+              "action": "Go Back"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "→",
+              "action": "Go Forward"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "Y",
+              "action": "Move Focus to Notification"
             }
           ]
         },
@@ -2848,6 +5671,160 @@
               ],
               "key": "I",
               "action": "Italic"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Q",
+              "action": "Collapse All Conversational Folders"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Esc",
+              "action": "Mark All as Read"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "J",
+              "action": "Jump to Last Read or Newest Message"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F",
+              "action": "Find in Current Chat or Channel"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "1",
+              "action": "Open 1st Tab on Chat Header"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "2",
+              "action": "Open 2nd Tab on Chat Header"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "3",
+              "action": "Open 3rd Tab on Chat Header"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "4",
+              "action": "Open 4th Tab on Chat Header"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "5",
+              "action": "Open 5th Tab on Chat Header"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "6",
+              "action": "Open 6th Tab on Chat Header"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "7",
+              "action": "Open 7th Tab on Chat Header"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "8",
+              "action": "Open 8th Tab on Chat Header"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "9",
+              "action": "Open 9th Tab on Chat Header"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "P",
+              "action": "Toggle Details Pane"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "R",
+              "action": "Reply to Last Message"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "R",
+              "action": "React to Last Message"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "U",
+              "action": "See All Unread Chats"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "C",
+              "action": "See All Chat Conversations"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "A",
+              "action": "See All Channel Conversations"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "B",
+              "action": "See All Meeting Chats"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "Z",
+              "action": "Clear All Filters"
             }
           ]
         },
@@ -2893,6 +5870,627 @@
               ],
               "key": "K",
               "action": "Accept Call"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "A",
+              "action": "Accept Video Call or Screen Share"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "S",
+              "action": "Accept an Audio Call"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "D",
+              "action": "Decline Call or Screen Share"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "A",
+              "action": "Start an Audio Call"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "V",
+              "action": "Start a Video Call"
+            },
+            {
+              "modifiers": [],
+              "key": "F11",
+              "action": "Toggle Full Screen"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "+",
+              "action": "Zoom In Shared Content"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "-",
+              "action": "Zoom Out Shared Content"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "0",
+              "action": "Reset Zoom for Shared Content"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "H",
+              "action": "End Audio or Video Call"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "U",
+              "action": "Toggle Speaker"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Space",
+              "action": "Temporarily Unmute"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "L",
+              "action": "Announce Raised Hands with Screen Reader"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Space",
+              "action": "Go to the Sharing Toolbar"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Y",
+              "action": "Admit People from the Lobby Notification"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N",
+              "action": "Schedule Meeting"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F10",
+              "action": "Move Focus to Toolbar in an Edit Field"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "S",
+              "action": "Save or Send Meeting Request"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "J",
+              "action": "Join from the Meeting Details"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "S",
+              "action": "Go to the Suggested Time"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "J",
+              "action": "Join from Meeting Started Toast"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "R",
+              "action": "Open Meeting Chat from Meeting Notification"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "↑",
+              "action": "Pan Shared Content Up"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "↓",
+              "action": "Pan Shared Content Down"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "←",
+              "action": "Pan Shared Content Left"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "→",
+              "action": "Pan Shared Content Right"
+            }
+          ]
+        },
+        {
+          "name": "General",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F",
+              "action": "Open the Filter"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "N",
+              "action": "Start Chat in New Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": ",",
+              "action": "Open Settings"
+            },
+            {
+              "modifiers": [],
+              "key": "F1",
+              "action": "Open Help"
+            },
+            {
+              "modifiers": [],
+              "key": "Esc",
+              "action": "Close"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "=",
+              "action": "Increase Zoom Level"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "-",
+              "action": "Decrease Zoom Level"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "0",
+              "action": "Reset the Zoom Level"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt",
+                "Shift"
+              ],
+              "key": "R",
+              "action": "Report a Problem"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "G",
+              "action": "Go to Specific Chat or Channel"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "Enter",
+              "action": "Move Focus to Pane Divider"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Enter",
+              "action": "Return Pane to Default Width"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "T",
+              "action": "Pin Window on Top"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "O",
+              "action": "Open Existing Conversation in New Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "K",
+              "action": "Mark All Activity as Read"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "M",
+              "action": "Filter Activity to @ Mentions"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt",
+                "Shift"
+              ],
+              "key": "1",
+              "action": "Download the Diagnostic Logs"
+            }
+          ]
+        },
+        {
+          "name": "Compose",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "X",
+              "action": "Expand the Compose Box"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Enter",
+              "action": "Send from Expanded Compose Box"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "P",
+              "action": "Paragraph Style"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "4",
+              "action": "Insert Block Quote"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "O",
+              "action": "Attach a File"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "1",
+              "action": "Apply Heading 1 Style"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "2",
+              "action": "Apply Heading 2 Style"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "3",
+              "action": "Apply Heading 3 Style"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "U",
+              "action": "Underline"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "X",
+              "action": "Strikethrough"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "I",
+              "action": "Mark Message as Important"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "A",
+              "action": "Rewrite with Copilot"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "E",
+              "action": "Open Video Recorder"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "K",
+              "action": "Insert Link"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "C",
+              "action": "Insert Inline Code"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "5",
+              "action": "Insert Code"
+            }
+          ]
+        },
+        {
+          "name": "Calendar",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "Enter",
+              "action": "Open Selected Item"
+            },
+            {
+              "modifiers": [],
+              "key": "Delete",
+              "action": "Delete Selected Item"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "1",
+              "action": "Open Day View"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "2",
+              "action": "Open Work Week View"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "3",
+              "action": "Open Week View"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "4",
+              "action": "Open Month View"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "5",
+              "action": "Open Agenda in Month View"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "←",
+              "action": "Go to Previous Time Period"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "→",
+              "action": "Go to Next Time Period"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "↓",
+              "action": "Go to Next Week"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "↑",
+              "action": "Go to Previous Week"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Page Down",
+              "action": "Go to Next Month"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Page Up",
+              "action": "Go to Previous Month"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F1",
+              "action": "Open or Collapse Left Pane"
+            },
+            {
+              "modifiers": [],
+              "key": "Tab",
+              "action": "Move to Next Event or Area in Current View"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Move to Previous Event or Area in Current View"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "P",
+              "action": "Print Calendar"
+            },
+            {
+              "modifiers": [],
+              "key": "?",
+              "action": "Show Help"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "F",
+              "action": "Forward an Event"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "R",
+              "action": "Reply to Meeting"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Z",
+              "action": "Undo Action"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Q",
+              "action": "Create Meeting Request"
             }
           ]
         }
@@ -3194,7 +6792,7 @@
       "slug": "word",
       "displayName": "Word",
       "category": "Microsoft Office",
-      "shortcutCount": 20,
+      "shortcutCount": 220,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/word.webp",
       "docsUrl": "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-word-95ef89dd-7142-4b50-afb2-f762f663ceb2",
       "sections": [
@@ -3265,6 +6863,220 @@
               ],
               "key": "<",
               "action": "Decrease Font Size"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "[",
+              "action": "Decrease Font Size by 1 Point"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "]",
+              "action": "Increase Font Size by 1 Point"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "M",
+              "action": "Indent Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "M",
+              "action": "Remove Paragraph Indent"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "T",
+              "action": "Create Hanging Indent"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "T",
+              "action": "Remove Hanging Indent"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Q",
+              "action": "Remove Paragraph Formatting"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "1",
+              "action": "Apply Single Spacing to Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "2",
+              "action": "Apply Double Spacing to Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "5",
+              "action": "Apply 1.5-Line Spacing to Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "K",
+              "action": "Enable AutoFormat"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "N",
+              "action": "Apply Normal Style"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "1",
+              "action": "Apply Heading 1 Style"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "2",
+              "action": "Apply Heading 2 Style"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "3",
+              "action": "Apply Heading 3 Style"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "S",
+              "action": "Display Apply Styles Task Pane"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt",
+                "Shift"
+              ],
+              "key": "S",
+              "action": "Display Styles Task Pane"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F3",
+              "action": "Switch Text Between Upper, Lower, and Title Case"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "A",
+              "action": "Change Text to All Upper Case"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "H",
+              "action": "Hide Selected Text"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "L",
+              "action": "Add Bulleted List"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "W",
+              "action": "Underline Words, Not Spaces"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "D",
+              "action": "Apply Double Underline"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "K",
+              "action": "Apply Small Caps"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "+",
+              "action": "Apply Superscript"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Space",
+              "action": "Remove Manual Character Formatting"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Q",
+              "action": "Change Selected Text to Symbol Font"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F1",
+              "action": "Display Reveal Formatting Task Pane"
             }
           ]
         },
@@ -3305,6 +7117,137 @@
               ],
               "key": "Enter",
               "action": "Page Break"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "X",
+              "action": "Cut Selected Content to Clipboard"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "C",
+              "action": "Copy Selected Content to Clipboard"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "V",
+              "action": "Paste Clipboard Contents"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "V",
+              "action": "Paste Text Only"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Z",
+              "action": "Undo Previous Action"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Y",
+              "action": "Redo Previous Action"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Backspace",
+              "action": "Delete One Word to the Left"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Delete",
+              "action": "Delete One Word to the Right"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H F O",
+              "action": "Open Clipboard Task Pane"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F3",
+              "action": "Define AutoText Block from Selection"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F3",
+              "action": "Cut Selected Content to the Spike"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F3",
+              "action": "Paste Contents of the Spike"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "C",
+              "action": "Copy Selected Text Formatting"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "V",
+              "action": "Paste Selected Text Formatting"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "R",
+              "action": "Copy Header or Footer from Previous Section"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N J J",
+              "action": "Display Object Dialog to Insert File Object"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N M",
+              "action": "Insert SmartArt Graphic"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N W",
+              "action": "Insert WordArt Graphic"
             }
           ]
         },
@@ -3331,6 +7274,113 @@
               ],
               "key": "G",
               "action": "Go To Page"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "←",
+              "action": "Move Cursor One Word Left"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "→",
+              "action": "Move Cursor One Word Right"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "↑",
+              "action": "Move Cursor Up One Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "↓",
+              "action": "Move Cursor Down One Paragraph"
+            },
+            {
+              "modifiers": [],
+              "key": "End",
+              "action": "Move Cursor to End of Line"
+            },
+            {
+              "modifiers": [],
+              "key": "Home",
+              "action": "Move Cursor to Beginning of Line"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "Page Up",
+              "action": "Move Cursor to Top of Screen"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "Page Down",
+              "action": "Move Cursor to Bottom of Screen"
+            },
+            {
+              "modifiers": [],
+              "key": "Page Up",
+              "action": "Scroll Up One Screen"
+            },
+            {
+              "modifiers": [],
+              "key": "Page Down",
+              "action": "Scroll Down One Screen"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Page Down",
+              "action": "Move Cursor to Top of Next Page"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Page Up",
+              "action": "Move Cursor to Top of Previous Page"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F5",
+              "action": "Move Cursor to Previous Revision"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "Z",
+              "action": "Cycle Through Locations of Four Previous Changes"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "←",
+              "action": "Go Back One Page"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "→",
+              "action": "Go Forward One Page"
             }
           ]
         },
@@ -3358,6 +7408,1056 @@
               ],
               "key": "-",
               "action": "Zoom Out"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "0",
+              "action": "Return to 100% Zoom"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "S",
+              "action": "Split Document Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "I",
+              "action": "Switch to Print Preview"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "W F",
+              "action": "Switch to Read Mode View"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "P",
+              "action": "Switch to Print Layout View"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "O",
+              "action": "Switch to Outline View"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "N",
+              "action": "Switch to Draft View"
+            }
+          ]
+        },
+        {
+          "name": "Frequently Used",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "O",
+              "action": "Open Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "N",
+              "action": "Create New Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "S",
+              "action": "Save Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "W",
+              "action": "Close Document"
+            },
+            {
+              "modifiers": [],
+              "key": "Esc",
+              "action": "Cancel Command"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "P",
+              "action": "Print Document"
+            }
+          ]
+        },
+        {
+          "name": "Ribbon",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Q",
+              "action": "Go to Tell Me or Search Field on the Ribbon"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F",
+              "action": "Open File Page for Backstage View"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "H",
+              "action": "Open Home Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "N",
+              "action": "Open Insert Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "G",
+              "action": "Open Design Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "P",
+              "action": "Open Layout Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "S",
+              "action": "Open References Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "M",
+              "action": "Open Mailings Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "R",
+              "action": "Open Review Tab"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "W",
+              "action": "Open View Tab"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F10",
+              "action": "Show Tooltip for Focused Ribbon Element"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "↓",
+              "action": "Open Menu for Selected Button"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F1",
+              "action": "Expand or Collapse Ribbon"
+            },
+            {
+              "modifiers": [],
+              "key": "→",
+              "action": "Move to Submenu When a Main Menu Is Open"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Z A",
+              "action": "Toggle AutoSave On or Off"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "B",
+              "action": "Open Dialog to Rename or Save to Another Location"
+            }
+          ]
+        },
+        {
+          "name": "Selection",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "←",
+              "action": "Select Word to the Left"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "→",
+              "action": "Select Word to the Right"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Home",
+              "action": "Select to Beginning of Line"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "End",
+              "action": "Select to End of Line"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "↑",
+              "action": "Select to Beginning of Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "↓",
+              "action": "Select to End of Paragraph"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Page Up",
+              "action": "Select to Top of Screen"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Page Down",
+              "action": "Select to Bottom of Screen"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Home",
+              "action": "Select to Beginning of Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "End",
+              "action": "Select to End of Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt",
+                "Shift"
+              ],
+              "key": "Page Down",
+              "action": "Select to Bottom of Window"
+            },
+            {
+              "modifiers": [],
+              "key": "F8",
+              "action": "Start Extending Selection"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F8",
+              "action": "Reduce Selection"
+            }
+          ]
+        },
+        {
+          "name": "Special Characters",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Enter",
+              "action": "Insert Line Break"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Enter",
+              "action": "Insert Column Break"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Space",
+              "action": "Insert Nonbreaking Space"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "R",
+              "action": "Insert Registered Trademark Symbol"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "T",
+              "action": "Insert Trademark Symbol"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": ".",
+              "action": "Insert Ellipsis"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt",
+                "Shift"
+              ],
+              "key": "?",
+              "action": "Insert Inverted Question Mark"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt",
+                "Shift"
+              ],
+              "key": "!",
+              "action": "Insert Inverted Exclamation Mark"
+            }
+          ]
+        },
+        {
+          "name": "Tables",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "Tab",
+              "action": "Move to Next Cell in Row and Select Its Content"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Move to Previous Cell in Row and Select Its Content"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Home",
+              "action": "Move to First Cell in Row"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "End",
+              "action": "Move to Last Cell in Row"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Page Up",
+              "action": "Move to First Cell in Column"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Page Down",
+              "action": "Move to Last Cell in Column"
+            },
+            {
+              "modifiers": [],
+              "key": "↑",
+              "action": "Move to Previous Row"
+            },
+            {
+              "modifiers": [],
+              "key": "↓",
+              "action": "Move to Next Row"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "↑",
+              "action": "Move One Row Up"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "↓",
+              "action": "Move One Row Down"
+            },
+            {
+              "modifiers": [],
+              "key": "Enter",
+              "action": "Insert New Paragraph in Cell"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Tab",
+              "action": "Insert Tab Character in Cell"
+            }
+          ]
+        },
+        {
+          "name": "Review",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "R P 1 L",
+              "action": "Show List of Comments"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "M",
+              "action": "Insert Comment"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "E",
+              "action": "Turn Change Tracking On or Off"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "C",
+              "action": "Close Reviewing Pane"
+            }
+          ]
+        },
+        {
+          "name": "References",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "O",
+              "action": "Mark Table of Contents Entry"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "I",
+              "action": "Mark Table of Authorities Entry (Citation)"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "X",
+              "action": "Mark Index Entry"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "F",
+              "action": "Insert Footnote"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "D",
+              "action": "Insert Endnote"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": ">",
+              "action": "Go to Next Footnote"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "<",
+              "action": "Go to Previous Footnote"
+            }
+          ]
+        },
+        {
+          "name": "Mail Merge and Fields",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "K",
+              "action": "Preview Mail Merge"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "N",
+              "action": "Merge Document"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "M",
+              "action": "Print Merged Document"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "E",
+              "action": "Edit Mail Merge Data Document"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "F",
+              "action": "Insert Merge Field"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "D",
+              "action": "Insert DATE Field"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "L",
+              "action": "Insert LISTNUM Field"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "P",
+              "action": "Insert PAGE Field"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "T",
+              "action": "Insert TIME Field"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F9",
+              "action": "Insert Empty Field"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F7",
+              "action": "Update Linked Information in Source Document"
+            },
+            {
+              "modifiers": [],
+              "key": "F9",
+              "action": "Update Selected Fields"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F9",
+              "action": "Unlink Field"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F9",
+              "action": "Switch Between Field Code and Its Result"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F9",
+              "action": "Switch Between All Field Codes and Their Results"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "F9",
+              "action": "Run GOTOBUTTON or MACROBUTTON from Field Results"
+            },
+            {
+              "modifiers": [],
+              "key": "F11",
+              "action": "Go to Next Field"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F11",
+              "action": "Go to Previous Field"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F11",
+              "action": "Lock Field"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F11",
+              "action": "Unlock Field"
+            }
+          ]
+        },
+        {
+          "name": "Languages",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "R U L",
+              "action": "Display Language Dialog to Set Proofing Language"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "R L",
+              "action": "Set Default Languages"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "`",
+              "action": "Switch to Japanese Input Method Editor"
+            }
+          ]
+        },
+        {
+          "name": "Outline",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "←",
+              "action": "Promote Paragraph"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "→",
+              "action": "Demote Paragraph"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "A",
+              "action": "Expand or Collapse All Text or Headings"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "L",
+              "action": "Show First Line of Body Text or All Body Text"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "1",
+              "action": "Show All Headings with Heading 1 Style"
+            }
+          ]
+        },
+        {
+          "name": "Function Keys",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "F1",
+              "action": "Display Help Task Pane"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F1",
+              "action": "Move to Next Field"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "F1",
+              "action": "Move to Previous Field"
+            },
+            {
+              "modifiers": [],
+              "key": "F2",
+              "action": "Move Selected Text or Graphic"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F2",
+              "action": "Copy Selected Text or Graphic"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F2",
+              "action": "Display Print Preview on the Print Tab"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "F2",
+              "action": "Save Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "F2",
+              "action": "Display Open Dialog"
+            },
+            {
+              "modifiers": [],
+              "key": "F4",
+              "action": "Repeat Last Command or Action"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F4",
+              "action": "Repeat Last Find or Go To Action"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F4",
+              "action": "Close Current Document"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F4",
+              "action": "Close Word"
+            },
+            {
+              "modifiers": [],
+              "key": "F5",
+              "action": "Display Go To Dialog"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F5",
+              "action": "Display Bookmark Dialog"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F5",
+              "action": "Restore Document Window Size"
+            },
+            {
+              "modifiers": [],
+              "key": "F6",
+              "action": "Switch Among Document, Task Pane, Status Bar, and Ribbon"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F6",
+              "action": "Switch Among Document, Ribbon, Status Bar, and Task Pane"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F6",
+              "action": "Switch to Next Document Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F6",
+              "action": "Switch to Previous Document Window"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F6",
+              "action": "Move from Open Dialog Back to Document"
+            },
+            {
+              "modifiers": [],
+              "key": "F7",
+              "action": "Display Editor Task Pane to Check Spelling and Grammar"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F7",
+              "action": "Display Thesaurus Task Pane"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F7",
+              "action": "Find Next Spelling or Grammatical Error"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "F7",
+              "action": "Display Translator Task Pane"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F8",
+              "action": "Turn Extend Selection Mode On and Off"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F8",
+              "action": "Display Macro Dialog"
+            },
+            {
+              "modifiers": [],
+              "key": "F10",
+              "action": "Turn KeyTips On or Off"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F10",
+              "action": "Display Shortcut Menu for Selected Item"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F10",
+              "action": "Maximize or Restore Document Window"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F10",
+              "action": "Display Selection Task Pane"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "F10",
+              "action": "Display Menu or Message for Available Actions"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F11",
+              "action": "Open Visual Basic for Applications Editor"
+            },
+            {
+              "modifiers": [],
+              "key": "F12",
+              "action": "Display Save As Dialog"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "F12",
+              "action": "Save Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F12",
+              "action": "Display Open Dialog"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "F12",
+              "action": "Display Print Tab in Backstage View"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Shift"
+              ],
+              "key": "F12",
+              "action": "Select Table of Contents Button in Its Container"
             }
           ]
         }
@@ -11265,7 +16365,7 @@
       "slug": "windows",
       "displayName": "Windows",
       "category": "Windows System",
-      "shortcutCount": 30,
+      "shortcutCount": 150,
       "iconUrl": "https://hgxtwlynuixwwyjykiqd.supabase.co/storage/v1/object/public/icons/app-icons/windows.webp",
       "docsUrl": "https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec",
       "sections": [
@@ -11341,6 +16441,127 @@
               ],
               "key": "F4",
               "action": "Close Window"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "A",
+              "action": "Focus First Icon in Suggested Actions Menu"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Esc",
+              "action": "Cycle Through Windows in Order Opened"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "F8",
+              "action": "Show Password on Sign-In Screen"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "←",
+              "action": "Go Back"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Page Down",
+              "action": "Move Down One Screen"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Page Up",
+              "action": "Move Up One Screen"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "→",
+              "action": "Go Forward"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "Insert",
+              "action": "Return Focus From Windows Sandbox to Host"
+            },
+            {
+              "modifiers": [
+                "Alt"
+              ],
+              "key": "Space",
+              "action": "Open Context Menu of Active Window"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "Delete",
+              "action": "Open Security Screen"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Alt"
+              ],
+              "key": "Tab",
+              "action": "View Thumbnails of All Open Apps"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Esc",
+              "action": "Open Start Menu"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "F4",
+              "action": "Close Active Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Space",
+              "action": "Turn Chinese Input Method Editor On or Off"
+            },
+            {
+              "modifiers": [],
+              "key": "Esc",
+              "action": "Stop Current Task or Dismiss Dialog Box"
+            },
+            {
+              "modifiers": [],
+              "key": "F5",
+              "action": "Refresh Active Window"
+            },
+            {
+              "modifiers": [],
+              "key": "F6",
+              "action": "Cycle Through Elements in Window or Desktop"
+            },
+            {
+              "modifiers": [],
+              "key": "F10",
+              "action": "Activate Menu Bar"
             }
           ]
         },
@@ -11416,6 +16637,91 @@
               ],
               "key": "↓",
               "action": "Minimize Window"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Win"
+              ],
+              "key": "↓",
+              "action": "Snap Window to Bottom Half"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Win"
+              ],
+              "key": "↑",
+              "action": "Snap Window to Top Half"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "Home",
+              "action": "Minimize or Restore All Other Windows"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "M",
+              "action": "Minimize All Windows"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "↓",
+              "action": "Restore Snapped or Maximized Window"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "Enter",
+              "action": "Make UWP App Full Screen"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "←",
+              "action": "Move Window to Left Monitor"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "M",
+              "action": "Restore Minimized Windows"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "→",
+              "action": "Move Window to Right Monitor"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "↑",
+              "action": "Stretch Window to Top and Bottom of Screen"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "Z",
+              "action": "Open Snap Layouts"
             }
           ]
         },
@@ -11507,6 +16813,668 @@
               "action": "Run Dialog"
             }
           ]
+        },
+        {
+          "name": "Windows Key",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "A",
+              "action": "Open Action Center"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "A",
+              "action": "Set Focus to Windows Tip"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Win"
+              ],
+              "key": "B",
+              "action": "Turn HDR On or Off"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "C",
+              "action": "Open Copilot"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Win"
+              ],
+              "key": "D",
+              "action": "Show or Hide Date and Time on Desktop"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Win"
+              ],
+              "key": "H",
+              "action": "Set Focus to Keyboard in Voice Typing"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Win"
+              ],
+              "key": "K",
+              "action": "Mute or Unmute Microphone"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": ",",
+              "action": "Peek at Desktop"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Win"
+              ],
+              "key": "C",
+              "action": "Turn Color Filters On or Off"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Win"
+              ],
+              "key": "Enter",
+              "action": "Open Narrator"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Win"
+              ],
+              "key": "F",
+              "action": "Search for Devices on Network"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Win"
+              ],
+              "key": "Q",
+              "action": "Open Quick Assist"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift",
+                "Win"
+              ],
+              "key": "B",
+              "action": "Wake Device From Blank or Black Screen"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Win"
+              ],
+              "key": "Space",
+              "action": "Change to Previous Input Option"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Win"
+              ],
+              "key": "V",
+              "action": "Open Sound Output in Quick Settings"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "Esc",
+              "action": "Close Magnifier"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "F",
+              "action": "Open Feedback Hub"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "/",
+              "action": "Start IME Reconversion"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "G",
+              "action": "Open Game Bar"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "H",
+              "action": "Open Voice Dictation"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "J",
+              "action": "Open Recall"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "K",
+              "action": "Open Cast to Connect to a Display"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "-",
+              "action": "Zoom Out in Magnifier"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "N",
+              "action": "Open Notification Center and Calendar"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "O",
+              "action": "Lock Device Orientation"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "P",
+              "action": "Choose Presentation Display Mode"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "Pause",
+              "action": "Open About Page in Settings"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "+",
+              "action": "Zoom In With Magnifier"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "Q",
+              "action": "Open Search"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "S",
+              "action": "Open Search"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "R",
+              "action": "Record Video of Screen Region"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "Space",
+              "action": "Previous Input Language or Keyboard Layout"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "V",
+              "action": "Cycle Through Notifications"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "Space",
+              "action": "Next Input Language or Keyboard Layout"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "U",
+              "action": "Open Accessibility Settings"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "V",
+              "action": "Open Clipboard History"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "W",
+              "action": "Open Widgets"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "X",
+              "action": "Open Quick Link Menu"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "Y",
+              "action": "Switch Input Between Mixed Reality and Desktop"
+            }
+          ]
+        },
+        {
+          "name": "Taskbar",
+          "shortcuts": [
+            {
+              "modifiers": [
+                "Alt",
+                "Win"
+              ],
+              "key": "Enter",
+              "action": "Open Taskbar Settings"
+            },
+            {
+              "modifiers": [
+                "Alt",
+                "Win"
+              ],
+              "key": "0-9",
+              "action": "Open Jump List of Pinned App by Position"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "B",
+              "action": "Focus First Icon in Notification Area"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Win"
+              ],
+              "key": "0-9",
+              "action": "Switch to Last Active Window of Pinned App"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift",
+                "Win"
+              ],
+              "key": "0-9",
+              "action": "Open New Instance of Pinned App as Administrator"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "0-9",
+              "action": "Open or Switch to Pinned App by Position"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "0-9",
+              "action": "Start New Instance of Pinned App"
+            },
+            {
+              "modifiers": [
+                "Win"
+              ],
+              "key": "T",
+              "action": "Cycle Through Apps in Taskbar"
+            },
+            {
+              "modifiers": [
+                "Shift",
+                "Win"
+              ],
+              "key": "T",
+              "action": "Move to Previous App in Taskbar"
+            }
+          ]
+        },
+        {
+          "name": "Text Editing",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "Backspace",
+              "action": "Delete Character to the Left"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "B",
+              "action": "Bold Selected Text"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Backspace",
+              "action": "Delete Word to the Left"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Delete",
+              "action": "Delete Word to the Right"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "↓",
+              "action": "Move Cursor to Next Paragraph"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "End",
+              "action": "Move Cursor to End of Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "H",
+              "action": "Find and Replace Text"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Home",
+              "action": "Move Cursor to Start of Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "I",
+              "action": "Italicize Selected Text"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "←",
+              "action": "Move Cursor to Previous Word"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "→",
+              "action": "Move Cursor to Next Word"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "V",
+              "action": "Paste as Plain Text"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "U",
+              "action": "Underline Selected Text"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "↑",
+              "action": "Move Cursor to Previous Paragraph"
+            },
+            {
+              "modifiers": [],
+              "key": "Delete",
+              "action": "Delete Character to the Right"
+            },
+            {
+              "modifiers": [],
+              "key": "↓",
+              "action": "Move Cursor to Next Line"
+            },
+            {
+              "modifiers": [],
+              "key": "End",
+              "action": "Move Cursor to End of Line"
+            },
+            {
+              "modifiers": [],
+              "key": "Home",
+              "action": "Move Cursor to Start of Line"
+            },
+            {
+              "modifiers": [],
+              "key": "←",
+              "action": "Move Cursor to Previous Character"
+            },
+            {
+              "modifiers": [],
+              "key": "Page Down",
+              "action": "Move Cursor Forward One Page"
+            },
+            {
+              "modifiers": [],
+              "key": "Page Up",
+              "action": "Move Cursor Backward One Page"
+            },
+            {
+              "modifiers": [],
+              "key": "→",
+              "action": "Move Cursor to Next Character"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "↓",
+              "action": "Select Paragraphs Forward"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "End",
+              "action": "Select to End of Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Home",
+              "action": "Select to Start of Document"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "←",
+              "action": "Select Words Backward"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "→",
+              "action": "Select Words Forward"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "↑",
+              "action": "Select Paragraphs Backward"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "↓",
+              "action": "Select Lines Forward"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "End",
+              "action": "Select to End of Line"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Home",
+              "action": "Select to Start of Line"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "←",
+              "action": "Select Characters Backward"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Page Down",
+              "action": "Select One Page Forward"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Page Up",
+              "action": "Select One Page Backward"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "→",
+              "action": "Select Characters Forward"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "↑",
+              "action": "Select Lines Backward"
+            },
+            {
+              "modifiers": [],
+              "key": "Tab",
+              "action": "Indent One Tab Stop"
+            },
+            {
+              "modifiers": [],
+              "key": "↑",
+              "action": "Move Cursor to Previous Line"
+            }
+          ]
+        },
+        {
+          "name": "Dialog Boxes",
+          "shortcuts": [
+            {
+              "modifiers": [],
+              "key": "F4",
+              "action": "Display Items in Active List"
+            },
+            {
+              "modifiers": [
+                "Ctrl"
+              ],
+              "key": "Tab",
+              "action": "Move Forward Through Tabs"
+            },
+            {
+              "modifiers": [
+                "Ctrl",
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Move Back Through Tabs"
+            },
+            {
+              "modifiers": [
+                "Shift"
+              ],
+              "key": "Tab",
+              "action": "Move Back Through Options"
+            },
+            {
+              "modifiers": [],
+              "key": "Space",
+              "action": "Select or Clear Check Box"
+            }
+          ]
         }
       ]
     }
@@ -11542,6 +17510,12 @@
       {
         "id": "linux",
         "name": "Linux"
+      }
+    ],
+    "edge": [
+      {
+        "id": "macos",
+        "name": "macOS"
       }
     ],
     "excel": [

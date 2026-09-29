@@ -476,13 +476,16 @@ The sync pipeline scrapes official documentation pages, extracts shortcuts via G
 
 ### Lists that wait for the database (`content/pending-apps/`)
 
-Files for `pnpm add-app -- --from-json <file>`, prepared on 2026-09-29 from the vendors' own pages: 1,126 shortcuts, most of them for Windows (Excel 22 → 159, Word 20 → 220, Windows 30 → 150), and five new pages. Its `README.md` is written for the owner.
+Files for `pnpm add-app -- --from-json <file>`, prepared on 2026-09-29 from the vendors' own pages. Eight were written to the database the same day (845 shortcuts: Excel for Windows 22 → 159, Word 20 → 220, Windows 30 → 150, a new Edge page). Four wait for icons: Outlook, OneNote, File Explorer, Windows Terminal (281 shortcuts). Its `README.md` is written for the owner.
+
+- **The import runs in the main checkout**, because `.env` is there and is never copied: `node <main>/scripts/add-app.mjs --from-json <main>/content/pending-apps/...`, then `pnpm -C <main> export`. The data files are then copied into the worktree, where the tests and the build run.
+- **The export keeps the order of the last export** (`scripts/lib/keep-order.mjs`): a shortcut that was there stays where it was, new ones follow by their `sort_order`. The database answers in the order it keeps its rows, and its `sort_order` does not hold the order the site shows: sorting by it alone moved shortcuts on many macOS pages.
 
 - **Nothing of it is in `public/data`**: that folder is an export, and the next export would undo it. `node scripts/preview-pending-apps.mjs` shows the data as it would be.
 - **`pending-apps.test.js` is the gate**: every file against `inputFaults()` (`scripts/lib/app-input.mjs`), no keys the app already has, no text of an existing action changed, a word for every key. A file whose every shortcut is in the data has been written and passes.
 - **`scripts/add-app.mjs`** checks its input with the same `inputFaults()` before it writes, links the app to the platform of the file (until 2026-09-29: always macOS), puts a new shortcut after the ones its section has, and leaves `appCategories.js` alone for a platform other than macOS: that file lists the apps of the Mac app.
 - **The text of an action is stored once per app, for every platform** (`shortcuts.<slug>.<camelCase>`). A new action whose key equals that of an existing one replaces its text on every platform. The test fails on that.
-- **Notes for the five new pages** are in `APP_NOTES_FOR_PENDING` (`appNotes.js`) and show from the day the pages exist. `app-notes.test.js` checks them against the data with the pending files merged in.
+- **Notes for the new pages** (Edge, and the four that wait) are in `APP_NOTES_FOR_PENDING` (`appNotes.js`) and show from the day the pages exist. `app-notes.test.js` checks them against the data with the pending files merged in.
 - **`content/pending-apps/local/`** is not in git: the full reports and the parsers that quote the vendors' pages at length.
 
 ### App notes (`src/data/appNotes.js`)

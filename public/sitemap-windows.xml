@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://keyshortcut.com/windows/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://keyshortcut.com/windows/chrome/</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -31,8 +31,14 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://keyshortcut.com/windows/edge/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://keyshortcut.com/windows/excel/</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -62,7 +68,7 @@
   </url>
   <url>
     <loc>https://keyshortcut.com/windows/powerpoint/</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -74,7 +80,7 @@
   </url>
   <url>
     <loc>https://keyshortcut.com/windows/teams/</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -86,7 +92,7 @@
   </url>
   <url>
     <loc>https://keyshortcut.com/windows/word/</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -290,7 +296,7 @@
   </url>
   <url>
     <loc>https://keyshortcut.com/windows/windows/</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
