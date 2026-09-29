@@ -1,0 +1,47 @@
+name: Missing shortcut
+description: An app on the site lacks a shortcut it has.
+title: "Missing shortcut: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: This issue is public. Write nothing private in it.
+  - type: input
+    id: app
+    attributes:
+      label: App
+      placeholder: Figma
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      placeholder: macOS, Windows or Linux
+    validations:
+      required: true
+  - type: input
+    id: action
+    attributes:
+      label: Action
+      description: What the shortcut does.
+      placeholder: Paste to replace
+    validations:
+      required: true
+  - type: input
+    id: keys
+    attributes:
+      label: Keys
+      placeholder: ⌘ + ⇧ + R
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Where it is documented
+      description: A link to the app's own documentation, if you have one.
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: The address of the page on keyshortcut.com.

@@ -39,12 +39,21 @@ export default function CreatorBanner() {
             {missing.text}
           </p>
         </div>
-        <div>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <a
             href={missing.buttonHref}
-            className="inline-block px-6 py-2.5 rounded-full text-[14px] font-medium no-underline transition-opacity hover:opacity-90 bg-theme-base text-theme-accent"
+            className="inline-flex items-center min-h-[44px] px-6 rounded-full text-[14px] font-medium no-underline transition-opacity hover:opacity-90 bg-theme-base text-theme-accent"
           >
             {missing.buttonLabel}
+          </a>
+          <a
+            href={missing.githubHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 min-h-[44px] text-[14px] text-theme-accent-text/80 hover:text-theme-accent-text underline underline-offset-2"
+          >
+            <GitHubIcon className="w-4 h-4" />
+            {missing.githubLabel}
           </a>
         </div>
       </div>

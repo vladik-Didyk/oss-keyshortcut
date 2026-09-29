@@ -1,0 +1,32 @@
+name: Suggest an app
+description: An app whose shortcuts the site should list.
+title: "App suggestion: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: This issue is public. Write nothing private in it.
+  - type: input
+    id: app
+    attributes:
+      label: App
+      placeholder: Linear
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platforms
+      placeholder: macOS, Windows, Linux
+  - type: input
+    id: source
+    attributes:
+      label: Where its shortcuts are listed
+      description: A link to the app's own documentation.
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: The address of the page on keyshortcut.com you came from.

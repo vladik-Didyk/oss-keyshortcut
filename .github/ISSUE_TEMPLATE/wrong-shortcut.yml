@@ -1,0 +1,47 @@
+name: Wrong shortcut
+description: A shortcut on the site has the wrong keys or the wrong name.
+title: "Wrong shortcut: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: This issue is public. Write nothing private in it.
+  - type: input
+    id: app
+    attributes:
+      label: App
+      placeholder: Figma
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      placeholder: macOS, Windows or Linux
+    validations:
+      required: true
+  - type: input
+    id: shortcut
+    attributes:
+      label: Shortcut on the site
+      description: The action and the keys, as the site shows them.
+      placeholder: Duplicate (⌘ + D)
+    validations:
+      required: true
+  - type: input
+    id: correct
+    attributes:
+      label: What it should be
+      placeholder: ⌘ + J
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Where it is documented
+      description: A link to the app's own documentation, if you have one.
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: The address of the page on keyshortcut.com.

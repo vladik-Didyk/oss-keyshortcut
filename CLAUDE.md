@@ -187,6 +187,18 @@ Hero uses an HTML/CSS animated keyboard mockup with `AppPanelMockup` — no 3D/c
 - **Author line** (`AuthorLine.jsx`) sits under the verification badge: label and target from `CONTENT.shortcutPage.author`, name from `CONTENT.about.cards.creator.name`.
 - **Top of the page on a phone**: two rows, the title with its facts, then search and PDF side by side. Every control is 44 px high (back link, search, clear, PDF); the search field is 16 px, or iOS zooms in on focus. "Also on:" shows on phones too, each platform with its mark (`PlatformGlyph`), because it is the only way to the same app on another platform. The icon of the page loads `eager`, the icons of lists stay `lazy`. From `lg` up the header is the compact sticky one: 36 px icon, PDF as a text link. `shortcut-page.test.jsx` reads the classes without a breakpoint, which are what a phone gets.
 
+### Reports from visitors
+
+A visitor tells the developer what to fix, add or remove. Step 1 of three; votes ("Works" / "Doesn't work") and counts need a server function and a database, and are not built.
+
+- **Two ways, the visitor picks**: an email to `SUPPORT_EMAIL` (private), or an issue in the public repository (`REPO_URL` in `siteConfig.js`). Both arrive filled in with the app, the platform and the page. No server, no database, nothing stored by the site.
+- **Links** are built in `src/utils/reportLinks.js` (`reportEmail`, `reportIssue`). `REPORT_KINDS` names, for each kind, the issue form in `.github/ISSUE_TEMPLATE/` and what the email asks for. A value the link carries must have a field with that `id` in the form, or GitHub drops it; `report-links.test.jsx` checks this.
+- **Issue forms** use only labels every repository has (`bug`, `enhancement`, `question`): a form with a label that does not exist loses it silently. They ask for no email address, because an issue is public.
+- **App pages**: `ReportProblem.jsx`, a native `<details>` under the shortcut list, so it is in the pre-rendered HTML and opens without JavaScript. It must not have the shape `details > summary + div > p`: a test counts the FAQ answers by it.
+- **The flag of a row** shows on hover and opens the panel about that shortcut. It is drawn in the browser, only where there is a mouse (`hover: hover` and `pointer: fine`), and is not a tab stop: the panel is the way in for a phone and for the keyboard.
+- **About page**: "Suggest an app" by email, "Suggest on GitHub" beside it.
+- Event: `report_link_clicked` with `kind`, `channel`, `app`, `platform`, `shortcut`.
+
 ### Icon imports
 
 `src/utils/icons.js` is a barrel re-export of `lucide-react` icons. Import icons from `../utils/icons` (not directly from `lucide-react`) to keep the tree-shake list centralized and Vite dev server compatible.
