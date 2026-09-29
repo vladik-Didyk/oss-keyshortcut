@@ -537,12 +537,14 @@ export const CONTENT = {
     // and the server sends none below its minimum (server/feedback.js).
     feedback: {
       title: 'Votes of visitors',
-      // First line of the bar: the confirmations, or the question while there are none.
       prompt: 'Do these shortcuts work for you?',
+      // In the place of the numbers while the page has none to show.
+      empty: 'No votes to show yet. Yours can be the first.',
+      // Under each number, and the same fact as a sentence for a screen reader.
+      confirmedLabel: 'say it works',
+      viewsLabel: 'views in a month',
+      downloadsLabel: 'PDF downloads',
       confirmed: (n) => `Confirmed by ${n.toLocaleString('en-US')} visitors`,
-      // Second line: the counts of the page, or a hint while there are none.
-      hint: 'Your vote helps the next visitor.',
-      hintToo: 'Do they work for you too?',
       views: (n) => `${n.toLocaleString('en-US')} views in a month`,
       downloads: (n) => `${n.toLocaleString('en-US')} PDF downloads`,
       works: 'Works',

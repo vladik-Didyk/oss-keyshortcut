@@ -47,7 +47,7 @@ function server(answers) {
   return calls
 }
 
-const voteBar = () => document.querySelector(`section[aria-label="${c.title}"]`)
+const voteCard = () => document.querySelector(`section[aria-label="${c.title}"]`)
 
 beforeAll(() => {
   globalThis.IntersectionObserver = class {
@@ -109,7 +109,7 @@ describe('app page while the switch is off', () => {
     render(page())
     await new Promise((done) => setTimeout(done, 20))
     expect(calls).toEqual([])
-    expect(voteBar()).toBeNull()
+    expect(voteCard()).toBeNull()
     expect(document.body.textContent).not.toMatch(/Confirmed by|views in a month|PDF downloads/)
     expect(document.querySelector('button[aria-pressed]')).toBeNull()
     expect(screen.getByText(CONTENT.shortcutPage.report.title)).toBeInTheDocument()
@@ -138,71 +138,88 @@ describe('app page with the switch on', () => {
     vi.unstubAllEnvs()
   })
 
-  it('the bar is in the page as it is served, with the question and no number', () => {
+  it('the card is in the page as it is served, with the question and no number', () => {
     const html = renderToString(page())
     expect(html).toContain(c.prompt)
-    expect(html).toContain(c.hint)
+    expect(html).toContain(c.empty)
     expect(html).toContain(`aria-label="${c.title}"`)
     expect(html).not.toMatch(/Confirmed by|views in a month|PDF downloads/)
   })
 
-  it('sits at the top: after the header, before the list, and it sticks', async () => {
+  it('sits at the top: after the header, before the text and the list, and scrolls with the page', async () => {
     server({ '/api/visit': { enabled: true, numbers } })
     render(page())
-    await waitFor(() => expect(voteBar().textContent).toContain('Confirmed by'))
-    expect(document.querySelector('header').nextElementSibling).toBe(voteBar())
+    await waitFor(() => expect(voteCard().textContent).toContain('Confirmed by'))
+    expect(document.querySelector('header').nextElementSibling).toBe(voteCard())
     const list = document.querySelector('table.shortcut-table')
-    expect(voteBar().compareDocumentPosition(list) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
-    expect(voteBar().className).toMatch(/(^| )sticky( |$)/)
-    expect(voteBar().style.top).toBe('48px')
+    expect(voteCard().compareDocumentPosition(list) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    for (const el of [voteCard(), ...voteCard().querySelectorAll('*')]) {
+      expect(String(el.getAttribute('class'))).not.toMatch(/(^| )(sticky|fixed)( |$)/)
+    }
   })
 
-  it('prints the numbers the server sent, and says it in green', async () => {
+  it('prints the numbers the server sent, large and in green', async () => {
     server({ '/api/visit': { enabled: true, numbers } })
     render(page())
-    await waitFor(() => expect(voteBar().textContent).toContain('Confirmed by 14 visitors'))
-    expect(voteBar().textContent).toContain('1,240 views in a month')
-    expect(voteBar().textContent).toContain('38 PDF downloads')
-    expect(voteBar().className).toContain('bg-theme-good-soft')
-    expect(screen.getByText('Confirmed by 14 visitors').className).toContain('text-theme-good')
+    await waitFor(() => expect(voteCard().textContent).toContain('Confirmed by 14 visitors'))
+    expect(voteCard().textContent).toContain('1,240 views in a month')
+    expect(voteCard().textContent).toContain('38 PDF downloads')
+    expect(voteCard().firstElementChild.className).toContain('bg-theme-good-soft')
+    const stats = [...voteCard().querySelectorAll('li')]
+    expect(stats.map((li) => li.querySelector('.sr-only').textContent)).toEqual([
+      'Confirmed by 14 visitors',
+      '1,240 views in a month',
+      '38 PDF downloads',
+    ])
+    expect(stats.map((li) => li.querySelector('.tabular-nums + span').textContent)).toEqual([c.confirmedLabel, c.viewsLabel, c.downloadsLabel])
+    for (const li of stats) expect(li.querySelector('.tabular-nums').className).toMatch(/text-theme-good/)
     const row = document.querySelector(`tr[data-item="${firstId}"]`)
     expect(row.textContent).toContain('Confirmed by 5 visitors')
     expect(row.querySelector('span[title]').className).toContain('text-theme-good')
   })
 
-  it('a phone shows one count in the second line, so the line does not wrap', async () => {
-    server({ '/api/visit': { enabled: true, numbers } })
+  it('shows a number at once to a visitor who asked for less motion', async () => {
+    vi.stubGlobal('matchMedia', (query) => ({ matches: query.includes('reduce'), addEventListener() {}, removeEventListener() {} }))
+    server({ '/api/visit': { enabled: true, numbers: { ...NONE, views: 12480 } } })
     render(page())
-    await waitFor(() => expect(voteBar().textContent).toContain('38 PDF downloads'))
-    const facts = [...voteBar().querySelectorAll('[role="status"] li')]
-    expect(facts.map((li) => /(^| )hidden( |$)/.test(li.className))).toEqual([false, true])
-    expect(facts[1].className).toContain('sm:inline-flex')
+    await waitFor(() => expect(voteCard().querySelector('li')).not.toBeNull())
+    expect(voteCard().querySelector('li .tabular-nums').textContent).toBe('12,480')
   })
 
-  it('prints no number the server did not send: the question and a hint stay', async () => {
+  it('prints only the numbers the server sent', async () => {
+    server({ '/api/visit': { enabled: true, numbers: { ...NONE, views: 1240 } } })
+    render(page())
+    await waitFor(() => expect(voteCard().textContent).toContain('1,240 views in a month'))
+    expect(voteCard().querySelectorAll('li')).toHaveLength(1)
+    expect(voteCard().textContent).not.toMatch(/Confirmed by|PDF downloads/)
+  })
+
+  it('prints no number the server did not send: the question and one line of words stay', async () => {
     const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
     render(page())
     await waitFor(() => expect(calls).toHaveLength(1))
-    expect(voteBar().textContent).toContain(c.prompt)
-    expect(voteBar().textContent).toContain(c.hint)
+    expect(voteCard().textContent).toContain(c.prompt)
+    expect(voteCard().textContent).toContain(c.empty)
     expect(document.body.textContent).not.toMatch(/Confirmed by|views in a month|PDF downloads/)
   })
 
-  it('always has two lines, so its height does not change when the numbers arrive', async () => {
-    const lines = () => [voteBar().querySelector('p'), voteBar().querySelector('[role="status"]')].map((el) => el.textContent)
-    server({ '/api/visit': { enabled: true, numbers: { ...NONE, confirmed: 14 } } })
+  it('the place of the numbers keeps its height when they arrive', async () => {
+    const place = () => voteCard().firstElementChild.firstElementChild
+    server({ '/api/visit': { enabled: true, numbers } })
     render(page())
-    expect(lines()).toEqual([c.prompt, c.hint])
-    await waitFor(() => expect(lines()).toEqual(['Confirmed by 14 visitors', c.hintToo]))
-    expect(voteBar().firstElementChild.className).toMatch(/(^| )min-h-\[60px\]/)
+    expect(place().textContent).toBe(c.empty)
+    expect(place().className).toMatch(/(^| )min-h-\[48px\]/)
+    await waitFor(() => expect(place().textContent).toContain('Confirmed by 14 visitors'))
+    expect(place().className).toMatch(/(^| )min-h-\[48px\]/)
+    expect(place().querySelector('ul').className).toMatch(/(^| )grid-cols-3( |$)/)
   })
 
   it('goes away when the server keeps no votes', async () => {
     const calls = server({ '/api/visit': { enabled: false } })
     render(page())
-    expect(voteBar()).not.toBeNull()
+    expect(voteCard()).not.toBeNull()
     await waitFor(() => expect(calls).toHaveLength(1))
-    await waitFor(() => expect(voteBar()).toBeNull())
+    await waitFor(() => expect(voteCard()).toBeNull())
     expect(document.querySelector('button[aria-pressed]')).toBeNull()
   })
 
@@ -216,29 +233,31 @@ describe('app page with the switch on', () => {
     const works = screen.getByRole('button', { name: c.worksLabel })
     expect(works).toHaveAttribute('aria-pressed', 'false')
     fireEvent.click(works)
-    await waitFor(() => expect(voteBar().textContent).toContain('Confirmed by 3 visitors'))
+    await waitFor(() => expect(voteCard().textContent).toContain('Confirmed by 3 visitors'))
     expect(calls.at(-1)).toEqual({ path: '/api/vote', body: { page: PAGE, item: 'page', vote: 'works' } })
     expect(works).toHaveAttribute('aria-pressed', 'true')
     expect(works.className).toContain('vote-pop')
-    expect(voteBar().querySelector('[role="status"]').textContent).toBe(c.thanksWorks)
+    expect(voteCard().querySelector('[role="status"]').textContent).toBe(c.thanksWorks)
     expect(myVotes(PAGE)).toEqual({ page: 'works' })
   })
 
-  it('the thanks give way to the counts after a moment', async () => {
+  it('the thanks give way to the question after a moment', async () => {
     vi.useFakeTimers({ shouldAdvanceTime: true })
     try {
-      server({
+      const calls = server({
         '/api/visit': { enabled: true, numbers },
         '/api/vote': { enabled: true, changed: true, numbers },
       })
       render(page())
-      await waitFor(() => expect(voteBar().textContent).toContain('1,240 views in a month'))
+      await waitFor(() => expect(calls).toHaveLength(1))
+      const status = () => voteCard().querySelector('[role="status"]').textContent
+      expect(status()).toBe(c.prompt)
       fireEvent.click(screen.getByRole('button', { name: c.worksLabel }))
-      expect(voteBar().querySelector('[role="status"]').textContent).toBe(c.thanksWorks)
+      expect(status()).toBe(c.thanksWorks)
       await act(async () => {
         vi.advanceTimersByTime(4100)
       })
-      expect(voteBar().querySelector('[role="status"]').textContent).toContain('1,240 views in a month')
+      expect(status()).toBe(c.prompt)
     } finally {
       vi.useRealTimers()
     }
@@ -257,7 +276,7 @@ describe('app page with the switch on', () => {
     fireEvent.click(screen.getByRole('button', { name: c.brokenLabel }))
     expect(panel.open).toBe(true)
     await waitFor(() => expect(calls.at(-1).body).toEqual({ page: PAGE, item: 'page', vote: 'broken' }))
-    expect(voteBar().querySelector('[role="status"]').textContent).toBe(c.thanksBroken)
+    expect(voteCard().querySelector('[role="status"]').textContent).toBe(c.thanksBroken)
   })
 
   it('a vote the server refused is not shown as cast', async () => {
@@ -284,12 +303,10 @@ describe('app page with the switch on', () => {
   it('the buttons are controls a thumb can hit, and each has a name', async () => {
     server({ '/api/visit': { enabled: true, numbers: NONE } })
     render(page())
-    const buttons = [...voteBar().querySelectorAll('button')]
+    const buttons = [...voteCard().querySelectorAll('button')]
     expect(buttons.map((b) => b.getAttribute('aria-label'))).toEqual([c.worksLabel, c.brokenLabel])
-    for (const button of buttons) {
-      expect(button.className).toMatch(/(^| )min-h-\[44px\]/)
-      expect(button.className).toMatch(/(^| )min-w-\[44px\]/)
-    }
+    expect(buttons.map((b) => b.textContent)).toEqual([c.works, c.broken])
+    for (const button of buttons) expect(button.className).toMatch(/(^| )min-h-\[44px\]/)
   })
 
   it('a row can be confirmed where there is a mouse', async () => {

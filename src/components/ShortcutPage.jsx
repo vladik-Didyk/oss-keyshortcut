@@ -4,7 +4,7 @@ import { Search, X, Download, Lightbulb, ChevronDown, ChevronLeft, ChevronRight,
 import LastCheckedBadge from './LastCheckedBadge'
 import AuthorLine from './AuthorLine'
 import ReportProblem from './ReportProblem'
-import VoteBar from './VoteBar'
+import VoteCard from './VoteCard'
 import MacAppStoreButton from './MacAppStoreButton'
 import AppIcon from './directory/AppIcon'
 import { PlatformGlyph } from './PlatformIcons'
@@ -156,9 +156,6 @@ export default function ShortcutPage() {
   const [search, setSearch] = useState('')
   const searchInputRef = useRef(null)
   const headerRef = useRef(null)
-  // Where the vote bar sticks, and where the section titles stick under it.
-  const barRef = useRef(null)
-  const [barTop, setBarTop] = useState(48)
   const [stickyTop, setStickyTop] = useState(48)
   const sp = CONTENT.shortcutPage
   const pagePath = `/${platform}/${slug}`
@@ -184,29 +181,25 @@ export default function ShortcutPage() {
 
   const activeId = useScrollspy(sectionIds)
 
-  // What sticks, from the top: the navbar (48px), the header when it is itself
-  // sticky (lg and up), the vote bar, then the title of the section in view.
-  // On phones the header scrolls away, so adding its height left the titles
-  // pinned mid-screen.
+  // Sticky section titles sit under the navbar (48px), plus the header when the
+  // header is itself sticky (lg and up). On phones the header scrolls away, so
+  // adding its height left the titles pinned mid-screen.
   useEffect(() => {
     const el = headerRef.current
     if (!el) return
     const update = () => {
       const headerPinned = getComputedStyle(el).position === 'sticky'
-      const under = 48 + (headerPinned ? el.offsetHeight : 0)
-      setBarTop(under)
-      setStickyTop(under + (barRef.current?.offsetHeight ?? 0))
+      setStickyTop(48 + (headerPinned ? el.offsetHeight : 0))
     }
     update()
     const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(update) : null
     ro?.observe(el)
-    if (barRef.current) ro?.observe(barRef.current)
     window.addEventListener('resize', update)
     return () => {
       ro?.disconnect()
       window.removeEventListener('resize', update)
     }
-  }, [feedback.enabled])
+  }, [])
 
   // Track shortcut page view (top of conversion funnel)
   useEffect(() => {
@@ -434,9 +427,9 @@ export default function ShortcutPage() {
         </div>
       </header>
 
-      {/* ─── Votes and counts: a green bar that stays in view while the list scrolls ─── */}
+      {/* ─── Votes and counts: a green card at the top of the page. It scrolls with the page. ─── */}
       {feedback.enabled && (
-        <VoteBar numbers={feedback.numbers} mine={feedback.mine.page} onVote={votePage} top={barTop} barRef={barRef} />
+        <VoteCard numbers={feedback.numbers} mine={feedback.mine.page} onVote={votePage} className="pt-5 sm:pt-6" />
       )}
 
       {/* ─── Intro text: the hand-written note, or one sentence from the data when the page has none ─── */}
