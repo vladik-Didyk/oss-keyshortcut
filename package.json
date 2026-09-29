@@ -29,6 +29,7 @@
     "clean-data": "node scripts/clean-data.mjs",
     "stats": "node scripts/site-stats.mjs",
     "pdf-bundle": "node scripts/build-pdf-bundle.mjs",
+    "affiliates": "node scripts/affiliate-status.mjs",
     "check:redirects": "node scripts/check-redirects.mjs"
   },
   "dependencies": {

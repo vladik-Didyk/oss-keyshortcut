@@ -1,11 +1,12 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { readFileSync } from 'fs'
+import { readFileSync, readdirSync } from 'fs'
 import { join } from 'path'
 import AdSlot from '../components/AdSlot'
 import AffiliateLink from '../components/AffiliateLink'
 import { AD_UNITS, resolveAdUnit } from '../data/ads'
 import { AFFILIATES, PLATFORM_FALLBACK, getAffiliate } from '../data/affiliates'
+import { AFFILIATE_PROGRAMS, HARDWARE_PROGRAMS, NO_PROGRAM, CHECKED } from '../data/affiliatePrograms'
 import { getSponsor, sponsorMailto } from '../data/sponsors'
 import { APP_COUNT, SHORTCUT_COUNT, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, formatShortcutCount } from '../data/siteConfig'
 
@@ -70,6 +71,61 @@ describe('affiliates', () => {
   it('renders nothing without an affiliate', () => {
     const { container } = render(<AffiliateLink affiliate={null} appSlug="figma" platform="macos" />)
     expect(container.innerHTML).toBe('')
+  })
+})
+
+// Where to apply and what a program pays is kept for the owner, not for the
+// pages: src/data/affiliatePrograms.js, printed by `pnpm affiliates`.
+describe('affiliate programs', () => {
+  const entries = [...Object.values(AFFILIATES), ...Object.values(PLATFORM_FALLBACK)]
+  const isLive = (entry) => /^https:\/\//.test(entry.url)
+
+  it('every program of a link is described, and every described program has a link entry', () => {
+    const used = [...new Set(entries.map((entry) => entry.program))].sort()
+    expect(Object.keys(AFFILIATE_PROGRAMS).sort()).toEqual(used)
+  })
+
+  it('a program is "live" exactly when one of its links is set', () => {
+    for (const [name, program] of Object.entries(AFFILIATE_PROGRAMS)) {
+      expect(['live', 'applied', 'open']).toContain(program.state)
+      const linked = entries.some((entry) => entry.program === name && isLive(entry))
+      expect(program.state === 'live', name).toBe(linked)
+    }
+  })
+
+  it('an address to apply at is https, and a program not yet applied to says where or why not', () => {
+    for (const [name, program] of Object.entries({ ...AFFILIATE_PROGRAMS, ...HARDWARE_PROGRAMS })) {
+      expect(program.apply === '' || program.apply.startsWith('https://'), name).toBe(true)
+      if (program.state === 'open') expect(program.apply || program.note, name).toBeTruthy()
+    }
+  })
+
+  it('an app that was checked and has no program has no link entry', () => {
+    const jetbrains = ['intellij', 'pycharm', 'webstorm', 'phpstorm', 'goland', 'clion', 'rider', 'rubymine', 'datagrip', 'dataspell']
+    for (const slug of [...Object.keys(NO_PROGRAM), ...jetbrains]) expect(AFFILIATES[slug], slug).toBeUndefined()
+  })
+
+  it('the date of the check is a date', () => {
+    expect(CHECKED).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+  })
+
+  it('no page carries the list: only the script and the tests read it', () => {
+    const files = (dir) =>
+      readdirSync(join(process.cwd(), dir), { withFileTypes: true }).flatMap((entry) =>
+        entry.isDirectory() ? files(join(dir, entry.name)) : [join(dir, entry.name)]
+      )
+    const importers = files('src')
+      .filter((file) => /\.(js|jsx|ts)$/.test(file) && !file.startsWith('src/test/'))
+      .filter((file) => /from\s+['"][^'"]*affiliatePrograms/.test(readFileSync(join(process.cwd(), file), 'utf-8')))
+    expect(importers).toEqual([])
+    expect(readFileSync(join(process.cwd(), 'scripts/affiliate-status.mjs'), 'utf-8')).toContain("from '../src/data/affiliatePrograms.js'")
+    expect(JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf-8')).scripts.affiliates).toBe('node scripts/affiliate-status.mjs')
+  })
+
+  it('every button says what it leads to', () => {
+    for (const [slug, entry] of Object.entries(AFFILIATES)) {
+      expect(entry.label, slug).toMatch(/^(Get|Try) \S/)
+    }
   })
 })
 

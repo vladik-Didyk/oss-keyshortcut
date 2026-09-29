@@ -34,6 +34,7 @@ pnpm add-app      # Interactive CLI to add a new app (icon, shortcuts, all files
 pnpm add-app:dry  # Preview add-app without writing
 pnpm check:redirects [base] [--all] [--wait=90]  # Legacy redirects on a running server (default keyshortcut.com): one 301, ending at 200
 pnpm pdf-bundle [platform] [--out dir]  # The PDF bundle that is sold: every cheat sheet of a platform in one file → dist/products/
+pnpm affiliates [--open]  # Affiliate programs: which have a link, which wait, where to apply
 ```
 
 Add an app from JSON: `pnpm add-app -- --from-json path/to/app.json`
@@ -291,6 +292,9 @@ Reference implementation (non-SSR variant) at `Personal-Portfolio/src/lib/analyt
 
 - **AdSense units:** `src/data/ads.js`. One In-article unit serves all placements (`IN_ARTICLE_UNIT`); a placement with an empty ID renders nothing. `AdSlot` never hides the slot with `display:none` before fill (AdSense then measures width 0 and never fills); card styling and the "Advertisements" label appear on fill, and `index.css` collapses `data-ad-status="unfilled"`. Ads render only in production builds.
 - **Affiliate links:** `src/data/affiliates.js`, keyed by app slug, plus `PLATFORM_FALLBACK` (Setapp on macOS pages). Kept out of Supabase because CI's `pnpm export` rewrites `public/data/`. Empty `url` = nothing renders. `AffiliateLink` uses `rel="sponsored nofollow noopener"`, puts the disclosure beside the button, fires `affiliate_clicked`. Programs: Adobe (Partnerize), Raycast (Rewardful), 1Password (CJ), Canva (Impact), Setapp (Impact). Figma closed its program (Jan 2025).
+  - Every app of the directory was checked for a program on 2026-09-28. `src/data/affiliatePrograms.js` holds, per program, where to apply, what its own page says it pays, and its conditions; also the apps that have no program (`NO_PROGRAM`), so that nobody adds them from a directory of affiliate programs, which were wrong about several. No page imports that file. `pnpm affiliates` prints the list, `pnpm affiliates --open` the programs not applied to yet.
+  - When a program approves: paste the tracking link into `url` in `affiliates.js`, set the program's `state` to `'live'`, run the tests, deploy. A test fails while the two files disagree.
+  - Never print a commission on the site.
 - **Sponsors:** `src/data/sponsors.js` (`sitewide` or `byPath`). A page sold on its own shows its own sponsor, so the whole site is promised the pages that have none. Sponsor images must be in `public/images/sponsors/` (CSP).
 - **The slot of an app page** (after the second section, pages with three or more) holds one thing: a sponsor's card, else the site's own card for the Mac app (`HOUSE_CARD`, macOS pages, `HouseCard.jsx`), else the AdSense unit. `HOUSE_CARD.enabled: false` gives the slot back to the ad unit. The card makes no promise about active app detection, so it carries no note about Settings.
 - **PDF bundle:** `pnpm pdf-bundle` writes every cheat sheet of a platform into one file in `dist/products/` (not served, not in git). It is uploaded by hand to a seller that delivers the file after payment. `PDF_BUNDLE` in `src/data/products.js` holds the seller's link and the price; while either is empty, `/cheat-sheets` shows no offer. The single sheets stay free, and the offer says so. `drawAppSheet()` in `generateShortcutPDF.js` draws a sheet for both.
