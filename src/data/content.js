@@ -623,6 +623,14 @@ export const CONTENT = {
     },
     moreAppsTitle: (platformName) => `Explore more ${platformName} apps`,
     faqTitle: 'Frequently Asked Questions',
+    // The site's own card in the slot of a page without a sponsor. It makes no
+    // promise about active app detection, so it needs no note about Settings.
+    houseCard: {
+      label: 'Made by this site',
+      name: 'KeyShortcut for Mac',
+      line: (appName) => `${appName} shortcuts in a floating panel, next to your work.`,
+      cta: 'See the Mac app',
+    },
     ctaTitle: (appName) => `Access ${appName} shortcuts from your menu bar`,
     ctaSubtitle: 'KeyShortcut detects the active app and shows its shortcuts instantly. Switch it on in Settings. No memorization needed.',
     ctaButton: 'Download KeyShortcut',
@@ -961,7 +969,13 @@ export const CONTENT = {
 
     price: {
       title: 'Price',
-      sitewide: { name: 'The whole site', detail: ({ slotPages }) => `Your card on all ${slotPages} app pages that hold the slot.` },
+      // A page sold on its own shows its own sponsor (getSponsor), so the
+      // whole site is promised only the pages that have none.
+      sitewide: {
+        name: 'The whole site',
+        detail: ({ slotPages, ownPages = 0 }) =>
+          `Your card on every app page that holds the slot and has no sponsor of its own. Today that is ${ownPages > 0 ? `${slotPages - ownPages} of ${slotPages}` : `all ${slotPages}`}.`,
+      },
       page: { name: 'One page', detail: ({ slotPages }) => `Your card on one app page of your choice, from the ${slotPages} that hold the slot.` },
       perMonth: 'a month',
       compare: 'The whole site costs less than four single pages.',

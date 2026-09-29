@@ -8,6 +8,7 @@ import ShortcutPage from '../components/ShortcutPage'
 import { CONTENT } from '../data/content'
 import { keysToWords, parseKeyParts } from '../utils/platformHelpers'
 import { trackEvent } from '../lib/analytics'
+import { HOUSE_CARD, MIN_SECTIONS_FOR_SLOT, showsHouseCard } from '../data/sponsors'
 
 vi.mock('../lib/analytics', async (importOriginal) => ({
   ...(await importOriginal()),
@@ -331,6 +332,66 @@ describe('app page: no line that asks for a sponsor', () => {
   it('the offer is still reachable: the footer links to it', () => {
     const links = CONTENT.shared.footer.columns.flatMap((column) => column.links)
     expect(links).toContainEqual({ label: 'Sponsor', to: '/sponsor' })
+  })
+})
+
+// A page without a sponsor shows the site's own card for the Mac app in the
+// slot, on macOS pages. One link, labeled as the site's own.
+describe('app page: the Mac app card in the slot', () => {
+  const macos = JSON.parse(read('public/data/platforms/macos.json')).apps
+  const windows = JSON.parse(read('public/data/platforms/windows.json')).apps
+  const figma = macos.find((a) => a.slug === 'figma')
+  const card = () => document.querySelector(`aside[aria-label="${CONTENT.shortcutPage.houseCard.label}"]`)
+
+  it('a macOS page that holds the slot shows it once, in the server-rendered page too', () => {
+    const c = CONTENT.shortcutPage.houseCard
+    render(page(pageData(figma)))
+    expect(document.querySelectorAll(`aside[aria-label="${c.label}"]`)).toHaveLength(1)
+    const link = card().querySelector('a')
+    expect(link.getAttribute('href')).toBe('/mac-hud')
+    expect(card().textContent).toContain(c.name)
+    expect(card().textContent).toContain(c.line('Figma'))
+    expect(renderToString(page(pageData(figma)))).toContain(c.name)
+  })
+
+  it('it sits after the second section', () => {
+    render(page(pageData(figma)))
+    const sections = [...document.querySelectorAll('table.shortcut-table')].map((t) => t.parentElement)
+    expect(sections[1].nextElementSibling).toBe(card())
+  })
+
+  it('a page with fewer than three sections has none', () => {
+    render(page())
+    expect(APP.sections.length).toBeLessThan(MIN_SECTIONS_FOR_SLOT)
+    expect(card()).toBeNull()
+  })
+
+  it('a Windows page has none: the app is for the Mac', () => {
+    const app = windows.find((a) => a.sections.length >= MIN_SECTIONS_FOR_SLOT)
+    render(page(pageData(app, 'windows', 'Windows')))
+    expect(card()).toBeNull()
+  })
+
+  it('a sponsor wins over it, and the switch turns it off', () => {
+    const sponsor = { name: 'Acme', url: 'https://example.com' }
+    expect(showsHouseCard('macos', null)).toBe(true)
+    expect(showsHouseCard('macos', sponsor)).toBe(false)
+    expect(showsHouseCard('windows', null)).toBe(false)
+    expect(showsHouseCard('macos', null, { ...HOUSE_CARD, enabled: false })).toBe(false)
+  })
+
+  it('the card is a control a thumb can hit, and its click is counted', () => {
+    render(page(pageData(figma)))
+    const link = card().querySelector('a')
+    expect(link.className).toMatch(/(^| )min-h-\[44px\]/)
+    trackEvent.mockClear()
+    fireEvent.click(link)
+    expect(trackEvent).toHaveBeenCalledWith('mac_hud_promo_clicked', { location: 'shortcut_mid', app: 'figma' })
+  })
+
+  it('it promises nothing about active app detection', () => {
+    const c = CONTENT.shortcutPage.houseCard
+    expect(`${c.name} ${c.line('Figma')} ${c.cta}`).not.toMatch(/detect/i)
   })
 })
 

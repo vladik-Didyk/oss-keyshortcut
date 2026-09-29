@@ -81,6 +81,21 @@ export const SPONSOR_MOCK = {
   ],
 }
 
+// The site's own card for the Mac app. It fills the slot of a page that has no
+// sponsor, on the platforms listed. A sponsor always wins over it.
+// enabled: false = the slot goes back to the AdSense unit (one thing per slot).
+export const HOUSE_CARD = {
+  enabled: true,
+  platforms: ['macos'],
+  to: '/mac-hud',
+  icon: '/images/app-icon.svg',
+}
+
+/** True when the page of this platform shows the site's own card. */
+export function showsHouseCard(platform, sponsor, card = HOUSE_CARD) {
+  return !sponsor && card.enabled === true && card.platforms.includes(platform)
+}
+
 // A sponsor card sits after the second section, so a page needs three or more.
 // ShortcutPage.jsx applies the same rule when it renders the slot.
 export const MIN_SECTIONS_FOR_SLOT = 3

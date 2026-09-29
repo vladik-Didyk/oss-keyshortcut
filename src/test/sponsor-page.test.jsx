@@ -188,7 +188,14 @@ describe('SponsorPage', () => {
   it('says that a one-page booking is for a page that holds the slot', () => {
     renderPage({ offer: NO_LINKS, sitewideOpen: true })
     expect(screen.getByText(CONTENT.sponsorPage.price.page.detail(STATS))).toHaveTextContent('from the 152 that hold the slot')
-    expect(screen.getByText(CONTENT.sponsorPage.price.sitewide.detail(STATS))).toHaveTextContent('all 152 app pages')
+    expect(screen.getByText(CONTENT.sponsorPage.price.sitewide.detail(STATS))).toHaveTextContent('Today that is all 152.')
+  })
+
+  it('promises the whole site only the pages without a sponsor of their own', () => {
+    const { detail } = CONTENT.sponsorPage.price.sitewide
+    expect(detail(STATS)).toContain('has no sponsor of its own')
+    expect(detail({ ...STATS, ownPages: 2 })).toContain('Today that is 150 of 152.')
+    expect(detail(STATS)).not.toMatch(/on all \d+ app pages/)
   })
 
   it('prints the visitor figure together with its source and period', () => {

@@ -13,9 +13,10 @@ import { CONTENT } from '../data/content'
 import { APP_STORE_URL } from '../data/siteConfig'
 import { pageUrl } from '../utils/siteUrl'
 import AdSlot from './AdSlot'
+import HouseCard from './HouseCard'
 import AffiliateLink from './AffiliateLink'
 import { getAffiliate } from '../data/affiliates'
-import { getSponsor, MIN_SECTIONS_FOR_SLOT } from '../data/sponsors'
+import { getSponsor, showsHouseCard, MIN_SECTIONS_FOR_SLOT } from '../data/sponsors'
 import { getAppNote } from '../data/appNotes'
 import { noteFitsApp, fittingTips, resolveNoteText, resolveEssentials, everydayShortcuts, largestSections } from '../utils/appCopy'
 import { tokenize } from '../utils/searchHelpers'
@@ -571,10 +572,13 @@ export default function ShortcutPage() {
                     </tbody>
                   </table>
                 </div>
-                {/* The one slot of the page: a sponsor's card, else the ad, else nothing.
+                {/* The one slot of the page: a sponsor's card, else the site's own card
+                    for the Mac app (macOS pages), else the ad, else nothing.
                     No line that asks for a sponsor: the offer is at /sponsor, linked from the footer. */}
                 {idx === 1 && filteredSections.length >= MIN_SECTIONS_FOR_SLOT && !search && (
-                  <AdSlot adSlot="shortcut_mid" variant="in-article" sponsor={sponsor} />
+                  showsHouseCard(platform, sponsor)
+                    ? <HouseCard appName={app.displayName} slug={slug} />
+                    : <AdSlot adSlot="shortcut_mid" variant="in-article" sponsor={sponsor} />
                 )}
               </React.Fragment>
             ))}

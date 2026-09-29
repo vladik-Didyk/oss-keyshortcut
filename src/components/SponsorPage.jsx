@@ -4,6 +4,7 @@ import { CONTENT } from '../data/content'
 import { APP_COUNT, formatShortcutCount } from '../data/siteConfig'
 import {
   SPONSOR_OFFER,
+  SPONSORS,
   SPONSOR_AUDIENCE,
   SPONSOR_EMAIL,
   SPONSOR_PAGE_APPS,
@@ -164,7 +165,7 @@ export default function SponsorPage({ stats, offer = SPONSOR_OFFER, sitewideOpen
           <PriceCard
             kind="sitewide"
             name={c.price.sitewide.name}
-            detail={c.price.sitewide.detail(stats)}
+            detail={c.price.sitewide.detail({ ...stats, ownPages: Object.keys(SPONSORS.byPath).length })}
             label={c.cta.sitewide(offer.sitewide.price)}
             offer={offer}
             open={sitewideOpen}
