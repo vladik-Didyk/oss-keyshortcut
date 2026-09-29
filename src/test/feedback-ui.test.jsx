@@ -7,7 +7,7 @@ import { join } from 'path'
 import ShortcutPage from '../components/ShortcutPage'
 import { CONTENT } from '../data/content'
 import { shortcutIds } from '../utils/feedbackIds'
-import { myVotes, visitPage, sendVote, countDownload, votesOn, VOTES_SWITCH } from '../lib/feedback'
+import { myVotes, visitPage, countViewOnSign, sendVote, countDownload, votesOn, VOTES_SWITCH } from '../lib/feedback'
 import { GUARD_DAYS, isItemId } from '../../server/feedback.js'
 
 vi.mock('../lib/analytics', async (importOriginal) => ({
@@ -285,6 +285,21 @@ describe('app page with the switch on', () => {
       expect(own()).toBeNull()
     })
 
+    it('a vote the server did not take is not called counted', async () => {
+      const calls = server({
+        '/api/visit': { enabled: true, numbers: NONE },
+        '/api/vote': { status: 403, enabled: true, error: 'robot' },
+      })
+      render(page())
+      await waitFor(() => expect(calls).toHaveLength(1))
+      const works = screen.getByRole('button', { name: c.worksLabel })
+      fireEvent.click(works)
+      await waitFor(() => expect(voteCard().querySelector('[role="status"]').textContent).toBe(c.notCounted))
+      expect(own()).toBeNull()
+      expect(works).toHaveAttribute('aria-pressed', 'false')
+      expect(myVotes(PAGE)).toEqual({})
+    })
+
     it('is shown to nobody who did not vote', async () => {
       const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
       render(page())
@@ -469,30 +484,121 @@ describe('the green', () => {
   })
 })
 
+// A view is counted when a person acts on the page, not when the page loads:
+// a speed test or a link preview loads a page and touches nothing.
 describe('the browser side', () => {
-  it('counts a page once per tab: a second visit only reads', async () => {
+  const counted = (calls) => calls.filter((call) => call.path === '/api/visit' && call.body.count === true)
+  // A page stops waiting when it is left. A test leaves no listener behind either.
+  const waiting = []
+  const watch = (path) => {
+    const stop = countViewOnSign(path)
+    waiting.push(stop)
+    return stop
+  }
+  afterEach(() => {
+    while (waiting.length) waiting.pop()()
+  })
+  const sign = async (type = 'keydown', init = {}) => {
+    const event = new Event(type, { bubbles: true })
+    Object.assign(event, init)
+    await act(async () => {
+      window.dispatchEvent(event)
+    })
+  }
+
+  it('loading a page reads its numbers and counts nothing', async () => {
     const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
     await visitPage(PAGE)
     await visitPage(PAGE)
-    await visitPage('/macos/chrome')
     expect(calls.map((call) => call.body)).toEqual([
-      { page: PAGE, count: true },
       { page: PAGE, count: false },
-      { page: '/macos/chrome', count: true },
+      { page: PAGE, count: false },
     ])
   })
 
-  it('a visit that was not counted is tried again', async () => {
+  it('an app page that is only loaded is not counted; the first key, touch or click counts it once', async () => {
+    const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
+    render(page())
+    await waitFor(() => expect(calls).toHaveLength(1))
+    await new Promise((done) => setTimeout(done, 20))
+    expect(counted(calls)).toEqual([])
+    await sign('keydown')
+    await sign('pointerdown')
+    await sign('touchstart')
+    await sign('wheel')
+    expect(counted(calls)).toEqual([{ path: '/api/visit', body: { page: PAGE, count: true } }])
+  })
+
+  it('each of the signs counts', async () => {
+    for (const type of ['pointerdown', 'keydown', 'touchstart', 'wheel']) {
+      window.sessionStorage.clear()
+      const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
+      const stop = countViewOnSign(PAGE)
+      await sign(type)
+      expect(counted(calls), type).toHaveLength(1)
+      stop()
+    }
+  })
+
+  it('a pointer that rests is no sign, a pointer that moves is', async () => {
+    const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
+    watch(PAGE)
+    await sign('pointermove', { movementX: 0, movementY: 0 })
+    expect(counted(calls)).toEqual([])
+    await sign('pointermove', { movementX: 3, movementY: 0 })
+    expect(counted(calls)).toHaveLength(1)
+  })
+
+  it('scrolling alone is no sign: a page scrolls by itself to an anchor', async () => {
+    const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
+    watch(PAGE)
+    await sign('scroll')
+    expect(counted(calls)).toEqual([])
+  })
+
+  it('a page that is not visible is not counted', async () => {
+    const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
+    const visibility = vi.spyOn(document, 'visibilityState', 'get').mockReturnValue('hidden')
+    watch(PAGE)
+    await sign('keydown')
+    expect(counted(calls)).toEqual([])
+    visibility.mockRestore()
+  })
+
+  it('counts a page once per tab, and each page on its own', async () => {
+    const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
+    watch(PAGE)
+    await sign()
+    watch(PAGE)
+    await sign()
+    watch('/macos/chrome')
+    await sign()
+    expect(counted(calls).map((call) => call.body.page)).toEqual([PAGE, '/macos/chrome'])
+  })
+
+  it('stops waiting when the page is left', async () => {
+    const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
+    const stop = countViewOnSign(PAGE)
+    stop()
+    await sign()
+    expect(calls).toEqual([])
+  })
+
+  it('a view that was not counted is tried again', async () => {
     const calls = server({ '/api/visit': { enabled: false } })
-    await visitPage(PAGE)
-    await visitPage(PAGE)
-    expect(calls.map((call) => call.body.count)).toEqual([true, true])
+    watch(PAGE)
+    await sign()
+    watch(PAGE)
+    await sign()
+    expect(counted(calls)).toHaveLength(2)
   })
 
   it('a browser driven by a program is not counted', async () => {
     const calls = server({ '/api/visit': { enabled: true, numbers: NONE }, '/api/download': { enabled: true } })
     vi.stubGlobal('navigator', { webdriver: true })
     await visitPage(PAGE)
+    watch(PAGE)
+    await sign()
     countDownload(PAGE)
     expect(calls).toEqual([{ path: '/api/visit', body: { page: PAGE, count: false } }])
   })

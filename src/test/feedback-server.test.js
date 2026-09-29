@@ -185,6 +185,19 @@ describe('shapes', () => {
     for (const robot of ['Googlebot/2.1', 'curl/8.1', 'HeadlessChrome', 'python-requests/2', '', null]) expect(isBot(robot)).toBe(true)
     expect(isBot('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Version/18.0 Safari/605.1.15')).toBe(false)
   })
+
+  it('knows the browser of an AI assistant by its name', () => {
+    for (const agent of [
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Claude/1.2 Chrome/140.0 Safari/537.36',
+      'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; ChatGPT-User/1.0; +https://openai.com/bot)',
+      'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Perplexity-User/1.0)',
+      'Claude-User/1.0',
+    ]) {
+      expect(isBot(agent), agent).toBe(true)
+    }
+    expect(isBot('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36')).toBe(false)
+    expect(isBot('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1')).toBe(false)
+  })
 })
 
 /* ─── The endpoints, with a stand-in for the site's files ─── */

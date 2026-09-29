@@ -250,9 +250,10 @@ export default function ShortcutPage() {
 
   const itemIds = useMemo(() => shortcutIds(app.sections), [app])
   const votePage = useCallback((value) => {
-    feedback.vote('page', value)
+    const sent = feedback.vote('page', value)
     trackEvent('page_vote_cast', { app: slug, platform, vote: value })
     if (value === 'broken') openReport()
+    return sent
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feedback.vote, slug, platform, openReport])
 

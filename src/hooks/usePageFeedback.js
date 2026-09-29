@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { myVotes, sendVote, visitPage, votesOn } from '../lib/feedback'
+import { countViewOnSign, myVotes, sendVote, visitPage, votesOn } from '../lib/feedback'
 
 const NONE = { views: null, downloads: null, confirmed: null, items: {} }
 
@@ -20,8 +20,10 @@ export function usePageFeedback(page) {
   useEffect(() => {
     if (!on) return
     let live = true
+    let stopCounting = () => {}
     visitPage(page).then((answer) => {
       if (!live) return
+      if (answer.enabled) stopCounting = countViewOnSign(page)
       setState(
         answer.enabled
           ? { enabled: true, numbers: answer.numbers || NONE, mine: myVotes(page) }
@@ -30,6 +32,7 @@ export function usePageFeedback(page) {
     })
     return () => {
       live = false
+      stopCounting()
     }
   }, [page, on])
 

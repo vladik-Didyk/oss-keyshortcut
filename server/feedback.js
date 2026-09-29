@@ -29,7 +29,8 @@ const PAGE_SHAPE = /^\/[a-z0-9-]{1,40}\/[a-z0-9-]{1,80}$/
 const ITEM_SHAPE = /^[a-z0-9-]{1,120}$/
 const VOTES = ['works', 'broken']
 const KINDS = ['view', 'pdf']
-const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|pagespeed|monitor|curl|wget|python|httpclient|scrapy/i
+// Robots by the name they give themselves, the browsers of AI assistants among them.
+const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|pagespeed|monitor|curl|wget|python|httpclient|scrapy|claude|anthropic|chatgpt|openai|perplexity/i
 
 const SCHEMA = [
   'CREATE TABLE IF NOT EXISTS counts (page TEXT NOT NULL, kind TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (page, kind, day))',

@@ -559,6 +559,8 @@ export const CONTENT = {
       brokenLabel: 'No, something is not right',
       thanksWorks: 'Counted. Thank you.',
       thanksBroken: 'Counted. Tell us what is wrong below.',
+      // The server did not take the vote: a robot, the daily limit, or no network.
+      notCounted: 'This vote could not be counted.',
       rowWorks: (action) => `${action} works for me`,
       rowConfirmed: (n, action) => `${action}: confirmed by ${n.toLocaleString('en-US')} ${n === 1 ? 'visitor' : 'visitors'}`,
     },

@@ -91,11 +91,15 @@ export default function VoteCard({ numbers, mine, onVote, className = '' }) {
   useEffect(() => () => clearTimeout(timer.current), [])
 
   const cast = (value) => {
-    onVote(value)
     setThanks(value)
     clearTimeout(timer.current)
     timer.current = setTimeout(() => setThanks(null), 4000)
+    // A vote the server did not take is not called "counted".
+    Promise.resolve(onVote(value)).then((answer) => {
+      if (answer && answer.status !== 200) setThanks('refused')
+    })
   }
+  const said = thanks === 'works' ? c.thanksWorks : thanks === 'broken' ? c.thanksBroken : thanks === 'refused' ? c.notCounted : c.prompt
 
   const own = numbers.confirmed == null && (mine === 'works' || mine === 'broken')
   const stats = [
@@ -126,8 +130,8 @@ export default function VoteCard({ numbers, mine, onVote, className = '' }) {
         </div>
 
         <div className="flex flex-col gap-3 lg:gap-2.5 lg:pl-8 lg:border-l lg:border-theme-good-border/60">
-          <p role="status" className={`m-0 text-[14px] leading-snug font-semibold ${thanks ? 'text-theme-good' : 'text-theme-text'}`}>
-            {thanks ? (thanks === 'works' ? c.thanksWorks : c.thanksBroken) : c.prompt}
+          <p role="status" className={`m-0 text-[14px] leading-snug font-semibold ${thanks && thanks !== 'refused' ? 'text-theme-good' : 'text-theme-text'}`}>
+            {said}
           </p>
           <div className="flex items-center gap-2">
             <button

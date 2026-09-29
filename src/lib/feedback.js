@@ -4,6 +4,7 @@
 // What the browser keeps: the visitor's own votes (localStorage, so the
 // buttons show them again) and the pages counted in this tab (sessionStorage,
 // so a reload is not a second view). No cookie, no id of the visitor.
+// Loading a page reads its numbers; the view is counted when a person acts.
 // SSR-safe: every entry point guards `typeof window`.
 
 // The switch. Off: no request is sent and the pages show nothing of it.
@@ -62,14 +63,39 @@ export function myVotes(page) {
   return readJson(window.localStorage, VOTES_KEY)[page] || {}
 }
 
-/** Counts the view (once per tab and page) and returns { enabled, numbers }. */
+const visit = (page, count) => post('/api/visit', { page, count })
+
+/** Reads the numbers of a page: { enabled, numbers }. Counts nothing. */
 export async function visitPage(page) {
   if (typeof window === 'undefined') return OFF
-  const seen = readJson(window.sessionStorage, SEEN_KEY)
-  const count = !seen[page] && !navigator.webdriver
-  const answer = await post('/api/visit', { page, count })
-  if (count && answer.enabled) writeJson(window.sessionStorage, SEEN_KEY, { ...seen, [page]: 1 })
-  return answer
+  return visit(page, false)
+}
+
+// A view is counted at the first sign of a person, not when the page loads:
+// a speed test, a link preview or a monitor loads a page and touches nothing.
+// Scrolling is no sign of its own, because a page scrolls by itself to "#faq".
+const SIGNS = ['pointerdown', 'keydown', 'touchstart', 'wheel', 'pointermove']
+// A browser sends a pointer move of its own when the page moves under a resting
+// pointer: only a move with a distance is a sign.
+const isSign = (event) => event.type !== 'pointermove' || Boolean(event.movementX || event.movementY)
+
+/**
+ * Counts the view of a page at the first sign of a person, once per tab and
+ * page. Returns the function that stops waiting for the sign.
+ */
+export function countViewOnSign(page) {
+  if (typeof window === 'undefined' || navigator.webdriver) return () => {}
+  if (readJson(window.sessionStorage, SEEN_KEY)[page]) return () => {}
+  const options = { capture: true, passive: true }
+  const stop = () => SIGNS.forEach((type) => window.removeEventListener(type, onSign, options))
+  async function onSign(event) {
+    if (!isSign(event) || document.visibilityState !== 'visible') return
+    stop()
+    const answer = await visit(page, true)
+    if (answer.enabled) writeJson(window.sessionStorage, SEEN_KEY, { ...readJson(window.sessionStorage, SEEN_KEY), [page]: 1 })
+  }
+  SIGNS.forEach((type) => window.addEventListener(type, onSign, options))
+  return stop
 }
 
 /** Sends a vote and remembers it. Returns the server's answer. */
