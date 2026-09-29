@@ -187,7 +187,7 @@ describe('app page with the switch on', () => {
       '1,240 views in a month',
       '38 PDF downloads',
     ])
-    expect(stats.map((li) => li.querySelector('.tabular-nums + span').textContent)).toEqual([c.confirmedLabel, c.viewsLabel, c.downloadsLabel])
+    expect(stats.map((li) => li.querySelector('.tabular-nums + span').textContent)).toEqual(['say it works', 'views in a month', 'PDF downloads'])
     for (const li of stats) expect(li.querySelector('.tabular-nums').className).toMatch(/text-theme-good/)
     const row = document.querySelector(`tr[data-item="${firstId}"]`)
     expect(row.textContent).toContain('Confirmed by 5 visitors')
@@ -208,6 +208,35 @@ describe('app page with the switch on', () => {
     await waitFor(() => expect(voteCard().textContent).toContain('1,240 views in a month'))
     expect(voteCard().querySelectorAll('li')).toHaveLength(1)
     expect(voteCard().textContent).not.toMatch(/Confirmed by|PDF downloads/)
+  })
+
+  it('says "1" in the singular, on the card and on a row', async () => {
+    server({ '/api/visit': { enabled: true, numbers: { views: 1, downloads: 1, confirmed: 1, items: { [firstId]: 1 } } } })
+    render(page())
+    await waitFor(() => expect(voteCard().querySelectorAll('li')).toHaveLength(3))
+    const stats = [...voteCard().querySelectorAll('li')]
+    expect(stats.map((li) => li.querySelector('.sr-only').textContent)).toEqual([
+      'Confirmed by 1 visitor',
+      '1 view in a month',
+      '1 PDF download',
+    ])
+    expect(stats.map((li) => li.querySelector('.tabular-nums + span').textContent)).toEqual(['says it works', 'view in a month', 'PDF download'])
+    expect(document.querySelector(`tr[data-item="${firstId}"]`).textContent).toContain('Confirmed by 1 visitor')
+  })
+
+  it('the first vote of a page shows at once', async () => {
+    const calls = server({
+      '/api/visit': { enabled: true, numbers: { ...NONE, views: 1 } },
+      '/api/vote': { enabled: true, changed: true, numbers: { ...NONE, views: 1, confirmed: 1 } },
+    })
+    render(page())
+    await waitFor(() => expect(calls).toHaveLength(1))
+    expect(voteCard().textContent).not.toContain('Confirmed by')
+    fireEvent.click(screen.getByRole('button', { name: c.worksLabel }))
+    await waitFor(() => expect(voteCard().textContent).toContain('Confirmed by 1 visitor'))
+    expect(voteCard().textContent).not.toContain(c.empty)
+    // Never "0 says it works": a small number does not count up.
+    expect([...voteCard().querySelectorAll('li .tabular-nums')].map((el) => el.textContent)).toEqual(['1', '1'])
   })
 
   it('prints no number the server did not send: the question and one line of words stay', async () => {

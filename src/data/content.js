@@ -534,19 +534,19 @@ export const CONTENT = {
     author: { label: 'Maintained by', to: '/about' },
     // Panel under the shortcut list (ReportProblem.jsx). The links are built in utils/reportLinks.
     // Votes and counts. A number is on the page only when the server sent it,
-    // and the server sends none below its minimum (server/feedback.js).
+    // and the server sends it from the first real one (server/feedback.js).
     feedback: {
       title: 'Votes of visitors',
       prompt: 'Do these shortcuts work for you?',
       // In the place of the numbers while the page has none to show.
       empty: 'No votes to show yet. Yours can be the first.',
       // Under each number, and the same fact as a sentence for a screen reader.
-      confirmedLabel: 'say it works',
-      viewsLabel: 'views in a month',
-      downloadsLabel: 'PDF downloads',
-      confirmed: (n) => `Confirmed by ${n.toLocaleString('en-US')} visitors`,
-      views: (n) => `${n.toLocaleString('en-US')} views in a month`,
-      downloads: (n) => `${n.toLocaleString('en-US')} PDF downloads`,
+      confirmedLabel: (n) => (n === 1 ? 'says it works' : 'say it works'),
+      viewsLabel: (n) => (n === 1 ? 'view in a month' : 'views in a month'),
+      downloadsLabel: (n) => (n === 1 ? 'PDF download' : 'PDF downloads'),
+      confirmed: (n) => `Confirmed by ${n.toLocaleString('en-US')} ${n === 1 ? 'visitor' : 'visitors'}`,
+      views: (n) => `${n.toLocaleString('en-US')} ${n === 1 ? 'view' : 'views'} in a month`,
+      downloads: (n) => `${n.toLocaleString('en-US')} PDF ${n === 1 ? 'download' : 'downloads'}`,
       works: 'Works',
       broken: 'Not right',
       worksLabel: 'Yes, these shortcuts work for me',
@@ -554,7 +554,7 @@ export const CONTENT = {
       thanksWorks: 'Counted. Thank you.',
       thanksBroken: 'Counted. Tell us what is wrong below.',
       rowWorks: (action) => `${action} works for me`,
-      rowConfirmed: (n, action) => `${action}: confirmed by ${n.toLocaleString('en-US')} visitors`,
+      rowConfirmed: (n, action) => `${action}: confirmed by ${n.toLocaleString('en-US')} ${n === 1 ? 'visitor' : 'visitors'}`,
     },
     report: {
       title: 'Report a problem',

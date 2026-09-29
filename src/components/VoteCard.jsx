@@ -12,15 +12,20 @@ const canAnimate = () =>
   typeof window.requestAnimationFrame === 'function' &&
   !(typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
 
+// A number below this shows at once: counting up to 1 would print "0" first,
+// which is a false number right after the visitor's own vote.
+const COUNT_UP_FROM = 10
+
 /**
  * A number that counts up to its value, once, when it first appears. A later
  * change of the value (the visitor's own vote) shows at once. The number is
  * decoration: the sentence beside it (sr-only) carries the value from the start.
  */
 function useCountUp(value, duration = 700) {
-  const [progress, setProgress] = useState(() => (canAnimate() ? 0 : 1))
+  const [animated] = useState(() => canAnimate() && value >= COUNT_UP_FROM)
+  const [progress, setProgress] = useState(animated ? 0 : 1)
   useEffect(() => {
-    if (!canAnimate()) return
+    if (!animated) return
     let frame
     const start = performance.now()
     const step = (now) => {
@@ -30,7 +35,7 @@ function useCountUp(value, duration = 700) {
     }
     frame = window.requestAnimationFrame(step)
     return () => window.cancelAnimationFrame(frame)
-  }, [duration])
+  }, [animated, duration])
   return Math.round(value * (1 - (1 - progress) ** 3))
 }
 
@@ -83,9 +88,9 @@ export default function VoteCard({ numbers, mine, onVote, className = '' }) {
   }
 
   const stats = [
-    numbers.confirmed != null && { key: 'confirmed', icon: BadgeCheck, value: numbers.confirmed, label: c.confirmedLabel, sentence: c.confirmed(numbers.confirmed) },
-    numbers.views != null && { key: 'views', icon: Eye, value: numbers.views, label: c.viewsLabel, sentence: c.views(numbers.views) },
-    numbers.downloads != null && { key: 'downloads', icon: Download, value: numbers.downloads, label: c.downloadsLabel, sentence: c.downloads(numbers.downloads) },
+    numbers.confirmed != null && { key: 'confirmed', icon: BadgeCheck, value: numbers.confirmed, label: c.confirmedLabel(numbers.confirmed), sentence: c.confirmed(numbers.confirmed) },
+    numbers.views != null && { key: 'views', icon: Eye, value: numbers.views, label: c.viewsLabel(numbers.views), sentence: c.views(numbers.views) },
+    numbers.downloads != null && { key: 'downloads', icon: Download, value: numbers.downloads, label: c.downloadsLabel(numbers.downloads), sentence: c.downloads(numbers.downloads) },
   ].filter(Boolean)
 
   return (

@@ -12,8 +12,11 @@
 // Without a database binding (env.DB) every endpoint answers
 // { enabled: false } and the pages show nothing.
 
-/** A number is sent to the page only from this value up. Below it, null. */
-export const MINIMUM = { votes: 3, views: 100, downloads: 10 }
+/**
+ * A number is sent to the page only from this value up. Below it, null.
+ * 1 = from the first real one. A zero is never sent.
+ */
+export const MINIMUM = { votes: 1, views: 1, downloads: 1 }
 /** Views are counted over this many days. */
 export const VIEW_DAYS = 30
 /** A vote's hash is kept this long. */
@@ -89,7 +92,7 @@ const confirmed = (row) => (row && row.works >= MINIMUM.votes && row.broken * 2 
 
 /**
  * The numbers a page may show. A number below its minimum is null, so the
- * browser never receives a small number.
+ * browser never receives a zero.
  * { views, downloads, confirmed, items: { <shortcut id>: <count> } }
  */
 export async function pageNumbers(db, page, now = new Date()) {
