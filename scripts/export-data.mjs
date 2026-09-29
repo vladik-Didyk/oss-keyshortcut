@@ -119,9 +119,16 @@ async function fetchPlatformApps(platformId) {
   );
   const transMap = Object.fromEntries(translations.map((t) => [t.key, t.value]));
 
-  // Assemble
+  // Assemble. Shortcuts come in the order of their sort_order: without it the
+  // database answers in the order it keeps its rows, which changes when rows
+  // are added. Rows with the same number keep the order they arrived in.
+  const inOrder = shortcuts
+    .map((sc, arrived) => ({ sc, arrived }))
+    .sort((a, b) => (a.sc.sort_order ?? 0) - (b.sc.sort_order ?? 0) || a.arrived - b.arrived)
+    .map(({ sc }) => sc);
+
   const shortcutsBySection = {};
-  for (const sc of shortcuts) {
+  for (const sc of inOrder) {
     (shortcutsBySection[sc.section_id] ||= []).push({
       modifiers: sc.modifiers.map((m) => modMap[m] || m),
       key: sc.key,
