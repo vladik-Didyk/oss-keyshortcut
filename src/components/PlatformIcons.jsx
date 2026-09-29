@@ -39,6 +39,17 @@ export default function PlatformIcons({ currentPlatform, otherPlatforms }) {
   )
 }
 
+/** The mark of one platform, to sit beside its name. Draws nothing for a platform it does not know. */
+export function PlatformGlyph({ id, size = 12, className = '' }) {
+  const Icon = PLATFORM_META[id]?.icon
+  if (!Icon) return null
+  return (
+    <span className={`inline-flex shrink-0 ${className}`} aria-hidden="true">
+      <Icon size={size} />
+    </span>
+  )
+}
+
 function AppleIcon({ size }) {
   return (
     <svg width={size} height={size} viewBox="0 0 256 315" fill="currentColor">

@@ -307,3 +307,64 @@ describe('app page top', () => {
     expect(textOf(document.body)).toContain(sp.intro(APP.displayName, 'macOS', APP.shortcutCount, APP.sections.length))
   })
 })
+
+// The top of the page on a phone. jsdom lays nothing out, so these read the
+// classes: a class without a breakpoint is what a phone gets.
+describe('app page top on a phone', () => {
+  const header = () => document.querySelector('header')
+  const phone = (element) => element.className.split(/\s+/).filter((name) => !name.includes(':'))
+  const pdfButton = () => screen.getByRole('button', { name: CONTENT.shortcutPage.downloadTitle })
+  const withWindows = () => ({ ...pageData(APP), otherPlatforms: [{ id: 'windows', name: 'Windows' }] })
+
+  it('search and PDF share one row', () => {
+    render(page())
+    const row = pdfButton().parentElement
+    expect(row).toContainElement(screen.getByRole('searchbox'))
+    expect(phone(row)).toContain('flex')
+    expect(phone(row)).not.toContain('flex-col')
+  })
+
+  it('every control is at least 44 px high: back link, search, clear, PDF', () => {
+    render(page())
+    const back = screen.getByRole('link', { name: CONTENT.shortcutPage.backLabel('macOS') })
+    expect(phone(back)).toContain('min-h-[44px]')
+    expect(phone(screen.getByRole('searchbox'))).toContain('h-11')
+    expect(phone(pdfButton())).toContain('min-h-[44px]')
+
+    fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'tab' } })
+    const clear = screen.getByRole('button', { name: CONTENT.shortcutPage.clearAriaLabel })
+    expect(phone(clear)).toEqual(expect.arrayContaining(['min-w-[44px]', 'min-h-[44px]']))
+  })
+
+  it('the search field is 16 px, so iOS does not zoom in, and its keyboard says Search', () => {
+    render(page())
+    const search = screen.getByRole('searchbox')
+    expect(phone(search)).toContain('text-base')
+    expect(search).toHaveAttribute('enterkeyhint', 'search')
+    expect(search).toHaveAttribute('autocomplete', 'off')
+    expect(search).toHaveAttribute('name', 'q')
+  })
+
+  it('the other platforms of the app are shown, each one a link', () => {
+    render(page(withWindows()))
+    const link = within(header()).getByRole('link', { name: 'Windows' })
+    expect(link).toHaveAttribute('href', `/windows/${APP.slug}`)
+    expect(phone(link.closest('li'))).not.toContain('hidden')
+  })
+
+  it('the icon of the page loads at once, the icons of other apps when they come into view', () => {
+    const figma = JSON.parse(read('public/data/platforms/macos.json')).apps.find((a) => a.slug === 'figma')
+    render(page(pageData(figma)))
+    const icon = header().querySelector('img')
+    expect(icon).toHaveAttribute('loading', 'eager')
+    expect(icon).toHaveAttribute('width')
+    expect(icon).toHaveAttribute('height')
+    expect(read('src/components/directory/AppIcon.jsx')).toMatch(/loading = 'lazy'/)
+  })
+
+  it('the keyboard focus is visible on the search field and on the PDF button', () => {
+    render(page())
+    expect(screen.getByRole('searchbox').className).toMatch(/focus-visible:/)
+    expect(pdfButton().className).toMatch(/focus-visible:/)
+  })
+})

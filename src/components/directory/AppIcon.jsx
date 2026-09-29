@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { slugToIconName, getIconData } from '../../utils/directoryHelpers'
 
-export default function AppIcon({ slug, displayName, size = 48, className = '' }) {
+// `loading`: "lazy" for the icons of a list; "eager" for the one icon at the top of a page.
+export default function AppIcon({ slug, displayName, size = 48, className = '', loading = 'lazy' }) {
   const [imgError, setImgError] = useState(false)
   const iconName = slugToIconName[slug] || displayName
   const data = getIconData(iconName)
@@ -15,7 +16,7 @@ export default function AppIcon({ slug, displayName, size = 48, className = '' }
         height={size}
         className={`shrink-0 ${className}`}
         aria-hidden="true"
-        loading="lazy"
+        loading={loading}
         onError={() => setImgError(true)}
       />
     )

@@ -5,6 +5,7 @@ import LastCheckedBadge from './LastCheckedBadge'
 import AuthorLine from './AuthorLine'
 import MacAppStoreButton from './MacAppStoreButton'
 import AppIcon from './directory/AppIcon'
+import { PlatformGlyph } from './PlatformIcons'
 import AppCard from './directory/AppCard'
 import { useScrollspy } from '../hooks/useScrollspy'
 import { CONTENT } from '../data/content'
@@ -250,22 +251,24 @@ export default function ShortcutPage() {
       <div className="h-12" />
 
       {/* ─── Back link (breadcrumb JSON-LD stays in <BreadcrumbSchema>) ─── */}
-      <nav aria-label="Breadcrumb" className="mx-auto max-w-[980px] px-5 md:px-6 pt-4">
+      {/* Phones: the link is 44 px high for a thumb; the space above it shrinks by as much. */}
+      <nav aria-label="Breadcrumb" className="mx-auto max-w-[980px] px-5 md:px-6 pt-2 sm:pt-4">
         <Link
           to={`/${platform}`}
-          className="inline-flex items-center gap-1 min-h-[32px] text-[13px] text-theme-muted hover:text-theme-text no-underline transition-colors"
+          className="inline-flex items-center gap-1 min-h-[44px] sm:min-h-[32px] text-[13px] text-theme-muted hover:text-theme-text no-underline transition-colors"
         >
           <ChevronLeft size={15} aria-hidden="true" />
           {sp.backLabel(platformName)}
         </Link>
       </nav>
 
-      {/* ─── Header: title + facts on the left, search + PDF on the right (stacked on mobile) ─── */}
-      <header ref={headerRef} className="pt-1 pb-4 lg:py-4 border-b border-theme-border static lg:sticky lg:top-12 z-20 bg-theme-base">
+      {/* ─── Header: title + facts on the left, search + PDF on the right.
+          Phones and tablets: two rows, title and facts, then search and PDF side by side. ─── */}
+      <header ref={headerRef} className="pt-0 sm:pt-1 pb-4 lg:py-4 border-b border-theme-border static lg:sticky lg:top-12 z-20 bg-theme-base">
         <div className="mx-auto max-w-[980px] px-5 md:px-6 flex flex-col lg:flex-row lg:flex-wrap lg:items-center gap-4 lg:gap-x-6 lg:gap-y-2">
           <div className="flex items-center gap-3 min-w-0 lg:flex-1">
             <div className="shrink-0">
-              <AppIcon slug={slug} displayName={app.displayName} size={36} />
+              <AppIcon slug={slug} displayName={app.displayName} size={44} className="w-11 h-11 lg:w-9 lg:h-9" loading="eager" />
             </div>
             <div className="min-w-0">
               <h1 className="text-2xl font-bold tracking-tight leading-tight">
@@ -273,7 +276,8 @@ export default function ShortcutPage() {
               </h1>
               {/* Facts, each one once. The dot belongs to the fact after it and sits in the
                   list's negative margin, so a fact that wraps starts its line without one. */}
-              <div className="overflow-hidden mt-0.5">
+              {/* The padding, taken back by the margins, leaves room for the taller tap area of the links. */}
+              <div className="overflow-hidden -mt-1.5 -mb-2 py-2">
                 <ul className="flex flex-wrap -ml-4 text-[13px] text-theme-muted">
                   <li className={FACT}>{app.shortcutCount} shortcuts</li>
                   {app.sections.length > 1 && <li className={FACT}>{app.sections.length} sections</li>}
@@ -281,19 +285,23 @@ export default function ShortcutPage() {
                     <li className={FACT}>
                       <Link
                         to={`/?category=${app.category}${platform !== 'macos' ? `&platform=${platform}` : ''}`}
-                        className="text-theme-muted hover:text-theme-text no-underline hover:underline underline-offset-2"
+                        className="inline-block py-2 -my-2 text-theme-muted hover:text-theme-text no-underline hover:underline underline-offset-2"
                       >
                         {app.category}
                       </Link>
                     </li>
                   )}
                   {otherPlatforms.length > 0 && (
-                    <li className={`${FACT} hidden sm:block`}>
+                    <li className={FACT}>
                       {sp.alsoOnLabel}{' '}
                       {otherPlatforms.map((p, i) => (
                         <span key={p.id}>
                           {i > 0 && ', '}
-                          <Link to={`/${p.id}/${slug}`} className="text-theme-muted hover:text-theme-text underline underline-offset-2">
+                          <Link
+                            to={`/${p.id}/${slug}`}
+                            className="inline-flex items-baseline gap-1 py-2 -my-2 text-theme-muted hover:text-theme-text underline underline-offset-2"
+                          >
+                            <PlatformGlyph id={p.id} size={11} className="self-center" />
                             {p.name}
                           </Link>
                         </span>
@@ -315,8 +323,9 @@ export default function ShortcutPage() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 lg:shrink-0">
-            <div className="relative w-full sm:flex-1 lg:w-64 lg:flex-none">
+          {/* One row at every width. Phones: both controls 44 px high, the field 16 px so iOS does not zoom in. */}
+          <div className="flex items-center gap-2 sm:gap-4 lg:shrink-0">
+            <div className="relative flex-1 min-w-0 lg:w-64 lg:flex-none">
               <Search
                 size={15}
                 className="absolute left-3 top-1/2 -translate-y-1/2 text-theme-muted pointer-events-none"
@@ -325,11 +334,14 @@ export default function ShortcutPage() {
               <input
                 ref={searchInputRef}
                 type="search"
+                name="q"
+                autoComplete="off"
+                enterKeyHint="search"
                 placeholder={sp.searchPlaceholder}
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 aria-label={sp.filterAriaLabel}
-                className="appearance-none w-full h-10 pl-9 pr-10 rounded-xl bg-theme-surface border border-transparent text-theme-text placeholder:text-theme-muted outline-none focus:border-theme-border-hover transition-colors text-base sm:text-sm [&::-webkit-search-cancel-button]:hidden"
+                className="appearance-none w-full h-11 sm:h-10 pl-9 pr-11 sm:pr-10 rounded-xl bg-theme-surface border border-transparent text-theme-text placeholder:text-theme-muted outline-none focus:border-theme-border-hover focus-visible:ring-2 focus-visible:ring-theme-border-hover/30 transition-colors text-base sm:text-sm [&::-webkit-search-cancel-button]:hidden"
               />
               {!search && (
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:flex items-center text-theme-muted pointer-events-none select-none">
@@ -339,21 +351,23 @@ export default function ShortcutPage() {
               {search && (
                 <button
                   onClick={() => setSearch('')}
-                  className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center justify-center min-w-[32px] min-h-[32px] text-theme-muted hover:text-theme-text bg-transparent border-none cursor-pointer rounded-full transition-colors"
+                  className="absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 flex items-center justify-center min-w-[44px] min-h-[44px] sm:min-w-[32px] sm:min-h-[32px] text-theme-muted hover:text-theme-text bg-transparent border-none cursor-pointer rounded-full transition-colors"
                   aria-label={sp.clearAriaLabel}
                 >
-                  <X size={15} />
+                  <X size={15} aria-hidden="true" />
                 </button>
               )}
             </div>
+            {/* Phones: a button of the same height and surface as the field. From sm up: the quiet text link. */}
             <button
               onClick={async () => {
                 const { generateShortcutPDF } = await import('../utils/generateShortcutPDF')
                 generateShortcutPDF(app)
                 trackEvent('shortcut_pdf_downloaded', { app: slug, platform, app_name: app.displayName })
               }}
-              className="inline-flex items-center gap-1.5 min-h-[40px] px-1 -ml-1 sm:ml-0 bg-transparent border-none text-[13px] text-theme-text hover:opacity-70 transition-opacity cursor-pointer shrink-0"
+              className="inline-flex items-center justify-center gap-1.5 min-h-[44px] px-3.5 rounded-xl bg-theme-surface border border-[var(--theme-control-border)] sm:min-h-[40px] sm:px-1 sm:rounded-md sm:bg-transparent sm:border-transparent text-[13px] font-medium sm:font-normal text-theme-text hover:opacity-70 transition-opacity cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-theme-border-hover"
               title={sp.downloadTitle}
+              aria-label={sp.downloadTitle}
             >
               <Download size={15} aria-hidden="true" />
               {sp.pdfLabel}
