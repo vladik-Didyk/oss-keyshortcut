@@ -9,6 +9,7 @@
 import { CONTENT } from '../data/content'
 import { groupByCategories } from './platformHelpers'
 import { pageUrl } from './siteUrl'
+import { shortcutDetailFaq } from './shortcutDetail'
 
 const SCHEMA_ORG = 'https://schema.org'
 
@@ -83,6 +84,36 @@ export function buildAppPageJsonLd({ app, platformId, platformName }) {
       ...(app.docsUrl ? { softwareHelp: { '@type': 'CreativeWork', url: app.docsUrl } } : {}),
     },
   }
+}
+
+/**
+ * The page about one shortcut: its place in the site and its two questions.
+ * The questions are the ones the page shows (shortcutDetailFaq).
+ */
+export function buildShortcutDetailJsonLd(data) {
+  const { platformId, platformName, app, shortcut } = data
+  const c = CONTENT.shortcutDetail
+  return [
+    {
+      '@context': SCHEMA_ORG,
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { name: c.breadcrumbHome, item: pageUrl('/') },
+        { name: c.platformCrumb(platformName), item: pageUrl(`/${platformId}`) },
+        { name: app.displayName, item: pageUrl(`/${platformId}/${app.slug}`) },
+        { name: shortcut.title, item: pageUrl(`/${platformId}/${app.slug}/${shortcut.id}`) },
+      ].map((entry, i) => ({ '@type': 'ListItem', position: i + 1, ...entry })),
+    },
+    {
+      '@context': SCHEMA_ORG,
+      '@type': 'FAQPage',
+      mainEntity: shortcutDetailFaq(data).map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: { '@type': 'Answer', text: item.answer },
+      })),
+    },
+  ]
 }
 
 /** The author, as the "Created by" card of the About page shows him. */

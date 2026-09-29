@@ -1,11 +1,13 @@
 import { useLoaderData } from 'react-router'
 import Link from './SiteLink'
 import React, { useState, useCallback, useDeferredValue, useEffect, useMemo, useRef } from 'react'
-import { Search, X, Download, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, Clipboard, CircleCheck, Flag, ThumbsUp } from '../utils/icons'
+import { Search, X, Download, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, CircleCheck, Flag, ThumbsUp } from '../utils/icons'
 import LastCheckedBadge from './LastCheckedBadge'
 import AuthorLine from './AuthorLine'
 import ReportProblem from './ReportProblem'
 import VoteCard from './VoteCard'
+import { CopyableShortcut, ShortcutList, ACTION_LINK } from './ShortcutKeys'
+import FaqAccordion from './FaqAccordion'
 import MacAppStoreButton from './MacAppStoreButton'
 import AppIcon from './directory/AppIcon'
 import { PlatformGlyph } from './PlatformIcons'
@@ -25,68 +27,12 @@ import { getSponsor, showsHouseCard, MIN_SECTIONS_FOR_SLOT } from '../data/spons
 import { getAppNote } from '../data/appNotes'
 import { noteFitsApp, fittingTips, resolveNoteText, resolveEssentials, everydayShortcuts, largestSections } from '../utils/appCopy'
 import { tokenize } from '../utils/searchHelpers'
-import { parseKeyParts, keysToWords } from '../utils/platformHelpers'
+import { parseKeyParts } from '../utils/platformHelpers'
 import { COMPARISONS } from '../data/comparisons'
 import { trackEvent } from '../lib/analytics'
 
 // One fact of the line under the page title, with the dot that separates it from the one before.
 const FACT = "relative pl-4 before:content-['·'] before:absolute before:left-[5px]"
-
-function Keycap({ children }) {
-  return <kbd className="keycap" aria-hidden="true">{children}</kbd>
-}
-
-/**
- * A shortcut's keycaps, clickable to copy the human-readable combo to the
- * clipboard. Shows a transient "Copied" state for ~1.2s.
- * The keycaps are hidden from assistive technology; the same shortcut in words
- * (⌘ ⇧ P → "Command + Shift + P") is in the label and in a visually hidden span.
- */
-function CopyableShortcut({ parts, action, appSlug, platform }) {
-  const [copied, setCopied] = useState(false)
-  const timerRef = useRef(null)
-
-  useEffect(() => () => clearTimeout(timerRef.current), [])
-
-  const combo = parts.join(' + ')
-  const words = keysToWords(parts, platform)
-
-  const onCopy = useCallback(() => {
-    if (!navigator.clipboard?.writeText) return
-    navigator.clipboard
-      .writeText(combo)
-      .then(() => {
-        setCopied(true)
-        clearTimeout(timerRef.current)
-        timerRef.current = setTimeout(() => setCopied(false), 1200)
-        trackEvent('shortcut_copied', { app: appSlug, platform, action, combo })
-      })
-      .catch(() => {})
-  }, [combo, action, appSlug, platform])
-
-  return (
-    <button
-      type="button"
-      onClick={onCopy}
-      title={copied ? 'Copied' : `Copy shortcut: ${combo}`}
-      aria-label={copied ? `Copied ${words}` : `Copy shortcut ${words} for ${action}`}
-      className="group/copy inline-flex items-center gap-1.5 flex-wrap justify-end bg-transparent border-none p-0 m-0 cursor-pointer align-middle"
-    >
-      <span className="sr-only">{words}</span>
-      {parts.map((part, k) => (
-        <Keycap key={k}>{part}</Keycap>
-      ))}
-      <span
-        className={`inline-flex items-center transition-opacity ${
-          copied ? 'opacity-100 text-green-600' : 'opacity-0 group-hover/copy:opacity-70 text-theme-muted'
-        }`}
-        aria-hidden="true"
-      >
-        {copied ? <CircleCheck size={13} /> : <Clipboard size={13} />}
-      </span>
-    </button>
-  )
-}
 
 /**
  * Note text with {{Action}} placeholders rendered as the page's own keys.
@@ -113,20 +59,6 @@ function NoteText({ segments, keys = true }) {
   )
 }
 
-/** A short list of shortcuts: action on the left, copyable keycaps on the right. */
-function ShortcutList({ shortcuts, appSlug, platform }) {
-  return (
-    <ul className="divide-y divide-theme-border">
-      {shortcuts.map((sc, i) => (
-        <li key={i} className="flex items-center justify-between gap-3 py-2">
-          <span className="text-[14px] text-theme-text">{sc.action}</span>
-          <CopyableShortcut parts={parseKeyParts(sc.modifiers, sc.key)} action={sc.action} appSlug={appSlug} platform={platform} />
-        </li>
-      ))}
-    </ul>
-  )
-}
-
 export default function ShortcutPage() {
   const {
     platformId: platform,
@@ -136,8 +68,14 @@ export default function ShortcutPage() {
     relatedApps = [],
     moreApps = [],
     otherPlatformsMap = {},
+    shortcutLinks = {},
   } = useLoaderData()
   const slug = app.slug
+  // Paths of the shortcuts that have a page of their own, by action.
+  const detailLinks = useMemo(
+    () => Object.fromEntries(Object.entries(shortcutLinks).map(([action, id]) => [action, `/${platform}/${slug}/${id}`])),
+    [shortcutLinks, platform, slug]
+  )
 
   // Cross-content link targets that actually exist for this app.
   const comparisonLinks = useMemo(
@@ -453,7 +391,7 @@ export default function ShortcutPage() {
           <>
             <div className="mt-8 max-w-[720px] rounded-2xl bg-theme-base-alt border border-theme-border p-6">
               <h2 className="text-base font-semibold tracking-tight mb-4">{sp.startWithTitle}</h2>
-              <ShortcutList shortcuts={resolveEssentials(note.essentials, app)} appSlug={slug} platform={platform} />
+              <ShortcutList shortcuts={resolveEssentials(note.essentials, app)} appSlug={slug} platform={platform} links={detailLinks} />
               {noteTips.length > 0 && (
                 <>
                   <h3 className="text-base font-semibold tracking-tight flex items-center gap-2 mt-6 mb-3">
@@ -475,7 +413,7 @@ export default function ShortcutPage() {
           <div className="mt-8 max-w-[720px] rounded-2xl bg-theme-base-alt border border-theme-border p-6">
             <h2 className="text-base font-semibold tracking-tight mb-1">{sp.everydayTitle(app.displayName)}</h2>
             <p className="text-[13px] text-theme-muted mb-4">{sp.everydayIntro}</p>
-            <ShortcutList shortcuts={everyday} appSlug={slug} platform={platform} />
+            <ShortcutList shortcuts={everyday} appSlug={slug} platform={platform} links={detailLinks} />
           </div>
         ) : null}
 
@@ -573,7 +511,7 @@ export default function ShortcutPage() {
                       {section.shortcuts.map((s, j) => (
                         <tr key={j} data-item={itemIds.get(s)} className={`group/row ${j % 2 === 1 ? 'shortcut-row-alt' : ''}`}>
                           <td className="py-3 pr-3 text-theme-text text-[15px] break-words">
-                            {s.action}
+                            {detailLinks[s.action] ? <Link to={detailLinks[s.action]} className={ACTION_LINK}>{s.action}</Link> : s.action}
                             {feedback.numbers.items[itemIds.get(s)] != null && (
                               <span
                                 title={sp.feedback.rowConfirmed(feedback.numbers.items[itemIds.get(s)], s.action)}
@@ -826,30 +764,4 @@ function BreadcrumbSchema({ appName, platformName, platformId, slug }) {
   })
   // Safe: jsonLd is built from our own static app/platform data (not user input)
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
-}
-
-/* ─── FAQ Accordion ───
-   Native <details>: the answer is in the pre-rendered HTML (the FAQPage JSON-LD
-   must describe text that is on the page) and it opens without JavaScript. */
-function FaqAccordion({ question, answer }) {
-  return (
-    <details
-      className="group rounded-xl border border-theme-border overflow-hidden"
-      onToggle={(e) => {
-        if (e.currentTarget.open) trackEvent('faq_item_expanded', { question })
-      }}
-    >
-      <summary className="focus-ring-inset flex items-center justify-between px-5 py-4 cursor-pointer text-theme-text hover:bg-theme-base-alt transition-colors list-none [&::-webkit-details-marker]:hidden">
-        <span className="text-[15px] font-medium pr-4">{question}</span>
-        <ChevronDown
-          size={16}
-          aria-hidden="true"
-          className="shrink-0 text-theme-muted transition-transform group-open:rotate-180"
-        />
-      </summary>
-      <div className="px-5 pb-4">
-        <p className="text-theme-muted text-[14px] leading-relaxed">{answer}</p>
-      </div>
-    </details>
-  )
 }

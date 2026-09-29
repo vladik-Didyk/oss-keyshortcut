@@ -21,8 +21,9 @@ const buildDir = resolve(process.argv[2] || 'build')
 const serverBuild = join(buildDir, 'server/index.js')
 const outFile = join(buildDir, 'client/404.html')
 
-// Three segments: no route but the catch-all ("*") matches it.
-const UNKNOWN_PATH = '/404/not/found'
+// Four segments: no route but the catch-all ("*") matches it. The longest
+// route of the site has three (/macos/vscode/toggle-comment).
+const UNKNOWN_PATH = '/404/not/found/here'
 
 function fail(message) {
   console.error(`generate-404: ${message}`)

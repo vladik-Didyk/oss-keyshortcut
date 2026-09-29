@@ -5,6 +5,7 @@ import { buildAppPageJsonLd } from "../utils/structuredData";
 import { CONTENT, buildMeta } from "../data/content";
 import { getAppNote } from "../data/appNotes";
 import { leadShortcuts, formatKeys } from "../utils/appCopy";
+import { shortcutLinksOf } from "../utils/shortcutPages";
 import NotFound from "../components/NotFound";
 import ShortcutPage from "../components/ShortcutPage";
 import JsonLd from "../components/JsonLd";
@@ -58,6 +59,8 @@ export async function loader({ params }) {
     relatedApps,
     moreApps,
     otherPlatformsMap: cardOtherPlatformsMap,
+    // { <action>: <id> } of the shortcuts that have a page of their own.
+    shortcutLinks: shortcutLinksOf(platformId, app),
   };
 }
 

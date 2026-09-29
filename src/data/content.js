@@ -5,6 +5,9 @@ import { SPONSOR_OFFER, SPONSOR_AUDIENCE } from './sponsors'
 import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys, fitList } from '../utils/appCopy'
 import { pageUrl } from '../utils/siteUrl'
 
+// "Windows", "Windows and Linux", "macOS, Windows and Linux"
+const listOf = (names) => (names.length < 2 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`)
+
 /**
  * Single source of truth for all website content.
  * Computed values come from siteConfig.js; everything else is defined here.
@@ -506,6 +509,38 @@ export const CONTENT = {
         { symbol: 'Super', name: 'Super/Meta', description: 'Often the Windows key on standard keyboards. Opens the activities overview in GNOME or application launcher in KDE.' },
       ]
     },
+  },
+
+  // ─── Page about one shortcut (/:platformId/:slug/:shortcutId) ──────
+  // Every value comes from the data or from the note of that shortcut
+  // (src/data/shortcutNotes.js). `keys` is the shortcut as text: "⇧⌘P", "Ctrl+Shift+P".
+  shortcutDetail: {
+    breadcrumbLabel: 'Breadcrumb',
+    breadcrumbHome: 'Home',
+    platformCrumb: (platformName) => `${platformName} shortcuts`,
+    h1: (title, appName, platformName) =>
+      appName === platformName ? `${title} in ${platformName}` : `${title} in ${appName} (${platformName})`,
+    pressLead: 'Press',
+    press: (press) => `to ${press}.`,
+    whatTitle: 'What it does',
+    othersTitle: 'The same shortcut on other platforms',
+    othersHead: { platform: 'Platform', keys: 'Shortcut' },
+    here: 'this page',
+    // A platform where the app is listed and this action is not.
+    noShortcut: (appName, platformName) => `Our ${platformName} list of ${appName} has no such shortcut.`,
+    relatedTitle: (sectionName, appName) => `More ${appName} shortcuts: ${sectionName}`,
+    fullList: (appName, platformName, count) =>
+      appName === platformName ? `All ${count} ${platformName} shortcuts` : `All ${count} ${appName} shortcuts for ${platformName}`,
+    fullListNote: 'The full list has a search and a printable PDF.',
+    faqTitle: 'Questions',
+    faqHere: (title, appName, platformName) =>
+      appName === platformName
+        ? `What is the ${platformName} shortcut for ${title}?`
+        : `What is the ${appName} shortcut for ${title} on ${platformName}?`,
+    // `words` is the shortcut in words ("Shift + Command + P"); left out when it says the same as `keys`.
+    faqHereAnswer: (keys, words, press) => `${keys}${words && words.replace(/\s+/g, '') !== keys ? ` (${words})` : ''}. Press it to ${press}.`,
+    faqOthers: (title, appName, platformNames) => `What is the shortcut for ${title} in ${appName} on ${listOf(platformNames)}?`,
+    faqOthersAnswer: (others) => others.map((o) => `On ${o.platformName} it is ${o.keys}.`).join(' '),
   },
 
   // ─── Per-app shortcut page (/:platformId/:slug) ───────────────────
@@ -1190,6 +1225,27 @@ export const CONTENT = {
       url: pageUrl(`/${platformId}`),
       image: `https://keyshortcut.com/images/og/${platformId}.png`,
     }),
+    // Page about one shortcut. `others`: [{ platformName, keys }] of the other platforms.
+    // The title keeps to 60 characters and the description to 155 by leaving
+    // out what is least needed, never by cutting a word.
+    shortcutDetail: ({ title, appName, platformName, platformId, slug, id, keys, press, sectionName, others = [] }) => {
+      const system = appName === platformName
+      const titles = [
+        system ? `${title} Shortcut in ${platformName}: ${keys}` : `${title} Shortcut in ${appName} on ${platformName}: ${keys}`,
+        `${title} Shortcut in ${appName}: ${keys}`,
+        `${title} in ${appName}: ${keys}`,
+      ]
+      const first = system ? `${title} in ${platformName} is ${keys}.` : `${title} in ${appName} on ${platformName} is ${keys}.`
+      const other = others.length ? ` On ${others[0].platformName} it is ${others[0].keys}.` : ` It is the shortcut to ${press}.`
+      const more = ` See the related ${sectionName} shortcuts and the full list.`
+      const descriptions = [`${first}${other}${more}`, `${first}${other}`, first]
+      return {
+        title: titles.find((t) => t.length <= 60) || titles.at(-1),
+        description: descriptions.find((d) => d.length <= 155) || descriptions.at(-1),
+        url: pageUrl(`/${platformId}/${slug}/${id}`),
+        image: `https://keyshortcut.com/images/og/${platformId}-${slug}.png`,
+      }
+    },
     // `lead`: shortcuts the page opens with, each as "Action Keys" (leadShortcuts
     // in utils/appCopy). The description names as many as fit in 155 characters,
     // so every page has its own, made of what the page holds. No year in the

@@ -163,9 +163,11 @@ describe('dates in the sitemap', async () => {
   it('a page made of others states the latest of their days', () => {
     expect(latest(['2026-03-31', undefined, '2026-09-28', '2026-04-09'])).toBe('2026-09-28')
     expect(latest([undefined])).toBeUndefined()
+    // The platform page lists the apps: it changed when the list of an app did.
     const macos = entries('sitemap-macos.xml')
+    const appPages = macos.filter((e) => /^https:\/\/keyshortcut\.com\/macos\/[a-z0-9-]+\/$/.test(e.loc))
     expect(macos[0].loc).toBe(pageUrl('/macos'))
-    expect(macos[0].lastmod).toBe(latest(macos.slice(1).map((e) => e.lastmod)))
+    expect(macos[0].lastmod).toBe(latest(appPages.map((e) => e.lastmod)))
   })
 
   it('no day is later than today', () => {

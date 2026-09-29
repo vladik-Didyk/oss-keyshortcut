@@ -85,6 +85,7 @@ const structuredData = [
   ["macos/index.html", ["WebSite", "BreadcrumbList", "ItemList"]],
   ["macos/figma/index.html", ["WebSite", "FAQPage", "BreadcrumbList", "WebPage"]],
   ["about/index.html", ["WebSite", "Person"]],
+  ["macos/vscode/toggle-comment/index.html", ["WebSite", "BreadcrumbList", "FAQPage"]],
 ];
 const jsonLdFound = [];
 for (const [page, expected] of structuredData) {

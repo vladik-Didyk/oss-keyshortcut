@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 import { SITE_ORIGIN, pageUrl } from '../src/utils/siteUrl.js'
 import { latest, pageDate } from './lib/page-dates.mjs'
+import { shortcutPagesOf, shortcutPagePath } from '../src/utils/shortcutPages.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
@@ -72,9 +73,20 @@ for (const platform of platforms) {
     appDates[path] = pageDate(record, path, app, today)
     return { loc: `/${path}`, lastmod: appDates[path], priority: '0.6', changefreq: 'monthly' }
   })
+  // Pages about one shortcut: changed when the note was written, or when the
+  // shortcut list of the app changed after that.
+  const shortcutPages = apps.flatMap((app) =>
+    shortcutPagesOf(platform.id, app).map((page) => ({
+      loc: shortcutPagePath(platform.id, app.slug, page.id),
+      lastmod: latest([page.note.written, appDates[`${platform.id}/${app.slug}`]]),
+      priority: '0.5',
+      changefreq: 'monthly',
+    }))
+  )
   const platformPages = [
     { loc: `/${platform.id}`, lastmod: latest(appPages.map((p) => p.lastmod)), priority: '0.8', changefreq: 'weekly' },
     ...appPages,
+    ...shortcutPages,
   ]
 
   const filename = `sitemap-${platform.id}.xml`

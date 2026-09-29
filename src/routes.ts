@@ -13,6 +13,7 @@ export default [
     route("compare/:slug", "./routes/compare-page.jsx"),
     route(":platformId", "./routes/platform-index.jsx"),
     route(":platformId/:slug", "./routes/shortcut-page.jsx"),
+    route(":platformId/:slug/:shortcutId", "./routes/shortcut-detail.jsx"),
   ]),
   route("mac-hud", "./routes/product-page.jsx"),
   route("directory", "./routes/redirect-directory.jsx"),

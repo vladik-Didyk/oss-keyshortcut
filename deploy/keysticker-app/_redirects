@@ -59,11 +59,14 @@
 /shortcuts/:app           https://keyshortcut.com/macos/:app/    301
 /shortcuts/:app/          https://keyshortcut.com/macos/:app/    301
 
-# Pages: one or two parts, with or without the closing slash.
-/:a        https://keyshortcut.com/:a/     301
-/:a/       https://keyshortcut.com/:a/     301
-/:a/:b     https://keyshortcut.com/:a/:b/  301
-/:a/:b/    https://keyshortcut.com/:a/:b/  301
+# Pages: one, two or three parts, with or without the closing slash.
+# Three parts is the page about one shortcut (/macos/vscode/toggle-comment).
+/:a          https://keyshortcut.com/:a/        301
+/:a/         https://keyshortcut.com/:a/        301
+/:a/:b       https://keyshortcut.com/:a/:b/     301
+/:a/:b/      https://keyshortcut.com/:a/:b/     301
+/:a/:b/:c    https://keyshortcut.com/:a/:b/:c/  301
+/:a/:b/:c/   https://keyshortcut.com/:a/:b/:c/  301
 
 # Anything else keeps its path.
 /*  https://keyshortcut.com/:splat  301

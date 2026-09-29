@@ -77,6 +77,7 @@ Route modules live in `src/routes/` and export `loader`, `meta`, and a default c
 - `home.jsx` — `/` Directory homepage (server `loader` reads manifest + macos JSON)
 - `platform-index.jsx` — `/:platformId` Platform shortcuts index (server `loader`, validates platform)
 - `shortcut-page.jsx` — `/:platformId/:slug` Per-app shortcut page (server `loader`, validates app)
+- `shortcut-detail.jsx` — `/:platformId/:slug/:shortcutId` Page about one shortcut (server `loader`; exists only where a note exists)
 - `product-page.jsx` — `/mac-hud` Mac HUD product page (Hero, Problem, Features, etc.)
 - `guides-index.jsx` — `/guides` Guides listing page
 - `guide-page.jsx` — `/guides/:slug` Individual guide (content from `src/data/guides/`)
@@ -205,6 +206,22 @@ Hero uses an HTML/CSS animated keyboard mockup with `AppPanelMockup` — no 3D/c
 - **Author line** (`AuthorLine.jsx`) sits under the verification badge: label and target from `CONTENT.shortcutPage.author`, name from `CONTENT.about.cards.creator.name`.
 - **Top of the page on a phone**: two rows, the title with its facts, then search and PDF side by side. Every control is 44 px high (back link, search, clear, PDF); the search field is 16 px, or iOS zooms in on focus. "Also on:" shows on phones too, each platform with its mark (`PlatformGlyph`), because it is the only way to the same app on another platform. The icon of the page loads `eager`, the icons of lists stay `lazy`. From `lg` up the header is the compact sticky one: 36 px icon, PDF as a text link. `shortcut-page.test.jsx` reads the classes without a breakpoint, which are what a phone gets.
 
+### Pages about one shortcut (`/macos/vscode/toggle-comment/`)
+
+One page for one shortcut on one platform: the keys, what they do, the same action on the other platforms, five neighbours from its section, two questions. Started 2026-09-29 with 100 notes, which give 163 pages.
+
+- **A page exists only where a hand-written note exists** (`src/data/shortcutNotes.js`) and the data of that platform has the action. No note, no page. Two shortcuts in three have no counterpart on another platform and none has a description in the data, so a page for every shortcut would be the app page cut into pieces. Google's spam policy calls that scaled content abuse, and it would put the pages that rank at risk.
+- **A note** holds `id` (the last part of the address), `title`, `names` (the action as each platform's data names it), `press` (follows "Press ⌘/ to"), `what` (40 to 80 words) and `written`.
+- **Rules of a note**, all tested in `shortcut-notes.test.js`: no key in the text (the page prints the keys of its platform from the data), no number, no version, no praise, no sentence that is in another note. Write what the shortcut does and check it against the app's own documentation (`docsUrl`). If the documentation does not say it and you have not seen it, leave it out.
+- **The notes stay on the server.** `src/utils/shortcutPages.js` imports them; only loaders, the pre-render config and the sitemap script import that file. The app page gets `shortcutLinks` from its loader and the page about a shortcut gets its one note. A test fails if a component imports either file, or if a note is in a built client file.
+- **The app page links a row to the page of its shortcut**, where there is one. The link looks like the text around it and is underlined on hover (`ACTION_LINK`).
+- **Renaming an action in the data takes its page away** until `names` in the note follows. `shortcut-notes.test.js` fails on a name the data does not have, so an export that renames actions shows up in the tests.
+- **Title**: `{Title} Shortcut in {App} on {OS}: {Keys}`, 60 characters at most, shortened by leaving out the platform. **Description**: the keys here, the keys on one other platform, 155 characters at most.
+- **Not found**: the route has no `ErrorBoundary` and no meta without data, so an address without a page goes up to the root route (see `root.jsx`). `generate-404.mjs` asks for an address with four parts, because three now match this route.
+- **Sitemap**: the pages are in the sitemap of their platform, with the later of the day the note was written and the day the app's list changed.
+- **Shared parts**: `ShortcutKeys.jsx` (keycaps, copy button, short list) and `FaqAccordion.jsx` are used by the app page and by this page.
+- **keysticker.app**: `deploy/keysticker-app/_redirects` has a rule for addresses with three parts. It applies after that project is deployed (its own command, see its README).
+
 ### Reports from visitors
 
 A visitor tells the developer what to fix, add or remove. Step 1 of three; votes ("Works" / "Doesn't work") and counts need a server function and a database, and are not built.
@@ -278,6 +295,9 @@ Vitest with jsdom environment, globals enabled, setup in `src/test/setup.js` (im
 - `shortcut-page.test.jsx` — app page: FAQ answers in the rendered and server-rendered HTML, accordion, hidden shortcut words, clipboard, author line
 - `performance.test.js` — benchmarks page load and rendering
 - `feedback-server.test.js` — votes and counts on the server: minimums, one vote per address, no address stored, refusals, the three endpoints
+- `shortcut-notes.test.js` — notes of the pages about one shortcut: every name against the data, the rules of the text, title and description of every page, pre-render list, sitemap, nothing of it in the browser
+- `shortcut-detail.test.jsx` — the page about one shortcut as it is served, its structured data, and the links to it from the app page
+- `app-page-meta.test.js` — title and description of every app page
 - `feedback-ui.test.jsx` — votes and counts on the app page: nothing without a database, only numbers the server sent, ids of every shortcut of every page
 - `pdf-bundle.test.jsx` — the bundle file (contents, page numbers) and its offer, shown only with a link and a price
 - `mac-app-claims.test.jsx` — copy about the Mac app, checked against the app's source (build 3): fails on a promise of custom shortcuts (the app only imports packs), on "use it forever" and on "sends nothing over the internet"; also the "Switch it on in Settings." note for active app detection (once per page) and the `offers` block of the structured data (only with `APP_STORE_URL`)

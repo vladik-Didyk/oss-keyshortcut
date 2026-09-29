@@ -264,3 +264,82 @@ Both builds on a local server on this Mac, same method as Phase 0 (phone: median
 2. **After `pnpm export`, run `pnpm page-dates`** before the commit, so the sitemap knows the new days. If it is forgotten, a changed list states the day of the build, as before.
 3. **Search Console.** Titles and descriptions of 171 pages change with this branch. Expect positions to move for one to three weeks after the deploy. Submit `sitemap.xml` again on that day.
 
+---
+
+# Phase 2: pages about one shortcut, the first batch
+
+Done on 2026-09-29, on the branch `growth-ux-overhaul`. Phase 1 was deployed the same day (main `c92cf0e`); Phase 2 is not deployed.
+
+## 1. What was built
+
+| Item of the brief | What was done |
+|---|---|
+| Address | `/{platform}/{app}/{id}`, for example `/macos/vscode/toggle-comment/` |
+| Which shortcuts | Only those with a hand-written note. 100 notes for 15 apps, which give 163 pages: 91 macOS, 43 Windows, 29 Linux |
+| Breadcrumb, h1, large keys, "Press ... to ..." | On every page |
+| "What it does" | 52 to 71 words, written for each action |
+| The same shortcut on other platforms | A table, where another platform has the action. The action is matched by hand, because the platforms often name it differently ("Add Next Match" on macOS is "Select Word / Next Occurrence" on Windows) |
+| Related shortcuts | Five from the same section: the ones that follow in the list. Each page of an app gets its own five |
+| Link to the full list | On every page, with the count |
+| Questions | One or two, with `FAQPage`. The second only where another platform has the action |
+| Title and description | Within 60 and 155 characters, no two pages the same |
+| Rows of the app page | The action of a row is a link where its shortcut has a page |
+| Sitemap | In the sitemap of the platform |
+| `noindex` for thin pages | Not needed: a page without a note does not exist |
+
+The apps of the first batch: VS Code, Figma, Chrome, Safari, Photoshop, Excel, Slack, Notion, Blender, macOS, Terminal, Illustrator, Windows, Word, Vim. For each, the shortcuts of "Start with these".
+
+## 2. Numbers
+
+| | Before | After |
+|---|---|---|
+| Pages in a build | 206 | 369 |
+| Files in a build | 827 | 1,158 |
+| Full build | 9 s | 10 s |
+| Links checked by `verify-build` | 13,907 | 22,528, none in the wrong form |
+| Tests | 1,380 | 1,419 |
+
+Lighthouse, local build, same method as before:
+
+| Page | Device | Performance | Accessibility | Best practices | SEO | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|---|
+| `/macos/vscode/toggle-comment/` | phone | 100 | 100 | 79 | 100 | 1.4 s | 0.002 | 29 ms |
+| `/macos/vscode/toggle-comment/` | desktop | 100 | 100 | 78 | 100 | 0.7 s | 0.000 | 0 ms |
+| `/macos/vscode/` with the new links | phone | 98 | 100 | 79 | 100 | 1.5 s | 0.075 | 33 ms |
+
+The notes are not in any file the browser loads.
+
+## 3. How the notes were checked
+
+- Every action name was checked against the data by a test, on every platform the note names.
+- The texts were written from what the shortcut does in the app. For Slack, Notion, Safari, Terminal, macOS and Windows the official pages were read and compared. One sentence about Slack's switcher was not in its documentation and was taken out.
+- Not checked against a running app. A reader who knows the app well may still find a detail to correct; the report links of the site are the way to say so.
+
+## 4. Questions about the data, nothing changed
+
+| Page | What stands out |
+|---|---|
+| `windows/notion` | "New Page" is Ctrl+Shift+9, which Notion documents as "create a new page, or turn a line into a page". It is not the same command as New Page on macOS, so the note does not name it |
+| `macos/vim` | Keys are written in capitals ("U" for undo, "I" for insert). In Vim the capital is another command |
+| `macos/vscode` | Has no "Find in Files"; `windows/vscode` and `linux/vscode` have no "Go to Definition" |
+| `macos/chrome` and `windows/chrome` | Name the same actions differently ("Open a new tab, and jump to it" and "New Tab") |
+
+## 5. Found while choosing the pages
+
+**Visits.** Cloudflare Web Analytics, which counts browsers and leaves robots out, shows for the last 30 days: 150 visits and 810 page views. 590 of the page views came from Singapore, on Windows, moving from page to page inside the site, which looks like one automatic reader. Figures are sampled and rounded by Cloudflare.
+
+The figure the site quotes, "9,000+ monthly visitors (Cloudflare, August 2026)", comes from the other Cloudflare report, HTTP Traffic. Its "unique visitors" are network addresses that asked the server for anything, robots and crawlers among them.
+
+- The sponsor page states the figure to people who may pay for a slot. It should name what was counted, or use the number of visits.
+- The goal of 50,000 visitors a month starts from a few hundred people, not from nine thousand.
+- "Most visited apps" could not be taken from these numbers. The first batch follows the site's own list of popular apps.
+
+**Search Console.** The Google account has no property for keyshortcut.com. Without it there is no data on which searches show the site. Adding the property takes a DNS record in Cloudflare.
+
+## 6. For the owner
+
+1. **The old domain.** `deploy/keysticker-app/_redirects` has a rule for addresses with three parts. It applies after that project is deployed with its own command.
+2. **Search Console**: add the property, then submit `sitemap.xml`.
+3. **The visitor figure on `/sponsor`**: decide what it should say.
+4. **Next batch**: more notes can be added app by app. Each one needs the same check against the app's documentation.
+

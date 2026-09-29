@@ -339,6 +339,17 @@ body {
   user-select: none;
 }
 
+/* The keys at the top of the page about one shortcut */
+.keycap-large {
+  min-width: 52px;
+  height: 52px;
+  padding: 0 14px;
+  border-radius: 9px;
+  border-width: 2px;
+  font-size: 22px;
+  box-shadow: 3px 3px 0 var(--theme-keycap-legend);
+}
+
 /* =========================================
    SHORTCUT TABLE (app pages)
    ========================================= */

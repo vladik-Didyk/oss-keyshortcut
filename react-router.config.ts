@@ -27,6 +27,9 @@ export default {
       readFileSync(join(dataDir, "platforms.json"), "utf-8")
     );
 
+    // Pages about one shortcut: only where a note exists (src/data/shortcutNotes.js)
+    const { shortcutPagesOf, shortcutPagePath } = await import("./src/utils/shortcutPages.js");
+
     for (const platform of platforms) {
       paths.push(`/${platform.id}`);
       const { apps }: { apps: { slug: string }[] } = JSON.parse(
@@ -34,6 +37,9 @@ export default {
       );
       for (const app of apps) {
         paths.push(`/${platform.id}/${app.slug}`);
+        for (const page of shortcutPagesOf(platform.id, app)) {
+          paths.push(shortcutPagePath(platform.id, app.slug, page.id));
+        }
       }
     }
 
