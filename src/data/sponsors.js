@@ -37,14 +37,23 @@ export const SPONSOR_OFFER = {
   goLiveBusinessDays: 2,
 }
 
-// The one audience figure the page may state. It must be a measured number with
-// its source and period; the page prints all three together. Update all three
-// at once, or not at all.
+// The one audience figure the page may state: people, measured, with its source
+// and period. The page prints all three together. All three empty = the page
+// states no visitor figure, and a tile with the number of app pages takes its place.
+//
+// Empty since 2026-09-29. Until then it held "9,000+" from Cloudflare's HTTP
+// Traffic report ("unique visitors"), which counts network addresses, robots
+// included. Cloudflare Web Analytics counts browsers and showed 150 visits in
+// the same 30 days. Fill it in again from Web Analytics or Search Console, when
+// the number is one a sponsor would pay for.
 export const SPONSOR_AUDIENCE = {
-  monthlyVisitors: '9,000+',
-  source: 'Cloudflare',
-  period: 'August 2026',
+  monthlyVisitors: '',
+  source: '',
+  period: '',
 }
+
+export const hasAudienceFigure = (audience = SPONSOR_AUDIENCE) =>
+  Boolean(audience.monthlyVisitors && audience.source && audience.period)
 
 // App icons shown under "Who sees it" on /sponsor, each a link to its macOS page.
 // A test checks every one against the data: the slug, the name, the page.

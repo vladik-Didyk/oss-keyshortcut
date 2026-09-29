@@ -6,6 +6,7 @@ import {
   SPONSOR_OFFER,
   SPONSORS,
   SPONSOR_AUDIENCE,
+  hasAudienceFigure,
   SPONSOR_EMAIL,
   SPONSOR_PAGE_APPS,
   SPONSOR_MOCK,
@@ -23,6 +24,7 @@ import {
   ChevronDown,
   CircleCheck,
   CreditCard,
+  Files,
   Keyboard,
   LayoutList,
   MousePointerClick,
@@ -115,9 +117,12 @@ export default function SponsorPage({ stats, offer = SPONSOR_OFFER, sitewideOpen
       {/* ─── Figures: each one measured or counted from the data ─── */}
       <section className={`${WIDTH} mt-12`} aria-label={c.audience.title}>
         <ul className="grid grid-cols-2 lg:grid-cols-4 gap-3 list-none p-0 m-0">
-          <Stat icon={Users} value={SPONSOR_AUDIENCE.monthlyVisitors} label={c.stats.visitors} source={`${SPONSOR_AUDIENCE.source}, ${SPONSOR_AUDIENCE.period}`} />
+          {hasAudienceFigure() && (
+            <Stat icon={Users} value={SPONSOR_AUDIENCE.monthlyVisitors} label={c.stats.visitors} source={`${SPONSOR_AUDIENCE.source}, ${SPONSOR_AUDIENCE.period}`} />
+          )}
           <Stat icon={AppWindow} value={APP_COUNT} label={c.stats.apps} />
           <Stat icon={Keyboard} value={formatShortcutCount()} label={c.stats.shortcuts} />
+          {!hasAudienceFigure() && <Stat icon={Files} value={stats.appPages} label={c.stats.pages} />}
           <Stat icon={LayoutList} value={stats.slotPages} label={c.stats.slot} />
         </ul>
       </section>

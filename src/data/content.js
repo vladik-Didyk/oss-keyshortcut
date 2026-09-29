@@ -1,7 +1,7 @@
 import { APP_COUNT, SHORTCUT_COUNT, APP_PAGE_COUNT, PAGES_WITH_DOCS, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, APP_STORE_URL, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL, REPO_URL } from './siteConfig'
 import { reportEmail, reportIssue } from '../utils/reportLinks'
 import { getAppNote } from './appNotes'
-import { SPONSOR_OFFER, SPONSOR_AUDIENCE } from './sponsors'
+import { SPONSOR_OFFER, SPONSOR_AUDIENCE, hasAudienceFigure } from './sponsors'
 import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys, fitList } from '../utils/appCopy'
 import { pageUrl } from '../utils/siteUrl'
 
@@ -992,9 +992,11 @@ export const CONTENT = {
     fromPage: (path) => `You came from ${path}. Book that page alone, or the whole site.`,
 
     // Tiles under the top of the page. The visitor figure is printed with its
-    // source and period in the same tile (SponsorPage.jsx).
+    // source and period in the same tile (SponsorPage.jsx). While there is no
+    // figure, the tile shows the number of app pages.
     stats: {
-      visitors: 'unique visitors a month',
+      visitors: 'visits a month',
+      pages: 'app pages',
       apps: 'apps',
       shortcuts: 'shortcuts',
       slot: 'app pages hold the card',
@@ -1104,7 +1106,9 @@ export const CONTENT = {
         },
         {
           q: 'How many people will click it?',
-          a: `I don’t know yet. The site gets ${SPONSOR_AUDIENCE.monthlyVisitors} unique visitors a month (${SPONSOR_AUDIENCE.source}, ${SPONSOR_AUDIENCE.period}), but the slot is new. Your link carries ?ref=keyshortcut, so you can count the clicks yourself from the first day.`,
+          a: hasAudienceFigure()
+            ? `I don’t know yet. The site gets ${SPONSOR_AUDIENCE.monthlyVisitors} visits a month (${SPONSOR_AUDIENCE.source}, ${SPONSOR_AUDIENCE.period}), but the slot is new. Your link carries ?ref=keyshortcut, so you can count the clicks yourself from the first day.`
+            : 'I don’t know yet. The slot is new. Your link carries ?ref=keyshortcut, so you can count the clicks yourself from the first day.',
         },
         {
           q: 'Which page should I pick?',

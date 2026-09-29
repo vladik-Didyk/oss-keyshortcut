@@ -23,6 +23,7 @@ export {
   Download,
   ExternalLink,
   FileDown,
+  Files,
   Linkedin,
   MapPin,
   FileSpreadsheet,

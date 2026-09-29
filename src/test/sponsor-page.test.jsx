@@ -11,6 +11,7 @@ import {
   SPONSORS,
   SPONSOR_OFFER,
   SPONSOR_AUDIENCE,
+  hasAudienceFigure,
   SPONSOR_EMAIL,
   SPONSOR_PAGE_APPS,
   SPONSOR_MOCK,
@@ -69,10 +70,21 @@ describe('sponsor offer config', () => {
     expect(SPONSOR_OFFER.firstMonthCode).toMatch(/^[A-Za-z0-9_-]{0,40}$/)
   })
 
-  it('states the audience figure with its source and period', () => {
-    expect(SPONSOR_AUDIENCE.monthlyVisitors).toBeTruthy()
-    expect(SPONSOR_AUDIENCE.source).toBeTruthy()
-    expect(SPONSOR_AUDIENCE.period).toMatch(/\b20\d\d\b/)
+  it('states the audience figure with its source and period, or no figure at all', () => {
+    const { monthlyVisitors, source, period } = SPONSOR_AUDIENCE
+    const filled = [monthlyVisitors, source, period].filter(Boolean).length
+    expect([0, 3]).toContain(filled)
+    expect(hasAudienceFigure()).toBe(filled === 3)
+    if (filled === 3) expect(period).toMatch(/\b20\d\d\b/)
+    expect(hasAudienceFigure({ monthlyVisitors: '1,200', source: '', period: 'May 2027' })).toBe(false)
+    expect(hasAudienceFigure({ monthlyVisitors: '1,200', source: 'Cloudflare Web Analytics', period: 'May 2027' })).toBe(true)
+  })
+
+  // Cloudflare's HTTP Traffic report calls network addresses "unique visitors"
+  // and counts robots among them. The page stated that number until 2026-09-29.
+  it('does not take its figure from a report that counts robots', () => {
+    expect(SPONSOR_AUDIENCE.monthlyVisitors).not.toBe('9,000+')
+    expect(CONTENT.sponsorPage.stats.visitors).not.toMatch(/unique visitors/i)
   })
 
   it('reports the sitewide slot as open only while it is empty', () => {
@@ -198,8 +210,13 @@ describe('SponsorPage', () => {
     expect(detail(STATS)).not.toMatch(/on all \d+ app pages/)
   })
 
-  it('prints the visitor figure together with its source and period', () => {
-    renderPage({ offer: NO_LINKS, sitewideOpen: true })
+  it('prints the visitor figure together with its source and period, or says nothing of visitors', () => {
+    const { container } = renderPage({ offer: NO_LINKS, sitewideOpen: true })
+    if (!hasAudienceFigure()) {
+      expect(container.textContent).not.toMatch(/visitors a month|visits a month/i)
+      expect(screen.getByText(CONTENT.sponsorPage.stats.pages).parentElement).toHaveTextContent(String(STATS.appPages))
+      return
+    }
     // Wherever the figure appears, its source and period appear with it.
     const lines = screen.getAllByText(new RegExp(SPONSOR_AUDIENCE.monthlyVisitors.replace('+', '\\+')))
     expect(lines.length).toBeGreaterThanOrEqual(1)
@@ -273,8 +290,12 @@ describe('SponsorPage', () => {
       .items({ ...STATS, email: SPONSOR_EMAIL, days: 2 })
       .find((item) => item.q.includes('click'))
     expect(clicks.a.startsWith('I don\u2019t know yet.')).toBe(true)
-    expect(clicks.a).toContain(SPONSOR_AUDIENCE.source)
-    expect(clicks.a).toContain(SPONSOR_AUDIENCE.period)
+    if (hasAudienceFigure()) {
+      expect(clicks.a).toContain(SPONSOR_AUDIENCE.source)
+      expect(clicks.a).toContain(SPONSOR_AUDIENCE.period)
+    } else {
+      expect(clicks.a).not.toMatch(/visitors|visits/i)
+    }
   })
 
   it('lists what is refused', () => {
@@ -373,6 +394,8 @@ describe('sponsor page in search results', () => {
   })
 
   it('leaves the visitor figure out: there is no room for its source and period', () => {
+    expect(`${title} ${description}`).not.toMatch(/visitors|visits/i)
+    if (!hasAudienceFigure()) return
     const figure = SPONSOR_AUDIENCE.monthlyVisitors
     expect(title).not.toContain(figure)
     expect(description).not.toContain(figure)
