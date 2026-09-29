@@ -57,6 +57,7 @@ function AppPill({ name }) {
     <span className="shrink-0 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-medium bg-theme-base text-theme-text border border-theme-border whitespace-nowrap select-none">
       {data.type === 'image' ? (
         <img
+          decoding="async"
           src={data.src}
           alt=""
           width={18}

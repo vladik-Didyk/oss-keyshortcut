@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import Link from './SiteLink'
 import { CONTENT } from '../data/content'
 
 /** Who stands behind an app page: one quiet line at the end of the page's FAQ. */

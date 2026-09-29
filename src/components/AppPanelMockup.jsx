@@ -42,6 +42,7 @@ export default function AppPanelMockup({
         <span className="retro-window-dot" />
         <span className="retro-window-dot" />
         <img
+          decoding="async"
           src={`/images/app-icons/${app.slug}.webp`}
           alt={app.name}
           className={`${compact ? 'w-5 h-5' : 'w-6 h-6'} rounded-md shrink-0 ml-2`}

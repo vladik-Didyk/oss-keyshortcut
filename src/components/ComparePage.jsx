@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import Link from './SiteLink'
 import { useEffect } from 'react'
 import AdSlot from './AdSlot'
 import { trackEvent } from '../lib/analytics'

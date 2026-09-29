@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import Link from './SiteLink'
 import { useScrollspy } from '../hooks/useScrollspy'
 import { getGuideBySlug } from '../data/guides'
 import { pageUrl } from '../utils/siteUrl'

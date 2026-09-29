@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router'
+import Link from './SiteLink'
 import { CONTENT } from '../data/content'
 import { GUIDES } from '../data/guides/index.js'
 import { COMPARISONS } from '../data/comparisons.js'
@@ -8,6 +8,7 @@ import { openCookieSettings } from '../lib/consent'
 import { HAS_AFFILIATE_LINKS } from '../data/affiliates'
 import { getSupportLink } from '../data/support'
 import SupportLink from './SupportLink'
+import { linkPath } from '../utils/siteUrl'
 
 // Turn a comparison slug pair into a readable label, e.g.
 // { slugA: 'vscode', slugB: 'cursor' } → "VS Code vs Cursor".
@@ -58,6 +59,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center gap-2.5 no-underline mb-4">
               <img
+                decoding="async"
                 src="/images/app-icon.svg"
                 alt="KeyShortcut icon"
                 width={28}
@@ -153,6 +155,7 @@ function FooterAvatar({ src, name }) {
 
   return (
     <img
+      decoding="async"
       src={src}
       alt={name}
       width={28}
@@ -171,7 +174,7 @@ function FooterLink({ to, heading, children }) {
   return (
     <li className="list-none">
       {hasHash ? (
-        <a href={to} className={cls} onClick={onClick}>{children}</a>
+        <a href={linkPath(to)} className={cls} onClick={onClick}>{children}</a>
       ) : (
         <Link to={to} className={cls} onClick={onClick}>{children}</Link>
       )}

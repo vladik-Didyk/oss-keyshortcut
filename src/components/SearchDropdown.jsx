@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router'
 import { ArrowRight } from '../utils/icons'
 import { parseKeyParts } from '../utils/platformHelpers'
 import { POPULAR_APPS } from '../data/popularApps'
+import { linkPath } from '../utils/siteUrl'
 
 /**
  * Anchored search dropdown rendered under the homepage search input.
@@ -18,7 +19,7 @@ export default function SearchDropdown({ results, platform, onClose, query, list
   const hasResults = appMatches.length > 0 || shortcutMatches.length > 0
 
   const goTo = (href) => {
-    navigate(href)
+    navigate(linkPath(href))
     onClose()
   }
 
@@ -41,6 +42,7 @@ export default function SearchDropdown({ results, platform, onClose, query, list
               className="flex items-center gap-2 px-3 py-2.5 min-h-[44px] rounded-lg border border-theme-border bg-theme-base-alt hover:border-theme-border-hover transition-colors cursor-pointer text-[13px] text-theme-text"
             >
               <img
+                decoding="async"
                 src={`/images/app-icons/${app.slug}.webp`}
                 alt=""
                 width={16}
@@ -94,6 +96,7 @@ export default function SearchDropdown({ results, platform, onClose, query, list
                 }`}
               >
                 <img
+                  decoding="async"
                   src={`/images/app-icons/${app.slug}.webp`}
                   alt=""
                   width={28}
@@ -133,6 +136,7 @@ export default function SearchDropdown({ results, platform, onClose, query, list
                   }`}
                 >
                   <img
+                    decoding="async"
                     src={`/images/app-icons/${group.appSlug}.webp`}
                     alt=""
                     width={20}

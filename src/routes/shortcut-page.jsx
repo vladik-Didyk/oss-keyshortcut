@@ -3,6 +3,8 @@ import { getPlatformApps, getPlatforms, getOtherPlatforms, getOtherPlatformsMap 
 import { pickMoreApps } from "../utils/platformHelpers";
 import { buildAppPageJsonLd } from "../utils/structuredData";
 import { CONTENT, buildMeta } from "../data/content";
+import { getAppNote } from "../data/appNotes";
+import { leadShortcuts, formatKeys } from "../utils/appCopy";
 import NotFound from "../components/NotFound";
 import ShortcutPage from "../components/ShortcutPage";
 import JsonLd from "../components/JsonLd";
@@ -64,7 +66,8 @@ export function meta({ data }) {
     return buildMeta(CONTENT.meta.notFound);
   }
   const { app, platformName, platformId } = data;
-  return buildMeta(CONTENT.meta.shortcutPage(app.displayName, platformName, app.shortcutCount, platformId, app.slug));
+  const lead = leadShortcuts(app, getAppNote(app.slug, platformId)).map((sc) => `${sc.action} ${formatKeys(sc, platformId)}`);
+  return buildMeta(CONTENT.meta.shortcutPage(app.displayName, platformName, app.shortcutCount, platformId, app.slug, lead));
 }
 
 export default function ShortcutPageRoute() {

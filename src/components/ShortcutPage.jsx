@@ -1,4 +1,5 @@
-import { Link, useLoaderData } from 'react-router'
+import { useLoaderData } from 'react-router'
+import Link from './SiteLink'
 import React, { useState, useCallback, useDeferredValue, useEffect, useMemo, useRef } from 'react'
 import { Search, X, Download, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, Clipboard, CircleCheck, Flag, ThumbsUp } from '../utils/icons'
 import LastCheckedBadge from './LastCheckedBadge'

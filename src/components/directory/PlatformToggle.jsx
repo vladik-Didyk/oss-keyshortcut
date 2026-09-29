@@ -28,6 +28,7 @@ export default function PlatformToggle({ platforms, activePlatform, onSelect, la
           >
             {p.icon && (
               <img
+                decoding="async"
                 src={`/images/platform-icons/${p.icon.replace('.png', '.webp')}`}
                 alt=""
                 width={16}

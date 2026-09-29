@@ -1,14 +1,23 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync } from 'fs'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 import { SITE_ORIGIN, pageUrl } from '../src/utils/siteUrl.js'
+import { latest, pageDate } from './lib/page-dates.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
 const DATA_DIR = join(ROOT, 'public/data')
 
 const today = new Date().toISOString().split('T')[0]
+
+// <lastmod> is stated only where the day of the last change is known: for an
+// app page from the record of its shortcut list (scripts/page-dates.mjs), for a
+// guide from its own date, for a page made of others from the latest of them.
+// A page without a known day has no <lastmod>. The day of the build is not a
+// day of change: a date that is wrong teaches a crawler to ignore all of them.
+const recordPath = join(ROOT, 'src/data/pageDates.json')
+const record = existsSync(recordPath) ? JSON.parse(readFileSync(recordPath, 'utf-8')) : null
 
 function readJSON(relativePath) {
   return JSON.parse(readFileSync(join(DATA_DIR, relativePath), 'utf-8'))
@@ -18,8 +27,8 @@ function buildUrlset(pages) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages.map(p => `  <url>
-    <loc>${pageUrl(p.loc)}</loc>
-    <lastmod>${p.lastmod || today}</lastmod>
+    <loc>${pageUrl(p.loc)}</loc>${p.lastmod ? `
+    <lastmod>${p.lastmod}</lastmod>` : ''}
     <changefreq>${p.changefreq}</changefreq>
     <priority>${p.priority}</priority>
   </url>`).join('\n')}
@@ -45,48 +54,52 @@ const staticPages = [
 const { GUIDES } = await import('../src/data/guides/index.js')
 const guidePages = GUIDES.map(g => ({
   loc: `/guides/${g.slug}`,
-  lastmod: g.lastUpdated || today,
+  lastmod: g.lastUpdated,
   priority: '0.6',
   changefreq: 'monthly',
 }))
-
-// ─── Comparison pages ───────────────────────────────────────────────
-
-const { COMPARISONS } = await import('../src/data/comparisons.js')
-const comparePages = [
-  { loc: '/compare', lastmod: today, priority: '0.6', changefreq: 'monthly' },
-  ...COMPARISONS.map(c => ({
-    loc: `/compare/${c.slugA}-vs-${c.slugB}`,
-    lastmod: today,
-    priority: '0.6',
-    changefreq: 'monthly',
-  })),
-]
 
 // ─── Platform + app pages ───────────────────────────────────────────
 
 const platforms = readJSON('platforms.json')
 const platformSitemaps = []
+const appDates = {}
 
 for (const platform of platforms) {
-  const platformPages = [
-    { loc: `/${platform.id}`, lastmod: today, priority: '0.8', changefreq: 'weekly' },
-  ]
-
   const { apps } = readJSON(`platforms/${platform.id}.json`)
-  for (const app of apps) {
-    platformPages.push({
-      loc: `/${platform.id}/${app.slug}`,
-      lastmod: today,
-      priority: '0.6',
-      changefreq: 'monthly',
-    })
-  }
+  const appPages = apps.map((app) => {
+    const path = `${platform.id}/${app.slug}`
+    appDates[path] = pageDate(record, path, app, today)
+    return { loc: `/${path}`, lastmod: appDates[path], priority: '0.6', changefreq: 'monthly' }
+  })
+  const platformPages = [
+    { loc: `/${platform.id}`, lastmod: latest(appPages.map((p) => p.lastmod)), priority: '0.8', changefreq: 'weekly' },
+    ...appPages,
+  ]
 
   const filename = `sitemap-${platform.id}.xml`
   writeFileSync(join(ROOT, 'public', filename), buildUrlset(platformPages))
-  platformSitemaps.push({ filename, count: platformPages.length })
+  platformSitemaps.push({ filename, count: platformPages.length, lastmod: latest(platformPages.map((p) => p.lastmod)) })
 }
+
+// ─── Comparison pages ───────────────────────────────────────────────
+// A comparison is made of two shortcut lists: it changed when one of them did.
+
+const { COMPARISONS } = await import('../src/data/comparisons.js')
+const comparisons = COMPARISONS.map(c => ({
+  loc: `/compare/${c.slugA}-vs-${c.slugB}`,
+  lastmod: latest([appDates[`${c.platform}/${c.slugA}`], appDates[`${c.platform}/${c.slugB}`]]),
+  priority: '0.6',
+  changefreq: 'monthly',
+}))
+const comparePages = [
+  { loc: '/compare', lastmod: latest(comparisons.map((p) => p.lastmod)), priority: '0.6', changefreq: 'monthly' },
+  ...comparisons,
+]
+
+// The pages that list the others.
+const listing = { '/': latest(Object.values(appDates)), '/cheat-sheets': latest(Object.values(appDates)), '/guides': latest(guidePages.map((p) => p.lastmod)) }
+for (const page of staticPages) page.lastmod = listing[page.loc]
 
 // ─── Write sub-sitemaps ─────────────────────────────────────────────
 
@@ -96,18 +109,19 @@ writeFileSync(join(ROOT, 'public', 'sitemap-compare.xml'), buildUrlset(comparePa
 
 // ─── Write sitemap index ────────────────────────────────────────────
 
+const lastmodOf = (pages) => latest(pages.map((p) => p.lastmod))
 const subSitemaps = [
-  'sitemap-pages.xml',
-  'sitemap-guides.xml',
-  'sitemap-compare.xml',
-  ...platformSitemaps.map(s => s.filename),
+  { filename: 'sitemap-pages.xml', lastmod: lastmodOf(staticPages) },
+  { filename: 'sitemap-guides.xml', lastmod: lastmodOf(guidePages) },
+  { filename: 'sitemap-compare.xml', lastmod: lastmodOf(comparePages) },
+  ...platformSitemaps,
 ]
 
 const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${subSitemaps.map(f => `  <sitemap>
-    <loc>${SITE_ORIGIN}/${f}</loc>
-    <lastmod>${today}</lastmod>
+    <loc>${SITE_ORIGIN}/${f.filename}</loc>${f.lastmod ? `
+    <lastmod>${f.lastmod}</lastmod>` : ''}
   </sitemap>`).join('\n')}
 </sitemapindex>
 `

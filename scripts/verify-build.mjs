@@ -10,11 +10,13 @@
  *   --strict  missing analytics IDs fail the check (default: warn only)
  *
  * Always fails when the AdSense script tag, the ads.txt line or 404.html is missing,
- * or when the JSON-LD of a checked page does not parse or lacks a type.
+ * when the JSON-LD of a checked page does not parse or lacks a type, or when a
+ * link inside the site points at an address the host answers with a redirect.
  */
 import { existsSync, readFileSync, readdirSync } from "fs";
 import { join } from "path";
 import { readJsonLd, jsonLdTypes } from "./lib/json-ld.mjs";
+import { linkPath, SITE_ORIGIN } from "../src/utils/siteUrl.js";
 
 const args = process.argv.slice(2);
 const strict = args.includes("--strict");
@@ -102,10 +104,49 @@ for (const [page, expected] of structuredData) {
   }
 }
 
+// 8. Links inside the site, canonical and og:url: every one in the form the
+// host serves (src/utils/siteUrl.js). The other form answers 308, which costs
+// a crawler a request for every link it follows.
+function htmlFiles(dir, found = []) {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) htmlFiles(path, found);
+    else if (entry.name.endsWith(".html")) found.push(path);
+  }
+  return found;
+}
+const pages = existsSync(buildDir) ? htmlFiles(buildDir) : [];
+const wrongLinks = new Map();
+let linksChecked = 0;
+for (const file of pages) {
+  const html = readFileSync(file, "utf-8");
+  const targets = [
+    ...[...html.matchAll(/<a\b[^>]*?\shref="([^"]+)"/g)].map((m) => m[1]),
+    ...[...html.matchAll(/<link rel="canonical" href="([^"]+)"/g)].map((m) => m[1]),
+    ...[...html.matchAll(/<meta property="og:url" content="([^"]+)"/g)].map((m) => m[1]),
+  ];
+  for (const raw of targets) {
+    const target = raw.replaceAll("&amp;", "&");
+    const path = target.startsWith(SITE_ORIGIN) ? target.slice(SITE_ORIGIN.length) || "/" : target;
+    if (!path.startsWith("/") || path.startsWith("//")) continue;
+    linksChecked++;
+    if (linkPath(path) !== path) {
+      const where = wrongLinks.get(path) || [];
+      where.push(file.slice(buildDir.length + 1));
+      wrongLinks.set(path, where);
+    }
+  }
+}
+for (const [path, where] of [...wrongLinks].slice(0, 20)) {
+  errors.push(`link to ${path} (should be ${linkPath(path)}) on ${where.length} page(s), first: ${where[0]}`);
+}
+if (wrongLinks.size > 20) errors.push(`... and ${wrongLinks.size - 20} more link targets in the wrong form`);
+
 for (const w of warnings) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`FAIL  ${e}`);
 console.log(`INFO  App Store download buttons: ${appStoreLive ? "SHOWN" : "hidden"}`);
 for (const line of jsonLdFound) console.log(`INFO  JSON-LD ${line}`);
+console.log(`INFO  Links inside the site: ${linksChecked} checked on ${pages.length} pages, ${wrongLinks.size} target(s) in the wrong form`);
 
 if (errors.length) {
   console.error(`\nverify-build: ${errors.length} problem(s). Do not deploy this build.`);

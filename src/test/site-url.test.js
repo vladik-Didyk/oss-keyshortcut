@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { execFileSync } from 'child_process'
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'fs'
 import { join, extname } from 'path'
-import { SITE_ORIGIN, pagePath, pageUrl } from '../utils/siteUrl'
+import { SITE_ORIGIN, linkPath, pagePath, pageUrl } from '../utils/siteUrl'
 import routerConfig from '../../react-router.config.ts'
 import { COMPARISONS } from '../data/comparisons'
 import { GUIDES } from '../data/guides'
@@ -48,6 +48,73 @@ describe('pagePath / pageUrl', () => {
 
   it('uses the https origin without www', () => {
     expect(SITE_ORIGIN).toBe('https://keyshortcut.com')
+  })
+})
+
+// A link inside the site points at the address that answers 200: the form
+// without the slash costs a crawler one redirect for every link it follows.
+describe('linkPath: the target of a link inside the site', () => {
+  it('ends a page with a slash', () => {
+    expect(linkPath('/macos')).toBe('/macos/')
+    expect(linkPath('/macos/figma')).toBe('/macos/figma/')
+    expect(linkPath('/macos/figma/')).toBe('/macos/figma/')
+    expect(linkPath('/')).toBe('/')
+  })
+
+  it('keeps the anchor and the query, after the slash', () => {
+    expect(linkPath('/macos/macos#finder')).toBe('/macos/macos/#finder')
+    expect(linkPath('/mac-hud#faq')).toBe('/mac-hud/#faq')
+    expect(linkPath('/?category=Design')).toBe('/?category=Design')
+    expect(linkPath('/sponsor?page=/macos/figma')).toBe('/sponsor/?page=/macos/figma')
+  })
+
+  it('leaves /privacy and files as they are served', () => {
+    expect(linkPath('/privacy')).toBe('/privacy')
+    expect(linkPath('/privacy#cookies')).toBe('/privacy#cookies')
+    expect(linkPath('/rss.xml')).toBe('/rss.xml')
+    expect(linkPath('/images/app-icon.svg')).toBe('/images/app-icon.svg')
+  })
+
+  it('leaves what is not a path of this site', () => {
+    for (const other of ['https://example.com/a', '//example.com/a', 'mailto:a@b.c', '#faq', 'figma']) {
+      expect(linkPath(other)).toBe(other)
+    }
+    const object = { pathname: '/macos' }
+    expect(linkPath(object)).toBe(object)
+    expect(linkPath(undefined)).toBe(undefined)
+  })
+})
+
+describe('links in the source', () => {
+  const sources = (dir) =>
+    readdirSync(join(ROOT, dir), { withFileTypes: true }).flatMap((entry) =>
+      entry.isDirectory()
+        ? sources(join(dir, entry.name))
+        : /\.jsx?$/.test(entry.name)
+          ? [join(dir, entry.name)]
+          : []
+    )
+  const files = ['src/components', 'src/routes', 'src/layouts'].flatMap(sources)
+
+  it("only SiteLink imports the router's Link", () => {
+    const direct = files.filter(
+      (file) =>
+        file !== 'src/components/SiteLink.jsx' &&
+        /import \{[^}]*\b(Link|NavLink)\b[^}]*\} from ['"]react-router['"]/.test(readFileSync(join(ROOT, file), 'utf-8'))
+    )
+    expect(direct).toEqual([])
+  })
+
+  it('a plain anchor or a navigation to a page names it with the slash', () => {
+    const wrong = []
+    for (const file of files) {
+      const source = readFileSync(join(ROOT, file), 'utf-8')
+      for (const [, target] of source.matchAll(/href="(\/[^"]*)"/g)) {
+        if (linkPath(target) !== target) wrong.push(`${file}: href="${target}"`)
+      }
+      for (const [call] of source.matchAll(/navigate\((?!linkPath\()[^)]*\)/g)) wrong.push(`${file}: ${call}`)
+    }
+    expect(wrong).toEqual([])
   })
 })
 

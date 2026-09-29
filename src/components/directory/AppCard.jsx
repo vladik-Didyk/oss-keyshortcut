@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import Link from '../SiteLink'
 import AppIcon from './AppIcon'
 import { CONTENT } from '../../data/content'
 import PlatformIcons from '../PlatformIcons'

@@ -43,8 +43,8 @@ describe('Footer', () => {
         <Footer />
       </MemoryRouter>
     )
-    expect(screen.getByRole('link', { name: /macos shortcuts/i })).toHaveAttribute('href', '/macos')
-    expect(screen.getByRole('link', { name: /mac hud app/i })).toHaveAttribute('href', '/mac-hud')
+    expect(screen.getByRole('link', { name: /macos shortcuts/i })).toHaveAttribute('href', '/macos/')
+    expect(screen.getByRole('link', { name: /mac hud app/i })).toHaveAttribute('href', '/mac-hud/')
     expect(screen.getByRole('link', { name: /privacy/i })).toHaveAttribute('href', '/privacy')
   })
 
@@ -54,8 +54,8 @@ describe('Footer', () => {
         <Footer />
       </MemoryRouter>
     )
-    expect(screen.getByRole('link', { name: /macos shortcuts/i })).toHaveAttribute('href', '/macos')
-    expect(screen.getByRole('link', { name: /mac hud app/i })).toHaveAttribute('href', '/mac-hud')
+    expect(screen.getByRole('link', { name: /macos shortcuts/i })).toHaveAttribute('href', '/macos/')
+    expect(screen.getByRole('link', { name: /mac hud app/i })).toHaveAttribute('href', '/mac-hud/')
   })
 })
 

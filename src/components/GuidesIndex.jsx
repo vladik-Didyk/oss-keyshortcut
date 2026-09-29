@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import Link from './SiteLink'
 import { GUIDES } from '../data/guides'
 import AdSlot from './AdSlot'
 import GuideCtaBanner from './GuideCtaBanner'

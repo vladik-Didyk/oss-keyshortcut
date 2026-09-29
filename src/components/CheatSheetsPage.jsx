@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
-import { Link, useLoaderData } from 'react-router'
+import { useLoaderData } from 'react-router'
+import Link from './SiteLink'
 import { Search, X, Download } from '../utils/icons'
 import AdSlot from './AdSlot'
 import SupportLink from './SupportLink'

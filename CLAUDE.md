@@ -12,6 +12,7 @@ Keyboard shortcuts directory website — a React site that serves as a multi-pla
 pnpm dev          # Start React Router dev server (HMR)
 pnpm build        # Build icons + sitemap + React Router build (SSR + pre-render) → build/
 pnpm sitemap      # Regenerate sitemap.xml only
+pnpm page-dates   # Record the day each app page's shortcut list last changed (run after `pnpm export`, before the commit)
 pnpm rss          # Regenerate rss.xml only
 pnpm og-images    # Regenerate Open Graph images only
 pnpm icons        # Download app icons from Supabase Storage only
@@ -24,7 +25,7 @@ pnpm test:perf    # Run performance benchmarks
 pnpm test:perf:browser  # Run Playwright E2E performance tests
 pnpm run deploy   # Build + deploy the WORKING TREE (uncommitted changes included)
 scripts/deploy-clean.sh [--dry-run]  # Build committed HEAD in a clean folder, verify, deploy (preferred manual deploy)
-node scripts/verify-build.mjs [dir] [--strict]  # Check a build has the AdSense tag and JSON-LD that parses (+ analytics IDs with --strict)
+node scripts/verify-build.mjs [dir] [--strict]  # Check a build has the AdSense tag, JSON-LD that parses and no link in the form the host redirects (+ analytics IDs with --strict)
 pnpm export       # Export Supabase data to public/data/ JSON (maintainer only, needs .env)
 pnpm sync         # Run shortcut sync pipeline (scrape → diff → write to Supabase)
 pnpm sync:dry     # Dry run (no writes to Supabase)
@@ -92,6 +93,21 @@ Route modules live in `src/routes/` and export `loader`, `meta`, and a default c
 **Layout**: `src/layouts/directory-layout.jsx` wraps directory routes (home, platform-index, shortcut-page, privacy, about) with `<Navbar />` + `<Footer />`. The product page has its own Navbar/Footer.
 
 **SEO**: Route modules export `meta()` functions that return title, description, OG tags, Twitter Card tags, and canonical links (via `{ tagName: "link", rel: "canonical", ... }`). All meta is rendered server-side into pre-rendered HTML.
+
+**Title and description of an app page** (`CONTENT.meta.shortcutPage`, tested on every page in `app-page-meta.test.js`):
+- Title: `{App} Keyboard Shortcuts for {OS} — {N} shortcuts`. Over 60 characters the count is left out. No year: it would say the list was checked this year, and the data has no date. The page of the operating system names it once ("macOS Keyboard Shortcuts").
+- Description, 155 characters at most: `{App} shortcuts for {OS}: ` then two to four shortcuts the page opens with ("Start with these", else the everyday ones), each with the keys of that platform, then `All {N}, with a printable PDF.` Every page has its own.
+
+**Links inside the site** end with a slash, like canonical, `og:url` and the sitemap: the host answers the other form with 308.
+- Components import `Link` from `src/components/SiteLink.jsx`, never from `react-router`. It sends the target through `linkPath()` (`src/utils/siteUrl.js`), which keeps the query and the anchor: `/macos/macos#finder` becomes `/macos/macos/#finder`. `/privacy` and files stay as they are served.
+- A plain `<a href>` and a `navigate()` to a page use `linkPath()` too. `site-url.test.js` fails on the router's own `Link`, on `href="/guides"` and on `navigate(` without it.
+- `verify-build.mjs` reads every link, canonical and `og:url` of every built page and fails on one in the wrong form.
+
+**Sitemap dates** (`<lastmod>`): stated only where the day of the last change is known.
+- An app page: the day its shortcut list last changed, from `src/data/pageDates.json`. `pnpm page-dates` writes that record from the git history of `public/data/platforms/*.json`; it needs the full history.
+- Each entry holds a hash of the list. A list with another hash changed after the record was written (CI exports fresh data before it builds) and gets the day of the build.
+- A guide: its `lastUpdated`. A platform page, a comparison, the home page, `/cheat-sheets`, `/guides`: the latest day of what they are made of. `/mac-hud`, `/about`, `/sponsor`, `/privacy`: no `<lastmod>`.
+- The day of the build is not a day of change. Before 2026-09-29 every page claimed it.
 
 **Structured data (JSON-LD)**: built in `src/utils/structuredData.js`, written by `<JsonLd>` (`src/components/JsonLd.jsx`) from the route modules.
 

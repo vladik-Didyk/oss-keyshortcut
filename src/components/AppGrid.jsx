@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import Link from './SiteLink'
 import AppIcon from './directory/AppIcon'
 import { useInView } from '../hooks/useInView'
 import { CONTENT } from '../data/content'
@@ -67,7 +67,7 @@ export default function AppGrid({ appCategories }) {
 
         <div className="text-center mt-10">
           <a
-            href="/macos"
+            href="/macos/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-accent hover:underline font-medium"

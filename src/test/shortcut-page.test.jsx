@@ -237,7 +237,7 @@ describe('app page author line', () => {
   it('names the author of the About page and links there', () => {
     render(page())
     const link = screen.getByRole('link', { name })
-    expect(link).toHaveAttribute('href', '/about')
+    expect(link).toHaveAttribute('href', '/about/')
     expect(link.closest('p')).toHaveTextContent(`${CONTENT.shortcutPage.author.label} ${name}`)
   })
 
@@ -348,7 +348,7 @@ describe('app page: the Mac app card in the slot', () => {
     render(page(pageData(figma)))
     expect(document.querySelectorAll(`aside[aria-label="${c.label}"]`)).toHaveLength(1)
     const link = card().querySelector('a')
-    expect(link.getAttribute('href')).toBe('/mac-hud')
+    expect(link.getAttribute('href')).toBe('/mac-hud/')
     expect(card().textContent).toContain(c.name)
     expect(card().textContent).toContain(c.line('Figma'))
     expect(renderToString(page(pageData(figma)))).toContain(c.name)
@@ -435,7 +435,7 @@ describe('app page top on a phone', () => {
   it('the other platforms of the app are shown, each one a link', () => {
     render(page(withWindows()))
     const link = within(header()).getByRole('link', { name: 'Windows' })
-    expect(link).toHaveAttribute('href', `/windows/${APP.slug}`)
+    expect(link).toHaveAttribute('href', `/windows/${APP.slug}/`)
     expect(phone(link.closest('li'))).not.toContain('hidden')
   })
 

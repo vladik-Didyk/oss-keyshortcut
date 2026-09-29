@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import Link from './SiteLink'
 import { ArrowRight } from '../utils/icons'
 import { CONTENT } from '../data/content'
 import { HOUSE_CARD } from '../data/sponsors'
@@ -19,7 +19,7 @@ export default function HouseCard({ appName, slug, className = '' }) {
         onClick={() => trackEvent('mac_hud_promo_clicked', { location: 'shortcut_mid', app: slug })}
         className="group flex items-center gap-4 min-h-[44px] mx-auto max-w-[560px] rounded-2xl border border-theme-border bg-theme-base-alt px-4 py-3.5 sm:px-5 no-underline transition-colors hover:border-theme-border-hover"
       >
-        <img src={HOUSE_CARD.icon} alt="" width={44} height={44} loading="lazy" className="w-11 h-11 shrink-0 rounded-[10px]" />
+        <img decoding="async" src={HOUSE_CARD.icon} alt="" width={44} height={44} loading="lazy" className="w-11 h-11 shrink-0 rounded-[10px]" />
         <span className="flex-1 min-w-0">
           <span className="block text-[15px] font-semibold text-theme-text">{c.name}</span>
           <span className="block text-[13px] leading-snug text-theme-muted mt-0.5">{c.line(appName)}</span>

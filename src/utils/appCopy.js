@@ -95,6 +95,23 @@ export function everydayShortcuts(app, count = 6) {
   return picked
 }
 
+/** The shortcuts a page opens with: the note's essentials if the note fits the page, else the everyday ones. */
+export function leadShortcuts(app, note) {
+  return noteFitsApp(note, app) ? resolveEssentials(note.essentials, app) : everydayShortcuts(app)
+}
+
+/**
+ * head + items + tail in `limit` characters: as many of the first `most` items
+ * as fit, joined by commas. '' when fewer than two fit: one item is no list.
+ */
+export function fitList(head, items, tail, limit, most = 4) {
+  for (let n = Math.min(most, items.length); n >= 2; n--) {
+    const text = `${head}${items.slice(0, n).join(', ')}${tail}`
+    if (text.length <= limit) return text
+  }
+  return ''
+}
+
 /** The largest sections, e.g. [{ name: 'Editing', count: 46 }, ...]. */
 export function largestSections(app, count = 3) {
   return [...(app.sections || [])]

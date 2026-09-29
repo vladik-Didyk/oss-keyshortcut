@@ -1,5 +1,6 @@
 import React, { useState, useDeferredValue, useMemo, useRef, useEffect, useCallback } from 'react'
-import { useLoaderData, useNavigate, Link } from 'react-router'
+import { useLoaderData, useNavigate } from 'react-router'
+import Link from './SiteLink'
 import { Search, X, ArrowRight } from '../utils/icons'
 import { usePlatformData, prefetchPlatform } from '../hooks/usePlatformData'
 import { groupByCategories, getPopularApps, parseKeyParts } from '../utils/platformHelpers'
@@ -14,6 +15,7 @@ import AdSlot from './AdSlot'
 import { APP_STORE_URL, APP_COUNT, SHORTCUT_COUNT } from '../data/siteConfig'
 import { trackEvent } from '../lib/analytics'
 import { POPULAR_APPS } from '../data/popularApps'
+import { linkPath } from '../utils/siteUrl'
 
 export default function DirectoryHomepage() {
   const loaderData = useLoaderData()
@@ -252,7 +254,7 @@ export default function DirectoryHomepage() {
               ? `/${selectedPlatform}/${smartResults.shortcutMatches[0].appSlug}`
               : null
       if (chosen) {
-        navigate(chosen)
+        navigate(linkPath(chosen))
         setSearch('')
         setDropdownOpen(false)
         searchRef.current?.blur()
@@ -331,6 +333,7 @@ export default function DirectoryHomepage() {
                     >
                       {p.icon && (
                         <img
+                          decoding="async"
                           src={`/images/platform-icons/${p.icon.replace('.png', '.webp')}`}
                           alt=""
                           width={15}
@@ -521,10 +524,11 @@ export default function DirectoryHomepage() {
               {POPULAR_APPS.map(app => (
                 <button
                   key={app.slug}
-                  onClick={() => { setSearch(''); setDropdownOpen(false); navigate(`/${selectedPlatform}/${app.slug}`) }}
+                  onClick={() => { setSearch(''); setDropdownOpen(false); navigate(linkPath(`/${selectedPlatform}/${app.slug}`)) }}
                   className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-full border border-theme-border bg-theme-base-alt hover:border-theme-border-hover transition-colors cursor-pointer text-[14px] text-theme-text outline-none focus-visible:ring-2 focus-visible:ring-theme-accent"
                 >
                   <img
+                    decoding="async"
                     src={`/images/app-icons/${app.slug}.webp`}
                     alt=""
                     width={18}
@@ -700,6 +704,7 @@ function SearchResultsInline({ results, platform }) {
                 className="flex items-center gap-3 px-4 py-3 rounded-xl no-underline hover:bg-theme-base-alt transition-colors"
               >
                 <img
+                  decoding="async"
                   src={`/images/app-icons/${app.slug}.webp`}
                   alt=""
                   width={36}
@@ -732,6 +737,7 @@ function SearchResultsInline({ results, platform }) {
                   className="flex items-center gap-2.5 mb-2 no-underline hover:opacity-80 transition-opacity"
                 >
                   <img
+                    decoding="async"
                     src={`/images/app-icons/${group.appSlug}.webp`}
                     alt=""
                     width={24}

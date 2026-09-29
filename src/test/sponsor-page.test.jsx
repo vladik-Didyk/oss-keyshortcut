@@ -316,7 +316,7 @@ describe('SponsorPage: what it shows', () => {
     expect(SPONSOR_PAGE_APPS.length).toBeGreaterThanOrEqual(8)
     for (const { slug, name } of SPONSOR_PAGE_APPS) {
       expect(macApps.find((a) => a.slug === slug)?.displayName, slug).toBe(name)
-      expect(screen.getByRole('link', { name })).toHaveAttribute('href', `/macos/${slug}`)
+      expect(screen.getByRole('link', { name })).toHaveAttribute('href', `/macos/${slug}/`)
     }
   })
 
@@ -416,7 +416,7 @@ describe('site wiring', () => {
         <Footer />
       </MemoryRouter>,
     )
-    expect(screen.getByRole('link', { name: 'Sponsor' })).toHaveAttribute('href', '/sponsor')
+    expect(screen.getByRole('link', { name: 'Sponsor' })).toHaveAttribute('href', '/sponsor/')
   })
 
   it('names Stripe in both copies of the privacy policy', () => {

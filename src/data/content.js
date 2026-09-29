@@ -2,7 +2,7 @@ import { APP_COUNT, SHORTCUT_COUNT, APP_PAGE_COUNT, PAGES_WITH_DOCS, MAC_APP_COU
 import { reportEmail, reportIssue } from '../utils/reportLinks'
 import { getAppNote } from './appNotes'
 import { SPONSOR_OFFER, SPONSOR_AUDIENCE } from './sponsors'
-import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys } from '../utils/appCopy'
+import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys, fitList } from '../utils/appCopy'
 import { pageUrl } from '../utils/siteUrl'
 
 /**
@@ -147,7 +147,9 @@ export const CONTENT = {
       text: 'This website uses cookies for advertising (Google AdSense) and analytics (Google Analytics, Microsoft Clarity, PostHog). By accepting, you consent to our use of cookies. If you decline, you get non-personalised ads and no analytics.',
       // EEA/UK/CH: Google's consent message covers ads; this banner covers analytics only.
       textGdpr: 'We would like to use analytics cookies (Google Analytics, Microsoft Clarity, PostHog) to see which pages people use. Your ad choices are set in Google\u2019s consent message.',
-      learnMore: 'Learn more',
+      // A link names where it leads: "Learn more" alone says nothing to a screen
+      // reader that lists the links of a page, or to a crawler.
+      learnMore: 'Privacy policy',
       accept: 'Accept',
       decline: 'Decline',
       dismissAria: 'Dismiss cookie banner',
@@ -1188,12 +1190,24 @@ export const CONTENT = {
       url: pageUrl(`/${platformId}`),
       image: `https://keyshortcut.com/images/og/${platformId}.png`,
     }),
-    shortcutPage: (appName, platformName, shortcutCount, platformId, slug) => ({
-      title: `${appName} ${platformName} Shortcuts \u2014 KeyShortcut`,
-      description: `All ${shortcutCount} ${appName} keyboard shortcuts for ${platformName}.`,
-      url: pageUrl(`/${platformId}/${slug}`),
-      image: `https://keyshortcut.com/images/og/${platformId}-${slug}.png`,
-    }),
+    // `lead`: shortcuts the page opens with, each as "Action Keys" (leadShortcuts
+    // in utils/appCopy). The description names as many as fit in 155 characters,
+    // so every page has its own, made of what the page holds. No year in the
+    // title: it would say the list was checked this year, and the data has no date.
+    shortcutPage: (appName, platformName, shortcutCount, platformId, slug, lead = []) => {
+      // The page of the operating system itself: "macOS", not "macOS for macOS".
+      const on = appName === platformName ? '' : ` for ${platformName}`
+      const name = `${appName} Keyboard Shortcuts${on}`
+      const withCount = `${name} \u2014 ${shortcutCount} shortcuts`
+      return {
+        title: withCount.length <= 60 ? withCount : name,
+        description:
+          fitList(`${appName} shortcuts${on}: `, lead, `. All ${shortcutCount}, with a printable PDF.`, 155) ||
+          `All ${shortcutCount} ${appName} keyboard shortcuts${on}, with a printable PDF.`,
+        url: pageUrl(`/${platformId}/${slug}`),
+        image: `https://keyshortcut.com/images/og/${platformId}-${slug}.png`,
+      }
+    },
   },
 
   // ─── Structured data (JSON-LD) ────────────────────────────────────

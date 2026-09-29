@@ -125,7 +125,7 @@ describe('JSON-LD of an app page', () => {
     expect(buildAppPageJsonLd({ ...macos, app: figma })).toEqual({
       '@context': 'https://schema.org',
       '@type': 'WebPage',
-      name: 'Figma macOS Shortcuts — KeyShortcut',
+      name: `Figma Keyboard Shortcuts for macOS — ${figma.shortcutCount} shortcuts`,
       url: 'https://keyshortcut.com/macos/figma/',
       about: {
         '@type': 'SoftwareApplication',

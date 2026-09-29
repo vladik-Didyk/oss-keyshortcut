@@ -10,6 +10,7 @@ export default function AppIcon({ slug, displayName, size = 48, className = '', 
   if (data.type === 'image' && !imgError) {
     return (
       <img
+        decoding="async"
         src={data.src}
         alt=""
         width={size}

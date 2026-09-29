@@ -1,9 +1,10 @@
 import React, { useState, useDeferredValue, useMemo, useRef, useEffect } from 'react'
-import { Link, useLoaderData, useNavigate } from 'react-router'
+import { useLoaderData, useNavigate } from 'react-router'
+import Link from './SiteLink'
 import { Search, X } from '../utils/icons'
 import { groupByCategories } from '../utils/platformHelpers'
 import { buildSearchIndex, searchIndex, parseAppQuery } from '../utils/searchHelpers'
-import { pageUrl } from '../utils/siteUrl'
+import { linkPath, pageUrl } from '../utils/siteUrl'
 import { categoryConfig } from '../data/categoryConfig'
 import { CONTENT } from '../data/content'
 import AppCard from './directory/AppCard'
@@ -109,11 +110,11 @@ export default function ShortcutsIndex() {
                   e.preventDefault()
                   const topApp = smartResults.appMatches[0]
                   if (topApp) {
-                    navigate(`/${platform}/${topApp.slug}`)
+                    navigate(linkPath(`/${platform}/${topApp.slug}`))
                     setSearch('')
                     searchRef.current?.blur()
                   } else if (smartResults.shortcutMatches[0]) {
-                    navigate(`/${platform}/${smartResults.shortcutMatches[0].appSlug}`)
+                    navigate(linkPath(`/${platform}/${smartResults.shortcutMatches[0].appSlug}`))
                     setSearch('')
                     searchRef.current?.blur()
                   }

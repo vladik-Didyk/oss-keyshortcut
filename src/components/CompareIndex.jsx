@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import Link from './SiteLink'
 import { COMPARISONS } from '../data/comparisons'
 
 export default function CompareIndex() {

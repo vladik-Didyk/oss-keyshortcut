@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router'
+import { useLocation } from 'react-router'
+import Link from './SiteLink'
 import { Menu, X } from '../utils/icons'
 import { CONTENT } from '../data/content'
 import { APP_STORE_URL } from '../data/siteConfig'
@@ -57,7 +58,7 @@ export default function Navbar() {
       <div className="mx-auto max-w-[980px] px-5 md:px-6 flex items-center justify-between h-12">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2.5 no-underline" onClick={closeMenu}>
-            <img src="/images/app-icon.svg" alt="KeyShortcut icon" width={28} height={28} className="rounded-lg" />
+            <img decoding="async" src="/images/app-icon.svg" alt="KeyShortcut icon" width={28} height={28} className="rounded-lg" />
             <span className="text-base font-semibold text-theme-text">KeyShortcut</span>
           </Link>
           <div className="hidden md:flex items-center gap-4">

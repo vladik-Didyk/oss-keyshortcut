@@ -126,6 +126,7 @@ export default function CreatorBanner() {
               className="inline-flex items-center justify-center no-underline transition-opacity hover:opacity-80"
             >
               <img
+                decoding="async"
                 src="/images/app-store-badge.png"
                 alt="Download on the App Store"
                 width={140}
@@ -176,6 +177,7 @@ function AvatarImage({ src, name }) {
 
   return (
     <img
+      decoding="async"
       src={src}
       alt={name}
       width={48}

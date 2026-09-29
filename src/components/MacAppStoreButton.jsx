@@ -30,6 +30,7 @@ export default function MacAppStoreButton({
       onClick={() => trackEvent(eventName, { destination: href, ...eventProps })}
     >
       <img
+        decoding="async"
         src="/images/app-store-badge.png"
         alt="Download on the App Store"
         width={195}

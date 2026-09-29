@@ -202,3 +202,65 @@ Proposal: start with the pages that have something to say.
 4. Vote card: stays at the top with numbers from the first one?
 5. Cookie banner: "Decline" for every visitor?
 6. Email obfuscation: will you switch it off in Cloudflare, or shall I do it in the dashboard?
+
+---
+
+# Phase 1: technical SEO
+
+Done on 2026-09-29, on the branch `growth-ux-overhaul`. Nothing is merged or deployed.
+
+Rules taken from the owner's answer to section 11: the closing slash stays, no year in titles, no date the data cannot prove, the vote card stays as it is.
+
+## 1. What changed
+
+| Item of the brief | What was done |
+|---|---|
+| Closing slash | Every link inside the site now ends with the slash, like canonical, `og:url` and the sitemap. One component (`SiteLink.jsx`) and one helper (`linkPath`) do it, so a new link cannot get it wrong |
+| Proof by reading the build | `verify-build.mjs` reads every link, canonical and `og:url` of every built page. Before: 208 link targets in the wrong form. After: 0 of 13,907 links on 208 pages. CI runs this check before every deploy |
+| Redirect for the other form | Nothing to add: the host answers it with one 308 |
+| Titles | `VS Code Keyboard Shortcuts for macOS — 71 shortcuts`. 60 characters at most; four long names leave the count out. No year |
+| Descriptions | `VS Code shortcuts for macOS: Command Palette ⇧⌘P, Quick Open File ⌘P, Toggle Terminal ⌃`, Add Next Match ⌘D. All 71, with a printable PDF.` 96 to 155 characters. Each of the 171 pages has its own, with two to four shortcuts from its "Start with these" |
+| Structured data | Already there. `dateModified` is left out (conflict 3) |
+| Sitemap dates | An app page states the day its shortcut list last changed, read from the git history: 126 pages 2026-03-31, 6 pages 2026-04-09, 39 pages 2026-09-28. Before, all 206 addresses claimed the day of the build. Pages without a known day state none |
+| Links between pages | Already there: every app page links to 8 or more other apps and to each of its comparisons. 34 pages link to fewer than 6 apps of their own category, because the category has fewer on that platform |
+| Images | `decoding="async"` on every image that does not load at once. `width`, `height` and lazy loading were there |
+| Link text | The link in the cookie banner said "Learn more". It now says "Privacy policy" |
+
+## 2. Lighthouse, before and after
+
+Both builds on a local server on this Mac, same method as Phase 0 (phone: median of three runs with real throttling; desktop: one run). Local numbers differ from the live ones of Phase 0: no CDN, no network distance.
+
+| Page | Device | Build | Performance | Accessibility | Best practices | SEO | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|---|---|
+| `/` | phone | before | 75 | 100 | 79 | 92 | 6.2 s | 0.002 | 46 ms |
+| `/` | phone | after | 76 | 100 | 79 | 100 | 6.2 s | 0.002 | 29 ms |
+| `/` | desktop | before | 97 | 100 | 78 | 92 | 1.0 s | 0.003 | 0 ms |
+| `/` | desktop | after | 99 | 100 | 78 | 100 | 0.9 s | 0.002 | 0 ms |
+| `/macos/vscode/` | phone | before | 98 | 100 | 79 | 92 | 1.5 s | 0.071 | 39 ms |
+| `/macos/vscode/` | phone | after | 98 | 100 | 79 | 100 | 1.5 s | 0.075 | 30 ms |
+| `/macos/vscode/` | desktop | before | 98 | 100 | 78 | 92 | 0.7 s | 0.078 | 0 ms |
+| `/macos/vscode/` | desktop | after | 99 | 100 | 78 | 100 | 0.7 s | 0.043 | 0 ms |
+| `/windows/excel/` | phone | before | 78 | 100 | 79 | 92 | 5.8 s | 0.013 | 45 ms |
+| `/windows/excel/` | phone | after | 78 | 100 | 79 | 100 | 6.0 s | 0.013 | 29 ms |
+| `/windows/excel/` | desktop | before | 98 | 100 | 78 | 92 | 0.7 s | 0.065 | 0 ms |
+| `/windows/excel/` | desktop | after | 99 | 100 | 78 | 100 | 0.7 s | 0.042 | 0 ms |
+
+- SEO went from 92 to 100 on every page.
+- Performance did not move, and was not meant to: that is Phase 5. The slow LCP on the phone is still the cookie banner.
+- Best practices stays at 78 to 79: a third-party cookie of AdSense, which the site cannot change.
+
+## 3. Left as it is, and why
+
+| Item of the brief | Why |
+|---|---|
+| Fixed height for every ad slot | The AdSense account is not approved, so no ad fills. A reserved height would be an empty box on every page today. To do on the day ads show, with a real ad to measure |
+| One image sheet for the app icons | The icons below the fold load only when they come into view, and the host serves them over HTTP/2. A sheet would load all 119 at once |
+| `dateModified` in the structured data | The data has no date. The sitemap now carries the day the list changed, which is what can be proven |
+| Email links | See 4 |
+
+## 4. For the owner
+
+1. **Email Address Obfuscation.** Cloudflare rewrites every email link and adds a render-blocking script. The switch is in the Cloudflare dashboard: keyshortcut.com, Security, Settings, "Email Address Obfuscation". It is a security setting of the domain, so it is the owner's to change. Cost of switching it off: the address in the links becomes readable to address collectors.
+2. **After `pnpm export`, run `pnpm page-dates`** before the commit, so the sitemap knows the new days. If it is forgotten, a changed list states the day of the build, as before.
+3. **Search Console.** Titles and descriptions of 171 pages change with this branch. Expect positions to move for one to three weeks after the deploy. Submit `sitemap.xml` again on that day.
+

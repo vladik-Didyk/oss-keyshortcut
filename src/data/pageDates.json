@@ -1,0 +1,688 @@
+{
+  "pages": {
+    "linux/blender": {
+      "changed": "2026-03-31",
+      "hash": "1e72b4c7def129c5"
+    },
+    "linux/chrome": {
+      "changed": "2026-03-31",
+      "hash": "7bc65544f95acb75"
+    },
+    "linux/discord": {
+      "changed": "2026-03-31",
+      "hash": "934df6adc157f5d4"
+    },
+    "linux/figma": {
+      "changed": "2026-03-31",
+      "hash": "c8a8779d6f4a7ea0"
+    },
+    "linux/firefox": {
+      "changed": "2026-03-31",
+      "hash": "43e4544218bac9d7"
+    },
+    "linux/linux": {
+      "changed": "2026-03-31",
+      "hash": "5dff78ee1605418f"
+    },
+    "linux/notion": {
+      "changed": "2026-03-31",
+      "hash": "46d249f8393a7a7a"
+    },
+    "linux/slack": {
+      "changed": "2026-03-31",
+      "hash": "1aa9b51b80b69845"
+    },
+    "linux/vim": {
+      "changed": "2026-03-31",
+      "hash": "8f3b4d6e50f4ac7d"
+    },
+    "linux/vscode": {
+      "changed": "2026-03-31",
+      "hash": "88322deb409af875"
+    },
+    "macos/1password": {
+      "changed": "2026-03-31",
+      "hash": "b2a4c632e5d6978a"
+    },
+    "macos/acrobat": {
+      "changed": "2026-09-28",
+      "hash": "422012b1e8c52bb9"
+    },
+    "macos/adobe-xd": {
+      "changed": "2026-09-28",
+      "hash": "d41c9c51118beafd"
+    },
+    "macos/after-effects": {
+      "changed": "2026-09-28",
+      "hash": "4c835e19654a0ae7"
+    },
+    "macos/android-studio": {
+      "changed": "2026-03-31",
+      "hash": "c8b77f8ce88e7497"
+    },
+    "macos/app-store": {
+      "changed": "2026-03-31",
+      "hash": "59e35eda15111f41"
+    },
+    "macos/apple-tv": {
+      "changed": "2026-09-28",
+      "hash": "482bbfd8e55a730e"
+    },
+    "macos/arc": {
+      "changed": "2026-03-31",
+      "hash": "b691cf7a7d445bf6"
+    },
+    "macos/asana": {
+      "changed": "2026-03-31",
+      "hash": "5ef9dfbb60b8e6db"
+    },
+    "macos/bear": {
+      "changed": "2026-04-09",
+      "hash": "0ea3de76c96f4ce4"
+    },
+    "macos/blender": {
+      "changed": "2026-03-31",
+      "hash": "050a63d75cd258e8"
+    },
+    "macos/brave": {
+      "changed": "2026-03-31",
+      "hash": "650d38ab92b1f5ea"
+    },
+    "macos/calendar": {
+      "changed": "2026-09-28",
+      "hash": "900ecba65a1e53ed"
+    },
+    "macos/canva": {
+      "changed": "2026-03-31",
+      "hash": "4f21f8f15b403d38"
+    },
+    "macos/chrome": {
+      "changed": "2026-09-28",
+      "hash": "1f763237e267baa7"
+    },
+    "macos/chrome-devtools": {
+      "changed": "2026-03-31",
+      "hash": "a9c90d9dce6b9cd9"
+    },
+    "macos/clickup": {
+      "changed": "2026-09-28",
+      "hash": "33a64f074c021faa"
+    },
+    "macos/clion": {
+      "changed": "2026-03-31",
+      "hash": "5e108e529a72f897"
+    },
+    "macos/confluence": {
+      "changed": "2026-03-31",
+      "hash": "e0cf37a928457c51"
+    },
+    "macos/contacts": {
+      "changed": "2026-03-31",
+      "hash": "c6811998d293802b"
+    },
+    "macos/cursor": {
+      "changed": "2026-03-31",
+      "hash": "6a6457dc50b1ea9a"
+    },
+    "macos/datagrip": {
+      "changed": "2026-03-31",
+      "hash": "783dba423988f4d5"
+    },
+    "macos/dataspell": {
+      "changed": "2026-03-31",
+      "hash": "9965e3dc177727dc"
+    },
+    "macos/davinci-resolve": {
+      "changed": "2026-03-31",
+      "hash": "4deeeef9527ae77a"
+    },
+    "macos/dbeaver": {
+      "changed": "2026-03-31",
+      "hash": "efe71c327dc2d55f"
+    },
+    "macos/discord": {
+      "changed": "2026-09-28",
+      "hash": "f37153f8509a7cd2"
+    },
+    "macos/disk-utility": {
+      "changed": "2026-03-31",
+      "hash": "a5a86a648e3fe7ec"
+    },
+    "macos/eclipse": {
+      "changed": "2026-03-31",
+      "hash": "6da6a6ecc39ff458"
+    },
+    "macos/edge": {
+      "changed": "2026-03-31",
+      "hash": "b01da36c8a6b0cb7"
+    },
+    "macos/emacs": {
+      "changed": "2026-09-28",
+      "hash": "3ef407b9af762192"
+    },
+    "macos/excel": {
+      "changed": "2026-03-31",
+      "hash": "b0f0c4e3b69d26a0"
+    },
+    "macos/figma": {
+      "changed": "2026-09-28",
+      "hash": "be3eae35652b956d"
+    },
+    "macos/final-cut-pro": {
+      "changed": "2026-03-31",
+      "hash": "ae15551ed469ba7f"
+    },
+    "macos/find-my": {
+      "changed": "2026-09-28",
+      "hash": "55470b460a51e99e"
+    },
+    "macos/firefox": {
+      "changed": "2026-03-31",
+      "hash": "db35a58387595619"
+    },
+    "macos/gimp": {
+      "changed": "2026-09-28",
+      "hash": "feb67c51e0510d61"
+    },
+    "macos/github": {
+      "changed": "2026-09-28",
+      "hash": "ef08219f52dc0b24"
+    },
+    "macos/gitlab": {
+      "changed": "2026-03-31",
+      "hash": "80acc7e6c5f7e787"
+    },
+    "macos/gmail": {
+      "changed": "2026-09-28",
+      "hash": "384ffb4f82ffe4fd"
+    },
+    "macos/godot": {
+      "changed": "2026-09-28",
+      "hash": "a365a92cdf29b317"
+    },
+    "macos/goland": {
+      "changed": "2026-03-31",
+      "hash": "d95f9de92f9aa649"
+    },
+    "macos/google-docs": {
+      "changed": "2026-03-31",
+      "hash": "b9490f4098d04ae4"
+    },
+    "macos/google-drive": {
+      "changed": "2026-04-09",
+      "hash": "13b261ec91ec398c"
+    },
+    "macos/google-sheets": {
+      "changed": "2026-03-31",
+      "hash": "9c92a8abb4d6589f"
+    },
+    "macos/illustrator": {
+      "changed": "2026-09-28",
+      "hash": "4423297bd82f4640"
+    },
+    "macos/imovie": {
+      "changed": "2026-03-31",
+      "hash": "686e766257a6f908"
+    },
+    "macos/inkscape": {
+      "changed": "2026-03-31",
+      "hash": "5793157fe937ec77"
+    },
+    "macos/insomnia": {
+      "changed": "2026-03-31",
+      "hash": "5aebdc0fd48cde5d"
+    },
+    "macos/intellij": {
+      "changed": "2026-03-31",
+      "hash": "b01ba2b895174a86"
+    },
+    "macos/iterm": {
+      "changed": "2026-03-31",
+      "hash": "570b4617e0e82730"
+    },
+    "macos/jira": {
+      "changed": "2026-03-31",
+      "hash": "4911f952327e9dc6"
+    },
+    "macos/jira-align": {
+      "changed": "2026-03-31",
+      "hash": "9b23e703ada00c5a"
+    },
+    "macos/jupyter": {
+      "changed": "2026-03-31",
+      "hash": "9659b75c83bbc5bc"
+    },
+    "macos/keynote": {
+      "changed": "2026-03-31",
+      "hash": "2cd921db302403c3"
+    },
+    "macos/macos": {
+      "changed": "2026-09-28",
+      "hash": "0b1b38da832bb3ee"
+    },
+    "macos/mail": {
+      "changed": "2026-03-31",
+      "hash": "a70aaf471220e01c"
+    },
+    "macos/maps": {
+      "changed": "2026-03-31",
+      "hash": "4c969ee0da2b0b4c"
+    },
+    "macos/matlab": {
+      "changed": "2026-09-28",
+      "hash": "188ab76eefce0b26"
+    },
+    "macos/maya": {
+      "changed": "2026-04-09",
+      "hash": "5337764e2f8d47e2"
+    },
+    "macos/messages": {
+      "changed": "2026-03-31",
+      "hash": "9836e07f7c4606fb"
+    },
+    "macos/music": {
+      "changed": "2026-04-09",
+      "hash": "8dc4b594ff0e3807"
+    },
+    "macos/news": {
+      "changed": "2026-03-31",
+      "hash": "cf91c9da6063cfb4"
+    },
+    "macos/notes": {
+      "changed": "2026-03-31",
+      "hash": "642ad0e957b9db9b"
+    },
+    "macos/notion": {
+      "changed": "2026-03-31",
+      "hash": "bc629d2bd90129de"
+    },
+    "macos/numbers": {
+      "changed": "2026-03-31",
+      "hash": "40362e065f8e4ca2"
+    },
+    "macos/obsidian": {
+      "changed": "2026-03-31",
+      "hash": "9eac31da79a852db"
+    },
+    "macos/opera": {
+      "changed": "2026-09-28",
+      "hash": "7d4778c22c17f8d2"
+    },
+    "macos/pages": {
+      "changed": "2026-09-28",
+      "hash": "ac17b2ba187408ca"
+    },
+    "macos/photos": {
+      "changed": "2026-04-09",
+      "hash": "721c71786e90f383"
+    },
+    "macos/photoshop": {
+      "changed": "2026-09-28",
+      "hash": "922529415d84d75b"
+    },
+    "macos/phpstorm": {
+      "changed": "2026-03-31",
+      "hash": "ea2ddf9edcee34d3"
+    },
+    "macos/podcasts": {
+      "changed": "2026-03-31",
+      "hash": "53f5b85f58a10147"
+    },
+    "macos/postman": {
+      "changed": "2026-03-31",
+      "hash": "eda7f1ad185d7f5f"
+    },
+    "macos/powerpoint": {
+      "changed": "2026-03-31",
+      "hash": "711daf1d0fc663e5"
+    },
+    "macos/premiere-pro": {
+      "changed": "2026-03-31",
+      "hash": "7214915ef959edff"
+    },
+    "macos/preview": {
+      "changed": "2026-03-31",
+      "hash": "010a7896267465d9"
+    },
+    "macos/pycharm": {
+      "changed": "2026-03-31",
+      "hash": "316a638b4a691517"
+    },
+    "macos/raycast": {
+      "changed": "2026-09-28",
+      "hash": "0b2bd3734023cb6d"
+    },
+    "macos/reminders": {
+      "changed": "2026-03-31",
+      "hash": "64903bddb861a665"
+    },
+    "macos/rider": {
+      "changed": "2026-03-31",
+      "hash": "8be52359e601a9fc"
+    },
+    "macos/rstudio": {
+      "changed": "2026-03-31",
+      "hash": "97147c335e69fd4f"
+    },
+    "macos/rubymine": {
+      "changed": "2026-03-31",
+      "hash": "4eac77cce8665d34"
+    },
+    "macos/safari": {
+      "changed": "2026-09-28",
+      "hash": "1e07bb7a468584ed"
+    },
+    "macos/sketch": {
+      "changed": "2026-09-28",
+      "hash": "e91e8a7a6d292614"
+    },
+    "macos/slack": {
+      "changed": "2026-09-28",
+      "hash": "81aae0b0c5a74ad4"
+    },
+    "macos/spotify": {
+      "changed": "2026-03-31",
+      "hash": "374b1c767ea9f760"
+    },
+    "macos/spotlight": {
+      "changed": "2026-03-31",
+      "hash": "cfbf3e4b2f99e005"
+    },
+    "macos/sql-developer": {
+      "changed": "2026-03-31",
+      "hash": "b0d98bc636cfe63b"
+    },
+    "macos/stata": {
+      "changed": "2026-03-31",
+      "hash": "a09e10c99dbff4c6"
+    },
+    "macos/sublime-text": {
+      "changed": "2026-09-28",
+      "hash": "559f4017b1f3d43b"
+    },
+    "macos/teams": {
+      "changed": "2026-03-31",
+      "hash": "b9d641f2b17aba04"
+    },
+    "macos/telegram": {
+      "changed": "2026-09-28",
+      "hash": "e84478810e6b8fea"
+    },
+    "macos/terminal": {
+      "changed": "2026-09-28",
+      "hash": "8d8addcc0a75b220"
+    },
+    "macos/things": {
+      "changed": "2026-03-31",
+      "hash": "989bbda46402c21c"
+    },
+    "macos/todoist": {
+      "changed": "2026-09-28",
+      "hash": "03dba860c739b437"
+    },
+    "macos/tor-browser": {
+      "changed": "2026-09-28",
+      "hash": "9e7c5946cc0e10bb"
+    },
+    "macos/tower": {
+      "changed": "2026-09-28",
+      "hash": "873cb5ebeec1ec25"
+    },
+    "macos/trello": {
+      "changed": "2026-03-31",
+      "hash": "8ff5a2b7c00dea77"
+    },
+    "macos/unity": {
+      "changed": "2026-03-31",
+      "hash": "f760d1ea937c8197"
+    },
+    "macos/unreal-engine": {
+      "changed": "2026-03-31",
+      "hash": "5c97519e12caf069"
+    },
+    "macos/vim": {
+      "changed": "2026-03-31",
+      "hash": "49c18d53843aa9fc"
+    },
+    "macos/visual-studio": {
+      "changed": "2026-09-28",
+      "hash": "9eb30f69a260a7df"
+    },
+    "macos/vivaldi": {
+      "changed": "2026-03-31",
+      "hash": "2facb0f66af648ff"
+    },
+    "macos/vlc": {
+      "changed": "2026-03-31",
+      "hash": "ccda45f11dc906b0"
+    },
+    "macos/voice-memos": {
+      "changed": "2026-03-31",
+      "hash": "9978944e45154087"
+    },
+    "macos/vscode": {
+      "changed": "2026-09-28",
+      "hash": "6dab24228876d5f1"
+    },
+    "macos/warp": {
+      "changed": "2026-03-31",
+      "hash": "c320d0e2a1babd11"
+    },
+    "macos/webflow": {
+      "changed": "2026-03-31",
+      "hash": "6781e47fdaa101d9"
+    },
+    "macos/webstorm": {
+      "changed": "2026-09-28",
+      "hash": "c0d2ff748d14ec6b"
+    },
+    "macos/word": {
+      "changed": "2026-03-31",
+      "hash": "6c74e217cb59064a"
+    },
+    "macos/wordpress": {
+      "changed": "2026-03-31",
+      "hash": "2ec2a4104dc1397a"
+    },
+    "macos/xcode": {
+      "changed": "2026-03-31",
+      "hash": "fac9534a5317299f"
+    },
+    "macos/zoom": {
+      "changed": "2026-09-28",
+      "hash": "bba5f3a86d411bfd"
+    },
+    "windows/acrobat": {
+      "changed": "2026-09-28",
+      "hash": "0d537967b900a85b"
+    },
+    "windows/adobe-xd": {
+      "changed": "2026-09-28",
+      "hash": "8874448fec702674"
+    },
+    "windows/canva": {
+      "changed": "2026-03-31",
+      "hash": "070b84c2bf551cfc"
+    },
+    "windows/chrome": {
+      "changed": "2026-03-31",
+      "hash": "f106fddbb6dfc202"
+    },
+    "windows/clickup": {
+      "changed": "2026-09-28",
+      "hash": "c0c4f96c0583fd11"
+    },
+    "windows/confluence": {
+      "changed": "2026-03-31",
+      "hash": "e658a773cb1e665e"
+    },
+    "windows/datagrip": {
+      "changed": "2026-03-31",
+      "hash": "5016b51074be8dfb"
+    },
+    "windows/dataspell": {
+      "changed": "2026-03-31",
+      "hash": "c5b1d8ce8eaf9cdd"
+    },
+    "windows/dbeaver": {
+      "changed": "2026-03-31",
+      "hash": "f6d223c73b4bb51b"
+    },
+    "windows/discord": {
+      "changed": "2026-03-31",
+      "hash": "7ef0b094780f4ca1"
+    },
+    "windows/excel": {
+      "changed": "2026-03-31",
+      "hash": "bfb47a1178f9b8ab"
+    },
+    "windows/figma": {
+      "changed": "2026-03-31",
+      "hash": "ec3206fddec34c65"
+    },
+    "windows/firefox": {
+      "changed": "2026-03-31",
+      "hash": "43e4544218bac9d7"
+    },
+    "windows/gimp": {
+      "changed": "2026-03-31",
+      "hash": "b55c0a273ab64e1a"
+    },
+    "windows/gitlab": {
+      "changed": "2026-03-31",
+      "hash": "80acc7e6c5f7e787"
+    },
+    "windows/godot": {
+      "changed": "2026-09-28",
+      "hash": "ed27bb4ca2d45555"
+    },
+    "windows/inkscape": {
+      "changed": "2026-03-31",
+      "hash": "fa95a947576de475"
+    },
+    "windows/insomnia": {
+      "changed": "2026-03-31",
+      "hash": "9070dd73341a4963"
+    },
+    "windows/jira-align": {
+      "changed": "2026-03-31",
+      "hash": "9b23e703ada00c5a"
+    },
+    "windows/jupyter": {
+      "changed": "2026-03-31",
+      "hash": "a82c9e5c2eb13bbe"
+    },
+    "windows/labview": {
+      "changed": "2026-03-31",
+      "hash": "322a500c62af1708"
+    },
+    "windows/matlab": {
+      "changed": "2026-03-31",
+      "hash": "8dc8eba575033477"
+    },
+    "windows/maya": {
+      "changed": "2026-04-09",
+      "hash": "7da3f1b0a95bb181"
+    },
+    "windows/minitab": {
+      "changed": "2026-03-31",
+      "hash": "1dec08405e46f2ef"
+    },
+    "windows/notion": {
+      "changed": "2026-03-31",
+      "hash": "65c8632b91674936"
+    },
+    "windows/opera": {
+      "changed": "2026-03-31",
+      "hash": "29c5d0049fc27393"
+    },
+    "windows/photoshop": {
+      "changed": "2026-03-31",
+      "hash": "b2e4fb394d2c7b91"
+    },
+    "windows/postman": {
+      "changed": "2026-03-31",
+      "hash": "06d6498c4d794c03"
+    },
+    "windows/powerpoint": {
+      "changed": "2026-03-31",
+      "hash": "d222b97c167ca85e"
+    },
+    "windows/premiere-pro": {
+      "changed": "2026-03-31",
+      "hash": "12be9cead5a2ce2b"
+    },
+    "windows/rider": {
+      "changed": "2026-03-31",
+      "hash": "7bc45bb61ef8596e"
+    },
+    "windows/rstudio": {
+      "changed": "2026-03-31",
+      "hash": "9ec90bc376cf3d84"
+    },
+    "windows/slack": {
+      "changed": "2026-03-31",
+      "hash": "42f65b664de631b4"
+    },
+    "windows/spss": {
+      "changed": "2026-03-31",
+      "hash": "78b10b79f45ff729"
+    },
+    "windows/sql-developer": {
+      "changed": "2026-03-31",
+      "hash": "f2e1bbc869e94d50"
+    },
+    "windows/stata": {
+      "changed": "2026-03-31",
+      "hash": "3935b7784ef06957"
+    },
+    "windows/teams": {
+      "changed": "2026-03-31",
+      "hash": "f649997258f01397"
+    },
+    "windows/tor-browser": {
+      "changed": "2026-03-31",
+      "hash": "b1b634b674199455"
+    },
+    "windows/tortoisegit": {
+      "changed": "2026-03-31",
+      "hash": "b9fe53feb24a5958"
+    },
+    "windows/unity": {
+      "changed": "2026-03-31",
+      "hash": "9a9ce94f47b491c1"
+    },
+    "windows/unreal-engine": {
+      "changed": "2026-03-31",
+      "hash": "1ada0a5102f17a11"
+    },
+    "windows/visual-studio": {
+      "changed": "2026-03-31",
+      "hash": "77bd624c04c169f7"
+    },
+    "windows/vscode": {
+      "changed": "2026-03-31",
+      "hash": "df1e10661e11f3b1"
+    },
+    "windows/webflow": {
+      "changed": "2026-03-31",
+      "hash": "7087936063b4ccba"
+    },
+    "windows/webstorm": {
+      "changed": "2026-03-31",
+      "hash": "816cc17b8ce885b5"
+    },
+    "windows/windows": {
+      "changed": "2026-03-31",
+      "hash": "c04920bb3cd2dd85"
+    },
+    "windows/word": {
+      "changed": "2026-03-31",
+      "hash": "2e5b4374abec7930"
+    },
+    "windows/wordpress": {
+      "changed": "2026-03-31",
+      "hash": "1700144beeee823f"
+    }
+  }
+}

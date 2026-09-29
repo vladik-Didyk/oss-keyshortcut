@@ -73,7 +73,7 @@ function SponsorBanner({ sponsor, className }) {
           className="inline-block rounded-2xl border border-theme-border hover:border-theme-border-hover transition-colors overflow-hidden no-underline"
         >
           {sponsor.image ? (
-            <img src={sponsor.image} alt={sponsor.alt || sponsor.name || 'Sponsor'} className="max-w-full h-auto max-h-24" />
+            <img decoding="async" src={sponsor.image} alt={sponsor.alt || sponsor.name || 'Sponsor'} className="max-w-full h-auto max-h-24" />
           ) : (
             <span className="block px-6 py-4 text-left">
               <span className="block text-[15px] font-semibold text-theme-text">{sponsor.name}</span>
