@@ -534,12 +534,18 @@ export const CONTENT = {
     author: { label: 'Maintained by', to: '/about' },
     // Panel under the shortcut list (ReportProblem.jsx). The links are built in utils/reportLinks.
     // Votes and counts. A number is on the page only when the server sent it,
-    // and the server sends it from the first real one (server/feedback.js).
+    // and the server sends none below its minimum (server/feedback.js).
     feedback: {
       title: 'Votes of visitors',
       prompt: 'Do these shortcuts work for you?',
-      // In the place of the numbers while the page has none to show.
-      empty: 'No votes to show yet. Yours can be the first.',
+      // In the place of the numbers while the page has none to show. It says
+      // nothing about how many voted: a count below the minimum is not known here.
+      empty: 'Your answer helps keep this page right.',
+      // The visitor's own vote, in the place of the count while the count is
+      // not public: the word, large like a number, and the label under it.
+      ownWord: 'You',
+      ownLabel: (vote) => (vote === 'works' ? 'said it works' : 'said it is not right'),
+      own: (vote) => (vote === 'works' ? 'You said it works' : 'You said it is not right'),
       // Under each number, and the same fact as a sentence for a screen reader.
       confirmedLabel: (n) => (n === 1 ? 'says it works' : 'say it works'),
       viewsLabel: (n) => (n === 1 ? 'view in a month' : 'views in a month'),

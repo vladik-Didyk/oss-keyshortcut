@@ -39,32 +39,18 @@ const times = async (n, fn) => {
 const votesOf = (n, item, kind = 'works', page = PAGE) =>
   times(n, (i) => castVote(db, { page, item, vote: kind, address: `10.0.0.${i}-${kind}` }, NOW, 0))
 
-describe('the first real number', () => {
-  it('every number is sent from the first one', () => {
-    expect(MINIMUM).toEqual({ votes: 1, views: 1, downloads: 1 })
+describe('counts', () => {
+  it('a small number is not for the public: the minimums', () => {
+    expect(MINIMUM).toEqual({ votes: 3, views: 100, downloads: 10 })
   })
 
-  it('a page nobody counted sends no zero', async () => {
-    expect(await pageNumbers(db, PAGE, NOW)).toEqual({ views: null, downloads: null, confirmed: null, items: {} })
-  })
-
-  it('one view, one download and one vote are sent as 1', async () => {
+  it('one view and one vote send nothing', async () => {
     await countEvent(db, PAGE, 'view', NOW)
     await countEvent(db, PAGE, 'pdf', NOW)
     await castVote(db, { page: PAGE, item: PAGE_ITEM, vote: 'works', address: 'a' }, NOW, 0)
-    await castVote(db, { page: PAGE, item: 'edit--group', vote: 'works', address: 'a' }, NOW, 0)
-    expect(await pageNumbers(db, PAGE, NOW)).toEqual({ views: 1, downloads: 1, confirmed: 1, items: { 'edit--group': 1 } })
+    expect(await pageNumbers(db, PAGE, NOW)).toEqual({ views: null, downloads: null, confirmed: null, items: {} })
   })
 
-  it('a vote that is taken back to "not right" sends no zero', async () => {
-    const one = { page: PAGE, item: PAGE_ITEM, address: 'a' }
-    await castVote(db, { ...one, vote: 'works' }, NOW, 0)
-    await castVote(db, { ...one, vote: 'broken' }, NOW, 0)
-    expect((await pageNumbers(db, PAGE, NOW)).confirmed).toBeNull()
-  })
-})
-
-describe('counts', () => {
   it('shows nothing below the minimum, and the number from the minimum up', async () => {
     await times(MINIMUM.views - 1, () => countEvent(db, PAGE, 'view', NOW))
     expect((await pageNumbers(db, PAGE, NOW)).views).toBeNull()

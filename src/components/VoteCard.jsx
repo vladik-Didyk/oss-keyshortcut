@@ -39,17 +39,18 @@ function useCountUp(value, duration = 700) {
   return Math.round(value * (1 - (1 - progress) ** 3))
 }
 
-function Stat({ icon, value, label, sentence }) {
+// One place of the card: a large green figure, a label under it, and the same
+// fact as a sentence for a screen reader.
+function Place({ icon, figure, label, sentence, item }) {
   const Icon = icon
-  const shown = useCountUp(value)
   return (
-    <li className="flex items-start sm:items-center gap-3 min-w-0">
+    <li data-stat={item} className="flex items-start sm:items-center gap-3 min-w-0">
       <span className="hidden sm:inline-flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-theme-good text-white">
         <Icon size={18} aria-hidden="true" />
       </span>
       <span className="min-w-0">
         <span aria-hidden="true" className="block text-[21px] sm:text-[24px] leading-none font-bold tracking-tight tabular-nums text-theme-good">
-          {shown.toLocaleString('en-US')}
+          {figure}
         </span>
         <span aria-hidden="true" className="block mt-1.5 text-[11px] sm:text-[13px] leading-tight sm:whitespace-nowrap text-theme-text/75">
           {label}
@@ -60,6 +61,11 @@ function Stat({ icon, value, label, sentence }) {
   )
 }
 
+function Stat({ value, ...place }) {
+  const shown = useCountUp(value)
+  return <Place {...place} figure={shown.toLocaleString('en-US')} />
+}
+
 /**
  * Votes and counts of an app page: a green card at the top of the page, under
  * the header. The numbers on the left, the question and its two buttons on
@@ -68,6 +74,10 @@ function Stat({ icon, value, label, sentence }) {
  * The card is in the page as it is served. The place of the numbers holds one
  * line of words until they arrive and has the same height after, so nothing
  * below the card moves.
+ *
+ * A count below its minimum is not public, so a visitor who votes may see no
+ * number change. Their own vote then stands in the place of the count ("You
+ * said it works"): it comes from their browser and is shown to nobody else.
  *
  *   numbers   from usePageFeedback; a value that is null is not printed
  *   mine      the visitor's vote on the page: 'works', 'broken' or undefined
@@ -87,8 +97,10 @@ export default function VoteCard({ numbers, mine, onVote, className = '' }) {
     timer.current = setTimeout(() => setThanks(null), 4000)
   }
 
+  const own = numbers.confirmed == null && (mine === 'works' || mine === 'broken')
   const stats = [
     numbers.confirmed != null && { key: 'confirmed', icon: BadgeCheck, value: numbers.confirmed, label: c.confirmedLabel(numbers.confirmed), sentence: c.confirmed(numbers.confirmed) },
+    own && { key: 'own', icon: mine === 'works' ? ThumbsUp : ThumbsDown, figure: c.ownWord, label: c.ownLabel(mine), sentence: c.own(mine) },
     numbers.views != null && { key: 'views', icon: Eye, value: numbers.views, label: c.viewsLabel(numbers.views), sentence: c.views(numbers.views) },
     numbers.downloads != null && { key: 'downloads', icon: Download, value: numbers.downloads, label: c.downloadsLabel(numbers.downloads), sentence: c.downloads(numbers.downloads) },
   ].filter(Boolean)
@@ -99,9 +111,9 @@ export default function VoteCard({ numbers, mine, onVote, className = '' }) {
         <div className="flex-1 min-w-0 min-h-[48px] flex items-center">
           {stats.length ? (
             <ul className="w-full grid grid-cols-3 gap-3 sm:gap-6 lg:flex lg:gap-12">
-              {stats.map(({ key, ...stat }) => (
-                <Stat key={key} {...stat} />
-              ))}
+              {stats.map(({ key, ...stat }) =>
+                key === 'own' ? <Place key={key} item={key} {...stat} /> : <Stat key={key} item={key} {...stat} />
+              )}
             </ul>
           ) : (
             <p className="m-0 flex items-center gap-3 text-[14px] leading-snug text-theme-text/80">

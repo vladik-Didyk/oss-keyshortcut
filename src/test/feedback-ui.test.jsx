@@ -224,19 +224,78 @@ describe('app page with the switch on', () => {
     expect(document.querySelector(`tr[data-item="${firstId}"]`).textContent).toContain('Confirmed by 1 visitor')
   })
 
-  it('the first vote of a page shows at once', async () => {
-    const calls = server({
-      '/api/visit': { enabled: true, numbers: { ...NONE, views: 1 } },
-      '/api/vote': { enabled: true, changed: true, numbers: { ...NONE, views: 1, confirmed: 1 } },
-    })
+  it('a small number does not count up from zero', async () => {
+    server({ '/api/visit': { enabled: true, numbers: { ...NONE, confirmed: 3 } } })
     render(page())
-    await waitFor(() => expect(calls).toHaveLength(1))
-    expect(voteCard().textContent).not.toContain('Confirmed by')
-    fireEvent.click(screen.getByRole('button', { name: c.worksLabel }))
-    await waitFor(() => expect(voteCard().textContent).toContain('Confirmed by 1 visitor'))
-    expect(voteCard().textContent).not.toContain(c.empty)
-    // Never "0 says it works": a small number does not count up.
-    expect([...voteCard().querySelectorAll('li .tabular-nums')].map((el) => el.textContent)).toEqual(['1', '1'])
+    await waitFor(() => expect(voteCard().querySelector('li')).not.toBeNull())
+    expect(voteCard().querySelector('li .tabular-nums').textContent).toBe('3')
+  })
+
+  // A count below the minimum is not public. The visitor who voted still sees
+  // that the vote was taken: their own line, in the place of the count.
+  describe('a vote on a page whose count is not public yet', () => {
+    const own = () => voteCard().querySelector('li[data-stat="own"]')
+
+    it('shows "You said it works" at once, and no number', async () => {
+      const calls = server({
+        '/api/visit': { enabled: true, numbers: NONE },
+        '/api/vote': { enabled: true, changed: true, numbers: NONE },
+      })
+      render(page())
+      await waitFor(() => expect(calls).toHaveLength(1))
+      expect(voteCard().textContent).toContain(c.empty)
+      fireEvent.click(screen.getByRole('button', { name: c.worksLabel }))
+      expect(own()).not.toBeNull()
+      expect(own().querySelector('.sr-only').textContent).toBe('You said it works')
+      expect(own().querySelector('.tabular-nums').textContent).toBe('You')
+      expect(own().querySelector('.tabular-nums + span').textContent).toBe('said it works')
+      await waitFor(() => expect(calls).toHaveLength(2))
+      expect(voteCard().textContent).not.toContain(c.empty)
+      expect(voteCard().textContent).not.toMatch(/Confirmed by|\d/)
+    })
+
+    it('shows "You said it is not right" for the other answer', async () => {
+      const calls = server({
+        '/api/visit': { enabled: true, numbers: NONE },
+        '/api/vote': { enabled: true, changed: true, numbers: NONE },
+      })
+      render(page())
+      await waitFor(() => expect(calls).toHaveLength(1))
+      fireEvent.click(screen.getByRole('button', { name: c.brokenLabel }))
+      expect(own().querySelector('.sr-only').textContent).toBe('You said it is not right')
+    })
+
+    it('is there again on the next visit, from the browser', async () => {
+      window.localStorage.setItem('ks-votes', JSON.stringify({ [PAGE]: { page: 'works' } }))
+      const calls = server({ '/api/visit': { enabled: true, numbers: { ...NONE, views: 240 } } })
+      render(page())
+      await waitFor(() => expect(calls).toHaveLength(1))
+      await waitFor(() => expect(own()).not.toBeNull())
+      expect([...voteCard().querySelectorAll('li')].map((li) => li.querySelector('.sr-only').textContent)).toEqual([
+        'You said it works',
+        '240 views in a month',
+      ])
+    })
+
+    it('gives way to the count once the count is public', async () => {
+      window.localStorage.setItem('ks-votes', JSON.stringify({ [PAGE]: { page: 'works' } }))
+      server({ '/api/visit': { enabled: true, numbers: { ...NONE, confirmed: 3 } } })
+      render(page())
+      await waitFor(() => expect(voteCard().textContent).toContain('Confirmed by 3 visitors'))
+      expect(own()).toBeNull()
+    })
+
+    it('is shown to nobody who did not vote', async () => {
+      const calls = server({ '/api/visit': { enabled: true, numbers: NONE } })
+      render(page())
+      await waitFor(() => expect(calls).toHaveLength(1))
+      expect(own()).toBeNull()
+      expect(voteCard().textContent).toContain(c.empty)
+    })
+  })
+
+  it('the line in the place of the numbers says nothing about how many voted', () => {
+    expect(c.empty).not.toMatch(/\d|no votes|first|nobody|yet/i)
   })
 
   it('prints no number the server did not send: the question and one line of words stay', async () => {
