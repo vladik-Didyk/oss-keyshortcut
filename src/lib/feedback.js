@@ -1,0 +1,77 @@
+// Votes and counts, the browser's side. The rules are on the server
+// (server/feedback.js); this file asks and remembers.
+//
+// What the browser keeps: the visitor's own votes (localStorage, so the
+// buttons show them again) and the pages counted in this tab (sessionStorage,
+// so a reload is not a second view). No cookie, no id of the visitor.
+// SSR-safe: every entry point guards `typeof window`.
+
+const VOTES_KEY = 'ks-votes'
+const SEEN_KEY = 'ks-seen'
+const OFF = { enabled: false }
+
+function readJson(storage, key) {
+  try {
+    const value = JSON.parse(storage.getItem(key) || '{}')
+    return value && typeof value === 'object' ? value : {}
+  } catch {
+    return {}
+  }
+}
+
+function writeJson(storage, key, value) {
+  try {
+    storage.setItem(key, JSON.stringify(value))
+  } catch {
+    // Storage is full or switched off: the vote is still sent.
+  }
+}
+
+async function post(path, body) {
+  try {
+    const response = await fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      keepalive: true,
+    })
+    const answer = await response.json()
+    return answer && typeof answer === 'object' ? { ...answer, status: response.status } : OFF
+  } catch {
+    // No such endpoint (pnpm dev), no network, or an answer that is not JSON.
+    return OFF
+  }
+}
+
+/** The visitor's own votes on a page: { <item>: 'works' | 'broken' }. */
+export function myVotes(page) {
+  if (typeof window === 'undefined') return {}
+  return readJson(window.localStorage, VOTES_KEY)[page] || {}
+}
+
+/** Counts the view (once per tab and page) and returns { enabled, numbers }. */
+export async function visitPage(page) {
+  if (typeof window === 'undefined') return OFF
+  const seen = readJson(window.sessionStorage, SEEN_KEY)
+  const count = !seen[page] && !navigator.webdriver
+  const answer = await post('/api/visit', { page, count })
+  if (count && answer.enabled) writeJson(window.sessionStorage, SEEN_KEY, { ...seen, [page]: 1 })
+  return answer
+}
+
+/** Sends a vote and remembers it. Returns the server's answer. */
+export async function sendVote(page, item, vote) {
+  if (typeof window === 'undefined') return OFF
+  const answer = await post('/api/vote', { page, item, vote })
+  if (answer.enabled && answer.status === 200) {
+    const all = readJson(window.localStorage, VOTES_KEY)
+    writeJson(window.localStorage, VOTES_KEY, { ...all, [page]: { ...all[page], [item]: vote } })
+  }
+  return answer
+}
+
+/** Counts a PDF download. Nothing waits for it. */
+export function countDownload(page) {
+  if (typeof window === 'undefined' || navigator.webdriver) return
+  post('/api/download', { page })
+}

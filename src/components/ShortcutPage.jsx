@@ -1,14 +1,18 @@
 import { Link, useLoaderData } from 'react-router'
 import React, { useState, useCallback, useDeferredValue, useEffect, useMemo, useRef } from 'react'
-import { Search, X, Download, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, Clipboard, CircleCheck, Flag } from '../utils/icons'
+import { Search, X, Download, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, Clipboard, CircleCheck, Flag, ThumbsUp } from '../utils/icons'
 import LastCheckedBadge from './LastCheckedBadge'
 import AuthorLine from './AuthorLine'
 import ReportProblem from './ReportProblem'
+import PageVote from './PageVote'
 import MacAppStoreButton from './MacAppStoreButton'
 import AppIcon from './directory/AppIcon'
 import { PlatformGlyph } from './PlatformIcons'
 import AppCard from './directory/AppCard'
 import { useScrollspy } from '../hooks/useScrollspy'
+import { usePageFeedback } from '../hooks/usePageFeedback'
+import { shortcutIds } from '../utils/feedbackIds'
+import { countDownload } from '../lib/feedback'
 import { CONTENT } from '../data/content'
 import { APP_STORE_URL } from '../data/siteConfig'
 import { pageUrl } from '../utils/siteUrl'
@@ -226,8 +230,7 @@ export default function ShortcutPage() {
     setHasMouse(!!window.matchMedia?.('(hover: hover) and (pointer: fine)').matches)
   }, [])
 
-  const reportAbout = useCallback((shortcut) => {
-    setReportShortcut({ action: shortcut.action, keys: parseKeyParts(shortcut.modifiers, shortcut.key).join(' + ') })
+  const openReport = useCallback(() => {
     const panel = reportRef.current
     if (!panel) return
     panel.open = true
@@ -235,6 +238,23 @@ export default function ShortcutPage() {
     panel.scrollIntoView({ block: 'center', behavior: calm ? 'auto' : 'smooth' })
     panel.querySelector('summary')?.focus({ preventScroll: true })
   }, [])
+
+  const reportAbout = useCallback((shortcut) => {
+    setReportShortcut({ action: shortcut.action, keys: parseKeyParts(shortcut.modifiers, shortcut.key).join(' + ') })
+    openReport()
+  }, [openReport])
+
+  // Votes and counts. Nothing of it shows until the server says it keeps votes,
+  // and a number shows only when the server sent it. The ids are in the served
+  // page (data-item): the server accepts a vote only for an id the page has.
+  const feedback = usePageFeedback(pagePath)
+  const itemIds = useMemo(() => shortcutIds(app.sections), [app])
+  const votePage = useCallback((value) => {
+    feedback.vote('page', value)
+    trackEvent('page_vote_cast', { app: slug, platform, vote: value })
+    if (value === 'broken') openReport()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [feedback.vote, slug, platform, openReport])
 
   // Compute action tokens (stripping app name tokens from the query)
   const deferredSearch = useDeferredValue(search)
@@ -331,6 +351,14 @@ export default function ShortcutPage() {
                       ))}
                     </li>
                   )}
+                  {feedback.numbers.confirmed != null && (
+                    <li className={FACT}>
+                      <span className="inline-flex items-baseline gap-1">
+                        <CircleCheck size={12} className="self-center" aria-hidden="true" />
+                        {sp.feedback.confirmed(feedback.numbers.confirmed)}
+                      </span>
+                    </li>
+                  )}
                   {(app.lastVerified || app.docsUrl) && (
                     <li className={FACT}>
                       <LastCheckedBadge
@@ -387,6 +415,7 @@ export default function ShortcutPage() {
                 const { generateShortcutPDF } = await import('../utils/generateShortcutPDF')
                 generateShortcutPDF(app)
                 trackEvent('shortcut_pdf_downloaded', { app: slug, platform, app_name: app.displayName })
+                countDownload(pagePath)
               }}
               className="inline-flex items-center justify-center gap-1.5 min-h-[44px] px-3.5 rounded-xl bg-theme-surface border border-[var(--theme-control-border)] sm:min-h-[40px] sm:px-1 sm:rounded-md sm:bg-transparent sm:border-transparent text-[13px] font-medium sm:font-normal text-theme-text hover:opacity-70 transition-opacity cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-theme-border-hover"
               title={sp.downloadTitle}
@@ -543,9 +572,35 @@ export default function ShortcutPage() {
                     </thead>
                     <tbody>
                       {section.shortcuts.map((s, j) => (
-                        <tr key={j} className={`group/row ${j % 2 === 1 ? 'shortcut-row-alt' : ''}`}>
+                        <tr key={j} data-item={itemIds.get(s)} className={`group/row ${j % 2 === 1 ? 'shortcut-row-alt' : ''}`}>
                           <td className="py-3 pr-3 text-theme-text text-[15px] break-words">
                             {s.action}
+                            {feedback.numbers.items[itemIds.get(s)] != null && (
+                              <span
+                                title={sp.feedback.rowConfirmed(feedback.numbers.items[itemIds.get(s)], s.action)}
+                                className="ml-2 inline-flex items-center gap-0.5 align-middle text-[11px] text-theme-muted"
+                              >
+                                <CircleCheck size={12} aria-hidden="true" />
+                                <span aria-hidden="true">{feedback.numbers.items[itemIds.get(s)]}</span>
+                                <span className="sr-only">{sp.feedback.confirmed(feedback.numbers.items[itemIds.get(s)])}</span>
+                              </span>
+                            )}
+                            {hasMouse && feedback.enabled && (
+                              <button
+                                type="button"
+                                tabIndex={-1}
+                                aria-pressed={feedback.mine[itemIds.get(s)] === 'works'}
+                                onClick={() => {
+                                  feedback.vote(itemIds.get(s), 'works')
+                                  trackEvent('shortcut_vote_cast', { app: slug, platform, action: s.action, vote: 'works' })
+                                }}
+                                title={sp.feedback.rowWorks(s.action)}
+                                aria-label={sp.feedback.rowWorks(s.action)}
+                                className={`ml-1.5 -my-1 inline-flex items-center justify-center w-6 h-6 align-middle rounded bg-transparent border-none cursor-pointer transition-opacity hover:!opacity-100 focus-visible:opacity-100 ${feedback.mine[itemIds.get(s)] === 'works' ? 'text-theme-text opacity-100' : 'text-theme-muted opacity-0 group-hover/row:opacity-60'}`}
+                              >
+                                <ThumbsUp size={12} aria-hidden="true" />
+                              </button>
+                            )}
                             {hasMouse && (
                               <button
                                 type="button"
@@ -593,6 +648,11 @@ export default function ShortcutPage() {
       </div>
 
       <div className="mx-auto max-w-[980px] px-5 md:px-6 pb-14">
+        {/* ─── Votes and counts of the page, while the server keeps them ─── */}
+        {feedback.enabled && (
+          <PageVote numbers={feedback.numbers} mine={feedback.mine.page} onVote={votePage} className="max-w-[720px] mb-4" />
+        )}
+
         {/* ─── What to fix, add or remove: by email or on GitHub ─── */}
         <ReportProblem
           page={pagePath}

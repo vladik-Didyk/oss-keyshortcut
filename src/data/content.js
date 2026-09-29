@@ -533,6 +533,23 @@ export const CONTENT = {
     // Line at the end of the FAQ. The name itself is about.cards.creator.name.
     author: { label: 'Maintained by', to: '/about' },
     // Panel under the shortcut list (ReportProblem.jsx). The links are built in utils/reportLinks.
+    // Votes and counts. A number is on the page only when the server sent it,
+    // and the server sends none below its minimum (server/feedback.js).
+    feedback: {
+      title: 'Votes of visitors',
+      question: 'Do these shortcuts work for you?',
+      works: 'Yes',
+      broken: 'No',
+      worksLabel: 'Yes, these shortcuts work for me',
+      brokenLabel: 'No, something is wrong',
+      thanksWorks: 'Counted. Thank you.',
+      thanksBroken: 'Counted. Tell us what is wrong below.',
+      confirmed: (n) => `Confirmed by ${n.toLocaleString('en-US')} visitors`,
+      views: (n) => `${n.toLocaleString('en-US')} views in a month`,
+      downloads: (n) => `${n.toLocaleString('en-US')} PDF downloads`,
+      rowWorks: (action) => `${action} works for me`,
+      rowConfirmed: (n, action) => `${action}: confirmed by ${n.toLocaleString('en-US')} visitors`,
+    },
     report: {
       title: 'Report a problem',
       kinds: { wrong: 'Wrong shortcut', missing: 'Missing shortcut', remove: 'Remove shortcut' },
@@ -661,6 +678,15 @@ export const CONTENT = {
             },
             { type: 'paragraph', text: 'Visitors in the EEA, the UK and Switzerland see Google\u2019s consent message, a certified consent tool, before ads use cookies. If you decline our cookie banner, you get non-personalised ads and no analytics. You can change your choice at any time with the "Cookie settings" link in the footer.' },
             { type: 'paragraph', text: 'These services apply only to the website. The KeyShortcut macOS app contains no analytics, advertising, or tracking of any kind.' },
+          ],
+        },
+        {
+          heading: 'Votes and Counts',
+          id: 'votes',
+          content: [
+            { type: 'paragraph', text: 'App pages let you say whether the shortcuts work, and may show how often a page was viewed and how often its PDF was downloaded. We keep these as plain numbers per page and per shortcut. A number is shown only when it is large enough.' },
+            { type: 'paragraph', text: 'To count one vote per person, a vote stores a scrambled form (a salted hash) of your network address. The address itself is not stored, the hash cannot be read back by us as an address, and it is deleted after 90 days. Views and downloads store no information about you.' },
+            { type: 'paragraph', text: 'Your own votes are also remembered in your browser (local storage), so the buttons show them when you come back. This uses no cookie and works without the cookie banner. Clearing the site data in your browser removes it.' },
           ],
         },
         {
