@@ -33,6 +33,7 @@ pnpm readme       # Regenerate README app directory from Supabase
 pnpm add-app      # Interactive CLI to add a new app (icon, shortcuts, all files)
 pnpm add-app:dry  # Preview add-app without writing
 pnpm check:redirects [base] [--all] [--wait=90]  # Legacy redirects on a running server (default keyshortcut.com): one 301, ending at 200
+pnpm pdf-bundle [platform] [--out dir]  # The PDF bundle that is sold: every cheat sheet of a platform in one file → dist/products/
 ```
 
 Add an app from JSON: `pnpm add-app -- --from-json path/to/app.json`
@@ -199,6 +200,20 @@ A visitor tells the developer what to fix, add or remove. Step 1 of three; votes
 - **About page**: "Suggest an app" by email, "Suggest on GitHub" beside it.
 - Event: `report_link_clicked` with `kind`, `channel`, `app`, `platform`, `shortcut`.
 
+### Votes and counts (`server/feedback.js`)
+
+Visitors say whether the shortcuts of a page work, and a page may show its views and PDF downloads.
+
+- **Storage** is a Cloudflare D1 database bound to the Pages project as `DB`. The tables are made on first use. Without the binding the three functions (`functions/api/visit.js`, `vote.js`, `download.js`) answer `{ enabled: false }` and the pages show nothing of it.
+- **A number below its minimum never leaves the server** (`MINIMUM`: 3 confirmations, 100 views in 30 days, 10 downloads). The page prints only numbers it received. Votes against a shortcut are never sent.
+- **One vote per network address and shortcut.** The address is stored only as a hash, salted with a value that lives in the database; hashes older than 90 days are deleted. 40 votes a day per address.
+- **A vote is accepted only for an id the served page has.** Rows carry `data-item` (`shortcutIds()` in `src/utils/feedbackIds.js`: section and action, in small letters and dashes); the function reads the page through `env.ASSETS`. Renaming a section or an action starts its count from zero.
+- **The browser** (`src/lib/feedback.js`) keeps the visitor's own votes in `localStorage` and the pages counted in this tab in `sessionStorage`. No cookie. A browser driven by a program is not counted.
+- **On the page:** the question under the list (`PageVote.jsx`; "No" opens the report panel), the numbers of the page, a count on a confirmed row, and for a mouse a "works for me" button on the row. The rules live on the server, so tests run them against a real SQLite (`src/test/helpers/d1.js`, `node:sqlite`).
+- **Local:** `wrangler pages dev build/client --d1 DB` gives a local database in `.wrangler/`.
+- **Reading the votes against a shortcut:** in the Cloudflare dashboard, D1 → the database → Console: `SELECT page, item, works, broken FROM votes WHERE broken > 0 ORDER BY broken DESC`.
+- The privacy page says what is kept: `CONTENT.privacy` and `public/privacy.html`, changed together.
+
 ### Icon imports
 
 `src/utils/icons.js` is a barrel re-export of `lucide-react` icons. Import icons from `../utils/icons` (not directly from `lucide-react`) to keep the tree-shake list centralized and Vite dev server compatible.
@@ -233,6 +248,9 @@ Vitest with jsdom environment, globals enabled, setup in `src/test/setup.js` (im
 - `key-words.test.js` — key symbols in words; scans `public/data/platforms/` for a symbol or punctuation key without a word
 - `shortcut-page.test.jsx` — app page: FAQ answers in the rendered and server-rendered HTML, accordion, hidden shortcut words, clipboard, author line
 - `performance.test.js` — benchmarks page load and rendering
+- `feedback-server.test.js` — votes and counts on the server: minimums, one vote per address, no address stored, refusals, the three endpoints
+- `feedback-ui.test.jsx` — votes and counts on the app page: nothing without a database, only numbers the server sent, ids of every shortcut of every page
+- `pdf-bundle.test.jsx` — the bundle file (contents, page numbers) and its offer, shown only with a link and a price
 - `mac-app-claims.test.jsx` — copy about the Mac app, checked against the app's source (build 3): fails on a promise of custom shortcuts (the app only imports packs), on "use it forever" and on "sends nothing over the internet"; also the "Switch it on in Settings." note for active app detection (once per page) and the `offers` block of the structured data (only with `APP_STORE_URL`)
 
 ### ESLint
@@ -273,7 +291,9 @@ Reference implementation (non-SSR variant) at `Personal-Portfolio/src/lib/analyt
 
 - **AdSense units:** `src/data/ads.js`. One In-article unit serves all placements (`IN_ARTICLE_UNIT`); a placement with an empty ID renders nothing. `AdSlot` never hides the slot with `display:none` before fill (AdSense then measures width 0 and never fills); card styling and the "Advertisements" label appear on fill, and `index.css` collapses `data-ad-status="unfilled"`. Ads render only in production builds.
 - **Affiliate links:** `src/data/affiliates.js`, keyed by app slug, plus `PLATFORM_FALLBACK` (Setapp on macOS pages). Kept out of Supabase because CI's `pnpm export` rewrites `public/data/`. Empty `url` = nothing renders. `AffiliateLink` uses `rel="sponsored nofollow noopener"`, puts the disclosure beside the button, fires `affiliate_clicked`. Programs: Adobe (Partnerize), Raycast (Rewardful), 1Password (CJ), Canva (Impact), Setapp (Impact). Figma closed its program (Jan 2025).
-- **Sponsors:** `src/data/sponsors.js` (`sitewide` or `byPath`). A sponsor replaces the mid-page AdSense unit on app pages; without one the spot holds the ad, or nothing. Sponsor images must be in `public/images/sponsors/` (CSP).
+- **Sponsors:** `src/data/sponsors.js` (`sitewide` or `byPath`). A page sold on its own shows its own sponsor, so the whole site is promised the pages that have none. Sponsor images must be in `public/images/sponsors/` (CSP).
+- **The slot of an app page** (after the second section, pages with three or more) holds one thing: a sponsor's card, else the site's own card for the Mac app (`HOUSE_CARD`, macOS pages, `HouseCard.jsx`), else the AdSense unit. `HOUSE_CARD.enabled: false` gives the slot back to the ad unit. The card makes no promise about active app detection, so it carries no note about Settings.
+- **PDF bundle:** `pnpm pdf-bundle` writes every cheat sheet of a platform into one file in `dist/products/` (not served, not in git). It is uploaded by hand to a seller that delivers the file after payment. `PDF_BUNDLE` in `src/data/products.js` holds the seller's link and the price; while either is empty, `/cheat-sheets` shows no offer. The single sheets stay free, and the offer says so. `drawAppSheet()` in `generateShortcutPDF.js` draws a sheet for both.
 - **No line that asks for a sponsor on app pages** (removed 2026-09-28). About 9,000 visitors a month over 171 app pages is about 54 a page: too few to sell one page, and every visitor read the line. The offer stays at `/sponsor`, linked from the footer; `/sponsor?page=<path>` still names a page, for a link sent by hand. Come back to it when traffic is several times higher.
 - **Sponsor offer (`/sponsor`):** prices, Stripe Payment Links and the go-live promise are `SPONSOR_OFFER` in `src/data/sponsors.js`; copy is `CONTENT.sponsorPage`. An option with an empty `paymentLink` books by email, so the page works before the links exist. `firstMonthCode` (a Stripe promotion code) switches the half-price line on. The page may state one audience figure, `SPONSOR_AUDIENCE`, always with its source and period; a test fails if the page mentions pageviews, click rates or income. `?page=` is accepted only when it has the shape of an app page (`isAppPagePath`).
 - **How `/sponsor` is built** (`SponsorPage.jsx`): top with a drawn app page that shows where the card sits, four figures, what you get, "Try your card", who sees it (app icons), price, steps, rules, questions.
