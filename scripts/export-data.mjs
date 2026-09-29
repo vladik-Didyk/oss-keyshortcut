@@ -12,10 +12,11 @@
  *   public/data/platforms/linux.json
  */
 import { createClient } from "@supabase/supabase-js";
-import { mkdirSync, writeFileSync } from "fs";
+import { mkdirSync, writeFileSync, readFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { cleanApps } from "./lib/clean-platform-data.mjs";
+import { keepOrder } from "./lib/keep-order.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -119,20 +120,14 @@ async function fetchPlatformApps(platformId) {
   );
   const transMap = Object.fromEntries(translations.map((t) => [t.key, t.value]));
 
-  // Assemble. Shortcuts come in the order of their sort_order: without it the
-  // database answers in the order it keeps its rows, which changes when rows
-  // are added. Rows with the same number keep the order they arrived in.
-  const inOrder = shortcuts
-    .map((sc, arrived) => ({ sc, arrived }))
-    .sort((a, b) => (a.sc.sort_order ?? 0) - (b.sc.sort_order ?? 0) || a.arrived - b.arrived)
-    .map(({ sc }) => sc);
-
+  // Assemble. `order` is for keepOrder(), which takes it out again.
   const shortcutsBySection = {};
-  for (const sc of inOrder) {
+  for (const sc of shortcuts) {
     (shortcutsBySection[sc.section_id] ||= []).push({
       modifiers: sc.modifiers.map((m) => modMap[m] || m),
       key: sc.key,
       action: transMap[sc.action_key] || sc.action_key,
+      order: sc.sort_order,
     });
   }
 
@@ -214,8 +209,10 @@ async function main() {
   // cleanApps: humanize untranslated action keys, merge duplicate sections,
   // drop duplicate rows (see scripts/lib/clean-platform-data.mjs).
   const appResults = (await Promise.all(platforms.map((p) => fetchPlatformApps(p.id)))).map(cleanApps);
+  // A shortcut the last export had stays where it was; new ones follow in the
+  // order of their file (scripts/lib/keep-order.mjs).
   const allApps = {};
-  platforms.forEach((p, i) => { allApps[p.id] = appResults[i]; });
+  platforms.forEach((p, i) => { allApps[p.id] = keepOrder(appResults[i], lastExport(p.id)); });
 
   // Build manifest
   const manifest = buildManifest(platforms, modSymbolsByPlatform, allApps);
@@ -243,6 +240,17 @@ async function main() {
 
   console.log("\n=== Export complete ===");
   console.log(`Files written to public/data/`);
+}
+
+/** The apps of a platform as the last export wrote them, or none. */
+function lastExport(platformId) {
+  const path = join(PLATFORMS_DIR, `${platformId}.json`);
+  if (!existsSync(path)) return [];
+  try {
+    return JSON.parse(readFileSync(path, "utf-8")).apps || [];
+  } catch {
+    return [];
+  }
 }
 
 function writeJSON(path, data) {
