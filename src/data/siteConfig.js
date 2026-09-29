@@ -22,6 +22,8 @@ export const APP_STORE_URL = import.meta.env.VITE_APP_STORE_ID
   : null
 export const SUPPORT_EMAIL = 'info@keyshortcut.com'
 export const SITE_NAME = 'KeyShortcut'
+// The public repository: the code, and the issues visitors open from the site.
+export const REPO_URL = 'https://github.com/vladik-Didyk/oss-keyshortcut'
 
 export function formatShortcutCount(count = SHORTCUT_COUNT) {
   return count.toLocaleString('en-US') + '+'

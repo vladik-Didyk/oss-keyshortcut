@@ -1,5 +1,5 @@
-import { APP_COUNT, SHORTCUT_COUNT, APP_PAGE_COUNT, PAGES_WITH_DOCS, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, APP_STORE_URL, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL } from './siteConfig'
-import { siteMailto } from '../utils/siteMailto'
+import { APP_COUNT, SHORTCUT_COUNT, APP_PAGE_COUNT, PAGES_WITH_DOCS, MAC_APP_COUNT, MAC_SHORTCUT_COUNT, PRICE, MIN_MACOS, APP_STORE_URL, formatShortcutCount, SITE_NAME, SUPPORT_EMAIL, REPO_URL } from './siteConfig'
+import { reportEmail, reportIssue } from '../utils/reportLinks'
 import { getAppNote } from './appNotes'
 import { SPONSOR_OFFER, SPONSOR_AUDIENCE } from './sponsors'
 import { noteFitsApp, resolveEssentials, everydayShortcuts, formatKeys } from '../utils/appCopy'
@@ -532,6 +532,17 @@ export const CONTENT = {
     everydayIntro: 'Everyday actions this app has shortcuts for:',
     // Line at the end of the FAQ. The name itself is about.cards.creator.name.
     author: { label: 'Maintained by', to: '/about' },
+    // Panel under the shortcut list (ReportProblem.jsx). The links are built in utils/reportLinks.
+    report: {
+      title: 'Report a problem',
+      kinds: { wrong: 'Wrong shortcut', missing: 'Missing shortcut', remove: 'Remove shortcut' },
+      email: 'Email',
+      github: 'GitHub',
+      note: 'GitHub is public. Email is private.',
+      aboutLabel: 'About:',
+      clearLabel: 'Report about the whole page',
+      rowLabel: (action) => `Report a problem with ${action}`,
+    },
     faqItems: (app, platformName) => {
       const name = typeof app === 'string' ? app : app.displayName
       const count = typeof app === 'string' ? null : app.shortcutCount
@@ -856,14 +867,16 @@ export const CONTENT = {
         title: 'Missing something?',
         text: 'Can\u2019t find your favorite app or noticed a wrong shortcut? Let me know and I\u2019ll add it. Every suggestion makes this resource better for everyone.',
         buttonLabel: 'Suggest an app',
-        buttonHref: siteMailto({ topic: 'App suggestion', page: '/about', body: 'App:\nWhere its shortcuts are listed (link):\n' }),
+        buttonHref: reportEmail({ kind: 'app', page: '/about' }),
+        githubLabel: 'Suggest on GitHub',
+        githubHref: reportIssue({ kind: 'app', page: '/about' }),
       },
       openSource: {
         label: 'Open source',
         title: 'Built in the open',
         text: 'KeyShortcut is open source. Browse the code, report issues, or contribute on GitHub.',
         buttonLabel: 'View on GitHub',
-        buttonHref: 'https://github.com/vladik-Didyk/KeyShortcut',
+        buttonHref: REPO_URL,
       },
       creator: {
         label: 'Created by',

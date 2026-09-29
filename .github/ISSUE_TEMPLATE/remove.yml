@@ -1,0 +1,41 @@
+name: Remove something
+description: A shortcut the app no longer has, or anything else that should not be on the site.
+title: "Remove: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: This issue is public. Write nothing private in it.
+  - type: input
+    id: app
+    attributes:
+      label: App
+      placeholder: Figma
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      placeholder: macOS, Windows or Linux
+  - type: input
+    id: shortcut
+    attributes:
+      label: Shortcut on the site
+      description: If it is about one shortcut - the action and the keys, as the site shows them.
+      placeholder: Duplicate (⌘ + D)
+  - type: textarea
+    id: what
+    attributes:
+      label: What to remove
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: The address of the page on keyshortcut.com.

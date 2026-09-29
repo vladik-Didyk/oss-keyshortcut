@@ -1,8 +1,9 @@
 import { Link, useLoaderData } from 'react-router'
 import React, { useState, useCallback, useDeferredValue, useEffect, useMemo, useRef } from 'react'
-import { Search, X, Download, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, Clipboard, CircleCheck } from '../utils/icons'
+import { Search, X, Download, Lightbulb, ChevronDown, ChevronLeft, ChevronRight, Clipboard, CircleCheck, Flag } from '../utils/icons'
 import LastCheckedBadge from './LastCheckedBadge'
 import AuthorLine from './AuthorLine'
+import ReportProblem from './ReportProblem'
 import MacAppStoreButton from './MacAppStoreButton'
 import AppIcon from './directory/AppIcon'
 import { PlatformGlyph } from './PlatformIcons'
@@ -211,6 +212,27 @@ export default function ShortcutPage() {
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
+  // Report a problem. The flag of a row is drawn in the browser and only where
+  // there is a mouse: it shows on hover, and 119 of them would weigh on the HTML
+  // of a page. On a phone, and for the keyboard, the panel under the list is the way in.
+  const [hasMouse, setHasMouse] = useState(false)
+  const [reportShortcut, setReportShortcut] = useState(null)
+  const reportRef = useRef(null)
+
+  useEffect(() => {
+    setHasMouse(!!window.matchMedia?.('(hover: hover) and (pointer: fine)').matches)
+  }, [])
+
+  const reportAbout = useCallback((shortcut) => {
+    setReportShortcut({ action: shortcut.action, keys: parseKeyParts(shortcut.modifiers, shortcut.key).join(' + ') })
+    const panel = reportRef.current
+    if (!panel) return
+    panel.open = true
+    const calm = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    panel.scrollIntoView({ block: 'center', behavior: calm ? 'auto' : 'smooth' })
+    panel.querySelector('summary')?.focus({ preventScroll: true })
   }, [])
 
   // Compute action tokens (stripping app name tokens from the query)
@@ -520,9 +542,21 @@ export default function ShortcutPage() {
                     </thead>
                     <tbody>
                       {section.shortcuts.map((s, j) => (
-                        <tr key={j} className={j % 2 === 1 ? 'shortcut-row-alt' : ''}>
+                        <tr key={j} className={`group/row ${j % 2 === 1 ? 'shortcut-row-alt' : ''}`}>
                           <td className="py-3 pr-3 text-theme-text text-[15px] break-words">
                             {s.action}
+                            {hasMouse && (
+                              <button
+                                type="button"
+                                tabIndex={-1}
+                                onClick={() => reportAbout(s)}
+                                title={sp.report.rowLabel(s.action)}
+                                aria-label={sp.report.rowLabel(s.action)}
+                                className="ml-1.5 -my-1 inline-flex items-center justify-center w-6 h-6 align-middle rounded bg-transparent border-none text-theme-muted opacity-0 group-hover/row:opacity-60 hover:!opacity-100 focus-visible:opacity-100 transition-opacity cursor-pointer"
+                              >
+                                <Flag size={12} aria-hidden="true" />
+                              </button>
+                            )}
                           </td>
                           <td className="py-3 pl-3 text-right align-middle">
                             <CopyableShortcut
@@ -566,6 +600,17 @@ export default function ShortcutPage() {
       </div>
 
       <div className="mx-auto max-w-[980px] px-5 md:px-6 pb-14">
+        {/* ─── What to fix, add or remove: by email or on GitHub ─── */}
+        <ReportProblem
+          page={pagePath}
+          app={app}
+          platform={{ id: platform, name: platformName }}
+          shortcut={reportShortcut}
+          onClear={() => setReportShortcut(null)}
+          detailsRef={reportRef}
+          className="max-w-[720px] mb-4"
+        />
+
         {/* ─── Related resources (cross-content links), after the list ─── */}
         <div className="max-w-[720px] rounded-2xl border border-theme-border bg-theme-base p-5">
           <p className="text-xs font-semibold uppercase tracking-wider text-theme-muted mb-3">
