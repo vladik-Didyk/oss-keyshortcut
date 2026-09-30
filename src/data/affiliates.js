@@ -43,7 +43,7 @@ export const PLATFORM_FALLBACK = {
     // Setapp's own approved line (brand cheat sheet, 2026-09-29). Its rules: write
     // "Setapp", never SetApp/SETAPP; never "bundle", "store" or "subscription service".
     tagline: 'A shortcut to the best Mac apps',
-    url: '',
+    url: 'https://setapp.sjv.io/c/7857038/343321/5114',
   },
 }
 
