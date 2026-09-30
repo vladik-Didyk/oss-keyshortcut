@@ -40,8 +40,8 @@ export const PLATFORM_FALLBACK = {
   macos: {
     program: 'Setapp (Impact)',
     label: 'Try Setapp',
-    // Setapp's own approved line (brand cheat sheet, 2026-09-29). Its rules: write
-    // "Setapp", never SetApp/SETAPP; never "bundle", "store" or "subscription service".
+    // Setapp's own approved line, from its brand cheat sheet (2026-09-29).
+    // The wording rules are checked in src/test/setapp-brand.test.js.
     tagline: 'A shortcut to the best Mac apps',
     url: 'https://setapp.sjv.io/c/7857038/343321/5114',
   },
