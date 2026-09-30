@@ -23,7 +23,7 @@ export const AFFILIATE_PROGRAMS = {
     state: 'applied',
     apply: 'https://setapp.com/affiliate-program',
     pays: '"earn $25 for every user you refer"',
-    note: 'Application in review at Impact since 2026-09-28. Shown on macOS pages of apps without a link of their own.',
+    note: 'Approved 2026-09-29 (MacPaw affiliate manager). Waiting for the Impact tracking link. Shown on macOS pages of apps without a link of their own.',
   },
   'Adobe (Partnerize)': {
     state: 'applied',
