@@ -59,32 +59,35 @@ describe('affiliates', () => {
     if (empty && !PLATFORM_FALLBACK.windows?.url) expect(getAffiliate(empty, 'windows')).toBeNull()
   })
 
-  it('renders the button with sponsored rel and a disclosure next to it', () => {
+  it('renders the link with sponsored rel and an "Ad" label that discloses it', () => {
     const affiliate = { program: 'Test', label: 'Get Figma', url: 'https://example.test/figma', kind: 'app' }
     render(<AffiliateLink affiliate={affiliate} appSlug="figma" platform="macos" />)
     const link = screen.getByRole('link', { name: /get figma/i })
     expect(link).toHaveAttribute('rel', 'sponsored nofollow noopener')
     expect(link).toHaveAttribute('target', '_blank')
-    expect(screen.getByText(/we may earn a commission/i)).toBeInTheDocument()
+    const ad = screen.getByRole('link', { name: /we may earn a commission/i })
+    expect(ad).toHaveTextContent(/^Ad$/)
+    expect(ad).toHaveAttribute('href', '/privacy#affiliate-links')
   })
 
-  it('shows a fallback program as a card: its own icon, name and line', () => {
+  it('shows a fallback program as a card: its own icon, name, title and line', () => {
     const affiliate = { ...PLATFORM_FALLBACK.macos, kind: 'platform' }
     const { container } = render(<AffiliateLink affiliate={affiliate} appSlug="figma" appName="Figma" platform="macos" />)
     const link = screen.getByRole('link', { name: new RegExp(affiliate.label, 'i') })
-    expect(link).toHaveTextContent(affiliate.name)
-    expect(link).toHaveTextContent(affiliate.tagline)
-    expect(link).not.toHaveTextContent('Figma')
+    expect(link).toHaveTextContent(affiliate.title)
+    expect(container).toHaveTextContent(affiliate.name)
+    expect(container).toHaveTextContent(affiliate.text)
+    expect(container).not.toHaveTextContent('Figma')
     expect(container.querySelector(`img[src="${affiliate.icon}"]`)).toBeInTheDocument()
     expect(existsSync(join(process.cwd(), 'public', affiliate.icon))).toBe(true)
   })
 
   it("shows an app's own program under the app's name, with its site when it has no line", () => {
     const affiliate = { program: 'Test', label: 'Get Raycast', url: 'https://www.raycast.com/?via=x', kind: 'app' }
-    render(<AffiliateLink affiliate={affiliate} appSlug="raycast" appName="Raycast" platform="macos" />)
-    const link = screen.getByRole('link', { name: /get raycast/i })
-    expect(link).toHaveTextContent('Raycast')
-    expect(link).toHaveTextContent('raycast.com')
+    const { container } = render(<AffiliateLink affiliate={affiliate} appSlug="raycast" appName="Raycast" platform="macos" />)
+    expect(screen.getByRole('link', { name: /get raycast/i })).toHaveTextContent('Get Raycast')
+    expect(container).toHaveTextContent('Raycast')
+    expect(container).toHaveTextContent('raycast.com')
   })
 
   it('renders nothing without an affiliate', () => {

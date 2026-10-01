@@ -52,10 +52,12 @@ describe('Setapp brand rules', () => {
     expect(hits.map((l) => l.where)).toEqual([])
   })
 
-  it('the button says "Setapp" and its line is one Setapp approved', () => {
+  it('the card says "Setapp" and its lines are ones Setapp approved', () => {
     for (const entry of setappEntries) {
       expect(entry.label).toMatch(/\bSetapp\b/)
-      if (entry.tagline) expect(APPROVED_LINES).toContain(entry.tagline)
+      expect(entry.name).toBe('Setapp')
+      expect(APPROVED_LINES).toContain(entry.title)
+      expect(APPROVED_LINES).toContain(entry.text.replace(/\.$/, ''))
     }
   })
 })

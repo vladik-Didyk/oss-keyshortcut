@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { ChevronDown, Flag, Mail, X } from '../utils/icons'
 import { CONTENT } from '../data/content'
-import { reportEmail, reportIssue } from '../utils/reportLinks'
+import { SUPPORT_EMAIL } from '../data/siteConfig'
+import { reportEmail, reportGmail, reportIssue } from '../utils/reportLinks'
 import { trackEvent } from '../lib/analytics'
 
 const KINDS = ['wrong', 'missing', 'remove']
@@ -33,6 +35,14 @@ export default function ReportProblem({ page, app, platform, shortcut, onClear, 
   const about = { page, app: app.displayName, platform: platform.name, shortcut }
   const count = (kind, channel) => () =>
     trackEvent('report_link_clicked', { kind, channel, app: app.slug, platform: platform.id, shortcut: shortcut?.action ?? null })
+  // The kind of the last Email click. An email link opens the computer's mail
+  // app; for a visitor without one, the panel then offers Gmail and the address.
+  const [emailed, setEmailed] = useState(null)
+  const [copied, setCopied] = useState(false)
+  const copyAddress = () => {
+    count(emailed, 'copy')()
+    navigator.clipboard?.writeText(SUPPORT_EMAIL).then(() => setCopied(true), () => {})
+  }
 
   return (
     <details ref={detailsRef} className={`group rounded-2xl border border-theme-border bg-theme-base ${className}`}>
@@ -66,7 +76,15 @@ export default function ReportProblem({ page, app, platform, shortcut, onClear, 
             <li key={kind} className="flex items-center justify-between gap-3 py-1">
               <span className="text-[14px] text-theme-text">{copy.kinds[kind]}</span>
               <span className="flex items-center gap-1 -mr-2.5 sm:-mr-3 shrink-0">
-                <a href={reportEmail({ kind, ...about })} onClick={count(kind, 'email')} className={LINK}>
+                <a
+                  href={reportEmail({ kind, ...about })}
+                  onClick={() => {
+                    count(kind, 'email')()
+                    setEmailed(kind)
+                    setCopied(false)
+                  }}
+                  className={LINK}
+                >
                   <Mail size={14} className="text-theme-muted" aria-hidden="true" />
                   {copy.email}
                 </a>
@@ -84,6 +102,28 @@ export default function ReportProblem({ page, app, platform, shortcut, onClear, 
             </li>
           ))}
         </ul>
+
+        {emailed && (
+          <p role="status" className="mt-2 flex flex-wrap items-center gap-x-3 text-[13px] text-theme-muted">
+            <span>{copy.mailHelp}</span>
+            <a
+              href={reportGmail({ kind: emailed, ...about })}
+              onClick={count(emailed, 'gmail')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center min-h-[44px] sm:min-h-[32px] text-theme-text underline underline-offset-2 hover:no-underline"
+            >
+              {copy.gmail}
+            </a>
+            <button
+              type="button"
+              onClick={copyAddress}
+              className="inline-flex items-center min-h-[44px] sm:min-h-[32px] p-0 bg-transparent border-none text-theme-text underline underline-offset-2 hover:no-underline cursor-pointer"
+            >
+              {copied ? copy.copied : copy.copyAddress(SUPPORT_EMAIL)}
+            </button>
+          </p>
+        )}
 
         <p className="mt-3 text-[12px] text-theme-muted">{copy.note}</p>
       </section>

@@ -618,6 +618,12 @@ export const CONTENT = {
       email: 'Email',
       github: 'GitHub',
       note: 'GitHub is public. Email is private.',
+      // Shown after a click on Email: the link opens the computer's mail app,
+      // and a visitor who writes in the browser may have none set up.
+      mailHelp: 'No mail app opened?',
+      gmail: 'Write in Gmail',
+      copyAddress: (address) => `Copy ${address}`,
+      copied: 'Copied',
       aboutLabel: 'About:',
       clearLabel: 'Report about the whole page',
       rowLabel: (action) => `Report a problem with ${action}`,
@@ -698,6 +704,7 @@ export const CONTENT = {
       return items
     },
     affiliate: {
+      ad: 'Ad',
       disclosure: 'Affiliate link: we may earn a commission, at no extra cost to you.',
       learnMore: 'How we make money',
     },

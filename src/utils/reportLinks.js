@@ -6,7 +6,7 @@
  * An email is private. An issue is public, so its forms ask for no address.
  */
 import { REPO_URL } from '../data/siteConfig'
-import { siteMailto } from './siteMailto'
+import { siteGmail, siteMailto } from './siteMailto'
 import { pageUrl } from './siteUrl'
 
 /**
@@ -51,13 +51,22 @@ const nameOf = (shortcut) => (shortcut ? `${shortcut.action} (${shortcut.keys})`
  *   app       name of the app ("Figma"), platform its name ("macOS"); both absent on a page about no app
  *   shortcut  { action, keys } when the report is about one shortcut
  */
-export function reportEmail({ kind, page, app, platform, shortcut }) {
+export function reportEmail(report) {
+  return siteMailto(emailMessage(report))
+}
+
+/** The same email as a Gmail compose window. Same arguments as reportEmail(). */
+export function reportGmail(report) {
+  return siteGmail(emailMessage(report))
+}
+
+function emailMessage({ kind, page, app, platform, shortcut }) {
   const { topic, about, ask } = REPORT_KINDS[kind]
   const lines = []
   if (app) lines.push(`App: ${app} (${platform})`)
   if (about === 'shortcut') lines.push(`Shortcut:${shortcut ? ` ${nameOf(shortcut)}` : ''}`)
   lines.push(...ask)
-  return siteMailto({ topic, page, body: `${lines.join('\n')}\n` })
+  return { topic, page, body: `${lines.join('\n')}\n` }
 }
 
 /** Link to a new issue, with the fields of its form filled in. Same arguments as reportEmail(). */

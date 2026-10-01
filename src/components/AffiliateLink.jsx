@@ -1,4 +1,3 @@
-import { ExternalLink } from '../utils/icons'
 import { CONTENT } from '../data/content'
 import { trackEvent } from '../lib/analytics'
 import AppIcon from './directory/AppIcon'
@@ -12,9 +11,11 @@ const hostOf = (url) => {
 }
 
 /**
- * Affiliate card, shaped like an App Store row: icon, name, one line, button.
- * The whole card is the link. The disclosure sits right under it (FTC: by the
- * link, not only in the footer or privacy page).
+ * Affiliate card, shaped like a native ad: a panel in the brand's colour with
+ * its icon, then the name, an "Ad" label, a title and one line.
+ * The title is the link and covers the whole card; the "Ad" label is a link of
+ * its own, above it, to how the site makes money (FTC: the disclosure sits on
+ * the link, not only in the footer or privacy page).
  * `affiliate` comes from getAffiliate() in src/data/affiliates.js; null renders nothing.
  * An app's own program shows the app's icon and name; a platform fallback
  * (Setapp) brings its own `name` and `icon`.
@@ -24,48 +25,59 @@ export default function AffiliateLink({ affiliate, appSlug, appName, platform, c
   const t = CONTENT.shortcutPage.affiliate
   const isApp = affiliate.kind === 'app'
   const name = isApp ? appName || affiliate.name : affiliate.name
-  const line = affiliate.tagline || hostOf(affiliate.url)
+  const title = affiliate.title || affiliate.label
+  const text = affiliate.text || hostOf(affiliate.url)
+
+  const icon = (size, cls) =>
+    isApp
+      ? name && <AppIcon slug={appSlug} displayName={name} size={size} className={cls} />
+      : affiliate.icon && (
+          <img src={affiliate.icon} alt="" aria-hidden="true" width={size} height={size} loading="lazy" decoding="async" className={`shrink-0 rounded-[22%] ${cls}`} />
+        )
 
   return (
-    <div className={className}>
-      <a
-        href={affiliate.url}
-        target="_blank"
-        rel="sponsored nofollow noopener"
-        aria-label={line ? `${affiliate.label}: ${line}` : affiliate.label}
-        onClick={() =>
-          trackEvent('affiliate_clicked', {
-            app: appSlug,
-            platform,
-            program: affiliate.program,
-            kind: affiliate.kind,
-            destination: affiliate.url,
-          })
-        }
-        className="group flex items-center gap-3.5 rounded-2xl bg-theme-base-alt border border-theme-border px-4 py-3 no-underline text-theme-text hover:border-theme-muted transition-colors"
+    <div className={`relative flex overflow-hidden rounded-2xl border border-theme-border bg-theme-base-alt hover:border-theme-muted transition-colors ${className}`}>
+      <div
+        aria-hidden="true"
+        className="flex shrink-0 items-center justify-center w-[88px] sm:w-[128px] bg-theme-surface"
+        style={affiliate.panel ? { backgroundColor: affiliate.panel } : undefined}
       >
-        {isApp ? (
-          name && <AppIcon slug={appSlug} displayName={name} size={44} className="w-11 h-11" />
-        ) : (
-          affiliate.icon && (
-            <img src={affiliate.icon} alt="" aria-hidden="true" width={44} height={44} loading="lazy" decoding="async" className="w-11 h-11 shrink-0 rounded-[22%]" />
-          )
-        )}
-        <span className="flex-1 min-w-0">
-          {name && <span className="block text-[15px] font-semibold leading-tight">{name}</span>}
-          {line && <span className="block mt-0.5 text-[13px] text-theme-muted leading-snug line-clamp-2">{line}</span>}
-        </span>
-        <span className="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-theme-accent text-theme-accent-text text-[13px] font-medium group-hover:opacity-90 transition-opacity">
-          {affiliate.label}
-          <ExternalLink size={13} aria-hidden="true" />
-        </span>
-      </a>
-      <p className="mt-2 px-1 text-[12px] text-theme-muted leading-snug">
-        {t.disclosure}{' '}
-        <a href="/privacy#affiliate-links" className="underline underline-offset-2 hover:no-underline">
-          {t.learnMore}
+        {icon(56, 'w-12 h-12 sm:w-14 sm:h-14')}
+      </div>
+
+      <div className="flex-1 min-w-0 py-3 pl-4 pr-3 sm:py-4 sm:pl-5 sm:pr-4">
+        <div className="flex items-center gap-2">
+          {icon(18, 'w-[18px] h-[18px]')}
+          {name && <span className="truncate text-[13px] text-theme-muted">{name}</span>}
+          <a
+            href="/privacy#affiliate-links"
+            aria-label={`${t.ad}. ${t.disclosure} ${t.learnMore}`}
+            title={t.disclosure}
+            className="relative z-10 ml-auto -my-3 inline-flex items-center min-h-[44px] sm:min-h-[32px] no-underline"
+          >
+            <span className="rounded-full bg-theme-surface px-2.5 py-0.5 text-[12px] font-medium text-theme-muted">{t.ad}</span>
+          </a>
+        </div>
+        <a
+          href={affiliate.url}
+          target="_blank"
+          rel="sponsored nofollow noopener"
+          aria-label={`${affiliate.label}: ${title}`}
+          onClick={() =>
+            trackEvent('affiliate_clicked', {
+              app: appSlug,
+              platform,
+              program: affiliate.program,
+              kind: affiliate.kind,
+              destination: affiliate.url,
+            })
+          }
+          className="mt-1 block text-[16px] sm:text-[17px] font-semibold leading-snug text-theme-text no-underline after:absolute after:inset-0 after:content-['']"
+        >
+          {title}
         </a>
-      </p>
+        {text && <p className="mt-0.5 text-[14px] leading-snug text-theme-muted line-clamp-2">{text}</p>}
+      </div>
     </div>
   )
 }

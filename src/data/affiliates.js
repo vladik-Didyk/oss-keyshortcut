@@ -15,7 +15,15 @@ export const AFFILIATES = {
   'after-effects': { program: 'Adobe (Partnerize)', label: 'Get After Effects', url: '' },
   'premiere-pro': { program: 'Adobe (Partnerize)', label: 'Get Premiere Pro', url: '' },
   acrobat: { program: 'Adobe (Partnerize)', label: 'Get Acrobat', url: '' },
-  raycast: { program: 'Raycast (Rewardful)', label: 'Get Raycast', url: 'https://raycast.com/?via=vlad-didyk' },
+  raycast: {
+    program: 'Raycast (Rewardful)',
+    label: 'Get Raycast',
+    url: 'https://raycast.com/?via=vlad-didyk',
+    // Raycast's own words: the title of raycast.com and its description (2026-10-01).
+    title: 'Your shortcut to everything',
+    text: 'A collection of powerful productivity tools all within an extendable launcher.',
+    panel: '#FF6363',
+  },
   '1password': { program: '1Password (CJ)', label: 'Get 1Password', url: '' },
   canva: { program: 'Canva (Impact)', label: 'Get Canva Pro', url: '' },
   // Added 2026-09-28, after every app of the directory was checked for a program.
@@ -43,9 +51,11 @@ export const PLATFORM_FALLBACK = {
     name: 'Setapp',
     // Cut from the cover of Setapp's brand cheat sheet, which allows its media.
     icon: '/images/affiliates/setapp.webp',
-    // Setapp's own approved line, from its brand cheat sheet (2026-09-29).
-    // The wording rules are checked in src/test/setapp-brand.test.js.
-    tagline: 'A shortcut to the best Mac apps',
+    // Setapp's own approved lines, from its brand cheat sheet (2026-09-29), and
+    // its pink. The wording rules are checked in src/test/setapp-brand.test.js.
+    title: 'A shortcut to the best Mac apps',
+    text: 'An essential toolbox for macOS and iOS.',
+    panel: '#FF02AB',
     url: 'https://setapp.sjv.io/c/7857038/343321/5114',
   },
 }

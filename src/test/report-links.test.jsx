@@ -10,7 +10,7 @@ import { CONTENT } from '../data/content'
 import { REPO_URL, SUPPORT_EMAIL } from '../data/siteConfig'
 import { MAIL_TAG } from '../utils/siteMailto'
 import { pageUrl } from '../utils/siteUrl'
-import { REPORT_KINDS, reportEmail, reportIssue } from '../utils/reportLinks'
+import { REPORT_KINDS, reportEmail, reportGmail, reportIssue } from '../utils/reportLinks'
 import { trackEvent } from '../lib/analytics'
 
 vi.mock('../lib/analytics', async (importOriginal) => ({
@@ -136,6 +136,18 @@ function page() {
   return <Stub initialEntries={['/macos/test-app']} hydrationData={{ loaderData: { app: data } }} />
 }
 
+describe('report by Gmail, for a visitor without a mail app', () => {
+  it('is the same message as the email, in a Gmail compose window', () => {
+    const mail = mailOf(reportEmail({ kind: 'wrong', ...figma, shortcut: duplicate }))
+    const url = new URL(reportGmail({ kind: 'wrong', ...figma, shortcut: duplicate }))
+    expect(url.origin + url.pathname).toBe('https://mail.google.com/mail/')
+    expect(url.searchParams.get('view')).toBe('cm')
+    expect(url.searchParams.get('to')).toBe(SUPPORT_EMAIL)
+    expect(url.searchParams.get('su')).toBe(mail.subject)
+    expect(url.searchParams.get('body')).toBe(mail.body)
+  })
+})
+
 describe('report panel on an app page', () => {
   const copy = CONTENT.shortcutPage.report
   const panel = () => screen.getByText(copy.title).closest('details')
@@ -191,6 +203,23 @@ describe('report panel on an app page', () => {
     expect(trackEvent).toHaveBeenCalledWith('report_link_clicked', expect.objectContaining({ kind: 'wrong', channel: 'github', app: 'test-app', platform: 'macos' }))
     fireEvent.click(email)
     expect(trackEvent).toHaveBeenCalledWith('report_link_clicked', expect.objectContaining({ kind: 'wrong', channel: 'email' }))
+  })
+
+  it('after a click on Email, offers Gmail and the address, for a computer with no mail app', () => {
+    const writeText = vi.fn(() => Promise.resolve())
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true })
+    render(page())
+    expect(within(panel()).queryByText(copy.mailHelp)).toBeNull()
+    const [email] = within(within(panel()).getAllByRole('listitem')[1]).getAllByRole('link')
+    fireEvent.click(email)
+    const help = within(panel()).getByRole('status')
+    expect(help).toHaveTextContent(copy.mailHelp)
+    const gmail = within(help).getByRole('link', { name: copy.gmail })
+    expect(gmail).toHaveAttribute('target', '_blank')
+    expect(new URL(gmail.getAttribute('href')).searchParams.get('su')).toBe(`${MAIL_TAG} ${REPORT_KINDS.missing.topic}`)
+    fireEvent.click(within(help).getByRole('button', { name: copy.copyAddress(SUPPORT_EMAIL) }))
+    expect(writeText).toHaveBeenCalledWith(SUPPORT_EMAIL)
+    expect(trackEvent).toHaveBeenCalledWith('report_link_clicked', expect.objectContaining({ kind: 'missing', channel: 'copy' }))
   })
 
   it('adds no button to the rows of the page as it is served', () => {
