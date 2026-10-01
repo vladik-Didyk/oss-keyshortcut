@@ -383,7 +383,7 @@ export default function ShortcutPage() {
             {sp.sectionsSummary(largestSections(app))}
           </p>
         )}
-        <AffiliateLink affiliate={affiliate} appSlug={slug} platform={platform} className="mt-4 max-w-[720px]" />
+        <AffiliateLink affiliate={affiliate} appSlug={slug} appName={app.displayName} platform={platform} className="mt-5 max-w-[720px]" />
 
         {/* ─── Shortcuts to start with: from the note (src/data/appNotes.js), or everyday ones from the data ─── */}
         {noteFits ? (

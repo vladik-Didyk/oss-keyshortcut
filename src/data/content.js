@@ -698,7 +698,7 @@ export const CONTENT = {
       return items
     },
     affiliate: {
-      disclosure: 'Affiliate link: we may earn a commission if you buy, at no extra cost to you.',
+      disclosure: 'Affiliate link: we may earn a commission, at no extra cost to you.',
       learnMore: 'How we make money',
     },
     moreAppsTitle: (platformName) => `Explore more ${platformName} apps`,

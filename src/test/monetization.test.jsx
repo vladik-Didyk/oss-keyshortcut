@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { readFileSync, readdirSync } from 'fs'
+import { existsSync, readFileSync, readdirSync } from 'fs'
 import { join } from 'path'
 import AdSlot from '../components/AdSlot'
 import AffiliateLink from '../components/AffiliateLink'
@@ -66,6 +66,25 @@ describe('affiliates', () => {
     expect(link).toHaveAttribute('rel', 'sponsored nofollow noopener')
     expect(link).toHaveAttribute('target', '_blank')
     expect(screen.getByText(/we may earn a commission/i)).toBeInTheDocument()
+  })
+
+  it('shows a fallback program as a card: its own icon, name and line', () => {
+    const affiliate = { ...PLATFORM_FALLBACK.macos, kind: 'platform' }
+    const { container } = render(<AffiliateLink affiliate={affiliate} appSlug="figma" appName="Figma" platform="macos" />)
+    const link = screen.getByRole('link', { name: new RegExp(affiliate.label, 'i') })
+    expect(link).toHaveTextContent(affiliate.name)
+    expect(link).toHaveTextContent(affiliate.tagline)
+    expect(link).not.toHaveTextContent('Figma')
+    expect(container.querySelector(`img[src="${affiliate.icon}"]`)).toBeInTheDocument()
+    expect(existsSync(join(process.cwd(), 'public', affiliate.icon))).toBe(true)
+  })
+
+  it("shows an app's own program under the app's name, with its site when it has no line", () => {
+    const affiliate = { program: 'Test', label: 'Get Raycast', url: 'https://www.raycast.com/?via=x', kind: 'app' }
+    render(<AffiliateLink affiliate={affiliate} appSlug="raycast" appName="Raycast" platform="macos" />)
+    const link = screen.getByRole('link', { name: /get raycast/i })
+    expect(link).toHaveTextContent('Raycast')
+    expect(link).toHaveTextContent('raycast.com')
   })
 
   it('renders nothing without an affiliate', () => {

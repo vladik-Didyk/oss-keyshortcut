@@ -40,6 +40,9 @@ export const PLATFORM_FALLBACK = {
   macos: {
     program: 'Setapp (Impact)',
     label: 'Try Setapp',
+    name: 'Setapp',
+    // Cut from the cover of Setapp's brand cheat sheet, which allows its media.
+    icon: '/images/affiliates/setapp.webp',
     // Setapp's own approved line, from its brand cheat sheet (2026-09-29).
     // The wording rules are checked in src/test/setapp-brand.test.js.
     tagline: 'A shortcut to the best Mac apps',
