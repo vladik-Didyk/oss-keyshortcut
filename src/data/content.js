@@ -781,6 +781,7 @@ export const CONTENT = {
                 { bold: 'Google AdSense', text: ' — may set cookies to serve and measure ads. These are governed by ', link: { text: 'Google\u2019s privacy policy', href: 'https://policies.google.com/privacy' }, textAfter: '.' },
                 { bold: 'Google Analytics, Microsoft Clarity, PostHog', text: ' — set analytics cookies only after you accept the cookie banner.' },
                 { bold: 'Affiliate partners', text: ' — may set a cookie after you click an affiliate link, to credit a purchase.' },
+                { bold: 'Impact.com', text: ' — only if you accept cookies: its tag records the pages you view and the links to brands you follow, and may share that with those brands.' },
                 { bold: 'Cloudflare', text: ' — may set a technical cookie (__cf_bm) for bot protection. This is not used for tracking.' },
               ],
             },

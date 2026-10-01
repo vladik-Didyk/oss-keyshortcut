@@ -369,6 +369,8 @@ Three consent-gated tools live behind a single wrapper at `src/lib/analytics.js`
 - Footer "Cookie settings" → `openCookieSettings()` reopens our banner and Google's message (`googlefc.showRevocationMessage`).
 - Ad hosts in the CSP: `GOOGLE_ADS_HOSTS` in `root.jsx` (googlesyndication, doubleclick, google.com, gstatic, adtrafficquality.google) for script, img, connect and frame.
 
+**Impact.com tag** (`src/lib/impact.js`, 2026-10-01): Impact's Universal Tracking Tag, asked for when the website is added in Impact. It is in the `<head>` of every page as Impact gives it, wrapped in `window.ksImpact()`, which runs only for `cookie-consent` = `accepted` (at once for a returning visitor, from `initAnalytics()` for one who accepts now). It rewrites links to brands into tracking links and records views. Its hosts are `IMPACT_HOSTS` in the CSP. `impact-tag.test.js`.
+
 **Route-change page views** are fired by the `AnalyticsTracker` component in `src/root.jsx`, which watches `useLocation().pathname` and calls `trackPageView()` after re-confirming consent.
 
 Reference implementation (non-SSR variant) at `Personal-Portfolio/src/lib/analytics.js`.

@@ -10,6 +10,7 @@ import { hasConsented, initAnalytics, trackPageView } from "./lib/analytics";
 import { CONTENT, buildMeta } from "./data/content";
 import { ADSENSE_CLIENT } from "./data/ads";
 import { REGION_SCRIPT } from "./lib/consent";
+import { IMPACT_HOSTS, IMPACT_SCRIPT } from "./lib/impact";
 import { buildWebSiteJsonLd } from "./utils/structuredData";
 import { cloudflareToken } from "./utils/cloudflareToken";
 import SERIF_REGULAR from "@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-normal.woff2?url";
@@ -58,13 +59,13 @@ export function Layout({ children }) {
             // Ads: Google AdSense, its consent message (fundingchoicesmessages.google.com)
             // and ad-quality checks (*.adtrafficquality.google) load from these Google
             // hosts. Analytics: Cloudflare, GA4, Clarity, PostHog.
-            `script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com ${GOOGLE_ADS_HOSTS} https://partner.googleadservices.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms https://*.posthog.com https://us-assets.i.posthog.com https://eu-assets.i.posthog.com`,
+            `script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com ${GOOGLE_ADS_HOSTS} https://partner.googleadservices.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms https://*.posthog.com https://us-assets.i.posthog.com https://eu-assets.i.posthog.com ${IMPACT_HOSTS}`,
             // 'unsafe-inline' required: dynamic style attributes for runtime colors, flex widths, and sizing
             // cannot use nonces/hashes (CSP only supports those for <style> blocks, not style attributes)
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "font-src 'self' data: https://fonts.gstatic.com",
-            `img-src 'self' data: https://hgxtwlynuixwwyjykiqd.supabase.co ${GOOGLE_ADS_HOSTS} https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com`,
-            `connect-src 'self' https://*.cloudflareinsights.com https://cloudflareinsights.com ${GOOGLE_ADS_HOSTS} https://hgxtwlynuixwwyjykiqd.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://*.analytics.google.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com https://*.posthog.com https://us.i.posthog.com https://eu.i.posthog.com`,
+            `img-src 'self' data: https://hgxtwlynuixwwyjykiqd.supabase.co ${GOOGLE_ADS_HOSTS} https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com ${IMPACT_HOSTS}`,
+            `connect-src 'self' https://*.cloudflareinsights.com https://cloudflareinsights.com ${GOOGLE_ADS_HOSTS} https://hgxtwlynuixwwyjykiqd.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://*.analytics.google.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com https://*.posthog.com https://us.i.posthog.com https://eu.i.posthog.com ${IMPACT_HOSTS}`,
             `frame-src ${GOOGLE_ADS_HOSTS}`,
             "object-src 'none'",
             "base-uri 'self'",
@@ -109,6 +110,8 @@ export function Layout({ children }) {
 
         {/* The cookie banner needs the visitor's region: ask while the page loads. */}
         <script dangerouslySetInnerHTML={{ __html: REGION_SCRIPT }} />
+        {/* Impact.com tag: loads only after cookie consent (src/lib/impact.js). */}
+        <script dangerouslySetInnerHTML={{ __html: IMPACT_SCRIPT }} />
 
         {/* JSON-LD WebSite — static content, safe to inline */}
         <script type="application/ld+json">{JSON_LD}</script>
