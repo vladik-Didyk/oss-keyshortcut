@@ -26,7 +26,7 @@ export default function AffiliateLink({ affiliate, appSlug, platform, className 
             destination: affiliate.url,
           })
         }
-        className="self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-theme-accent text-theme-accent-text text-[13px] font-medium no-underline hover:opacity-90 transition-opacity"
+        className="self-start shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-theme-accent text-theme-accent-text text-[13px] font-medium no-underline hover:opacity-90 transition-opacity"
       >
         {affiliate.label}
         <ExternalLink size={13} aria-hidden="true" />
