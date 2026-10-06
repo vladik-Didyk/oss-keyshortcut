@@ -71,7 +71,6 @@ export async function initAnalytics() {
   if (typeof window === "undefined") return;
   if (initialized) return;
   initialized = true;
-  window.ksImpact?.(); // Impact.com tag, defined in the <head> (src/lib/impact.js)
   injectGA4();
   injectClarity();
   await initPostHog();
