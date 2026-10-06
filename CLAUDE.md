@@ -369,6 +369,8 @@ Three consent-gated tools live behind a single wrapper at `src/lib/analytics.js`
 - Footer "Cookie settings" → `openCookieSettings()` reopens our banner and Google's message (`googlefc.showRevocationMessage`).
 - Ad hosts in the CSP: `GOOGLE_ADS_HOSTS` in `root.jsx` (googlesyndication, doubleclick, google.com, gstatic, adtrafficquality.google) for script, img, connect and frame.
 
+**No Impact.com tracking tag.** One was on the site from 2026-10-01 to 2026-10-05. It belonged to a second Impact account (7865306) opened by mistake; the account that holds Setapp (7857038) has keyshortcut.com connected through the `impact-site-verification` meta tag and needs no script. Do not add a tag from another account.
+
 **Route-change page views** are fired by the `AnalyticsTracker` component in `src/root.jsx`, which watches `useLocation().pathname` and calls `trackPageView()` after re-confirming consent.
 
 Reference implementation (non-SSR variant) at `Personal-Portfolio/src/lib/analytics.js`.
